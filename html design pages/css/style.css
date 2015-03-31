@@ -68,7 +68,7 @@ table {
 .logo h2{
   font-family:Calibri;	
   font-size:40px;
-  color:#fff;
+  color:#ae4019;
   float:left;
   text-transform:uppercase;
   margin-top:17px;	
@@ -99,7 +99,7 @@ table {
 .top-nav li{
  font-family:Calibri;
  font-size:16px;
- color:#fff;
+ color:#ae4019;
  padding:0 12px;
  float:left;		
 }
@@ -107,17 +107,17 @@ table {
 
 .top-nav li a{
  text-decoration:none;
- color:#fff;		
+ color:#ae4019;		
 }
 
 .banner{
  width:100%;
- height:196px;
+ height:170px;
  background:#dbcb8f;		
 }
 
 .min-cont{
- width:983px;
+ width:1200px;
  height:auto;
   background:#e2deae;
  margin:0 auto;
@@ -125,15 +125,16 @@ table {
 }
 
 .bg{
- width:983px;
- height:1020px;
+ width:1200px;
+ height:auto;
+ overflow: hidden;
  background:#e2deae;
  margin:0 auto;
 	
 }
 
 .bg2{
- width:983px;
+ width:1200px;
  height:440px;
  background:#e2deae;
  margin:0 auto;
@@ -141,7 +142,7 @@ table {
 }
 
 .bg3{
- width:983px;
+ width:1200px;
  height:555px;
  background:#e2deae;
  margin:0 auto;
@@ -149,7 +150,7 @@ table {
 }
 
 .cont{
- width:983px;
+ width:1200px;
  height:auto;
  margin:0 auto;
 	
@@ -158,12 +159,12 @@ table {
 
 .search{
  font-family:Calibri;
- font-size:16px;
+ font-size:14px;
  color:#333333;
- width:470px;
+ width:830px;
  text-indent:19px;
  height:37px;
- -webkit-height:57px;
+ -webkit-height:30px;
  margin-top:30px;
  border:2px solid #e7e7e7;
  border-radius:4px 0 0 4px;	
@@ -194,7 +195,7 @@ table {
   font-family:Calibri;
   font-size:16px;
   font-weight:bold;
-  color:#fff;
+  color:#ae4019;
 }
 
 .tags ul{
@@ -217,7 +218,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 6px;
-  color:#fff;
+  color:#ae4019;
   margin-left:5px;
   margin-top:2px;
   border-radius:5px;
@@ -233,7 +234,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:-8px !important;
    border-radius:5px;
   padding:10xp 10px;
@@ -249,7 +250,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px;
@@ -276,7 +277,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 6px;
-  color:#fff;
+  color:#ae4019;
   margin-left:3px;
   margin-top:5px;
    border-radius:5px;
@@ -292,7 +293,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px;
@@ -308,7 +309,7 @@ table {
   float:left;
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px; 
@@ -316,7 +317,7 @@ table {
 }
 
 .login{
- width:436px;
+ width:300px;
  height:148px;
  float:right;
  margin-top:-46px;
@@ -342,13 +343,13 @@ form{
 .login li{
   font-family:Calibri;
   font-size:12px;
-  color:#fff;
+  color:#ae4019;
   float:left;
   padding:0 5px;	
 } 
 
 .login li a{
- color:#fff;
+ color:#ae4019;
 }
 
 .login li a:hover{
@@ -362,10 +363,10 @@ form{
 
 
 .u-n{
- width:172px;
+ width:183px;
  height:27px;
  font-family:Calibri;
- margin-top:10px;
+ margin-top:0;
  text-indent:40px;
  float:left;
  margin-left:5px;
@@ -376,10 +377,10 @@ form{
 }
 
 .pw{
- width:172px;
+ width:183px;
  height:27px;
  font-family:Calibri;
- margin-top:10px;
+ margin-top:5px;
  text-indent:40px;
  float:left;
  margin-left:5px;
@@ -393,17 +394,17 @@ form{
 
 .login h3{
 	background: none repeat scroll 0 0 #7a672d;
-    border-radius: 5px;
-    color: #fff;
-    font-family: Calibri;
-    font-size: 14px;
-    height:27px;
-    line-height:2;
-    margin-left: 375px;
-    margin-top: 11px;
-    padding: 2px 5px;
-    text-indent: 25px;
-    width: 80px;		
+	border-radius: 5px;
+	color: #AE4019;
+	font-family: Calibri;
+	font-size: 14px;
+	height: 27px;
+	line-height: 2;
+	margin-left: 5px;
+	margin-top: 75px;
+	padding: 2px 5px;
+	text-indent: 25px;
+	width: 83px;	
 }
 
 .login h4{
@@ -411,23 +412,26 @@ form{
  font-size:16px;
  margin-left: 163px;
  margin-top: 10px;
- color:#fff;		
+ color:#ae4019;		
 }
 
 .login h5{
- width:120px;
- height:25px;
+ width:70px;
+ height:111px;
  font-family:Calibri;
  font-size:16px;
- margin-left: 110px;
- margin-top: 20px;
- color:#fff;
- line-height: 1.7;
- text-indent:15px;
+
+ color:#ae4019;
+ line-height: 1;
+ text-align: center;
+ font-weight: bold;
+ vertical-align: middle;
  border-radius:5px;	
  padding:11px 30px;
  background:#7a672d;
  text-decoration:none;	
+ display: table-cell;
+  text-align: center;
 }
 
 .footer{
@@ -447,10 +451,12 @@ form{
  width:220px;	
  height:1000px;
  margin-top:20px;
+ overflow: hidden;
  float:left;
  clear:both;
  margin-top:20px;
- background:#fff;	
+ background: #E2DEAE;
+
 }
 
 .category h2{
@@ -458,7 +464,7 @@ form{
  height:45px;
  font-family:Calibri;
  font-size:16px;
- color:#fff;
+ color:#ae4019;
  line-height:2.5;
  text-indent:12px;	
  background:#333333;
@@ -479,7 +485,7 @@ form{
  height:45px;
  font-family:Calibri;
  font-size:16px;
- color:#fff;
+ color:#ae4019;
  line-height:2.5;
  text-indent:12px;	
  background:#333333;
@@ -501,7 +507,7 @@ form{
  height:45px;
  font-family:Calibri;
  font-size:16px;
- color:#fff;
+ color:#ae4019;
  line-height:2.5;
  text-indent:12px;	
  background:#333333;
@@ -509,57 +515,63 @@ form{
 
 .user
 {
-width:670px;
-height:auto;
-float:left;
-margin-left:30px;	
-	
-}
+width:50%;
 
+margin-left: auto;
+    margin-right: auto;
+}
 
 .counts{
 font-family:Calibri;
  font-size:16px;
- color:#333;
+ color:#ae4019;
+ text-align: center;
  float:left;
  position:relative;
- top:35px;
+ top:10px;
  left:10px;
  text-decoration:none;
 }
 
-
 .statistics{
-	margin-top:30px;
+	margin-top:10px;
 	margin-left:60px;
-	
-}
-.statistics1{
-	margin-top:30px;
-	margin-left:60px;
-	float:left;
-	
 }
 
+
 .statistics1{
-	margin-top:30px;
+	margin-top:10px;
 	margin-left:60px;
 	float:left;
-	
 }
 
 .statistics2{
-	margin-top:35px;
+	margin-top:10px;
+	margin-left:60px;
+	float:left;
+}
+
+.vid{
+	margin-top:10px;
 	margin-left:60px;
 	float:left;
 	
 }
 
-.vid{
-	margin-top:35px;
-	margin-left:60px;
-	float:left;
-	
+.videos{
+    width: 750px;
+    float: right;
+}
+
+.rightCol{
+	width:220px;	
+	height:1000px;
+	margin-top:20px;
+	overflow: hidden;
+	float:right;
+	clear:both;
+	margin-top:20px;
+	background: #12DEAE;
 }
 
 .hollywd{
@@ -575,12 +587,12 @@ font-family:Calibri;
  float:left;
  margin-top:30px;	
  margin-left:23px;
- color:#3e3003;	
+ color:#ae4019;	
 }
 
 
 .box-cont{
-  float: left;
+  float: right;
   height: 215px;
   margin-left: 11px;
   margin-top: -45px;
@@ -592,7 +604,7 @@ font-family:Calibri;
 .box{
  width:187px;
  height:235px;
- background:#fff;
+ background:#DBCB8F;
  float:left;
  margin-left:0px;
  margin-top: 60px;	
@@ -606,7 +618,7 @@ font-family:Calibri;
 .box h2{
  font-family:Calibri;
  font-size:14px;
- color:#3e3003;
+ color:#ae4019;
  text-decoration:none;
  margin-left: 10px;
  margin-top: 10px;	
@@ -631,7 +643,7 @@ text-decoration:none;
 .box li{
   font-family:Calibri;
   font-size:12px;
-  color:#3e3003;
+  color:#ae4019;
   padding:2px 0;	
  	
 }
@@ -639,7 +651,7 @@ text-decoration:none;
 .box li p{
   font-family:Calibri;
   font-size:10px;
-  color:#3e3003;
+  color:#ae4019;
   position:relative;
   top:-15px;
   left:20px;
@@ -649,7 +661,7 @@ text-decoration:none;
 .wood{
  font-family:Calibri;
  font-size:12px;
- color:#3e3003;
+ color:#ae4019;
  position: relative;
  margin-left:80px;
  top:3px;
@@ -658,7 +670,7 @@ text-decoration:none;
 .views{
  font-family:Calibri;
  font-size:12px;
- color:#3e3003;
+ color:#ae4019;
  position: relative;
  margin-left:73px;
  top:3px;
@@ -668,7 +680,7 @@ text-decoration:none;
 .smith{
  font-family:Calibri;
  font-size:12px;
- color:#3e3003;
+ color:#ae4019;
  left:53px;
  position:relative;
  top: 10px;
@@ -678,7 +690,7 @@ text-decoration:none;
 .date{
  font-family:Calibri;
  font-size:12px;
- color:#3e3003;
+ color:#ae4019;
  left: 50px;
  position: relative;
  top: 8px;
@@ -712,7 +724,8 @@ text-decoration:none;
  height:25px;
  float:left;
  margin-left:10px;
- margin-top:20px;
+ margin-top:30px;
+ margin-bottom:20px;
  border-radius:4px;
  background:#7a672d;	
 }
@@ -720,14 +733,14 @@ text-decoration:none;
 .btn h2{
 	font-family:Calibri;
 	font-size:12px;
-	color:#fff;
+	color:#ae4019;
     line-height: 2;
     text-indent: 7px;
 }
 
 .btn a{
  text-decoration:none;
- color:#fff;	
+ color:#ae4019;	
 }
 
 .thumbnail{
@@ -738,7 +751,7 @@ text-decoration:none;
 .f-details{
  font-family:Calibri;
  font-size:16px;
- color:#3e3003;
+ color:#ae4019;
  position:relative;
  top:40px;	
 }
@@ -750,7 +763,7 @@ text-decoration:none;
 }
 
 .f-details ul, .d-move{
-  float:right;	
+  float:left;	
 }
 
 .f-details li{
@@ -763,7 +776,7 @@ text-decoration:none;
 
 .f-details li a{
   text-decoration:none;
-  color:#3e3003;	
+  color:#ae4019;	
 }
 
 
@@ -784,7 +797,7 @@ label{
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:10px;
  margin-top:57px;
@@ -816,7 +829,7 @@ label{
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:10px;
  margin-top:20px;
@@ -827,7 +840,7 @@ label{
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:10px;
  margin-top:8px;
@@ -924,7 +937,7 @@ label{
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:15px;
  margin-top:20px;	
@@ -951,7 +964,7 @@ label{
  float:left;
  border-radius:4px;
  text-decoration:none;
- color:#fff;
+ color:#ae4019;
  margin-top:22px;
  margin-left:20px;
  text-indent: 30px;
@@ -968,7 +981,7 @@ label{
  height:40px;
  font-family:Calibri;
  font-size:18px;
- color:#fff;
+ color:#ae4019;
  text-decoration:none;
  padding:5px 10px;
  float:left;
@@ -986,11 +999,11 @@ label{
 .us-name{
  font-family:Calibri;
  font-size:16px;
- color:#3e3003;
+ color:#ae4019;
  float:left;
  margin-top:105px;
  margin-left:108px;
- color:#3e3003;	
+ color:#ae4019;	
 }
 
 .usr-box{
@@ -1015,11 +1028,11 @@ label{
 .usr-pw{
  font-family:Calibri;
  font-size:16px;
- color:#3e3003;
+ color:#ae4019;
  float:left;
  margin-top:25px;
  margin-left:109px;
- color:#3e3003;	
+ color:#ae4019;	
 }
 
 .login2{
@@ -1077,7 +1090,7 @@ label{
 .pic1 h2{
  font-family:Calibri;
  font-size:14px;
- color:#3e3003;
+ color:#ae4019;
  text-indent:25px;	
 }
 
@@ -1099,7 +1112,7 @@ label{
   font-family:Calibri;
   font-size:16px;
   font-weight:bold;
-  color:#fff;
+  color:#ae4019;
 }
 
 .tags2 ul{
@@ -1127,7 +1140,7 @@ text-decoration:none;
   font-size:12px;
   line-height: 2;
   text-indent: 6px;
-  color:#fff;
+  color:#ae4019;
   margin-left:-7px;
   margin-top:15px;
   border-radius:5px;
@@ -1143,7 +1156,7 @@ text-decoration:none;
 
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:-8px !important;
    border-radius:5px;
   padding:10xp 10px;
@@ -1159,7 +1172,7 @@ text-decoration:none;
 
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px;
@@ -1185,7 +1198,7 @@ text-decoration:none;
   font-size:12px;
   line-height: 2;
   text-indent: 6px;
-  color:#fff;
+  color:#ae4019;
   margin-left:-7px;
   margin-top:15px;
    border-radius:5px;
@@ -1201,7 +1214,7 @@ text-decoration:none;
 
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px;
@@ -1217,7 +1230,7 @@ text-decoration:none;
 
   line-height: 2;
   text-indent: 10px;
-  color:#fff;
+  color:#ae4019;
   margin-left:10px;
    border-radius:5px;
   padding:10xp 10px; 
@@ -1299,7 +1312,7 @@ position:relative;
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:10px;
  margin-top:25px;
@@ -1348,7 +1361,7 @@ position:relative;
  font-family:Calibri;
  font-size:16px;
  font-weight:bold;
- color:#3e3003;
+ color:#ae4019;
  float:left;	
  margin-left:10px;
  margin-top:10px;
@@ -1443,7 +1456,7 @@ position:relative;
  border-radius:4px;
  text-decoration:none;
 margin-right:45px;
- color:#fff;
+ color:#ae4019;
  	
 }
 
@@ -1600,13 +1613,13 @@ margin-right:45px;
 .c-name li{
  font-family:Calibri;
  font-size:14px;
- color:#3e3003;
- padding:10px 0;	
+ color:#ae4019;
+ padding:2px 0;	
 }
 
 .c-name a{
  text-decoration:none;
- color:#3e3003;	
+ color:#ae4019;	
 }
 
 
@@ -1713,7 +1726,7 @@ margin-right:45px;
 .wood {
   font-family: Calibri;
   font-size: 12px;
-  color: #3e3003;
+  color: #ae4019;
   position: relative;
   margin-left: 60px;
   top: 3px;
@@ -1721,7 +1734,7 @@ margin-right:45px;
 .views {
   font-family: Calibri;
   font-size: 12px;
-  color: #3e3003;
+  color: #ae4019;
   position: relative;
   margin-left: 75px;
   top: 3px;
@@ -1730,7 +1743,7 @@ margin-right:45px;
 .date {
   font-family: Calibri;
   font-size: 12px;
-  color: #3e3003;
+  color: #ae4019;
   left: 54px;
   position: relative;
   top: 8px;
@@ -1738,7 +1751,7 @@ margin-right:45px;
 .smith {
   font-family: Calibri;
   font-size: 12px;
-  color: #3e3003;
+  color: #ae4019;
   left: 63px;
   position: relative;
   top: 10px;
