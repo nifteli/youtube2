@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-03-31 01:50:24
+<?php /* Smarty version Smarty-3.1.18, created on 2015-03-31 01:54:18
          compiled from "C:\wamp\www\\youtube\\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:248785519b7100ecfe7-48706409%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f89e1215b9096601ed5d526ab2954dbff75cb2a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\header.tpl',
-      1 => 1427748538,
+      1 => 1427757070,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.18',
   'unifunc' => 'content_5519b7101bbf00_90221521',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5519b7101bbf00_90221521')) {function content_5519b7101bbf00_90221521($_smarty_tpl) {?> <div id="wrapper">
       <div class="banner">
