@@ -3,7 +3,12 @@
 //$sessionId = session_id(); 
 
 //includes
-$lang="az";//this will be detected according to user's profile info or IP by default
+if(isset($_GET["lang"])) 
+	$_SESSION["lang"]=$_GET["lang"];
+if($_SESSION["lang"]=="")
+	$_SESSION["lang"]="az";
+$lang = $_SESSION["lang"];//this will be detected according to user's profile info or IP by default
+
 require_once(dirname(__FILE__)."/configs/paths.php");
 require_once($langsPath."content_".$lang.".php");
 //++//require_once($confsPath."conf.php");
@@ -23,7 +28,7 @@ $comm   = new CommonFunctions($db);
 if(!isset($_GET["page"]))
 {
 	$comm->includeSection("header",$lang);
-	//$comm->includeSection("categories",$lang);
+	$comm->includeSection("categories",$lang);
 	$comm->includeSection("videos",$lang);
 	$comm->includeSection("footer",$lang);
 }
