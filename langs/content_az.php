@@ -16,5 +16,5 @@ $content['HOW'] = 'Necə';
 $content['WHY'] = 'Niyə';
 $content['WHAT'] = 'Nə';
 $content['WHO'] = 'Kim';
-
+$content['WRONGLOGIN'] = "Yanlış şifrə və ya istifadəçi adı";
 ?>

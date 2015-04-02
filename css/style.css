@@ -596,6 +596,7 @@ font-family:Calibri;
   height: 215px;
   margin-left: 11px;
   margin-top: -45px;
+  margin-bottom: 10px;
   width: 750px;	
   padding: 0 0 65px 0;
 }
@@ -1765,7 +1766,16 @@ background: url(../img/line.png);
 .details2 {
   float: left;
   margin-left: -16px !important;
-}	
+}
+
+.err{
+	background:#dbcb8f;
+	clear: both;
+	text-align: center;
+	padding: 5px;
+	color:red;
+	margin-bottom: -30px;
+}
 	
 }
 

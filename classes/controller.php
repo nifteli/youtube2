@@ -1,15 +1,16 @@
 <?php
 include($langsPath."content_".$lang.".php");
-include("header.php");
-include("categories.php");
-include("videos.php");
-include("footer.php");
+include($templatePath."header.php");
+include($templatePath."categories.php");
+include($templatePath."videos.php");
+include($templatePath."footer.php");
 
 class Controller //extends MySQL
 {
 //Variables
 	
 	private $db;
+	private $lang;
 	
 //End Variables
 	
@@ -18,7 +19,10 @@ class Controller //extends MySQL
 //End GetSets
 	public function __construct($db) 
 	{
+		global $lang;
+		
 		$this->db = $db; 
+		$this->lang=$lang;
     }
 	
 	public function includeSection($section,$lang)
@@ -30,7 +34,7 @@ class Controller //extends MySQL
 		global $langsPath;
 		global $templatePath;
 		global $classesPath;
-		global $errorMessage;
+		
 		global $okMessage;
 		global $sessionId;
 		
@@ -59,15 +63,15 @@ class Controller //extends MySQL
 	//this will be common function because categories panel are located in all pages
 	public function getCategories($questionId)
 	{
-		return array(array("url" => "#", "catName" => "Music1","count" => "1896","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Hollywood","count" => "196","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Funny","count" => "588","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Science","count" => "8785","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Dance","count" => "85","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Sex","count" => "8889998877","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Something1","count" => "3","subscribe"=>"#"),
-					array("url" => "#", "catName" => "Something2","count" => "5","subscribe"=>"#")
-					);
+		$this->db->join("(SELECT categoryId, COUNT(*) AS count
+						  FROM videos
+						  GROUP BY categoryId) AS v", "v.categoryId=c.id", "LEFT");
+		$this->db->where("questionId", $questionId);
+		$this->db->groupBy("c.id,catName".$this->lang.",catInfo".$this->lang);
+		$this->db->orderBy("catName".$this->lang,"asc");
+		$cats = $this->db->get("categories c",null,"c.id,'#' as url,catName".$this->lang." as catName,catInfo".$this->lang." as catInfo,'#' as subscribe,IfNULL(v.count,0) AS count");
+		//echo $this->db->getLastQuery ();
+		return $cats;
 	}
 }
 ?>

@@ -16,5 +16,5 @@ $content['HOW'] = 'How';
 $content['WHY'] = 'Why';
 $content['WHAT'] = 'What';
 $content['WHO'] = 'Who';
-
+$content['WRONGLOGIN'] = "Wrong username or password";
 ?>
