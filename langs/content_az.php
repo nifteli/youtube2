@@ -1,15 +1,20 @@
 <?php
-$search="Axtar";
-$addVideo="Video əlavə et";
-$userName="İstifadəçi adı";
-$password="Şifrə";
-$signUp="Qeydiyyat";
-$users="İstifadəçilər";
-$tags="Taqlar";
-$videos="Videolar";
-$login="Daxil ol";
-$how="Necə";
-$why="Niyə";
-$what="Nə";
-$who="Kim";
+
+//AZ//
+$content = array();
+
+$content['SEARCH'] = 'Axtar';
+$content['ADD_VIDEO'] = 'Video əlavə et';
+$content['USERNAME'] = 'İstifadəçi adı';
+$content['PASSWORD'] = 'Şifrə';
+$content['SIGN_UP'] = 'Qeydiyyat';
+$content['USERS'] = 'İstifadəçilər';
+$content['TAGS'] = 'Taqlar';
+$content['VIDEOS'] = 'Videolar';
+$content['LOGIN'] = 'Daxil ol';
+$content['HOW'] = 'Necə';
+$content['WHY'] = 'Niyə';
+$content['WHAT'] = 'Nə';
+$content['WHO'] = 'Kim';
+
 ?>

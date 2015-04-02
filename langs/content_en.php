@@ -1,15 +1,20 @@
 <?php
-$search="Search";
-$addVideo="Add Video";
-$userName="User Name";
-$password="Password";
-$signUp="Sign up";
-$users="Users";
-$tags="Tags";
-$videos="Videos";
-$login="Login";
-$how="How";
-$why="Why";
-$what="What";
-$who="Who";
+
+//EN//
+$content = array();
+
+$content['SEARCH'] = 'Search';
+$content['ADD_VIDEO'] = 'Add Video';
+$content['USERNAME'] = 'User Name';
+$content['PASSWORD'] = 'Password';
+$content['SIGN_UP'] = 'Sign up';
+$content['USERS'] = 'Users';
+$content['TAGS'] = 'Tags';
+$content['VIDEOS'] = 'Videos';
+$content['LOGIN'] = 'Login';
+$content['HOW'] = 'How';
+$content['WHY'] = 'Why';
+$content['WHAT'] = 'What';
+$content['WHO'] = 'Who';
+
 ?>
