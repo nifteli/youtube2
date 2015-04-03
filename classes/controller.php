@@ -4,6 +4,7 @@ include($templatePath."header.php");
 include($templatePath."categories.php");
 include($templatePath."videos.php");
 include($templatePath."footer.php");
+include($templatePath."reg.php");
 
 class Controller //extends MySQL
 {
@@ -25,7 +26,7 @@ class Controller //extends MySQL
 		$this->lang=$lang;
     }
 	
-	public function includeSection($section,$lang)
+	public function includeSection($section)
 	{
 		global $access;
 		global $domain;
@@ -57,6 +58,10 @@ class Controller //extends MySQL
 				$footer = new Footer($this);
 				$footer->Show();
 				break;
+			case "reg":
+				$reg = new Reg($this);
+				$reg->Show();
+				break;
 		}
 	}
 	
@@ -70,7 +75,7 @@ class Controller //extends MySQL
 		$this->db->groupBy("c.id,catName".$this->lang.",catInfo".$this->lang);
 		$this->db->orderBy("catName".$this->lang,"asc");
 		$cats = $this->db->get("categories c",null,"c.id,'#' as url,catName".$this->lang." as catName,catInfo".$this->lang." as catInfo,'#' as subscribe,IfNULL(v.count,0) AS count");
-		//echo $this->db->getLastQuery ();
+		//echo $this->db->getLastQuery ()."<br>";
 		return $cats;
 	}
 }

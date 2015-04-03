@@ -15,14 +15,14 @@ if ($_GET["action"]=="login")
 	}
 	else
 	{
-		$db->where("userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
+		$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
 		$usr = $db->get("users");
 		//check user if registered or not
 		if($db->count == 1)
 		{
 			//session_start();
 			$_SESSION['userName'] = $_POST["userName"];
-			//$access->setValues($db); //echo $_SESSION['userName'];exit;
+			$access->setValues($db); //echo $_SESSION['userName'];exit;
 			
 			$upData = Array ('lastLoggedIn' => $db->now());
 			$db->where("userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");

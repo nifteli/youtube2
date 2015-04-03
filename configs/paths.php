@@ -1,5 +1,5 @@
 <?php
-$domain="http://localhost/youtube/index.php";
+$domain="http://localhost:88/youtube/index.php";
 $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
 $appDirectory = $rootDirectory . "/youtube/";
 $classesPath = $appDirectory."/classes/";

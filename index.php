@@ -32,10 +32,11 @@ if(!isset($_GET["page"]))
 {
 	if(isset($_GET["action"])) 
 		include_once($actionsPath."loginAction.php");
-	$controller->includeSection("header",$lang);
-	$controller->includeSection("categories",$lang);
-	$controller->includeSection("videos",$lang);
-	$controller->includeSection("footer",$lang);
+	$controller->includeSection("header");
+	$controller->includeSection("categories");
+	$controller->includeSection("videos");
+	$controller->includeSection("footer");
+	//echo "<pre>";print_r($access);echo "</pre>";
 }
 else
 {
@@ -43,15 +44,21 @@ else
 	{
 		/*case "logAdmin";
 			include_once($actionsPath."loginAction.php");
-			break;
-		case "login": 
+			break;*/
+		case "reg": 
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."loginAction.php");
-			$controller->includeSection("header",$lang);
-			$controller->includeSection("horizontalMenu",$lang);
-			$controller->includeSection("login",$lang);
-			$controller->includeSection("footerLineMenu",$lang);
-			break;*/
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("reg");
+			$controller->includeSection("footer");
+			break;
+		default:
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("videos");
+			$controller->includeSection("footer");
+			break;
 	}
 }
 ?>

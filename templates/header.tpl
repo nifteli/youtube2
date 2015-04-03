@@ -1,3 +1,18 @@
+<script>
+$(document).ready(function() {
+    var validator = $("#logForm").validate({
+        rules: {
+            userName: "required",
+			password: "required",
+        },
+        messages: {
+			userName:"",
+			password:"",
+        },
+    });
+});
+</script>
+<body>
 <div id="wrapper">
 				{if isset($errorMessage)}
 				<div class="err">
@@ -27,13 +42,13 @@
 					<a href="add-video.html"><h5>{$addVideo}</h5></a>
 				</div>
 				<div style="height:140px;float:right;width:170px">
-				<form action="?action=login" method="post">
+				<form name="logForm" id="logForm" action="?action=login" method="post">
 					<a  href="other-user.html"><img class="fb" style="margin-left:7px;" src="img/fb.png" /></a>
 					<a  href="other-user.html"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
 					<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
-					<input class="pw" type="text" name="password" value="" placeholder="{$password}">
+					<input class="pw" type="password" name="password" value="" placeholder="{$password}">
 					<a href="#" onclick="$(this).closest('form').submit()"><h3>{$login}</h3></a>
-					<a href="#" onclick="$(this).closest('form').submit()"><h3 style="margin-top: -31px;width: 83px; margin-left: 100px;">{$signUp}</h3></a>
+					<a href="?page=reg"><h3 style="margin-top: -31px;width: 83px; margin-left: 100px;">{$signUp}</h3></a>
 				</form>
 				</div>
 			</div> 

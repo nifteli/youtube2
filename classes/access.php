@@ -5,10 +5,12 @@ class Access{
 	var $hasAccess=false;
 	var $userName;
 	//var $userType;
-	var $name;
-	var $surname;
-	var $secretQuestion;
-	var $secretAnswer;
+	var $firstName;
+	var $lastName;
+	var $fatherName;
+	var $lang;
+	//var $secretQuestion;
+	//var $secretAnswer;
 	//var $phoneCode;
 	var $db;
 	var $isAdmin;
@@ -24,34 +26,33 @@ class Access{
 		//echo "username = ".$_SESSION["userName"];
 		if(isset($_SESSION["userName"]))
 		{
-			/*$result = $db->select("users",array("user_name"=>$_SESSION["userName"],"status"=>"confirmed"),"","0,1",false,"and","*");
-			//echo $db->lastQuery;
-			if($result!=false)
+			$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
+			$result = $db->get("users");
+			
+			if($db->count == 1)
 			{
 				$this->userName=$_SESSION["userName"];
 				$this->hasAccess=true;
-				$this->userType=$result[0]["user_type"];
-				$this->userId=$result[0]["user_id"];
-				$this->name=$result[0]["name"];
-				$this->surname=$result[0]["surname"];
-				$this->secretQuestion=$result[0]["secret_question"];
-				$this->secretAnswer=$result[0]["secret_answer"];
-				$this->phoneCode=$result[0]["sms_code"];
-				$this->isAdmin=$result[0]["isAdmin"];
+				$this->userId=$result[0]["id"];
+				$this->firstName=$result[0]["firstName"];
+				$this->lastName=$result[0]["lastName"];
+				$this->fatherName=$result[0]["fatherName"];
+				$this->lang=$result[0]["lang"];
+				//$this->userType=$result[0]["user_type"];
+				//$this->secretQuestion=$result[0]["secret_question"];
+				//$this->secretAnswer=$result[0]["secret_answer"];
+				//$this->phoneCode=$result[0]["sms_code"];
+				//$this->isAdmin=$result[0]["isAdmin"];
 				
 				//echo "<pre>"; print_r($result); echo "</pre>";
-			}*/
+			}
 		}
 	}
 	
 	public function destroy()
 	{
-		/*unset($this->userName);
+		unset($this->userName);
 		$this->hasAccess=false;
-		unset($this->userType);
-		unset($this->userId);
-		unset($this->name);
-		unset($this->surname);*/
 	}
 	
 	public function hasAccess() 
@@ -68,8 +69,8 @@ class Access{
 	
 	public function getGreeting()
 	{
-		if(isset($this->name))
-			return $this->name;
+		if(isset($this->firstName))
+			return $this->firstName;
 	}
 }
 ?>

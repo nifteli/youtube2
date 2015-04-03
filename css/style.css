@@ -449,7 +449,7 @@ form{
 
 .category{
  width:220px;	
- height:1000px;
+ min-height:1000px;
  margin-top:20px;
  overflow: hidden;
  float:left;
@@ -800,8 +800,8 @@ label{
  font-weight:bold;
  color:#ae4019;
  float:left;	
- margin-left:10px;
- margin-top:57px;
+ margin-left: -30px;
+margin-top: 5px;
 }
 
 .url{
@@ -827,13 +827,9 @@ label{
 
 
 .lan{
- font-family:Calibri;
- font-size:16px;
- font-weight:bold;
- color:#ae4019;
- float:left;	
- margin-left:10px;
- margin-top:20px;
+ float: left;
+margin-left: -305px;
+margin-top: 66px;
 	
 }
 
@@ -1239,7 +1235,8 @@ text-decoration:none;
 }
 
 .reg-form{
- margin-left:150px;	
+ margin-left: 280px;
+margin-top: 50px;	
 }
 
 .name{
@@ -1263,39 +1260,39 @@ text-decoration:none;
  border-radius:3px;
  border:1px solid #fff;
  margin-top:50px;
- margin-left:10px;	
+ margin-left:11px;	
 }
 
 
 .check1{
-position:relative;
-  left:55px;
- top:25px;	
+position: relative;
+left: -185px;
+top: 67px;
 }
 
 
 .check2{
- position:relative;
- left:80px;
- top:25px;	
+ position: relative;
+left: -100px;
+top: 28px;	
 }
 
 .male{
- font-family:Calibri;
- font-size:16px;
- color:#333333;
- position:relative;
- left:60px;
- top:22px;
+font-family: Calibri;
+font-size: 16px;
+color: #333333;
+position: relative;
+left: -220px;
+top: 46px;
 }
 
 .female{
- font-family:Calibri;
- font-size:16px;
- color:#333333;
- position:relative;
- left:85px;
- top:22px;
+ font-family: Calibri;
+font-size: 16px;
+color: #333333;
+position: relative;
+left: 95px;
+top: 7px;
 }
 
 
@@ -1310,24 +1307,23 @@ position:relative;
 
 
 .lan2{
- font-family:Calibri;
- font-size:16px;
- font-weight:bold;
- color:#ae4019;
- float:left;	
- margin-left:10px;
- margin-top:25px;
-	
+	font-family: Calibri;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ae4019;
+	float: left;
+	margin-left: -305px;
+	margin-top: 89px;
 }
 
 
 .select2{
- width:125px;
- height:37px;
- border-radius:3px;
- border:1px solid #fff;
- margin-top:19px;
- margin-left:18px;
+	height: 37px;
+	border-radius: 3px;
+	border: 1px solid #fff;
+	margin-top: 19px;
+	margin-left: 17px;
+	width: 220px;
 }
 
 .pass{
@@ -1336,17 +1332,17 @@ position:relative;
  border-radius:3px;
  border:1px solid #fff;
  margin-top:50px;
- margin-left:15px;
+margin-left: 14px;
 	
 }
 
 .u-s{
- width:220px;
- height:35px;
- border-radius:3px;
- border:1px solid #fff;
- margin-top:50px;
- margin-left:6px;
+width: 220px;
+height: 35px;
+border-radius: 3px;
+border: 1px solid #fff;
+margin-top: 50px;
+margin-left: 4px;
 }
 
 
@@ -1359,13 +1355,13 @@ position:relative;
 
 
 .cap{
- font-family:Calibri;
- font-size:16px;
- font-weight:bold;
- color:#ae4019;
- float:left;	
- margin-left:10px;
- margin-top:10px;
+ font-family: Calibri;
+font-size: 16px;
+font-weight: bold;
+color: #ae4019;
+float: left;
+margin-left: -308px;
+margin-top: 70px;
 	
 }
 
@@ -1375,7 +1371,7 @@ position:relative;
  border-radius:3px;
  border:1px solid #fff;
  margin-top:30px;
- margin-left:100px;
+ margin-left:57px;
 }
 
 .name2{
@@ -1776,7 +1772,17 @@ background: url(../img/line.png);
 	color:red;
 	margin-bottom: -30px;
 }
-	
+
+.nm{
+	 float:left;
+	margin-top:60px;	
+}
+
+.email{
+	float: left;
+	margin-top: -20px;
+	margin-left: -55px;	
+}
 }
 
 

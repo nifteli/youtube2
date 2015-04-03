@@ -1,7 +1,7 @@
 <?php
-	$hostname = 'localhost';
-	$port = '3306';
-	$database = 'youtube';
-	$username = 'root';
-	$password = '';
+$hostname = 'localhost';
+$port = '3306';
+$database = 'youtube';
+$username = 'root';
+$password = '';
 ?>
