@@ -14,7 +14,7 @@ class Categories
 		$this->categories->assign("what",$content['WHAT']);
 		$this->categories->assign("who",$content['WHO']);
 		
-		$this->categories->assign("catsHow",$controller->getCategories(8));
+		$this->categories->assign("catsHow",$controller->getCategories(3));
 		$this->categories->assign("catsWhy",$controller->getCategories(4));
 		$this->categories->assign("catsWhat",$controller->getCategories(1));
 		$this->categories->assign("catsWho",$controller->getCategories(2));

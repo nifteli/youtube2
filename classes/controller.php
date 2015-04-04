@@ -71,7 +71,7 @@ class Controller //extends MySQL
 		$this->db->join("(SELECT categoryId, COUNT(*) AS count
 						  FROM videos
 						  GROUP BY categoryId) AS v", "v.categoryId=c.id", "LEFT");
-		$this->db->where("questionId", $questionId);
+		$this->db->where("questions", $questionId);
 		$this->db->groupBy("c.id,catName".$this->lang.",catInfo".$this->lang);
 		$this->db->orderBy("catName".$this->lang,"asc");
 		$cats = $this->db->get("categories c",null,"c.id,'#' as url,catName".$this->lang." as catName,catInfo".$this->lang." as catInfo,'#' as subscribe,IfNULL(v.count,0) AS count");

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-03 18:28:18
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-03 19:25:48
          compiled from "C:\wamp\www\\youtube\\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:248785519b7100ecfe7-48706409%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f89e1215b9096601ed5d526ab2954dbff75cb2a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\header.tpl',
-      1 => 1428077667,
+      1 => 1428081862,
       2 => 'file',
     ),
   ),
@@ -35,7 +35,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5519b7101bbf00_90221521')) {function content_5519b7101bbf00_90221521($_smarty_tpl) {?><div id="wrapper">
+<?php if ($_valid && !is_callable('content_5519b7101bbf00_90221521')) {function content_5519b7101bbf00_90221521($_smarty_tpl) {?><script>
+$(document).ready(function() {
+    var validator = $("#logForm").validate({
+        rules: {
+            userName: "required",
+			password: "required",
+        },
+        messages: {
+			userName:"",
+			password:"",
+        },
+    });
+});
+</script>
+<body>
+<div id="wrapper">
 				<?php if (isset($_smarty_tpl->tpl_vars['errorMessage']->value)) {?>
 				<div class="err">
 						<?php echo $_smarty_tpl->tpl_vars['errorMessage']->value;?>
@@ -67,16 +82,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </h5></a>
 				</div>
 				<div style="height:140px;float:right;width:170px">
-				<form action="?action=login" method="post">
+				<form name="logForm" id="logForm" action="?action=login" method="post">
 					<a  href="other-user.html"><img class="fb" style="margin-left:7px;" src="img/fb.png" /></a>
 					<a  href="other-user.html"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
 					<input class="u-n" type="text" name="userName" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['userName']->value;?>
 ">
-					<input class="pw" type="text" name="password" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['password']->value;?>
+					<input class="pw" type="password" name="password" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['password']->value;?>
 ">
 					<a href="#" onclick="$(this).closest('form').submit()"><h3><?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 </h3></a>
-					<a href="#" onclick="$(this).closest('form').submit()"><h3 style="margin-top: -31px;width: 83px; margin-left: 100px;"><?php echo $_smarty_tpl->tpl_vars['signUp']->value;?>
+					<a href="?page=reg"><h3 style="margin-top: -31px;width: 83px; margin-left: 100px;"><?php echo $_smarty_tpl->tpl_vars['signUp']->value;?>
 </h3></a>
 				</form>
 				</div>
