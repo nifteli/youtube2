@@ -1,34 +1,48 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-02 02:41:30
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-08 23:43:02
          compiled from "C:\wamp\www\\youtube\\templates\videos.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:255695519b61c55c998-93758390%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:18875520cf74d035f0-84180048%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c81440dc4f09453663e85e64c1161026a1c101b4' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\videos.tpl',
-      1 => 1427934024,
+      1 => 1428518577,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '255695519b61c55c998-93758390',
+  'nocache_hash' => '18875520cf74d035f0-84180048',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5519b61c8b1d79_48650880',
+  'unifunc' => 'content_5520cf74d91a03_63559025',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5519b61c8b1d79_48650880')) {function content_5519b61c8b1d79_48650880($_smarty_tpl) {?>			<div>
-			<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-				<div class="tabcontents2"></div>
-			</div>
-			</div>
-			
-            
-			
-			<!--Videos thums Start-->			 
-			<div class="videos">
+<?php if ($_valid && !is_callable('content_5520cf74d91a03_63559025')) {function content_5520cf74d91a03_63559025($_smarty_tpl) {?><script>
+$(document).ready(function() {
+    var validator = $("#logForm").validate({
+        rules: {
+            userName: "required",
+			password: "required",
+        },
+        messages: {
+			userName:"",
+			password:"",
+        },
+    });
+});
+</script>
+<div>
+<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
+	<div class="tabcontents2"></div>
+</div>
+</div>
+
+<!--Videos thums Start-->			 
+
+	<div style="padding-top:10px;min-height: 1000px;">
+<div class="videos">
 				<div class="hollywd">
 					<h2>Hollywood</h2>  
 				</div>
@@ -361,9 +375,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			
 			
 			<div class="btn">
-				<a href="#"><h2>Load More Videos</h2></a>
+               <a href="#">  <input class="login34" type="submit" value="Load More Videos" name="submit"></a>
+                
+                </div>
 			</div>
-			</div>
-			<!--Videos thums End-->
-		</div>
-          <?php }} ?>
+</div>
+
+             
+
+<?php }} ?>

@@ -23,6 +23,14 @@ class Header
 		$this->header->assign("videoCnt",34234);
 		$this->header->assign("login",$content['LOGIN']);
 		$this->header->assign("errorMessage",$errorMessage);
+		//print_r($controller->access);
+		if(isset($controller->access->userName))
+		{
+			$this->header->assign("greeting",$content['GREETING']);
+			$this->header->assign("adminpanel",$content['ADMINPANEL']);
+			$this->header->assign("logout",$content['LOGOUT']);
+			$this->header->assign("loggedUser",$controller->access->firstName);
+		}
 	}
 	
 	public function Show()

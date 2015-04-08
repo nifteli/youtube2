@@ -1,4 +1,25 @@
-<script>
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-08 23:36:19
+         compiled from "C:\wamp\www\\youtube\\templates\reg.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:112225520d07ec719a3-99654063%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c74747a1c6c6e413cbd05765ec6a6dd8afa48545' => 
+    array (
+      0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\reg.tpl',
+      1 => 1428518176,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '112225520d07ec719a3-99654063',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_5520d07edc1b19_19500318',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5520d07edc1b19_19500318')) {function content_5520d07edc1b19_19500318($_smarty_tpl) {?><script>
 $(document).ready(function() {
     var validator = $("#logForm").validate({
         rules: {
@@ -98,3 +119,4 @@ $(document).ready(function() {
 
              
 
+<?php }} ?>

@@ -32,23 +32,27 @@ $(document).ready(function() {
 			<div class="login">
 				<ul class="lang">
 					<!--<li>Lang:</li>-->
-					<li><a>Salam User</a></li>
-					<li><a>Admin Panel</a></li>
+					{if isset($greeting)}
+					<li><a>{$greeting}, {$loggedUser}</a></li>
+					<li><a href="?admin.php">{$adminPanel}</a></li>
+					<li><a href="?action=logout">{$logout}</a></li>
+					{/if}
 					<li><a href="?lang=az">AZ</a></li>
 					<li><a href="?lang=ru">RU</a></li>
 					<li><a href="?lang=en">EN</a></li>
 				</ul>
 				<div style="height:140px;float:left;width:130px">
-					<a href="add-video.html"><h5>{$addVideo}</h5></a>
+					<a href="?page=addVideo"><input class="login3" type="submit" value="{$addVideo}" name="submit"></a>
 				</div>
 				<div style="height:140px;float:right;width:170px">
 				<form name="logForm" id="logForm" action="?action=login" method="post">
-					<a  href="other-user.html"><img class="fb" style="margin-left:7px;" src="img/fb.png" /></a>
+					<a  href="other-user.html"><img class="fb" src="img/fb.png" /></a>
 					<a  href="other-user.html"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
 					<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
 					<input class="pw" type="password" name="password" value="" placeholder="{$password}">
-					<a href="#" onclick="$(this).closest('form').submit()"><h3>{$login}</h3></a>
-					<a href="?page=reg"><h3 style="margin-top: -31px;width: 83px; margin-left: 100px;">{$signUp}</h3></a>
+					<input class="loginLg" type="submit" value="{$login}" name="submit">
+					<input class="login33" type="submit" value="{$signUp}" name="submit">
+					
 				</form>
 				</div>
 			</div> 
@@ -56,7 +60,7 @@ $(document).ready(function() {
 	</div>
 	<div class="min-cont bg">
 		<!--Statistics Bar Start-->
-		<div class="user"> 
+		<div class="user" align="center"> 
 			<a  href="other-user.html"><img class="statistics1"  src="img/1.png" /></a>
 			<p class="counts">{$users} ({$userCnt})</p>
 			<a href="alltags.html"><img class="statistics2" src="img/2.png" /></a>

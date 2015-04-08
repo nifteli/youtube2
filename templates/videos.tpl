@@ -1,13 +1,27 @@
-			<div>
-			<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-				<div class="tabcontents2"></div>
-			</div>
-			</div>
-			
-            
-			
-			<!--Videos thums Start-->			 
-			<div class="videos">
+<script>
+$(document).ready(function() {
+    var validator = $("#logForm").validate({
+        rules: {
+            userName: "required",
+			password: "required",
+        },
+        messages: {
+			userName:"",
+			password:"",
+        },
+    });
+});
+</script>
+<div>
+<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
+	<div class="tabcontents2"></div>
+</div>
+</div>
+
+<!--Videos thums Start-->			 
+
+	<div style="padding-top:10px;min-height: 1000px;">
+<div class="videos">
 				<div class="hollywd">
 					<h2>Hollywood</h2>  
 				</div>
@@ -340,9 +354,11 @@
 			
 			
 			<div class="btn">
-				<a href="#"><h2>Load More Videos</h2></a>
+               <a href="#">  <input class="login34" type="submit" value="Load More Videos" name="submit"></a>
+                
+                </div>
 			</div>
-			</div>
-			<!--Videos thums End-->
-		</div>
-          
+</div>
+
+             
+

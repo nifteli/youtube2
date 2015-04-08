@@ -23,12 +23,10 @@ class Access{
 	
 	public function setValues($db)
 	{
-		//echo "username = ".$_SESSION["userName"];
-		if(isset($_SESSION["userName"]))
+		if(!isset($_SESSION["userName"]))
 		{
 			$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
 			$result = $db->get("users");
-			
 			if($db->count == 1)
 			{
 				$this->userName=$_SESSION["userName"];
@@ -45,6 +43,21 @@ class Access{
 				//$this->isAdmin=$result[0]["isAdmin"];
 				
 				//echo "<pre>"; print_r($result); echo "</pre>";
+			}
+		}
+		else
+		{
+			$db->where("status='confirmed' and isDeleted=0 and userName = '$_SESSION[userName]'");
+			$result = $db->get("users");
+			if($db->count == 1)
+			{
+				$this->userName=$_SESSION["userName"];
+				$this->hasAccess=true;
+				$this->userId=$result[0]["id"];
+				$this->firstName=$result[0]["firstName"];
+				$this->lastName=$result[0]["lastName"];
+				$this->fatherName=$result[0]["fatherName"];
+				$this->lang=$result[0]["lang"];
 			}
 		}
 	}

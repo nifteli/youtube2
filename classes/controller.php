@@ -5,6 +5,7 @@ include($templatePath."categories.php");
 include($templatePath."videos.php");
 include($templatePath."footer.php");
 include($templatePath."reg.php");
+include($templatePath."addVideo.php");
 
 class Controller //extends MySQL
 {
@@ -12,6 +13,7 @@ class Controller //extends MySQL
 	
 	private $db;
 	private $lang;
+	public $access;
 	
 //End Variables
 	
@@ -21,14 +23,16 @@ class Controller //extends MySQL
 	public function __construct($db) 
 	{
 		global $lang;
+		global $access;
 		
+		$this->access=$access;
 		$this->db = $db; 
 		$this->lang=$lang;
+		//print_r($access);
     }
 	
 	public function includeSection($section)
 	{
-		global $access;
 		global $domain;
 		global $user;
 		global $product;
@@ -61,6 +65,10 @@ class Controller //extends MySQL
 			case "reg":
 				$reg = new Reg($this);
 				$reg->Show();
+				break;
+			case "addVideo":
+				$addVideo = new AddVideo($this);
+				$addVideo->Show();
 				break;
 		}
 	}

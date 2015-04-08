@@ -1,6 +1,6 @@
 <?php
 session_start();
-//$sessionId = session_id(); 
+$sessionId = session_id(); 
 
 //includes
 if(isset($_GET["lang"])) 
@@ -24,6 +24,7 @@ include_once($templatePath."pageHeader.tpl");
 $db = new MysqliDb($hostname, $username, $password, $database);
 if(!$db) die("Database error");
 $access = new Access($db);//echo "username=".$access->userName;
+//print_r($access);
 $controller = new Controller($db);
 //end initiations
 
@@ -47,10 +48,18 @@ else
 			break;*/
 		case "reg": 
 			if(isset($_GET["action"])) 
-				include_once($actionsPath."loginAction.php");
+				include_once($actionsPath."regAction.php");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("reg");
+			$controller->includeSection("footer");
+			break;
+		case "addVideo": 
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."addVideoAction.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("addVideo");
 			$controller->includeSection("footer");
 			break;
 		default:

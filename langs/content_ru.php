@@ -16,4 +16,7 @@ $content['WHY'] = 'Why';
 $content['WHAT'] = 'What';
 $content['WHO'] = 'Who';
 $content['WRONGLOGIN'] = "Wrong username or password";
+$content['GREETING'] = 'Hi';
+$content['ADMINPANEL'] = 'Admin Panel';
+$content['LOGOUT'] = 'Logout';
 ?>
