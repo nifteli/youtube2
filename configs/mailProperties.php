@@ -9,8 +9,8 @@
 	$mail->Password = 'testportagal';                     // SMTP password
 	$mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
 	$mail->Port       = 465;
-	$mail->From = 'portagaltest@gmail.com';
-	$mail->FromName = 'Portagal.az';
+	$mail->From = 'test@gmail.com';
+	$mail->FromName = 'Youtube';
 	$mail->isHTML(true);                                  // Set email format to HTML
 	
 	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

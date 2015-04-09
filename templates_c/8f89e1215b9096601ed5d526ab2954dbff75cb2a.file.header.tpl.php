@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-08 23:51:31
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-09 21:41:00
          compiled from "C:\wamp\www\\youtube\\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:298965520cc3a889cb8-13806676%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f89e1215b9096601ed5d526ab2954dbff75cb2a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\header.tpl',
-      1 => 1428518951,
+      1 => 1428597652,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_5520cc3b1d1576_15445236',
   'variables' => 
   array (
-    'errorMessage' => 0,
     'search' => 0,
     'greeting' => 0,
     'loggedUser' => 0,
@@ -55,12 +54,7 @@ $(document).ready(function() {
 </script>
 <body>
 <div id="wrapper">
-				<?php if (isset($_smarty_tpl->tpl_vars['errorMessage']->value)) {?>
-				<div class="err">
-						<?php echo $_smarty_tpl->tpl_vars['errorMessage']->value;?>
-
-				</div>
-				<?php }?>
+				
 	<div class="banner">
 		<div class="min-cont">
 			<form>
@@ -94,16 +88,16 @@ $(document).ready(function() {
 				</div>
 				<div style="height:140px;float:right;width:170px">
 				<form name="logForm" id="logForm" action="?action=login" method="post">
-					<a  href="other-user.html"><img class="fb" src="img/fb.png" /></a>
-					<a  href="other-user.html"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					<a  href="#"><img class="fb" src="img/fb.png" /></a>
+					<a  href="#"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
 					<input class="u-n" type="text" name="userName" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['userName']->value;?>
 ">
 					<input class="pw" type="password" name="password" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['password']->value;?>
 ">
 					<input class="loginLg" type="submit" value="<?php echo $_smarty_tpl->tpl_vars['login']->value;?>
 " name="submit">
-					<input class="login33" type="submit" value="<?php echo $_smarty_tpl->tpl_vars['signUp']->value;?>
-" name="submit">
+					<a href="?page=reg"><input class="login33" type="button" value="<?php echo $_smarty_tpl->tpl_vars['signUp']->value;?>
+" name="submit"></a>
 					
 				</form>
 				</div>
@@ -113,15 +107,15 @@ $(document).ready(function() {
 	<div class="min-cont bg">
 		<!--Statistics Bar Start-->
 		<div class="user" align="center"> 
-			<a  href="other-user.html"><img class="statistics1"  src="img/1.png" /></a>
+			<a  href="?page=users"><img class="statistics1"  src="img/1.png" /></a>
 			<p class="counts"><?php echo $_smarty_tpl->tpl_vars['users']->value;?>
  (<?php echo $_smarty_tpl->tpl_vars['userCnt']->value;?>
 )</p>
-			<a href="alltags.html"><img class="statistics2" src="img/2.png" /></a>
+			<a href="?page=allTags"><img class="statistics2" src="img/2.png" /></a>
 			<p class="counts"><?php echo $_smarty_tpl->tpl_vars['tags']->value;?>
  (<?php echo $_smarty_tpl->tpl_vars['tagCnt']->value;?>
 )</p>
-			<a href="index.html"><img class="vid" src="img/3.png" /></a>
+			<a href="?index.php"><img class="vid" src="img/3.png" /></a>
 			<p class="counts"><?php echo $_smarty_tpl->tpl_vars['videos']->value;?>
  (<?php echo $_smarty_tpl->tpl_vars['videoCnt']->value;?>
 )</p>

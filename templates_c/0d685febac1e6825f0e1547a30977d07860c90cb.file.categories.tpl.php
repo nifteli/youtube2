@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-05 11:00:20
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-09 14:02:50
          compiled from "C:\wamp\www\\youtube\\templates\categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:174065520cf742ad2d0-17135116%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0d685febac1e6825f0e1547a30977d07860c90cb' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\categories.tpl',
-      1 => 1427914575,
+      1 => 1428570166,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_5520cf74a72ca8_53195650',
   'variables' => 
   array (
     'how' => 0,
@@ -27,8 +29,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'catsWho' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5520cf74a72ca8_53195650',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5520cf74a72ca8_53195650')) {function content_5520cf74a72ca8_53195650($_smarty_tpl) {?> <!--Category Panel Starts-->
 <div class="category">
@@ -75,8 +75,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['sec1']['last']       = ($_sm
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['catsHow']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['url'];?>
 "><?php echo $_smarty_tpl->tpl_vars['catsHow']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['catName'];?>
  (<?php echo $_smarty_tpl->tpl_vars['catsHow']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['count'];?>
-) (<a href="<?php echo $_smarty_tpl->tpl_vars['catsHow']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['subscribe'];?>
-">Subscribe</a>)</a></li>
+) </a></li>
 						<?php endfor; endif; ?>
 					</ul>
 				</div>
@@ -111,8 +110,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['sec1']['last']       = ($_sm
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['catsWhy']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['url'];?>
 "><?php echo $_smarty_tpl->tpl_vars['catsWhy']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['catName'];?>
  (<?php echo $_smarty_tpl->tpl_vars['catsWhy']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['count'];?>
-) (<a href="<?php echo $_smarty_tpl->tpl_vars['catsWhy']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['subscribe'];?>
-">Subscribe</a>)</a></li>
+) </a></li>
 						<?php endfor; endif; ?>
 					</ul>
 				</div>
@@ -147,8 +145,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['sec1']['last']       = ($_sm
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['catsWhat']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['url'];?>
 "><?php echo $_smarty_tpl->tpl_vars['catsWhat']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['catName'];?>
  (<?php echo $_smarty_tpl->tpl_vars['catsWhat']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['count'];?>
-) (<a href="<?php echo $_smarty_tpl->tpl_vars['catsWhat']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['subscribe'];?>
-">Subscribe</a>)</a></li>
+) </a></li>
 						<?php endfor; endif; ?>
 					</ul>
 				</div>
@@ -183,8 +180,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['sec1']['last']       = ($_sm
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['catsWho']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['url'];?>
 "><?php echo $_smarty_tpl->tpl_vars['catsWho']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['catName'];?>
  (<?php echo $_smarty_tpl->tpl_vars['catsWho']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['count'];?>
-) (<a href="<?php echo $_smarty_tpl->tpl_vars['catsWho']->value[$_smarty_tpl->getVariable('smarty')->value['section']['sec1']['index']]['subscribe'];?>
-">Subscribe</a>)</a></li>
+) </a></li>
 						<?php endfor; endif; ?>
 					</ul>
 				</div>

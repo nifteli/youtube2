@@ -18,6 +18,8 @@ require_once($classesPath."MysqliDb.php");
 require_once($classesPath."access.php");
 //Page specific data load
 include_once($templatePath."pageHeader.tpl");
+require $phpMailerPath.'PHPMailerAutoload.php';
+require_once($confsPath."mailProperties.php");
 
 //initiations
 //++//$dbConf = new Conf();
@@ -55,11 +57,35 @@ else
 			$controller->includeSection("footer");
 			break;
 		case "addVideo": 
-			if(isset($_GET["action"])) 
-				include_once($actionsPath."addVideoAction.php");
+			//if(isset($_GET["action"])) 
+				//include_once($actionsPath."addVideoAction.php");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("addVideo");
+			$controller->includeSection("footer");
+			break;
+		case "users": 
+			//if(isset($_GET["action"])) 
+				//include_once($actionsPath."usersAction.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("users");
+			$controller->includeSection("footer");
+			break;
+		case "allTags": 
+			//if(isset($_GET["action"])) 
+				//include_once($actionsPath."allTagsAction.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("allTags");
+			$controller->includeSection("footer");
+			break;
+		case "watchVideo": 
+			//if(isset($_GET["action"])) 
+				//include_once($actionsPath."watchVideo.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("watchVideo");
 			$controller->includeSection("footer");
 			break;
 		default:

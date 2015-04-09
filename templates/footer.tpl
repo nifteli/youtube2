@@ -9,13 +9,13 @@
 				</div>
 				<div class="f-details">
 					<!--<h2> All Rights Reserved</h2>-->
-					<ul style="text-align: center;"> 
+					<ul style="text-align: left; margin-right:40%"> 
 						<li><a href="#">Website Usage Rules</a></li>
 					</ul>
 				</div>
 				<div class="f-details">
 					<!--<h2> All Rights Reserved</h2>-->
-					<ul style="float:right;"> 
+					<ul style="float:left;"> 
 						<li><a href="#">Other info</a></li>
 					</ul>
 				</div>

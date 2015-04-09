@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-08 22:49:59
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-09 13:52:38
          compiled from "C:\wamp\www\\youtube\\templates\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:178365520cf74e842f1-03731158%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b47be5ea17bd06b24d73871a6868dde3d838fc3a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\footer.tpl',
-      1 => 1428515378,
+      1 => 1428569555,
       2 => 'file',
     ),
   ),
@@ -30,13 +30,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 				<div class="f-details">
 					<!--<h2> All Rights Reserved</h2>-->
-					<ul style="text-align: center;"> 
+					<ul style="text-align: left; margin-right:40%"> 
 						<li><a href="#">Website Usage Rules</a></li>
 					</ul>
 				</div>
 				<div class="f-details">
 					<!--<h2> All Rights Reserved</h2>-->
-					<ul style="float:right;"> 
+					<ul style="float:left;"> 
 						<li><a href="#">Other info</a></li>
 					</ul>
 				</div>

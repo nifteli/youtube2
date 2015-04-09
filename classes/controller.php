@@ -6,6 +6,9 @@ include($templatePath."videos.php");
 include($templatePath."footer.php");
 include($templatePath."reg.php");
 include($templatePath."addVideo.php");
+include($templatePath."users.php");
+include($templatePath."watchVideo.php");
+include($templatePath."allTags.php");
 
 class Controller //extends MySQL
 {
@@ -65,6 +68,18 @@ class Controller //extends MySQL
 			case "reg":
 				$reg = new Reg($this);
 				$reg->Show();
+				break;
+			case "users":
+				$users = new Users($this);
+				$users->Show();
+				break;
+			case "allTags":
+				$allTags = new AllTags($this);
+				$allTags->Show();
+				break;
+			case "watchVideo":
+				$watchVideo = new WatchVideo($this);
+				$watchVideo->Show();
 				break;
 			case "addVideo":
 				$addVideo = new AddVideo($this);

@@ -33,6 +33,15 @@ $content['REGISTER'] = 'Qeydiyyatdan keç';
 $content['CANCEL'] = 'Ləğv';
 $content['MALE'] = 'kişi';
 $content['FEMALE'] = 'qadın';
+$content['PASSWORDAGAIN'] = 'Şifrə(təkrar)';
+$content["REGERROR"]="Xahiş olunur məlumatları tam girin.";
+$content["USEREXISTS"]="Bu istifadəçi və ya email adı artıq mövcuddur";
+$content["CONFIRMSUB"]="İstifadəçi adı təsdiqi";
+$content["CONFIRMBODY"]="İstifadəçi adının təsdiqlənməsi üçün zəhmət olmasa aşağıdakı linkə tıklayın";
+$content["REGOK"]="Qeydiyyatınızın ilkin mərhələsi tamamlandı. İstifadəçi adının təsdiqlənməsi üçün zəhmət olmasa emailinizi yoxlayın";
+$content["CONFIRMATIONERR"]="Bu link təsdiqlənmə üçün aktiv deyil";
+$content["REGCONFIRMED"]="Sizin istifadəçi adınız təsdiqləndi";
+$content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
 //End registration
 
 ?>

@@ -8,7 +8,7 @@ $templatePath = $appDirectory."/templates/";
 $smartyPath = $classesPath."plugins/Smarty/";
 $langsPath = $appDirectory."/langs/";
 $actionsPath=$appDirectory."actions/";
-$phpMailerPath=$classesPath."/PHPMailer/";
+$phpMailerPath=$classesPath."plugins/PHPMailer/";
 //$productImagesPath=$appDirectory."productImages/";
 //$bannerPath=$appDirectory."img/banners/";
 
