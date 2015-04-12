@@ -21,7 +21,7 @@ if ($_GET["action"]=="reg")
 		{
 			//insert user registration data to database
 			$hash=uniqid();
-			$id = $db->insert("users", array("userName"=>trim($_POST[username]),
+			$id = $db->insert("users", array("userName"=>trim($_POST["username"]),
 											  "password"=> md5(trim($_POST["password"])),
 											  "status"=>"pending",
 											  "hash"=>"$hash",

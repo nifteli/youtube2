@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-09 13:52:38
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-11 19:38:26
          compiled from "C:\wamp\www\\youtube\\templates\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:178365520cf74e842f1-03731158%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b47be5ea17bd06b24d73871a6868dde3d838fc3a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\footer.tpl',
-      1 => 1428569555,
+      1 => 1428773822,
       2 => 'file',
     ),
   ),

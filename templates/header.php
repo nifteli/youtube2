@@ -11,7 +11,7 @@ class Header
 		
 		$this->header = new Smarty;
 		$this->header->assign("search",$content['SEARCH']);
-		$this->header->assign("addVideo",$content['ADD_VIDEO']);
+		$this->header->assign("addVideo",$content['ADDVIDEO']);
 		$this->header->assign("userName",$content['USERNAME']);
 		$this->header->assign("password",$content['PASSWORD']);
 		$this->header->assign("signUp",$content['SIGN_UP']);
@@ -27,7 +27,7 @@ class Header
 		if(isset($controller->access->userName))
 		{
 			$this->header->assign("greeting",$content['GREETING']);
-			$this->header->assign("adminpanel",$content['ADMINPANEL']);
+			$this->header->assign("adminPanel",$content['ADMINPANEL']);
 			$this->header->assign("logout",$content['LOGOUT']);
 			$this->header->assign("loggedUser",$controller->access->firstName);
 		}

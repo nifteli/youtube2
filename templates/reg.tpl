@@ -46,7 +46,7 @@ $(document).ready(function() {
 
 	<div class="topgap">
 	<label>{$surname}:
-	<div class="gap"><input class="field" type="text" name="surname" id="surname" value="{if isset($nameVal)} {$surnameVal} {/if}"></div></label></div><br><br>
+	<div class="gap"><input class="field" type="text" name="surname" id="surname" value="{if isset($surnameVal)} {$surnameVal} {/if}"></div></label></div><br><br>
 
 	<div class="topgap">
 	<label>{$gender}:

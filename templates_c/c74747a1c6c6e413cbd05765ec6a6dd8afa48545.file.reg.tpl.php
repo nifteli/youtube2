@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-09 23:12:02
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-11 20:33:16
          compiled from "C:\wamp\www\\youtube\\templates\reg.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:112225520d07ec719a3-99654063%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c74747a1c6c6e413cbd05765ec6a6dd8afa48545' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\reg.tpl',
-      1 => 1428602950,
+      1 => 1428775691,
       2 => 'file',
     ),
   ),
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	<div class="topgap">
 	<label><?php echo $_smarty_tpl->tpl_vars['surname']->value;?>
 :
-	<div class="gap"><input class="field" type="text" name="surname" id="surname" value="<?php if (isset($_smarty_tpl->tpl_vars['nameVal']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['surnameVal']->value;?>
+	<div class="gap"><input class="field" type="text" name="surname" id="surname" value="<?php if (isset($_smarty_tpl->tpl_vars['surnameVal']->value)) {?> <?php echo $_smarty_tpl->tpl_vars['surnameVal']->value;?>
  <?php }?>"></div></label></div><br><br>
 
 	<div class="topgap">

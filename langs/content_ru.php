@@ -3,7 +3,7 @@
 $content = array();
 
 $content['SEARCH'] = 'Search';
-$content['ADD_VIDEO'] = 'Add Video';
+$content['ADDVIDEO'] = 'Add Video';
 $content['USERNAME'] = 'User Name';
 $content['PASSWORD'] = 'Password';
 $content['SIGN_UP'] = 'Sign up';
@@ -40,4 +40,17 @@ $content["REGOK"]="Qeydiyyatınızın ilkin mərhələsi tamamlandı. İstifadə
 $content["CONFIRMATIONERR"]="Bu link təsdiqlənmə üçün aktiv deyil";
 $content["REGCONFIRMED"]="Sizin istifadəçi adınız təsdiqləndi";
 $content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
+//end registration
+// add video
+$content['VIDEOLINK'] = 'Video Link';
+$content['VIDEOQUESTION'] = 'Video Question';
+$content['LANGAZ'] = 'Azerbaijani';
+$content['LANGRU'] = 'Russian';
+$content['LANGEN'] = 'English';
+$content['VIDEONAME'] = 'Video Name';
+$content['INFORMATION'] = 'Information';
+$content['CATEGORY'] = 'Category';
+$content['TAGS'] = 'Tags';
+$content['ADDTOMYFOLDER'] = 'Add to My Folder';
+//end add video
 ?>

@@ -4,7 +4,7 @@
 $content = array();
 
 $content['SEARCH'] = 'Axtar';
-$content['ADD_VIDEO'] = 'Video əlavə et';
+$content['ADDVIDEO'] = 'Video əlavə et';
 $content['USERNAME'] = 'İstifadəçi adı';
 $content['PASSWORD'] = 'Şifrə';
 $content['SIGN_UP'] = 'Qeydiyyat';
@@ -43,5 +43,16 @@ $content["CONFIRMATIONERR"]="Bu link təsdiqlənmə üçün aktiv deyil";
 $content["REGCONFIRMED"]="Sizin istifadəçi adınız təsdiqləndi";
 $content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
 //End registration
-
+// add video
+$content['VIDEOLINK'] = 'Video İstinad';
+$content['VIDEOQUESTION'] = 'Video Sualı';
+$content['LANGAZ'] = 'Azərbaycan dili';
+$content['LANGRU'] = 'Rus dili';
+$content['LANGEN'] = 'İngilis dili';
+$content['VIDEONAME'] = 'Video Adı';
+$content['INFORMATION'] = 'Məlumat';
+$content['CATEGORY'] = 'Kateqoriya';
+$content['TAGS'] = 'Təqlər';
+$content['ADDTOMYFOLDER'] = 'Əlavə et';
+//end add video
 ?>
