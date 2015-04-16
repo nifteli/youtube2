@@ -42,8 +42,12 @@ $(document).ready(function() {
 				</div>
 				<div style="height:140px;float:right;width:170px">
 				<form name="logForm" id="logForm" action="?action=login" method="post">
-					<a  href="#"><img class="fb" src="img/fb.png" /></a>
-					<a  href="#"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					<div class="sosialBtn">
+					{if !isset($greeting)}
+					<a  href="?action=fbLogin"><img class="fb" src="img/fb.png" /></a>
+					<a  href="?action=okLogin"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					{/if}
+					</div>
 					<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
 					<input class="pw" type="password" name="password" value="" placeholder="{$password}">
 					<input class="loginLg" type="submit" value="{$login}" name="submit">

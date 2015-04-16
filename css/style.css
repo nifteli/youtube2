@@ -1012,6 +1012,7 @@ text-decoration:none;
  margin-left:65px;
 transition:0.5s;
 vertical-align: middle;
+cursor: pointer;
 }
 
 .add:hover{
@@ -1043,6 +1044,7 @@ vertical-align: middle;
  margin-left:114px;
  background:#b7b7b7;
 transition:0.5s;
+cursor: pointer;
 }
 .cancel:hover{
 	background:#333333;
@@ -1480,7 +1482,7 @@ width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: 4px;
+top: -25px;
 border: 0px;
 border-radius: 5px;
 }
@@ -1497,14 +1499,14 @@ font-size: 14px;
 height: 30px;
 line-height: 2;
 text-align: center;
-margin-left: -55px;
+margin-left: 5px;
 padding: 0px 0px;
 text-indent: 0px;
 width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: 96px;
+top: 5px;
 border: 0px;
 border-radius: 5px;
 }
@@ -2051,6 +2053,11 @@ float: right;
 margin-right: 6px;
 }
 
+.sosialBtn{
+	float: right;
+	margin-left: 195px;
+	margin-bottom: -30px
+}
 
 
 

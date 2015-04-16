@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-11 19:38:26
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-16 16:46:32
          compiled from "C:\wamp\www\\youtube\\templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:298965520cc3a889cb8-13806676%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:22677552a09a664c687-58917446%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '8f89e1215b9096601ed5d526ab2954dbff75cb2a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\header.tpl',
-      1 => 1428773822,
+      1 => 1429184312,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '298965520cc3a889cb8-13806676',
+  'nocache_hash' => '22677552a09a664c687-58917446',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5520cc3b1d1576_15445236',
+  'unifunc' => 'content_552a09a6e2ac67_44930712',
   'variables' => 
   array (
     'search' => 0,
@@ -38,7 +38,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5520cc3b1d1576_15445236')) {function content_5520cc3b1d1576_15445236($_smarty_tpl) {?><script>
+<?php if ($_valid && !is_callable('content_552a09a6e2ac67_44930712')) {function content_552a09a6e2ac67_44930712($_smarty_tpl) {?><script>
 $(document).ready(function() {
     var validator = $("#logForm").validate({
         rules: {
@@ -88,8 +88,12 @@ $(document).ready(function() {
 				</div>
 				<div style="height:140px;float:right;width:170px">
 				<form name="logForm" id="logForm" action="?action=login" method="post">
-					<a  href="#"><img class="fb" src="img/fb.png" /></a>
-					<a  href="#"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					<div class="sosialBtn">
+					<?php if (!isset($_smarty_tpl->tpl_vars['greeting']->value)) {?>
+					<a  href="?action=fbLogin"><img class="fb" src="img/fb.png" /></a>
+					<a  href="?action=okLogin"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					<?php }?>
+					</div>
 					<input class="u-n" type="text" name="userName" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['userName']->value;?>
 ">
 					<input class="pw" type="password" name="password" value="" placeholder="<?php echo $_smarty_tpl->tpl_vars['password']->value;?>

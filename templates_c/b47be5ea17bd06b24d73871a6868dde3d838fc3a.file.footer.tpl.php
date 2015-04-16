@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-11 19:38:26
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-12 10:59:03
          compiled from "C:\wamp\www\\youtube\\templates\footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:178365520cf74e842f1-03731158%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:13624552a09a7a00523-03302630%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'b47be5ea17bd06b24d73871a6868dde3d838fc3a' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\footer.tpl',
-      1 => 1428773822,
+      1 => 1428569555,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '178365520cf74e842f1-03731158',
+  'nocache_hash' => '13624552a09a7a00523-03302630',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_5520cf74f0e865_40202488',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_552a09a7a609e6_26401035',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5520cf74f0e865_40202488')) {function content_5520cf74f0e865_40202488($_smarty_tpl) {?><!--footer starts-->
+<?php if ($_valid && !is_callable('content_552a09a7a609e6_26401035')) {function content_552a09a7a609e6_26401035($_smarty_tpl) {?><!--footer starts-->
 		<div class="footer">
 			<div class="cont">
 				<div class="f-details">

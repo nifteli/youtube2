@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2015-04-11 22:44:19
+<?php /* Smarty version Smarty-3.1.18, created on 2015-04-12 11:03:13
          compiled from "C:\wamp\www\\youtube\\templates\addVideo.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21533552579f24baa04-58881099%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3483552a09a75d6a67-34927649%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ae127bfcb24443b2fa929097e06a03350947bb02' => 
     array (
       0 => 'C:\\wamp\\www\\\\youtube\\\\templates\\addVideo.tpl',
-      1 => 1428785056,
+      1 => 1428818589,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21533552579f24baa04-58881099',
+  'nocache_hash' => '3483552a09a75d6a67-34927649',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_552579f2575795_53604891',
+  'unifunc' => 'content_552a09a7800357_39743803',
   'variables' => 
   array (
     'videoLink' => 0,
@@ -44,7 +44,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_552579f2575795_53604891')) {function content_552579f2575795_53604891($_smarty_tpl) {?><script>
+<?php if ($_valid && !is_callable('content_552a09a7800357_39743803')) {function content_552a09a7800357_39743803($_smarty_tpl) {?><script>
 $(document).ready(function() {
     var validator = $("#logForm").validate({
         rules: {
@@ -104,9 +104,9 @@ $(document).ready(function() {
 </input></td>
 					</tr>
 					<tr>
-						<td><input class="checkbox" type="checkbox" value="1" name="videoQuestion[]" <?php if (isset($_smarty_tpl->tpl_vars['videoQuestionVal']->value)&&in_array("1",$_smarty_tpl->tpl_vars['videoQuestionVal']->value)) {?> checked <?php }?>><?php echo $_smarty_tpl->tpl_vars['vqWhat']->value;?>
+						<td><input class="checkbox" type="radio" value="1" name="videoQuestion[]" <?php if (isset($_smarty_tpl->tpl_vars['videoQuestionVal']->value)&&in_array("1",$_smarty_tpl->tpl_vars['videoQuestionVal']->value)) {?> checked <?php }?>><?php echo $_smarty_tpl->tpl_vars['vqWhat']->value;?>
 </input></td>
-						<td><input class="checkbox" type="checkbox" value="2" name="videoQuestion[]" <?php if (isset($_smarty_tpl->tpl_vars['videoQuestionVal']->value)&&in_array("2",$_smarty_tpl->tpl_vars['videoQuestionVal']->value)) {?> checked <?php }?>><?php echo $_smarty_tpl->tpl_vars['vqWho']->value;?>
+						<td><input class="checkbox" type="radio" value="2" name="videoQuestion[]" <?php if (isset($_smarty_tpl->tpl_vars['videoQuestionVal']->value)&&in_array("2",$_smarty_tpl->tpl_vars['videoQuestionVal']->value)) {?> checked <?php }?>><?php echo $_smarty_tpl->tpl_vars['vqWho']->value;?>
 </input></td>
 					</tr>
 				</table>

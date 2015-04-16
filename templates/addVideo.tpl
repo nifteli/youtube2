@@ -49,8 +49,8 @@ $(document).ready(function() {
 						<td><input class="checkbox" type="checkbox" value="4" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("4", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
 					</tr>
 					<tr>
-						<td><input class="checkbox" type="checkbox" value="1" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
-						<td><input class="checkbox" type="checkbox" value="2" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
+						<td><input class="checkbox" type="radio" value="1" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
+						<td><input class="checkbox" type="radio" value="2" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
 					</tr>
 				</table>
                </div>

@@ -9,6 +9,7 @@ $smartyPath = $classesPath."plugins/Smarty/";
 $langsPath = $appDirectory."/langs/";
 $actionsPath=$appDirectory."actions/";
 $phpMailerPath=$classesPath."plugins/PHPMailer/";
+$facebookPath=$classesPath."plugins/Facebook/";
 //$productImagesPath=$appDirectory."productImages/";
 //$bannerPath=$appDirectory."img/banners/";
 

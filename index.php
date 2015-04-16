@@ -17,9 +17,9 @@ require_once($classesPath."controller.php");
 require_once($classesPath."MysqliDb.php");
 require_once($classesPath."access.php");
 //Page specific data load
-include_once($templatePath."pageHeader.tpl");
 require $phpMailerPath.'PHPMailerAutoload.php';
 require_once($confsPath."mailProperties.php");
+require_once($facebookPath."facebook.php");
 
 //initiations
 //++//$dbConf = new Conf();
@@ -35,6 +35,7 @@ if(!isset($_GET["page"]))
 {
 	if(isset($_GET["action"])) 
 		include_once($actionsPath."loginAction.php");
+	include_once($templatePath."pageHeader.tpl");
 	$controller->includeSection("header");
 	$controller->includeSection("categories");
 	$controller->includeSection("videos");
@@ -43,6 +44,7 @@ if(!isset($_GET["page"]))
 }
 else
 {
+	include_once($templatePath."pageHeader.tpl");
 	switch($_GET["page"])
 	{
 		/*case "logAdmin";

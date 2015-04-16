@@ -1,8 +1,7 @@
-<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Your Site Name</title>
+	<title>www.howtubesmart.com</title>
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="fonts/stylesheet.css"/>
 	<link href="css/tabcontent.css" rel="stylesheet" type="text/css" />
@@ -42,7 +41,6 @@
           {text: "Amet", weight: 5}
           // ...as many words as you want
       ];
-
       $(function() {
         // When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
         $("#tags1").jQCloud(word_array);
