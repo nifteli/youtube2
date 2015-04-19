@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2015 at 01:16 AM
+-- Generation Time: Apr 19, 2015 at 09:21 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -384,6 +384,7 @@ INSERT INTO `catgroups` (`id`, `catGroupNameAz`, `infoAz`, `catGroupNameEn`, `in
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `videoId` int(11) NOT NULL,
   `isConfirmed` tinyint(1) NOT NULL DEFAULT '0',
   `confirmedById` int(11) DEFAULT NULL,
   `confirmedByIP` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -680,9 +681,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deleted` datetime NOT NULL,
   `deletedById` int(11) DEFAULT NULL,
   `contentChangeCount` int(11) NOT NULL COMMENT 'Sayt kontentini dəyişdirmə sayı',
-  `linksAddedCount` int(11) NOT NULL COMMENT 'Əlavə etdiyi video linklərinin sayı',
   `getEmailOnVideoComment` tinyint(1) NOT NULL DEFAULT '0',
-  `videoCommentCount` int(11) NOT NULL COMMENT 'Şərh etdiyi videoların sayı',
   PRIMARY KEY (`id`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
@@ -692,9 +691,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `userName`, `password`, `status`, `hash`, `firstName`, `lastName`, `fatherName`, `birthDate`, `gender`, `email`, `registered`, `registeredByIP`, `lastLoggedIn`, `languageId`, `profession`, `interests`, `phoneNumber`, `notes`, `isDeleted`, `deleted`, `deletedById`, `contentChangeCount`, `linksAddedCount`, `getEmailOnVideoComment`, `videoCommentCount`) VALUES
-(1, 'admin', 'admin', '', '', 'Admin', 'Adminovic', '', '0000-00-00', 'Male', '', '2015-03-12 11:31:00', '', '0000-00-00 00:00:00', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0, 0, 0),
-(2, 'user1', 'f6fdffe48c908deb0f4c3bd36c032e72', 'confirmed', '55295c5f4187e', 'User1', 'Ov', '', '0000-00-00', 'Male', 'user1@mail.com', '2015-04-11 19:39:43', '127.0.0.1', '2015-04-11 13:45:05', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0, 0, 0);
+INSERT INTO `users` (`id`, `userName`, `password`, `status`, `hash`, `firstName`, `lastName`, `fatherName`, `birthDate`, `gender`, `email`, `registered`, `registeredByIP`, `lastLoggedIn`, `languageId`, `profession`, `interests`, `phoneNumber`, `notes`, `isDeleted`, `deleted`, `deletedById`, `contentChangeCount`, `getEmailOnVideoComment`) VALUES
+(1, 'admin', 'admin', '', '', 'Admin', 'Adminovic', '', '0000-00-00', 'Male', '', '2015-03-12 11:31:00', '', '0000-00-00 00:00:00', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0),
+(2, 'user1', 'f6fdffe48c908deb0f4c3bd36c032e72', 'confirmed', '55295c5f4187e', 'User1', 'Ov', '', '0000-00-00', 'Male', 'user1@mail.com', '2015-04-11 19:39:43', '127.0.0.1', '2015-04-18 17:45:24', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -709,6 +708,26 @@ CREATE TABLE IF NOT EXISTS `videocats` (
   KEY `categoryId` (`categoryId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `videocats`
+--
+
+INSERT INTO `videocats` (`videoId`, `categoryId`) VALUES
+(1, 3),
+(2, 3),
+(3, 5),
+(13, 20),
+(30, 102),
+(30, 104),
+(31, 106),
+(29, 138),
+(28, 191),
+(32, 191),
+(27, 195),
+(13, 198),
+(25, 198),
+(26, 198);
+
 -- --------------------------------------------------------
 
 --
@@ -722,7 +741,6 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `questions` smallint(6) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `info` text COLLATE utf8_unicode_ci NOT NULL,
-  `categoryId` int(11) DEFAULT NULL,
   `addedById` int(11) DEFAULT NULL,
   `addedByIP` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `updatedById` int(11) DEFAULT NULL,
@@ -731,12 +749,43 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `deletedById` int(11) DEFAULT NULL,
   `duration` int(11) NOT NULL COMMENT 'by seconds',
   PRIMARY KEY (`id`),
-  KEY `categoryId` (`categoryId`),
   KEY `addedById` (`addedById`),
   KEY `updatedById` (`updatedById`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`id`, `link`, `languageId`, `questions`, `name`, `info`, `addedById`, `addedByIP`, `updatedById`, `isDeleted`, `deleted`, `deletedById`, `duration`) VALUES
+(1, 'qwdqw', 4, 13, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(2, 'gregerg', 3, 1, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(3, 'tgwerer', 3, 1, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(4, 'dwedwed', 8, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(5, 'wewef', 5, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(6, 'wefwef', 1, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(9, 'qweqwe', 4, 8, 'qweqwe', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(11, '111111111111111', 5, 4, '111111111', '111', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(12, 'qwdwef', 6, 12, 'dqwd', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(13, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 9, 12, 'test 1', 'good', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(14, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 1, 12, 'test 2', 'good 2', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(15, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 1, 12, 'test 3', 'good 3', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(16, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 3, 12, 'test 4', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(17, 'qwdqwd', 2, 12, 'qwdwd', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(18, 'rthrthrt', 2, 12, 'qerg', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(19, 'wsfwefew', 3, 12, 'wewef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(20, '2222222222222222222', 2, 12, '2222222222222', '22222222', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(24, '4444444', 3, 12, '444444444', '44444444', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(25, '55555555555', 5, 12, '5555555', '5555555', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(26, '66666666', 4, 12, '666666666', '6666666666', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(27, '7777777', 3, 12, '77777777', '777777777', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(28, '888888888', 13, 12, '8888888888', '88888888888', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(29, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(30, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(31, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(32, '23123', 7, 12, 'eeeeeeeeeeeeeeee', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -812,8 +861,8 @@ ALTER TABLE `profileviews`
 -- Constraints for table `roleaccess`
 --
 ALTER TABLE `roleaccess`
-  ADD CONSTRAINT `roleaccess_ibfk_2` FOREIGN KEY (`accessTypeId`) REFERENCES `accesstypes` (`id`),
-  ADD CONSTRAINT `roleaccess_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `roleaccess_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`),
+  ADD CONSTRAINT `roleaccess_ibfk_2` FOREIGN KEY (`accessTypeId`) REFERENCES `accesstypes` (`id`);
 
 --
 -- Constraints for table `searches`
@@ -825,8 +874,8 @@ ALTER TABLE `searches`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`);
 
 --
 -- Constraints for table `videocats`
@@ -839,11 +888,10 @@ ALTER TABLE `videocats`
 -- Constraints for table `videos`
 --
 ALTER TABLE `videos`
-  ADD CONSTRAINT `videos_ibfk_5` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`),
-  ADD CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `videos_ibfk_2` FOREIGN KEY (`addedById`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `videos_ibfk_3` FOREIGN KEY (`updatedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `videos_ibfk_4` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `videos_ibfk_4` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `videos_ibfk_5` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`);
 
 --
 -- Constraints for table `videotags`

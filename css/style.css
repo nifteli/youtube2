@@ -2013,7 +2013,7 @@ background: url(../img/line.png);
 	margin-left:-189px
 }
 
-.inf, .success1, .wrn, .err, .validation {
+.inf, .success1, .wrn, .err, .smallerr, .validation {
 border: 1px solid;
 margin: 10px 0px;
 padding:15px 10px 15px 50px;
@@ -2051,6 +2051,15 @@ background-image: url('../img/error.png');
 width: 910px;
 float: right;
 margin-right: 6px;
+}
+.smallerr {
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('../img/error.png');
+width: 400px;
+float: right;
+margin-right: 20px;
+margin-top: 60px;
 }
 
 .sosialBtn{

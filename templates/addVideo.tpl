@@ -1,6 +1,6 @@
 <script>
 $(document).ready(function() {
-    var validator = $("#logForm").validate({
+    var validator = $("#addVideoForm").validate({
         rules: {
             userName: "required",
 			password: "required",
@@ -12,17 +12,19 @@ $(document).ready(function() {
     });
 });
 </script>
-<div>
-<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
-</div>
-</div>
 
 <!--Videos thums Start-->			 
-
 <div style="padding-top:10px;min-height: 1000px;">
 	<img class="player" src="img/player2.png" width="432" height="289" alt="">
-              <form style="margin-top:44px;" name="addVideoForm" action="?page=addVideo&action=add" method="post">
+	{if $result != 'success'}
+			{if $result == 'error'}
+			  <div class="smallerr">
+			  	{foreach from=$messages item=message}
+			  		{$message} <br>
+			  	{/foreach}
+			  </div>
+			{/if}
+              <form style="margin-top:44px;" id="addVideoForm" action="?page=addVideo&action=add" method="post">
              
               <label class="labelv">{$videoLink}:</label><br>
               <input class="fieldv" type="url" name="videoLink" value="{if isset($videoLinkVal)}{$videoLinkVal}{/if}">
@@ -32,9 +34,10 @@ $(document).ready(function() {
               <label class="labelv">{$language}:</label><br>
 
               <select class="fieldv" name="language" style="width:234px; height:45px">
-               	<option value="az" {if isset($languageVal) &&  $languageVal=='az'} selected {/if}>{$langAz}</option>
-				<option value="en" {if isset($languageVal) &&  $languageVal=='en'} selected {/if}>{$langEn}</option>
-				<option value="ru" {if isset($languageVal) &&  $languageVal=='ru'} selected {/if}>{$langRu}</option>
+              	<option value="0" selected="selected"> </option>
+              	{foreach from=$languages item=row1}
+    				{html_options values=$row1.id output=$row1.name selected=$languageVal}
+  				{/foreach}
               </select>
               <br><br>
 
@@ -45,12 +48,12 @@ $(document).ready(function() {
               <div class="checkbox">
 				<table>
 					<tr>
-						<td><input class="checkbox" type="checkbox" value="3" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("3", $videoQuestionVal)} checked {/if}>{$vqHow}</input></td>
-						<td><input class="checkbox" type="checkbox" value="4" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("4", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
+						<td><input id="q3" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("4", $videoQuestionVal)} checked {/if}>{$vqHow}</input></td>
+						<td><input id="q4" class="checkbox" type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("8", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
 					</tr>
 					<tr>
-						<td><input class="checkbox" type="radio" value="1" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
-						<td><input class="checkbox" type="radio" value="2" name="videoQuestion[]" {if isset($videoQuestionVal) && in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
+						<td><input id="q1" class="checkbox" type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
+						<td><input id="q2" class="checkbox" type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
 					</tr>
 				</table>
                </div>
@@ -71,31 +74,85 @@ $(document).ready(function() {
 				<label class="labelv">{$category}:</label>
                 <br>
 
-               <select class="fieldv" style="width:234px; height:45px" name="category">
-               <option>Music</option>
-               <option>Bollywood</option>
-               <option>Blues</option>
-              </select><br><br>
+               <select class="fieldv" style="width:234px; height:45px" name="category[]" id="category1">
+               </select><br><br>
 
+               <select class="fieldv" style="width:234px; height:45px" name="category[]" id="category2">
+               </select><br><br>
+              
+               <select class="fieldv" style="width:234px; height:45px" name="category[]" id="category3">
+               </select><br><br>
 
 			   <label class="labelv">{$tags}:</label>
                 <br>
 
                <input class="fieldv" type="text" name="tags" value="{if isset($tagsVal)}{$tagsVal}{/if}">
                <br>
-				<a href="javascript: submitform()"> <button class="add" type="button"> 
+				<a href="javascript: submitForm()"> <button class="add" type="button"> 
 				<img src="img/folder.png" width="29" height="29" alt="">&nbsp;{$addToMyFolder}</button></a>
       
                 <br>
-				<a href="#"> <button class="cancel" type="button">{$cancel}</button></a>
+				<a href="javascript: resetForm()"> <button class="cancel" type="button">{$cancel}</button></a>
              </form>
 	<script type="text/javascript">
-		function submitform()
+		var allCategories = {$allCategories};
+		
+		loadCategories();
+	
+		function submitForm()
 		{
-			document.addVideoForm.submit();
+			$("#addVideoForm").submit();
 		}
+		
+		function resetForm()
+		{
+			$("#addVideoForm")[0].reset();
+		}
+		
+		function controlQuestionSelection(el)
+		{
+			if(el.id == "q3" || el.id == "q4")
+			{
+				$("#q1").prop('checked', false);
+				$("#q2").prop('checked', false);
+			}
+			if(el.id == "q1" || el.id == "q2")
+			{
+				$("#q3").prop('checked', false);
+				$("#q4").prop('checked', false);
+			}
+			
+			loadCategories();
+		}
+		
+		function loadCategories()
+		{
+			var q = $("#q1").prop('checked') ? 1 : 0;
+			q += $("#q2").prop('checked') ? 2 : 0;
+			q += $("#q3").prop('checked') ? 4 : 0;
+			q += $("#q4").prop('checked') ? 8 : 0;
+			
+		 	for(var i=1; i<=3; i++)
+		 	{
+				var html = '<option value="0"> </option>';
+				$.each(allCategories, function(key,value)
+				{
+					if(q & value.questions)
+					{
+						var selected = (value.id == {$categoryVal}[i-1]) ? ' selected' : '';
+						html += '<option value="' + value.id + '"' + selected + '>' + value.catName + '</option>';
+					}
+				});
+				$("#category" + i).html(html);
+			}
+			
+			//alert(html);
+		}
+		
 	</script>
+	{else}
+	<div class="success1">{$messages['success']}</div>
+	{/if}
 </div>
-
              
 

@@ -45,9 +45,6 @@ $content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
 // add video
 $content['VIDEOLINK'] = 'Video Link';
 $content['VIDEOQUESTION'] = 'Video Question';
-$content['LANGAZ'] = 'Azerbaijani';
-$content['LANGRU'] = 'Russian';
-$content['LANGEN'] = 'English';
 $content['VIDEONAME'] = 'Video Name';
 $content['INFORMATION'] = 'Information';
 $content['CATEGORY'] = 'Category';

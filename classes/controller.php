@@ -89,17 +89,25 @@ class Controller //extends MySQL
 	}
 	
 	//this will be common function because categories panel are located in all pages
-	public function getCategories($questionId)
+	public function getCategories($questions)
 	{
-		$this->db->join("(SELECT categoryId, COUNT(*) AS count
-						  FROM videos
-						  GROUP BY categoryId) AS v", "v.categoryId=c.id", "LEFT");
-		$this->db->where("questions", $questionId);
-		$this->db->groupBy("c.id,catName".$this->lang.",catInfo".$this->lang);
-		$this->db->orderBy("catName".$this->lang,"asc");
-		$cats = $this->db->get("categories c",null,"c.id,'#' as url,catName".$this->lang." as catName,catInfo".$this->lang." as catInfo,'#' as subscribe,IfNULL(v.count,0) AS count");
-		//echo $this->db->getLastQuery ()."<br>";
+		$this->db->join("videocats vc", "c.id = vc.categoryId", "LEFT");
+		$this->db->join("videos v", "v.id = vc.videoId", "LEFT");
+		$this->db->where("c.questions", $questions, "&");
+		$this->db->groupBy("c.id");
+		$this->db->orderBy("c.catName".$this->lang,"asc");
+		$cats = $this->db->get("categories c",null,"c.id, '#' as url, c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo, '#' as subscribe, IfNULL(count(vc.categoryid), 0) AS count");
 		return $cats;
+	}
+	
+	public function getAllCategories()
+	{
+		return $this->db->get("categories", null, "id, questions, catName".$this->lang." as catName");
+	}
+	
+	public function getLanguages()
+	{
+		return $this->db->get("languages", null, "id, name".$this->lang." as name");
 	}
 }
 ?>

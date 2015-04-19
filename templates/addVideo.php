@@ -7,33 +7,34 @@ class AddVideo
 	public function __construct($controller)
 	{
 		global $content;
-		global $errorMessage;
-		global $okMessage;
+		global $result;
+		global $messages;
 		
 		$this->videos = new Smarty;
-		$this->videos->assign("videoLink",$content['VIDEOLINK']);
-		if (isset($_POST["videoLink"])) $this->videos->assign("videoLinkVal",$_POST["videoLink"]);
-		$this->videos->assign("language",$content['LANGUAGE']);
-		$this->videos->assign("langAz",$content['LANGAZ']);
-		$this->videos->assign("langRu",$content['LANGRU']);
-		$this->videos->assign("langEn",$content['LANGEN']);
-		if (isset($_POST["language"])) $this->videos->assign("languageVal",$_POST["language"]);
-		$this->videos->assign("videoQuestion",$content['VIDEOQUESTION']);
-		$this->videos->assign("vqHow",$content['HOW']);
-		$this->videos->assign("vqWhy",$content['WHY']);
-		$this->videos->assign("vqWho",$content['WHO']);
-		$this->videos->assign("vqWhat",$content['WHAT']);
-		if (isset($_POST["videoQuestion"])) $this->videos->assign("videoQuestionVal",$_POST["videoQuestion"]);
-		$this->videos->assign("videoName",$content['VIDEONAME']);
-		if (isset($_POST["videoName"])) $this->videos->assign("videoNameVal",$_POST["videoName"]);
-		$this->videos->assign("information",$content['INFORMATION']);
-		if (isset($_POST["information"])) $this->videos->assign("informationVal",$_POST["information"]);
-		$this->videos->assign("category",$content['CATEGORY']);
-		if (isset($_POST["category"])) $this->videos->assign("categoryVal",$_POST["category"]);
-		$this->videos->assign("tags",$content['TAGS']);
-		if (isset($_POST["tags"])) $this->videos->assign("tagsVal",$_POST["tags"]);
-		$this->videos->assign("addToMyFolder",$content['ADDTOMYFOLDER']);
-		$this->videos->assign("cancel",$content['CANCEL']);
+		$this->videos->assign("videoLink", $content['VIDEOLINK']);
+		$this->videos->assign("videoLinkVal", isset($_POST["videoLink"]) ? $_POST["videoLink"] : "");
+		$this->videos->assign("language", $content['LANGUAGE']);
+		$this->videos->assign("languages", $controller->getLanguages());
+		$this->videos->assign("languageVal", isset($_POST["language"]) ? $_POST["language"] : "");
+		$this->videos->assign("videoQuestion", $content['VIDEOQUESTION']);
+		$this->videos->assign("vqHow", $content['HOW']);
+		$this->videos->assign("vqWhy", $content['WHY']);
+		$this->videos->assign("vqWho", $content['WHO']);
+		$this->videos->assign("vqWhat", $content['WHAT']);
+		$this->videos->assign("videoQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : []);
+		$this->videos->assign("videoName", $content['VIDEONAME']);
+		$this->videos->assign("videoNameVal", isset($_POST["videoName"]) ? $_POST["videoName"] : "");
+		$this->videos->assign("information", $content['INFORMATION']);
+		$this->videos->assign("informationVal", isset($_POST["information"]) ? $_POST["information"] : "");
+		$this->videos->assign("category", $content['CATEGORY']);
+		$this->videos->assign("categoryVal", isset($_POST["category"]) ? json_encode($_POST["category"]) : json_encode([]));
+		$this->videos->assign("tags", $content['TAGS']);
+		$this->videos->assign("tagsVal", isset($_POST["tags"]) ? $_POST["tags"] : "");
+		$this->videos->assign("addToMyFolder", $content['ADDTOMYFOLDER']);
+		$this->videos->assign("cancel", $content['CANCEL']);
+		$this->videos->assign("allCategories", json_encode($controller->getAllCategories()));
+		$this->videos->assign("result", $result);
+		$this->videos->assign("messages", $messages);
 		
 	}
 	

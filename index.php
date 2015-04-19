@@ -59,8 +59,8 @@ else
 			$controller->includeSection("footer");
 			break;
 		case "addVideo": 
-			//if(isset($_GET["action"])) 
-				//include_once($actionsPath."addVideoAction.php");
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."addVideoAction.php");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("addVideo");
