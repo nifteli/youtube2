@@ -35,7 +35,9 @@ class Access{
 				$this->firstName=$result[0]["firstName"];
 				$this->lastName=$result[0]["lastName"];
 				$this->fatherName=$result[0]["fatherName"];
-				$this->lang=$result[0]["lang"];
+				$db->where("id=" . (isset($result[0]["languageId"])?$result[0]["languageId"]:1));
+				$result2 = $db->get("languages");//echo $db->getLastQuery(); print_r($result2);
+				$this->lang=strtolower($result2[0]["abbr"]);
 				//$this->userType=$result[0]["user_type"];
 				//$this->secretQuestion=$result[0]["secret_question"];
 				//$this->secretAnswer=$result[0]["secret_answer"];

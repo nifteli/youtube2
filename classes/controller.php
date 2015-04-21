@@ -1,5 +1,5 @@
 <?php
-include($langsPath."content_".$lang.".php");
+//include($langsPath."content_".$lang.".php");
 include($templatePath."header.php");
 include($templatePath."categories.php");
 include($templatePath."videos.php");
@@ -109,5 +109,6 @@ class Controller //extends MySQL
 	{
 		return $this->db->get("languages", null, "id, name".$this->lang." as name");
 	}
+
 }
 ?>

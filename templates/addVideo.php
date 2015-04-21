@@ -21,13 +21,13 @@ class AddVideo
 		$this->videos->assign("vqWhy", $content['WHY']);
 		$this->videos->assign("vqWho", $content['WHO']);
 		$this->videos->assign("vqWhat", $content['WHAT']);
-		$this->videos->assign("videoQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : []);
+		$this->videos->assign("videoQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : array());
 		$this->videos->assign("videoName", $content['VIDEONAME']);
 		$this->videos->assign("videoNameVal", isset($_POST["videoName"]) ? $_POST["videoName"] : "");
 		$this->videos->assign("information", $content['INFORMATION']);
 		$this->videos->assign("informationVal", isset($_POST["information"]) ? $_POST["information"] : "");
 		$this->videos->assign("category", $content['CATEGORY']);
-		$this->videos->assign("categoryVal", isset($_POST["category"]) ? json_encode($_POST["category"]) : json_encode([]));
+		$this->videos->assign("categoryVal", isset($_POST["category"]) ? json_encode($_POST["category"]) : json_encode(array()));
 		$this->videos->assign("tags", $content['TAGS']);
 		$this->videos->assign("tagsVal", isset($_POST["tags"]) ? $_POST["tags"] : "");
 		$this->videos->assign("addToMyFolder", $content['ADDTOMYFOLDER']);

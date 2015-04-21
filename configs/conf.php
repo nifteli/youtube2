@@ -6,4 +6,5 @@ $username = 'root';
 $password = '';
 
 $minPasswordLength=5;
+$defaultLang="az";
 ?>

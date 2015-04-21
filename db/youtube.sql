@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `accesstypes` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   KEY `catGroupId` (`catGroupId`),
   KEY `deletedById` (`deletedById`),
   KEY `createdById` (`createdById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=282 ;
+) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=282 ;
 
 --
 -- Dumping data for table `categories`
@@ -361,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `catgroups` (
   `catGroupNameRu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `infoRu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `catgroups`
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `createdById` (`createdById`),
   KEY `updatedById` (`updatedById`),
   FULLTEXT KEY `confirmedByIP` (`confirmedByIP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -427,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `folders` (
   KEY `updatedById` (`updatedById`),
   KEY `lastVideoAddedById` (`lastVideoAddedById`),
   KEY `deletedById` (`deletedById`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -442,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `nameRu` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `abbr` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
 
 --
 -- Dumping data for table `languages`
@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `fileName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'attached file',
   PRIMARY KEY (`id`),
   KEY `createdById` (`createdById`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -571,7 +571,7 @@ CREATE TABLE IF NOT EXISTS `profileviews` (
   `lastViewed` datetime NOT NULL,
   PRIMARY KEY (`viewerId`,`viewedId`),
   KEY `viewedId` (`viewedId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -584,7 +584,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `bitValue` smallint(6) NOT NULL,
   `question` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `questions`
@@ -609,7 +609,7 @@ CREATE TABLE IF NOT EXISTS `roleaccess` (
   `endDate` datetime NOT NULL,
   PRIMARY KEY (`roleId`,`accessTypeId`),
   KEY `accessTypeId` (`accessTypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -621,7 +621,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -637,7 +637,7 @@ CREATE TABLE IF NOT EXISTS `searches` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `createdById` (`createdById`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -649,7 +649,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -685,7 +685,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
@@ -706,7 +706,7 @@ CREATE TABLE IF NOT EXISTS `videocats` (
   `categoryId` int(11) NOT NULL,
   PRIMARY KEY (`videoId`,`categoryId`),
   KEY `categoryId` (`categoryId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `videocats`
@@ -753,7 +753,11 @@ CREATE TABLE IF NOT EXISTS `videos` (
   KEY `updatedById` (`updatedById`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
+<<<<<<< .mine
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+=======
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+>>>>>>> .r30
 
 --
 -- Dumping data for table `videos`
@@ -798,7 +802,7 @@ CREATE TABLE IF NOT EXISTS `videotags` (
   `videoId` int(11) NOT NULL,
   PRIMARY KEY (`tagId`,`videoId`),
   KEY `videoId` (`videoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -813,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `videoviews` (
   `actionDate` int(11) NOT NULL,
   PRIMARY KEY (`userId`,`videoId`),
   KEY `videoId` (`videoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Constraints for dumped tables

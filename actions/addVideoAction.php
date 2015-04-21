@@ -14,7 +14,7 @@ if ($_GET["action"]=="add")
 		$result = "error";
 		$messages["language"] = "Language is not set";
 	}
-	if(!isset($_POST["videoQuestion"]) || $_POST["videoQuestion"] == [])
+	if(!isset($_POST["videoQuestion"]) || $_POST["videoQuestion"] == array())
 	{
 		$result = "error";
 		$messages["videoQuestion"] = "Video question is not set";
