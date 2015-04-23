@@ -18,7 +18,7 @@
 		
 	   });
 	$(window).scroll(function(){
-       
+       //alert("hi");
 	   var height = $('#demoajax').height();
 	   var scroll_top = $(this).scrollTop();
 	   if(ajax_arry.length>0){
@@ -30,6 +30,7 @@
 	   var page = $('#demoajax').find('.nextpage').val();
 	   var isload = $('#demoajax').find('.isload').val();
 	   
+		 //alert('scrollTop='+$(window).scrollTop()+' clientHeight='+document.body.clientHeight+' winheight='+$(window).height()+' isload='+isload);
 	     if ((($(window).scrollTop()+document.body.clientHeight)==$(window).height()) && isload=='true'){
 		   $('#loading').show();
 	   var ajaxreq = $.ajax({
@@ -77,11 +78,12 @@
 		{if isset($okMessage)}
 		<div class="success1" style="width:680px; margin-top:40px">{$okMessage}</div>
 		{/if}
-		<!--<img id='loading' src='img/loading.gif'>-->
+		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">
 		</div>
 	</div>
 </div>
+	<br><br><br><br>
 
              
 

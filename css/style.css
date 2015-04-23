@@ -633,7 +633,7 @@ font-family:Calibri;
   height: 215px;
   margin-left: 11px;
   margin-top: -45px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   width: 750px;	
   padding: 0 0 65px 0;
 }
@@ -695,44 +695,15 @@ text-decoration:none;
   left:20px;
 }
 
-
-.wood{
- font-family:Calibri;
- font-size:12px;
- color:#3e3003;
- position: relative;
- margin-left:80px;
- top:3px;
-}
-
-.views{
- font-family:Calibri;
- font-size:12px;
- color:#3e3003;
- position: relative;
- margin-left:73px;
- top:3px;
-}
-
-
 .smith{
  font-family:Calibri;
  font-size:12px;
  color:#3e3003;
- left:53px;
  position:relative;
  top: 10px;
+ float: inherit;
 }
 
-
-.date{
- font-family:Calibri;
- font-size:12px;
- color:#3e3003;
- left: 50px;
- position: relative;
- top: 8px;
-}
 
 .likes{
  margin-top:8px !important;
@@ -1482,7 +1453,7 @@ width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: -25px;
+top: -13px;
 border: 0px;
 border-radius: 5px;
 }
@@ -1506,7 +1477,7 @@ width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: 5px;
+top: 17px;
 border: 0px;
 border-radius: 5px;
 }
@@ -1925,7 +1896,7 @@ background: url(../img/line.png);
   font-size: 12px;
   color: #3e3003;
   position: relative;
-  margin-left: 60px;
+  margin-left: 20px;
   top: 3px;
 }
 .views {
@@ -1933,7 +1904,7 @@ background: url(../img/line.png);
   font-size: 12px;
   color: #3e3003;
   position: relative;
-  margin-left: 75px;
+  margin-left: 20px;
   top: 3px;
 }	
 
@@ -1941,7 +1912,7 @@ background: url(../img/line.png);
   font-family: Calibri;
   font-size: 12px;
   color: #3e3003;
-  left: 54px;
+  left: 20px;
   position: relative;
   top: 8px;
 }
@@ -1949,7 +1920,7 @@ background: url(../img/line.png);
   font-family: Calibri;
   font-size: 12px;
   color: #3e3003;
-  left: 63px;
+  left: 20px;
   position: relative;
   top: 10px;
 }
@@ -2068,6 +2039,12 @@ margin-top: 60px;
 	margin-bottom: -30px
 }
 
+ #loading{
+  display:none;
+  position:fixed;
+  left:50%;
+  top:50%;
+  }
 
 
 
