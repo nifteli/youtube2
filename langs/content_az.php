@@ -9,7 +9,6 @@ $content['USERNAME'] = 'İstifadəçi adı';
 $content['PASSWORD'] = 'Şifrə';
 $content['SIGN_UP'] = 'Qeydiyyat';
 $content['USERS'] = 'İstifadəçilər';
-$content['TAGS'] = 'Taqlar';
 $content['VIDEOS'] = 'Videolar';
 $content['LOGIN'] = 'Daxil ol';
 $content['HOW'] = 'Necə';
@@ -52,4 +51,9 @@ $content['CATEGORY'] = 'Kateqoriya';
 $content['TAGS'] = 'Təqlər';
 $content['ADDTOMYFOLDER'] = 'Əlavə et';
 //end add video
+
+//Watch video
+$content['VIEWS'] = 'Baxışlar';
+$content['REPORTVIDEO'] = 'Videonu şikayət et';
+//end Watch video
 ?>

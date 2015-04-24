@@ -51,4 +51,9 @@ $content['CATEGORY'] = 'Category';
 $content['TAGS'] = 'Tags';
 $content['ADDTOMYFOLDER'] = 'Add to My Folder';
 //end add video
+
+//Watch video
+$content['VIEWS'] = 'Views';
+$content['REPORTVIDEO'] = 'Report Video';
+//end Watch video
 ?>

@@ -11,6 +11,7 @@ class Videos
 		global $okMessage;
 		
 		$this->videos = new Smarty;
+		$this->videos->assign("lang",$controller->lang);
 		if(isset($errorMessage))
 			$this->videos->assign("errorMessage",$errorMessage);
 		if(isset($okMessage))

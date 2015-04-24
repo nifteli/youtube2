@@ -16,6 +16,11 @@
 	<!--validation scripts-->
 	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 	
+	<!--VideoJS -->
+	<link type="text/css" rel="stylesheet" href="css/video-js.css" />
+	<script src="js/videoJs/video.js"></script>
+	<script src="js/videoJs/youtube.js"></script>
+	
 	<script type="text/javascript">
       /*!
        * Create an array of word objects, each representing a word in the cloud

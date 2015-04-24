@@ -14,8 +14,8 @@ class Controller //extends MySQL
 {
 //Variables
 	
-	private $db;
-	private $lang;
+	public $db;
+	public $lang;
 	public $access;
 	
 //End Variables
@@ -108,6 +108,28 @@ class Controller //extends MySQL
 	public function getLanguages()
 	{
 		return $this->db->get("languages", null, "id, name".$this->lang." as name");
+	}
+	
+	public function getCount($flag)
+	{
+		switch ($flag)
+		{
+			case 1:
+				$this->db->where("status='confirmed' and isDeleted=0");
+				$this->db->get("users");
+				return $this->db->count;
+			break;
+			case 2:
+				$this->db->get("tags");
+				return $this->db->count;
+			break;
+			case 3:
+				$this->db->where("isDeleted=0");
+				$this->db->get("videos");
+				return $this->db->count;
+			break;
+		}
+		return 0;
 	}
 
 }

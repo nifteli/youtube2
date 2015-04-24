@@ -4,10 +4,10 @@ require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 
-if(isset($_REQUEST['actionfunction']) && $_REQUEST['actionfunction']!='')
+if(isset($_REQUEST['actionfunction']) && $_REQUEST['actionfunction']!='' && $_REQUEST['lang']!='')
 {
 	$actionfunction = $_REQUEST['actionfunction'];
-	call_user_func($actionfunction,$_REQUEST,$db,$limit,"az");
+	call_user_func($actionfunction,$_REQUEST,$db,$limit,$_REQUEST['lang']);
 }
 
 function showData($data,$db,$limit,$lang)
@@ -21,7 +21,7 @@ function showData($data,$db,$limit,$lang)
 	$res =$db->rawQuery("SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,
 								SUM(IF(action = -1, 1, 0)) dislikeCount,
-								v.id,v.name,v.info,v.duration,v.added,v.languageId,
+								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								tg.tags,
 								vc.categoryId,
@@ -31,15 +31,17 @@ function showData($data,$db,$limit,$lang)
 						inner join users u on u.id=v.addedById
 						inner join videocats vc on vc.videoId=v.id
 						inner join categories c on c.id = vc.categoryId
+						left join languages l on l.id=v.languageId
 						left join (
 							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
 							from videoTags vt
 							inner join tags t on t.id=vt.tagId
 							group by vt.videoId
 						) tg on tg.videoId=v.id
+						where lower(l.abbr)='$lang'
 						group by v.id,vc.categoryId
 						order by catName$lang asc,v.added desc
-						limit $start,$limit");//echo $db->getLastQuery();
+						limit $start,$limit");
 	
 	if($db->count>0)
 	{
@@ -57,16 +59,16 @@ function showData($data,$db,$limit,$lang)
 			for($j=1; $j<=4; $j++)
 			{
 				$str .= "<div class='box'>";
-				$str .= "<a href='?page=watchVideo?id=".$res[$i][id]."'><img src='img/player.png' width=152 height=79 alt='".$res[$i][info]."'/></a>
+				$str .= "<a href='?page=watchVideo&id=".$res[$i][id]."'><img src=".getYoutubeImage($res[$i][link])." width=152 height=79 alt='".$res[$i][info]."'/></a>
 						<a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
 						<a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/></a>
-						<a href='?page=watchVideo?id=".$res[$i][id]."'><h2>".$res[$i][name].$res[$i][id]."</h2></a>
+						<a href='?page=watchVideo?id=".$res[$i][id]."'><h2>".(strlen($res[$i][name])>18?substr(trim($res[$i][name]),0,15)."...":$res[$i][name])."</h2></a>
 						<img class='shape' src='img/shape.png' width=140 height=1 alt=''/> 
 						<ul class='move'>
-							<li><img class='details' src='img/02.png' /><span class='wood'>".$res[$i][tags]."</span></li>
+							<li><img class='details' src='img/02.png' /><span class='wood'>".(strlen($res[$i][tags])>17?substr(trim($res[$i][tags]),0,14)."...":$res[$i][tags])."</span></li>
 							<li><img class='details2' src='img/eye.png'/><span class='views'>".$res[$i][viewCount]."</span></li>
 							<li><img class='details3' src='img/publish.png' /><span class='date'>".$res[$i][added]."</span></li>
-							<li><img class='details4' src='img/user1.png' /><span class='smith'>".$res[$i][addedBy]."</span></li>
+							<li><img class='details4' src='img/user1.png' /><span class='smith'>".(strlen($res[$i][addedBy])>17?substr(trim($res[$i][addedBy]),0,14)."...":$res[$i][addedBy])."</span></li>
 							<li class='likes'><a href='?page=like&type=1'><img src='img/like-01.png'/></a><p>".$res[$i][likeCount]."</p></li>
 							<li class='likes2'><a href='?page=like&type=2'><img src='img/like-02.png'/></a><p>".$res[$i][dislikeCount]."</p></li>
 						</ul>";
@@ -84,88 +86,16 @@ function showData($data,$db,$limit,$lang)
 	$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'>";
 	echo $str;
 	}
-	
-	/*$variable = <<<XYZ
-<div class="hollywd">
-			<h2>Hollywood</h2>  
-		</div>
-		<div class="box-cont">
-			<div class="box">
-				<a href="?page=watchVideo"><img src="img/player.png" width="152" height="79" alt=""/></a>
-				<a href="#"><img class="ico1" src="img/add-to-f.png" width="24" height="24" alt=""/></a>
-				<a href="#"><img class="ico2" src="img/edit-02.png" width="24" height="24" alt=""/></a>
-				<a href="?page=watchVideo"><h2>The Devil's Double</h2></a>
-				<img class="shape" src="img/shape.png" width="140" height="1" alt=""/> 
-				<ul class="move">
-					<li><img class="details" src="img/02.png" /><span class="wood">Hollywood</span></li>
-					<li><img class="details2" src="img/eye.png" /><span class="views">15,2341</span></li>
-					<li><img class="details3" src="img/publish.png" /><span class="date">Nov 29,2013</span></li>
-					<li><img class="details4" src="img/user1.png" /><span class="smith">Will Smith</span></li>
-					<li class="likes"><a href="?page=like&type=1"><img src="img/like-01.png"/></a><p>13245</p></li>
-					<li class="likes2"><a href="?page=like&type=2"><img src="img/like-02.png"/></a><p>3245</p></li>
-				</ul>
-			</div>
-		   <div class="box">
-				<a href="watch-vid.html"><img src="img/player.png" width="152" height="79" alt=""/></a>
-				<a href="#"><img class="ico1" src="img/add-to-f.png" width="24" height="24" alt=""/></a>
-				<a href="#"><img class="ico2" src="img/edit-02.png" width="24" height="24" alt=""/></a>
-				<a href="watch-vid.html"><h2>The Devil's Double</h2></a>
-				<img class="shape" src="img/shape.png" width="140" height="1" alt=""/> 
-				<ul class="move">
-					<li><img class="details" src="img/02.png" /><span class="wood">Hollywood</span></li>
-					<li><img class="details2" src="img/eye.png" /><span class="views">15,2341</span></li>
-					<li><img class="details3" src="img/publish.png" /><span class="date">Nov 29,2013</span></li>
-					<li><img class="details4" src="img/user1.png" /><span class="smith">Will Smith</span></li>
-					<li class="likes"><img src="img/like-01.png"/><p>13245</p></li>
-					<li class="likes2"><img src="img/like-02.png"/><p>3245</p></li>
-				</ul>
-			</div>
-		   <div class="box">
-				<a href="watch-vid.html"><img src="img/player.png" width="152" height="79" alt=""/></a>
-				<a href="#"><img class="ico1" src="img/add-to-f.png" width="24" height="24" alt=""/></a>
-				<a href="#"><img class="ico2" src="img/edit-02.png" width="24" height="24" alt=""/></a>
-				<a href="watch-vid.html"><h2>The Devil's Double</h2></a>
-				<img class="shape" src="img/shape.png" width="140" height="1" alt=""/> 
-				<ul class="move">
-					<li><img class="details" src="img/02.png" /><span class="wood">Hollywood</span></li>
-					<li><img class="details2" src="img/eye.png" /><span class="views">15,2341</span></li>
-					<li><img class="details3" src="img/publish.png" /><span class="date">Nov 29,2013</span></li>
-					<li><img class="details4" src="img/user1.png" /><span class="smith">Will Smith</span></li>
-					<li class="likes"><img src="img/like-01.png"/><p>13245</p></li>
-					<li class="likes2"><img src="img/like-02.png"/><p>3245</p></li>
-				</ul>
-			</div>
-			<div class="box">
-				<a href="watch-vid.html"><img src="img/player.png" width="152" height="79" alt=""/></a>
-				<a href="#"><img class="ico1" src="img/add-to-f.png" width="24" height="24" alt=""/></a>
-				<a href="#"><img class="ico2" src="img/edit-02.png" width="24" height="24" alt=""/></a>
-				<a href="watch-vid.html"><h2>The Devil's Double</h2></a>
-				<img class="shape" src="img/shape.png" width="140" height="1" alt=""/> 
-				<ul class="move">
-					<li><img class="details" src="img/02.png" /><span class="wood">Hollywood</span></li>
-					<li><img class="details2" src="img/eye.png" /><span class="views">15,2341</span></li>
-					<li><img class="details3" src="img/publish.png" /><span class="date">Nov 29,2013</span></li>
-					<li><img class="details4" src="img/user1.png" /><span class="smith">Will Smith</span></li>
-					<li class="likes"><img src="img/like-01.png"/><p>13245</p></li>
-					<li class="likes2"><img src="img/like-02.png"/><p>3245</p></li>
-				</ul>
-			</div>
-		</div>  
-		
-XYZ;
-echo $variable;*/
-	/*$sql = "select * from categories order by id asc limit $start,$limit";
-	$str='';
-	$data = $con->query($sql);
-	if($data!=null && $data->num_rows>0)
-	{
-		while( $row = $data->fetch_array(MYSQLI_ASSOC))
-			$str.="<div class='data-container'><p>".$row['id']."</p><p>".$row['catNameAz']."</p><p>".$row['catNameRu']."</p></div>";
-		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'>";
-	}
+}
 
-	echo $str; */
-
+function getYoutubeImage($url)
+{
+	$queryString = parse_url($url, PHP_URL_QUERY);
+	parse_str($queryString, $params);
+	$v = $params['v'];  
+	//DISPLAY THE IMAGE
+	if(strlen($v)>0)
+		return "'http://i3.ytimg.com/vi/$v/default.jpg'";
 }
 
 ?>

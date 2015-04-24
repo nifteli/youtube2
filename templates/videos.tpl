@@ -8,7 +8,7 @@
  $.ajax({
 	     url:"scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page=1",
+                  data:"actionfunction=showData&page=1&lang={$lang}",
         cache: false,
         success: function(response){
 		   $('#loading').hide();
@@ -36,7 +36,7 @@
 	   var ajaxreq = $.ajax({
 	     url:"scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page="+page,
+                  data:"actionfunction=showData&lang={$lang}&page="+page,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();

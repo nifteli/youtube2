@@ -51,6 +51,7 @@ if ($_GET["action"]=="add")
 								  "languageId"=>$_POST["language"],
 								  "questions"=>$questions,
 								  "name"=>$_POST["videoName"],
+								  "added"=>date("Y-m-d H:i:s"),
 								  "info"=>$_POST["information"],
 								  "addedById"=>$access->userId,
 								  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
