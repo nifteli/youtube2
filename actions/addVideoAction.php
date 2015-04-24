@@ -9,6 +9,11 @@ if ($_GET["action"]=="add")
 		$result = "error";
 		$messages["videoLink"] = "Video Link is not set";
 	}
+	else if(!isset($_POST["validVideo"]) || $_POST["validVideo"] == "false")
+	{
+		$result = "error";
+		$messages["videoLink"] = "Video does not exist";
+	}
 	if(!isset($_POST["language"]) || $_POST["language"] == "0")
 	{
 		$result = "error";
@@ -29,6 +34,9 @@ if ($_GET["action"]=="add")
 		$result = "error";
 		$messages["category"] = "Category is not set";
 	}
+	
+	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+	
 		
 	if($result == "success")
 	{
@@ -36,6 +44,8 @@ if ($_GET["action"]=="add")
 		
 		$questions = array_sum($_POST["videoQuestion"]);
 		$categories = array_unique($_POST["category"]);
+		$tags = explode(",", $tagStr);
+		$continue = true;
 		
 		$videoId = $db->insert("videos", array("link"=>trim($_POST["videoLink"]),
 								  "languageId"=>$_POST["language"],
@@ -44,29 +54,50 @@ if ($_GET["action"]=="add")
 								  "info"=>$_POST["information"],
 								  "addedById"=>$access->userId,
 								  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
-								  "duration"=>0
-								  )
-					);
-		$cnt = count($categories);
-		$id = true;
-		foreach($categories as $key => $value)	
+								  "duration"=>$_POST["duration"]));
+		if($videoId)
 		{
-			if($value != "0")
+			foreach($categories as $key => $value)	
 			{
+				if($value != "0")
+				{
+					
+					$id = $db->insert("videocats", array("videoId"=>$videoId,
+									  	"categoryId"=>$value));
+					if(!$id)
+					{
+						$continue = false;
+						break;
+					}
+				}
 				
-				$id = $db->insert("videocats", array("videoId"=>$videoId,
-								  	"categoryId"=>$value
-							  	  	)
-							);
+				
+			}
+			if($continue)
+			{
+				foreach($tags as $tag)
+				{
+					$id = $db->insert("tags", array("name"=>trim($tag)));
+					if($id)
+					{
+						$id = $db->insert("videotags", array("tagId"=>$id,
+									  		"videoId"=>$videoId));
+					}
+					
+					if(!$id)
+					{
+						$continue = false;
+						break;
+					}
+				}
 			}
 			
-			if(!$id)
-				$videoId = false;
 		}
 		
-		if(!$videoId)
+		if(!$continue)
 		{
 			$db->rollback();
+			$result = "error";
 			$messages["dbError"] = "DB error";
 		}
 		else

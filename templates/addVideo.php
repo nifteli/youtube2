@@ -26,6 +26,8 @@ class AddVideo
 		$this->videos->assign("videoNameVal", isset($_POST["videoName"]) ? $_POST["videoName"] : "");
 		$this->videos->assign("information", $content['INFORMATION']);
 		$this->videos->assign("informationVal", isset($_POST["information"]) ? $_POST["information"] : "");
+		$this->videos->assign("durationVal", isset($_POST["duration"]) ? $_POST["duration"] : "");
+		$this->videos->assign("validVideoVal", isset($_POST["validVideo"]) ? $_POST["validVideo"] : "true");
 		$this->videos->assign("category", $content['CATEGORY']);
 		$this->videos->assign("categoryVal", isset($_POST["category"]) ? json_encode($_POST["category"]) : json_encode(array()));
 		$this->videos->assign("tags", $content['TAGS']);

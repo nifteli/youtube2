@@ -21,7 +21,7 @@ function showData($data,$db,$limit,$lang)
 	$res =$db->rawQuery("SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,
 								SUM(IF(action = -1, 1, 0)) dislikeCount,
-								v.id,v.name,v.info,v.duration,v.addedDate,v.languageId,
+								v.id,v.name,v.info,v.duration,v.added,v.languageId,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								tg.tags,
 								vc.categoryId,
@@ -38,7 +38,7 @@ function showData($data,$db,$limit,$lang)
 							group by vt.videoId
 						) tg on tg.videoId=v.id
 						group by v.id,vc.categoryId
-						order by catName$lang asc,v.addedDate desc
+						order by catName$lang asc,v.added desc
 						limit $start,$limit");//echo $db->getLastQuery();
 	
 	if($db->count>0)
@@ -65,7 +65,7 @@ function showData($data,$db,$limit,$lang)
 						<ul class='move'>
 							<li><img class='details' src='img/02.png' /><span class='wood'>".$res[$i][tags]."</span></li>
 							<li><img class='details2' src='img/eye.png'/><span class='views'>".$res[$i][viewCount]."</span></li>
-							<li><img class='details3' src='img/publish.png' /><span class='date'>".$res[$i][addedDate]."</span></li>
+							<li><img class='details3' src='img/publish.png' /><span class='date'>".$res[$i][added]."</span></li>
 							<li><img class='details4' src='img/user1.png' /><span class='smith'>".$res[$i][addedBy]."</span></li>
 							<li class='likes'><a href='?page=like&type=1'><img src='img/like-01.png'/></a><p>".$res[$i][likeCount]."</p></li>
 							<li class='likes2'><a href='?page=like&type=2'><img src='img/like-02.png'/></a><p>".$res[$i][dislikeCount]."</p></li>

@@ -27,13 +27,14 @@ $(document).ready(function() {
               <form style="margin-top:44px;" id="addVideoForm" action="?page=addVideo&action=add" method="post">
              
               <label class="labelv">{$videoLink}:</label><br>
-              <input class="fieldv" type="url" name="videoLink" value="{if isset($videoLinkVal)}{$videoLinkVal}{/if}">
+              <input class="fieldv" type="url" name="videoLink" id="videoLink" value="{$videoLinkVal}"><br>
+              <label class="labelv" style="color: red" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>Incorrect video link</label>
               <br><br>
 
 
               <label class="labelv">{$language}:</label><br>
 
-              <select class="fieldv" name="language" style="width:234px; height:45px">
+              <select class="fieldv" name="language" id="language" style="width:234px; height:45px">
               	<option value="0" selected="selected"> </option>
               	{foreach from=$languages item=row1}
     				{html_options values=$row1.id output=$row1.name selected=$languageVal}
@@ -63,13 +64,15 @@ $(document).ready(function() {
 
 			<label class="labelv">{$videoName}:</label>
             <br>
-             <input class="fieldv" type="text" name="videoName" value="{if isset($videoNameVal)}{$videoNameVal}{/if}"> 
+             <input class="fieldv" type="text" name="videoName" id="videoName" value="{$videoNameVal}"> 
              <br><br>
 
 		      <label class="labelv">{$information}:</label>
               <br>
-				<textarea class="fieldtextv" type="text" name="information">{if isset($informationVal)}{$informationVal}{/if}</textarea>
+				<textarea class="fieldtextv" type="text" name="information" id="information">{$informationVal}</textarea>
                 <br><br>
+                <input type="hidden" name="duration" id="duration" value="{$durationVal}"/>
+                <input type="hidden" name="validVideo" id="validVideo" value="{$validVideoVal}"/>
 
 				<label class="labelv">{$category}:</label>
                 <br>
@@ -86,7 +89,7 @@ $(document).ready(function() {
 			   <label class="labelv">{$tags}:</label>
                 <br>
 
-               <input class="fieldv" type="text" name="tags" value="{if isset($tagsVal)}{$tagsVal}{/if}">
+               <input class="fieldv" type="text" name="tags" id="tags" value="{$tagsVal}">
                <br>
 				<a href="javascript: submitForm()"> <button class="add" type="button"> 
 				<img src="img/folder.png" width="29" height="29" alt="">&nbsp;{$addToMyFolder}</button></a>
@@ -96,6 +99,7 @@ $(document).ready(function() {
              </form>
 	<script type="text/javascript">
 		var allCategories = {$allCategories};
+		var oldLink = '';
 		
 		loadCategories();
 	
@@ -132,21 +136,71 @@ $(document).ready(function() {
 			q += $("#q3").prop('checked') ? 4 : 0;
 			q += $("#q4").prop('checked') ? 8 : 0;
 			
+			var html = '<option value="0"> </option>';
+			$.each(allCategories, function(key,value)
+			{
+				if(q & value.questions)
+				{
+					html += '<option value="' + value.id + '"' + '>' + value.catName + '</option>';
+				}
+			});
+			
 		 	for(var i=1; i<=3; i++)
 		 	{
-				var html = '<option value="0"> </option>';
-				$.each(allCategories, function(key,value)
-				{
-					if(q & value.questions)
-					{
-						var selected = (value.id == {$categoryVal}[i-1]) ? ' selected' : '';
-						html += '<option value="' + value.id + '"' + selected + '>' + value.catName + '</option>';
-					}
-				});
 				$("#category" + i).html(html);
+				$("#category" + i).val({$categoryVal}[i-1]);
 			}
+		}
+		
+		$("#videoLink").blur(function() 
+			{
+					loadVideoData(this.value);
+			}
+		)
 			
-			//alert(html);
+		function loadVideoData(link)
+		{
+			if(link.indexOf("https://www.youtube.com/watch?") == 0)
+			{
+				if(link != oldLink)
+				{
+					var urlObj = parseURL(link);
+					var apiUrl = 'https://www.googleapis.com/youtube/v3/videos?';
+					var parts = 'id,snippet,contentDetails,player,statistics,status';
+					
+					$.getJSON(apiUrl + 'id=' + urlObj.searchObject.v + '&part=' + parts + '&key=' + API_KEY + '&callback=?',function(data)
+						{
+							if (typeof(data.items[0]) != "undefined") 
+							{
+								$("#videoName").val(data.items[0].snippet.title);
+								$("#information").val(data.items[0].snippet.description);
+								$("#duration").val(ISO8601toSeconds(data.items[0].contentDetails.duration));
+								$("#validVideo").val("true");
+								$("#linkerror").hide();
+							} 
+							else 
+							{
+								$("#validVideo").val("false");
+								$("#linkerror").show();
+							}   
+						}
+					);
+					oldLink = link;
+				}
+			}
+			else
+			{
+				if(link != "")
+				{
+					$("#validVideo").val("false");
+					$("#linkerror").show();
+				}
+				else
+				{
+					$("#validVideo").val("true");
+					$("#linkerror").hide();
+				}
+			}
 		}
 		
 	</script>

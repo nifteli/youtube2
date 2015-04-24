@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="css/jqcloud.min.css">
 	<script src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/jqcloud.min.js"></script>
+	<script src="js/youtube.js"></script>
 	
 	<!--validation scripts-->
 	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
