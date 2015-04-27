@@ -13,7 +13,7 @@
 			   <div class="c-name">
 					<ul>
 						{section name=sec1 loop=$catsHow}
-						<li title="{$catsHow[sec1].catInfo}"><a href="{$catsHow[sec1].url}">{$catsHow[sec1].catName} ({$catsHow[sec1].count}) </a></li>
+						<li title="{$catsHow[sec1].catInfo}"><a href="?catId={$catsHow[sec1].id}">{$catsHow[sec1].catName} ({$catsHow[sec1].count}) </a></li>
 						{/section}
 					</ul>
 				</div>
@@ -22,7 +22,7 @@
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$catsWhy}
-						<li title="{$catsWhy[sec1].catInfo}"><a href="{$catsWhy[sec1].url}">{$catsWhy[sec1].catName} ({$catsWhy[sec1].count}) </a></li>
+						<li title="{$catsWhy[sec1].catInfo}"><a href="?catId={$catsWhy[sec1].id}">{$catsWhy[sec1].catName} ({$catsWhy[sec1].count}) </a></li>
 						{/section}
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$catsWhat}
-						<li title="{$catsWhat[sec1].catInfo}"><a href="{$catsWhat[sec1].url}">{$catsWhat[sec1].catName} ({$catsWhat[sec1].count}) </a></li>
+						<li title="{$catsWhat[sec1].catInfo}"><a href="?catId={$catsWhat[sec1].id}">{$catsWhat[sec1].catName} ({$catsWhat[sec1].count}) </a></li>
 						{/section}
 					</ul>
 				</div>
@@ -40,7 +40,7 @@
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$catsWho}
-						<li title="{$catsWho[sec1].catInfo}"><a href="{$catsWho[sec1].url}">{$catsWho[sec1].catName} ({$catsWho[sec1].count}) </a></li>
+						<li title="{$catsWho[sec1].catInfo}"><a href="?catId={$catsWho[sec1].id}">{$catsWho[sec1].catName} ({$catsWho[sec1].count}) </a></li>
 						{/section}
 					</ul>
 				</div>

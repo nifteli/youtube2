@@ -15,7 +15,11 @@ $(document).ready(function() {
 
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 1000px;">
-	<img class="player" src="img/player2.png" width="432" height="289" alt="">
+	<div class="player" style="margin-left: 5px;">
+	<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="460" height="275" 
+	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$addedVideo}" }'>
+	  </video>
+	</div>
 	{if $result != 'success'}
 			{if $result == 'error'}
 			  <div class="smallerr">

@@ -35,6 +35,27 @@ if ($_GET["action"]=="add")
 		$messages["category"] = "Category is not set";
 	}
 	
+	//check if videolink is added to the category before
+	$categories = array_unique($_POST["category"]);
+	foreach($categories as $key => $value)	
+	{
+		if($value != "0")
+		{
+			$res = $db->rawQuery("SELECT c.catName$lang FROM 
+							videos v
+							inner join videocats vc on vc.videoId=v.id
+							inner join categories c on c.id=vc.categoryId
+							WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId=$value");
+			if($db->count>0)
+			{
+				$result = "error";
+				$messages["duplicate"] = "This video link is already added to category ".$res[0]["catName$lang"];
+			}
+		}
+	}
+	
+	
+	
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
 	
 		
@@ -43,7 +64,6 @@ if ($_GET["action"]=="add")
 		$db->startTransaction();
 		
 		$questions = array_sum($_POST["videoQuestion"]);
-		$categories = array_unique($_POST["category"]);
 		$tags = explode(",", $tagStr);
 		$continue = true;
 		

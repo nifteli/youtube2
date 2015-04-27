@@ -7,41 +7,49 @@ $db = new MysqliDb($hostname, $username, $password, $database);
 if(isset($_REQUEST['actionfunction']) && $_REQUEST['actionfunction']!='' && $_REQUEST['lang']!='')
 {
 	$actionfunction = $_REQUEST['actionfunction'];
-	call_user_func($actionfunction,$_REQUEST,$db,$limit,$_REQUEST['lang']);
+	call_user_func($actionfunction,$_REQUEST,$db,$limit);
 }
 
-function showData($data,$db,$limit,$lang)
+function showData($data,$db,$limit)
 {
+	$lang = $data["lang"];
 	$page = $data['page'];
+	if(isset($data["catId"]) && $data["catId"]>0)
+		$catId = $data["catId"];
 	if($page==1)
 		$start = 0;  
 	else
 		$start = ($page-1)*$limit;
+		//echo "<pre>";print_r($data);echo "</pre>";
+		//echo "page=$page; limit=$limit; start=$start";
 		
-	$res =$db->rawQuery("SELECT count(vv.action) viewCount,
-								SUM(IF(action = 1, 1, 0)) likeCount,
-								SUM(IF(action = -1, 1, 0)) dislikeCount,
-								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,
-								concat(u.firstName,' ',u.lastName) addedBy,
-								tg.tags,
-								vc.categoryId,
-								c.catName$lang
-						FROM videoViews vv
-						right join videos v on v.id=vv.videoId
-						inner join users u on u.id=v.addedById
-						inner join videocats vc on vc.videoId=v.id
-						inner join categories c on c.id = vc.categoryId
-						left join languages l on l.id=v.languageId
-						left join (
-							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
-							from videoTags vt
-							inner join tags t on t.id=vt.tagId
-							group by vt.videoId
-						) tg on tg.videoId=v.id
-						where lower(l.abbr)='$lang'
-						group by v.id,vc.categoryId
-						order by catName$lang asc,v.added desc
-						limit $start,$limit");
+	$qry = "SELECT count(vv.action) viewCount,
+					SUM(IF(action = 1, 1, 0)) likeCount,
+					SUM(IF(action = -1, 1, 0)) dislikeCount,
+					v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,
+					concat(u.firstName,' ',u.lastName) addedBy,
+					tg.tags,
+					vc.categoryId,
+					c.catName$lang
+			FROM videoViews vv
+			right join videos v on v.id=vv.videoId
+			inner join users u on u.id=v.addedById
+			inner join videocats vc on vc.videoId=v.id
+			inner join categories c on c.id = vc.categoryId
+			left join languages l on l.id=v.languageId
+			left join (
+				select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
+				from videoTags vt
+				inner join tags t on t.id=vt.tagId
+				group by vt.videoId
+			) tg on tg.videoId=v.id
+			where lower(l.abbr)='$lang'";
+	if(isset($catId))
+		$qry .= " and vc.categoryId=$catId";
+	$qry .= " group by v.id,vc.categoryId
+			order by catName$lang asc,v.added desc 
+			limit $start,$limit";//echo $qry;
+	$res =$db->rawQuery($qry);
 	
 	if($db->count>0)
 	{

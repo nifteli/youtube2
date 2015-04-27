@@ -389,7 +389,7 @@ form{
 } 
 
 .login li a{
- color:#fff;
+ color:#ae4019;
 }
 
 .login li a:hover{
@@ -625,6 +625,7 @@ width: 110px;
  margin-top:30px;	
  margin-left:23px;
  color:#3e3003;	
+ width: 300px;
 }
 
 
