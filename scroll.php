@@ -54,6 +54,7 @@ function showData($data,$db,$limit)
 	if($db->count>0)
 	{
 		$cat="";
+		$str="";
 		for($i=0; $i<$db->count; $i++)
 		{
 			if($cat != $res[$i]["catName".$lang])
@@ -67,18 +68,18 @@ function showData($data,$db,$limit)
 			for($j=1; $j<=4; $j++)
 			{
 				$str .= "<div class='box'>";
-				$str .= "<a href='?page=watchVideo&id=".$res[$i][id]."'><img src=".getYoutubeImage($res[$i][link])." width=152 height=79 alt='".$res[$i][info]."'/></a>
+				$str .= "<a href='?page=watchVideo&id=".$res[$i]['id']."'><img src=".getYoutubeImage($res[$i]['link'])." width=152 height=79 alt='".$res[$i]['info']."'/></a>
 						<a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
 						<a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/></a>
-						<a href='?page=watchVideo?id=".$res[$i][id]."'><h2>".(strlen($res[$i][name])>18?substr(trim($res[$i][name]),0,15)."...":$res[$i][name])."</h2></a>
+						<a href='?page=watchVideo?id=".$res[$i]['id']."'><h2>".(strlen($res[$i]['name'])>18?substr(trim($res[$i]['name']),0,15)."...":$res[$i]['name'])."</h2></a>
 						<img class='shape' src='img/shape.png' width=140 height=1 alt=''/> 
 						<ul class='move'>
-							<li><img class='details' src='img/02.png' /><span class='wood'>".(strlen($res[$i][tags])>17?substr(trim($res[$i][tags]),0,14)."...":$res[$i][tags])."</span></li>
-							<li><img class='details2' src='img/eye.png'/><span class='views'>".$res[$i][viewCount]."</span></li>
-							<li><img class='details3' src='img/publish.png' /><span class='date'>".$res[$i][added]."</span></li>
-							<li><img class='details4' src='img/user1.png' /><span class='smith'>".(strlen($res[$i][addedBy])>17?substr(trim($res[$i][addedBy]),0,14)."...":$res[$i][addedBy])."</span></li>
-							<li class='likes'><a href='?page=like&type=1'><img src='img/like-01.png'/></a><p>".$res[$i][likeCount]."</p></li>
-							<li class='likes2'><a href='?page=like&type=2'><img src='img/like-02.png'/></a><p>".$res[$i][dislikeCount]."</p></li>
+							<li><img class='details' src='img/02.png' /><span class='wood'>".(strlen($res[$i]['tags'])>17?substr(trim($res[$i]['tags']),0,14)."...":$res[$i]['tags'])."</span></li>
+							<li><img class='details2' src='img/eye.png'/><span class='views'>".$res[$i]['viewCount']."</span></li>
+							<li><img class='details3' src='img/publish.png' /><span class='date'>".$res[$i]['added']."</span></li>
+							<li><img class='details4' src='img/user1.png' /><span class='smith'>".(strlen($res[$i]['addedBy'])>17?substr(trim($res[$i]['addedBy']),0,14)."...":$res[$i]['addedBy'])."</span></li>
+							<li class='likes'><a href='?page=like&type=1'><img src='img/like-01.png'/></a><p>".$res[$i]['likeCount']."</p></li>
+							<li class='likes2'><a href='?page=like&type=2'><img src='img/like-02.png'/></a><p>".$res[$i]['dislikeCount']."</p></li>
 						</ul>";
 				$str .= "</div>";
 				if($j<4) $i++;
