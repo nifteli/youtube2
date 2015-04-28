@@ -37,24 +37,18 @@ if ($_GET["action"]=="add")
 	
 	//check if videolink is added to the category before
 	$categories = array_unique($_POST["category"]);
-	foreach($categories as $key => $value)	
-	{
-		if($value != "0")
-		{
-			$res = $db->rawQuery("SELECT c.catName$lang FROM 
+	$cats = join(",", $categories);
+	$res = $db->rawQuery("SELECT GROUP_CONCAT(' ', c.catName$lang) duplicates FROM 
 							videos v
 							inner join videocats vc on vc.videoId=v.id
 							inner join categories c on c.id=vc.categoryId
-							WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId=$value");
-			if($db->count>0)
-			{
-				$result = "error";
-				$messages["duplicate"] = "This video link is already added to category ".$res[0]["catName$lang"];
-			}
-		}
-	}
-	
-	
+							WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId in (".$cats.") 
+							group by v.link");
+	if($db->count>0)
+	{
+		$result = "error";
+		$messages["duplicate"] = "This video link is already added to category ".$res[0]["duplicates"];
+	}	
 	
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
 	
