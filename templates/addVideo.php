@@ -35,8 +35,6 @@ class AddVideo
 		$this->videos->assign("addToMyFolder", $content['ADDTOMYFOLDER']);
 		$this->videos->assign("cancel", $content['CANCEL']);
 		$this->videos->assign("allCategories", json_encode($controller->getAllCategories()));
-		if(isset($_POST["videoLink"]))
-			$this->videos->assign("addedVideo", trim($_POST["videoLink"]));
 		$this->videos->assign("result", $result);
 		$this->videos->assign("messages", $messages);
 		

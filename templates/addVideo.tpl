@@ -17,7 +17,7 @@ $(document).ready(function() {
 <div style="padding-top:10px;min-height: 1000px;">
 	<div class="player" style="margin-left: 5px;">
 	<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="460" height="275" 
-	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$addedVideo}" }'>
+	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{if $result=="success"}{$videoLinkVal}{/if}" }'>
 	  </video>
 	</div>
 	{if $result != 'success'}
