@@ -9,6 +9,7 @@ class Access{
 	var $lastName;
 	var $fatherName;
 	var $lang;
+	var $langId;
 	//var $secretQuestion;
 	//var $secretAnswer;
 	//var $phoneCode;
@@ -17,8 +18,8 @@ class Access{
 	
 	public function Access($db)
 	{
-		$this->setValues($db);
 		$this->db = $db; 
+		$this->setValues($db);
 	}
 	
 	public function setValues($db)
@@ -29,12 +30,15 @@ class Access{
 			$result = $db->get("users");
 			if($db->count == 1)
 			{
-				$this->userName=$_SESSION["userName"];
+				$_SESSION["userName"] = $result[0]["userName"];
+				$_SESSION["userId"] = $result[0]["id"];//echo "session user id=".$_SESSION["userId"];
+				$this->userName=$result[0]["userName"];
 				$this->hasAccess=true;
 				$this->userId=$result[0]["id"];
 				$this->firstName=$result[0]["firstName"];
 				$this->lastName=$result[0]["lastName"];
 				$this->fatherName=$result[0]["fatherName"];
+				$this->langId=$result[0]["languageId"];
 				$db->where("id=" . (isset($result[0]["languageId"])?$result[0]["languageId"]:1));
 				$result2 = $db->get("languages");//echo $db->getLastQuery(); print_r($result2);
 				$this->lang=strtolower($result2[0]["abbr"]);
@@ -54,12 +58,16 @@ class Access{
 			if($db->count == 1)
 			{
 				$this->userName=$_SESSION["userName"];
+				$_SESSION["userId"] = $result[0]["id"];
 				$this->hasAccess=true;
-				$this->userId=$result[0]["id"];
+				$this->userId=$result[0]["id"]; //echo $_SESSION["userId"];
 				$this->firstName=$result[0]["firstName"];
 				$this->lastName=$result[0]["lastName"];
 				$this->fatherName=$result[0]["fatherName"];
-				$this->lang=$result[0]["lang"];
+				$this->langId=$result[0]["languageId"];
+				$db->where("id=" . (isset($result[0]["languageId"])?$result[0]["languageId"]:1));
+				$result2 = $db->get("languages");//echo $db->getLastQuery(); print_r($result2);
+				$this->lang=strtolower($result2[0]["abbr"]);
 			}
 		}
 	}

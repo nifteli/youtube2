@@ -1,1 +1,1 @@
-ALTER TABLE `videos` CHANGE `addedDate` `added` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE  `users` ADD  `picturePath` VARCHAR( 255 ) NOT NULL AFTER  `email` ;

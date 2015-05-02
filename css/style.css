@@ -1601,20 +1601,18 @@ text-decoration: none;
 }
 
 .post{
- width: 80px;
-height: 25px;
-background: #7a672d;
-padding: 5px 10px;
-margin-top: 10px;
-float: right;
-line-height: 2;
+width: 139px;
+height: 35px;
 font-family: Calibri;
-font-size: 12px;
-border-radius: 4px;
-text-decoration: none;
-margin-right: 264px;
+font-size: 16px;
+margin-left: 541px;
+margin-top: -36px;
 color: #fff;
-text-align: center;
+border: 0px;
+border-radius: 5px;
+padding: 0px 0px;
+background: #7a672d;
+text-decoration: none;
 }
 
 .post:hover{
@@ -1646,9 +1644,9 @@ background: url(../img/line.png);
 }
 
 .tw{
- float:right;
- margin-top:10px;
- margin-right:-50px !important	
+float: right;
+margin-top: 5px;
+margin-right: -5px !important;
 }
 
 .v-name{
@@ -2048,8 +2046,94 @@ margin-top: 60px;
   top:50%;
   }
 
+.comments{
+min-height: 100px;
 
+width: 900px;
+margin-top: 0px;
+margin-left:235px
+}
 
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+.detailBox {
+    
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:20px;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+	top: 1px;
+}
+.actionBox {
+    padding:10px;
+}
+
+.cmtEmail{
+	float:left;
+	margin-bottom: 10px;
+}
+
+.cmt{
+	float:left;
+	margin-bottom:10px;
+}
+
+.cmtBox{
+	width:530px; 
+	border-radius: 5px; 
+	height: 55px;
+}
 
 
 

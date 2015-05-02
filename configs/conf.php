@@ -8,4 +8,5 @@ $password = '';
 $minPasswordLength=5;
 $defaultLang="az";
 $limit = 28;
+$langs = array("az","en","ru");
 ?>

@@ -55,5 +55,16 @@ $content['ADDTOMYFOLDER'] = 'Əlavə et';
 //Watch video
 $content['VIEWS'] = 'Baxışlar';
 $content['REPORTVIDEO'] = 'Videonu şikayət et';
+$content['PUBLISHED'] = 'Tarix';
+
+$content['NOCOMMENT'] = 'Şərh yazılmayıb';
+$content['NOEMAIL'] = 'Email qeyd olunmayıb';
+$content['NOID'] = 'Video nömrəsi yoxdur';
+
+$content['ADDCOMMENT']  = 'Şərh yaz';
+$content['POST'] = 'Göndər';
+$content['EDIT'] = 'Dəyiş';
+$content['DELETE'] = 'Sil';
+$content['SAVE'] = 'Yaddaşa ver';
 //end Watch video
 ?>

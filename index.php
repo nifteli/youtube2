@@ -12,13 +12,16 @@ $db = new MysqliDb($hostname, $username, $password, $database);
 $access = new Access($db);
 
 //set website language
-if(isset($_GET["lang"])) 
+if(isset($_GET["lang"]) && $_GET["lang"] != "" && in_array($_GET["lang"],$langs)) 
 {
 	$_SESSION["lang"]=$_GET["lang"];
 	$lang = $_SESSION["lang"];
 }
+elseif(isset($_SESSION["lang"]) && $_SESSION["lang"] != "")
+	$lang = $_SESSION["lang"];
 else
 	$lang = getUserLanguage($access);
+	
 require_once($langsPath."content_".$lang.".php");
 ///
 
@@ -37,7 +40,7 @@ require_once($facebookPath."facebook.php");
 
 if(!$db) die("Database error");
 
-//print_r($access);
+//print_r($access);echo "ses=".$_SESSION["userId"];
 $controller = new Controller($db);
 //end initiations
 
@@ -71,6 +74,8 @@ else
 			$controller->includeSection("footer");
 			break;
 		case "addVideo": 
+			if(!$access->hasAccess)
+				header("location: ?page=reg");
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."addVideoAction.php");
 			$controller->includeSection("header");
@@ -95,8 +100,8 @@ else
 			$controller->includeSection("footer");
 			break;
 		case "watchVideo": 
-			//if(isset($_GET["action"])) 
-				//include_once($actionsPath."watchVideo.php");
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."watchVideoAction.php");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("watchVideo");
@@ -114,7 +119,7 @@ else
 function getUserLanguage($access)
 {
 	global $defaultLang;
-	$langs = array("az","en","ru");
+	global $langs;
 	//echo "<pre>".print_r($access);echo "</pre>";
 	if($access->hasAccess)
 	{

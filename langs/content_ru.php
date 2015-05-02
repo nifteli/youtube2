@@ -54,5 +54,15 @@ $content['ADDTOMYFOLDER'] = 'Add to My Folder';
 //Watch video
 $content['VIEWS'] = 'Views';
 $content['REPORTVIDEO'] = 'Report Video';
+$content['PUBLISHED'] = 'Published';
+$content['NOCOMMENT'] = 'No comment is written';
+$content['NOEMAIL'] = 'No email is written';
+$content['NOID'] = 'No video ID';
+
+$content['ADDCOMMENT']  = 'Add comment';
+$content['POST'] = 'Post';
+$content['EDIT'] = 'Edir';
+$content['DELETE'] = 'Delete';
+$content['SAVE'] = 'Save';
 //end Watch video
 ?>
