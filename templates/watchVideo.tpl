@@ -32,7 +32,7 @@ function likeIt(videoId,flag)
 //alert(videoId+" "+flag); 
 	$.ajax({
      type: "GET",
-     url: './ajaxActions.php',
+     url: 'ajax/ajaxActions.php',
      data: "action=likeIt&videoId="+videoId+"&flag="+flag, 
      success: function(data) {
 	 //alert(data);

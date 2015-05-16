@@ -1,4 +1,3 @@
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
  var ajax_arry=[];
  var ajax_index =0;
@@ -6,7 +5,7 @@
  $(function(){
    $('#loading').show();
  $.ajax({
-	     url:"scroll.php",
+	     url:"ajax/scroll.php",
                   type:"POST",
                   data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}",
         cache: false,
@@ -34,7 +33,7 @@
 	     if ((($(window).scrollTop()+document.body.clientHeight)==$(window).height()) && isload=='true'){
 		   $('#loading').show();
 	   var ajaxreq = $.ajax({
-	     url:"scroll.php",
+	     url:"ajax/scroll.php",
                   type:"POST",
                   data:"actionfunction=showData&lang={$lang}&catId={$catId}&page="+page,
         cache: false,
@@ -72,10 +71,10 @@
 
 <div class="videos">
 	<div style="padding-top:10px;min-height: 1000px;">
-		{if isset($errorMessage)}
+		{if $errorMessage != ''}
 		<div class="err" style="width:680px; margin-top:40px">{$errorMessage}</div>
 		{/if}
-		{if isset($okMessage)}
+		{if $okMessage != ''}
 		<div class="success1" style="width:680px; margin-top:40px">{$okMessage}</div>
 		{/if}
 		<img id='loading' src='img/loading.gif'>

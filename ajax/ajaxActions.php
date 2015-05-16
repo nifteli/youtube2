@@ -2,7 +2,7 @@
 session_start();
 $sessionId = session_id();
 
-require_once(dirname(__FILE__)."/configs/paths.php");
+require_once("../configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
@@ -19,14 +19,14 @@ if($_GET["action"] == "likeIt" &&
 		$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 						values (".$_SESSION["userId"].",$_GET[videoId],1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update
-						action = 1");
+						action = 1, actionDate = '".date("Y-m-d H:i:s")."'");
 	}
 	if($_GET["flag"] == 2)
 	{
 		$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 						values (".$_SESSION["userId"].",$_GET[videoId],-1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update
-						action = -1");
+						action = -1, actionDate = '".date("Y-m-d H:i:s")."'");
 	}
 	//if($db->count>0)
 	//{

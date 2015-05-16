@@ -14,7 +14,7 @@
 	<script src="js/youtube.js"></script>
 	
 	<!--validation scripts-->
-	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	
 	<!--VideoJS -->
 	<link type="text/css" rel="stylesheet" href="css/video-js.css" />

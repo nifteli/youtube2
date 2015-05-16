@@ -61,7 +61,7 @@ class WatchVideo
 			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 							values (".$access->userId.",$id,0,'".date("Y-m-d H:i:s")."')
 							on duplicate key update
-							userId = ".$access->userId);
+							actionDate = '".date("Y-m-d H:i:s")."'");
 		$res = $db->rawQuery("
 						SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,
