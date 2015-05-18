@@ -14,6 +14,7 @@ class Videos
 		$this->videos->assign("lang",$controller->lang);
 		
 		$this->videos->assign("catId", isset($_GET["catId"]) ? $_GET["catId"] : "");
+		$this->videos->assign("userId", isset($_GET["userId"]) ? $_GET["userId"] : "");
 		$this->videos->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->videos->assign("okMessage", isset($okMessage) ? $okMessage : "");
 	}

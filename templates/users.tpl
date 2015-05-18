@@ -22,83 +22,16 @@ $(document).ready(function() {
 
 	<div style="padding-top:10px;min-height: 1000px;">
 <div class="pic-cont">
-                
-                  <div class="pic1">
-			       <img src="img/pic1.png"/> 
-                    <h2>User 01</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic2.png"/> 
-                    <h2>User 02</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic3.png"/> 
-                    <h2>User 03</h2>
-                   </div> <div class="pic1">
-			       <img src="img/pic4.png"/> 
-                    <h2>User 04</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic5.png"/> 
-                    <h2>User 05</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic1.png"/> 
-                    <h2>User 06</h2>
-                   </div>
-                   
-                   
-                  <div class="pic1">
-			       <img src="img/pic3.png"/> 
-                    <h2>User 07</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic2.png"/> 
-                    <h2>User 08</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic4.png"/> 
-                    <h2>User 09</h2>
-                   </div> <div class="pic1">
-			       <img src="img/pic1.png"/> 
-                    <h2>User 10</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic2.png"/> 
-                    <h2>User 11</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic3.png"/> 
-                    <h2>User 12</h2>
-                   </div>
-                   
-                   
-                  <div class="pic1">
-			       <img src="img/pic3.png"/> 
-                    <h2>User 13</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic2.png"/> 
-                    <h2>User 14</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic4.png"/> 
-                    <h2>User 15</h2>
-                   </div> 
-                   <div class="pic1">
-			       <img src="img/pic5.png"/> 
-                    <h2>User 16</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic4.png"/> 
-                    <h2>User 17</h2>
-                   </div>
-                    <div class="pic1">
-			       <img src="img/pic2.png"/> 
-                    <h2>User 18</h2>
-                   </div>
-                   
-                   
+					
+					{section name=sec1 loop=$users}
+					<div class="pic1">
+						<a href="{$users[sec1].url}"> 
+							<img src="{$users[sec1].picPath}"/> 
+							<h2>{$users[sec1].user} ({$users[sec1].videoCount})</h2>
+						</a>
+					</div>
+					{/section}
+					
                 </div>
  
 	</div>

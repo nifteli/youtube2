@@ -7,7 +7,7 @@
  $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}",
+                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&userId={$userId}",
         cache: false,
         success: function(response){
 		   $('#loading').hide();
@@ -35,7 +35,7 @@
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&page="+page,
+                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&userId={$userId}&page="+page,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();

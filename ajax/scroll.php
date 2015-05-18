@@ -16,6 +16,8 @@ function showData($data,$db,$limit)
 	$page = $data['page'];
 	if(isset($data["catId"]) && $data["catId"]>0)
 		$catId = $data["catId"];
+	if(isset($data["userId"]) && $data["userId"]>0)
+		$userId = $data["userId"];
 	if($page==1)
 		$start = 0;  
 	else
@@ -46,6 +48,8 @@ function showData($data,$db,$limit)
 			where lower(l.abbr)='$lang'";
 	if(isset($catId))
 		$qry .= " and vc.categoryId=$catId";
+	if(isset($userId))
+		$qry .= " and v.addedById=$userId";
 	$qry .= " group by v.id,vc.categoryId
 			order by catName$lang asc,v.added desc 
 			limit $start,$limit";//echo $qry;
