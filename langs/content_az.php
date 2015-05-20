@@ -50,6 +50,18 @@ $content['INFORMATION'] = 'Məlumat';
 $content['CATEGORY'] = 'Kateqoriya';
 $content['TAGS'] = 'Təqlər';
 $content['ADDTOMYFOLDER'] = 'Əlavə et';
+$content['ADD'] = 'Əlavə et';
+
+$content['ADDVIDEOERROR1'] = "Video Link is not set";
+$content['ADDVIDEOERROR2'] = "Video does not exist";
+$content['ADDVIDEOERROR3'] = "Language is not set";
+$content['ADDVIDEOERROR4'] = "Video question is not set";
+$content['ADDVIDEOERROR5'] = "Video name is not set";
+$content['ADDVIDEOERROR6'] = "Category is not set";
+$content['ADDVIDEOERROR7'] = "This video link is already added to category ";
+$content['ADDVIDEOERROR8'] = "DB error";
+$content['ADDVIDEOERROR9'] = "Yanlış video linki";
+$content['ADDVIDEONOTF1'] = "Video added";
 //end add video
 
 //Watch video
@@ -67,4 +79,8 @@ $content['EDIT'] = 'Dəyiş';
 $content['DELETE'] = 'Sil';
 $content['SAVE'] = 'Yaddaşa ver';
 //end Watch video
+
+//All tags
+$content['ALLTAGS'] = 'Bütün təqlər';
+//end All tags
 ?>

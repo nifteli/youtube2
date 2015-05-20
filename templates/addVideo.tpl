@@ -32,7 +32,7 @@ $(document).ready(function() {
              
               <label class="labelv">{$videoLink}:</label><br>
               <input class="fieldv" type="url" name="videoLink" id="videoLink" value="{$videoLinkVal}"><br>
-              <label class="labelv" style="color: red" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>Incorrect video link</label>
+              <label class="labelv" style="color: red" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>{$addVideoError9}</label>
               <br><br>
 
 

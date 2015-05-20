@@ -49,6 +49,18 @@ $content['INFORMATION'] = 'Information';
 $content['CATEGORY'] = 'Category';
 $content['TAGS'] = 'Tags';
 $content['ADDTOMYFOLDER'] = 'Add to My Folder';
+$content['ADD'] = 'Add';
+
+$content['ADDVIDEOERROR1'] = "Video Link is not set";
+$content['ADDVIDEOERROR2'] = "Video does not exist";
+$content['ADDVIDEOERROR3'] = "Language is not set";
+$content['ADDVIDEOERROR4'] = "Video question is not set";
+$content['ADDVIDEOERROR5'] = "Video name is not set";
+$content['ADDVIDEOERROR6'] = "Category is not set";
+$content['ADDVIDEOERROR7'] = "This video link is already added to category ";
+$content['ADDVIDEOERROR8'] = "DB error";
+$content['ADDVIDEOERROR9'] = "Incorrect video link";
+$content['ADDVIDEONOTF1'] = "Video added";
 //end add video
 
 //Watch video
@@ -65,4 +77,8 @@ $content['EDIT'] = 'Edir';
 $content['DELETE'] = 'Delete';
 $content['SAVE'] = 'Save';
 //end Watch video
+
+//All tags
+$content['ALLTAGS'] = 'All Tags';
+//end All tags
 ?>

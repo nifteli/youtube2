@@ -1,4 +1,7 @@
 <?php
+session_start();
+$sessionId = session_id();
+
 require_once("../configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
@@ -16,6 +19,8 @@ function showData($data,$db,$limit)
 	$page = $data['page'];
 	if(isset($data["catId"]) && $data["catId"]>0)
 		$catId = $data["catId"];
+	if(isset($data["tagId"]) && $data["tagId"]>0)
+		$tagId = $data["tagId"];
 	if(isset($data["userId"]) && $data["userId"]>0)
 		$userId = $data["userId"];
 	if($page==1)
@@ -28,7 +33,7 @@ function showData($data,$db,$limit)
 	$qry = "SELECT count(vv.action) viewCount,
 					SUM(IF(action = 1, 1, 0)) likeCount,
 					SUM(IF(action = -1, 1, 0)) dislikeCount,
-					v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,
+					v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,
 					tg.tags,
 					vc.categoryId,
@@ -38,6 +43,7 @@ function showData($data,$db,$limit)
 			inner join users u on u.id=v.addedById
 			inner join videocats vc on vc.videoId=v.id
 			inner join categories c on c.id = vc.categoryId
+			left join videoTags vt on vt.videoId = v.id
 			left join languages l on l.id=v.languageId
 			left join (
 				select videoId,GROUP_CONCAT(' ', (select DISTINCT t.name ORDER BY t.name)) AS tags
@@ -50,6 +56,8 @@ function showData($data,$db,$limit)
 		$qry .= " and vc.categoryId=$catId";
 	if(isset($userId))
 		$qry .= " and v.addedById=$userId";
+	if(isset($tagId))
+		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
 			order by catName$lang asc,v.added desc 
 			limit $start,$limit";//echo $qry;
@@ -84,14 +92,16 @@ function showData($data,$db,$limit)
 			$addedBy = (strlen($res[$i]['addedBy']) > 17) ? substr(trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
 			$likes = $res[$i]['likeCount'];
 			$dislikes = $res[$i]['dislikeCount'];
-			
+			//echo "<br><br><br><br><br>added=".$res[$i]['addedById'] ."sessionid=". $_SESSION["userId"];
 			$str .= "<div class='box'>
 						 <a href='?page=watchVideo&id=$id'>
 							<img src=$link width=152 height=79 alt='$info'/>
 						 </a>
 						 <a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
-						 <a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/></a>
-						 <a href='?page=watchVideo?id=$id'>
+						 <a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/";
+				if($res[$i]['addedById'] != $_SESSION["userId"])
+					$str .= " style='visibility: hidden;'";
+				$str .= "></a><a href='?page=watchVideo?id=$id'>
 						 	<h2>$name</h2>
 						 </a>
 						 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> 

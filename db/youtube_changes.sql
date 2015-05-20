@@ -1,5 +1,8 @@
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwprofileviews` AS select `profileviews`.`viewerId` AS `viewerid`,sum(`profileviews`.`count`) AS `views` from `profileviews` group by `profileviews`.`viewerId`;
+CREATE TABLE IF NOT EXISTS `foldertags` (
+  `tagId` int(11) NOT NULL,
+  `folderId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwuserstats` AS select `u`.`id` AS `id`,count(distinct `v`.`id`) AS `videos`,coalesce(`pv`.`views`,0) AS `profileviews`,count(distinct `vw`.`videoId`,`vw`.`userId`) AS `videoviews`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = 1) then 1 end)) AS `likes`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = -(1)) then 1 end)) AS `dislikes`,count(distinct `c`.`id`) AS `comments` from ((((`users` `u` left join `videoviews` `vw` on((`vw`.`userId` = `u`.`id`))) left join `comments` `c` on((`c`.`createdById` = `u`.`id`))) left join `videos` `v` on((`v`.`addedById` = `u`.`id`))) left join `vwprofileviews` `pv` on((`pv`.`viewerid` = `u`.`id`))) group by `u`.`id`;
+ALTER TABLE  `tags` ADD  `langId` INT NOT NULL ;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwvideostats` AS select `v`.`id` AS `id`,count(distinct `vw`.`videoId`,`vw`.`userId`) AS `views`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = 1) then 1 end)) AS `likes`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = -(1)) then 1 end)) AS `dislikes`,count(distinct `c`.`id`) AS `comments` from ((`videos` `v` left join `videoviews` `vw` on((`vw`.`videoId` = `v`.`id`))) left join `comments` `c` on((`c`.`videoId` = `v`.`id`))) group by `v`.`id`;
+ALTER TABLE  `youtube`.`tags` ADD UNIQUE  `idx_tags` (  `name` ,  `langId` ) COMMENT  '';

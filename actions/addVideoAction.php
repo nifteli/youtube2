@@ -7,32 +7,32 @@ if ($_GET["action"]=="add")
 	if(!isset($_POST["videoLink"]) || $_POST["videoLink"] == "")
 	{
 		$result = "error";
-		$messages["videoLink"] = "Video Link is not set";
+		$messages["videoLink"] = $content['ADDVIDEOERROR1'];
 	}
 	else if(!isset($_POST["validVideo"]) || $_POST["validVideo"] == "false")
 	{
 		$result = "error";
-		$messages["videoLink"] = "Video does not exist";
+		$messages["videoLink"] = $content['ADDVIDEOERROR2'];
 	}
 	if(!isset($_POST["language"]) || $_POST["language"] == "0")
 	{
 		$result = "error";
-		$messages["language"] = "Language is not set";
+		$messages["language"] = $content['ADDVIDEOERROR3'];
 	}
 	if(!isset($_POST["videoQuestion"]) || $_POST["videoQuestion"] == array())
 	{
 		$result = "error";
-		$messages["videoQuestion"] = "Video question is not set";
+		$messages["videoQuestion"] = $content['ADDVIDEOERROR4'];
 	}
 	if(!isset($_POST["videoName"]) || $_POST["videoName"] == "")
 	{
 		$result = "error";
-		$messages["videoName"] = "Video name is not set";
+		$messages["videoName"] = $content['ADDVIDEOERROR5'];
 	}
 	if(!isset($_POST["category"]) || array_sum($_POST["category"]) == 0)
 	{
 		$result = "error";
-		$messages["category"] = "Category is not set";
+		$messages["category"] = $content['ADDVIDEOERROR6'];
 	}
 	
 	//check if videolink is added to the category before
@@ -47,7 +47,7 @@ if ($_GET["action"]=="add")
 	if($db->count>0)
 	{
 		$result = "error";
-		$messages["duplicate"] = "This video link is already added to category ".$res[0]["duplicates"];
+		$messages["duplicate"] = $content['ADDVIDEOERROR7'].$res[0]["duplicates"];
 	}	
 	
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
@@ -92,7 +92,13 @@ if ($_GET["action"]=="add")
 			{
 				foreach($tags as $tag)
 				{
-					$id = $db->insert("tags", array("name"=>trim($tag)));
+					$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+					$res = $db->getOne("tags");
+					if ($db->count == 1) 
+						$id = $res["id"];
+					else
+						$id = $db->insert("tags", array("name"=>trim($tag),
+												"langId"=>$langIds[$_SESSION["lang"]]));
 					if($id)
 					{
 						$id = $db->insert("videotags", array("tagId"=>$id,
@@ -113,7 +119,7 @@ if ($_GET["action"]=="add")
 		{
 			$db->rollback();
 			$result = "error";
-			$messages["dbError"] = "DB error";
+			$messages["dbError"] = $content['ADDVIDEOERROR8'];
 		}
 		else
 			$db->commit();
@@ -121,6 +127,6 @@ if ($_GET["action"]=="add")
 	}
 		
 	if($result=="success")
-		$messages["success"] = "Video added";
+		$messages["success"] = $content['ADDVIDEONOTF1'];
 }
 ?>

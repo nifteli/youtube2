@@ -32,9 +32,11 @@ class AddVideo
 		$this->videos->assign("categoryVal", isset($_POST["category"]) ? json_encode($_POST["category"]) : json_encode(array()));
 		$this->videos->assign("tags", $content['TAGS']);
 		$this->videos->assign("tagsVal", isset($_POST["tags"]) ? $_POST["tags"] : "");
-		$this->videos->assign("addToMyFolder", $content['ADDTOMYFOLDER']);
+		$this->videos->assign("addToMyFolder", $content['ADD']);
 		$this->videos->assign("cancel", $content['CANCEL']);
+		$this->videos->assign("addVideoError9", $content['ADDVIDEOERROR9']);
 		$this->videos->assign("allCategories", json_encode($controller->getAllCategories()));
+		
 		$this->videos->assign("result", $result);
 		$this->videos->assign("messages", $messages);
 		

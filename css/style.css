@@ -2135,6 +2135,108 @@ margin-left:235px
 	height: 55px;
 }
 
+.tagArea{
+	margin-top:10px;
+	margin-top:5px;
+}
 
 
+#eerie {
+    width: 230px;
+margin: auto;
+margin-top: 100px;
+float: left;
+margin-left: -80px;
+}
+
+#sinister {
+    margin-left: 3px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: "Penguins";
+    font-size: 70px;
+    color: #FF546C;
+    text-transform: uppercase;
+    line-height: 40px;
+    text-align: center;}
+    
+#death {
+    margin-bottom: 2px;}
+
+#death a{
+    color: #000000;
+    text-align: center;
+    font-size: 9px;
+    font-family: calibri;
+    text-transform: uppercase;
+    background: #F9F9F9;
+    padding: 3px 11px 3px 11px; 
+    height: 10px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;}
+
+#death a:hover{
+    color: #FF546C;
+    background: #FFFFFF;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;}
+
+.phantom {
+    background-color: #7A672D;
+    color: #FFFFFF;
+    display: block;
+    margin-top: 10px;
+    width: 222px;
+    height: 35px;
+    font-family: "Penguins";
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 35px;}
+
+.phantom a {
+    text-decoration: none;}
+
+.corpulent {
+    background-color: #E2DEAE;
+    width: 202px;
+    padding: 10px;
+    font-family: calibri;
+    font-size: 10px;
+    color: #5D5D5D;
+    text-align: justify;
+    line-height: 12px;
+    margin-bottom: 20px;
+    margin-right: 10px;}
+
+.corpulent img {
+    max-width: 202px;}
+    
+.insidious {
+    color: #000000;
+    display: block;
+    font-size: 12px;
+    width: auto;
+    padding: 8px 0px;
+    margin-bottom: 3px;
+    text-align: center;
+    background-color: #F1F1F1;
+    text-transform: uppercase;}
+
+#annihilation {
+    font-family: "Penguins";
+    font-size: 8px;
+    color: #FFFFFF;
+    left: 3px;
+    bottom: 3px;
+    z-index: 999;
+    position: fixed;
+    letter-spacing: 1px;
+    text-transform: uppercase;}
+ 
+#annihilation a {
+    text-decoration: none;}
 
