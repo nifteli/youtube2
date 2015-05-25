@@ -45,7 +45,7 @@ $(document).ready(function() {
 					<div class="sosialBtn">
 					{if !isset($greeting)}
 					<a  href="?action=fbLogin"><img class="fb" src="img/fb.png" /></a>
-					<a  href="?action=okLogin"><img class="odn" width="22" width="23"  src="img/odn.png" /></a>
+					<a  href="https://connect.mail.ru/oauth/authorize?client_id=734021&response_type=code&redirect_uri=http://pfs.az/?action=mailruLogin"><img class="odn" width="22" width="23"  src="img/mailru.png" /></a>
 					{/if}
 					</div>
 					<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
