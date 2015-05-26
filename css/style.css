@@ -619,7 +619,7 @@ width: 110px;
 
 .hollywd h2{
  font-family:Calibri;
- font-size:16px;
+ font-size:20px;
  font-weight:bold;
  float:left;
  margin-top:30px;	
@@ -1425,7 +1425,7 @@ position:relative;
 
 .login3{
   width: 130px;
-height: 129px;
+height: 137px;
 font-family: Calibri;
 font-size: 16px;
 margin-left: 0px;
@@ -1447,14 +1447,14 @@ font-size: 14px;
 height: 30px;
 line-height: 2;
 text-align: center;
-margin-left: 106px;
+margin-left: 102px;
 padding: 0px 0px;
 text-indent: 0px;
 width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: -13px;
+top: -5px;
 border: 0px;
 border-radius: 5px;
 }
@@ -1471,14 +1471,14 @@ font-size: 14px;
 height: 30px;
 line-height: 2;
 text-align: center;
-margin-left: 5px;
+margin-left: -85px;
 padding: 0px 0px;
 text-indent: 0px;
 width: 92px;
 cursor: pointer;
 transition: 0.5s;
 position: relative;
-top: 17px;
+top: 25px;
 border: 0px;
 border-radius: 5px;
 }
@@ -1500,6 +1500,7 @@ border-radius: 5px;
 padding: 0px 0px;
 background: #7a672d;
 text-decoration: none;
+cursor: pointer;
 }
 
 .login39:hover{
@@ -2239,4 +2240,10 @@ margin-left: -80px;
  
 #annihilation a {
     text-decoration: none;}
+	
+.forgotPass{
+	color: rgb(174, 64, 25);
+    font-size: 12px;
+    margin-left:5px;
+}
 

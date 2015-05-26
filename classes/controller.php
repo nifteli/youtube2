@@ -9,6 +9,7 @@ include($templatePath."addVideo.php");
 include($templatePath."users.php");
 include($templatePath."watchVideo.php");
 include($templatePath."allTags.php");
+include($templatePath."forgotPass.php");
 
 class Controller //extends MySQL
 {
@@ -84,6 +85,10 @@ class Controller //extends MySQL
 			case "addVideo":
 				$addVideo = new AddVideo($this);
 				$addVideo->Show();
+				break;
+			case "forgotPass":
+				$forgotPass = new ForgotPass($this);
+				$forgotPass->Show();
 				break;
 		}
 	}

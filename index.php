@@ -107,6 +107,14 @@ else
 			$controller->includeSection("watchVideo");
 			$controller->includeSection("footer");
 			break;
+		case "forgotPass": 
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."forgotPassAction.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("forgotPass");
+			$controller->includeSection("footer");
+			break;
 		default:
 			$controller->includeSection("header");
 			$controller->includeSection("categories");

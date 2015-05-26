@@ -83,4 +83,18 @@ $content['SAVE'] = 'Yaddaşa ver';
 //All tags
 $content['ALLTAGS'] = 'Bütün təqlər';
 //end All tags
+
+//FORGOT PASSWORD
+$content['FORGOTPASS'] = 'Forgot password';
+$content['SENDTOMAIL'] = 'Send to mail';
+$content["EMAILERROR"] = "Enter email";
+$content["NOSUCHEMAIL"] = "This email is not registered";
+$content["RESETPASS"] = "Reset password";
+$content["RESETPASSBODY"] = "For resetting password of your user please click the link below otherwise ignore this email.";
+$content["RESETMAILSENT"] = "The link for resetting email is sent to your email";
+$content["RESETCONFERR1"] = "Link is not valid";
+$content["RESETCONFERR2"] = "Password must be minumum 5 characters long";
+$content["PASSRESET"] = "Password changed. You can login with your new password";
+$content["PASSNOTRESET"] = "Error on password reset";
+//END FORGOT PASSWORD
 ?>

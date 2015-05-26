@@ -50,6 +50,7 @@ $(document).ready(function() {
 					</div>
 					<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
 					<input class="pw" type="password" name="password" value="" placeholder="{$password}">
+					<a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a>
 					<input class="loginLg" type="submit" value="{$login}" name="submit">
 					<a href="?page=reg"><input class="login33" type="button" value="{$signUp}" name="submit"></a>
 					

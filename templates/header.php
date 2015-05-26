@@ -22,6 +22,8 @@ class Header
 		$this->header->assign("videos",$content['VIDEOS']);
 		$this->header->assign("videoCnt",$controller->getCount(3));
 		$this->header->assign("login",$content['LOGIN']);
+		$this->header->assign("forgotPass",$content['FORGOTPASS']);
+		
 		$this->header->assign("errorMessage",$errorMessage);
 		//print_r($controller->access);
 		if(isset($controller->access->userName))
