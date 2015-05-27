@@ -36,22 +36,24 @@ if ($_GET["action"]=="add")
 	}
 	
 	//check if videolink is added to the category before
-	$categories = array_unique($_POST["category"]);
-	$cats = join(",", $categories);
-	$res = $db->rawQuery("SELECT GROUP_CONCAT(' ', c.catName$lang) duplicates FROM 
-							videos v
-							inner join videocats vc on vc.videoId=v.id
-							inner join categories c on c.id=vc.categoryId
-							WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId in (".$cats.") 
-							group by v.link");
-	if($db->count>0)
+	if(isset($_POST["category"]) && array_sum($_POST["category"]) > 0)
 	{
-		$result = "error";
-		$messages["duplicate"] = $content['ADDVIDEOERROR7'].$res[0]["duplicates"];
-	}	
-	
+		$categories = array_unique($_POST["category"]);
+		$cats = join(",", $categories);
+		$res = $db->rawQuery("SELECT GROUP_CONCAT(' ', c.catName$lang) duplicates FROM 
+								videos v
+								inner join videocats vc on vc.videoId=v.id
+								inner join categories c on c.id=vc.categoryId
+								WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId in (".$cats.") 
+								group by v.link");
+		if($db->count>0)
+		{
+			$result = "error";
+			$messages["duplicate"] = $content['ADDVIDEOERROR7'].$res[0]["duplicates"];
+		}	
+		
+	}
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
-	
 		
 	if($result == "success")
 	{

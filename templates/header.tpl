@@ -21,9 +21,16 @@ $(document).ready(function() {
 				<input class="search" type="search" name="search" value="" placeholder="{$search}">
 				<a href="#"><img class="s-img" src="img/search.png" /></a>
 			</form>
-			<div class="tags" id="tags1">
-				
-			</div>
+			
+			
+				<div class="tags">
+				<ul>
+					{section name=sec1 loop=$randTags}
+					<li class="tag{$randTags[sec1].size}"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
+					{/section}
+				</ul>
+				</div>
+		
 			
 			<div class="login">
 				<ul class="lang">
