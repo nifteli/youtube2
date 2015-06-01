@@ -23,7 +23,13 @@ class Header
 		$this->header->assign("videoCnt",$controller->getCount(3));
 		$this->header->assign("login",$content['LOGIN']);
 		$this->header->assign("forgotPass",$content['FORGOTPASS']);
+		$this->header->assign("lang",$controller->lang);
 		$this->header->assign("randTags",$this->getRandTags($controller->lang,$controller->db));
+		
+		$this->header->assign("vqHow", $content['HOW']);
+		$this->header->assign("vqWhy", $content['WHY']);
+		$this->header->assign("vqWho", $content['WHO']);
+		$this->header->assign("vqWhat", $content['WHAT']);
 		
 		$this->header->assign("errorMessage",$errorMessage);
 		//print_r($controller->access);

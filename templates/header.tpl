@@ -1,4 +1,10 @@
 <script>
+$(function() {
+$( "#dpFrom" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#dpTo" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+});
+</script>	
+<script>
 $(document).ready(function() {
     var validator = $("#logForm").validate({
         rules: {
@@ -11,7 +17,9 @@ $(document).ready(function() {
         },
     });
 });
+
 </script>
+
 <body>
 <div id="wrapper">
 				
@@ -22,14 +30,45 @@ $(document).ready(function() {
 				<a href="#"><img class="s-img" src="img/search.png" /></a>
 			</form>
 			
+			<div class="simpleSearch">
+			|
+				<select class="srcCmb">
+					<option>Butun diller</option>
+					<option>aaaaaaz</option>
+					<option>eeeeeen</option>
+					<option>ruuuuuu</option>
+				</select> |
+			<input id="q3" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]"  >{$vqHow}</input>
+			<input id="q4"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhy}</input>
+			<input id="q1"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhat}</input>
+			<input id="q2"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWho}</input>
+				<select class="srcCmb">
+					<option>Butun kateqoriyalar</option>
+					<option>kat1</option>
+					<option>kat2</option>
+					<option>kat3</option>
+				</select> |
+			<input id="time" name="time"  type="radio" value="1"  name="videoQuestion[]" >saat</input>
+			<input id="time" name="time" type="radio" value="2"  name="videoQuestion[]" >deq</input>
+			<select class="srcCmb">
+					<option>15-dən qısa</option>
+					<option>15-30</option>
+					<option>30-45</option>
+					<option>45-60</option>
+				</select> |
+				<label class="srcLbl">Tarix</label>
+				<input class="srcCmb" type="text" id="dpFrom">&nbsp;
+				<input class="srcCmb" type="text" id="dpTo">&nbsp;
+			</div>
 			
-				<div class="tags">
-				<ul>
-					{section name=sec1 loop=$randTags}
-					<li class="tag{$randTags[sec1].size}"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
-					{/section}
-				</ul>
-				</div>
+			<div class="tags">
+			
+			<ul>
+				{section name=sec1 loop=$randTags}
+				<li class="tag{$randTags[sec1].size}"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
+				{/section}
+			</ul>
+			</div>
 		
 			
 			<div class="login">
