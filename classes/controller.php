@@ -10,6 +10,7 @@ include($templatePath."users.php");
 include($templatePath."watchVideo.php");
 include($templatePath."allTags.php");
 include($templatePath."forgotPass.php");
+include($templatePath."advSearch.php");
 
 class Controller //extends MySQL
 {
@@ -89,6 +90,10 @@ class Controller //extends MySQL
 			case "forgotPass":
 				$forgotPass = new ForgotPass($this);
 				$forgotPass->Show();
+				break;
+			case "advSearch":
+				$advSearch = new AdvSearch($this);
+				$advSearch->Show();
 				break;
 		}
 	}

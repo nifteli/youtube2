@@ -115,6 +115,14 @@ else
 			$controller->includeSection("forgotPass");
 			$controller->includeSection("footer");
 			break;
+		case "advSearch": 
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."advSearchAction.php");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("advSearch");
+			$controller->includeSection("footer");
+			break;
 		default:
 			$controller->includeSection("header");
 			$controller->includeSection("categories");

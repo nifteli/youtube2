@@ -2,6 +2,8 @@
 $(function() {
 $( "#dpFrom" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 $( "#dpTo" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#dpFrom2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 </script>	
 <script>
@@ -57,8 +59,9 @@ $(document).ready(function() {
 					<option>45-60</option>
 				</select> |
 				<label class="srcLbl">Tarix</label>
-				<input class="srcCmb" type="text" id="dpFrom">&nbsp;
-				<input class="srcCmb" type="text" id="dpTo">&nbsp;
+				<input class="srcCmb" style="width:70" type="text" id="dpFrom">&nbsp;
+				<input class="srcCmb" style="width:70" type="text" id="dpTo">&nbsp;
+			<a href="?page=advSearch" class="forgotPass">Ətrafli</a>
 			</div>
 			
 			<div class="tags">
