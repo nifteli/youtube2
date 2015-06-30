@@ -135,11 +135,11 @@ $(document).ready(function() {
 		
 		function loadCategories()
 		{
-			var q = $("#q1").prop('checked') ? 1 : 0;
-			q += $("#q2").prop('checked') ? 2 : 0;
-			q += $("#q3").prop('checked') ? 4 : 0;
-			q += $("#q4").prop('checked') ? 8 : 0;
-			
+			var q = $( "#q1" ).prop('checked') ? 1 : 0;
+			q += $( "#q2" ).prop('checked') ? 2 : 0;
+			q += $( "#q3" ).prop('checked') ? 4 : 0;
+			q += $( "#q4" ).prop('checked') ? 8 : 0;
+			//alert($( "#q1" ).prop('checked'));
 			var html = '<option value="0"> </option>';
 			$.each(allCategories, function(key,value)
 			{

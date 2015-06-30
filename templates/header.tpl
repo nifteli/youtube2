@@ -7,7 +7,7 @@ $( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 </script>	
 <script>
-$(document).ready(function() {
+/*$(function() {
     var validator = $("#logForm").validate({
         rules: {
             userName: "required",
@@ -19,7 +19,7 @@ $(document).ready(function() {
         },
     });
 });
-
+*/
 </script>
 
 <body>
@@ -40,10 +40,10 @@ $(document).ready(function() {
 					<option>eeeeeen</option>
 					<option>ruuuuuu</option>
 				</select> |
-			<input id="q3" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]"  >{$vqHow}</input>
-			<input id="q4"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhy}</input>
-			<input id="q1"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhat}</input>
-			<input id="q2"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWho}</input>
+			<input id="q3_" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]"  >{$vqHow}</input>
+			<input id="q4_"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhy}</input>
+			<input id="q1_"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhat}</input>
+			<input id="q2_"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWho}</input>
 				<select class="srcCmb">
 					<option>Butun kateqoriyalar</option>
 					<option>kat1</option>

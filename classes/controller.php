@@ -11,6 +11,11 @@ include($templatePath."watchVideo.php");
 include($templatePath."allTags.php");
 include($templatePath."forgotPass.php");
 include($templatePath."advSearch.php");
+//Admin classes
+include($templatePath."adminMenu.php");
+include($templatePath."adminProfile.php");
+include($templatePath."adminFooter.php");
+include($templatePath."adminRoles.php");
 
 class Controller //extends MySQL
 {
@@ -94,6 +99,22 @@ class Controller //extends MySQL
 			case "advSearch":
 				$advSearch = new AdvSearch($this);
 				$advSearch->Show();
+				break;
+			case "adminMenu":
+				$adminMenu = new AdminMenu($this);
+				$adminMenu->Show();
+				break;
+			case "adminProfile":
+				$adminProfile = new AdminProfile($this);
+				$adminProfile->Show();
+				break;
+			case "adminFooter":
+				$adminFooter = new AdminFooter($this);
+				$adminFooter->Show();
+				break;
+			case "adminRoles":
+				$adminRoles = new AdminRoles($this);
+				$adminRoles->Show();
 				break;
 		}
 	}

@@ -27,5 +27,8 @@
 	  <script src="js/datePicker/jquery-ui.js"></script>
 	  <script src="js/datePicker/datepicker-az.js"></script>
 	  <script src="js/datePicker/datepicker-ru.js"></script>
-	  
+	
+	<!--Back to top-->
+	<script src="js/backToTop/modernizr.js"></script> <!-- Modernizr -->
+	<script src="js/backToTop/main.js"></script>
 </head>
