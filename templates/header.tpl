@@ -7,7 +7,7 @@ $( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 </script>	
 <script>
-/*$(function() {
+$(function() {
     var validator = $("#logForm").validate({
         rules: {
             userName: "required",
@@ -19,7 +19,7 @@ $( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
         },
     });
 });
-*/
+
 </script>
 
 <body>
@@ -79,7 +79,7 @@ $( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 					<!--<li>Lang:</li>-->
 					{if isset($greeting)}
 					<li><a>{$greeting}, {$loggedUser}</a></li>
-					<li><a href="?admin.php">{$adminPanel}</a></li>
+					<li><a href="admin.php">{$adminPanel}</a></li>
 					<li><a href="?action=logout">{$logout}</a></li>
 					{/if}
 					<li><a href="?lang=az">AZ</a></li>

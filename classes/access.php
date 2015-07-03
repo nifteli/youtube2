@@ -8,6 +8,7 @@ class Access{
 	var $firstName;
 	var $lastName;
 	var $fatherName;
+	var $picture;
 	var $lang;
 	var $langId;
 	//var $secretQuestion;
@@ -38,6 +39,7 @@ class Access{
 				$this->firstName=$result[0]["firstName"];
 				$this->lastName=$result[0]["lastName"];
 				$this->fatherName=$result[0]["fatherName"];
+				$this->picture=$result[0]["picturePath"];
 				$this->langId=$result[0]["languageId"];
 				$db->where("id=" . (isset($result[0]["languageId"])?$result[0]["languageId"]:1));
 				$result2 = $db->get("languages");//echo $db->getLastQuery(); print_r($result2);
@@ -64,6 +66,7 @@ class Access{
 				$this->firstName=$result[0]["firstName"];
 				$this->lastName=$result[0]["lastName"];
 				$this->fatherName=$result[0]["fatherName"];
+				$this->picture=$result[0]["picturePath"];
 				$this->langId=$result[0]["languageId"];
 				$db->where("id=" . (isset($result[0]["languageId"])?$result[0]["languageId"]:1));
 				$result2 = $db->get("languages");//echo $db->getLastQuery(); print_r($result2);

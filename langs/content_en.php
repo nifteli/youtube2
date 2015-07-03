@@ -98,4 +98,28 @@ $content["RESETCONFERR2"] = "Password must be minumum 5 characters long";
 $content["PASSRESET"] = "Password changed. You can login with your new password";
 $content["PASSNOTRESET"] = "Error on password reset";
 //END FORGOT PASSWORD
+
+//Admin profile
+$content['TITLEPROFILE'] = "Profil Məlumatları";
+$content['CODE'] = "Unikal kod";
+$content['POSITION'] = "Vəzifə";
+$content['INTERESTS'] = "Maraqlar";
+$content['PICTURE'] = "Şəkil";
+$content['AZERBAIJANI'] = "Azərbaycan dili";
+$content['ENGLISH'] = "İngilis dili";
+$content['RUSSIAN'] = "Rus dili";
+$content['FATHERNAME'] = "Ata adı";
+$content['BIRTHDATE'] = "Doğum tarixi";
+$content['getEmailOnComment'] = "Komment zamanı email";
+$content['ADMINPROFILEERR1'] = "Ad daxil edin";
+$content['ADMINPROFILEERR2'] = "Email daxil edin";
+$content['ADMINPROFILEERR3'] = "Şifrə daxil edin";
+$content['ADMINPROFILEERR4'] = "Şifrələr eyni deyil";
+$content['ADMINPROFILEERR5'] = "Yüklənmək istənən fayl şəkil olmalıdır";
+$content['ADMINPROFILEERR6'] = "Yüklənən şəkil maksimum $maxPicSize mb ola bilər";
+$content['ADMINPROFILEERR7'] = "Yaddaşa vermədə xəta";
+$content['ADMINPROFILEERR8'] = "Tarixi doğru formatda girin";
+$content['ADMINPROFILENOTF1'] = "Profil məlumatları yaddaşa verildi";
+
+//End Admin profile
 ?>

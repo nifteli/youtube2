@@ -23,7 +23,7 @@
 	
 	<!--Dateapicker-->
 	  <link rel="stylesheet" href="css/datePicker/jquery-ui.css">
-	  <script src="js/datePicker/jquery-1.10.2.js"></script>
+	  <!--<script src="js/datePicker/jquery-1.10.2.js"></script>-->
 	  <script src="js/datePicker/jquery-ui.js"></script>
 	  <script src="js/datePicker/datepicker-az.js"></script>
 	  <script src="js/datePicker/datepicker-ru.js"></script>

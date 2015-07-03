@@ -1524,6 +1524,7 @@ border-radius: 5px;
 padding: 0px 0px;
 background: #7a672d;
 text-decoration: none;
+margin-bottom: 25px;
 }
 
 .newRole{
@@ -2075,6 +2076,61 @@ margin-right: 6px;
   font-weight: bold;
 }
 
+.profilePic{
+	  float: left;
+	  height: 100px;
+	  width: 100px;
+	  margin-left: 90px;
+	  margin-top: -426px;
+}
+
+.inf, .success1, .wrn, .err, .validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+.inf {
+color: #00529B;
+background-color: #BDE5F8;
+background-image: url('../img/info.png');
+width: 515px;
+float: left;
+margin-left: 20px;
+margin-right: 30px;
+}
+.success1 {
+color: #4F8A10;
+background-color: #DFF2BF;
+background-image:url('../img/success.png');
+width: 515px;
+float: left;
+margin-left: 20px;
+margin-right: 30px;
+}
+.wrn {
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('../img/warning.png');
+width: 515px;
+float: left;
+margin-left: 20px;
+margin-right: 30px;
+}
+.err {
+color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('../img/error.png');
+  width: 515px;
+  float: left;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.emailCheck{
+	
+}
 
 
 

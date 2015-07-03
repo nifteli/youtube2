@@ -13,12 +13,17 @@
 	<link rel="stylesheet" href="./css/admin/menuStyles.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="./js/admin/menuScript.js"></script>
+	
+	<!--validation scripts-->
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/datePicker/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+	
 
 	<!--jsgrid-->
 	<!--<link rel="stylesheet" type="text/css" media="screen" href="./css/jquery-ui.css" />-->
     <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/trirand/ui.jqgrid.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/ui.multiselect.css" />
-	
 	<link rel="stylesheet" type="text/css" media="screen" href="./css/admin/jquery-ui-1.11.4.custom/jquery-ui.css" />
 	<!--<link rel="stylesheet" type="text/css" media="screen" href="./css/jquery-ui.css" />-->
 	<style type="text">
@@ -39,6 +44,12 @@
     </script>
     <script src="./js/admin/trirand/src/jquery.jqGrid.js" type="text/javascript"></script>
     <script src="./js/admin/jquery-ui.min.js" type="text/javascript"></script>
+	
+	<!--Dateapicker-->
+	  <!--<script src="js/datePicker/jquery-1.10.2.js"></script>
+	  <script src="js/datePicker/jquery-ui.js"></script>-->
+	  <script src="js/datePicker/datepicker-az.js"></script>
+	  <script src="js/datePicker/datepicker-ru.js"></script>
 </head>
 <body>
 <div id="wrapper">

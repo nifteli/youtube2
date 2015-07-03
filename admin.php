@@ -11,7 +11,12 @@ require_once($classesPath."access.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 $access = new Access($db);
 
-//set website language
+if(!$access->hasAccess)
+{
+	header("location:index.php");
+	return;
+}
+	//set website language
 if(isset($_GET["lang"]) && $_GET["lang"] != "" && in_array($_GET["lang"],$langs)) 
 {
 	$_SESSION["lang"]=$_GET["lang"];
@@ -47,10 +52,10 @@ $controller = new Controller($db);
 
 
 //defined which page to load into page
-if(!isset($_GET["page"]))
+if(!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] == "adminProfile") )
 {
-	//if(isset($_GET["action"])) 
-		//include_once($actionsPath."loginAction.php");
+	if(isset($_GET["action"])) 
+		include_once($actionsPath."adminProfileAction.php");
 	include_once($templatePath."adminPageHeader.tpl");
 	$controller->includeSection("adminMenu");
 	$controller->includeSection("adminProfile");
