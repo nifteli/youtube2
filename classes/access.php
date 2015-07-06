@@ -25,7 +25,7 @@ class Access{
 	
 	public function setValues($db)
 	{
-		if(!isset($_SESSION["userName"]))
+		if(!isset($_SESSION["userName"]) && isset($_POST["userName"]) && isset($_POST["password"]))
 		{
 			$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
 			$result = $db->get("users");

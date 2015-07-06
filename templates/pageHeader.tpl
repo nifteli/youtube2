@@ -13,9 +13,6 @@
 	<script src="js/jqcloud.min.js"></script>
 	<script src="js/youtube.js"></script>
 	
-	<!--validation scripts-->
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	
 	<!--VideoJS -->
 	<link type="text/css" rel="stylesheet" href="css/video-js.css" />
 	<script src="js/videoJs/video.js"></script>
@@ -31,4 +28,7 @@
 	<!--Back to top-->
 	<script src="js/backToTop/modernizr.js"></script> <!-- Modernizr -->
 	<script src="js/backToTop/main.js"></script>
+	<!--validation scripts-->
+	<script src="js/jquery.validate.min.js"></script>
+	  
 </head>

@@ -20,6 +20,61 @@ $(function() {
     });
 });
 
+var allCategories = {$allCategories};
+
+$(document).ready(function(){
+	loadCategories();
+});
+
+function controlQuestionSelection(el)
+{
+	if(el.id == "q3_" || el.id == "q4_")
+	{
+		$("#q1_").prop('checked', false);
+		$("#q2_").prop('checked', false);
+	}
+	if(el.id == "q1_" || el.id == "q2_")
+	{
+		$("#q3_").prop('checked', false);
+		$("#q4_").prop('checked', false);
+	}
+	
+	loadCategories();
+}
+		
+function loadCategories()
+{
+	var q = $( "#q1_" ).prop('checked') ? 1 : 0;
+	q += $( "#q2_" ).prop('checked') ? 2 : 0;
+	q += $( "#q3_" ).prop('checked') ? 4 : 0;
+	q += $( "#q4_" ).prop('checked') ? 8 : 0;
+	//alert($( "#q1" ).prop('checked'));
+	var html = '<option value="0"> Bütün kateqoriyalar</option>';
+	$.each(allCategories, function(key,value)
+	{
+		if(q & value.questions)
+		{
+			html += '<option value="' + value.id + '"' + '>' + value.catName + '</option>';
+		}
+	});
+	
+	$("#category").html(html);
+}
+
+function showTimeInterval()
+{
+	if($("#time:checked").val() == 1)
+	{
+		$("#interval2").hide();
+		$("#interval1").show();
+	}
+	else
+	{
+		$("#interval1").hide();
+		$("#interval2").show();
+	}
+}
+
 </script>
 
 <body>
@@ -27,42 +82,48 @@ $(function() {
 				
 	<div class="banner">
 		<div class="min-cont">
-			<form>
+			<form id="searchForm" action="?page=searchRes" method="post">
 				<input class="search" type="search" name="search" value="" placeholder="{$search}">
-				<a href="#"><img class="s-img" src="img/search.png" /></a>
-			</form>
+				<a href="#" onclick="$('#searchForm').submit()"><img class="s-img" src="img/search.png" /></a>
 			
 			<div class="simpleSearch">
 			|
-				<select class="srcCmb">
-					<option>Butun diller</option>
-					<option>aaaaaaz</option>
-					<option>eeeeeen</option>
-					<option>ruuuuuu</option>
+				<select class="srcCmb" name="language" id="language">
+					<option value="0" selected="selected"> Bütün dillər</option>
+	              	{foreach from=$languages item=row1}
+	    				{html_options values=$row1.id output=$row1.name selected=$languageVal}
+	  				{/foreach}
 				</select> |
-			<input id="q3_" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]"  >{$vqHow}</input>
-			<input id="q4_"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhy}</input>
-			<input id="q1_"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWhat}</input>
-			<input id="q2_"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" >{$vqWho}</input>
-				<select class="srcCmb">
-					<option>Butun kateqoriyalar</option>
-					<option>kat1</option>
-					<option>kat2</option>
-					<option>kat3</option>
-				</select> |
-			<input id="time" name="time"  type="radio" value="1"  name="videoQuestion[]" >saat</input>
-			<input id="time" name="time" type="radio" value="2"  name="videoQuestion[]" >deq</input>
-			<select class="srcCmb">
-					<option>15-dən qısa</option>
-					<option>15-30</option>
-					<option>30-45</option>
-					<option>45-60</option>
-				</select> |
-				<label class="srcLbl">Tarix</label>
-				<input class="srcCmb" style="width:70" type="text" id="dpFrom">&nbsp;
-				<input class="srcCmb" style="width:70" type="text" id="dpTo">&nbsp;
+			<input id="q3_" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqHow}</input>
+			<input id="q4_"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWhy}</input>
+			<input id="q1_"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWhat}</input>
+			<input id="q2_"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWho}</input>
+			<select class="srcCmb" name="category" id="category">
+				<option value="0" selected="selected"> Bütün kateqoriyalar</option>
+			</select> |
+			<input id="time" name="time"  type="radio" onclick="showTimeInterval()" value="1">saat</input>
+			<input id="time" name="time" type="radio" onclick="showTimeInterval()" value="2" checked="">deq</input>
+			<select class="srcCmb" name="interval1" id="interval1" style="display: none">
+				<option value="0">Hamısı</option>
+				<option value="1">1-2</option>
+				<option value="2">2-3</option>
+				<option value="3">3-4</option>
+				<option value="4">4-dən uzun</option>
+			</select>
+			<select class="srcCmb" name="interval2" id="interval2">
+				<option value="0">Hamısı</option>
+				<option value="1">15-dən qısa</option>
+				<option value="2">15-30</option>
+				<option value="3">30-45</option>
+				<option value="4">45-60</option>
+			</select> |
+			
+			<label class="srcLbl">Tarix</label>
+			<input class="srcCmb" style="width:70" type="text" name="fromDate" id="dpFrom">&nbsp;
+			<input class="srcCmb" style="width:70" type="text" name="toDate"  id="dpTo">&nbsp;
 			<a href="?page=advSearch" class="forgotPass">Ətrafli</a>
 			</div>
+			</form>
 			
 			<div class="tags">
 			

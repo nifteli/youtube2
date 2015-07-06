@@ -10,6 +10,7 @@ include($templatePath."users.php");
 include($templatePath."watchVideo.php");
 include($templatePath."allTags.php");
 include($templatePath."forgotPass.php");
+include($templatePath."searchResults.php");
 include($templatePath."advSearch.php");
 //Admin classes
 include($templatePath."adminMenu.php");
@@ -95,6 +96,10 @@ class Controller //extends MySQL
 			case "forgotPass":
 				$forgotPass = new ForgotPass($this);
 				$forgotPass->Show();
+				break;
+			case "searchResults":
+				$searchResults = new SearchResults($this);
+				$searchResults->Show();
 				break;
 			case "advSearch":
 				$advSearch = new AdvSearch($this);

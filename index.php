@@ -123,6 +123,12 @@ else
 			$controller->includeSection("advSearch");
 			$controller->includeSection("footer");
 			break;
+		case "searchRes":
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("searchResults");
+			$controller->includeSection("footer");
+			break;
 		default:
 			$controller->includeSection("header");
 			$controller->includeSection("categories");

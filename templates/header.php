@@ -30,6 +30,8 @@ class Header
 		$this->header->assign("vqWhy", $content['WHY']);
 		$this->header->assign("vqWho", $content['WHO']);
 		$this->header->assign("vqWhat", $content['WHAT']);
+		$this->header->assign("languages", $controller->getLanguages());
+		$this->header->assign("allCategories", json_encode($controller->getAllCategories()));
 		
 		$this->header->assign("errorMessage",$errorMessage);
 		//print_r($controller->access);
