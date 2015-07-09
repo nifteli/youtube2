@@ -16,6 +16,8 @@ class AdvSearch
 		$this->advSearch->assign("vqWhat", $content['WHAT']);
 		$this->advSearch->assign("search",$content['SEARCH']);
 		$this->advSearch->assign("lang",$controller->lang);
+		$this->advSearch->assign("languages", $controller->getLanguages());
+		$this->advSearch->assign("allCategories", json_encode($controller->getAllCategories()));
 	}
 	
 	public function Show()

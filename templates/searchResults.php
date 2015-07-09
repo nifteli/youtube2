@@ -21,6 +21,7 @@ class SearchResults
 		$this->searchRes->assign("interval", $_POST["interval".$_POST["time"]]);
 		$this->searchRes->assign("fromDate", $_POST["fromDate"]);
 		$this->searchRes->assign("toDate", $_POST["toDate"]);
+		$this->searchRes->assign("options", isset($_POST["opt"]) ? implode("," ,$_POST["opt"]) : "");
 		
 		$this->searchRes->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->searchRes->assign("okMessage", isset($okMessage) ? $okMessage : "");

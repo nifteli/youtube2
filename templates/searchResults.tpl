@@ -12,6 +12,7 @@
 				+ "&interval={$interval}"
 				+ "&fromDate={$fromDate}"
 				+ "&toDate={$toDate}"
+				+ "&options={$options}"
  				+ "&page=";
  var page = "1";
  $(function(){

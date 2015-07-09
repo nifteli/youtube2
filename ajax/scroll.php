@@ -77,6 +77,16 @@ function showSearchResults($data,$db,$limit)
 	$category = $data["category"];
 	$time = $data["time"];
 	$interval = $data["interval"];
+	$options = explode(",", $data["options"]);
+	
+	// remove when folders are linked to videos and folder table joined in the query below
+	for($i = 0; $i < count($options); $i++)
+	{
+		if(substr($options[$i], 0, strlen("f.")) == "f.")
+			$options[$i] = "";
+	}
+	$options = array_filter($options);
+	//
 	
 	// format dates
 	$fromDate = "0001-01-01";
@@ -124,10 +134,28 @@ function showSearchResults($data,$db,$limit)
 			left join languages l on l.id = v.languageId
             left join videotags vt on vt.videoId=v.id
             left join tags t on t.id=vt.tagId
+            left join comments ct on ct.videoId=v.id
 			where ";
 	$qry .= "(";
-	$qry .= createCondition("v.name", $search, "like", true); //" and v.name like '%$search%'";
-	$qry .= " or " . createCondition("v.info", $search, "like", true);
+	
+	if(count($options) == 0)
+	{
+		$qry .= createCondition("v.name", $search, "like", true); //" and v.name like '%$search%'";
+		$qry .= " or " . createCondition("v.info", $search, "like", true);
+	}
+	else
+	{
+		$preCond = "";
+		foreach($options as $option)
+		{
+			if(substr($option, -strlen("id")) == "id")			
+				$qry .= $preCond . createCondition($option, "'$search'", "=", false);
+			else
+				$qry .= $preCond . createCondition($option, $search, "like", true);
+			$preCond = " or ";
+		}
+	}
+	
 	$qry .= ")";
 	if($language != "0")
 		$qry .= " and " . createCondition("v.languageId", $language, "=", false);

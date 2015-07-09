@@ -22,33 +22,28 @@ $(function() {
 
 var allCategories = {$allCategories};
 
-$(document).ready(function(){
-	loadCategories();
-});
-
-function controlQuestionSelection(el)
+function controlQuestionSelection_s(el, sFlag)
 {
-	if(el.id == "q3_" || el.id == "q4_")
+	if(el.id == sFlag + "q3" || el.id == sFlag + "q4")
 	{
-		$("#q1_").prop('checked', false);
-		$("#q2_").prop('checked', false);
+		$("#" + sFlag + "q1").prop('checked', false);
+		$("#" + sFlag + "q2").prop('checked', false);
 	}
-	if(el.id == "q1_" || el.id == "q2_")
+	if(el.id == sFlag + "q1" || el.id == sFlag + "q2")
 	{
-		$("#q3_").prop('checked', false);
-		$("#q4_").prop('checked', false);
+		$("#" + sFlag + "q3").prop('checked', false);
+		$("#" + sFlag + "q4").prop('checked', false);
 	}
 	
-	loadCategories();
+	loadCategories_s(sFlag);
 }
 		
-function loadCategories()
+function loadCategories_s(sFlag)
 {
-	var q = $( "#q1_" ).prop('checked') ? 1 : 0;
-	q += $( "#q2_" ).prop('checked') ? 2 : 0;
-	q += $( "#q3_" ).prop('checked') ? 4 : 0;
-	q += $( "#q4_" ).prop('checked') ? 8 : 0;
-	//alert($( "#q1" ).prop('checked'));
+	var q = $("#" + sFlag + "q1").prop('checked') ? 1 : 0;
+	q += $("#" + sFlag + "q2").prop('checked') ? 2 : 0;
+	q += $("#" + sFlag + "q3").prop('checked') ? 4 : 0;
+	q += $("#" + sFlag + "q4").prop('checked') ? 8 : 0;
 	var html = '<option value="0"> Bütün kateqoriyalar</option>';
 	$.each(allCategories, function(key,value)
 	{
@@ -58,20 +53,20 @@ function loadCategories()
 		}
 	});
 	
-	$("#category").html(html);
+	$("#" + sFlag + "category").html(html);
 }
 
-function showTimeInterval()
+function showTimeInterval(sFlag)
 {
-	if($("#time:checked").val() == 1)
+	if($("#" + sFlag + "time:checked").val() == 1)
 	{
-		$("#interval2").hide();
-		$("#interval1").show();
+		$("#" + sFlag + "interval2").hide();
+		$("#" + sFlag + "interval1").show();
 	}
 	else
 	{
-		$("#interval1").hide();
-		$("#interval2").show();
+		$("#" + sFlag + "interval1").hide();
+		$("#" + sFlag + "interval2").show();
 	}
 }
 
@@ -83,7 +78,7 @@ function showTimeInterval()
 	<div class="banner">
 		<div class="min-cont">
 			<form id="searchForm" action="?page=searchRes" method="post">
-				<input class="search" type="search" name="search" value="" placeholder="{$search}">
+				<input class="search" type="input" name="search" value="" placeholder="{$search}">
 				<a href="#" onclick="$('#searchForm').submit()"><img class="s-img" src="img/search.png" /></a>
 			
 			<div class="simpleSearch">
@@ -94,23 +89,23 @@ function showTimeInterval()
 	    				{html_options values=$row1.id output=$row1.name selected=$languageVal}
 	  				{/foreach}
 				</select> |
-			<input id="q3_" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqHow}</input>
-			<input id="q4_"  type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWhy}</input>
-			<input id="q1_"  type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWhat}</input>
-			<input id="q2_"  type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]">{$vqWho}</input>
-			<select class="srcCmb" name="category" id="category">
+			<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
+			<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
+			<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
+			<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+			<select class="srcCmb" name="category" id="scategory">
 				<option value="0" selected="selected"> Bütün kateqoriyalar</option>
 			</select> |
-			<input id="time" name="time"  type="radio" onclick="showTimeInterval()" value="1">saat</input>
-			<input id="time" name="time" type="radio" onclick="showTimeInterval()" value="2" checked="">deq</input>
-			<select class="srcCmb" name="interval1" id="interval1" style="display: none">
+			<input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">saat</input>
+			<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">deq</input>
+			<select class="srcCmb" name="interval1" id="sinterval1" style="display: none">
 				<option value="0">Hamısı</option>
 				<option value="1">1-2</option>
 				<option value="2">2-3</option>
 				<option value="3">3-4</option>
 				<option value="4">4-dən uzun</option>
 			</select>
-			<select class="srcCmb" name="interval2" id="interval2">
+			<select class="srcCmb" name="interval2" id="sinterval2">
 				<option value="0">Hamısı</option>
 				<option value="1">15-dən qısa</option>
 				<option value="2">15-30</option>

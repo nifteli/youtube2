@@ -102,10 +102,10 @@ $(document).ready(function() {
 				<a href="javascript: resetForm()"> <button class="cancel" type="button">{$cancel}</button></a>
              </form>
 	<script type="text/javascript">
-		var allCategories = {$allCategories};
+		//var allCategories = {$allCategories};
 		var oldLink = '';
 		
-		loadCategories();
+		//loadCategories();
 	
 		function submitForm()
 		{
