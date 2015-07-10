@@ -50,7 +50,7 @@ table {
  width:220px;
  height:25px;
  border-radius:3px;
- border:1px solid #fff;
+ border:1px solid #5E5151;
  padding-left:10px;
 }
 
@@ -1542,9 +1542,10 @@ background: #7a672d;
 text-decoration: none;
 }
 
-.newRole:hover,.login39:hover{
+.newRole:hover,.roleSave:hover,.login39:hover{
 	background:#333333;
 	transition:0.5s;
+	cursor:pointer;
 }
 
 .login12{
@@ -2131,6 +2132,7 @@ color: #D8000C;
 .emailCheck{
 	
 }
+
 
 
 

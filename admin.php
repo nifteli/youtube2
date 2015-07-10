@@ -69,8 +69,8 @@ else
 	switch($_GET["page"])
 	{
 		case "adminRoles": 
-			//if(isset($_GET["action"])) 
-				//include_once($actionsPath."regAction.php");
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."adminRolesAction.php");
 			$controller->includeSection("adminRoles");
 			break;
 		default:

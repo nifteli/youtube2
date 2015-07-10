@@ -122,4 +122,14 @@ $content['ADMINPROFILEERR8'] = "Tarixi doğru formatda girin";
 $content['ADMINPROFILENOTF1'] = "Profil məlumatları yaddaşa verildi";
 
 //End Admin profile
+
+//Admin Roles
+$content['ROLENAME'] = "Rol adı";
+$content["ROLECREATEDBY"] = "Rol yaradan";
+$content["ROLECREATED"] = "Yaranma tarixi";
+$content['TITLEROLES'] = "Rollar";
+$content['ACTIONNAME'] = "Əməliyyat";
+$content['DATERANGE'] = "Tarix aralığı";
+$content['HASACCESS'] = "Təyin edilib";
+//End admin roles
 ?>

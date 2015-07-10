@@ -30,27 +30,24 @@ function showData($data,$db,$limit)
 		//echo "<pre>";print_r($data);echo "</pre>";
 		//echo "page=$page; limit=$limit; start=$start";
 		
-	$qry = "SELECT count(vv.action) viewCount,
-					SUM(IF(action = 1, 1, 0)) likeCount,
-					SUM(IF(action = -1, 1, 0)) dislikeCount,
-					v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.addedById,
+	$qry = "SELECT vs.views viewCount,
+					vs.likes likeCount,
+					vs.dislikes dislikeCount,
+					v.id, v.name, v.info, v.duration,
+					DATE_FORMAT(v.added,'%d %b %Y') added, 
+					v.languageId, v.link, v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,
-					tg.tags,
+                    GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
 					c.catName$lang
-			FROM videoViews vv
-			right join videos v on v.id=vv.videoId
-			inner join users u on u.id=v.addedById
-			inner join videocats vc on vc.videoId=v.id
-			inner join categories c on c.id = vc.categoryId
-			left join videoTags vt on vt.videoId = v.id
-			left join languages l on l.id=v.languageId
-			left join (
-				select videoId,GROUP_CONCAT(' ', (select DISTINCT t.name ORDER BY t.name)) AS tags
-				from videoTags vt
-				inner join tags t on t.id=vt.tagId
-				group by vt.videoId
-			) tg on tg.videoId=v.id
+			FROM videos v
+            left join vwvideostats vs on v.id = vs.id
+			join users u on u.id = v.addedById
+			join videocats vc on vc.videoId = v.id
+			join categories c on c.id = vc.categoryId
+			left join languages l on l.id = v.languageId
+            left join videotags vt on vt.videoId=v.id
+            left join tags t on t.id=vt.tagId
 			where lower(l.abbr)='$lang'";
 	if(isset($catId))
 		$qry .= " and vc.categoryId=$catId";

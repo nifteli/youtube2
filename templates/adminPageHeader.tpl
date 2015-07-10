@@ -50,6 +50,9 @@
 	  <script src="js/datePicker/jquery-ui.js"></script>-->
 	  <script src="js/datePicker/datepicker-az.js"></script>
 	  <script src="js/datePicker/datepicker-ru.js"></script>
+	
+	
+	
 </head>
 <body>
 <div id="wrapper">
