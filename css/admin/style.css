@@ -2058,19 +2058,9 @@ margin-right:45px;
 	
 }
 .modalDialog {
-		position: fixed;
 		font-family: Arial, Helvetica, sans-serif;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: rgba(0,0,0,0.8);
-		z-index: 99999;
-		opacity:0;
-		-webkit-transition: opacity 400ms ease-in;
-		-moz-transition: opacity 400ms ease-in;
-		transition: opacity 400ms ease-in;
-		pointer-events: none;
+		float:left;
+		margin-left: 150px;
 	}
 
 	.modalDialog:target {
@@ -2080,7 +2070,7 @@ margin-right:45px;
 
 	.modalDialog > div {
 		width: 600px;
-		position: relative;
+		/*position: relative;
 		margin: 10% auto;
 		padding: 5px 20px 13px 20px;
 		border-radius: 10px;
@@ -2089,13 +2079,12 @@ margin-right:45px;
 		background: #fff;
 		background: -moz-linear-gradient(#fff, #999);
 		background: -webkit-linear-gradient(#fff, #999);
-		background: -o-linear-gradient(#fff, #999);
+		background: -o-linear-gradient(#fff, #999);*/
 	}
 	
 	.accessDiv{
 		  overflow: auto;
 		  overflow-x: hidden;
-		  height: 400px;
 	}
 	.close {
 		background: #606061;
@@ -2129,7 +2118,7 @@ margin-right:45px;
 	}
 	
 	table#t01 tr:nth-child(even) {
-		background-color: #eee;
+		background-color: #DACEA2;
 	}
 	table#t01 tr:nth-child(odd) {
 		background-color: #fff;

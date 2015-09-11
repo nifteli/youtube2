@@ -109,7 +109,12 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			<h3>{$views}:&nbsp;&nbsp;&nbsp;{$viewCount}</h3>
 			<h4><b>{$tags}:</b>&nbsp;&nbsp; {$videoTags}</h4>
 			<h5><b>{$published}:</b>&nbsp;&nbsp; {$publishDate}</h5> 
+			<br><br>
+			<div class="vidInfo">
+				{$info}
+			</div>
 		</div> 
+		
 		<div class="strip">
 			<img src="img/flag.png" width="24" height="28" alt=""/><a class="flag" href="#">{$reportVideo}</a>
 			<img class="foldr" src="img/foldr.png" width="38" height="37" alt=""/> 
@@ -124,8 +129,9 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		{/foreach}
 	  </div>
 	{/if}
-	</div>
 	
+	
+	</div>
 	<div class="comments">
 		<div class="detailBox">
 				{if !$hasAccess}
@@ -169,6 +175,11 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	
 
              
 

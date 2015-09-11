@@ -54,7 +54,7 @@ class Header
 	private function getRandTags($lang,$db)
 	{
 		$qry = "SELECT vt.tagId,t.name,count(*) cnt,1 size
-				from videoTags vt
+				from videotags vt
 				inner join tags t on t.id=vt.tagId
 				inner join languages l on l.id=t.langId
 				where l.abbr='$lang'

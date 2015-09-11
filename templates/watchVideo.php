@@ -23,6 +23,7 @@ class WatchVideo
 			$this->watchVideo->assign("videoTags",$videoInfo[0]["tags"]);
 			$this->watchVideo->assign("publishDate",$videoInfo[0]["added"]);
 			$this->watchVideo->assign("author",$videoInfo[0]["addedBy"]);
+			$this->watchVideo->assign("info",$videoInfo[0]["info"]);
 			$this->watchVideo->assign("videoId",$_GET["id"]);
 			$this->watchVideo->assign("views",$content['VIEWS']);
 			$this->watchVideo->assign("hasAccess",$controller->access->hasAccess);
@@ -71,7 +72,7 @@ class WatchVideo
 								tg.tags,
 								vc.categoryId,
 								c.catName$lang
-						FROM videoViews vv
+						FROM videoviews vv
 						right join videos v on v.id=vv.videoId
 						inner join users u on u.id=v.addedById
 						inner join videocats vc on vc.videoId=v.id
@@ -79,7 +80,7 @@ class WatchVideo
 						left join languages l on l.id=v.languageId
 						left join (
 							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
-							from videoTags vt
+							from videotags vt
 							inner join tags t on t.id=vt.tagId
 							group by vt.videoId
 						) tg on tg.videoId=v.id

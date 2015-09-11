@@ -133,4 +133,10 @@ $content['ADMINROLESERR1'] = "Rol seçilməyib";
 $content['ADMINROLESERR2'] = "Yaddaşa vermədə xəta";
 $content['ADMINROLESNOTF1'] = "Accesslər yaddaşa verildi";
 //End admin roles
+
+//Edit Roles
+$content['FROMERR1'] = "Zəhmət olmasa seçilən qeydlər üçün başlanğıc tarixi qeyd edin";
+$content['FROMERR2'] = "Başlanğıc tarixi bitmə tarixindən kiçik olmalıdır";
+$content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
+//End Edit Roles
 ?>

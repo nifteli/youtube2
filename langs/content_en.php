@@ -132,4 +132,10 @@ $content['ACTIONNAME'] = "Əməliyyat";
 $content['DATERANGE'] = "Tarix aralığı";
 $content['HASACCESS'] = "Təyin edilib";
 //End admin roles
+
+//Edit Roles
+$content['FROMERR1'] = "Zəhmət olmasa seçilən qeydlər üçün başlanğıc tarixi qeyd edin";
+$content['FROMERR2'] = "Başlanğıc tarixi bitmə tarixindən kiçik olmalıdır";
+$content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
+//End Edit Roles
 ?>

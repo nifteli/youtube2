@@ -21,10 +21,11 @@ $grid = new jqGridRender($conn);
 // Write the SQL Query
 
 $grid->SelectCommand = "SELECT r.id,
-						concat(\"<a href='#openModal' onClick=setRoleId(\",r.id,\",'\",r.name,\"')>\",r.name,'</a>') name,
+						 name,
 						r.created,concat(u.firstName,' ',u.lastName) createdBy 
 						FROM roles r 
-						inner join users u on u.id=r.createdBy";					
+						inner join users u on u.id=r.createdBy";
+//concat(\"<a href='#openModal' onClick=setRoleId(\",r.id,\",'\",r.name,\"')>\",r.name,'</a>')						
 //echo $grid->getqueryGrid();
 $grid->table = 'roles'; 
 //$grid->setPrimaryKeyId('id'); 
@@ -47,7 +48,8 @@ $grid->setGridOptions(array(
 	
 // Change some property of the field(s)
 $grid->setColProperty("id", array("label"=>"No","width"=>"30","editable"=>false,"editoptions"=>array("readonly"=>true)));
-$grid->setColProperty('name', array("label"=>$content['ROLENAME'],"editrules"=>array("required"=>true),"editoptions"=>array("required"=>true))); 
+$grid->setColProperty('name', array("label"=>$content['ROLENAME'],"editrules"=>array("required"=>true),"editoptions"=>array("required"=>true),
+		"formatter"=>"showlink", "formatoptions"=>array("baseLinkUrl"=>'admin.php', "addParam"=>"&page=editRole"))); 
 $grid->setColProperty("created", array("editable"=>false,"label"=>$content["ROLECREATED"],"formatter"=>"date","formatoptions"=>array("srcformat"=>"Y-m-d H:i:s","newformat"=>"d-m-Y")));
 $grid->setColProperty("createdBy", array("label"=>$content["ROLECREATEDBY"],"editable"=>false,"editrules"=>array("edithidden"=>false, "required"=>true),"editoptions"=>array("defaultValue"=>"1"),"hidden"=>false));
 

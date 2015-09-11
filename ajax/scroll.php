@@ -7,10 +7,10 @@ require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 
-if(isset($_REQUEST['actionfunction']) && $_REQUEST['actionfunction']!='' && $_REQUEST['lang']!='')
+if(isset($_POST['actionfunction']) && $_POST['actionfunction']!='' && $_POST['lang']!='')
 {
-	$actionfunction = $_REQUEST['actionfunction'];
-	call_user_func($actionfunction,$_REQUEST,$db,$limit);
+	$actionfunction = $_POST['actionfunction'];
+	call_user_func($actionfunction,$_POST,$db,$limit);
 }
 
 function showData($data,$db,$limit)
@@ -58,7 +58,7 @@ function showData($data,$db,$limit)
 	$qry .= " group by v.id,vc.categoryId
 			order by catName$lang asc,v.added desc 
 			limit $start,$limit";//echo $qry;
-	$res =$db->rawQuery($qry);
+	$res =$db->rawQuery($qry); 
 	
 	displayData($res, $data);
 }

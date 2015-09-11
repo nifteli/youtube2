@@ -1609,6 +1609,7 @@ margin-right: -5px !important;
 	float: left;
 margin-top: 22px;
 margin-left: 20px;
+width:650px
 }
 
 .v-name h2{
@@ -1663,11 +1664,11 @@ margin-left: 20px;
 }
 
 .v-details{
-width: 462px;
-height: 96px;
-float: left;
-margin-top: 80px;
-margin-left: -460px;
+  width: 650px;
+  height: 96px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px;
 	
 }
 
@@ -1748,12 +1749,12 @@ margin-left: -460px;
 
 
 .strip{
- width: 460px;
-height: 1px;
-float: left;
-margin-left: -460px;
-margin-top: 160px;
-background: url(../img/line.png);	
+  width: 460px;
+  height: 1px;
+  float: left;
+  margin-left: 20;
+  margin-top: 120px;
+  background: url(../img/line.png);	
 }
 
 .flag{
@@ -2004,9 +2005,8 @@ margin-top: 60px;
 
 .comments{
 min-height: 100px;
-
 width: 900px;
-margin-top: 0px;
+margin-top: 150px;
 margin-left:235px
 }
 
@@ -2360,5 +2360,14 @@ pre{
     right: 30px;
     bottom: 30px;
   }
+}
+
+.vidInfo{
+	float: left;
+  width: 650px;
+  margin-top: 10px;
+  overflow: scroll;
+  height: 90px;
+  overflow-x: hidden;
 }
 /*End Back to top*/

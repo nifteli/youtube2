@@ -61,35 +61,5 @@ function setDatePickers()
 	<div id="all" style="float:right; margin-right:15px">
 	{include_php 'roles.php'}
 	</div>
-	<div id="openModal" class="modalDialog">
-		<div>
-			<a href="#close" title="Close" class="close">X</a>
-			
-			<h1><span class="roleTitle">Modal Box</span></h1></br>
-			<form name="frmRole" id="frmRole" style="width:100%" action="?page=adminRoles&action=save" method="post">
-			<input type="hidden" name="roleId" id="roleId" value="">
-			<div class="accessDiv" id="accessDiv" onclick="setDatePickers()">
-				<table border="1" id="t01" style="width:100%">
-					<tr style="background-color:#B3AC96">
-						<td>{$actionName}</td><td>{$dateRange}</td><td>{$hasAccess}</td>
-					</tr>
-					{section name=sec1 loop=$accessTypes}
-					<tr>
-						<td>{$accessTypes[sec1].name}</td>
-						<td>
-							<input type="hidden" name="accessId[]" id="accessId[]" value="{$accessTypes[sec1].id}">
-							<input class=field style='width:80px' type=text name=from[] id=from{$accessTypes[sec1].id} value=''>
-							<input class=field style='width:80px' type=text name=to[] id=to{$accessTypes[sec1].id} value=''>
-						</td>
-						<td><input  type="checkbox" name="hasAccess[]" id="hasAccess[]" ></td>
-					</tr>
-					{/section}
-					<tr>	
-						<td colspan=3><br><input class="roleSave" class="login39" type="submit" value="{$save}" name="submit"></td>
-					</tr>
-				</table>
-			</div>
-			</form>
-		</div>
-	</div>
+	
 </div>

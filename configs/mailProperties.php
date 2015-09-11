@@ -2,14 +2,14 @@
 	$mail = new PHPMailer;
 	$mail->isSMTP();                                      // Set mailer to use SMTP
 	$mail->CharSet = "UTF-8";
-	$mail->Host = 'smtp.gmail.com';  					  // Specify main and backup SMTP servers
+	$mail->Host = 'smtp.mail.ru';  					  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
 	//$mail->SMTPDebug = 1;
-	$mail->Username = 'portagaltest@gmail.com';           // SMTP username
-	$mail->Password = 'testportagal';                     // SMTP password
+	$mail->Username = 'howtubesmart@mail.ru';           // SMTP username
+	$mail->Password = 'sdf#@1212Zi';                     // SMTP password
 	$mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
 	$mail->Port       = 465;
-	$mail->From = 'test@gmail.com';
+	$mail->From = 'howtubesmart@mail.ru';
 	$mail->FromName = 'Youtube';
 	$mail->isHTML(true);                                  // Set email format to HTML
 	

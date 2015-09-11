@@ -26,6 +26,11 @@ elseif(isset($_SESSION["lang"]) && $_SESSION["lang"] != "")
 	$lang = $_SESSION["lang"];
 else
 	$lang = getUserLanguage($access);
+
+if($lang == "az" || $lang == "ru")
+		$format = "DD.MM.YYYY";
+	else
+		$format = "MM/DD/YYYY";
 	
 require_once($langsPath."content_".$lang.".php");
 ///
@@ -72,6 +77,11 @@ else
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."adminRolesAction.php");
 			$controller->includeSection("adminRoles");
+			break;
+		case "editRole": 
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."adminEditRoleAction.php");
+			$controller->includeSection("editRole");
 			break;
 		default:
 			$controller->includeSection("adminProfile");

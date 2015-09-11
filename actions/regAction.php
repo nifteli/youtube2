@@ -31,7 +31,7 @@ if ($_GET["action"]=="reg")
 											  "email"=>"$_POST[email]",
 											  "registered"=>date("Y-m-d H:i:s"),
 											  "registeredByIP"=>$_SERVER['REMOTE_ADDR'],
-											  "lang"=>"$_POST[lang]",
+											  "languageId"=>$langIds[$_POST["lang"]],
 											  "phoneNumber"=>"$_POST[phone]"
 											  )
 											  );

@@ -12,7 +12,7 @@
 					{section name=sec1 loop=$users}
 					<div class="pic1">
 						<a href="{$users[sec1].url}"> 
-							<img src="{$users[sec1].picPath}"/> 
+							<img width=100 height= 100 src="{$users[sec1].picPath}"/> 
 							<h2>{$users[sec1].user} ({$users[sec1].videoCount})</h2>
 						</a>
 					</div>

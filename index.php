@@ -59,7 +59,6 @@ if(!isset($_GET["page"]))
 }
 else
 {
-	include_once($templatePath."pageHeader.tpl");
 	switch($_GET["page"])
 	{
 		/*case "logAdmin";
@@ -68,6 +67,7 @@ else
 		case "reg": 
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."regAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("reg");
@@ -75,9 +75,13 @@ else
 			break;
 		case "addVideo": 
 			if(!$access->hasAccess)
-				header("location: ?page=reg");
+			{
+				header("location:?page=reg");
+				return;
+			}
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."addVideoAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("addVideo");
@@ -86,6 +90,7 @@ else
 		case "users": 
 			//if(isset($_GET["action"])) 
 				//include_once($actionsPath."usersAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("users");
@@ -94,6 +99,7 @@ else
 		case "allTags": 
 			//if(isset($_GET["action"])) 
 				//include_once($actionsPath."allTagsAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("allTags");
@@ -102,6 +108,7 @@ else
 		case "watchVideo": 
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."watchVideoAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("watchVideo");
@@ -110,6 +117,7 @@ else
 		case "forgotPass": 
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."forgotPassAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("forgotPass");
@@ -118,18 +126,21 @@ else
 		case "advSearch": 
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."advSearchAction.php");
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("advSearch");
 			$controller->includeSection("footer");
 			break;
 		case "searchRes":
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("searchResults");
 			$controller->includeSection("footer");
 			break;
 		default:
+			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("videos");

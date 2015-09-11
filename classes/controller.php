@@ -17,6 +17,7 @@ include($templatePath."adminMenu.php");
 include($templatePath."adminProfile.php");
 include($templatePath."adminFooter.php");
 include($templatePath."adminRoles.php");
+include($templatePath."editRole.php");
 
 class Controller //extends MySQL
 {
@@ -121,6 +122,10 @@ class Controller //extends MySQL
 				$adminRoles = new AdminRoles($this);
 				$adminRoles->Show();
 				break;
+			case "editRole":
+				$editRole = new EditRole($this);
+				$editRole->Show();
+				break;
 		}
 	}
 	
@@ -168,5 +173,43 @@ class Controller //extends MySQL
 		return 0;
 	}
 
+	public function getNormalizedDate($rawDate)
+	{
+		global $lang;
+		list($year, $month, $day) = explode('-', $rawDate);//return $month.$day.$year;
+		if($year == "0000")
+			return "";
+		$day = substr($rawDate,8,2);
+		if($lang == 'az' || $lang == 'ru')
+			$date = $day.".".$month.".".$year;
+		if($lang == 'en')
+			$date = $month . "/" . $day . "/" . $year;
+		return trim($date);
+	}
+	
+	public function validate_Date($mydate,$format = 'DD-MM-YYYY',&$date) 
+	{
+		if($mydate == "")
+			return true;
+		if ($format == 'YYYY-MM-DD') list($year, $month, $day) = explode('-', $mydate);
+		if ($format == 'YYYY/MM/DD') list($year, $month, $day) = explode('/', $mydate);
+		if ($format == 'YYYY.MM.DD') list($year, $month, $day) = explode('.', $mydate);
+
+		if ($format == 'DD-MM-YYYY') list($day, $month, $year) = explode('-', $mydate);
+		if ($format == 'DD/MM/YYYY') list($day, $month, $year) = explode('/', $mydate);
+		if ($format == 'DD.MM.YYYY') list($day, $month, $year) = explode('.', $mydate);
+
+		if ($format == 'MM-DD-YYYY') list($month, $day, $year) = explode('-', $mydate);
+		if ($format == 'MM/DD/YYYY') list($month, $day, $year) = explode('/', $mydate);
+		if ($format == 'MM.DD.YYYY') list($month, $day, $year) = explode('.', $mydate);       
+
+		if (is_numeric($year) && is_numeric($month) && is_numeric($day))
+			if(checkdate($month,$day,$year))
+			{
+				$date = $year . '-' . $month . '-' . $day;
+				return true;
+			}
+		return false;           
+	}      
 }
 ?>
