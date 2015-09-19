@@ -12,12 +12,14 @@ include($templatePath."allTags.php");
 include($templatePath."forgotPass.php");
 include($templatePath."searchResults.php");
 include($templatePath."advSearch.php");
+include($templatePath."signIn.php");
 //Admin classes
 include($templatePath."adminMenu.php");
 include($templatePath."adminProfile.php");
 include($templatePath."adminFooter.php");
 include($templatePath."adminRoles.php");
 include($templatePath."editRole.php");
+include($templatePath."adminVideoLinks.php");
 
 class Controller //extends MySQL
 {
@@ -65,6 +67,10 @@ class Controller //extends MySQL
 			case "categories":
 				$categories = new Categories($this);
 				$categories->Show();
+				break;
+			case "signIn":
+				$signIn = new SignIn($this);
+				$signIn->Show();
 				break;
 			case "videos":
 				$videos = new Videos($this);
@@ -125,6 +131,10 @@ class Controller //extends MySQL
 			case "editRole":
 				$editRole = new EditRole($this);
 				$editRole->Show();
+				break;
+			case "adminVideoLinks":
+				$adminVideoLinks = new AdminVideoLinks($this);
+				$adminVideoLinks->Show();
 				break;
 		}
 	}

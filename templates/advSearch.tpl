@@ -20,7 +20,7 @@
 </div>
 	<form id="advSearchForm" action="?page=searchRes" method="post">
 				<input class="search" type="input" name="search" value="" placeholder="{$search}">
-				<a href="#" onclick="$('#advSearchForm').submit()"><img class="s-img" src="img/search.png" /></a>
+				<input class="btnSearch" type="submit" value="{$search}" name="submit">
 			
 			<div class="advSearch">
 			|

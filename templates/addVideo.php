@@ -14,6 +14,7 @@ class AddVideo
 		$this->videos->assign("videoLink", $content['VIDEOLINK']);
 		$this->videos->assign("videoLinkVal", isset($_POST["videoLink"]) ? $_POST["videoLink"] : "");
 		$this->videos->assign("language", $content['LANGUAGE']);
+		$this->videos->assign("addVideoNote1", $content['ADDVIDEONOTE1']);
 		$this->videos->assign("languages", $controller->getLanguages());
 		$this->videos->assign("languageVal", isset($_POST["language"]) ? $_POST["language"] : "");
 		$this->videos->assign("videoQuestion", $content['VIDEOQUESTION']);

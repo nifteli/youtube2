@@ -24,6 +24,19 @@ class Header
 		$this->header->assign("login",$content['LOGIN']);
 		$this->header->assign("forgotPass",$content['FORGOTPASS']);
 		$this->header->assign("lang",$controller->lang);
+		
+		
+		$this->header->assign("about",$content['ABOUT']);
+		$this->header->assign("allLangs",$content['ALLLANGS']);
+		$this->header->assign("allCats",$content['ALLCATS']);
+		$this->header->assign("all",$content['ALL']);
+		$this->header->assign("moreThan4",$content['MORETHAN4']);
+		$this->header->assign("lessThan15",$content['LESSTHAN15']);
+		$this->header->assign("date",$content['DATE']);
+		$this->header->assign("signIn",$content['SIGNIN']);
+		$this->header->assign("hour",$content['HOUR']);
+		$this->header->assign("minute",$content['MINUTE']);
+		
 		$this->header->assign("randTags",$this->getRandTags($controller->lang,$controller->db));
 		
 		$this->header->assign("vqHow", $content['HOW']);

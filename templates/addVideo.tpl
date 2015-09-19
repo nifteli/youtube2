@@ -15,6 +15,7 @@ $(document).ready(function() {
 
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 1000px;">
+<br><br><p style="font-weight:bold">{$addVideoNote1}</p>
 	<div class="player" style="margin-left: 5px;">
 	<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="460" height="275" 
 	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{if $result=="success"}{$videoLinkVal}{/if}" }'>
@@ -28,6 +29,7 @@ $(document).ready(function() {
 			  	{/foreach}
 			  </div>
 			{/if}
+				
               <form style="margin-top:44px;" id="addVideoForm" action="?page=addVideo&action=add" method="post">
              
               <label class="labelv">{$videoLink}:</label><br>

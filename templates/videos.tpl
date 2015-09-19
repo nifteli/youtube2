@@ -29,8 +29,8 @@
 	   var page = $('#demoajax').find('.nextpage').val();
 	   var isload = $('#demoajax').find('.isload').val();
 	   
-		 //alert('scrollTop='+$(window).scrollTop()+' clientHeight='+document.body.clientHeight+' winheight='+$(window).height()+' isload='+isload);
-	     if ((($(window).scrollTop()+document.body.clientHeight)==$(window).height()) && isload=='true'){
+		 //alert('scrollTop='+$(window).scrollTop()+' clientHeight='+document.body.clientHeight+' winheight='+$(document).height()+' total='+($(window).scrollTop()+document.body.clientHeight)+'isload='+isload);
+	     if ((($(window).scrollTop()+document.body.clientHeight)==$(document).height()) && isload=='true'){
 		   $('#loading').show();
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",

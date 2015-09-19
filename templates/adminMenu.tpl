@@ -5,8 +5,8 @@
 			<li><a href='?page=adminProfile'><span>Profile</span></a></li>
 			<li><a href='?page=adminRoles'><span>Roles</span></a></li>
 			<li><a href='#'><span>Users</span></a></li>
+		   <li><a href='?page=adminVideoLinks'><span>Video links</span></a>
 			<li><a href='#'><span>Messages</span></a></li>
-		   <li><a href='#'><span>Video links</span></a>
 		   <li><a href='#'><span>Comments</span></a>
 		   <li><a href='#'><span>Folders</span></a>
 		   <li><a href='#'><span>Tags</span></a>

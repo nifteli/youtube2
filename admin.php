@@ -83,6 +83,11 @@ else
 				include_once($actionsPath."adminEditRoleAction.php");
 			$controller->includeSection("editRole");
 			break;
+		case "adminVideoLinks": 
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."adminVideoLinksAction.php");
+			$controller->includeSection("adminVideoLinks");
+			break;
 		default:
 			$controller->includeSection("adminProfile");
 			break;

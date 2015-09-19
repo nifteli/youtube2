@@ -20,6 +20,17 @@ $content['GREETING'] = 'Hi';
 $content['ADMINPANEL'] = 'Admin Panel';
 $content['LOGOUT'] = 'Logout';
 $content['FORGOTPASS'] = "Forgot password";
+$content["ABOUT"]="Haqqımızda";
+$content["ALLLANGS"]="Bütün dillər";
+$content["ALLCATS"]="Bütün kateqoriyalar";
+$content["ALL"]="Hamısı";
+$content["MORETHAN4"]="4-dən uzun";
+$content["LESSTHAN15"]="15-dən qısa";
+$content["DATE"]="Tarix";
+$content["SIGNIN"]="Daxil ol";
+$content["HOUR"]="saat";
+$content["MINUTE"]="dəq.";
+
 //Registration
 $content['NAME'] = 'Name';
 $content['SURNAME'] = 'Surname';
@@ -62,6 +73,8 @@ $content['ADDVIDEOERROR7'] = "This video link is already added to category ";
 $content['ADDVIDEOERROR8'] = "DB error";
 $content['ADDVIDEOERROR9'] = "Incorrect video link";
 $content['ADDVIDEONOTF1'] = "Video added";
+$content['ADDVIDEONOTE1'] = "This is not an entertainment site.<br> 
+							So, please, add only links of the videos, which carry practical information";
 //end add video
 
 //Watch video
@@ -135,4 +148,20 @@ $content['FROMERR1'] = "Zəhmət olmasa seçilən qeydlər üçün başlanğıc 
 $content['FROMERR2'] = "Başlanğıc tarixi bitmə tarixindən kiçik olmalıdır";
 $content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
 //End Edit Roles
+
+//Video links 
+$content['TITLEVIDEOLINKS'] = "Video linklər";
+//End Video links 
+
+//SignIn
+$content['SIGNINNOTE1'] = 'By using this site you agree with the';
+$content['SIGNINNOTE2'] = 'Rules';
+$content['SIGNINNOTE3'] = 'In order to add video to this site or to arrange videos in your personal catalogues you should sign in.';
+$content['SIGNINNOTE4'] = 'You may sign in by';
+$content['SIGNINNOTE5'] = 'If you are registered in this site, fill in;';
+$content['SIGNINNOTE6'] = 'If you are not registered in any of above, please,';
+$content['OR'] = 'OR';
+
+
+//End SignIn
 ?>

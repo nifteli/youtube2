@@ -220,7 +220,7 @@ function displayData($res, $data)
 			//echo "<br><br><br><br><br>added=".$res[$i]['addedById'] ."sessionid=". $_SESSION["userId"];
 			$str .= "<div class='box'>
 						 <a href='?page=watchVideo&id=$id'>
-							<img src=$link width=152 height=79 alt='$info'/>
+							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
 						 </a>
 						 <a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
 						 <a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/";
@@ -229,35 +229,37 @@ function displayData($res, $data)
 			$str .= "></a><a href='?page=watchVideo?id=$id'>
 					 	<h2>$name</h2>
 					 </a>
-					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> 
-					 <ul class='move'>
-					 	<li>
-					 		<img class='details' src='img/02.png'/>
-					 		<span class='wood'>$tags</span>
-					 	</li>
-						<li>
-							<img class='details2' src='img/eye.png'/><span class='views'>$viewCount</span>
-						</li>
-						<li>
-							<img class='details3' src='img/publish.png' /><span class='date'>$addedDate</span>
-						</li>
-						<li>
-							<img class='details4' src='img/user1.png'/>
-							<span class='smith'>$addedBy</span>
-						</li>
-						<li class='likes'>
-							<a href='?page=like&type=1'>
-								<img src='img/like-01.png'/>
-							</a>
-							<p>$likes</p>
-						</li>
-						<li class='likes2'>
-							<a href='?page=like&type=2'>
-								<img src='img/like-02.png'/>
-							</a>
-							<p>$dislikes</p>
-						</li>
-					 </ul>
+					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> </div>
+					 <div class='videoDet'>
+						 <ul class='move'>
+							<li>
+								<img class='details' width=15 height=10 src='img/tags.png'/>
+								<span class='wood'>$tags</span>
+							</li>
+							<li>
+								<img class='details2' width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
+							</li>
+							<li>
+								<img class='details3' src='img/publish.png' /><span class='date'>$addedDate</span>
+							</li>
+							<li>
+								<img class='details4' src='img/user1.png'/>
+								<span class='smith'>$addedBy</span>
+							</li>
+							<li class='likes'>
+								<a href='?page=like&type=1'>
+									<img src='img/like-01.png'/>
+								</a>
+								<p>$likes</p>
+							</li>
+							<li class='likes2'>
+								<a href='?page=like&type=2'>
+									<img src='img/like-02.png'/>
+								</a>
+								<p>$dislikes</p>
+							</li>
+						 </ul>
+					 </div>
 				</div>";
 			if($cnt % 4 == 0 || $i + 1 == count($res) || $cat != $res[$i + 1]["catName".$lang])
 				$str .= "</div>";

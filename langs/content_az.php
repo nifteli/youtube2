@@ -20,6 +20,17 @@ $content['GREETING'] = 'Salam';
 $content['GREETING'] = 'Salam';
 $content['ADMINPANEL'] = 'Admin Panel';
 $content['LOGOUT'] = 'Çıxış';
+$content["ABOUT"]="Haqqımızda";
+$content["ALLLANGS"]="Bütün dillər";
+$content["ALLCATS"]="Bütün kateqoriyalar";
+$content["ALL"]="Hamısı";
+$content["MORETHAN4"]="4-dən uzun";
+$content["LESSTHAN15"]="15-dən qısa";
+$content["DATE"]="Tarix";
+$content["SIGNIN"]="Daxil ol";
+$content["HOUR"]="saat";
+$content["MINUTE"]="dəq";
+
 //Registration
 $content['NAME'] = 'Ad';
 $content['SURNAME'] = 'Soyad';
@@ -41,6 +52,8 @@ $content["REGOK"]="Qeydiyyatınızın ilkin mərhələsi tamamlandı. İstifadə
 $content["CONFIRMATIONERR"]="Bu link təsdiqlənmə üçün aktiv deyil";
 $content["REGCONFIRMED"]="Sizin istifadəçi adınız təsdiqləndi";
 $content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
+
+
 //End registration
 // add video
 $content['VIDEOLINK'] = 'Video İstinad';
@@ -62,6 +75,9 @@ $content['ADDVIDEOERROR7'] = "This video link is already added to category ";
 $content['ADDVIDEOERROR8'] = "DB error";
 $content['ADDVIDEOERROR9'] = "Yanlış video linki";
 $content['ADDVIDEONOTF1'] = "Video added";
+
+$content['ADDVIDEONOTE1'] = "This is not an entertainment site.<br> 
+							So, please, add only links of the videos, which carry practical information";
 //end add video
 
 //Watch video
@@ -139,4 +155,21 @@ $content['FROMERR1'] = "Zəhmət olmasa seçilən qeydlər üçün başlanğıc 
 $content['FROMERR2'] = "Başlanğıc tarixi bitmə tarixindən kiçik olmalıdır";
 $content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
 //End Edit Roles
+
+
+//Video links 
+$content['TITLEVIDEOLINKS'] = "Video linklər";
+//End Video links 
+
+//SignIn
+$content['SIGNINNOTE1'] = 'By using this site you agree with the';
+$content['SIGNINNOTE2'] = 'Rules';
+$content['SIGNINNOTE3'] = 'In order to add video to this site or to arrange videos in your personal catalogues you should sign in.';
+$content['SIGNINNOTE4'] = 'You may sign in by';
+$content['SIGNINNOTE5'] = 'If you are registered in this site, fill in;';
+$content['SIGNINNOTE6'] = 'If you are not registered in any of above, please,';
+$content['OR'] = 'OR';
+
+
+//End SignIn
 ?>

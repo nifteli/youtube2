@@ -73,6 +73,15 @@ else
 			$controller->includeSection("reg");
 			$controller->includeSection("footer");
 			break;
+		case "signIn":
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."loginAction.php");
+			include_once($templatePath."pageHeader.tpl");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("signIn");
+			$controller->includeSection("footer");
+			break;
 		case "addVideo": 
 			if(!$access->hasAccess)
 			{
