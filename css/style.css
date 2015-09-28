@@ -624,7 +624,7 @@ width: 100%;
 .box a{
 text-decoration:none;	
 }
-
+/*
 .box ul{
  margin:0;
  padding:0;
@@ -634,23 +634,22 @@ text-decoration:none;
 .box ul, .move{
  margin-left: 10px;
 }
-
+*/
 
 .box li{
-  font-family:Calibri;
-  font-size:12px;
-  color:#3e3003;
-  padding:2px 0;	
- 	
+      font-family: Calibri;
+    font-size: 12px;
+    color: #3e3003;
+    width: 170px;
+    height: 20px;
 }
 
 .box li p{
-  font-family:Calibri;
-  font-size:10px;
-  color:#3e3003;
-  position:relative;
-  top:-15px;
-  left:20px;
+      font-family: Calibri;
+    font-size: 12px;
+    color: #3e3003;
+    width: 170px;
+    height: 20px;
 }
 
 .smith{
@@ -820,10 +819,9 @@ text-decoration:none;
 
 
 .player{
- margin-top:57px;
+ margin-top:10px;
  float:left;	
-margin-left: -95px;
-position: initial;
+
 }
 
 
@@ -1562,8 +1560,8 @@ width: 139px;
 height: 35px;
 font-family: Calibri;
 font-size: 16px;
-margin-left: 541px;
-margin-top: -36px;
+/*margin-left: 541px;
+margin-top: -36px;*/
 color: #fff;
 border: 0px;
 border-radius: 5px;
@@ -1608,8 +1606,7 @@ margin-right: -5px !important;
 .v-name{
 	float: left;
 margin-top: 22px;
-margin-left: 20px;
-width:650px
+
 }
 
 .v-name h2{
@@ -1851,20 +1848,19 @@ width:650px
 
 	
 .wood {
-  font-family: Calibri;
-  font-size: 12px;
-  color: #3e3003;
-  position: relative;
-  margin-left: 20px;
-  top: 3px;
+      font-family: Calibri;
+    font-size: 12px;
+    color: #3e3003;
+    position: relative;
+    margin-left: 5px;
+    top: 3px;
 }
 .views {
   font-family: Calibri;
-  font-size: 12px;
-  color: #3e3003;
-  position: relative;
-  margin-left: 20px;
-  top: 3px;
+    font-size: 12px;
+    color: #3e3003;
+    position: relative;
+    margin-left: 5px;
 }	
 
 .date {
@@ -2006,10 +2002,10 @@ margin-top: 60px;
   }
 
 .comments{
-min-height: 100px;
-width: 900px;
-margin-top: 150px;
-margin-left:235px
+    min-height: 100px;
+    width: 980px;
+    margin-top: 20px;
+    float: left;
 }
 
 @import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
@@ -2074,7 +2070,10 @@ margin-left:235px
 	top: 1px;
 }
 .actionBox {
-    padding:10px;
+        padding: 10px;
+    float: left;
+    width: 950px;
+}
 }
 
 .cmtEmail{
@@ -2091,6 +2090,7 @@ margin-left:235px
 	width:530px; 
 	border-radius: 5px; 
 	height: 55px;
+	vertical-align: bottom;
 }
 
 .tagArea{
@@ -2365,12 +2365,11 @@ pre{
 }
 
 .vidInfo{
-	float: left;
-  width: 650px;
-  margin-top: 10px;
-  overflow: scroll;
-  height: 90px;
-  overflow-x: hidden;
+	    float: left;
+    width: 370px;
+    margin-top: 10px;
+    height: 280;
+    overflow: auto;
 }
 /*End Back to top*/
     
@@ -2449,5 +2448,90 @@ background: #C05208;
 }
 
 .videoDet{
-	width:100%;
+	    width: 100%;
+    height: 110px;
+    padding-left: 15px;
 }
+
+.wvLeft{
+	float:left;
+	width:600px;
+}
+
+.wvRight{
+	float: right;
+    width: 378px;
+    min-height: 400px;
+}
+.wvUnder{
+	    float: left;
+    width: 980px;
+    height: 30px;
+	margin-top: 10px;
+}
+
+.wvDet1{
+	float:left;
+	width:100%;
+	margin-top:20px;
+}
+
+.wvLabel{
+	padding-left:5px;
+	padding-right: 5px;
+}
+
+.modalDialog {
+		position: fixed;
+		font-family: Arial, Helvetica, sans-serif;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0,0,0,0.8);
+		z-index: 99999;
+		opacity:0;
+		-webkit-transition: opacity 400ms ease-in;
+		-moz-transition: opacity 400ms ease-in;
+		transition: opacity 400ms ease-in;
+		pointer-events: none;
+	}
+
+	.modalDialog:target {
+		opacity:1;
+		pointer-events: auto;
+	}
+
+	.modalDialog > div {
+		width: 330px;
+		position: relative;
+		margin: 10% auto;
+		padding: 5px 20px 13px 20px;
+		border-radius: 10px;
+		background: #fff;
+		background: -moz-linear-gradient(#fff, #999);
+		background: -webkit-linear-gradient(#fff, #999);
+		background: -o-linear-gradient(#fff, #999);
+		height: 120px;
+	}
+
+	.close {
+		background: #606061;
+		color: #FFFFFF;
+		line-height: 25px;
+		position: absolute;
+		right: -12px;
+		text-align: center;
+		top: -10px;
+		width: 24px;
+		text-decoration: none;
+		font-weight: bold;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+		-moz-box-shadow: 1px 1px 3px #000;
+		-webkit-box-shadow: 1px 1px 3px #000;
+		box-shadow: 1px 1px 3px #000;
+	}
+
+	.close:hover { background: #00d9ff; }

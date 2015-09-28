@@ -92,6 +92,17 @@ $content['POST'] = 'Post';
 $content['EDIT'] = 'Edir';
 $content['DELETE'] = 'Delete';
 $content['SAVE'] = 'Save';
+$content['RECOMMENDED'] = 'Recommended';
+$content['DELETECONFIRMATION'] = 'Are you sure to delete';
+$content['FOLDERS'] = 'Folders';
+$content['FOLDERNAME'] = 'Folder Name';
+$content['NOFOLDERNOTF'] = 'Siz hər hansı papka yaratmamısınız. Zəhmət olmasa papka yaradın.';
+$content['ADDEDTOFOLDER'] = 'Papkaya əlavə edildi';
+$content['REMOVEFROMFOLDER'] = 'Papkadan sil';
+$content['REMOVEDFROMFOLDER'] = 'Papkadan silindi';
+$content['REPORTREASON'] = 'Report reason';
+$content['REPORTDESC'] = 'Report Description';
+$content['REPORTSAVED'] = 'Report saved';
 //end Watch video
 
 //All tags

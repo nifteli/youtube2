@@ -1,7 +1,6 @@
 <?php
 session_start();
 $sessionId = session_id(); 
-
 //includes
 require_once(dirname(__FILE__)."/configs/paths.php");
 require_once($confsPath."conf.php");

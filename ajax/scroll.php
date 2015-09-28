@@ -63,6 +63,52 @@ function showData($data,$db,$limit)
 	displayData($res, $data);
 }
 
+function showRecommended($data,$db,$limit)
+{
+	$lang = $data["lang"];
+	$page = $data['page'];
+	if(isset($data["catId"]) && $data["catId"]>0)
+		$catId = $data["catId"];
+	if(isset($data["tags"]) && $data["tags"] != "")
+	{
+		if (strpos($data["tags"],',') === false)
+			$tagArr[0] = $data["tags"];
+		else
+			$tagArr = explode(",",$data["tags"]);
+	}
+	if($page==1)
+		$start = 0;  
+	else
+		$start = ($page-1)*$limit;
+		
+	$qry = "Select * from (
+			SELECT l.abbr, vs.views viewCount, vs.likes likeCount, vs.dislikes dislikeCount, v.id, v.name, v.info, v.duration, 
+					DATE_FORMAT(v.added,'%d %b %Y') added, v.languageId, v.link, v.addedById, concat(u.firstName,' ',u.lastName) addedBy, 
+					GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags, vc.categoryId, c.catNameaz 
+			FROM videos v 
+			left join vwvideostats vs on v.id = vs.id 
+			join users u on u.id = v.addedById 
+			join videocats vc on vc.videoId = v.id 
+			join categories c on c.id = vc.categoryId 
+			left join languages l on l.id = v.languageId 
+			left join videotags vt on vt.videoId=v.id 
+			left join tags t on t.id=vt.tagId 
+			group by v.id,vc.categoryId ) a";
+	if(isset($catId))
+		$qry .= " where a.id !=".$data["videoId"]." and lower(a.abbr)='az' and (a.categoryId=$catId ";
+	if(count($tagArr) > 0)
+	{
+		for ($i=0; $i<count($tagArr); $i++)
+			$qry .= " or tags like '%" . $tagArr[$i] . "%'";
+	}
+	$qry .= " ) order by a.catNameaz asc,a.added desc 
+			limit $start,$limit";//echo $qry;
+		//echo $qry ;
+	$res =$db->rawQuery($qry); 
+	
+	displayData($res, $data,5);
+}
+
 function showSearchResults($data,$db,$limit)
 {
 	$lang = $data["lang"];
@@ -183,7 +229,7 @@ function showSearchResults($data,$db,$limit)
 	displayData($res, $data);
 }
 
-function displayData($res, $data)
+function displayData($res, $data, $colCnt=4)
 {
 	$lang = $data["lang"];
 	$page = $data['page'];
@@ -203,7 +249,7 @@ function displayData($res, $data)
 				$cat = $res[$i]["catName".$lang];
 				$cnt = 0;
 			}
-			if($cnt % 4 == 0)
+			if($cnt % $colCnt == 0)
 				$str .= "<div class='box-cont'>";
 			$cnt++;
 			
@@ -237,31 +283,31 @@ function displayData($res, $data)
 								<span class='wood'>$tags</span>
 							</li>
 							<li>
-								<img class='details2' width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
+								<img width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
 							</li>
 							<li>
-								<img class='details3' src='img/publish.png' /><span class='date'>$addedDate</span>
+								<img width=10 height=10 src='img/upload.png' /><span class='views'>$addedDate</span>
 							</li>
 							<li>
-								<img class='details4' src='img/user1.png'/>
-								<span class='smith'>$addedBy</span>
+								<img width=10 height=10 src='img/users.png'/>
+								<span class='views'>$addedBy</span>
 							</li>
-							<li class='likes'>
+							<li >
 								<a href='?page=like&type=1'>
-									<img src='img/like-01.png'/>
+									<img width=10 height=10  src='img/like.png'/>
 								</a>
-								<p>$likes</p>
-							</li>
-							<li class='likes2'>
+								<span class='views'>$likes</span>
+							
+							
 								<a href='?page=like&type=2'>
-									<img src='img/like-02.png'/>
+									<img width=10 height=10  src='img/dislike.png'/>
 								</a>
-								<p>$dislikes</p>
+								<span class='views'>$dislikes</span>
 							</li>
 						 </ul>
 					 </div>
 				</div>";
-			if($cnt % 4 == 0 || $i + 1 == count($res) || $cat != $res[$i + 1]["catName".$lang])
+			if($cnt % $colCnt == 0 || $i + 1 == count($res) || $cat != $res[$i + 1]["catName".$lang])
 				$str .= "</div>";
 		}
 		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'>";

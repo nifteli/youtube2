@@ -6,6 +6,28 @@
 	$access->setValues($db); //echo $_SESSION['userName'];exit;
 	header("Location: index.php");
 }*/
+
+if ($_GET["action"]=="delete")
+{
+	if($_GET["videoId"] > 0)
+	{
+		$db->startTransaction();
+		//$db->rawQuery("delete from videos where addedById=".$access->userId." and id=".$_GET["videoId"]);
+		$db->where("addedById=".$access->userId." and id=".$_GET["videoId"]);
+		if($db->delete("videos",1))
+		{
+			$db->where("videoId=".$_GET["videoId"]);
+			$db->delete("videocats");
+			$db->where("videoId=".$_GET["videoId"]);
+			$db->delete("videotags");
+			$db->where("videoId=".$_GET["videoId"]);
+			$db->delete("videoviews");
+			$db->commit();
+		}
+		else 
+			$db->rollback();
+	}
+}
 if ($_GET["action"]=="login")
 {
 	//server side validations

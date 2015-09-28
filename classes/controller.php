@@ -221,5 +221,22 @@ class Controller //extends MySQL
 			}
 		return false;           
 	}      
+	
+	public function getQuestions($id)
+	{
+		global $content;
+		$ret="";
+		//echo $id; echo "id shift "; echo  $id&2;
+		//if (($id&2) > 0) echo "here";
+		if (($id&1) == 1) 
+			$ret = $content['WHAT']."/";
+		if (($id&2) == 2)
+			$ret .= $content['WHO']."/";
+		if (($id&4) == 4)
+			$ret .= $content['HOW']."/";
+		if (($id&8) == 8)
+			$ret .= $content['WHY']."/";
+		return rtrim($ret, "/");
+	}
 }
 ?>

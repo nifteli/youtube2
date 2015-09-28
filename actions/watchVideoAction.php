@@ -81,4 +81,46 @@ if($_GET["action"]=="delComment")
 		$db->delete("comments");
 	}
 }
+
+if($_GET["action"]=="add2Folder")
+{
+	if($_GET["id"] > 0 && $_POST["folderId"] > 0)
+	{
+		$res = $db->insert("foldervideos", array("folderId"=>trim($_POST["folderId"]),
+												  "videoId"=>trim($_GET["id"]),
+												  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
+												  "added"=>date("Y-m-d H:i:s")));
+		if($db->count > 0) 
+			$okMessage = $content["ADDEDTOFOLDER"];
+		
+	}
+}
+
+if($_GET["action"]=="delFromFolder")
+{
+	if($_GET["id"] > 0)
+	{
+		$qry = "delete from foldervideos 
+				where videoId = $_GET[id] and exists(select 1 from folders where folders.id=foldervideos.folderId and createdById=".$access->userId.")";
+		$db->rawQuery($qry);
+		if($db->count>0) 
+			$okMessage = $content["REMOVEDFROMFOLDER"];
+		
+	}
+}
+
+if($_GET["action"]=="reportVideo")
+{
+	if(trim($_GET["id"]) > 0 && $_POST["reasonId"] > 0)
+	{
+		$res = $db->insert("videoReports", array("videoId"=>trim($_GET["id"]),
+												  "reasonId"=>$_POST["reasonId"],
+												  "desc"=>trim($_POST["desc"]),
+												  "reporterId"=>$access->userId,
+												  "reportDate"=>date("Y-m-d H:i:s")));
+		if($db->count > 0) 
+			$okMessage = $content["REPORTSAVED"];
+		
+	}
+}
 ?>

@@ -94,6 +94,18 @@ $content['POST'] = 'Göndər';
 $content['EDIT'] = 'Dəyiş';
 $content['DELETE'] = 'Sil';
 $content['SAVE'] = 'Yaddaşa ver';
+$content['RECOMMENDED'] = 'Tövsiyə olunanlar';
+$content['DELETECONFIRMATION'] = 'Məlumatı silməkdə əminsinizmi?';
+$content['FOLDERS'] = 'Papkalar';
+$content['FOLDERNAME'] = 'Papka adı';
+$content['NOFOLDERNOTF'] = 'Siz hər hansı papka yaratmamısınız. Zəhmət olmasa papka yaradın.';
+$content['ADDEDTOFOLDER'] = 'Papkaya əlavə edildi';
+$content['REMOVEFROMFOLDER'] = 'Papkadan sil';
+$content['REMOVEDFROMFOLDER'] = 'Papkadan silindi';
+$content['REPORTREASON'] = 'Şikayət səbəbi';
+$content['REPORTDESC'] = 'Şikayət açıqlaması';
+$content['REPORTSAVED'] = 'Şikayət qeydə alındı';
+
 //end Watch video
 
 //All tags
