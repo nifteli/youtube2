@@ -18,7 +18,7 @@ $(document).ready(function() {
 <br><br><p style="font-weight:bold">{$addVideoNote1}</p>
 	<div class="player" style="margin-left: 5px;">
 	<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="460" height="275" 
-	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{if $result=="success"}{$videoLinkVal}{/if}" }'>
+	  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLinkVal}" }'>
 	  </video>
 	</div>
 	{if $result != 'success'}
@@ -30,7 +30,7 @@ $(document).ready(function() {
 			  </div>
 			{/if}
 				
-              <form style="margin-top:44px;" id="addVideoForm" action="?page=addVideo&action=add" method="post">
+              <form style="margin-top:44px;" id="addVideoForm" action="?page=addVideo&action=add{if isset($videoId)}&videoId={$videoId}{/if}" method="post">
              
               <label class="labelv">{$videoLink}:</label><br>
               <input class="fieldv" type="url" name="videoLink" id="videoLink" value="{$videoLinkVal}"><br>
@@ -98,7 +98,7 @@ $(document).ready(function() {
                <input class="fieldv" type="text" name="tags" id="tags" value="{$tagsVal}">
                <br>
 				<a href="javascript: submitForm()"> <button class="add" type="button"> 
-				<img src="img/folder.png" width="29" height="29" alt="">&nbsp;{$addToMyFolder}</button></a>
+				<img src="img/folder.png" width="29" height="29" alt="">&nbsp;{if isset($videoId)} {$save} {else} {$addToMyFolder} {/if}</button></a>
       
                 <br>
 				<a href="javascript: resetForm()"> <button class="cancel" type="button">{$cancel}</button></a>
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		//var allCategories = {$allCategories};
 		var oldLink = '';
 		
-		//loadCategories();
+		loadCategories();
 	
 		function submitForm()
 		{

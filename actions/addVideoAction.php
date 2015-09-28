@@ -40,6 +40,9 @@ if ($_GET["action"]=="add")
 	{
 		$categories = array_unique($_POST["category"]);
 		$cats = join(",", $categories);
+	}
+	if(isset($_POST["category"]) && array_sum($_POST["category"]) > 0 && !isset($_GET["videoId"]))
+	{
 		$res = $db->rawQuery("SELECT GROUP_CONCAT(' ', c.catName$lang) duplicates FROM 
 								videos v
 								inner join videocats vc on vc.videoId=v.id
@@ -63,17 +66,35 @@ if ($_GET["action"]=="add")
 		$tags = explode(",", $tagStr);
 		$continue = true;
 		
-		$videoId = $db->insert("videos", array("link"=>trim($_POST["videoLink"]),
-								  "languageId"=>$_POST["language"],
-								  "questions"=>$questions,
-								  "name"=>$_POST["videoName"],
-								  "added"=>date("Y-m-d H:i:s"),
-								  "info"=>$_POST["information"],
-								  "addedById"=>$access->userId,
-								  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
-								  "duration"=>$_POST["duration"]));
+		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0)
+		{
+			$videoId = $_GET["videoId"];
+			$db->where("id=".$videoId." and addedById=".$access->userId	);
+			$db->update("videos", array("link"=>trim($_POST["videoLink"]),
+									  "languageId"=>$_POST["language"],
+									  "questions"=>$questions,
+									  "name"=>$_POST["videoName"],
+									  "updated"=>date("Y-m-d H:i:s"),
+									  "info"=>$_POST["information"],
+									  "updatedById"=>$access->userId,
+									  "duration"=>$_POST["duration"]));
+
+		}
+		else
+			$videoId = $db->insert("videos", array("link"=>trim($_POST["videoLink"]),
+									  "languageId"=>$_POST["language"],
+									  "questions"=>$questions,
+									  "name"=>$_POST["videoName"],
+									  "added"=>date("Y-m-d H:i:s"),
+									  "info"=>$_POST["information"],
+									  "addedById"=>$access->userId,
+									  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
+									  "duration"=>$_POST["duration"]));
 		if($videoId)
 		{
+			$db->where("videoId=".$videoId);
+			$db->delete("videocats");
+			
 			foreach($categories as $key => $value)	
 			{
 				if($value != "0")
@@ -92,6 +113,9 @@ if ($_GET["action"]=="add")
 			}
 			if($continue)
 			{
+				$db->where("videoId=".$videoId);
+				$db->delete("videotags");
+			
 				foreach($tags as $tag)
 				{
 					$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);

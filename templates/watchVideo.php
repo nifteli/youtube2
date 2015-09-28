@@ -61,10 +61,13 @@ class WatchVideo
 			
 			
 			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access));
-			$this->watchVideo->assign("foldersArr",$this->getFolders($controller));
+			if($access->hasAccess)
+			{	
+				$this->watchVideo->assign("foldersArr",$this->getFolders($controller));
+				$this->watchVideo->assign("added2Folder",$this->isAddedToFolder($_GET["id"],$controller));
+			}
 			$this->watchVideo->assign("reportReasons",$this->getReportReasons($controller));
-			$this->watchVideo->assign("addedFoldersArr",$this->getAddedFolders($_GET["id"],$controller));
-			$this->watchVideo->assign("added2Folder",$this->isAddedToFolder($_GET["id"],$controller));
+			//$this->watchVideo->assign("addedFoldersArr",$this->getAddedFolders($_GET["id"],$controller));
 		}
 	}
 	
@@ -77,7 +80,7 @@ class WatchVideo
 	
 	private function getVideoInfo($id,$lang,$db,$access)
 	{
-		//if($access->hasAccess)
+		if($access->hasAccess)
 			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 							values (".$access->userId.",$id,0,'".date("Y-m-d H:i:s")."')
 							on duplicate key update
@@ -129,7 +132,7 @@ class WatchVideo
 	
 	private function getReportReasons($controller)
 	{
-		$qry = "select id, reason".$controller->lang." reason from reportReasons";
+		$qry = "select id, reason".$controller->lang." reason from reportreasons";
 		$res = $controller->db->rawQuery($qry);
 		return $res;
 	}

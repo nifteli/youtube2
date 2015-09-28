@@ -11,6 +11,7 @@ class AddVideo
 		global $messages;
 		
 		$this->videos = new Smarty;
+		
 		$this->videos->assign("videoLink", $content['VIDEOLINK']);
 		$this->videos->assign("videoLinkVal", isset($_POST["videoLink"]) ? $_POST["videoLink"] : "");
 		$this->videos->assign("language", $content['LANGUAGE']);
@@ -35,11 +36,29 @@ class AddVideo
 		$this->videos->assign("tagsVal", isset($_POST["tags"]) ? $_POST["tags"] : "");
 		$this->videos->assign("addToMyFolder", $content['ADD']);
 		$this->videos->assign("cancel", $content['CANCEL']);
+		$this->videos->assign("save", $content['SAVE']);
 		$this->videos->assign("addVideoError9", $content['ADDVIDEOERROR9']);
 		$this->videos->assign("allCategories", json_encode($controller->getAllCategories()));
 		
 		$this->videos->assign("result", $result);
 		$this->videos->assign("messages", $messages);
+		
+		if(isset($_GET["id"]) && $_GET["id"] > 0)
+		{
+			$videoInfo = $this->getVideoInfo($_GET["id"],$controller);
+			$this->videos->assign("videoLinkVal", $videoInfo["link"]);
+			$this->videos->assign("languageVal", $videoInfo["languageId"]);
+			$this->videos->assign("videoQuestionVal", $videoInfo["questions"]);
+			$this->videos->assign("videoNameVal", $videoInfo["name"]);
+			$this->videos->assign("informationVal", $videoInfo["info"]);
+			$this->videos->assign("durationVal", $videoInfo["duration"]);
+			$this->videos->assign("videoLinkVal", $videoInfo["link"]);
+			$this->videos->assign("videoLinkVal", $videoInfo["link"]);
+			$this->videos->assign("validVideoVal", "true");
+			$this->videos->assign("categoryVal", $videoInfo["categories"]);
+			$this->videos->assign("tagsVal", $videoInfo["tags"]);
+			$this->videos->assign("videoId", $_GET["id"]);
+		}
 		
 	}
 	
@@ -48,6 +67,50 @@ class AddVideo
 		global $templatePath;
 		
 		$this->videos->display($templatePath."addVideo.tpl");
+	}
+	
+	private function getVideoInfo($id,$controller)
+	{
+		$res = $controller->db->rawQuery("select v.link,v.languageId,v.questions,v.name,v.added,v.info,v.duration
+										  from videos v
+										  where v.id=$id and v.addedById=".$controller->access->userId);
+		$res[0]["questions"] = $this->getVideoQuesArr($res[0]["questions"]);
+		$res[0]["categories"] = $this->getCatsJson($controller,$id);
+		$res[0]["tags"] = $this->getTagsGroup($controller,$id);
+		return $res[0];
+	}
+	
+	private function getCatsJson($controller,$id)
+	{
+		$res = $controller->db->rawQuery("select c.id
+										 from videocats vc
+										 inner join categories c on c.id=vc.categoryId
+										 where vc.videoId=$id");
+		for ($i=0; $i<count($res); $i++)
+			$ret[] = $res[$i]["id"];
+		return json_encode($ret);
+	}
+	
+	private function getTagsGroup($controller,$id)
+	{
+		$res = $controller->db->rawQuery("select group_concat(t.name) name
+										 from videotags vt
+										 inner join tags t on t.id=vt.tagId
+										 where vt.videoId=$id");
+		return $res[0]["name"];
+	}
+	
+	private function getVideoQuesArr($id)
+	{
+		if (($id&1) == 1) 
+			$ret[] = 1;
+		if (($id&2) == 2)
+			$ret[] = 2;
+		if (($id&4) == 4)
+			$ret[] = 4;
+		if (($id&8) == 8)
+			$ret[] = 8;
+		return $ret;
 	}
 }
 

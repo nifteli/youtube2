@@ -14,7 +14,7 @@
 	{$signInNote3} <br><br>
 
 	{$signInNote4} <br>
-	<a  href="?action=fbLogin"><img class="fbs" src="img/fb.png" /></a>
+	<a  href="?action=fbLogin"><img width="22" width="23" class="fbs" src="img/fb.png" /></a>
 	<a  href="https://connect.mail.ru/oauth/authorize?client_id=734021&response_type=code&redirect_uri=http://pfs.az/?action=mailruLogin"><img class="odns" width="22" width="23"  src="img/mailru.png" /></a>
 	<br><br>
 	{$or} 

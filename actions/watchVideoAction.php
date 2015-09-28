@@ -113,7 +113,7 @@ if($_GET["action"]=="reportVideo")
 {
 	if(trim($_GET["id"]) > 0 && $_POST["reasonId"] > 0)
 	{
-		$res = $db->insert("videoReports", array("videoId"=>trim($_GET["id"]),
+		$res = $db->insert("videoreports", array("videoId"=>trim($_GET["id"]),
 												  "reasonId"=>$_POST["reasonId"],
 												  "desc"=>trim($_POST["desc"]),
 												  "reporterId"=>$access->userId,

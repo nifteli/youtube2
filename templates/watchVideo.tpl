@@ -177,7 +177,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		{/if}
 		<a href="#reportVideoModal"><img src="img/report.png" width="15" height="15" alt=""/><span class="wvLabel">{$reportVideo}</span></a>
 		{if $addedById == $curUserId}
-			<a href="#"><img src="img/edit.png" width="15" height="15" alt=""/><span class="wvLabel">{$edit}</span></a>		
+			<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" alt=""/><span class="wvLabel">{$edit}</span></a>		
 			<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/remove.png" width="15" height="15" alt=""/><span class="wvLabel">{$delete}</span></a>
 		{/if}
 		<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png"/></a>
@@ -287,6 +287,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			</div>
 			<br><br>
 			<label>{$reportDesc}:</label>
+			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
 			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
 			<br><br><br><br>
 			<div style="text-align:center;width:100%">
