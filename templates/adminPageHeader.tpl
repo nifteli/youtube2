@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="./css/admin/style.css">
 	<link rel="stylesheet" href="./css/admin/style2.css">
 	<link href="./css/admin/tabcontent.css" rel="stylesheet" type="text/css">
+   	<link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.bootgrid.css" rel="stylesheet">
 	<script src="./js/admin/tabcontent.js" type="text/javascript"></script>   
 
 	<!--menu-->
@@ -51,6 +53,10 @@
 	  <script src="js/datePicker/datepicker-az.js"></script>
 	  <script src="js/datePicker/datepicker-ru.js"></script>
 	
+	<script src="js/bootgrid/modernizr-2.8.1.js"></script>
+    <script src="js/bootgrid/bootstrap.js"></script>
+    <script src="js/bootgrid/jquery.bootgrid.js"></script>
+    <script src="js/bootgrid/jquery.bootgrid.fa.js"></script>
 	
 	
 </head>

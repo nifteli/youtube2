@@ -167,6 +167,10 @@ $content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
 $content['TITLEVIDEOLINKS'] = "Video linklər";
 //End Video links 
 
+// Admin users
+$content['TITLEUSERS'] = "Users";
+// End admin users
+
 //SignIn
 $content['SIGNINNOTE1'] = 'By using this site you agree with the';
 $content['SIGNINNOTE2'] = 'Rules';

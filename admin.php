@@ -88,6 +88,11 @@ else
 				include_once($actionsPath."adminVideoLinksAction.php");
 			$controller->includeSection("adminVideoLinks");
 			break;
+		case "adminUsers":
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."adminUsersAction.php");
+			$controller->includeSection("adminUsers");
+			break;
 		default:
 			$controller->includeSection("adminProfile");
 			break;

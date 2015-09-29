@@ -20,6 +20,7 @@ include($templatePath."adminFooter.php");
 include($templatePath."adminRoles.php");
 include($templatePath."editRole.php");
 include($templatePath."adminVideoLinks.php");
+include($templatePath."adminUsers.php");
 
 class Controller //extends MySQL
 {
@@ -135,6 +136,10 @@ class Controller //extends MySQL
 			case "adminVideoLinks":
 				$adminVideoLinks = new AdminVideoLinks($this);
 				$adminVideoLinks->Show();
+				break;
+			case "adminUsers":
+				$adminUsers = new AdminUsers($this);
+				$adminUsers->Show();
 				break;
 		}
 	}

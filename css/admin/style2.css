@@ -1978,7 +1978,7 @@ background: url(../img/line.png);
   margin-left: -16px !important;
 }	
 	
-.button{
+/*.button{
   width: 207px;
   height: 60px;
   font-family: Calibri;
@@ -1994,7 +1994,7 @@ background: url(../img/line.png);
   padding-right: 30px;
   padding-left: 18px;
   margin-top:20px;
-}
+}*/
 .button2{
   width:114px;
   height: 50px;
@@ -2012,10 +2012,10 @@ background: url(../img/line.png);
   margin-left:94px;
 }
 
-.button:hover{
+/*.button:hover{
 	background:#333333;
 	transition:0.5s;
-}
+}*/
 
 .button2:hover{
 	background:#333333;

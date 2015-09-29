@@ -116,13 +116,12 @@ table {
  background:#dbcb8f;		
 }
 
-.icon {
+/*.icon {
 	padding-top:10px;
 	padding-left:20px;
 	float:left;
-
-	
 }
+*/
 
 .min-cont{
  width:983px;
@@ -164,7 +163,7 @@ table {
 }
 
 
-.search{
+/*.search{
  font-family:Calibri;
  font-size:16px;
  color:#333333;
@@ -175,7 +174,7 @@ table {
  margin-top:30px;
  border:2px solid #e7e7e7;
  border-radius:4px 0 0 4px;	
-}
+}*/
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     /* webkit specific CSS */
@@ -647,7 +646,7 @@ text-decoration:none;
 
 }
 
-.btn{
+/*.btn{
  width:117px;
  height:25px;
  float:left;
@@ -668,7 +667,7 @@ text-decoration:none;
 .btn a{
  text-decoration:none;
  color:#fff;	
-}
+}*/
 
 .thumbnail{
  margin-top:10px;
