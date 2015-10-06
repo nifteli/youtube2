@@ -4,12 +4,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<title>Profile</title>
-	<link rel="stylesheet" href="./css/admin/style.css">
-	<link rel="stylesheet" href="./css/admin/style2.css">
 	<link href="./css/admin/tabcontent.css" rel="stylesheet" type="text/css">
    	<link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/jquery.bootgrid.css" rel="stylesheet">
 	<script src="./js/admin/tabcontent.js" type="text/javascript"></script>   
+	<link rel="stylesheet" href="./css/admin/style.css">
+	<link rel="stylesheet" href="./css/admin/style2.css">
 
 	<!--menu-->
 	<link rel="stylesheet" href="./css/admin/menuStyles.css">

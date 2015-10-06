@@ -84,7 +84,7 @@ else
 		case "addVideo": 
 			if(!$access->hasAccess)
 			{
-				header("location:?page=reg");
+				header("location:?page=signIn");
 				return;
 			}
 			if(isset($_GET["action"])) 

@@ -5,6 +5,9 @@ $sessionId = session_id();
 require_once("../configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
+$lang = $_SESSION["lang"];
+if(isset($_SESSION["userId"]))
+	require_once($langsPath."content_".$lang.".php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 
 if(isset($_POST['actionfunction']) && $_POST['actionfunction']!='' && $_POST['lang']!='')
@@ -23,6 +26,8 @@ function showData($data,$db,$limit)
 		$tagId = $data["tagId"];
 	if(isset($data["userId"]) && $data["userId"]>0)
 		$userId = $data["userId"];
+	if(isset($data["folderId"]) && $data["folderId"]>0)
+		$folderId = $data["folderId"];
 	if($page==1)
 		$start = 0;  
 	else
@@ -48,11 +53,14 @@ function showData($data,$db,$limit)
 			left join languages l on l.id = v.languageId
             left join videotags vt on vt.videoId=v.id
             left join tags t on t.id=vt.tagId
+			left join foldervideos fv on fv.videoId=v.id
 			where lower(l.abbr)='$lang'";
 	if(isset($catId))
 		$qry .= " and vc.categoryId=$catId";
 	if(isset($userId))
 		$qry .= " and v.addedById=$userId";
+	if(isset($folderId))
+		$qry .= " and fv.folderId=$folderId";
 	if(isset($tagId))
 		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
@@ -233,6 +241,7 @@ function displayData($res, $data, $colCnt=4)
 {
 	$lang = $data["lang"];
 	$page = $data['page'];
+	global $content;
 	
 	if(count($res)>0)
 	{
@@ -244,8 +253,16 @@ function displayData($res, $data, $colCnt=4)
 			if($cat != $res[$i]["catName".$lang])
 			{
 				$str .= "<div class='hollywd'>
-							<h2>".$res[$i]["catName".$lang]."</h2>  
-						</div>";
+							<h2>".$res[$i]["catName".$lang];
+				if(isset($_SESSION["userId"]))
+				{
+					$subscribed = isSubscribed($res[$i]["categoryId"]);
+					if($subscribed)
+						$str .= " <span id='subs".$res[$i]["categoryId"]."'><a class='subscription'  id='".$res[$i]["categoryId"].":0'> [$content[UNSUBSCRIBE]]</a></span>";
+					else
+						$str .= "<span id='subs".$res[$i]["categoryId"]."'><a class='subscription' id='".$res[$i]["categoryId"].":1'> [$content[SUBSCRIBE]]</a></span>";
+				}
+				$str .= "</h2></div>";
 				$cat = $res[$i]["catName".$lang];
 				$cnt = 0;
 			}
@@ -268,11 +285,11 @@ function displayData($res, $data, $colCnt=4)
 						 <a href='?page=watchVideo&id=$id'>
 							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
 						 </a>
-						 <a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
+						 <!--<a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
 						 <a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/";
 			if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
 				$str .= " style='visibility: hidden;'";
-			$str .= "></a><a href='?page=watchVideo?id=$id'>
+			$str .= "></a>--><a href='?page=watchVideo?id=$id'>
 					 	<h2>$name</h2>
 					 </a>
 					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> </div>
@@ -353,6 +370,16 @@ function createCondition($column, $value, $operator, $accentSensitive)
 	}
 	
 	return $str;
+}
+
+function isSubscribed($catId)
+{
+	global $db;
+	$db->where("catId=$catId and userId=".$_SESSION["userId"]);
+	$db->get("subscriptions");
+	if($db->count>0)
+		return true;
+	return false;
 }
 
 ?>

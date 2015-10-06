@@ -28,3 +28,25 @@
 	<!--validation scripts-->
 	<script src="js/jquery.validate.min.js"></script>
 </head>
+<script>
+$(document).on("click", '.subscription', function eventHandler(e) {
+    //alert(e.target.id);
+	var res = e.target.id.split(":");
+  //alert ("id="+res[0]+"flag="+res[1]);return;
+	action="unSubscribe";
+	if(res[1] == 1)
+		action="subscribe";
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action="+action+"&catId="+res[0], 
+     success: function(data) {
+	 //alert("action=likeIt&videoId="+videoId+"&flag="+flag);
+	 //alert(data+"=data");
+		if(data=="") return;
+        $('[id=subs'+res[0]+']').html(data);
+		
+     }
+   });
+});
+</script>

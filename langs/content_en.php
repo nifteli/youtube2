@@ -31,6 +31,10 @@ $content["DATE"]="Date";
 $content["SIGNIN"]="Sign In";
 $content["HOUR"]="hour";
 $content["MINUTE"]="min";
+$content["CATOLOGUES"]="Catologues";
+$content["ADDED"]="Added";
+$content['SUBSCRIBE'] = "Subscribe";
+$content['UNSUBSCRIBE'] = "Unsubscribe";
 
 //Registration
 $content['NAME'] = 'Name';

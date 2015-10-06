@@ -16,6 +16,13 @@ class Videos
 		$this->videos->assign("catId", isset($_GET["catId"]) ? $_GET["catId"] : "");
 		$this->videos->assign("userId", isset($_GET["userId"]) ? $_GET["userId"] : "");
 		$this->videos->assign("tagId", isset($_GET["tagId"]) ? $_GET["tagId"] : "");
+		
+		if(isset($_GET["folderId"]) && $_GET["folderId"] > 0)
+		{
+			$folderInfo = $this->getFolderName($controller, $_GET["folderId"]);
+			$this->videos->assign("folderName", $folderInfo["name"]."(".$folderInfo["videoCount"].")");
+			$this->videos->assign("folderId", $_GET["folderId"]);
+		}
 		$this->videos->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->videos->assign("okMessage", isset($okMessage) ? $okMessage : "");
 	}
@@ -25,6 +32,17 @@ class Videos
 		global $templatePath;
 		
 		$this->videos->display($templatePath."videos.tpl");
+	}
+	
+	private function getFolderName($controller, $folderId)
+	{
+		$qry = "SELECT  f.name, count(*) videoCount
+				FROM foldervideos fv
+				inner join folders f on f.id=fv.folderId
+				where f.id=$folderId and f.createdById=" . $controller->access->userId .
+				" group by fv.folderId, f.name";
+		$res = $controller->db->rawQuery($qry);
+		return $res[0];
 	}
 }
 

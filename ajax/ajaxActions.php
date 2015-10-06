@@ -9,7 +9,25 @@ $db = new MysqliDb($hostname, $username, $password, $database);
 $lang = $_SESSION["lang"];
 require_once($langsPath."content_".$lang.".php");
 
-
+//Category subscription
+if($_GET["action"] == "subscribe" && $_GET["catId"] && $_GET["catId"] > 0)
+{
+	$db->insert("subscriptions",array(
+								"userId"=>$_SESSION["userId"],
+								"catId"=>$_GET["catId"],
+								"subsDate"=>date("Y-m-d H:i:s")
+								));
+	if($db->count>0)
+		echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":0'> [$content[UNSUBSCRIBE]]</a></span>";
+}
+//Category unsubscription
+if($_GET["action"] == "unSubscribe" && $_GET["catId"] && $_GET["catId"] > 0)
+{
+	$qry = "delete from subscriptions 
+				where catId = $_GET[catId] and userId=".$_SESSION["userId"];
+		$db->rawQuery($qry);
+			echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":1'> [$content[SUBSCRIBE]]</a></span>";
+}
 //LIKE DISLIKE actions
 if($_GET["action"] == "likeIt" && 
 	isset($_GET["videoId"]) && $_GET["videoId"] > 0 && 

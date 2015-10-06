@@ -23,12 +23,20 @@ if ($_GET["action"]=="comment")
 	if($result == "success")
 	{
 		//$db->startTransaction();
+		$isConfirmed = 1;
+		$email = "";
+		if(isset($_POST["email"]) && $_POST["email"] != "")
+		{
+			$email = $_POST["email"];
+			$isConfirmed = 0;
+		}
 		
 		$commentId = $db->insert("comments", array("comment"=>trim($_POST["comment"]),
 												  "videoId"=>trim($_GET["id"]),
 												  "createdById"=>$access->userId,
 												  "userIP"=>$_SERVER['REMOTE_ADDR'],
-												  "isConfirmed"=>1,
+												  "isConfirmed"=>$isConfirmed,
+												  "email"=>$email,
 												  "created"=>date("Y-m-d H:i:s")));
 		
 		//$db->commit();

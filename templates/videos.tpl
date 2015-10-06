@@ -7,7 +7,7 @@
  $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}",
+                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}&folderId={$folderId}",
         cache: false,
         success: function(response){
 		   $('#loading').hide();
@@ -35,7 +35,7 @@
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}&page="+page,
+                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();
@@ -58,8 +58,11 @@
 	});
 
 });
-</script>
 
+
+
+</script>
+	
 
 <div>
 <div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
@@ -71,6 +74,11 @@
 
 <div class="videos">
 	<div style="padding-top:10px;min-height: 1000px;">
+		{if isset($folderId)}
+			<div class='hollywd'>
+				<h2>{$folderName}</h2>  
+			</div>
+		{/if}
 		{if $errorMessage != ''}
 		<div class="err" style="width:680px; margin-top:40px">{$errorMessage}</div>
 		{/if}

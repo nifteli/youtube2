@@ -1,13 +1,8 @@
-<div>
-<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
-</div>
-</div>
 
 <!--Videos thums Start-->			 
 
 <div style="padding-top:10px;min-height: 1000px;">
-<div class="hollywd" style="margin-top:30px">
+<div class="hollywd" style="margin-top:30px;width:500px">
 <h2>{$allTagsTitle}</h2>  
 </div>
 

@@ -30,6 +30,10 @@ $content["DATE"]="Tarix";
 $content["SIGNIN"]="Daxil ol";
 $content["HOUR"]="saat";
 $content["MINUTE"]="dəq.";
+$content["CATOLOGUES"]="Papkalarım";
+$content["ADDED"]="Videolarım";
+$content['SUBSCRIBE'] = "Subscribe";
+$content['UNSUBSCRIBE'] = "Unsubscribe";
 
 //Registration
 $content['NAME'] = 'Name';

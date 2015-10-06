@@ -33,7 +33,9 @@ class WatchVideo
 			$this->watchVideo->assign("videoId",$_GET["id"]);
 			$this->watchVideo->assign("views",$content['VIEWS']);
 			$this->watchVideo->assign("hasAccess",$controller->access->hasAccess);
-			$this->watchVideo->assign("curUserId",$controller->access->userId);
+			$this->watchVideo->assign("curUserId",-1);
+			if($controller->access->hasAccess)
+				$this->watchVideo->assign("curUserId",$controller->access->userId);
 			$this->watchVideo->assign("email",$content['EMAIL']);
 			$this->watchVideo->assign("tags",$content['TAGS']);
 			$this->watchVideo->assign("published",$content['PUBLISHED']);
@@ -61,8 +63,8 @@ class WatchVideo
 			
 			
 			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access));
-			if($access->hasAccess)
-			{	
+			if($controller->access->hasAccess)
+			{
 				$this->watchVideo->assign("foldersArr",$this->getFolders($controller));
 				$this->watchVideo->assign("added2Folder",$this->isAddedToFolder($_GET["id"],$controller));
 			}
@@ -115,10 +117,11 @@ class WatchVideo
 	private function getComments($id,$lang,$db,$access)
 	{
 		$qry = "SELECT c.id commentId, c.comment,c.createdById,DATE_FORMAT(c.created,'%d %b %Y %T') created,c.updated,
-				concat(u.firstName,' ',u.lastName) author,if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
+				if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author,
+				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
 				FROM comments c
-				inner join users u on u.id=c.createdById
-				where c.videoId=$id";
+				left join users u on u.id=c.createdById
+				where c.videoId=$id"; //echo $qry;
 		$res = $db->rawQuery($qry);
 		return $res;
 	}

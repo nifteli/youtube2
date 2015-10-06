@@ -145,14 +145,21 @@ class Controller //extends MySQL
 	}
 	
 	//this will be common function because categories panel are located in all pages
-	public function getCategories($questions)
+	public function getCategories($questions,$userId="")
 	{
-		$this->db->join("videocats vc", "c.id = vc.categoryId", "LEFT");
-		$this->db->join("videos v", "v.id = vc.videoId", "LEFT");
-		$this->db->where("c.questions", $questions, "&");
+		$join = "LEFT";
+		if($userId != "")
+		{
+			$join = "INNER";
+			$cond = " and v.addedById = $userId";
+		}
+		$this->db->join("videocats vc", "c.id = vc.categoryId", $join);
+		$this->db->join("videos v", "v.id = vc.videoId", $join);
+		$this->db->where("c.questions &  $questions " . $cond);
 		$this->db->groupBy("c.id");
 		$this->db->orderBy("c.catName".$this->lang,"asc");
 		$cats = $this->db->get("categories c",null,"c.id, '#' as url, c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo, '#' as subscribe, IfNULL(count(vc.categoryid), 0) AS count");
+		//echo $this->db->getLastQuery()."<br>";
 		return $cats;
 	}
 	

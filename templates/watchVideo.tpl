@@ -166,16 +166,16 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		<img src="img/users.png" width="15" height="15" alt=""/>  <span class="wvLabel">{$author}</span>
 		<img src="img/upload.png" width="15" height="15" alt=""/>  <span class="wvLabel">{$publishDate}</span>
 		<img src="img/eye.png" width="20" height="15" alt=""/>  <span class="wvLabel">{$viewCount}</span>
-        <a href="javascript:void(0);" onclick="likeIt({$videoId},1)"><img width="15" height="15" src="img/like.png"/></a>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/like.png"/></a>
         <span id="likeCnt" class="wvLabel">{$likeCount}</span>
-        <a href="javascript:void(0);" onclick="likeIt({$videoId},2)"><img width="15" height="15" src="img/dislike.png"/></a>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/dislike.png"/></a>
         <span id="dislikeCnt" class="wvLabel">{$dislikeCount}</span>  
 		{if $added2Folder == 0}
-			<a href="#add2FolderModal"><img src="img/add.png" width="15" height="15" alt=""/><span class="wvLabel">{$addToFolder}</span></a>	
+			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" alt=""/><span class="wvLabel">{$addToFolder}</span></a>	
 		{else}
 			<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" alt=""/><span class="wvLabel">{$removeFromFolder}</span></a>	
 		{/if}
-		<a href="#reportVideoModal"><img src="img/report.png" width="15" height="15" alt=""/><span class="wvLabel">{$reportVideo}</span></a>
+		<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" alt=""/><span class="wvLabel">{$reportVideo}</span></a>
 		{if $addedById == $curUserId}
 			<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" alt=""/><span class="wvLabel">{$edit}</span></a>		
 			<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/remove.png" width="15" height="15" alt=""/><span class="wvLabel">{$delete}</span></a>
@@ -196,14 +196,14 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 	
 	<div class="comments">
 		<div class="detailBox">
-				{if !$hasAccess}
-				<div class="cmtEmail">
-					<label>{$email}:
-					<div class="gap"><input class="field" type="email" name="email" id="email" value="{if isset($emailVal)} {$emailVal} {/if}"></div></label>
-				</div>
-				{/if}
 				<div class="cmt">
 				<form name="frmComment" id="frmComment" style="float:none;" method="post" action="?page=watchVideo&action=comment&id={$videoId}">
+					{if !$hasAccess}
+					<div class="cmtEmail">
+						<label>{$email}:</label>
+						<input class="field" type="email" name="email" style="height:25px;margin-bottom:5px" id="email" value="{if isset($emailVal)} {$emailVal} {/if}">
+					</div>
+					{/if}
 					<TEXTAREA class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}"></TEXTAREA>
 					<input class="post" type="submit" value="{$post}" name="submit">
 				</form>
@@ -287,7 +287,6 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			</div>
 			<br><br>
 			<label>{$reportDesc}:</label>
-			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
 			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
 			<br><br><br><br>
 			<div style="text-align:center;width:100%">
