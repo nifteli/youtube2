@@ -1,0 +1,991 @@
+Executed 2 query(s) - 2015-07-07 12:45:37
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:37
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:45:37
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 12:45:41
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:41
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:45:41
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:41
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:45:41
+            [query] => INSERT INTO roles (id, name, createdBy, created) VALUES( ?, ?, ?, ?)
+            [data] => Array
+                (
+                    [0] => _empty
+                    [1] => www
+                    [2] => 1
+                    [3] => 2015-07-07
+                )
+
+            [types] => Array
+                (
+                    [0] => int
+                    [1] => string
+                    [2] => int
+                    [3] => date
+                )
+
+            [fields] => Array
+                (
+                    [id] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [name] => Array
+                        (
+                            [type] => string
+                        )
+
+                    [createdBy] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [created] => Array
+                        (
+                            [type] => date
+                        )
+
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [name] => www
+                    [oper] => add
+                    [id] => _empty
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:45:41
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:41
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:45:41
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 12:45:45
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:45
+            [query] => DELETE FROM roles WHERE id=?
+            [data] => Array
+                (
+                    [0] => 93
+                )
+
+            [types] => Array
+                (
+                    [0] => custom
+                )
+
+            [fields] => Array
+                (
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [oper] => del
+                    [id] => 93
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:45:45
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:45:45
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:45:45
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:46:55
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:46:55
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:46:55
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 12:46:57
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:46:57
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:46:57
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:46:57
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:46:57
+            [query] => INSERT INTO roles (id, name, createdBy, created) VALUES( ?, ?, ?, ?)
+            [data] => Array
+                (
+                    [0] => _empty
+                    [1] => sdsd
+                    [2] => 1
+                    [3] => 2015-07-07
+                )
+
+            [types] => Array
+                (
+                    [0] => int
+                    [1] => string
+                    [2] => int
+                    [3] => date
+                )
+
+            [fields] => Array
+                (
+                    [id] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [name] => Array
+                        (
+                            [type] => string
+                        )
+
+                    [createdBy] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [created] => Array
+                        (
+                            [type] => date
+                        )
+
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [name] => sdsd
+                    [oper] => add
+                    [id] => _empty
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:46:57
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:46:57
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:46:57
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:55:12
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:55:12
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:55:12
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 12:55:15
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:55:15
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:55:15
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:55:15
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:55:15
+            [query] => INSERT INTO roles (id, name, createdBy, created) VALUES( ?, ?, ?, ?)
+            [data] => Array
+                (
+                    [0] => _empty
+                    [1] => 
+                    [2] => 1
+                    [3] => 2015-07-07
+                )
+
+            [types] => Array
+                (
+                    [0] => int
+                    [1] => string
+                    [2] => int
+                    [3] => date
+                )
+
+            [fields] => Array
+                (
+                    [id] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [name] => Array
+                        (
+                            [type] => string
+                        )
+
+                    [createdBy] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [created] => Array
+                        (
+                            [type] => date
+                        )
+
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [name] => 
+                    [oper] => add
+                    [id] => _empty
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:55:15
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:55:15
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:55:15
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:55:44
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:55:44
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:55:44
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:56:36
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:56:36
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:56:36
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 12:56:43
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:56:43
+            [query] => DELETE FROM roles WHERE id=?
+            [data] => Array
+                (
+                    [0] => 95
+                )
+
+            [types] => Array
+                (
+                    [0] => custom
+                )
+
+            [fields] => Array
+                (
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [oper] => del
+                    [id] => 95
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:56:43
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:56:43
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:56:43
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 12:57:42
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 12:57:42
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy LIMIT 0, 0
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 12:57:42
+            [query] => SELECT r.id,r.name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:14:33
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:14:33
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:14:33
+            [query] => SELECT r.id,concat('<a href='#'>',r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:15:58
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:15:58
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:15:58
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:32:11
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:32:11
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:32:11
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2015-07-07 13:32:28
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:32:28
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:32:28
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:32:28
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:32:28
+            [query] => INSERT INTO roles (id, name, createdBy, created) VALUES( ?, ?, ?, ?)
+            [data] => Array
+                (
+                    [0] => _empty
+                    [1] => yyy
+                    [2] => 1
+                    [3] => 2015-07-07
+                )
+
+            [types] => Array
+                (
+                    [0] => int
+                    [1] => string
+                    [2] => int
+                    [3] => date
+                )
+
+            [fields] => Array
+                (
+                    [id] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [name] => Array
+                        (
+                            [type] => string
+                        )
+
+                    [createdBy] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [created] => Array
+                        (
+                            [type] => date
+                        )
+
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [name] => yyy
+                    [oper] => add
+                    [id] => _empty
+                    [createdBy] => 1
+                    [created] => 07/07/2015
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:32:28
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:32:28
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:32:28
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:42:06
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:42:06
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:42:06
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:42:13
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:42:13
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:42:13
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:42:19
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:42:19
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:42:19
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:44:50
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:44:50
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:44:50
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2015-07-07 13:45:06
+Array
+(
+    [0] => Array
+        (
+            [time] => 2015-07-07 13:45:06
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2015-07-07 13:45:06
+            [query] => SELECT r.id,concat("<a href='#'>",r.name,'</a>') name,r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)

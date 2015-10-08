@@ -121,7 +121,7 @@ class WatchVideo
 				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById
-				where c.videoId=$id"; //echo $qry;
+				where c.isConfirmed=1 and c.videoId=$id"; //echo $qry;
 		$res = $db->rawQuery($qry);
 		return $res;
 	}

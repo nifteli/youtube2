@@ -107,6 +107,7 @@ $content['REMOVEDFROMFOLDER'] = 'Papkadan silindi';
 $content['REPORTREASON'] = 'Report reason';
 $content['REPORTDESC'] = 'Report Description';
 $content['REPORTSAVED'] = 'Report saved';
+$content["COMMENTSENT2CONF"] = 'Your comment is sent to admin confirmation';
 //end Watch video
 
 //All tags

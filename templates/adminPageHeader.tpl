@@ -53,11 +53,6 @@
 	  <script src="js/datePicker/datepicker-az.js"></script>
 	  <script src="js/datePicker/datepicker-ru.js"></script>
 	
-	<script src="js/bootgrid/modernizr-2.8.1.js"></script>
-    <script src="js/bootgrid/bootstrap.js"></script>
-    <script src="js/bootgrid/jquery.bootgrid.js"></script>
-    <script src="js/bootgrid/jquery.bootgrid.fa.js"></script>
-	
 	
 </head>
 <body>

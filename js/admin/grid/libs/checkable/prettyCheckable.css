@@ -1,0 +1,96 @@
+.checkbox.has-pretty-child, .radio.has-pretty-child {
+    padding-left: 0;
+}
+.prettycheckbox, .prettyradio {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.prettycheckbox > a, .prettyradio > a {
+    height: 20px;
+    width: 20px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin: 0;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+
+}
+
+.prettycheckbox > a:focus, .prettyradio > a:focus {
+    outline: 0 none
+}
+
+.prettycheckbox label, .prettyradio label {
+    display: block;
+    float: left;
+    margin: 0 5px;
+    cursor: pointer
+}
+
+.prettycheckbox a.disabled, .prettycheckbox label.disabled, .prettyradio a.disabled, .prettyradio label.disabled {
+    cursor: not-allowed
+}
+
+.prettycheckbox > a {
+
+}
+
+.prettycheckbox > a:focus {
+
+}
+
+.prettycheckbox > a.checked {
+    background:#fff url("../../../img/imgs.png") no-repeat scroll 3px -70px;
+    border-color: #aaaaaa;
+}
+
+.prettycheckbox > a.checked:focus {
+}
+
+.prettycheckbox > a.checked.disabled {
+}
+
+.prettycheckbox > a.disabled {
+}
+
+.prettyradio > a {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.prettyradio > a:focus {
+}
+
+.prettyradio > a.checked {
+}
+.prettyradio > a.checked:before {
+    background-color: #797979;
+    content: '';
+    display: inline-block;
+    float: left;
+    width: 45%;
+    height: 45%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin: 5px 0 0 5px;
+}
+.prettyradio.orange > a.checked {
+    border-color: #faa342;
+}
+.prettyradio.orange > a.checked:before {
+    background-color: #fa9e39;
+}
+
+.prettyradio > a.checked:focus {
+}
+
+.prettyradio > a.checked.disabled {
+}
+
+.prettyradio > a.disabled {
+}

@@ -110,6 +110,7 @@ $content['REMOVEDFROMFOLDER'] = 'Papkadan silindi';
 $content['REPORTREASON'] = 'Şikayət səbəbi';
 $content['REPORTDESC'] = 'Şikayət açıqlaması';
 $content['REPORTSAVED'] = 'Şikayət qeydə alındı';
+$content["COMMENTSENT2CONF"] = 'Your comment is sent to admin confirmation';
 
 //end Watch video
 

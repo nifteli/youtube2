@@ -1,3 +1,12 @@
+<link href="css/admin/grid/design.css" rel="stylesheet">
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/admin/grid/libs/jquery-1.11.0.min.js"><\/script>')</script>
+<script src="js/admin/grid/libs/jquery-ui-1.10.4.custom.min.js"></script>-->
+<script src="js/admin/grid/bootstrap.min.js"></script>
+<script src="js/admin/grid/libs/checkable/prettyCheckable.min.js"></script>
+<script src="js/admin/grid/libs/selectbox/selectBoxIt.1.11.0.min.js"></script>
+<script defer="defer" src="js/admin/grid/script.js"></script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
 	<br/><br/><br/>
@@ -14,215 +23,205 @@
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 800px;">
-	 <table id="grid" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
-                            <thead>
-                                <tr>
-                                    <th data-column-id="created" data-type="string" data-width="30%">Date created</th>
-                                    <th data-column-id="id" data-identifier="true" data-order="asc" data-type="numeric" data-width="10%">ID</th>
-                                    <th data-column-id="userName" data-type="string" data-width="30%">Login</th>
-                                    <th data-column-id="link" data-formatter="link" data-sortable="false" data-width="75px">Link</th>
-                                </tr>
-                            </thead>
-                            <!--<tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>me@rafaelstaib.com</td>
-                                    <td>11.12.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>me@rafaelstaib.com</td>
-                                    <td>12.12.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>me@rafaelstaib.com</td>
-                                    <td>10.12.2014</td>
-                                    <td>Link</td>
-                                    <td>2</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>mo@rafaelstaib.com</td>
-                                    <td>12.08.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>ma@rafaelstaib.com</td>
-                                    <td>12.06.2014</td>
-                                    <td>Link</td>
-                                    <td>3</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>me@rafaelstaib.com</td>
-                                    <td>12.12.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>ma@rafaelstaib.com</td>
-                                    <td>12.11.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>mo@rafaelstaib.com</td>
-                                    <td>15.12.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>me@rafaelstaib.com</td>
-                                    <td>24.12.2014</td>
-                                    <td>Link</td>
-                                    <td>0</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>ma@rafaelstaib.com</td>
-                                    <td>14.12.2014</td>
-                                    <td>Link</td>
-                                    <td>1</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>mo@rafaelstaib.com</td>
-                                    <td>12.12.2014</td>
-                                    <td>Link</td>
-                                    <td>999</td>
-                                    <td>Hidden value 1</td>
-                                </tr>
-                            </tbody>-->
-                        </table>
+	<div id="all" style="float:left; margin-left:15px; width: 900px;">
+	<div class="table-responsive">
+                <table id="product-table" class="table table-condensed table-zebr table-hover">
+                    <colgroup>
+                        <col style="width: 30px;"/>
+                        <col style="width: 80px;"/>
+                        <col style="width: 50px"/>
+                        <col/>
+                        
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col style="width: 110px;"/>
+                    </colgroup>
+                    <thead>
+                    <tr style="background-color:rgb(219, 203, 129);">
+                        <th class="vertical-middle no-sort">
+                            <input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
+                        </th>
+                        <th class="vertical-middle no-sort">Şəkil</th>
+                        <th class="vertical-middle">ID</th>
+                        <th class="vertical-middle">İstifadəçi adı</th>
+                        <th class="vertical-middle">Qeydiyyat tarixi</th>
+                        <th class="vertical-middle">Son giriş</th>
+                        <th class="vertical-middle">Balansı</th>
+                        <th class="vertical-middle">Alıb</th>
+                        
+                        <th class="vertical-middle">Düzəlt</th>
+                    </tr>
+                    </thead>
+                    <thead class="head-transparent">
+                    <tr class="filter-row" style="background-color:rgb(219, 203, 129);">
+                        <td colspan="2"></td>
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        
+                        <td class="vertical-middle"><input class="form-control" type="text"/></td>
+                        <td class="vertical-middle">
+                            <button class="btn btn-light-combo btn-sm">Filter</button>
+							 <button class="btn btn-light-combo btn-sm">XLS</button>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+					<tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+                        <td class="vertical-middle">
+                            <img class="prodct-thmb" src="./uploads/userPictures/1.jpeg" height=30 width=30 alt="Product name"/>
+                        </td>
+                        <td class="vertical-middle">123</td>
+                        <td class="vertical-middle">Satan arkadaş</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        <td class="vertical-middle">12.03.2014</td>
+                        
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">0</td>
+                        <td class="vertical-middle">
+                            <a class="link-underlined" href="#">Təsdiq gözləyir</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+            <div class="row pagination-zone np-l">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <ul class="pagination ui-port-paginate pull-left">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li class="disabled"><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+                <!-- /.col-lg-9 -->
+                <div class="col-lg-3">
+                    <ul class="list-unstyled list-inline pagination-per-page pull-right">
+                        
+                        <li class="text-muted">
+                            <div class="dropdown ui-dropdown-brd-list">
+                                <button data-toggle="dropdown" id="dropdownMenu1" type="button" class="btn dropdown-toggle">
+                                    25
+                                    <span class="caret"></span>
+                                </button>
+                                <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
+                                    <li role="presentation"><a href="#" tabindex="-1" role="menuitem">25</a></li>
+                                    <li role="presentation"><a href="#" tabindex="-1" role="menuitem">50</a></li>
+                                    <li role="presentation"><a href="#" tabindex="-1" role="menuitem">100</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- /.col-lg-3 -->
+            </div>
 	</div>
 	
-	<script>
-            $(function()
-            {
-                function init()
-                {
-                    $("#grid").bootgrid({
-                    	ajax: true,
-					    post: function ()
-					    {
-					        return {
-					            action: "loadUsers"
-					        };
-					    },
-					    url: "ajax/adminGrid.php",
-                        formatters: {
-                            "link": function(column, row)
-                            {
-                                return "<a href=\"#\">" + column.id + ": " + row.id + "</a>";
-                            }
-                        }//,
-                        //rowCount: [10, 50, 75, -1]
-                    });
-                }
-                
-                init();
-                
-                /*
-                $("#append").on("click", function ()
-                {
-                    $("#grid").bootgrid("append", [{
-                            id: 0,
-                            sender: "hh@derhase.de",
-                            received: "Gestern",
-                            link: ""
-                        },
-                        {
-                            id: 12,
-                            sender: "er@fsdfs.de",
-                            received: "Heute",
-                            link: ""
-                        }]);
-                });
-                
-                $("#clear").on("click", function ()
-                {
-                    $("#grid").bootgrid("clear");
-                });
-                
-                $("#removeSelected").on("click", function ()
-                {
-                    $("#grid").bootgrid("remove");
-                });
-                
-                $("#destroy").on("click", function ()
-                {
-                    $("#grid").bootgrid("destroy");
-                });
-                
-                $("#init").on("click", init);
-                
-                $("#clearSearch").on("click", function ()
-                {
-                    $("#grid").bootgrid("search");
-                });
-                
-                $("#clearSort").on("click", function ()
-                {
-                    $("#grid").bootgrid("sort");
-                });
-                
-                $("#getCurrentPage").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getCurrentPage"));
-                });
-                
-                $("#getRowCount").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getRowCount"));
-                });
-                
-                $("#getTotalPageCount").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getTotalPageCount"));
-                });
-                
-                $("#getTotalRowCount").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getTotalRowCount"));
-                });
-                
-                $("#getSearchPhrase").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getSearchPhrase"));
-                });
-                
-                $("#getSortDictionary").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getSortDictionary"));
-                });
-                
-                $("#getSelectedRows").on("click", function ()
-                {
-                    alert($("#grid").bootgrid("getSelectedRows"));
-                });
-                */
-            });
-        </script>
 	
 </div>

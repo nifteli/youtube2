@@ -38,7 +38,8 @@ if ($_GET["action"]=="comment")
 												  "isConfirmed"=>$isConfirmed,
 												  "email"=>$email,
 												  "created"=>date("Y-m-d H:i:s")));
-		
+		if($commentId && isset($_POST["email"]) && $_POST["email"] != "")
+			$okMessage = $content["COMMENTSENT2CONF"];
 		//$db->commit();
 		
 	}
