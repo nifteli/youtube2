@@ -209,6 +209,16 @@ class Controller //extends MySQL
 		return trim($date);
 	}
 	
+	public function getDateForSelect($date)
+	{
+		global $lang;
+		if($lang == 'az' || $lang == 'ru')
+			list($day, $month, $year) = explode('.', $date);
+		if($lang == 'en')
+			list($month, $day, $year) = explode('/', $date);
+		return $day . '-' . $month . '-' . $year;
+	}
+	
 	public function validate_Date($mydate,$format = 'DD-MM-YYYY',&$date) 
 	{
 		if($mydate == "")
@@ -249,6 +259,28 @@ class Controller //extends MySQL
 		if (($id&8) == 8)
 			$ret .= $content['WHY']."/";
 		return rtrim($ret, "/");
+	}
+	
+	public function getPages($lang,$begin,$perPage,$cnt,$page)
+	{
+		if($begin ==1 ) {$disabled = "disabled"; $pageUrl="#";}
+		else {$disabled = ""; $pageUrl="?page=$page&begin=" . ($begin-1) ."&perPage=$perPage";}
+		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"«");
+		$pageNum = ceil($cnt / $perPage);
+		//echo "count=".$cnt."<br>pagenum=".$pageNum;
+		$disabled = "";
+		for($i=1; $i<=$pageNum; $i++)
+		{
+			if($begin == $i) {$disabled = "disabled";$pageUrl = "#";}
+			else {$disabled = "";$pageUrl = "?page=$page&begin=$i&perPage=$perPage";}
+			$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"$i");
+		}
+		$disabled = "";
+		if($begin ==$pageNum ) {$disabled = "disabled"; $pageUrl="";}
+		else {$disabled = ""; $pageUrl="?page=$page&begin=" . ($begin+1) . "&perPage=$perPage";}
+		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"»");
+		
+		return $ret;
 	}
 }
 ?>

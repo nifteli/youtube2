@@ -17,9 +17,9 @@ $CODE_PATH = "./classes/php/PHPSuito/"; // the physical path to the php files
 
 $minPasswordLength=5;
 $defaultLang="az";
-$limit = 28;
+$limit = 28; //video count in one page
 $langs = array("az","en","ru");
 $langIds = array("az"=>5,"en"=>19,"ru"=>67);
-$maxPicSize = 2;
-$imageQuality = 80;
+$maxPicSize = 2; //in mb
+$imageQuality = 80; //percent
 ?>

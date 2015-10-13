@@ -1,7 +1,7 @@
 <?php
-//echo "<pre>"; print_r($_POST); echo "</pre>";//exit;
-if ($_GET["action"]=="save")
+if ($_GET["action"]=="filter")
 {
+echo "<pre>"; print_r($_POST); echo "</pre>";return;
 	$result = "success";
 	$messages = array();
 	

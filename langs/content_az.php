@@ -177,6 +177,9 @@ $content['VALERROR1'] = "Tarix formatını düzgün daxil edin";
 
 //Video links 
 $content['TITLEVIDEOLINKS'] = "Video linklər";
+$content['ID'] = "No";
+$content['ADDDATE'] = "Əlavə olunma tarixi";
+$content['ADDEDBY'] = "Əlavə edən";
 //End Video links 
 
 // Admin users

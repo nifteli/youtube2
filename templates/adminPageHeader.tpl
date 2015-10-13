@@ -48,11 +48,17 @@
     <script src="./js/admin/jquery-ui.min.js" type="text/javascript"></script>
 	
 	<!--Dateapicker-->
-	  <!--<script src="js/datePicker/jquery-1.10.2.js"></script>
-	  <script src="js/datePicker/jquery-ui.js"></script>-->
-	  <script src="js/datePicker/datepicker-az.js"></script>
-	  <script src="js/datePicker/datepicker-ru.js"></script>
+	<!--<script src="js/datePicker/jquery-1.10.2.js"></script>
+	<script src="js/datePicker/jquery-ui.js"></script>-->
+	<script src="js/datePicker/datepicker-az.js"></script>
+	<script src="js/datePicker/datepicker-ru.js"></script>
 	
+	<!--Grid-->
+	<link href="css/admin/grid/design.css" rel="stylesheet">
+	<script src="js/admin/grid/bootstrap.min.js"></script>
+	<script src="js/admin/grid/libs/checkable/prettyCheckable.min.js"></script>
+	<script src="js/admin/grid/libs/selectbox/selectBoxIt.1.11.0.min.js"></script>
+	<script defer="defer" src="js/admin/grid/script.js"></script>
 	
 </head>
 <body>
