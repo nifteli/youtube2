@@ -1,6 +1,6 @@
 
 <div style="padding-top:10px;min-height: 1000px;">
-<div class="hollywd" style="margin-top:30px">
+<div class="hollywd" style="margin-top:30px;width:900px">
 
 <script>
 	$(document).ready(function () {

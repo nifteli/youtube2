@@ -12,7 +12,7 @@ class WatchVideo
 		global $okMessage;
 		
 		$this->watchVideo = new Smarty;
-		if(isset($_GET["id"]) && $_GET["id"] != "" && $_GET["id"]>0)
+		if(isset($_GET["id"]) && $_GET["id"] != "" && $_GET["id"]>0 && is_numeric($_GET["id"]))
 		{
 			$videoInfo = $this->getVideoInfo($_GET["id"],$controller->lang,$controller->db,$controller->access);
 			$this->watchVideo->assign("catName",$videoInfo[0]["catName".$controller->lang]);
@@ -109,7 +109,7 @@ class WatchVideo
 							inner join tags t on t.id=vt.tagId
 							group by vt.videoId
 						) tg on tg.videoId=v.id
-						where v.id=$id
+						where  v.isDeleted=0 and v.id=$id
 						group by v.id,vc.categoryId");
 		return $res;
 	}

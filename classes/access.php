@@ -16,11 +16,38 @@ class Access{
 	//var $phoneCode;
 	var $db;
 	var $isAdmin;
+	var $auth;
 	
 	public function Access($db)
 	{
 		$this->db = $db; 
 		$this->setValues($db);
+		if($this->hasAccess)
+			$this->setAuth($db);
+	}
+	
+	public function setAuth($db)
+	{
+		$res = $db->rawQuery("SELECT * 
+							  FROM roleaccess
+							  where roleId=(select roleId from users where id=" . $this->userId . ")
+							  order by accessTypeId");
+		for($i=0; $i<count($res); $i++)
+		{
+			$this->auth[$res[$i]["accessTypeId"]] = array("startDate"=>$res[$i]["startDate"],"endDate"=>$res[$i]["endDate"]);
+		}
+	}
+	
+	public function authorized($accessId)
+	{
+		if(array_key_exists($accessId,$this->auth))
+		{
+			if($this->auth[$accessId]["endDate"] == "0000-00-00 00:00:00")
+				$this->auth[$accessId]["endDate"] = "9999-01-01 00:00:00";
+			if(date("Y-m-d H:i:s")>=$this->auth[$accessId]["startDate"] && date("Y-m-d H:i:s") <= $this->auth[$accessId]["endDate"])
+				return true;
+		}
+		return false;
 	}
 	
 	public function setValues($db)

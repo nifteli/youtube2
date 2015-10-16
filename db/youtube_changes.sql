@@ -6,3 +6,7 @@ CREATE TABLE IF NOT EXISTS `subscriptions` (
 ALTER TABLE `youtube`.`subscriptions` ADD UNIQUE `idxUnq` (`userId`, `catId`)COMMENT '';
 
 ALTER TABLE `comments` ADD `email` VARCHAR(50) NOT NULL AFTER `isConfirmed`;
+
+ALTER TABLE `users` ADD `roleId` INT NOT NULL AFTER `status`;
+
+ALTER TABLE `videoreports` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`) ;

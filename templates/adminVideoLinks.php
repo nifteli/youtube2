@@ -22,9 +22,19 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("lnAdded", $content['ADDDATE']);
 		$this->adminVideoLinks->assign("lnLang", $content['LANGUAGE']);
 		$this->adminVideoLinks->assign("lnLink", $content['VIDEOLINK']);
-		$this->adminVideoLinks->assign("lnAddedBy", $content['ADDEDBY']);
+		$this->adminVideoLinks->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->adminVideoLinks->assign("lnTags", $content['TAGS']);
 		$this->adminVideoLinks->assign("lnCategory", $content['CATEGORY']);
+		$this->adminVideoLinks->assign("filter", $content['FILTER']);
+		$this->adminVideoLinks->assign("what", $content['WHAT']);
+		$this->adminVideoLinks->assign("who", $content['WHO']);
+		$this->adminVideoLinks->assign("why", $content['WHY']);
+		$this->adminVideoLinks->assign("how", $content['HOW']);
+		$this->adminVideoLinks->assign("delete", $content['DELETE']);
+		$this->adminVideoLinks->assign("export", $content['EXPORT']);
+		$this->adminVideoLinks->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
+		
+		$this->adminVideoLinks->assign("reportCount", $content['REPORTCOUNT']);
 		//echo "<pre>"; print_r($_POST); echo "</pre>";
 		if(isset($_POST) && count($_POST) > 0)
 		{
@@ -34,14 +44,52 @@ class AdminVideoLinks
 			$this->adminVideoLinks->assign("addedVal", $_POST["added"]);
 			$this->adminVideoLinks->assign("languageIdVal", $_POST["languageId"]);
 			$this->adminVideoLinks->assign("linkVal", $_POST["link"]);
-			$this->adminVideoLinks->assign("addedByVal", $_POST["addedBy"]);
+			$this->adminVideoLinks->assign("videoQuestionVal", $_POST["videoQuestion"]);
+			$this->adminVideoLinks->assign("categoryVal", $_POST["category"]);
 			$this->adminVideoLinks->assign("tagsVal", $_POST["tags"]);
-		}			
+			$this->adminVideoLinks->assign("questionsVal", $_POST["questions"]);
+		}
+		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
+			$sortBy = trim($_GET["sortBy"]);
+		if(isset($_GET["idSortType"]))
+			$sortType = ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["nameSortType"]))
+			$sortType = ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["infoSortType"]))
+			$sortType = ($_GET["infoSortType"] == "" || $_GET["infoSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["addedSortType"]))
+			$sortType = ($_GET["addedSortType"] == "" || $_GET["addedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["langSortType"]))
+			$sortType = ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["linkSortType"]))
+			$sortType = ($_GET["linkSortType"] == "" || $_GET["linkSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["catNameSortType"]))
+			$sortType = ($_GET["catNameSortType"] == "" || $_GET["catNameSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["tagsSortType"]))
+			$sortType = ($_GET["tagsSortType"] == "" || $_GET["tagsSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["questionsSortType"]))
+			$sortType = ($_GET["questionsSortType"] == "" || $_GET["questionsSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["reportCountSortType"]))
+			$sortType = ($_GET["reportCountSortType"] == "" || $_GET["reportCountSortType"] == "ASC")? 'DESC' : 'ASC';
+		
+		
+		$this->adminVideoLinks->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("infoSortType", ($_GET["infoSortType"] == "" || $_GET["infoSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("addedSortType", ($_GET["addedSortType"] == "" || $_GET["addedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("langSortType", ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("linkSortType", ($_GET["linkSortType"] == "" || $_GET["linkSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("catNameSortType", ($_GET["catNameSortType"] == "" || $_GET["catNameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("tagsSortType", ($_GET["tagsSortType"] == "" || $_GET["tagsSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("questionsSortType", ($_GET["questionsSortType"] == "" || $_GET["questionsSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("reportCountSortType", ($_GET["reportCountSortType"] == "" || $_GET["reportCountSortType"] == "ASC")? 'DESC' : 'ASC');
+		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
-		$this->adminVideoLinks->assign("videoLinks", $this->getVideoLinks($controller,$begin,$perPage,$_POST,$cnt));
+		$this->adminVideoLinks->assign("perPage", $perPage);
+		$this->adminVideoLinks->assign("videoLinks", $controller->getVideoLinks($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		
-		$this->adminVideoLinks->assign("videoLinkPages",$controller->getPages($controller,$begin,$perPage,$cnt,"adminVideoLinks"));
+		$this->adminVideoLinks->assign("videoLinkPages",$controller->getPages($begin,$perPage,$cnt,"adminVideoLinks"));
 		$this->adminVideoLinks->assign("result", $result);
 		$this->adminVideoLinks->assign("messages", $messages);
 	}
@@ -60,51 +108,6 @@ class AdminVideoLinks
 		return $res;
 	}
 	
-	private function getVideoLinks($controller,$begin,$perPage,$post,&$cnt)
-	{
-		//$db->where("id=$id");
-		$lang = $controller->lang;
-		$qry = "select * from (
-						SELECT v.id, v.name, v.info, DATE_FORMAT(v.added,'%d-%m-%Y') added, 
-								l.name$lang lang, v.link,v.languageId,
-								concat(u.firstName,' ',u.lastName) addedBy,
-								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
-								c.catName$lang catName
-						FROM videos v
-						left join vwvideostats vs on v.id = vs.id
-						join users u on u.id = v.addedById
-						join videocats vc on vc.videoId = v.id
-						join categories c on c.id = vc.categoryId
-						left join languages l on l.id = v.languageId
-						left join videotags vt on vt.videoId=v.id
-						left join tags t on t.id=vt.tagId
-						left join comments ct on ct.videoId=v.id
-						group by v.id,vc.categoryId
-						) v
-						where 1=1 ";
-		if(isset($post["id"]) && $post["id"] != "")
-			$qry .= " and v.id=".trim($post["id"]);
-		if(isset($post["name"]) && $post["name"] != "")
-			$qry .= " and v.name like '%" . trim($post["name"]) . "%'";
-		if(isset($post["info"]) && $post["info"] != "")
-			$qry .= " and v.info like '%" . trim($post["info"]) . "%'";
-		if(isset($post["added"]) && $post["added"] != "")
-			$qry .= " and v.added = '" . $controller->getDateForSelect(trim($post["added"])) . "'";
-		if(isset($post["languageId"]) && $post["languageId"] != "")
-			$qry .= " and v.languageId = " . trim($post["languageId"]);
-		if(isset($post["link"]) && $post["link"] != "")
-			$qry .= " and v.link like '%" . trim($post["link"]) . "%'";
-		if(isset($post["addedBy"]) && $post["addedBy"] != "")
-			$qry .= " and v.addedBy like '%" . trim($post["addedBy"]) . "%'";
-		if(isset($post["tags"]) && $post["tags"] != "")
-			$qry .= " and v.tags like '%" . trim($post["tags"]) . "%'";
-		//echo $qry;
-		$controller->db->rawQuery($qry);
-		$cnt = $controller->db->count;
-		$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
-		$res = $controller->db->rawQuery($qry);
-		return $res;
-	}
 }
 
 ?>

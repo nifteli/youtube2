@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<title>Profile</title>
 	<link href="./css/admin/tabcontent.css" rel="stylesheet" type="text/css">
-   	<link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/jquery.bootgrid.css" rel="stylesheet">
+   	<!--<link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.bootgrid.css" rel="stylesheet">-->
 	<script src="./js/admin/tabcontent.js" type="text/javascript"></script>   
 	<link rel="stylesheet" href="./css/admin/style.css">
 	<link rel="stylesheet" href="./css/admin/style2.css">
@@ -59,6 +59,10 @@
 	<script src="js/admin/grid/libs/checkable/prettyCheckable.min.js"></script>
 	<script src="js/admin/grid/libs/selectbox/selectBoxIt.1.11.0.min.js"></script>
 	<script defer="defer" src="js/admin/grid/script.js"></script>
+	
+	<!--Back to top-->
+	<script src="js/backToTop/modernizr.js"></script> <!-- Modernizr -->
+	<script src="js/backToTop/main.js"></script>
 	
 </head>
 <body>

@@ -54,7 +54,7 @@ function showData($data,$db,$limit)
             left join videotags vt on vt.videoId=v.id
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
-			where lower(l.abbr)='$lang'";
+			where v.isDeleted=0 and lower(l.abbr)='$lang'";
 	if(isset($catId))
 		$qry .= " and vc.categoryId=$catId";
 	if(isset($userId))
@@ -101,6 +101,7 @@ function showRecommended($data,$db,$limit)
 			left join languages l on l.id = v.languageId 
 			left join videotags vt on vt.videoId=v.id 
 			left join tags t on t.id=vt.tagId 
+			where v.isDeleted=0
 			group by v.id,vc.categoryId ) a";
 	if(isset($catId))
 		$qry .= " where a.id !=".$data["videoId"]." and lower(a.abbr)='az' and (a.categoryId=$catId ";
@@ -186,7 +187,7 @@ function showSearchResults($data,$db,$limit)
             left join videotags vt on vt.videoId=v.id
             left join tags t on t.id=vt.tagId
             left join comments ct on ct.videoId=v.id
-			where ";
+			where v.isDeleted=0 and ";
 	$qry .= "(";
 	
 	if(count($options) == 0)
@@ -285,11 +286,10 @@ function displayData($res, $data, $colCnt=4)
 						 <a href='?page=watchVideo&id=$id'>
 							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
 						 </a>
-						 <!--<a href='#'><img class='ico1' src='img/add-to-f.png' width=24 height=24 alt=''/></a>
-						 <a href='#'><img class='ico2' src='img/edit-02.png' width=24 height=24 alt=''/";
+						 <div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>";
 			if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
 				$str .= " style='visibility: hidden;'";
-			$str .= "></a>--><a href='?page=watchVideo?id=$id'>
+			$str .= "<a href='?page=watchVideo?id=$id'>
 					 	<h2>$name</h2>
 					 </a>
 					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> </div>

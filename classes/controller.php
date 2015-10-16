@@ -261,15 +261,28 @@ class Controller //extends MySQL
 		return rtrim($ret, "/");
 	}
 	
-	public function getPages($lang,$begin,$perPage,$cnt,$page)
+	public function getPages($begin,$perPage,$cnt,$page)
 	{
+		$visPageCnt = 8;
+		$start = 1;
 		if($begin ==1 ) {$disabled = "disabled"; $pageUrl="#";}
 		else {$disabled = ""; $pageUrl="?page=$page&begin=" . ($begin-1) ."&perPage=$perPage";}
 		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"«");
 		$pageNum = ceil($cnt / $perPage);
 		//echo "count=".$cnt."<br>pagenum=".$pageNum;
 		$disabled = "";
-		for($i=1; $i<=$pageNum; $i++)
+		$end = $pageNum;
+		if($pageNum > $visPageCnt)
+			$end = $visPageCnt;
+		if($begin >= $visPageCnt)
+		{
+			$start = $begin - $visPageCnt +2;
+			if($pageNum <= $start+$visPageCnt-1)
+				$end = $pageNum;
+			else
+				$end = $start+$visPageCnt-1;
+		}
+		for($i=$start; $i<=$end; $i++)
 		{
 			if($begin == $i) {$disabled = "disabled";$pageUrl = "#";}
 			else {$disabled = "";$pageUrl = "?page=$page&begin=$i&perPage=$perPage";}
@@ -282,5 +295,108 @@ class Controller //extends MySQL
 		
 		return $ret;
 	}
+
+	public function getVideoLinks($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "added";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select * from (
+						SELECT v.id, v.name, v.info, DATE_FORMAT(v.added,'%d-%m-%Y') added, v.addedByIP,DATE_FORMAT(v.updated,'%d-%m-%Y') updated,v.duration,v.questions,
+								l.name$lang lang, v.link,v.languageId,
+								concat(u.firstName,' ',u.lastName) addedBy,
+								concat(u2.firstName,' ',u2.lastName) updatedBy,
+								concat(u3.firstName,' ',u3.lastName) deletedBy,
+								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
+								c.catName$lang catName,
+								vs.reportCount,v.isDeleted,DATE_FORMAT(v.deleted,'%d-%m-%Y') deleted
+						FROM videos v
+						left join vwvideostats vs on v.id = vs.id
+						join users u on u.id = v.addedById
+						left join users u2 on u2.id = v.updatedById
+						left join users u3 on u3.id = v.deletedById
+						join videocats vc on vc.videoId = v.id
+						join categories c on c.id = vc.categoryId
+						left join languages l on l.id = v.languageId
+						left join videotags vt on vt.videoId=v.id
+						left join tags t on t.id=vt.tagId
+						left join comments ct on ct.videoId=v.id
+						group by v.id,vc.categoryId
+						) v
+						where v.isDeleted=0 ";
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and v.id=".trim($post["id"]);
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and v.name like '%" . trim($post["name"]) . "%'";
+		if(isset($post["info"]) && $post["info"] != "")
+			$qry .= " and v.info like '%" . trim($post["info"]) . "%'";
+		if(isset($post["added"]) && $post["added"] != "")
+			$qry .= " and v.added = '" . $this->getDateForSelect(trim($post["added"])) . "'";
+		if(isset($post["languageId"]) && $post["languageId"] != "")
+			$qry .= " and v.languageId = " . trim($post["languageId"]);
+		if(isset($post["link"]) && $post["link"] != "")
+			$qry .= " and v.link like '%" . trim($post["link"]) . "%'";
+		if(isset($post["addedBy"]) && $post["addedBy"] != "")
+			$qry .= " and v.addedBy like '%" . trim($post["addedBy"]) . "%'";
+		if(isset($post["category"]) && $post["category"] != "")
+			$qry .= " and catName like '%" . trim($post["category"]) . "%'";
+		if(isset($post["tags"]) && $post["tags"] != "")
+			$qry .= " and v.tags like '%" . trim($post["tags"]) . "%'";
+		if(isset($post["questions"]) && $post["questions"] != "")
+			$qry .= " and v.questions & " . trim($post["questions"]);
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		for($i=0; $i<count($res); $i++)
+		{
+			$res[$i]["questions"] = $this->getQuestions($res[$i]["questions"]);
+			$res[$i]["duration"] =gmdate('H:i:s',$res[$i]["duration"]);
+		}
+		return $res;
+	}
+	
+	public function exportToExcel($fields,$data,$filename)
+	{
+		$objPHPExcel = new PHPExcel();  
+		$objPHPExcel->setActiveSheetIndex(0);  
+		$rowCount = 1;  
+		$column = 'A';
+		
+		foreach($fields as $value)
+		{
+			$objPHPExcel->getActiveSheet()->setCellValue($column.$rowCount, $value);
+			$column++;
+		}
+
+		$rowCount = 2;
+		for($i=0; $i<count($data); $i++)
+		{
+			$column = 'A';
+			foreach($fields as $key => $value)
+			{
+				$objPHPExcel->getActiveSheet()->setCellValue($column.$rowCount, $data[$i][$key]);
+				$column++;
+			}
+			$rowCount++;
+		}
+		 
+		// Redirect output to a client’s web browser (Excel5) 
+		header('Content-Type: application/vnd.ms-excel'); 
+		header("Content-Disposition: attachment;filename=$filename.xls"); 
+		header('Cache-Control: max-age=0'); 
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
+		$objWriter->save('php://output');
+	}
+	
 }
 ?>

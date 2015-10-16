@@ -10,6 +10,7 @@ $langsPath = $appDirectory."/langs/";
 $actionsPath = $appDirectory."actions/";
 $phpMailerPath = $classesPath."plugins/PHPMailer/";
 $facebookPath = $classesPath."plugins/Facebook/";
+$phpExcelPath = $classesPath."php/PHPSuito/External/phpexcel/";
 $userPicsPath =  "/uploads/userPictures/";
 $tmpPath = $appDirectory . "/tmp/";
 //$productImagesPath=$appDirectory."productImages/";

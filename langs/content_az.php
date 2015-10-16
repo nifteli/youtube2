@@ -180,6 +180,15 @@ $content['TITLEVIDEOLINKS'] = "Video linklər";
 $content['ID'] = "No";
 $content['ADDDATE'] = "Əlavə olunma tarixi";
 $content['ADDEDBY'] = "Əlavə edən";
+$content['ADDEDBYIP'] = "Əlavə edən IP";
+$content['UPDATED'] = "Dəyişmə tarixi";
+$content['DURATION'] = "Müddət";
+$content["INSUFFACCESS"] = "Not sufficient access for this action";
+$content["REPORTCOUNT"] = "Şikayət sayı";
+$content["FILTER"] = "Filtr";
+$content["EXPORT"] = "İxrac et";
+$content["REMOVED"] = "Məlumat silindi";
+$content["DELETED"] = "Silinmə tarixi";
 //End Video links 
 
 // Admin users

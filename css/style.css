@@ -1777,9 +1777,12 @@ margin-top: 22px;
 
 .ico1{
     float: right;
-    right:56px;
-    top:-37px;
-    position: relative;	
+    right: 16px;
+    top: -19px;
+    position: relative;
+    color: white;
+    background-color: black;
+    font-size: smaller;
 }
 
 .ico2{

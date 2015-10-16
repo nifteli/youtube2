@@ -7,6 +7,7 @@ require_once(dirname(__FILE__)."/configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
 require_once($classesPath."access.php");
+require_once($phpExcelPath."PHPExcel.php");
 
 $db = new MysqliDb($hostname, $username, $password, $database);
 $access = new Access($db);
@@ -69,31 +70,44 @@ if(!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] == "adminProf
 }
 else
 {
-	include_once($templatePath."adminPageHeader.tpl");
-	$controller->includeSection("adminMenu");
 	switch($_GET["page"])
 	{
 		case "adminRoles": 
+			include_once($templatePath."adminPageHeader.tpl");
+			$controller->includeSection("adminMenu");
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."adminRolesAction.php");
 			$controller->includeSection("adminRoles");
 			break;
 		case "editRole": 
+			include_once($templatePath."adminPageHeader.tpl");
+			$controller->includeSection("adminMenu");
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."adminEditRoleAction.php");
 			$controller->includeSection("editRole");
 			break;
-		case "adminVideoLinks": 
-			if(isset($_GET["action"])) 
-				include_once($actionsPath."adminVideoLinksAction.php");
-			$controller->includeSection("adminVideoLinks");
+		case "adminVideoLinks": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(25))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminVideoLinksAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminVideoLinks");
+			}
+			else
+				echo "No access";
 			break;
 		case "adminUsers":
+			include_once($templatePath."adminPageHeader.tpl");
+			$controller->includeSection("adminMenu");
 			if(isset($_GET["action"])) 
 				include_once($actionsPath."adminUsersAction.php");
 			$controller->includeSection("adminUsers");
 			break;
 		default:
+			include_once($templatePath."adminPageHeader.tpl");
+			$controller->includeSection("adminMenu");
 			$controller->includeSection("adminProfile");
 			break;
 	}
