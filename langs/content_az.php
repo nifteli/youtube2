@@ -189,6 +189,18 @@ $content["FILTER"] = "Filtr";
 $content["EXPORT"] = "İxrac et";
 $content["REMOVED"] = "Məlumat silindi";
 $content["DELETED"] = "Silinmə tarixi";
+$content["ADDMANY"] = "Toplu daxil et";
+$content["EDITMANY"] = "Toplu dəyiş";
+$content["DELETEMANY"] = "Toplu sil";
+$content["TEMPLATE"] = "Şablon";
+$content["NOTEXCEL"] = "Daxil etdiyiniz fayl excel fayl tipində olmalıdır";
+$content["FILENOTADDED"] = "Please attach excel file";
+$content["LINKSADDED"] = "Links added";
+$content["LINKSNOTADDED"] = "Links not added: ";
+$content["ERRORONDELETE"] = "Silmədə xəta";
+$content["LINKSDELETED"] = "Videolar silindi";
+$content["LINKSUPDATED"] = "Videolar redaktə edildi:";
+$content["LINKSNOTUPDATED"] = "Videolar redaktə edilmədi:";
 //End Video links 
 
 // Admin users

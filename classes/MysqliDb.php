@@ -203,6 +203,7 @@ class MysqliDb
         if ($sanitize)
             $this->_query = filter_var ($query, FILTER_SANITIZE_STRING,
                                     FILTER_FLAG_NO_ENCODE_QUOTES);
+//echo "query=".$this->_query;
         $stmt = $this->_prepareQuery();
 
         if (is_array($bindParams) === true) {
@@ -215,11 +216,10 @@ class MysqliDb
             call_user_func_array(array($stmt, 'bind_param'), $this->refValues($params));
 
         }
-
         $stmt->execute();
         $this->_stmtError = $stmt->error;
         $this->reset();
-
+		$this->count = $stmt->affected_rows;
         return $this->_dynamicBindResults($stmt);
     }
 

@@ -31,8 +31,15 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("why", $content['WHY']);
 		$this->adminVideoLinks->assign("how", $content['HOW']);
 		$this->adminVideoLinks->assign("delete", $content['DELETE']);
+		$this->adminVideoLinks->assign("edit", $content['EDIT']);
 		$this->adminVideoLinks->assign("export", $content['EXPORT']);
 		$this->adminVideoLinks->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
+		$this->adminVideoLinks->assign("hasEditAccess", $controller->access->authorized(8));
+		$this->adminVideoLinks->assign("addMany", $content['ADDMANY']);
+		$this->adminVideoLinks->assign("editMany", $content['EDITMANY']);
+		$this->adminVideoLinks->assign("deleteMany", $content['DELETEMANY']);
+		$this->adminVideoLinks->assign("addVideo", $content['ADDVIDEO']);
+		$this->adminVideoLinks->assign("template", $content['TEMPLATE']);
 		
 		$this->adminVideoLinks->assign("reportCount", $content['REPORTCOUNT']);
 		//echo "<pre>"; print_r($_POST); echo "</pre>";
@@ -47,6 +54,7 @@ class AdminVideoLinks
 			$this->adminVideoLinks->assign("videoQuestionVal", $_POST["videoQuestion"]);
 			$this->adminVideoLinks->assign("categoryVal", $_POST["category"]);
 			$this->adminVideoLinks->assign("tagsVal", $_POST["tags"]);
+			$this->adminVideoLinks->assign("reportCountVal", $_POST["reportCount"]);
 			$this->adminVideoLinks->assign("questionsVal", $_POST["questions"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")

@@ -16,6 +16,27 @@ function submitForm(action)
 	<div class="titles">
 		<h1>{$titleVideoLinks}</h1>
 	</div>
+	<div class="actionButtons">
+	<form action="?page=adminVideoLinks&action=load" method="post" enctype='multipart/form-data'>
+	<table border=1 cellpadding=25 cellspacing=25 align=right>
+		<tr>
+			<td colspan=3><input type="file" class="field"  name="data" id="data" /></td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-light-combo btn-sm" name="action" value="addMany" type="submit">{$addMany}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" name="action" value="editMany" type="submit">{$editMany}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" name="action" value="deleteMany" type="submit">{$deleteMany}</button></td>
+		</tr>
+		<tr align=center>
+			<td><a href='uploadTemplates/AddBulkVideo.xls'>{$template}</a></td>
+			<td><a href='uploadTemplates/EditBulkVideo.xls'>{$template}</a></td>
+			<td><a href='uploadTemplates/DeleteBulkVideo.xls'>{$template}</a></td>
+			
+		</tr>
+	</table>
+	</form>
+			<button class="btn btn-light-combo btn-sm" name="action" onclick="window.location.href='index.php?page=addVideo'" style="height:55px">{$addVideo}</button>
+	</div>
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -39,7 +60,8 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 70px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 				</colgroup>
@@ -59,6 +81,7 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=questions&questionsSortType={$questionsSortType}')">{$videoQuestion}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$reportCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$edit}</th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -87,6 +110,7 @@ function submitForm(action)
 							<option value="8" {if $questionsVal == 8} selected {/if}>{$why}</option>
 						</select>
 					</td>
+					<td class="vertical-middle"><input class="form-control" name="reportCount" id="reportCount" type="text" value="{$reportCountVal}"/></td>
 					<td class="vertical-middle" colspan=2>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
@@ -97,8 +121,8 @@ function submitForm(action)
 				{section name=sec1 loop=$videoLinks}
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].id}">{$videoLinks[sec1].id}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].name}">{$videoLinks[sec1].name}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].id}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].id}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].name}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].name}</a></td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].info}">{$videoLinks[sec1].info}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].added}">{$videoLinks[sec1].added}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].lang}">{$videoLinks[sec1].lang}</td>
@@ -106,9 +130,14 @@ function submitForm(action)
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].catName}">{$videoLinks[sec1].catName}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].tags}">{$videoLinks[sec1].tags}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].addedBy}">{$videoLinks[sec1].questions}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].addedBy}">{$videoLinks[sec1].reportCount}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$delete}">
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].reportCount}">{$videoLinks[sec1].reportCount}</td>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						<a href="?page=adminVideoLinks&action=delete&videoId={$videoLinks[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+					</td>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$edit}">
+						{if $hasEditAccess}
+						<a href="index.php?page=addVideo&id={$videoLinks[sec1].id}"><img src="img/edit.png" width="15" height="15" alt=""/></a>
+						{/if}
 					</td>
 				</tr>
 				{/section}

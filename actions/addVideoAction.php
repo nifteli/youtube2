@@ -66,10 +66,13 @@ if ($_GET["action"]=="add")
 		$tags = explode(",", $tagStr);
 		$continue = true;
 		
-		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0)
+		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0 && is_numeric($_GET["videoId"]))
 		{
 			$videoId = $_GET["videoId"];
-			$db->where("id=".$videoId." and addedById=".$access->userId	);
+			if($access->authorized(8))
+				$db->where("id=".$videoId);
+			else
+				$db->where("id=".$videoId." and addedById=".$access->userId	);
 			$db->update("videos", array("link"=>trim($_POST["videoLink"]),
 									  "languageId"=>$_POST["language"],
 									  "questions"=>$questions,
@@ -78,6 +81,11 @@ if ($_GET["action"]=="add")
 									  "info"=>$_POST["information"],
 									  "updatedById"=>$access->userId,
 									  "duration"=>$_POST["duration"]));
+			if($db->count == 0)
+			{
+				$result = 'error';
+				$messages["noAccess"] = $content["INSUFFACCESS"];
+			}
 
 		}
 		else
@@ -105,7 +113,7 @@ if ($_GET["action"]=="add")
 					if(!$id)
 					{
 						$continue = false;
-						break;
+						//break;
 					}
 				}
 				

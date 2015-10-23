@@ -287,8 +287,8 @@ function displayData($res, $data, $colCnt=4)
 							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
 						 </a>
 						 <div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>";
-			if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
-				$str .= " style='visibility: hidden;'";
+			//if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
+				//$str .= " style='visibility: hidden;'";
 			$str .= "<a href='?page=watchVideo?id=$id'>
 					 	<h2>$name</h2>
 					 </a>

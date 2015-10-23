@@ -64,12 +64,12 @@ if ($_GET["action"]=="save")
 			$pathParts = pathinfo($_FILES["pic"]["tmp_name"]);
 			
 			$filename = compressImage($_FILES["pic"]["tmp_name"], $tmpPath . $pathParts['basename'], $imageQuality); 
-			echo "filesize=".filesize("tmp/" . $pathParts['basename'])."<br> allowed_size=".$maxPicSize * 1024 * 1024;
+			//echo "filesize=".filesize("tmp/" . $pathParts['basename'])."<br> allowed_size=".$maxPicSize * 1024 * 1024;
 			if (filesize($tmpPath . $pathParts['basename']) < $maxPicSize * 1024 * 1024)
 			{
 				unlink($_FILES["pic"]["tmp_name"]);
 				$_FILES["pic"]["tmp_name"] = $tmpPath . $pathParts['basename'];
-				echo "<br> new path ".$_FILES["pic"]["tmp_name"];
+				//echo "<br> new path ".$_FILES["pic"]["tmp_name"];
 			}
 			else
 			{

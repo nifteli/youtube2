@@ -43,7 +43,7 @@ class AddVideo
 		$this->videos->assign("result", $result);
 		$this->videos->assign("messages", $messages);
 		
-		if(isset($_GET["id"]) && $_GET["id"] > 0)
+		if(isset($_GET["id"]) && $_GET["id"] > 0 && is_numeric($_GET["id"]) && $controller->hasAccessToVideo($_GET["id"]))
 		{
 			$videoInfo = $this->getVideoInfo($_GET["id"],$controller);
 			$this->videos->assign("videoLinkVal", $videoInfo["link"]);
@@ -73,7 +73,7 @@ class AddVideo
 	{
 		$res = $controller->db->rawQuery("select v.link,v.languageId,v.questions,v.name,v.added,v.info,v.duration
 										  from videos v
-										  where v.id=$id and v.addedById=".$controller->access->userId);
+										  where v.id=$id");
 		$res[0]["questions"] = $this->getVideoQuesArr($res[0]["questions"]);
 		$res[0]["categories"] = $this->getCatsJson($controller,$id);
 		$res[0]["tags"] = $this->getTagsGroup($controller,$id);

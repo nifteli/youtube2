@@ -22,4 +22,5 @@ $langs = array("az","en","ru");
 $langIds = array("az"=>5,"en"=>19,"ru"=>67);
 $maxPicSize = 2; //in mb
 $imageQuality = 80; //percent
+$youtubeKey = 'AIzaSyChr0QJiBd6tVjw_txBTGv4bDEDXIIliDQ';
 ?>

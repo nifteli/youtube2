@@ -301,7 +301,7 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "added";
+			$sortBy = "STR_TO_DATE(added, '%d-%m-%y')";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
@@ -348,6 +348,8 @@ class Controller //extends MySQL
 			$qry .= " and v.tags like '%" . trim($post["tags"]) . "%'";
 		if(isset($post["questions"]) && $post["questions"] != "")
 			$qry .= " and v.questions & " . trim($post["questions"]);
+		if(isset($post["reportCount"]) && $post["reportCount"] != "")
+			$qry .= " and v.reportCount = " . trim($post["reportCount"]);
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
 		if($perPage>0)
@@ -398,5 +400,15 @@ class Controller //extends MySQL
 		$objWriter->save('php://output');
 	}
 	
+	public function hasAccessToVideo($videoId)
+	{
+		$this->db->where("id=$videoId and addedById=".$this->access->userId);
+		$this->db->get("videos");
+		if($this->db->count == 1)
+			return true;
+		if($this->access->authorized(8))
+			return true;
+		return false;
+	}
 }
 ?>

@@ -10,3 +10,5 @@ ALTER TABLE `comments` ADD `email` VARCHAR(50) NOT NULL AFTER `isConfirmed`;
 ALTER TABLE `users` ADD `roleId` INT NOT NULL AFTER `status`;
 
 ALTER TABLE `videoreports` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`) ;
+
+ALTER TABLE `videos` ENGINE = InnoDB;
