@@ -21,6 +21,7 @@ include($templatePath."adminRoles.php");
 include($templatePath."editRole.php");
 include($templatePath."adminVideoLinks.php");
 include($templatePath."adminUsers.php");
+include($templatePath."adminComments.php");
 
 class Controller //extends MySQL
 {
@@ -136,6 +137,10 @@ class Controller //extends MySQL
 			case "adminVideoLinks":
 				$adminVideoLinks = new AdminVideoLinks($this);
 				$adminVideoLinks->Show();
+				break;
+			case "adminComments":
+				$adminComments = new AdminComments($this);
+				$adminComments->Show();
 				break;
 			case "adminUsers":
 				$adminUsers = new AdminUsers($this);
@@ -410,5 +415,58 @@ class Controller //extends MySQL
 			return true;
 		return false;
 	}
+	
+	public function getComments($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "c.created ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select * from (SELECT c.*,
+				DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
+				DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+				if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author, 
+				concat(u2.firstName,' ',u2.lastName) confirmer,
+				concat(u3.firstName,' ',u3.lastName) updatedBy
+				from comments c
+				left join users u on u.id=c.createdById
+				left join users u2 on u2.id=c.confirmedById
+				left join users u3 on u3.id=c.updatedById
+				) c
+				where 1=1 ";
+				
+		if(isset($post["created"]) && $post["created"] != "")
+			$qry .= " and DATE_FORMAT(c.created,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and c.id=".trim($post["id"]);
+		if(isset($post["videoId"]) && $post["videoId"] != "")
+			$qry .= " and c.videoId=".trim($post["videoId"]);
+		if(isset($post["authorId"]) && $post["authorId"] != "")
+			$qry .= " and c.createdById=".trim($post["authorId"]);
+		if(isset($post["author"]) && $post["author"] != "")
+			$qry .= " and c.author like '%" . trim($post["author"]) . "%'";
+		if(isset($post["comment"]) && $post["comment"] != "")
+			$qry .= " and c.comment like '%" . trim($post["comment"]) . "%'";
+		if(isset($post["confirmed"]) && $post["confirmed"] != "")
+			$qry .= " and c.isConfirmed=".trim($post["confirmed"]);
+		if(isset($post["confirmer"]) && $post["confirmer"] != "")
+			$qry .= " and c.confirmer like '%" . trim($post["confirmer"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		
+		return $res;
+	}
+	
 }
 ?>

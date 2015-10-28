@@ -96,7 +96,25 @@ else
 				$controller->includeSection("adminVideoLinks");
 			}
 			else
+			{
 				echo "No access";
+				return;
+			}
+			break;
+		case "adminComments": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(26))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminCommentsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminComments");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
 			break;
 		case "adminUsers":
 			include_once($templatePath."adminPageHeader.tpl");

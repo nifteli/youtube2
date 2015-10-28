@@ -215,7 +215,22 @@ $content['SIGNINNOTE4'] = 'You may sign in by';
 $content['SIGNINNOTE5'] = 'If you are registered in this site, fill in;';
 $content['SIGNINNOTE6'] = 'If you are not registered in any of above, please,';
 $content['OR'] = 'OR';
-
-
 //End SignIn
+
+//Admin comments
+$content['TITLECOMMENTS'] = 'Şərhlər';
+$content['CONFIRM'] = 'Təsdiqlə';
+$content['VIDEOID'] ='Video No';
+$content['AUTHORID'] ='Avtor No';
+$content['COMMENT'] ='Şərh';
+$content['AUTHOR'] ='Avtor';
+$content['AUTHORIP'] ='Avtor IP';
+$content['CONFIRMED'] ='Təsdiqləndi';
+$content['CONFIRMER'] ='Təsdiqləyən';
+$content['CONFIRMERIP'] ='Təsdiqləyən IP';
+$content['UPDATEDBYID'] ='Redaktə edən ID';
+$content['UPDATEDBYIP'] ='Redaktə edən IP';
+$content['UPDATEDBY'] ='Redaktə edən';
+$content['CHANGED'] ='Redaktə edildi';
+//End Admin comments
 ?>
