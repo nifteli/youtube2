@@ -17,7 +17,7 @@ function submitForm(action)
 		<h1>{$titleUsers}</h1>
 	</div>
 	<div class="actionButtons">
-	<form action="?page=adminVideoLinks&action=load" method="post" enctype='multipart/form-data'>
+	<form method="post" action="?page=adminUsers&action=filter" id="vlFilter" name="vlFilter">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
 		<tr style="text-align:right">
 			<td><button class="btn btn-light-combo btn-sm" name="action" value="sendMail" type="submit" >{$sendMail}</button></td>
