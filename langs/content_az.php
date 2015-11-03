@@ -248,4 +248,16 @@ $content['NEWTAG'] ='Yeni Taq';
 $content['SUBSTITUTE'] ='Əvəzlə';
 
 //End Admin Tags
+
+
+//Admin users
+$content['TITLEUSERS'] ='İstifadəçilər';
+$content['DATECREATED'] ='Yaranma tarixi';
+$content['LOGIN'] ='Loqini';
+$content['NAME'] ='Adı';
+$content['WATCHPROFILE'] ='Profilə bax';
+$content['SETUSER'] ='Adından loqin ol';
+$content['SENDMAIL'] ='Mail göndər';
+$content['SAVEROLES'] ='Rolları yaddaşa ver';
+//End Admin users
 ?>

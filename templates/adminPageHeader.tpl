@@ -64,27 +64,6 @@
 	<script src="js/backToTop/modernizr.js"></script> <!-- Modernizr -->
 	<script src="js/backToTop/main.js"></script>
 	
-	
-	<link rel="stylesheet" type="text/css" href="admin/DataTables/jQueryUI-1.11.4/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="admin/DataTables/DataTables-1.10.9/css/dataTables.jqueryui.css"/>
-	<link rel="stylesheet" type="text/css" href="admin/DataTables/Buttons-1.0.3/css/buttons.jqueryui.css"/>
-	<link rel="stylesheet" type="text/css" href="admin/DataTables/Select-1.0.1/css/select.jqueryui.css"/>
-	 
-	<script type="text/javascript" src="admin/DataTables/jQueryUI-1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="admin/DataTables/JSZip-2.5.0/jszip.js"></script>
-	<script type="text/javascript" src="admin/DataTables/pdfmake-0.1.18/build/pdfmake.js"></script>
-	<script type="text/javascript" src="admin/DataTables/pdfmake-0.1.18/build/vfs_fonts.js"></script>
-	<script type="text/javascript" src="admin/DataTables/DataTables-1.10.9/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="admin/DataTables/DataTables-1.10.9/js/dataTables.jqueryui.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/dataTables.buttons.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/buttons.jqueryui.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/buttons.colVis.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/buttons.flash.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/buttons.html5.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Buttons-1.0.3/js/buttons.print.js"></script>
-	<script type="text/javascript" src="admin/DataTables/Select-1.0.1/js/dataTables.select.js"></script>
-	
-	
 </head>
 <body>
 <div id="wrapper">

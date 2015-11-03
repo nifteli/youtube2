@@ -555,5 +555,41 @@ class Controller //extends MySQL
 		return $res;
 	}
 	
+	public function getUsers($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "u.registered ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "SELECT u.*,
+				DATE_FORMAT(u.registered,'%d-%m-%Y %k:%i:%S') createdDate,
+				concat(u.firstName,' ',u.lastName) name
+				FROM users u
+				where 1=1 ";
+		
+		if(isset($post["created"]) && $post["created"] != "")
+			$qry .= " and DATE_FORMAT(u.registered,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+		if(isset($post["id"]) && is_numeric($post["id"]))
+			$qry .= " and u.id=".trim($post["id"]);
+		if(isset($post["userName"]) && $post["userName"] != "")
+			$qry .= " and u.userName like '%" . trim($post["userName"]) . "%'";
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["name"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		return $res;
+	}
+	
 }
 ?>

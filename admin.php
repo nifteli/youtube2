@@ -147,11 +147,19 @@ else
 			}
 			break;
 		case "adminUsers":
-			include_once($templatePath."adminPageHeader.tpl");
-			$controller->includeSection("adminMenu");
-			if(isset($_GET["action"])) 
-				include_once($actionsPath."adminUsersAction.php");
-			$controller->includeSection("adminUsers");
+			if($access->authorized(33))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminUsersAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminUsers");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
 			break;
 		default:
 			include_once($templatePath."adminPageHeader.tpl");
