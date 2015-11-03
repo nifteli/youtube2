@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2015 at 09:21 AM
+-- Generation Time: Nov 03, 2015 at 11:30 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -28,10 +28,49 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `accesstypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nameAz` varchar(500) NOT NULL,
+  `nameRu` varchar(500) NOT NULL,
+  `nameEn` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+
+--
+-- Dumping data for table `accesstypes`
+--
+
+INSERT INTO `accesstypes` (`id`, `nameAz`, `nameRu`, `nameEn`) VALUES
+(1, 'change profile info', 'change profile info', 'change profile info'),
+(2, 'view user profile', 'view user profile', 'view user profile'),
+(3, 'edit user profile', 'edit user profile', 'edit user profile'),
+(4, 'delete users', 'delete users', 'delete users'),
+(5, 'send email', 'send email', 'send email'),
+(6, 'change access', 'change access', 'change access'),
+(7, 'add video links', 'add video links', 'add video links'),
+(8, 'edit video links', 'edit video links', 'edit video links'),
+(9, 'delete video links', 'delete video links', 'delete video links'),
+(10, 'edit comments', 'edit comments', 'edit comments'),
+(11, 'create folders', 'create folders', 'create folders'),
+(12, 'delete folders', 'delete folders', 'delete folders'),
+(13, 'add video links from file', 'add video links from file', 'add video links from file'),
+(14, 'edit video links by file', 'edit video links by file', 'edit video links by file'),
+(15, 'delete video links by file', 'delete video links by file', 'delete video links by file'),
+(16, 'confirm comments', 'confirm comments', 'confirm comments'),
+(17, 'rename folder', 'rename folder', 'rename folder'),
+(18, 'access webpage general settings', 'access webpage general settings', 'access webpage general settings'),
+(19, 'export to excel guests', 'export to excel guests', 'export to excel guests'),
+(20, 'export to excel categories', 'export to excel categories', 'export to excel categories'),
+(21, 'export to excel videos', 'export to excel videos', 'export to excel videos'),
+(22, 'export to excel folders', 'export to excel folders', 'export to excel folders'),
+(23, 'export to excel tags', 'export to excel tags', 'export to excel tags'),
+(24, 'export to excel comments', 'export to excel comments', 'export to excel comments'),
+(25, 'view video links', 'view video links', 'view video links'),
+(26, 'view Comments', 'view Comments', 'view Comments'),
+(27, 'delete comments', 'delete comments', 'delete comments'),
+(28, 'view Folders', 'view Folders', 'view Folders'),
+(29, 'edit Folders', 'edit Folders', 'edit Folders'),
+(30, 'delete tags', 'delete tags', 'delete tags'),
+(31, 'edit Tags', 'edit Tags', 'edit Tags'),
+(32, 'view Tags', 'view Tags', 'view Tags');
 
 -- --------------------------------------------------------
 
@@ -62,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   KEY `catGroupId` (`catGroupId`),
   KEY `deletedById` (`deletedById`),
   KEY `createdById` (`createdById`)
-) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=282 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=282 ;
 
 --
 -- Dumping data for table `categories`
@@ -361,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `catgroups` (
   `catGroupNameRu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `infoRu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `catgroups`
@@ -386,6 +425,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
   `videoId` int(11) NOT NULL,
   `isConfirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `confirmedById` int(11) DEFAULT NULL,
   `confirmedByIP` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `createdById` int(11) DEFAULT NULL COMMENT 'commenter Id',
@@ -399,7 +439,37 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `createdById` (`createdById`),
   KEY `updatedById` (`updatedById`),
   FULLTEXT KEY `confirmedByIP` (`confirmedByIP`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=44 ;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment`, `videoId`, `isConfirmed`, `email`, `confirmedById`, `confirmedByIP`, `createdById`, `userIP`, `updated`, `created`, `updatedById`, `updatedByIP`) VALUES
+(1, 'add', 206, 1, '', NULL, '', 1, '127.0.0.1', '2015-09-21 19:37:43', '2015-04-28 14:28:23', 1, '::1'),
+(2, 'test comment122', 206, 1, '', 1, '::1', 1, '127.0.0.1', '2015-09-21 15:09:02', '2015-04-28 14:28:59', 1, '127.0.0.1'),
+(3, 'test comment1', 206, 1, '', 1, '::1', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-28 14:51:29', NULL, ''),
+(4, 'test comment1eeee', 206, 1, '', NULL, '', 1, '127.0.0.1', '2015-09-21 15:09:18', '2015-04-28 14:51:53', 1, '127.0.0.1'),
+(28, 'sdfsdf', 206, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-09-21 15:09:25', NULL, ''),
+(7, 'this is test comment this is test comment this is test comment this is test comment this is test comment', 203, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-28 14:57:03', NULL, ''),
+(8, 'this is test comment this is test comment this is test comment this is test comment this is test comment', 203, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-28 14:58:12', NULL, ''),
+(9, 'commentsssss', 203, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-28 15:04:58', NULL, ''),
+(10, 'commentsssss', 203, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-28 15:18:10', NULL, ''),
+(12, 'ddksdf sd;fpskd fs'';flkw f;wlkecjcedewwc wewef w', 208, 1, '', NULL, '', 3, '127.0.0.1', '2015-05-02 16:15:24', '2015-04-28 15:50:23', 3, '127.0.0.1'),
+(13, 'cc', 208, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-30 10:06:36', NULL, ''),
+(14, 'cc', 208, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-04-30 10:10:15', NULL, ''),
+(19, 'kkk', 208, 1, '', NULL, '', 3, '127.0.0.1', '0000-00-00 00:00:00', '2015-05-02 16:09:32', NULL, ''),
+(22, 'sdfsdf', 230, 1, '', NULL, '', 1, '127.0.0.1', '0000-00-00 00:00:00', '2015-05-27 11:09:40', NULL, ''),
+(24, 'asdd111', 219, 1, '', NULL, '', 1, '127.0.0.1', '2015-07-13 11:49:00', '2015-07-13 11:37:01', 1, '127.0.0.1'),
+(27, 'sdsfasdfasdf', 1, 1, '', NULL, '', 1, '127.0.0.1', '2015-09-21 14:11:39', '2015-09-21 14:11:34', 1, '127.0.0.1'),
+(29, 'kkkk', 228, 1, '', NULL, '', 1, '::1', '0000-00-00 00:00:00', '2015-09-21 20:08:26', NULL, ''),
+(32, 'kkkk', 228, 1, '', NULL, '', 1, '::1', '0000-00-00 00:00:00', '2015-09-22 07:14:11', NULL, ''),
+(33, 'kkkk', 228, 1, '', NULL, '', 1, '::1', '0000-00-00 00:00:00', '2015-09-22 07:14:33', NULL, ''),
+(43, 'new test', 206, 1, 'nifteli@yahoo.com', 1, '::1', NULL, '::1', '0000-00-00 00:00:00', '2015-10-28 06:33:00', NULL, ''),
+(36, 'sdfdfff11111', 233, 1, '', NULL, '', 1, '127.0.0.1', '2015-09-22 08:01:14', '2015-09-22 08:00:59', 1, '127.0.0.1'),
+(41, 'this is comment without login. sent to confirmation', 206, 1, 'nifteli@yahoo.com', 1, '', NULL, '::1', '0000-00-00 00:00:00', '2015-10-06 13:09:50', 1, ''),
+(39, 'wihout_auth', 206, 1, 'nifteli@yahoo.com', 1, '', NULL, '::1', '0000-00-00 00:00:00', '2015-10-06 07:33:55', NULL, ''),
+(42, 'this is comment without login. sent to confirmation', 206, 1, 'nifteli@yahoo.com', 1, '::1', NULL, '::1', '0000-00-00 00:00:00', '2015-10-06 13:10:50', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -420,14 +490,65 @@ CREATE TABLE IF NOT EXISTS `folders` (
   `lastVideoAdded` datetime NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `deletedById` int(11) DEFAULT NULL,
-  `deletedByIP` int(11) NOT NULL,
+  `deletedByIP` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `deleted` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `createdById` (`createdById`),
   KEY `updatedById` (`updatedById`),
   KEY `lastVideoAddedById` (`lastVideoAddedById`),
   KEY `deletedById` (`deletedById`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `folders`
+--
+
+INSERT INTO `folders` (`id`, `name`, `created`, `createdById`, `createdByIP`, `updatedById`, `updatedByIP`, `updated`, `lastVideoAddedById`, `lastVideoAdded`, `isDeleted`, `deletedById`, `deletedByIP`, `deleted`) VALUES
+(1, 'TestFolder', '2015-05-18 00:00:00', 1, '', NULL, '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 0, 1, '::1', '2015-10-28 13:26:20'),
+(2, 'TestFolder2', '2015-09-23 00:00:00', 1, '', NULL, '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 0, NULL, '0', '0000-00-00 00:00:00'),
+(3, 'folder_user', '2015-09-23 00:00:00', 2, '', NULL, '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 0, NULL, '0', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foldertags`
+--
+
+CREATE TABLE IF NOT EXISTS `foldertags` (
+  `tagId` int(11) NOT NULL,
+  `folderId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `foldertags`
+--
+
+INSERT INTO `foldertags` (`tagId`, `folderId`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foldervideos`
+--
+
+CREATE TABLE IF NOT EXISTS `foldervideos` (
+  `folderId` int(11) NOT NULL,
+  `videoId` int(11) NOT NULL,
+  `added` datetime NOT NULL,
+  `addedByIP` varchar(20) NOT NULL,
+  UNIQUE KEY `idxUnq` (`folderId`,`videoId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `foldervideos`
+--
+
+INSERT INTO `foldervideos` (`folderId`, `videoId`, `added`, `addedByIP`) VALUES
+(1, 1, '2015-10-01 07:52:55', '::1'),
+(1, 24, '2015-09-29 07:28:27', '::1'),
+(2, 206, '2015-10-01 07:52:43', '::1'),
+(3, 206, '2015-10-01 07:52:43', '::1');
 
 -- --------------------------------------------------------
 
@@ -442,7 +563,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `nameRu` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `abbr` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
 
 --
 -- Dumping data for table `languages`
@@ -556,7 +677,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `fileName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'attached file',
   PRIMARY KEY (`id`),
   KEY `createdById` (`createdById`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -571,7 +692,7 @@ CREATE TABLE IF NOT EXISTS `profileviews` (
   `lastViewed` datetime NOT NULL,
   PRIMARY KEY (`viewerId`,`viewedId`),
   KEY `viewedId` (`viewedId`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -584,17 +705,42 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `bitValue` smallint(6) NOT NULL,
   `question` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `questions`
 --
 
 INSERT INTO `questions` (`id`, `bitValue`, `question`) VALUES
-(1, 1, 'what'),
-(2, 2, 'who'),
-(3, 4, 'how'),
-(4, 8, 'why');
+(1, 1, 'Nə'),
+(2, 2, 'Kim'),
+(3, 4, 'Necə'),
+(4, 8, 'Niyə'),
+(5, 12, 'Necə/Niyə');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reportreasons`
+--
+
+CREATE TABLE IF NOT EXISTS `reportreasons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reasonAz` varchar(100) NOT NULL,
+  `reasonEn` varchar(100) NOT NULL,
+  `reasonRu` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `reportreasons`
+--
+
+INSERT INTO `reportreasons` (`id`, `reasonAz`, `reasonEn`, `reasonRu`) VALUES
+(1, 'Spam', 'Spam', 'Spam'),
+(2, 'Uyğunsuz video', 'Not appropriate video', 'Not appropriate video'),
+(3, 'Siyasi video', 'Political', 'Political'),
+(4, 'Digər', 'Other', 'Other');
 
 -- --------------------------------------------------------
 
@@ -609,7 +755,52 @@ CREATE TABLE IF NOT EXISTS `roleaccess` (
   `endDate` datetime NOT NULL,
   PRIMARY KEY (`roleId`,`accessTypeId`),
   KEY `accessTypeId` (`accessTypeId`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `roleaccess`
+--
+
+INSERT INTO `roleaccess` (`roleId`, `accessTypeId`, `startDate`, `endDate`) VALUES
+(1, 29, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(3, 3, '2015-07-31 00:00:00', '0000-00-00 00:00:00'),
+(3, 2, '2015-07-22 00:00:00', '2015-07-03 00:00:00'),
+(1, 28, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(3, 1, '2015-07-05 00:00:00', '2015-07-31 00:00:00'),
+(5, 4, '2015-09-02 00:00:00', '0000-00-00 00:00:00'),
+(5, 1, '2015-09-01 00:00:00', '2015-09-02 00:00:00'),
+(5, 2, '2015-09-01 00:00:00', '2015-09-03 00:00:00'),
+(5, 6, '2015-09-01 00:00:00', '2015-09-30 00:00:00'),
+(1, 27, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 26, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 25, '2015-10-14 00:00:00', '0000-00-00 00:00:00'),
+(1, 24, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 23, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 22, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 21, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 20, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 19, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 18, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 17, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 16, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 15, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 14, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 13, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 12, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 11, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 10, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 9, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 8, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 7, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 6, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 5, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 4, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 3, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 2, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 1, '2015-07-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 30, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 31, '2015-10-01 00:00:00', '0000-00-00 00:00:00'),
+(1, 32, '2015-10-01 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -620,8 +811,19 @@ CREATE TABLE IF NOT EXISTS `roleaccess` (
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `created` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `createdBy`, `created`) VALUES
+(1, 'Admin', 1, '2016-03-07'),
+(3, 'IstifadeciAdministrator', 1, '2015-08-07'),
+(5, 'eee2', 1, '2017-02-08');
 
 -- --------------------------------------------------------
 
@@ -637,7 +839,28 @@ CREATE TABLE IF NOT EXISTS `searches` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `createdById` (`createdById`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `userId` int(11) NOT NULL,
+  `catId` int(11) NOT NULL,
+  `subsDate` datetime NOT NULL,
+  UNIQUE KEY `idxUnq` (`userId`,`catId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `subscriptions`
+--
+
+INSERT INTO `subscriptions` (`userId`, `catId`, `subsDate`) VALUES
+(1, 96, '2015-10-06 07:07:08'),
+(1, 241, '2015-10-05 13:31:24');
 
 -- --------------------------------------------------------
 
@@ -648,8 +871,98 @@ CREATE TABLE IF NOT EXISTS `searches` (
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `langId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_tags` (`name`,`langId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=104 ;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `langId`) VALUES
+(64, 'addit', 5),
+(78, 'alabala bala', 5),
+(69, 'alalalal', 5),
+(75, 'aztag', 5),
+(96, 'best', 19),
+(91, 'bestofbest', 5),
+(68, 'blabla', 5),
+(79, 'boom', 5),
+(71, 'cancel', 5),
+(102, 'change', 19),
+(80, 'closer', 5),
+(92, 'diger', 5),
+(54, 'duff', 5),
+(85, 'ebru', 5),
+(76, 'entag', 5),
+(39, 'entertainment', 5),
+(63, 'especially', 5),
+(41, 'evething', 5),
+(60, 'extraordinary', 5),
+(4, 'eylence', 5),
+(84, 'fairtail', 5),
+(62, 'from youtube', 5),
+(82, 'going bother', 5),
+(66, 'google', 5),
+(26, 'Gozel', 19),
+(36, 'grigoriy', 5),
+(46, 'hashtag', 5),
+(53, 'hillary', 5),
+(10, 'honeymoon', 5),
+(30, 'Ilhan', 5),
+(3, 'Istirahet', 5),
+(93, 'JOE COCKER', 5),
+(83, 'just enough', 5),
+(35, 'leps', 5),
+(44, 'lorem.ipsum', 5),
+(89, 'madonna', 5),
+(94, 'madonna', 19),
+(9, 'maldiv', 5),
+(88, 'manson', 5),
+(24, 'Moda', 5),
+(38, 'music', 5),
+(95, 'music', 19),
+(55, 'musician', 5),
+(87, 'musiqi', 5),
+(37, 'muzika', 5),
+(86, 'nese', 5),
+(48, 'nese1', 5),
+(49, 'nese2', 5),
+(50, 'nese3', 5),
+(57, 'new', 5),
+(72, 'new singer', 5),
+(31, 'newtag', 5),
+(11, 'Özlem Tekin', 5),
+(25, 'Pul', 5),
+(77, 'rutag', 5),
+(59, 'sexy', 5),
+(73, 'sexy singer', 5),
+(12, 'sezen', 5),
+(65, 'share it', 5),
+(81, 'skin to skin', 5),
+(28, 'slepak', 67),
+(27, 'Slepakov', 5),
+(56, 'some', 5),
+(61, 'some new music', 5),
+(40, 'something', 5),
+(74, 'sparks', 5),
+(23, 'sss', 5),
+(33, 'tag1', 5),
+(34, 'tag2', 5),
+(51, 'tag33', 5),
+(45, 'tagtag', 5),
+(43, 'tagtest', 5),
+(58, 'talent', 5),
+(90, 'taq', 5),
+(1, 'taq1', 5),
+(2, 'taq2', 5),
+(32, 'tarkan', 5),
+(42, 'testtag', 5),
+(70, 'this is test tag', 5),
+(101, 'update', 19),
+(52, 'youtube', 5),
+(67, 'youtube trend', 5);
 
 -- --------------------------------------------------------
 
@@ -662,6 +975,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `userName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `roleId` int(11) NOT NULL,
   `hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `firstName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `lastName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -669,6 +983,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthDate` date NOT NULL,
   `gender` enum('Male','Female') COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `picturePath` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `registered` datetime NOT NULL,
   `registeredByIP` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `lastLoggedIn` datetime NOT NULL,
@@ -682,18 +997,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deletedById` int(11) DEFAULT NULL,
   `contentChangeCount` int(11) NOT NULL COMMENT 'Sayt kontentini dəyişdirmə sayı',
   `getEmailOnVideoComment` tinyint(1) NOT NULL DEFAULT '0',
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
-) ENGINE=MyIsam  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `userName`, `password`, `status`, `hash`, `firstName`, `lastName`, `fatherName`, `birthDate`, `gender`, `email`, `registered`, `registeredByIP`, `lastLoggedIn`, `languageId`, `profession`, `interests`, `phoneNumber`, `notes`, `isDeleted`, `deleted`, `deletedById`, `contentChangeCount`, `getEmailOnVideoComment`) VALUES
-(1, 'admin', 'admin', '', '', 'Admin', 'Adminovic', '', '0000-00-00', 'Male', '', '2015-03-12 11:31:00', '', '0000-00-00 00:00:00', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0),
-(2, 'user1', 'f6fdffe48c908deb0f4c3bd36c032e72', 'confirmed', '55295c5f4187e', 'User1', 'Ov', '', '0000-00-00', 'Male', 'user1@mail.com', '2015-04-11 19:39:43', '127.0.0.1', '2015-04-18 17:45:24', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0);
+INSERT INTO `users` (`id`, `userName`, `password`, `status`, `roleId`, `hash`, `firstName`, `lastName`, `fatherName`, `birthDate`, `gender`, `email`, `picturePath`, `registered`, `registeredByIP`, `lastLoggedIn`, `languageId`, `profession`, `interests`, `phoneNumber`, `notes`, `isDeleted`, `deleted`, `deletedById`, `contentChangeCount`, `getEmailOnVideoComment`, `created`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'confirmed', 1, '55646323a049e', 'Zöhrab', 'Niftəliyev', 'AAA', '1985-02-14', 'Male', 'nifteli@yahoo.com', './uploads/userPictures/1.jpeg', '2015-03-12 11:31:00', '', '2015-10-19 16:30:43', 5, 'Vəzifə', 'Maraqlar', '0000000', '', 0, '0000-00-00 00:00:00', NULL, 0, 1, '2015-09-30 10:53:47'),
+(2, 'user1', 'f6fdffe48c908deb0f4c3bd36c032e72', 'confirmed', 0, '55295c5f4187e', 'User1', 'Ov', '', '0000-00-00', 'Male', 'user1@mail.com', '', '2015-04-11 19:39:43', '127.0.0.1', '2015-04-11 13:45:05', NULL, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0, '2015-09-30 10:53:47'),
+(3, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 'confirmed', 0, '', 'Admin2', 'Adminovic2', '', '0000-00-00', 'Male', '', '', '2015-03-12 11:31:00', '', '2015-05-01 00:21:26', 19, '', '', '', '', 0, '0000-00-00 00:00:00', NULL, 0, 0, '2015-09-30 10:53:47'),
+(4, 'test', '5ed504758170fae49849bd1ebaef1a76', 'confirmed', 0, '55a4da52353d4', 'test', 'test', '', '0000-00-00', 'Male', 'nifteli@gmail.com', '', '2015-07-14 11:45:54', '127.0.0.1', '0000-00-00 00:00:00', 5, '', '', '1111111', '', 0, '0000-00-00 00:00:00', NULL, 0, 0, '2015-09-30 10:53:47');
 
 -- --------------------------------------------------------
 
@@ -703,30 +1021,330 @@ INSERT INTO `users` (`id`, `userName`, `password`, `status`, `hash`, `firstName`
 
 CREATE TABLE IF NOT EXISTS `videocats` (
   `videoId` int(11) NOT NULL,
-  `categoryId` int(11) NOT NULL,
-  PRIMARY KEY (`videoId`,`categoryId`),
-  KEY `categoryId` (`categoryId`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `categoryId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `videocats`
 --
 
 INSERT INTO `videocats` (`videoId`, `categoryId`) VALUES
-(1, 3),
-(2, 3),
-(3, 5),
-(13, 20),
-(30, 102),
-(30, 104),
-(31, 106),
-(29, 138),
-(28, 191),
-(32, 191),
-(27, 195),
-(13, 198),
-(25, 198),
-(26, 198);
+(1, 8),
+(1, 254),
+(2, 113),
+(4, 113),
+(5, 113),
+(6, 113),
+(7, 113),
+(8, 113),
+(9, 113),
+(10, 113),
+(11, 113),
+(12, 113),
+(13, 113),
+(14, 113),
+(15, 113),
+(16, 113),
+(17, 113),
+(18, 113),
+(208, 156),
+(20, 113),
+(21, 113),
+(22, 113),
+(23, 113),
+(241, 11),
+(25, 113),
+(26, 113),
+(27, 113),
+(28, 113),
+(29, 113),
+(30, 113),
+(31, 113),
+(32, 113),
+(33, 113),
+(34, 113),
+(35, 113),
+(36, 113),
+(37, 113),
+(38, 113),
+(39, 113),
+(40, 113),
+(41, 113),
+(42, 113),
+(43, 113),
+(44, 113),
+(45, 113),
+(46, 113),
+(47, 113),
+(48, 113),
+(49, 113),
+(50, 113),
+(51, 113),
+(52, 113),
+(53, 113),
+(54, 113),
+(55, 113),
+(56, 113),
+(57, 113),
+(58, 113),
+(59, 113),
+(60, 113),
+(61, 113),
+(62, 113),
+(63, 113),
+(64, 113),
+(65, 113),
+(66, 113),
+(67, 113),
+(68, 113),
+(69, 113),
+(70, 113),
+(71, 113),
+(72, 113),
+(73, 113),
+(74, 113),
+(75, 113),
+(76, 113),
+(77, 113),
+(78, 113),
+(79, 113),
+(80, 113),
+(81, 113),
+(82, 113),
+(83, 113),
+(84, 113),
+(85, 113),
+(86, 113),
+(87, 113),
+(88, 113),
+(89, 113),
+(90, 113),
+(91, 113),
+(92, 113),
+(93, 113),
+(94, 113),
+(95, 113),
+(96, 113),
+(97, 113),
+(98, 113),
+(99, 113),
+(100, 113),
+(101, 113),
+(102, 113),
+(103, 113),
+(104, 113),
+(105, 113),
+(106, 113),
+(107, 113),
+(108, 113),
+(109, 113),
+(110, 113),
+(111, 113),
+(112, 113),
+(113, 113),
+(114, 113),
+(115, 113),
+(116, 113),
+(117, 113),
+(118, 113),
+(119, 113),
+(120, 113),
+(121, 113),
+(122, 113),
+(123, 113),
+(124, 113),
+(125, 113),
+(126, 113),
+(127, 113),
+(128, 113),
+(129, 113),
+(130, 113),
+(131, 113),
+(132, 113),
+(133, 113),
+(134, 113),
+(135, 113),
+(136, 113),
+(137, 113),
+(138, 113),
+(139, 113),
+(140, 113),
+(141, 113),
+(142, 113),
+(143, 113),
+(144, 113),
+(145, 113),
+(146, 113),
+(147, 113),
+(148, 113),
+(149, 113),
+(150, 113),
+(151, 113),
+(152, 113),
+(153, 113),
+(154, 113),
+(155, 113),
+(156, 113),
+(157, 113),
+(158, 113),
+(159, 113),
+(160, 113),
+(161, 113),
+(162, 113),
+(163, 113),
+(164, 113),
+(165, 113),
+(166, 113),
+(167, 113),
+(168, 113),
+(169, 113),
+(170, 113),
+(171, 113),
+(172, 113),
+(173, 113),
+(174, 113),
+(175, 113),
+(176, 113),
+(177, 113),
+(178, 113),
+(179, 113),
+(180, 113),
+(181, 113),
+(182, 113),
+(183, 113),
+(184, 113),
+(185, 113),
+(186, 113),
+(187, 113),
+(188, 113),
+(189, 113),
+(190, 113),
+(191, 113),
+(192, 113),
+(193, 113),
+(194, 113),
+(195, 113),
+(196, 113),
+(197, 113),
+(198, 113),
+(199, 113),
+(200, 113),
+(201, 113),
+(202, 254),
+(203, 254),
+(204, 103),
+(205, 96),
+(206, 1),
+(207, 96),
+(240, 106),
+(209, 244),
+(210, 244),
+(211, 244),
+(212, 244),
+(213, 244),
+(214, 244),
+(215, 244),
+(216, 244),
+(217, 241),
+(218, 8),
+(218, 221),
+(219, 97),
+(220, 221),
+(221, 199),
+(222, 199),
+(223, 108),
+(224, 97),
+(225, 16),
+(226, 108),
+(227, 103),
+(228, 103),
+(229, 113),
+(230, 108),
+(231, 113),
+(232, 102),
+(233, 103),
+(234, 103),
+(235, 114),
+(236, 102),
+(237, 1),
+(238, 99),
+(239, 18),
+(242, 97),
+(156, 243),
+(156, 244),
+(156, 245),
+(156, 246),
+(156, 247),
+(156, 248),
+(156, 249),
+(156, 250),
+(156, 251),
+(156, 252),
+(156, 253),
+(156, 254),
+(156, 255),
+(156, 256),
+(156, 257),
+(156, 258),
+(156, 259),
+(156, 260),
+(156, 261),
+(156, 262),
+(156, 263),
+(156, 264),
+(156, 265),
+(156, 265),
+(266, 156),
+(267, 156),
+(268, 156),
+(269, 156),
+(270, 156),
+(271, 156),
+(272, 156),
+(282, 156),
+(283, 156),
+(289, 156),
+(291, 156),
+(292, 95),
+(293, 156),
+(294, 95),
+(295, 156),
+(296, 95),
+(297, 156),
+(298, 95),
+(299, 156),
+(287, 156),
+(288, 156),
+(290, 156),
+(300, 95),
+(301, 156);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `videoreports`
+--
+
+CREATE TABLE IF NOT EXISTS `videoreports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `videoId` int(11) NOT NULL,
+  `reporterId` int(11) NOT NULL,
+  `reportDate` datetime NOT NULL,
+  `reasonId` int(11) NOT NULL,
+  `desc` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `videoreports`
+--
+
+INSERT INTO `videoreports` (`id`, `videoId`, `reporterId`, `reportDate`, `reasonId`, `desc`) VALUES
+(1, 208, 1, '2015-09-28 07:58:40', 1, 'ssss'),
+(2, 208, 1, '2015-09-28 07:58:58', 2, ''),
+(3, 24, 1, '2015-09-29 07:28:23', 1, 'bm'),
+(4, 206, 1, '2015-10-16 08:09:48', 1, 'spa'),
+(5, 206, 1, '2015-10-16 14:21:14', 1, 'll');
 
 -- --------------------------------------------------------
 
@@ -741,8 +1359,10 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `questions` smallint(6) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `info` text COLLATE utf8_unicode_ci NOT NULL,
+  `added` datetime NOT NULL,
   `addedById` int(11) DEFAULT NULL,
   `addedByIP` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated` datetime NOT NULL,
   `updatedById` int(11) DEFAULT NULL,
   `isDeleted` tinyint(1) DEFAULT '0',
   `deleted` datetime NOT NULL,
@@ -753,43 +1373,284 @@ CREATE TABLE IF NOT EXISTS `videos` (
   KEY `updatedById` (`updatedById`),
   KEY `deletedById` (`deletedById`),
   KEY `languageId` (`languageId`)
-<<<<<<< .mine
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-=======
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
->>>>>>> .r30
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=302 ;
 
 --
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`id`, `link`, `languageId`, `questions`, `name`, `info`, `addedById`, `addedByIP`, `updatedById`, `isDeleted`, `deleted`, `deletedById`, `duration`) VALUES
-(1, 'qwdqw', 4, 13, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(2, 'gregerg', 3, 1, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(3, 'tgwerer', 3, 1, '', '', NULL, '', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(4, 'dwedwed', 8, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(5, 'wewef', 5, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(6, 'wefwef', 1, 12, 'wefwef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(9, 'qweqwe', 4, 8, 'qweqwe', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(11, '111111111111111', 5, 4, '111111111', '111', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(12, 'qwdwef', 6, 12, 'dqwd', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(13, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 9, 12, 'test 1', 'good', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(14, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 1, 12, 'test 2', 'good 2', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(15, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 1, 12, 'test 3', 'good 3', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(16, 'https://www.youtube.com/watch?v=O7cNhjeL-G8', 3, 12, 'test 4', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(17, 'qwdqwd', 2, 12, 'qwdwd', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(18, 'rthrthrt', 2, 12, 'qerg', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(19, 'wsfwefew', 3, 12, 'wewef', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(20, '2222222222222222222', 2, 12, '2222222222222', '22222222', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(24, '4444444', 3, 12, '444444444', '44444444', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(25, '55555555555', 5, 12, '5555555', '5555555', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(26, '66666666', 4, 12, '666666666', '6666666666', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(27, '7777777', 3, 12, '77777777', '777777777', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(28, '888888888', 13, 12, '8888888888', '88888888888', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(29, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(30, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(31, 'https://www.youtube.com/watch?v=vPrEzv0zL_o', 19, 2, 'russs', 'peters', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
-(32, '23123', 7, 12, 'eeeeeeeeeeeeeeee', '', 2, '127.0.0.1', NULL, 0, '0000-00-00 00:00:00', NULL, 0);
+INSERT INTO `videos` (`id`, `link`, `languageId`, `questions`, `name`, `info`, `added`, `addedById`, `addedByIP`, `updated`, `updatedById`, `isDeleted`, `deleted`, `deletedById`, `duration`) VALUES
+(1, 'https://www.youtube.com/watch?v=PQF9lPE-Ii4', 67, 12, 'test2', 'twst', '1970-01-01 00:00:00', 2, '127.0.0.1', '0000-00-00 00:00:00', NULL, 1, '2015-10-16 12:25:00', 1, 0),
+(2, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 19, 2, '123', 'info', '1970-01-01 00:00:00', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(5, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad2', 'info', '1970-01-01 00:00:00', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 1, '2015-10-16 12:45:07', 1, 0),
+(7, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(8, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(9, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(10, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(11, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(12, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(13, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(14, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(15, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(16, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(17, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(18, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(20, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(21, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(23, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(25, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(26, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(27, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(28, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(29, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(30, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(31, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(32, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(33, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(34, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(35, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(36, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(37, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(38, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(39, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(40, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(41, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(42, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(43, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(44, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(45, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(46, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(47, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(48, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(49, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(50, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(51, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(52, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(53, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(54, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(55, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(56, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(57, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(58, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(59, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(60, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(61, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(62, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(63, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(64, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(65, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(66, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(67, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(68, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(69, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(70, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(71, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(72, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(73, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(74, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(75, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(76, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(77, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(78, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(79, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(80, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(81, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(82, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(83, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(84, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(85, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(86, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(87, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(88, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(89, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(90, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(91, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(92, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(93, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(94, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(95, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(96, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(97, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(98, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(99, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(100, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(102, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(103, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(104, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(105, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(106, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(107, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(108, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(109, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(110, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(111, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(112, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(113, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(114, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(115, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(116, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(117, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(118, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(119, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(120, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(121, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(122, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(123, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(124, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(125, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(126, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(127, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(128, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(129, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(130, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(131, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(132, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(133, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(134, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(135, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(136, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(137, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(138, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(139, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(140, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(141, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(142, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(143, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(144, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(145, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(146, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(147, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(148, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(149, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(150, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(151, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(152, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(153, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(154, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(155, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(156, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(157, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(158, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(159, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(160, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(161, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(162, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(163, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(164, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(165, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(166, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(167, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(168, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(169, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(170, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(171, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(172, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(173, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(174, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(175, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(176, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(177, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(178, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(179, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(180, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(181, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(182, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(183, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(184, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(185, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(186, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(187, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(188, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(189, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(190, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(191, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(192, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(193, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(194, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(195, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(196, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(197, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(198, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(199, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(200, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(201, 'https://www.youtube.com/watch?v=kiQvaUAus-0', 5, 2, 'ad1', 'info', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(202, 'https://www.youtube.com/watch?v=BNTaJu2CVBg', 5, 4, 'videoad', 'melumat', '2015-04-24 11:42:57', 2, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(203, 'https://www.youtube.com/watch?v=BNTaJu2CVBg', 5, 4, 'Video Adı: ', 'Video Adı: \r\nVideo Adı: \r\n', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(204, 'https://www.youtube.com/watch?v=xpwZJPzcs7o', 5, 2, 'Honeymoon Pina-Ronnie. Zitahli Resort Maldives. Atlantis The Palm Dubai.', 'Traumhafte Flitterwochen auf den Malediven, Zitahli Kuda-Funafaru und in Dubai, Atlantis The Palm. Special thank to the Zitahli Staff. It was beautyful.', '2015-04-24 11:42:57', 3, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 600),
+(205, 'https://www.youtube.com/watch?v=xpwZJPzcs7o', 5, 2, 'Honeymoon Pina-Ronnie. Zitahli Resort Maldives. Atlantis The Palm Dubai.', 'Traumhafte Flitterwochen auf den Malediven, Zitahli Kuda-Funafaru und in Dubai, Atlantis The Palm. Special thank to the Zitahli Staff. It was beautyful.', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 600),
+(206, 'https://www.youtube.com/watch?v=p-j6hGSaqb0', 5, 1, 'Maldives - A trip to Paradise', 'A trip to Conrad Maldives Rangali Island resort with Ithaa Restaurant, the first undersea restaurant in the world, and Nemo N100 Tourist submarine.\r\n\r\nSee more:\r\nMy website: www.travip.me\r\nOn Facebook: www.facebook.com/travel.w.travip\r\nYume: www.yume.vn/travip', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 406),
+(207, 'https://www.youtube.com/watch?v=ZMaHn82YOlw', 5, 2, 'Özlem Tekin - Sen Anla', 'Music video by Özlem Tekin performing Sen Anla. (C) 2010 SONY MUSIC ENTERTAINMENT TURKEY', '2015-04-24 11:42:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 235),
+(208, 'https://www.youtube.com/watch?v=6ie6-s6EdH8', 5, 2, 'Sezen Aksu 3 En Duygusal 22 Şarkı', 'Sezen Aksu''nun en popüler, en çok dinlenen, en duygusal yirmi iki şarkısı.\r\n\r\n1) Adı Bende Saklı\r\n2) Ben Sende Tutuklu Kaldım\r\n3) El Gibi\r\n4) Farkındayım\r\n5) Geri Dön\r\n6) Gidiyorum\r\n7) Gülümse\r\n8) Her şeyi Yak\r\n9) İstanbul İstanbul Olalı\r\n10) Kaybolan Yıllar\r\n11) Keskin Bıçak\r\n12) Kolay Olmayacak\r\n13) Pişman Olduğun Zaman\r\n14) Sarı Odalarda\r\n15) Sen Ağlama\r\n16) Seni Kimler Aldı\r\n17) Sorma\r\n18) Tanrı İstemezse\r\n19) Tutsak\r\n20) Tükeneceğiz\r\n21) Unuttun mu Beni\r\n22) Vay\r\n JOIN QUIZGROUP PARTNER PROGRAM: http://join.quizgroup.com/?ref=207247', '2015-04-24 11:42:57', 1, '127.0.0.1', '2015-09-28 19:05:39', 1, 0, '0000-00-00 00:00:00', NULL, 6292),
+(209, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:46:27', 3, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(210, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:46:46', 3, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(211, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:47:28', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(212, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:47:34', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742);
+INSERT INTO `videos` (`id`, `link`, `languageId`, `questions`, `name`, `info`, `added`, `addedById`, `addedByIP`, `updated`, `updatedById`, `isDeleted`, `deleted`, `deletedById`, `duration`) VALUES
+(213, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:54:18', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(214, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:54:32', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(215, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 10:57:43', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(216, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 11:23:30', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(217, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 11:24:29', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(218, 'https://www.youtube.com/watch?v=uD3n-PH4CKM', 5, 12, '1 урок. Программирование в 1С 8.2. Простой и подробный курс!', 'www.1c-uroki.ru \r\nУрок 1 бесплатного курса по 1С 8.2 "Комплексная автоматизация предприятия". Знакомство со всеми механизмами платформы 1С Предприятие 8.2.\r\n\r\nОглавление 1 урока:\r\n01:12 что такое система 1С Предприятие 8.2?\r\n01:31 где скачать платформу 1С Предприятие 8.2\r\n01:49 архитектура 1С:Предприятие 8.2 на логическом уровне\r\n02:00 что такое информационная база?\r\n02:18 что такое конфигурация?\r\n02:40 что такое технологическая платформа 1С Предприятие 8.2?\r\n05:15 архитектура 1С Предприятие 8.2 на физическом уровне;\r\n05:33 файл-серверный вариант работы 1С 8.2;\r\n07:50 файл-серверный вариант работы 1С 8.2 с использованием веб-сервера;\r\n09:00 клиент-серверный вариант работы системы 1С Предприятие 8.2;\r\n10:00 что такое сервер 1С Предприятие 8.2?\r\n11:16 тонкий и толстый клиент платформы 1С Предприятие 8.2;\r\n13:38 знакомство с основными классами объектов в 1C 8.2;\r\n16:00 зачем нужны регистры в системе 1С 8.2?\r\n23:19 запуск конфигурации 1С Предприятия 8.2;\r\n24:48 создание новой информационной базы\r\n29:25 режимы запуска 1С: «1С Предприятие» и «Конфигуратор»;\r\n32:00 знакомство с классом объектов Константы;\r\n32:45 знакомство с классом объектов Справочники;\r\n33:59 создание справочника Сотрудники;\r\n42:44 создание иерархического справочника Контрагенты.\r\n\r\n\r\nСкачать платформу 1С Предприятие 8.2 можно тут:\r\nwww.1c-uroki.ru/articles/download_1C_8.2\r\n\r\nСсылка на 1 урок \r\nwww.1c-uroki.ru/lessons/kurs1C_1/1_urok_kurs_1C_8.2\r\n', '2015-04-27 11:24:50', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2742),
+(219, 'https://www.youtube.com/watch?v=EAlqswPMb5M', 5, 2, 'AHMET KAYA EN SEVİLEN ŞARKILARI', 'https://www.facebook.com/aktuelvideolar\r\n\r\nAhmet   Kaya - Ağladıkça \r\nAhmet   Kaya - Birazdan Kudurur Deniz\r\nAhmet   Kaya - Giderim\r\nAhmet   Kaya - Herkes Kendi işine\r\nAhmet   Kaya - Kum Gibi\r\nAhmet   Kaya - Nereden Bileceksiniz\r\nAhmet   Kaya - Penceresiz Kaldım Anne\r\nAhmet   Kaya - Söyle\r\nAhmet   Kaya- Hani Benim Gençligim\r\nAhmet   Kaya -Şafak Türküsü\r\n JOIN QUIZGROUP PARTNER PROGRAM: http://join.quizgroup.com/?ref=91605', '2015-04-30 11:55:53', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2797),
+(220, 'https://www.youtube.com/watch?v=QQPJYnr48yU', 5, 4, 'Marilyn Manson - Coma White', 'Music video by Marilyn Manson performing Coma White. (C) 1999 Nothing/Interscope Records', '2015-05-18 22:23:37', 1, '127.0.0.1', '2015-10-02 08:02:53', 1, 0, '0000-00-00 00:00:00', NULL, 263),
+(221, 'https://www.youtube.com/watch?v=r74c7C0FEhQ', 5, 4, 'Семён Слепаков: Рэд Хот Чили Пепперс', 'Песня из Comedy Club №334 (http://THT.ru/baea52e6f0)\r\n\r\nТекст песни:\r\nА у нас в деревне все слушают шансон,\r\nСлушают Михайлова, Лепса и Трофима,\r\nНу а я считаю, что всё это отстой,\r\nЯ поклонник музыки другой.\r\n\r\nЛюблю я Рэд Хот Чили Пепперс\r\nРэд-Хот-Чили-Пепперс!\r\nРэд Хот Чили Пепперс\r\nОчень я люблю.\r\n\r\nЯ работаю с людьми, я их хороню,\r\nА потом с коллегами мы идём бухать,\r\nА потом на кладбище песни мы поём,\r\nНаши вкусы сходятся во всём\r\n\r\nПомимо Рэд Хот Чилли Пепперс,\r\nРэд-Хот-Чилли-Пепперс!\r\nРэд Хот Чилли Пепперс\r\nЯ пою один.\r\n\r\nКак-то раз друзья меня ударили лопатой,\r\nЯ очнулся и пошёл в ресторан «Весна»\r\nТам играл какой-то чёрт песню про тюрьму\r\n- Слышишь, чёрт! - базарю я ему\r\n\r\nТы сбацай Помимо Рэд Хот Чилли Пепперс,\r\nВот тебе задачка!\r\nРэд Хот Чилли Пепперс,\r\nВот тебе полтос.\r\n\r\nЧёрт сказал: Не обессудь, не слыхал таких,\r\nЗнаю я Михайлова, Лепса и Трофима,\r\nА про этих, как их там, слышу в первый раз,\r\nВидно не высок пока их класс\r\n\r\nЧо там за Хот Бед Чилли Випонс,\r\nЧо за коллективчик?\r\nЧо за Мэд Хэд Шпилли Биверс,\r\nЧо за молодняк?\r\n\r\nВозмущаться начали мужики вокруг,\r\nПочему остановилась песня про тюрьму,\r\nИ чо за хрен с лопатою, торчащей из спины,\r\nСбил нас с ностальгической волны\r\n\r\nИ чо за незнакомое английское названье?\r\nЧо за неприятные, обидные слова?\r\n\r\nВыхватил лопату я и на них пошёл\r\nВовремя напомнили они мне про неё\r\nГоворю им я таких слов не потерплю\r\nЯ сейчас лопатой отрублю\r\n\r\nВам ваши Рэд Хот Чилли Пепперс\r\nВсем поочередно\r\nВаши Чилли Пепперс нахер отрублю!\r\n\r\nЗакричали мужики: Шутим мы, братан!\r\nПофиг нам на творчество Лепса и Трофима\r\nСтас Михалов лишь среди баб авторитет,\r\nА у нас другой приоритет\r\n\r\nМы любим Рэд Хот Чилли Пепперс,\r\nМамою клянёмся,\r\nЛюбим Рэд Хот Чилли Пепперс,\r\nЗуб тебе даём!\r\n\r\nМы любим сингл их великий\r\nКалифорникейшн,\r\nЛюбим Тони Кидиса\r\nИ их бассиста Фли!\r\n\r\nУважаемая группа Рэд Хот Чилли Пепперс,\r\nВсе у нас теперь в деревне любят только вас,\r\nВаши песни с мужиками часто мы поём,\r\nПросят мужики лишь об одном:\r\n\r\nМы просим вас, родные Рэд Хот Чилли Пепперс,\r\nНапишите хоть одну вы песню про тюрьму!..', '2015-05-18 22:25:22', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 190),
+(222, 'https://www.youtube.com/watch?v=5TZyrJf1b8k', 5, 4, 'Zuhair Murad Haute Couture Fall/Winter 2014-2015, COMPLETE SHOW', 'The complete (untruncated and untagged) video of the beautiful Zuhair Murad''s Haute Couture Fall/Winter 2014-2015 fashion show, part of the Paris Haute Couture Fashion Week.\r\nThis is the part 1/2. For the "bride" and the finale walk, see part 2/2\r\nhttps://www.youtube.com/watch?v=6OJvxsmGCko', '2015-05-18 22:28:51', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 840),
+(223, 'https://www.youtube.com/watch?v=Hyy8i45oh-c', 5, 2, 'Семён Слепаков: Мне бы бабу', 'Песня из Comedy Club №272 (http://THT.ru/d577c2272a)\r\n\r\nТекст песни:\r\nГде бы взять мне бабу, бабу молодую,\r\nС бескорыстным сердцем, чуткою душой,\r\nТонким интеллектом, скромною натурой,\r\nДобрыми глазами, да жопушкой большой?\r\n\r\nЧтобы секс любила, но не очень долгий -\r\nНу, минут так восемь, да и пять, порой.\r\nДа чтоб ей три минуты вечностью казались,\r\nДа и двух хватало бабе бы с лихвой!\r\n\r\nЧтобы и минута ей была бы в радость,\r\nЧтоб срывал бы крышу и секундный акт...\r\nИ, чтоб не знала баба про восьмое марта,\r\nЧтоб от бабы скрыли в детстве этот факт.\r\n\r\nЧтоб была у бабы мама космонавтом,\r\nЧто бы раз в полгода приходил сигнал.\r\nЧтоб у бабы папа был бы олигархом,\r\nВ Лондоне скрывался, но деньги присылал.\r\n\r\nЧтоб были у ней груди пятого размера,\r\nЧтоб всегда ей было девятнадцать лет.\r\nИ телефон у бабы чтобы был особый,\r\nЧтоб я мог звонить ей, а она мне нет.\r\n\r\nА еще чтоб к бабе пульт бы прилагался,\r\nЧтобы громкость бабы мог я убавлять,\r\nИ когда приходит баба от подруги,\r\nЧтоб рассказ я бабий мог перемотать.\r\n\r\nЧто бы парковалась баба как не баба,\r\nА как очень старый, опытный таксист.\r\nЧтоб была та баба родом из-за МКАДа,\r\nЧтобы благодарна мне была всю жизнь.\r\n\r\nЧто бы поощряла частые измены\r\nИ презервативы мне клала в пиджак,\r\nИ чтобы не любила крупные размеры,\r\nИли мне хотя бы говорила так.\r\n\r\nОх, где бы взять Семёну бабу молодую,\r\nЧтоб его любила и всегда ждала,\r\nЧтоб иметь бы бабу, именно, такую,\r\nИ чтоб об этой бабе не узнала бы жена!\r\n\r\nЧтоб иметь бы бабу, именно, такую,\r\nИ чтоб об этой бабе не узнала бы жена!', '2015-05-18 22:37:41', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 183),
+(224, 'https://www.youtube.com/watch?v=Hyy8i45oh-c', 5, 2, 'Семён Слепаков: Мне бы бабу', 'Песня из Comedy Club №272 (http://THT.ru/d577c2272a)\r\n\r\nТекст песни:\r\nГде бы взять мне бабу, бабу молодую,\r\nС бескорыстным сердцем, чуткою душой,\r\nТонким интеллектом, скромною натурой,\r\nДобрыми глазами, да жопушкой большой?\r\n\r\nЧтобы секс любила, но не очень долгий -\r\nНу, минут так восемь, да и пять, порой.\r\nДа чтоб ей три минуты вечностью казались,\r\nДа и двух хватало бабе бы с лихвой!\r\n\r\nЧтобы и минута ей была бы в радость,\r\nЧтоб срывал бы крышу и секундный акт...\r\nИ, чтоб не знала баба про восьмое марта,\r\nЧтоб от бабы скрыли в детстве этот факт.\r\n\r\nЧтоб была у бабы мама космонавтом,\r\nЧто бы раз в полгода приходил сигнал.\r\nЧтоб у бабы папа был бы олигархом,\r\nВ Лондоне скрывался, но деньги присылал.\r\n\r\nЧтоб были у ней груди пятого размера,\r\nЧтоб всегда ей было девятнадцать лет.\r\nИ телефон у бабы чтобы был особый,\r\nЧтоб я мог звонить ей, а она мне нет.\r\n\r\nА еще чтоб к бабе пульт бы прилагался,\r\nЧтобы громкость бабы мог я убавлять,\r\nИ когда приходит баба от подруги,\r\nЧтоб рассказ я бабий мог перемотать.\r\n\r\nЧто бы парковалась баба как не баба,\r\nА как очень старый, опытный таксист.\r\nЧтоб была та баба родом из-за МКАДа,\r\nЧтобы благодарна мне была всю жизнь.\r\n\r\nЧто бы поощряла частые измены\r\nИ презервативы мне клала в пиджак,\r\nИ чтобы не любила крупные размеры,\r\nИли мне хотя бы говорила так.\r\n\r\nОх, где бы взять Семёну бабу молодую,\r\nЧтоб его любила и всегда ждала,\r\nЧтоб иметь бы бабу, именно, такую,\r\nИ чтоб об этой бабе не узнала бы жена!\r\n\r\nЧтоб иметь бы бабу, именно, такую,\r\nИ чтоб об этой бабе не узнала бы жена!', '2015-05-18 22:38:58', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 183),
+(225, 'https://www.youtube.com/watch?v=uEDgf_ezWFw', 5, 1, 'Dior Haute Couture Spring/Summer 2015 : Making Of A Dress', 'Christian Dior Haute Couture Spring/Summer 2015', '2015-05-18 23:05:02', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 268),
+(226, 'https://www.youtube.com/watch?v=_70DqRgm8O0', 5, 2, 'İlhan Şeşen-Sarılınca sana', 'wwwwdd', '2015-05-19 10:52:38', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 238),
+(227, 'https://www.youtube.com/watch?v=_70DqRgm8O0', 5, 2, 'İlhan Şeşen-Sarılınca sana', 'wwwwdd', '2015-05-19 10:53:49', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 238),
+(228, 'https://www.youtube.com/watch?v=4RnjWLVyMps', 5, 2, 'Joe Cocker "The Letter" in live 1970 (MAD DOGS & ENGLISHMEN)', 'send me your e-mail, and I send this video\r\n JOIN QUIZGROUP PARTNER PROGRAM: http://join.quizgroup.com/?ref=65996', '2015-05-20 11:13:25', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 196),
+(229, 'https://www.youtube.com/watch?v=DA3NBgktpbw', 5, 2, 'KİBARİYE & TARKAN - Gülümse Kaderine', 'iTunes''dan İndir / Download on iTunes\r\nhttp://tinyurl.com/tarkan-on-itunes\r\n\r\n2007 - KİBARİYE & TARKAN - Gülümse Kaderine - Gülümse Kaderine', '2015-05-20 11:31:01', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 279),
+(230, 'https://www.youtube.com/watch?v=GCygLVz4Rjg', 5, 2, 'Григорий Лепс - Танго разбитых сердец (Парус. Live)', 'В видео версию концерта Григория Лепса «Парус. Live» вошли не только песни Владимира Высоцкого, но хорошо знакомые, полюбившиеся песни из репертуара артиста. Предлагаем Вам одну из них.\r\nПространство большого концертного зала, сдержанно подпевающие зрители, торжественная чёрно-белая гамма  формируют атмосферу этого концерта, настраивающего на вдумчивое и философское настроение, духовную работу.\r\nТак же на DVD представлены 8 клипов и более ста фотографий Григория Лепса.\r\n\r\nКупить "Парус. Live" на Ozon http://bit.ly/fVBHz8\r\nBuy Leps on iTunes http://bit.ly/aDKegL', '2015-05-27 11:09:03', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 228),
+(231, 'https://www.youtube.com/watch?v=oOmfMtHY7_U', 5, 2, 'Evanescence - Fallen', '(00:00 - 1. Going Under) \r\n(03:33 - 2. Bring Me To Life) \r\n(07:31 - 3. Everybody''s fool) \r\n(10:46 - 4. My Immortal) \r\n(15:11 - 5. Haunted) \r\n(18:16 - 6. Tourniquet) \r\n(22:49 - 7. Imaginary) \r\n(27:06 - 8. Taking Over Me) \r\n(30:57 - 9. Hello) \r\n(34:31 - 10. My Last Breath) \r\n(38:37 - 11. Whisper) \r\nThanks Marshalamax\r\n\r\nFallen is the first full-length album by Evanescence, and their first album to achieve widespread release around the world.\r\n\r\nFallen was the eighth best-selling album in the U.S. in 2004, with about 2.61 million copies sold that year. The album was recorded at Ocean Studios (Burbank) and Conway Recording Studios (Hollywood) both in California. The album reached 7x Platinium status on 24th June 2008 in the U.S.\r\n\r\nAmy Lee stated:\r\n"We''ve all fallen, but at the same time we''re not broken. There is the hint that we are going to get up again."\r\n\r\n\r\nThis is one of the reasons that Fallen is called what it is. Ben Moody in an interview said that Fallen was made to let people know that they aren''t alone when they feel alone or feel pain.\r\n\r\nFallen has sold well over 15 million copies worldwide and about 5 and a half million in the US alone. The album debuted at #7 and has not fallen below #39 to date on the Billboard Album Chart. The album stayed in the top 10 for 43 non-consecutive weeks. Released March 4th, 2003.\r\n\r\nThe CD was re-released in January 2004 with the band version of My Immortal. Fallen was Grammy nominated for Album of the Year in 2004. John LeCompt and Rocky Gray both had writing credits on Fallen before they officially joined the band. John has credits on Taking Over Me and Rocky has credits for writing the original version of Tourniquet (originally called My Tourniquet) for his band, Soul Embraced. The latest album features the 12th song My Immortal (Band Version) but does not state this song on the tracklisting.', '2015-05-27 11:11:33', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 2641),
+(232, 'https://www.youtube.com/watch?v=pW4qU4aWrDg', 5, 2, 'Hilary Duff - Sparks', 'Hilary Duff “Sparks” Available Now!\r\n\r\niTunes: http://smarturl.it/iSparks?iqid=yt\r\nAmazon: http://smarturl.it/aSparks?iqid=yt\r\nGoogle Play: http://smarturl.it/gSparks?iqid=yt\r\nSpotify: http://smarturl.it/sSparks?iqid=yt\r\n\r\nPre-order Hilary’s new album: http://myplay.me/1e35', '2015-05-27 11:13:20', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 235),
+(233, 'https://www.youtube.com/watch?v=8mkwmNPmPmk', 5, 2, 'Younger: A Sneak Peek and Preview of Hilary''s New Single SPARKS', 'Hilary''s New Single "SPARKS" Out April 7th. Shazam the sneak peek now for an exclusive reveal of the cover art for "SPARKS"!\r\n\r\nBe the first to hear a preview of Hilary Duff’s new single, “Sparks,” and sneak a peek at her new series, Younger, from the creator of Sex and the City. Younger premieres Tuesday March 31 at 10/9c on TV Land!\r\n\r\nFollow Hilary Duff!\r\nhttp://www.hilaryduff.com\r\nFacebook: https://www.facebook.com/HilaryDuff\r\nTwitter: https://twitter.com/HilaryDuff \r\nInstagram: http://instagram.com/HilaryDuff\r\n\r\nFollow Younger!\r\nTwitter: https://twitter.com/youngertv\r\nFacebook: https://www.facebook.com/youngertv\r\nInstagram: https://instagram.com/youngertv/\r\nPinterest: https://www.pinterest.com/youngertv/\r\nTumblr: http://youngertv.tumblr.com/', '2015-05-27 11:15:56', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 61),
+(234, 'https://www.youtube.com/watch?v=6ie6-s6EdH8', 5, 2, 'Sezen Aksu - En Duygusal 22 Şarkı', 'Sezen Aksu''nun en popüler, en çok dinlenen, en duygusal yirmi iki şarkısı.\r\n\r\n1) Adı Bende Saklı\r\n2) Ben Sende Tutuklu Kaldım\r\n3) El Gibi\r\n4) Farkındayım\r\n5) Geri Dön\r\n6) Gidiyorum\r\n7) Gülümse\r\n8) Her şeyi Yak\r\n9) İstanbul İstanbul Olalı\r\n10) Kaybolan Yıllar\r\n11) Keskin Bıçak\r\n12) Kolay Olmayacak\r\n13) Pişman Olduğun Zaman\r\n14) Sarı Odalarda\r\n15) Sen Ağlama\r\n16) Seni Kimler Aldı\r\n17) Sorma\r\n18) Tanrı İstemezse\r\n19) Tutsak\r\n20) Tükeneceğiz\r\n21) Unuttun mu Beni\r\n22) Vay\r\n JOIN QUIZGROUP PARTNER PROGRAM: http://join.quizgroup.com/?ref=207247', '2015-05-27 15:56:50', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 6292),
+(235, 'https://www.youtube.com/watch?v=6ie6-s6EdH8', 5, 2, 'Sezen Aksu - En Duygusal 22 Şarkı', 'Sezen Aksu''nun en popüler, en çok dinlenen, en duygusal yirmi iki şarkısı.\r\n\r\n1) Adı Bende Saklı\r\n2) Ben Sende Tutuklu Kaldım\r\n3) El Gibi\r\n4) Farkındayım\r\n5) Geri Dön\r\n6) Gidiyorum\r\n7) Gülümse\r\n8) Her şeyi Yak\r\n9) İstanbul İstanbul Olalı\r\n10) Kaybolan Yıllar\r\n11) Keskin Bıçak\r\n12) Kolay Olmayacak\r\n13) Pişman Olduğun Zaman\r\n14) Sarı Odalarda\r\n15) Sen Ağlama\r\n16) Seni Kimler Aldı\r\n17) Sorma\r\n18) Tanrı İstemezse\r\n19) Tutsak\r\n20) Tükeneceğiz\r\n21) Unuttun mu Beni\r\n22) Vay\r\n JOIN QUIZGROUP PARTNER PROGRAM: http://join.quizgroup.com/?ref=207247', '2015-05-27 15:57:47', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 6292),
+(236, 'https://www.youtube.com/watch?v=0JObRDWJ_Z8', 5, 2, 'Ebru Gündeş Demir attım yalnızlıga', 'ee', '2015-06-17 08:45:57', 1, '127.0.0.1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 302),
+(238, 'https://www.youtube.com/watch?v=9j5p9qtQZsM&index=3&list=PLv8w5AogPd5UhcBhIuK5Bg7zTxUkxWmU7', 5, 2, 'HALİL SEZAİ-GİT', '', '2015-09-22 07:45:04', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 337),
+(239, 'https://www.youtube.com/watch?v=Q52x94w_viA', 5, 12, 'Aşkın Nur Yengi - Susma (1990)', 'Söz : Sezen Aksu\r\nMüzik : Christos Nikolopoulos\r\nDüzenleme : Onno Tunç\r\n\r\nAnladım gidiyorsun daha öncekiler gibi\r\nHiç olmazsa son bir defa öp\r\nBu kadar zor mu "Seni sevdim bir zamanlar." demek\r\nÖyle zor ki yeniden sevmek\r\n\r\nYalnızlık eski bir ezber\r\nAyrılık alışkanlık\r\nSensizlik bana dost, bana eş\r\nBu kadar mağrur olma\r\nİnan sen olmasan bile\r\nHayat devam eder, doğar güneş\r\n\r\nSusma veda ederken\r\nBiraz gül, bir şey söyle giderken\r\nGitme, hemen gitme kal\r\nBiraz dur, daha erken...', '2015-09-22 13:06:40', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 325),
+(240, 'https://www.youtube.com/watch?v=6ie6-s6EdH8', 5, 2, 'Sezen Aksu - En Duygusal 22 Şarkı', 'Sezen Aksu''nun en popüler, en çok dinlenen, en duygusal yirmi iki şarkısı.\r\n\r\n00:00  - Vay Yine mi Keder\r\n04:00 - Adı Bende Saklı\r\n07:45 - Ben Sende Tutuklu Kaldım\r\n12:13 - El Gibi\r\n16:33 - Farkındayım\r\n21:36 - Geri dön\r\n26:00  - Gidiyorum Bütün Aşklar Yüreğimde\r\n30:50 - Gülümse \r\n35:42 - Her Şeyi Yak\r\n40:53 - İstanbul İstanbul Olalı\r\n46:42 - Kaybolan Yıllar\r\n50:02 - Keskin Bıçak \r\n55:27 - Kolay Olmayacak \r\n1:00:20 - Pişman Olduğun Zaman \r\n1:04:35 - Sarı Odalar\r\n1:10:24 - Sen Ağlama \r\n1:16:14-  Seni Kimler Aldı \r\n1:19:43 - Sorma \r\n1:24:35 - Tanrı İstemezse \r\n1:29:56 - Tutsak \r\n1:36:15 - Tükeneceğiz \r\n1:40:40 - Unuttun mu Beni', '2015-09-28 19:07:21', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 6292),
+(241, 'https://www.youtube.com/watch?v=GqRMIupK4Mc', 5, 8, 'Madonna - Get Together2', 'Lyrics:\r\n\r\nIt''s all an illusion\r\nThere''s too much confusion\r\nIt''s all an illusion\r\nThere''s too much confusion, confusion, confusion,...\r\n\r\nDown, down, down in your heart\r\nFind, find, find the secret\r\nTurn, turn, turn your head around\r\nBaby we can do it, we can do it all right\r\n\r\nDo you believe in love at first sight\r\nIt''s an illusion, I don''t care\r\nDo you believe I can make you feel better\r\nToo much confusion, come on over here\r\n\r\nCan we get together\r\nI really, I really wanna be with you\r\nCome on, check it out with me\r\nI hope you, I hope you feel the same way too\r\n\r\nI searched, I searched, I searched my whole life\r\nTo find, to find, to find the secret\r\nAnd all I did was open up my eyes\r\nBaby we can do it, we can do it all right\r\n\r\nDo you believe that we can change the future\r\nDo you believe I can make you feel better\r\n\r\nCan we get together\r\nI really, I really wanna be with you\r\nCome on, check it out with me\r\nI hope you, I hope you feel the same way too\r\nCan we get together\r\nI really, I really wanna be with you\r\nCome on, check it out with me\r\nI hope you, I hope you feel the same way too\r\n\r\nIt''s all an illusion\r\nThere''s too much confusion\r\nI''ll make you feel better\r\nIf it''s bitter at the start, then it''s sweeter in the end\r\n\r\nDo you believe in love at first sight\r\nIt''s an illusion, I don''t care\r\nDo you believe I can make you feel better\r\nToo much confusion, come on over here\r\n\r\nCan we get together\r\nI really, I really wanna be with you\r\nCome on, check it out with me\r\nI hope you, I hope you feel the same way too\r\nCan we get together\r\nI really wanna be with you\r\nCome on, check it out with me\r\nI hope you feel the same way too\r\n\r\nIt''s all an illusion\r\nThere''s too much confusion\r\nI''ll make you feel better\r\nIf it''s bitter at the start, then it''s sweeter in the end', '2015-10-16 17:48:44', 1, '::1', '2015-10-16 17:52:33', 1, 1, '2015-10-21 12:38:18', 1, 330),
+(242, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Madonna - Like It Or Not', 'Lyrics:\r\n\r\nYou can call me a sinner\r\nAnd you can call me a saint\r\nCelebrate me for who I am\r\nDislike me for what I ain''t\r\n\r\nPut me up on a pedestal\r\nOr drag me down in the dirt\r\nSticks and stones will break my bones\r\nBut your names will never hurt\r\n\r\nI''ll be the garden, you''ll be the snake\r\nAll of my fruit is yours to take\r\nBetter the devil that you know\r\nYour love for me will grow\r\nBecause\r\n\r\nThis is who I am\r\nYou can like it or not\r\nYou can love me or leave me\r\nCause I''m never gonna stop, no no\r\n\r\nCleopatra had her way\r\nMata Hari too\r\nWhether they were good or bad\r\nIs strictly up to you\r\n\r\nLife is a paradox\r\nAnd it doesn''t make much sense\r\nCan''t have femme without the fatale\r\nPlease don''t take offense\r\n\r\nDon''t let the fruit rot under the vine\r\nFill up your cup and let''s drink the wine\r\nBetter the devil that you know\r\nYour love for me will grow\r\nBecause\r\n\r\nThis is who I am\r\nYou can like it or not\r\nYou can love me or leave me\r\nCause I''m never gonna stop, no no, you know\r\nThis is who I am\r\nYou can like it or not\r\nYou can love me or leave me\r\nCause I''m never gonna stop, no no, you know\r\n\r\nNo no, you know\r\nNo no, you know\r\nNo no, you know\r\nNo no, you know\r\n\r\nI''ll be the garden, you''ll be the snake\r\nAll of my fruit is yours to take\r\nBetter the devil that you know\r\nYour love for me will grow\r\nBecause\r\n\r\nThis is who I am\r\nYou can like it or not\r\nYou can love me or leave me\r\nCause I''m never gonna stop, no no, you know\r\nThis is who I am\r\nYou can like it or not\r\nYou can love me or leave me\r\nCause I''m never gonna stop, no no, you know\r\n\r\nNo no, you know\r\nNo no, you know\r\nNo no, you know\r\nNo no, you know', '2015-10-20 14:31:48', 1, '::1', '0000-00-00 00:00:00', NULL, 1, '2015-10-21 12:38:14', 1, 289),
+(243, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 12:37:53', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(244, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 12:38:29', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(245, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 12:42:59', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(246, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 12:43:59', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(247, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 12:44:35', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(248, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:05:23', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(249, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:08:57', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 0),
+(250, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:09:29', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(251, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:10:47', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(252, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:11:46', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(253, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:15:15', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(254, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:29:34', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(255, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:29:53', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(256, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:30:23', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(259, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:40:57', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(260, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:42:44', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(261, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:43:44', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(262, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:44:11', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(263, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 13:45:13', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(282, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 14:47:41', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(283, 'https://www.youtube.com/watch?v=hLcLckQ51Fo', 5, 2, 'Music', 'Madonna is best', '2015-10-21 14:49:32', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 289),
+(287, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 19, 2, 'Music', 'melumat2', '2015-10-22 08:42:00', 1, '::1', '2015-10-23 19:59:14', 1, 0, '0000-00-00 00:00:00', NULL, 7192),
+(288, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 19, 2, 'Music', 'melumat1', '2015-10-22 08:44:50', 1, '::1', '2015-10-23 14:47:14', 1, 0, '0000-00-00 00:00:00', NULL, 199),
+(289, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'melumat2', '2015-10-22 08:44:51', 1, '::1', '2015-10-23 14:47:14', 1, 0, '0000-00-00 00:00:00', NULL, 7192),
+(290, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 19, 2, 'Music', 'melumat1', '2015-10-22 08:50:05', 1, '::1', '2015-10-23 14:56:43', 1, 0, '0000-00-00 00:00:00', NULL, 199),
+(291, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'melumat2', '2015-10-22 08:50:06', 1, '::1', '2015-10-23 15:13:12', 1, 0, '0000-00-00 00:00:00', NULL, 7192),
+(292, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 5, 1, 'Derbi Nedir?', 'Futbol zaten heyecan, adrenalin. Peki ya derbi bunun kaç misli? \nhttps://www.misli.com/ ile bilmeyen kalmasın.', '2015-10-22 08:51:38', 1, '::1', '2015-10-23 14:56:43', 1, 0, '0000-00-00 00:00:00', NULL, 199),
+(293, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'Joe Cocker Greatest Hits \nFacebook : https://www.facebook.com/thetoptensmusic\nBest Songs Of Joe Cocker', '2015-10-22 08:51:39', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 7192),
+(294, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 5, 1, 'Derbi Nedir?', 'Futbol zaten heyecan, adrenalin. Peki ya derbi bunun kaç misli? \nhttps://www.misli.com/ ile bilmeyen kalmasın.', '2015-10-22 08:54:25', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 199),
+(295, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'Joe Cocker Greatest Hits \nFacebook : https://www.facebook.com/thetoptensmusic\nBest Songs Of Joe Cocker', '2015-10-22 08:54:27', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 7192),
+(296, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 5, 1, 'Derbi Nedir?', 'Futbol zaten heyecan, adrenalin. Peki ya derbi bunun kaç misli? \nhttps://www.misli.com/ ile bilmeyen kalmasın.', '2015-10-22 14:53:33', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 199),
+(297, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'Joe Cocker Greatest Hits \nFacebook : https://www.facebook.com/thetoptensmusic\nBest Songs Of Joe Cocker', '2015-10-22 14:53:34', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 7192),
+(298, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 5, 1, 'Derbi Nedir?', 'Futbol zaten heyecan, adrenalin. Peki ya derbi bunun kaç misli? \nhttps://www.misli.com/ ile bilmeyen kalmasın.', '2015-10-22 14:55:35', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 199),
+(299, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'Joe Cocker Greatest Hits \nFacebook : https://www.facebook.com/thetoptensmusic\nBest Songs Of Joe Cocker', '2015-10-22 14:55:37', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 7192),
+(300, 'https://www.youtube.com/watch?v=qrjQIQ7dRmk', 5, 1, 'Derbi Nedir?', 'Futbol zaten heyecan, adrenalin. Peki ya derbi bunun kaç misli? \nhttps://www.misli.com/ ile bilmeyen kalmasın.', '2015-10-23 19:59:21', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 199),
+(301, 'https://www.youtube.com/watch?v=I3TQ6qJCIXA', 5, 2, 'Joe Cocker Greatest Hits (Full Album) - The Best Of Joe Cocker', 'Joe Cocker Greatest Hits \nFacebook : https://www.facebook.com/thetoptensmusic\nBest Songs Of Joe Cocker', '2015-10-23 19:59:23', 1, '::1', '0000-00-00 00:00:00', NULL, 0, '0000-00-00 00:00:00', NULL, 7192);
 
 -- --------------------------------------------------------
 
@@ -802,7 +1663,147 @@ CREATE TABLE IF NOT EXISTS `videotags` (
   `videoId` int(11) NOT NULL,
   PRIMARY KEY (`tagId`,`videoId`),
   KEY `videoId` (`videoId`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `videotags`
+--
+
+INSERT INTO `videotags` (`tagId`, `videoId`) VALUES
+(1, 0),
+(1, 1),
+(2, 1),
+(3, 204),
+(4, 204),
+(3, 205),
+(4, 205),
+(3, 206),
+(4, 206),
+(9, 206),
+(10, 206),
+(11, 207),
+(12, 208),
+(87, 208),
+(13, 209),
+(14, 210),
+(15, 211),
+(16, 212),
+(17, 213),
+(18, 214),
+(19, 215),
+(20, 216),
+(21, 217),
+(22, 218),
+(23, 219),
+(88, 220),
+(26, 222),
+(27, 223),
+(28, 224),
+(2, 225),
+(30, 226),
+(30, 227),
+(31, 228),
+(32, 229),
+(33, 230),
+(34, 230),
+(35, 230),
+(36, 230),
+(37, 230),
+(38, 230),
+(39, 230),
+(40, 230),
+(41, 230),
+(42, 230),
+(43, 230),
+(44, 230),
+(45, 230),
+(46, 230),
+(68, 230),
+(33, 231),
+(34, 231),
+(35, 231),
+(36, 231),
+(37, 231),
+(38, 231),
+(39, 231),
+(40, 231),
+(41, 231),
+(44, 231),
+(45, 231),
+(46, 231),
+(48, 231),
+(49, 231),
+(50, 231),
+(51, 231),
+(52, 231),
+(68, 231),
+(53, 232),
+(54, 232),
+(55, 232),
+(56, 232),
+(57, 232),
+(58, 232),
+(59, 232),
+(60, 232),
+(61, 232),
+(62, 232),
+(63, 232),
+(64, 232),
+(65, 232),
+(66, 232),
+(67, 232),
+(68, 232),
+(69, 232),
+(70, 233),
+(71, 233),
+(72, 233),
+(73, 233),
+(74, 233),
+(75, 233),
+(76, 233),
+(77, 233),
+(78, 233),
+(79, 233),
+(80, 233),
+(81, 233),
+(82, 233),
+(83, 233),
+(84, 233),
+(3, 234),
+(3, 235),
+(85, 236),
+(9, 237),
+(9, 238),
+(86, 239),
+(12, 240),
+(89, 241),
+(90, 242),
+(38, 282),
+(89, 282),
+(91, 282),
+(38, 283),
+(89, 283),
+(91, 283),
+(101, 287),
+(102, 287),
+(94, 288),
+(95, 288),
+(96, 288),
+(97, 289),
+(98, 289),
+(94, 290),
+(95, 290),
+(96, 290),
+(92, 292),
+(93, 293),
+(92, 294),
+(93, 295),
+(92, 296),
+(93, 297),
+(92, 298),
+(93, 299),
+(92, 300),
+(93, 301);
 
 -- --------------------------------------------------------
 
@@ -814,102 +1815,123 @@ CREATE TABLE IF NOT EXISTS `videoviews` (
   `userId` int(11) NOT NULL,
   `videoId` int(11) NOT NULL,
   `action` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'watched = 0, liked = 1, disliked = -1',
-  `actionDate` int(11) NOT NULL,
+  `actionDate` datetime DEFAULT NULL,
   PRIMARY KEY (`userId`,`videoId`),
   KEY `videoId` (`videoId`)
-) ENGINE=MyIsam DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Constraints for dumped tables
+-- Dumping data for table `videoviews`
 --
 
---
--- Constraints for table `categories`
---
-ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `categories_ibfk_2` FOREIGN KEY (`createdById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `categories_ibfk_3` FOREIGN KEY (`catGroupId`) REFERENCES `catgroups` (`id`);
+INSERT INTO `videoviews` (`userId`, `videoId`, `action`, `actionDate`) VALUES
+(2, 1, 1, '2015-04-22 00:00:00'),
+(1, 2, 0, '2015-04-22 00:00:00'),
+(1, 1, 0, '2015-10-16 12:34:14'),
+(3, 2, -1, '2015-04-22 00:00:00'),
+(1, 4, 0, '2015-09-23 08:10:06'),
+(1, 5, 0, '2015-04-28 10:36:21'),
+(1, 206, 1, '2015-10-28 06:32:32'),
+(1, 202, -1, '2015-10-16 14:42:38'),
+(1, 203, 0, '2015-10-16 14:43:28'),
+(1, 208, 1, '2015-09-28 19:06:11'),
+(3, 208, -1, '2015-04-28 15:50:06'),
+(3, 206, 1, '2015-04-28 21:58:09'),
+(1, 219, -1, '2015-10-16 14:09:45'),
+(3, 219, 1, '2015-05-01 00:19:10'),
+(3, 205, 0, '2015-05-02 16:27:00'),
+(1, 230, 0, '2015-10-14 08:11:49'),
+(1, 225, 0, '2015-09-23 16:59:54'),
+(1, 216, 0, '2015-07-06 12:57:55'),
+(1, 232, 0, '2015-09-22 13:17:05'),
+(1, 207, 0, '2015-10-06 07:07:05'),
+(1, 224, -1, '2015-09-21 20:03:49'),
+(1, 234, 0, '2015-09-21 20:05:17'),
+(1, 228, 0, '2015-09-22 07:17:44'),
+(1, 227, -1, '2015-09-22 14:09:11'),
+(1, 212, 0, '2015-09-22 06:58:25'),
+(1, 16, 0, '2015-09-21 20:07:39'),
+(1, 233, -1, '2015-09-22 13:17:19'),
+(1, 204, 0, '2015-09-22 08:00:40'),
+(1, 238, 1, '2015-09-23 13:07:39'),
+(1, 237, 0, '2015-09-23 08:03:00'),
+(1, 236, 0, '2015-09-22 13:05:47'),
+(1, 231, 0, '2015-09-22 13:07:08'),
+(1, 239, 0, '2015-09-23 13:49:44'),
+(1, 205, 0, '2015-09-22 14:09:27'),
+(1, 22, 0, '2015-09-23 08:03:56'),
+(1, 6, 0, '2015-09-23 08:19:38'),
+(1, 229, 0, '2015-09-23 12:18:46'),
+(1, 217, 0, '2015-09-23 13:03:56'),
+(1, 240, 0, '2015-10-15 12:48:39'),
+(1, 220, 0, '2015-10-02 08:03:12'),
+(1, 235, 0, '2015-10-06 07:07:22'),
+(1, 210, 0, '2015-10-16 14:49:23'),
+(1, 241, 0, '2015-10-20 14:30:47'),
+(1, 242, 0, '2015-10-20 15:07:20');
+
+-- --------------------------------------------------------
 
 --
--- Constraints for table `comments`
+-- Stand-in structure for view `vwprofileviews`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`confirmedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`createdById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`updatedById`) REFERENCES `users` (`id`);
+CREATE TABLE IF NOT EXISTS `vwprofileviews` (
+`viewerid` int(11)
+,`views` decimal(32,0)
+);
+-- --------------------------------------------------------
 
 --
--- Constraints for table `folders`
+-- Stand-in structure for view `vwuserstats`
 --
-ALTER TABLE `folders`
-  ADD CONSTRAINT `folders_ibfk_1` FOREIGN KEY (`createdById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `folders_ibfk_2` FOREIGN KEY (`updatedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `folders_ibfk_3` FOREIGN KEY (`lastVideoAddedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `folders_ibfk_4` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`);
+CREATE TABLE IF NOT EXISTS `vwuserstats` (
+`id` int(50)
+,`videos` bigint(21)
+,`profileviews` decimal(32,0)
+,`videoviews` bigint(21)
+,`likes` bigint(21)
+,`dislikes` bigint(21)
+,`comments` bigint(21)
+);
+-- --------------------------------------------------------
 
 --
--- Constraints for table `messages`
+-- Stand-in structure for view `vwvideostats`
 --
-ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`createdById`) REFERENCES `users` (`id`);
+CREATE TABLE IF NOT EXISTS `vwvideostats` (
+`id` int(11)
+,`views` bigint(21)
+,`likes` bigint(21)
+,`dislikes` bigint(21)
+,`comments` bigint(21)
+,`reportCount` bigint(21)
+);
+-- --------------------------------------------------------
 
 --
--- Constraints for table `profileviews`
+-- Structure for view `vwprofileviews`
 --
-ALTER TABLE `profileviews`
-  ADD CONSTRAINT `profileviews_ibfk_1` FOREIGN KEY (`viewerId`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `profileviews_ibfk_2` FOREIGN KEY (`viewedId`) REFERENCES `users` (`id`);
+DROP TABLE IF EXISTS `vwprofileviews`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwprofileviews` AS select `profileviews`.`viewerId` AS `viewerid`,sum(`profileviews`.`count`) AS `views` from `profileviews` group by `profileviews`.`viewerId`;
+
+-- --------------------------------------------------------
 
 --
--- Constraints for table `roleaccess`
+-- Structure for view `vwuserstats`
 --
-ALTER TABLE `roleaccess`
-  ADD CONSTRAINT `roleaccess_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `roleaccess_ibfk_2` FOREIGN KEY (`accessTypeId`) REFERENCES `accesstypes` (`id`);
+DROP TABLE IF EXISTS `vwuserstats`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwuserstats` AS select `u`.`id` AS `id`,count(distinct `v`.`id`) AS `videos`,coalesce(`pv`.`views`,0) AS `profileviews`,count(distinct `vw`.`videoId`,`vw`.`userId`) AS `videoviews`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = 1) then 1 end)) AS `likes`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = -(1)) then 1 end)) AS `dislikes`,count(distinct `c`.`id`) AS `comments` from ((((`users` `u` left join `videoviews` `vw` on((`vw`.`userId` = `u`.`id`))) left join `comments` `c` on((`c`.`createdById` = `u`.`id`))) left join `videos` `v` on((`v`.`addedById` = `u`.`id`))) left join `vwprofileviews` `pv` on((`pv`.`viewerid` = `u`.`id`))) group by `u`.`id`;
+
+-- --------------------------------------------------------
 
 --
--- Constraints for table `searches`
+-- Structure for view `vwvideostats`
 --
-ALTER TABLE `searches`
-  ADD CONSTRAINT `searches_ibfk_1` FOREIGN KEY (`createdById`) REFERENCES `users` (`id`);
+DROP TABLE IF EXISTS `vwvideostats`;
 
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`);
-
---
--- Constraints for table `videocats`
---
-ALTER TABLE `videocats`
-  ADD CONSTRAINT `videocats_ibfk_1` FOREIGN KEY (`videoId`) REFERENCES `videos` (`id`),
-  ADD CONSTRAINT `videocats_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`);
-
---
--- Constraints for table `videos`
---
-ALTER TABLE `videos`
-  ADD CONSTRAINT `videos_ibfk_2` FOREIGN KEY (`addedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `videos_ibfk_3` FOREIGN KEY (`updatedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `videos_ibfk_4` FOREIGN KEY (`deletedById`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `videos_ibfk_5` FOREIGN KEY (`languageId`) REFERENCES `languages` (`id`);
-
---
--- Constraints for table `videotags`
---
-ALTER TABLE `videotags`
-  ADD CONSTRAINT `videotags_ibfk_1` FOREIGN KEY (`tagId`) REFERENCES `tags` (`id`),
-  ADD CONSTRAINT `videotags_ibfk_2` FOREIGN KEY (`videoId`) REFERENCES `videos` (`id`);
-
---
--- Constraints for table `videoviews`
---
-ALTER TABLE `videoviews`
-  ADD CONSTRAINT `videoviews_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `videoviews_ibfk_2` FOREIGN KEY (`videoId`) REFERENCES `videos` (`id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwvideostats` AS select `v`.`id` AS `id`,count(distinct `vw`.`videoId`,`vw`.`userId`) AS `views`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = 1) then 1 end)) AS `likes`,count(distinct `vw`.`videoId`,`vw`.`userId`,(case when (`vw`.`action` = -(1)) then 1 end)) AS `dislikes`,count(distinct `c`.`id`) AS `comments`,count(distinct `vr`.`id`) AS `reportCount` from (((`videos` `v` left join `videoviews` `vw` on((`vw`.`videoId` = `v`.`id`))) left join `comments` `c` on((`c`.`videoId` = `v`.`id`))) left join `videoreports` `vr` on((`vr`.`videoId` = `v`.`id`))) group by `v`.`id`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

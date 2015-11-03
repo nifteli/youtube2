@@ -420,7 +420,8 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$controller->exportToExcel($fields,$links,$content['TITLEVIDEOLINKS']);
 	return;
 }
-if ($_GET["action"]=="delete" && trim($_GET["videoId"]) != "")
+
+if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])))
 {
 	$result = "success";
 	$messages = array();

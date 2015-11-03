@@ -22,6 +22,8 @@ include($templatePath."editRole.php");
 include($templatePath."adminVideoLinks.php");
 include($templatePath."adminUsers.php");
 include($templatePath."adminComments.php");
+include($templatePath."adminFolders.php");
+include($templatePath."adminTags.php");
 
 class Controller //extends MySQL
 {
@@ -141,6 +143,14 @@ class Controller //extends MySQL
 			case "adminComments":
 				$adminComments = new AdminComments($this);
 				$adminComments->Show();
+				break;
+			case "adminFolders":
+				$adminFolders = new AdminFolders($this);
+				$adminFolders->Show();
+				break;
+			case "adminTags":
+				$adminTags = new AdminTags($this);
+				$adminTags->Show();
 				break;
 			case "adminUsers":
 				$adminUsers = new AdminUsers($this);
@@ -466,6 +476,82 @@ class Controller //extends MySQL
 		}
 		$res = $this->db->rawQuery($qry);
 		
+		return $res;
+	}
+	
+	public function getFolders($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "f.created ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select * from (SELECT f.*,
+				DATE_FORMAT(f.created,'%d-%m-%Y %k:%i:%S') createdDate,
+				DATE_FORMAT(f.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+				concat(u.firstName,' ',u.lastName) author, 
+				concat(u3.firstName,' ',u3.lastName) updatedBy
+				from folders f
+				left join users u on u.id=f.createdById
+				left join users u3 on u3.id=f.updatedById
+				) f
+				where isDeleted=0 ";
+				
+		if(isset($post["created"]) && $post["created"] != "")
+			$qry .= " and DATE_FORMAT(f.created,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and f.id=".trim($post["id"]);
+		if(isset($post["authorId"]) && $post["authorId"] != "")
+			$qry .= " and f.createdById=".trim($post["authorId"]);
+		if(isset($post["author"]) && $post["author"] != "")
+			$qry .= " and f.author like '%" . trim($post["author"]) . "%'";
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and f.name like '%" . trim($post["comment"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		
+		return $res;
+	}
+	
+	public function getTags($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "t.name ";
+			$sortType = "asc";
+		}
+		$lang = $this->lang;
+		$qry = "select t.id,t.name,t.langId,
+						l.nameAz lang
+				from tags t
+				inner join languages l on l.id=t.langId
+				where 1=1 ";
+				
+		if(isset($post["languageId"]) && is_numeric($post["languageId"]))
+			$qry .= " and t.langId=".trim($post["languageId"]);
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and t.name like '%" . trim($post["name"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
 		return $res;
 	}
 	

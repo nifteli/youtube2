@@ -116,6 +116,36 @@ else
 				return;
 			}
 			break;
+		case "adminFolders": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(28))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminFoldersAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminFolders");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
+		case "adminTags": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(32))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminTagsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminTags");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		case "adminUsers":
 			include_once($templatePath."adminPageHeader.tpl");
 			$controller->includeSection("adminMenu");

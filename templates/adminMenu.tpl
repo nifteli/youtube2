@@ -7,8 +7,8 @@
 			<li><a href='?page=adminUsers'><span>Users</span></a></li>
 		   <li><a href='?page=adminVideoLinks'><span>Video links</span></a>
 		   <li><a href='?page=adminComments'><span>Comments</span></a>
-		   <li><a href='#'><span>Folders</span></a>
-		   <li><a href='#'><span>Tags</span></a>
+		   <li><a href='?page=adminFolders'><span>Folders</span></a>
+		   <li><a href='?page=adminTags'><span>Tags</span></a>
 		   <li class='has-sub'><a href='#'><span>Audit</span></a>
 			  <ul>
 				 <li><a href='#'><span>Menu 1</span></a></li>

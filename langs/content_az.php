@@ -34,6 +34,8 @@ $content["CATOLOGUES"]="Papkalarım";
 $content["ADDED"]="Videolarım";
 $content['SUBSCRIBE'] = "Abunə ol";
 $content['UNSUBSCRIBE'] = "Abunəliyi ləğv et";
+$content['SUCCESSFULLYSAVED'] = "Successfully saved";
+$content['ERRORONSAVE'] = "Error on save";
 
 
 //Registration
@@ -233,4 +235,17 @@ $content['UPDATEDBYIP'] ='Redaktə edən IP';
 $content['UPDATEDBY'] ='Redaktə edən';
 $content['CHANGED'] ='Redaktə edildi';
 //End Admin comments
+
+//Admin folders
+$content['TITLEFOLDERS'] ='Qovluqlar';
+
+//End Admin folders
+
+//Admin Tags
+$content['TITLETAGS'] ='Taqlar';
+$content['TAG'] ='Taq';
+$content['NEWTAG'] ='Yeni Taq';
+$content['SUBSTITUTE'] ='Əvəzlə';
+
+//End Admin Tags
 ?>
