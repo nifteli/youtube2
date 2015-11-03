@@ -8,8 +8,8 @@
 @import url(bootstrap.min.css);
 @import url(portagal-ui.css);
 /*@import url(libs/ui-lightness/jquery-ui-1.10.4.custom.min.css);*/
-@import url(.../js/admin/grid/libs/checkable/prettyCheckable.css);
-@import url(../js/admin/grid/libs/selectbox/selectBoxIt.css);
+/*@import url(.../js/admin/grid/libs/checkable/prettyCheckable.css);*/
+/*@import url(../js/admin/grid/libs/selectbox/selectBoxIt.css);*/
 
 /*  Helper classes
 ----------------------------------------------------*/
@@ -1399,7 +1399,7 @@ textarea.add-comment {
     border-bottom: 1px solid #ECECEC;
 }
 
-table.dataTable > thead > tr > th:first-child:before {
+/*table.dataTable > thead > tr > th:first-child:before {
     display: none;
 }
 table.dataTable .sorting {
@@ -1421,7 +1421,7 @@ table.dataTable thead .sorting_asc:before {
 }
 table.dataTable thead .sorting_desc:before {
     content: '\25B2 ';
-}
+}*/
 .setting-tab-panes li.active {
     position: relative;
     z-index: 2;

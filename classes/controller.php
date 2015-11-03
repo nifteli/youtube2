@@ -153,6 +153,7 @@ class Controller //extends MySQL
 	public function getCategories($questions,$userId="")
 	{
 		$join = "LEFT";
+		$cond = "";
 		if($userId != "")
 		{
 			$join = "INNER";
