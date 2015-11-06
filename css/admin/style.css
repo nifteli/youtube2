@@ -1173,7 +1173,7 @@ text-decoration:none;
 .gender {
 	float:right;
 	text-align:left;
-	width:237px;
+	width:219px;
 }
 
 
@@ -2200,6 +2200,11 @@ margin-right:45px;
 	margin-top: 40px;
 	MArgin-right: 12px;
     margin-bottom: 5px;
+}
+
+.topgap{
+	width:380px;
+	margin-bottom:5px;
 }
 
 

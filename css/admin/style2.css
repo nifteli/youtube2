@@ -1575,13 +1575,6 @@ text-decoration: none;
 	transition:0.5s;
 }
 
-.gender {
-	float:right;
-	text-align:left;
-	width:237px;
-}
-
-
 .fieldtext {
  width:220px;
  height:60px;
@@ -2082,7 +2075,7 @@ margin-right: 6px;
 	  height: 100px;
 	  width: 100px;
 	  margin-left: 90px;
-	  margin-top: -426px;
+	  margin-top: 20px;
 }
 
 .inf, .success1, .wrn, .err, .validation {
