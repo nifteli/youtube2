@@ -9,6 +9,11 @@ function submitForm(action)
 	document.getElementById('vlFilter').action=action;
 	document.getElementById('vlFilter').submit();
 }
+function setFolderName(id,folderName)
+{
+	 $( "#folderId" ).val( id );
+	 $( "#folderName" ).val( folderName );
+}
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
@@ -83,7 +88,7 @@ function submitForm(action)
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$confirm}">
 						{if $hasEditAccess}
-						<a href="?page=adminFolders&action=confirm&id={$folders[sec1].id}"><img src="img/edit.png" width="15" height="15" alt=""/></a>
+						<a onclick="setFolderName({$folders[sec1].id},'{$folders[sec1].name}')" href="#editFolder"><img src="img/edit.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 				</tr>
@@ -122,6 +127,24 @@ function submitForm(action)
                 </div>
                 <!-- /.col-lg-3 -->
             </div>
+		</form>
+	</div>
+</div>
+<div id="editFolder" class="modalDialog" >
+	<div style="width:290px">
+		<a href="#close" title="Close" class="close1">X</a>
+		<h4 style="font-weight:bold">{$editFolder}</h4>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminFolders&action=editFolder" method="post" style="width:250px">
+			
+			<div style="float:right;width:250px" >
+				<label>{$folderName}:</label>
+				<input type="hidden" name="folderId" id="folderId">
+				<input type="text" name="folderName" id="folderName">
+				<br>
+				<div style="text-align:center;">
+				<input type="submit" class="login39" name = "add" id="add" value="{$save}" style="margin-left:0;">
+				</div>
+			</div>
 		</form>
 	</div>
 </div>

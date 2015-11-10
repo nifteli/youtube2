@@ -74,7 +74,7 @@
 
 <div class="videos">
 	<div style="padding-top:10px;min-height: 1000px;">
-		{if isset($folderId)}
+		{if $folderName != "()"}
 			<div class='hollywd'>
 				<h2>{$folderName}</h2>  
 			</div>

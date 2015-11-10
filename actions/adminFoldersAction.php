@@ -1,4 +1,30 @@
 <?php
+if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_POST["folderName"]) != "")
+{
+	$result = "success";
+	$messages = array();
+	if(!$access->authorized(29))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	
+	$db->where("id=".$_POST["folderId"]);
+	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
+	if($res)
+	{
+		$messages["success"] = $content["FOLDEREDITED"];
+		$db->commit();
+	}
+	else
+	{
+		$result = "error";
+		$messages["err"] = $content["FOLDERNOTEDITED"];
+		$db->rollback();
+	}
+}
+
 if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 {
 	$result = "success";

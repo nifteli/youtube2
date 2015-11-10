@@ -7,6 +7,53 @@
 	header("Location: index.php");
 }*/
 
+if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["folderId"]) && trim($_POST["folderName"]) != "")
+{
+	$db->where("id=".$_POST["folderId"] . " and createdById=" . $access->userId);
+	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
+	if($res)
+	{
+		$okMessage = $content["FOLDEREDITED"];
+		$db->commit();
+	}
+	else
+	{
+		$db->rollback();
+		$errorMessage = $content["FOLDERNOTEDITED"];
+	}
+}
+
+if ($_GET["action"]=="deleteFolder" && $access->hasAccess && is_numeric($_GET["id"]))
+{
+	$db->startTransaction();
+	$db->where("id=".$_GET["id"] . " and createdById=" . $access->userId);
+	$res = $db->delete("folders");
+	if($res)
+	{
+		$db->where("folderId=".$_GET["id"]);
+		$res = $db->delete("foldervideos");
+		$okMessage = $content["FOLDERDELETED"];
+		$db->commit();
+	}
+	else
+	{
+		$db->rollback();
+		$errorMessage = $content["FOLDERNOTDELETED"];
+	}
+}
+
+if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
+{
+	$id = $db->insert("folders",array("name" => trim($_POST["folderName"]),
+									  "created" =>date("Y-m-d H:i:s"),
+									  "createdById" => $access->userId,
+									  "createdByIP" => $_SERVER['REMOTE_ADDR']));
+	if($id)
+		$okMessage = $content["FOLDERADDED"];
+	else
+		$errorMessage = $content["FOLDERNOTADDED"];
+	
+}
 if ($_GET["action"]=="delete")
 {
 	if($_GET["videoId"] > 0)

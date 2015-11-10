@@ -44,6 +44,12 @@
 		$('#view3').hide();
 		$('#view4').hide();
 	}
+	
+	function setFolderName(id,folderName)
+	{
+		 $( "#folderId" ).val( id );
+		 $( "#folderName" ).val( folderName );
+	}
 </script>
  <!--Category Panel Starts-->
 <div class="category">
@@ -69,9 +75,14 @@
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">
 				<div class="c-name">
+				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a><br><br>
 					<ul>
 						{section name=sec1 loop=$myFolders}
-						<li><a href="?folderId={$myFolders[sec1].folderId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a></li>
+						<li>
+							<a href="?folderId={$myFolders[sec1].folderId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
+							<a href="?action=deleteFolder&id={$myFolders[sec1].folderId}" onClick="return confirm('{$deleteConfirmation}')"><img src="./img/delete.png" height="10" width="10" ></a>
+							<a onclick="setFolderName({$myFolders[sec1].folderId},'{$myFolders[sec1].folderName}')" href="#editFolder"><img src="./img/edit.png" height="10" width="10"></a>
+						</li>
 						{/section}					
 					</ul>
 				</div>
@@ -152,6 +163,41 @@
 			
 			
 		</div>
+	</div>
+</div>
+<div id="editFolder" class="modalDialog" >
+	<div style="width:250px">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$editFolder}</h1>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?action=editFolder" method="post">
+			<br>
+			<label>{$folderName}:</label>
+			<div style="float:right">
+				<input type="hidden" name="folderId" id="folderId">
+				<input type="text" name="folderName" id="folderName">
+			</div>
+		<br><br>
+		<div style="text-align:center;width:100%">
+			<input type="submit" class="post" name = "add" id="add" value="{$save}">
+		</div>
+		</form>
+	</div>
+</div>
+<div id="addNewFolder" class="modalDialog" >
+	<div style="width:250px">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$newFolder}</h1>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?action=addNewFolder" method="post">
+			<br>
+			<label>{$folderName}:</label>
+			<div style="float:right">
+				<input type="text" name="folderName" id="folderName">
+			</div>
+		<br><br>
+		<div style="text-align:center;width:100%">
+			<input type="submit" class="post" name = "add" id="add" value="{$save}">
+		</div>
+		</form>
 	</div>
 </div>
 <!--Category Panel End-->

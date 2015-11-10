@@ -36,7 +36,16 @@ $content['SUBSCRIBE'] = "Abunə ol";
 $content['UNSUBSCRIBE'] = "Abunəliyi ləğv et";
 $content['SUCCESSFULLYSAVED'] = "Successfully saved";
 $content['ERRORONSAVE'] = "Error on save";
-
+$content['ADDNEWFOLDER'] = "Yeni papka yarat";
+$content['NEWFOLDER'] = "Yeni papka";
+$content['FOLDERNAME'] = "Papka adı";
+$content['FOLDERADDED'] = "Folder added";
+$content['FOLDERNOTADDED'] = "Folder not added";
+$content['FOLDERDELETED'] = "Folder deleted";
+$content['FOLDERNOTDELETED'] = "Folder not deleted";
+$content['EDITFOLDER'] = "Edit Folder";
+$content['FOLDEREDITED'] = "Folder editted";
+$content['FOLDERNOTEDITED'] = "Folder not editted";
 
 //Registration
 $content['NAME'] = 'Ad';

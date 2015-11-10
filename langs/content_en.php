@@ -37,6 +37,16 @@ $content['SUBSCRIBE'] = "Subscribe";
 $content['UNSUBSCRIBE'] = "Unsubscribe";
 $content['SUCCESSFULLYSAVED'] = "Successfully saved";
 $content['ERRORONSAVE'] = "Error on save";
+$content['ADDNEWFOLDER'] = "Add new folder";
+$content['NEWFOLDER'] = "New folder";
+$content['FOLDERNAME'] = "Folder name";
+$content['FOLDERADDED'] = "Folder added";
+$content['FOLDERNOTADDED'] = "Folder not added";
+$content['FOLDERDELETED'] = "Folder deleted";
+$content['FOLDERNOTDELETED'] = "Folder not deleted";
+$content['EDITFOLDER'] = "Edit Folder";
+$content['FOLDEREDITED'] = "Folder editted";
+$content['FOLDERNOTEDITED'] = "Folder not editted";
 
 //Registration
 $content['NAME'] = 'Name';
