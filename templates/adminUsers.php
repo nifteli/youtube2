@@ -23,18 +23,26 @@ class AdminUsers
 		$this->adminUsers->assign("confirm", $content['CONFIRM']);
 		$this->adminUsers->assign("sendMail", $content['SENDMAIL']);
 		$this->adminUsers->assign("saveRoles", $content['SAVEROLES']);
+		$this->adminUsers->assign("to", $content['TO']);
+		$this->adminUsers->assign("cc", $content['CC']);
+		$this->adminUsers->assign("file", $content['FILE']);
+		$this->adminUsers->assign("subject", $content['SUBJECT']);
+		$this->adminUsers->assign("body", $content['MESSAGEBODY']);
+		$this->adminUsers->assign("send", $content['SEND']);
 		
 		$this->adminUsers->assign("lnCreated", $content['DATECREATED']);
 		$this->adminUsers->assign("lnId", $content['ID']);
-		$this->adminUsers->assign("lnUsername", $content['LOGIN']);
+		$this->adminUsers->assign("lnUserName", $content['USERNAME']);
 		$this->adminUsers->assign("lnName", $content['NAME']);
 		$this->adminUsers->assign("lnRole", $content['ROLENAME']);
-		$this->adminUsers->assign("watchProfile", $content['WATCHPROFILE']);
-		$this->adminUsers->assign("setUser", $content['SETUSER']);
 		$this->adminUsers->assign("delete", $content['DELETE']);
+		$this->adminUsers->assign("viewProfile", $content['VIEWPROFILE']);
+		$this->adminUsers->assign("setUser", $content['SETUSER']);
 		$this->adminUsers->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
-		
 		$this->adminUsers->assign("hasDeleteAccess", $controller->access->authorized(27));
+		$this->adminUsers->assign("hasViewProfileAccess", $controller->access->authorized(2));
+		$this->adminUsers->assign("hasSetUserAccess", $controller->access->authorized(34));
+		$this->adminUsers->assign("roles", $this->getRoles($controller));
 		
 		//echo "<pre>"; print_r($_POST); echo "</pre>";
 		if(isset($_POST) && count($_POST) > 0)
@@ -73,6 +81,11 @@ class AdminUsers
 		global $templatePath;
 		
 		$this->adminUsers->display($templatePath."adminUsers.tpl");
+	}
+	
+	private function getRoles($controller)
+	{
+		return $controller->db->get("roles");
 	}
 	
 }

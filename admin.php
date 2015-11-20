@@ -73,18 +73,34 @@ else
 	switch($_GET["page"])
 	{
 		case "adminRoles": 
-			include_once($templatePath."adminPageHeader.tpl");
-			$controller->includeSection("adminMenu");
-			if(isset($_GET["action"])) 
-				include_once($actionsPath."adminRolesAction.php");
-			$controller->includeSection("adminRoles");
+			if($access->authorized(35))
+			{
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminRolesAction.php");
+				$controller->includeSection("adminRoles");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
 			break;
 		case "editRole": 
-			include_once($templatePath."adminPageHeader.tpl");
-			$controller->includeSection("adminMenu");
-			if(isset($_GET["action"])) 
-				include_once($actionsPath."adminEditRoleAction.php");
-			$controller->includeSection("editRole");
+			if($access->authorized(37))
+			{
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminEditRoleAction.php");
+				$controller->includeSection("editRole");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
 			break;
 		case "adminVideoLinks": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(25))

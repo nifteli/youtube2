@@ -10,7 +10,7 @@
 	$mail->SMTPSecure = 'ssl';                            // Enable encryption, 'ssl' also accepted
 	$mail->Port       = 465;
 	$mail->From = 'howtubesmart@mail.ru';
-	$mail->FromName = 'Youtube';
+	$mail->FromName = 'Howtubesmart';
 	$mail->isHTML(true);                                  // Set email format to HTML
 	
 	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

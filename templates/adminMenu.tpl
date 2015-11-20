@@ -1,3 +1,10 @@
+<div id="wrapper">
+	<div class="banner">
+		 
+		<div class="logout"><a href="index.php?action=logout"><h3>{$logout}</h3></a></div>
+	</div>  
+</div>
+<div class="min-cont bg">
 <div style="width:250px; height: 600px auto; margin-left:21px;float:left">
 	<div id='cssmenu'>
 		<ul>

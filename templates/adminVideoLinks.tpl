@@ -20,7 +20,7 @@ function submitForm(action)
 	<form action="?page=adminVideoLinks&action=load" method="post" enctype='multipart/form-data'>
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
 		<tr>
-			<td colspan=3><input type="file" class="field"  name="data" id="data" /></td>
+			<td colspan=3><input type="file" class="field"  name="data" id="data" style="width:280px"/></td>
 		</tr>
 		<tr>
 			<td><button class="btn btn-light-combo btn-sm" name="action" value="addMany" type="submit">{$addMany}</button></td>

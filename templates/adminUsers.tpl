@@ -9,6 +9,21 @@ function submitForm(action)
 	document.getElementById('vlFilter').action=action;
 	document.getElementById('vlFilter').submit();
 }
+
+function copyEmails()
+{
+	var emails="";
+	$('input[type=checkbox]').each(function () {
+		if (this.checked) 
+		{ 
+			var hv = $('#email_' +  $(this).attr('id')).attr("value");
+			if(hv != "" && typeof hv !== 'undefined')
+				emails += hv + "; ";
+		}
+	});
+   $('#to').val(emails);
+	
+}
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
@@ -17,10 +32,14 @@ function submitForm(action)
 		<h1>{$titleUsers}</h1>
 	</div>
 	<div class="actionButtons">
-	<form method="post" action="?page=adminUsers&action=filter" id="vlFilter" name="vlFilter">
+	<form method="post" action="?page=adminUsers&action=set" id="vlFilter" name="vlFilter">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
 		<tr style="text-align:right">
-			<td><button class="btn btn-light-combo btn-sm" name="action" value="sendMail" type="submit" >{$sendMail}</button></td>
+			<td>
+				<a onclick="copyEmails()" href="#sendMail">
+				<img src="img/sendMail.png" width="65" height="55" alt="sendMail"/>
+				</a>
+			</td>
 			<td><button class="btn btn-light-combo btn-sm" name="action" value="saveRoles" type="submit" >{$saveRoles}</button></td>
 		</tr>
 	</table>
@@ -60,7 +79,7 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$lnRole}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$watchProfile}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$viewProfile}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$setUser}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
 				</tr>
@@ -82,32 +101,34 @@ function submitForm(action)
 				<tbody>
 				{section name=sec1 loop=$users}
 				<tr>
-					<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>
+					<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="{$users[sec1].id}" name="Test"/>
+					<input type="hidden" name="email_{$users[sec1].id}" id="email_{$users[sec1].id}" value="{$users[sec1].email}">
+					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].createdDate}">{$users[sec1].createdDate}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].id}">{$users[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].userName}">{$users[sec1].userName}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].author}">
-						<select name="languageId" id="languageId"  class="form-control">
-							<option value="">{$lnRole}</option>
-							<option value="1" {if $roleIdVal == 1} selected {/if}>ROLE1</option>
-							<option value="1" {if $roleIdVal == 1} selected {/if}>ROLE2</option>
-							<option value="1" {if $roleIdVal == 1} selected {/if}>ROLE3</option>
+						<select name="roleId[{$users[sec1].id}]" id="roleId[{$users[sec1].id}]"  class="form-control">
+							<option value="0">{$lnRole}</option>
+							{section name=key loop=$roles}
+							<option value="{$roles[key].id}" {if $users[sec1].roleId == $roles[key].id} selected {/if}>{$roles[key].name}</option>
+							{/section}
 						</select>
 					</td>
-					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
-						{if $hasDeleteAccess}
-						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$viewProfile}">
+						{if $hasViewProfileAccess}
+						<a href="?page=adminUsers&action=viewProfile&id={$users[sec1].id}"><img alt="{$viewProfile}" src="img/viewProfile.png" width="15" height="15" alt=""/></a>
+						{/if}
+					</td>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$setUser}">
+						{if $hasSetUserAccess}
+						<a href="?page=adminUsers&action=setUser&id={$users[sec1].id}"><img alt="{$setUser}" src="img/setUser.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
-						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
-						{/if}
-					</td>
-					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
-						{if $hasDeleteAccess}
-						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" alt="{$delete}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 				</tr>
@@ -146,6 +167,48 @@ function submitForm(action)
                 </div>
                 <!-- /.col-lg-3 -->
             </div>
+		</form>
+	</div>
+</div>
+
+<div id="sendMail" class="modalDialog" >
+	<div style="width:800px;height:350px">
+	<h4 style="font-weight:bold">{$sendMail}</h4>
+		<a href="#close" title="Close" class="close1">X</a>
+		<form action="?page=adminUsers&action=sendMail" method="post" enctype="multipart/form-data" style="width: 100%;">
+			<div class="topgap">
+				<label>{$to}:</label>
+				<div class="gap">
+					<input required class="field" type="text" name="to" id="to" value="{$userId}">
+				</div>
+			</div>
+			<div class="topgap">
+				<label>{$cc}:</label>
+				<div class="gap">
+					<input class="field" type="text" name="cc" id="cc" value="{$userId}">
+				</div>
+			</div>
+			<div class="topgap">
+				<label>{$file}:</label>
+				<div class="gap">
+					<input type="file" class="field"  name="attachment" id="attachment" />
+				</div>
+			</div>	
+			<div class="topgap">
+				<label>{$subject}:</label>
+				<div class="gap">
+					<input class="field" type="text" name="subject" id="subject" value="{$userId}">
+				</div>
+			</div>
+			<div class="topgap">
+				<label>{$body}:</label>
+				<div class="gap">
+					<textarea class="field" type="text" name="body" id="body" value="{$userId}" style="height:100px"></textarea>
+				</div>
+			</div>
+			<div style="text-align:center;">
+			<input class="login39" type="submit" value="{$send}" name="submit" style="margin-left:0px;margin-top:10px">
+			</div>
 		</form>
 	</div>
 </div>

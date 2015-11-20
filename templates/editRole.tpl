@@ -26,9 +26,8 @@ $(function() {
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 	
-	<div id="openModalw" class="modalDialog">
-		<div>
-			<form name="frmRole" id="frmRole" style="width:100%" action="?page=editRole&action=save" method="post">
+		<div style="width:1000px; padding-left: 490px;">
+			<form name="frmRole" id="frmRole" action="?page=editRole&action=save" method="post">
 			<input type="hidden" name="roleId" id="roleId" value="{$roleId}">
 			<div class="accessDiv" id="accessDiv" onclick="setDatePickers()">
 				<table border="1" id="t01" style="width:100%">
@@ -39,8 +38,8 @@ $(function() {
 					<tr>
 						<td>{$accessTypes[sec1].name}</td>
 						<td>
-							<input class=field style='width:80px' type=text name=from[{$accessTypes[sec1].id}] id=from{$accessTypes[sec1].id} value='{if in_array({$accessTypes[sec1].id}, $setAccessesArr)}{$fromArr[$accessTypes[sec1].id]}{/if}'>
-							<input class=field style='width:80px' type=text name=to[{$accessTypes[sec1].id}] id=to{$accessTypes[sec1].id} value='{if in_array({$accessTypes[sec1].id}, $setAccessesArr)}{$toArr[$accessTypes[sec1].id]}{/if}'>
+							<input class=field style='width:110px' type=text name=from[{$accessTypes[sec1].id}] id=from{$accessTypes[sec1].id} value='{if in_array({$accessTypes[sec1].id}, $setAccessesArr)}{$fromArr[$accessTypes[sec1].id]}{/if}'>
+							<input class=field style='width:110px' type=text name=to[{$accessTypes[sec1].id}] id=to{$accessTypes[sec1].id} value='{if in_array({$accessTypes[sec1].id}, $setAccessesArr)}{$toArr[$accessTypes[sec1].id]}{/if}'>
 						</td>
 						<td><input  type="checkbox" name="hasAccess[]" value='{$accessTypes[sec1].id}' {if in_array({$accessTypes[sec1].id}, $setAccessesArr)} checked {/if} id="hasAccess[]" ></td>
 					</tr>
@@ -52,5 +51,5 @@ $(function() {
 			</div>
 			</form>
 		</div>
-	</div>
+
 </div>

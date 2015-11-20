@@ -9,6 +9,7 @@ class AdminMenu
 		global $content;
 		
 		$this->adminMenu = new Smarty;
+		$this->adminMenu->assign("logout",$content['LOGOUT']);
 	}
 	
 	public function Show()

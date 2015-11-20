@@ -564,11 +564,15 @@ class Controller //extends MySQL
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "SELECT u.*,
+		$qry = "SELECT u.*,r.name roleName,l.nameAz lang,
 				DATE_FORMAT(u.registered,'%d-%m-%Y %k:%i:%S') createdDate,
+				DATE_FORMAT(u.lastLoggedIn,'%d-%m-%Y %k:%i:%S') lastLoginDate,
+				DATE_FORMAT(u.birthDate,'%d-%m-%Y') bDate,
 				concat(u.firstName,' ',u.lastName) name
 				FROM users u
-				where 1=1 ";
+				left join roles r on r.id=u.roleId
+				left join languages l on l.id=u.languageId
+				where isDeleted=0 ";
 		
 		if(isset($post["created"]) && $post["created"] != "")
 			$qry .= " and DATE_FORMAT(u.registered,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";

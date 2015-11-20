@@ -1168,6 +1168,7 @@ text-decoration:none;
 .gap {
 	float:right;
 	margin-left:60px;
+	
 }
 
 .gender {
@@ -2059,7 +2060,7 @@ margin-right:45px;
 .modalDialog {
 		font-family: Arial, Helvetica, sans-serif;
 		float:left;
-		margin-left: 150px;
+		
 	}
 
 	.modalDialog:target {
@@ -2203,7 +2204,7 @@ margin-right:45px;
 }
 
 .topgap{
-	width:380px;
+	width:100%;
 	margin-bottom:5px;
 }
 

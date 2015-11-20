@@ -255,13 +255,25 @@ $content['SUBSTITUTE'] ='Əvəzlə';
 //Admin users
 $content['TITLEUSERS'] ='İstifadəçilər';
 $content['DATECREATED'] ='Yaranma tarixi';
-$content['LOGIN'] ='Loqini';
 $content['NAME'] ='Adı';
-$content['WATCHPROFILE'] ='Profilə bax';
+$content['VIEWPROFILE'] ='Profilə bax';
 $content['SETUSER'] ='Adından loqin ol';
 $content['SENDMAIL'] ='Mail göndər';
 $content['SAVEROLES'] ='Rolları yaddaşa ver';
-
+$content['ROLESEDITED'] ='Rollar yaddaşa verildi';
+$content['ROLESNOTEDITED'] ='Rollar yaddaşa verilmədi';
+$content['NOTES'] ='Qeydlər';
+$content['STATUS'] ='Status';
+$content['REGISTEREDBYIP'] ='Qeydiyyat İP-si';
+$content['LASTLOGINDATE'] ='Son daxil olma';
+$content['TO'] ='Kimə';
+$content['CC'] ='CC';
+$content['FILE'] ='Fayl';
+$content['SUBJECT'] ='Başlıq';
+$content['MESSAGEBODY'] ='Mətn';
+$content['SEND'] ='Göndər';
+$content['MAILSENT'] ='Mail göndərildi';
+$content['MAILNOTSENT'] ='Mail göndərilmədi';
 //End Admin users
 
 ?>

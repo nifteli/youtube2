@@ -66,10 +66,3 @@
 	
 </head>
 <body>
-<div id="wrapper">
-	<div class="banner">
-		 
-		<div class="logout"><a href="#"><h3>logout</h3></a></div>
-	</div>  
-</div>
-<div class="min-cont bg">
