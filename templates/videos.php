@@ -27,6 +27,14 @@ class Videos
 		}
 		$this->videos->assign("folderName", $folderName);
 		$this->videos->assign("folderId", $folderId);
+		$this->videos->assign("addToFolder", $content['ADDTOMYFOLDER']);
+		if($controller->access->hasAccess)
+		{
+			$this->videos->assign("folders",$content['FOLDERS']);
+			$this->videos->assign("folderName2",$content['FOLDERNAME']);
+			$this->videos->assign("noFolderNotf",$content['NOFOLDERNOTF']);
+			$this->videos->assign("foldersArr",$controller->getFolderNames($controller));
+		}
 		
 		$this->videos->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->videos->assign("okMessage", isset($okMessage) ? $okMessage : "");
@@ -35,6 +43,7 @@ class Videos
 	public function Show()
 	{
 		global $templatePath;
+		
 		
 		$this->videos->display($templatePath."videos.tpl");
 	}

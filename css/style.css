@@ -32,6 +32,7 @@ body {
 }
 ol, ul {
 	list-style: none;
+	    line-height: 1;
 }
 blockquote, q {
 	quotes: none;
@@ -48,10 +49,11 @@ table {
 
 .field {
  width:220px;
- height:35px;
+ height:20px;
  border-radius:3px;
  border:1px solid #fff;
  padding-left:10px;
+ margin-bottom: 5px;
 }
 
 .fieldv {
@@ -152,7 +154,7 @@ label {
 
 .banner{
  width:100%;
- height:180px;
+ height:140px;
  background:#dbcb8f;		
 }
 
@@ -572,6 +574,7 @@ font-family:Calibri;
 .hollywd{
  float:left;	
 width: 100%;
+ line-height: 0;
 }
 
 
@@ -589,7 +592,7 @@ width: 100%;
 
 .box-cont{
     float: right;
-    height: 215px;
+    height: 160px;
     margin-left: 11px;
     /* margin-top: -45px; */
     margin-bottom: 30px;
@@ -1228,7 +1231,7 @@ text-decoration:none;
 }
 
 .reg-form{
- margin-left:150px;	
+     margin-top: 60px;
 }
 
 .name{
@@ -1784,6 +1787,15 @@ margin-top: 22px;
     background-color: black;
     font-size: smaller;
 }
+.addVideoBtn
+{
+	float: left;
+    /* right: 16px; */
+    top: -25px;
+    position: relative;
+    font-size: smaller;
+    margin-left: 20;
+}
 
 .ico2{
     float: right;
@@ -1964,6 +1976,7 @@ background-image:url('../img/success.png');
 width: 910px;
 float: right;
 margin-right: 6px;
+margin-top: 60px;
 }
 .wrn {
 color: #9F6000;
@@ -1980,6 +1993,7 @@ background-image: url('../img/error.png');
 width: 910px;
 float: right;
 margin-right: 6px;
+margin-top: 60;
 }
 .smallerr {
 color: #D8000C;
@@ -2092,7 +2106,6 @@ margin-top: 60px;
 .cmtBox{
 	width:530px; 
 	border-radius: 5px; 
-	height: 55px;
 	vertical-align: bottom;
 }
 
@@ -2238,6 +2251,7 @@ pre{
 		overflow: hidden;
 		/* word-wrap: normal; */
 		float: left;
+		line-height: 20px;
 	}
 	.tags ul{
 		text-align:center;
@@ -2398,21 +2412,21 @@ pre{
     width: 200px;
     height: 130px;
 	float: left;
-    margin-top: 45px;
+    margin-top: 15px;
 }
 
 .headerMiddle{
 	    float: left;
     width: 840px;
     height: 170px;
-    
+        margin-top: -25px;
 }
 
 .headerRight{
 	float: left;
     width: 160px;
     height: 130px;
-    margin-top: 40px;
+    margin-top: 15px;
 }
 
 .langs{
@@ -2603,4 +2617,10 @@ h
 	text-decoration: none;
 	    cursor: pointer;
     color: blue;
+}
+
+.regTitles{
+	font-weight:bold;
+	margin-bottom:5px;
+	margin-top:10px;
 }

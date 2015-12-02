@@ -29,6 +29,7 @@ class AdminUsers
 		$this->adminUsers->assign("subject", $content['SUBJECT']);
 		$this->adminUsers->assign("body", $content['MESSAGEBODY']);
 		$this->adminUsers->assign("send", $content['SEND']);
+		$this->adminUsers->assign("userProfile", $content['USERPROFILE']);
 		
 		$this->adminUsers->assign("lnCreated", $content['DATECREATED']);
 		$this->adminUsers->assign("lnId", $content['ID']);

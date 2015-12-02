@@ -44,6 +44,7 @@ $grid->setGridOptions(array(
 	"rowNum"=>100,
 	"sortname"=>"id",
 	"height"=>400,
+	"width"=>1200,
 	"caption"=>"Roles"));
 	
 // Change some property of the field(s)

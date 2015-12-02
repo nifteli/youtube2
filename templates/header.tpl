@@ -86,7 +86,7 @@ function showTimeInterval(sFlag)
 				<ul class="about">
 					<li><a href="?page=about">{$about}</a></li>
 				</ul>
-				<a href="index.php"><img height="100" width="200" src="img/logo.png" ></a>
+				<a href="index.php"><img height="118" width="200" src="img/logo.png" ></a>
 			</div>
 			<div class="headerMiddle">
 				<form id="searchForm" action="?page=searchRes" method="post">
@@ -95,20 +95,20 @@ function showTimeInterval(sFlag)
 					<a href="?page=advSearch"><input class="btnSearch" type="button" value="Advanced" name="submit"></a>
 				
 				<div class="simpleSearch">
-				|
+				
 					<select class="srcCmb" name="language" id="language">
 						<option value="0" selected="selected"> {$allLangs}</option>
 						{foreach from=$languages item=row1}
 							{html_options values=$row1.id output=$row1.name selected=$languageVal}
 						{/foreach}
-					</select> |
+					</select> 
 				<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
 				<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
 				<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
 				<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
 				<select class="srcCmb" name="category" id="scategory">
 					<option value="0" selected="selected"> {$allCats}</option>
-				</select> |
+				</select> 
 				<input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
 				<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input>
 				<select class="srcCmb" name="interval1" id="sinterval1" style="display: none">
@@ -124,7 +124,7 @@ function showTimeInterval(sFlag)
 					<option value="2">15-30</option>
 					<option value="3">30-45</option>
 					<option value="4">45-60</option>
-				</select> |
+				</select> 
 				
 				<label class="srcLbl">{$date}</label>
 				<input class="srcCmb" style="width:70" type="text" name="fromDate" id="dpFrom">&nbsp;
@@ -160,7 +160,7 @@ function showTimeInterval(sFlag)
 						<li><a href="?page=reg">{$signUp}</a></li>
 					</ul>
 				{/if}
-				<br>
+				
 				<div style="text-align: center"><a href="?page=addVideo"><img align="middle" height="100" width="100" src="img/AddVideo.png" align="middle"></a></div>
 			
 			</div>

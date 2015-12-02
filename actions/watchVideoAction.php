@@ -103,6 +103,10 @@ if($_GET["action"]=="add2Folder")
 			$okMessage = $content["ADDEDTOFOLDER"];
 		
 	}
+	if($_GET["from"] == "main")
+	{
+		header("Location: index.php");
+	}
 }
 
 if($_GET["action"]=="delFromFolder")
@@ -115,6 +119,10 @@ if($_GET["action"]=="delFromFolder")
 		if($db->count>0) 
 			$okMessage = $content["REMOVEDFROMFOLDER"];
 		
+	}
+	if($_GET["from"] == "main")
+	{
+		header("Location: index.php");
 	}
 }
 

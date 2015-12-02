@@ -1,16 +1,32 @@
 <?php
-//echo "<pre>"; print_r($_POST); echo "<pre>";exit;
+//echo "<pre>"; print_r($_POST); echo "</pre>";//exit;
 if ($_GET["action"]=="reg")
 {
+	$result = true;
 	//server side validations
-	if(!isset($_POST["username"]) || !isset($_POST["name"]) || !isset($_POST["gender"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["passwordAgain"]) ||
-		strlen($_POST["password"])<$minPasswordLength ||
-		$_POST["passwordAgain"]!=$_POST["password"])
+	if(trim($_POST["username"]) == "" || trim($_POST["name"]) == "" || trim($_POST["gender"]) == "" || trim($_POST["email"]) == "" || trim($_POST["password"]) == "" || trim($_POST["passwordAgain"]) == "" ||
+		strlen(trim($_POST["password"]))<$minPasswordLength ||
+		$_POST["passwordAgain"] != $_POST["password"])
 	{
+		$result = false;
 		$errorMessage=$content["REGERROR"];
 	}
-	else
+	if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) 
 	{
+		$result = false;
+		$errorMessage=$content["NOTVALIDEMAIL"];
+	}
+	if(!$controller->validate_Date($_POST["dateOfBirth"],$format,$birthDate))
+	{
+		$result = false;
+		$errorMessage=$content["NOTVALIDDATE"];
+	}
+	if($result)
+	{
+		if($_POST["onVideoComment"] == "on")	$getEmailOnVideoComment = 1;
+		if($_POST["onComment"] == "on")	$getEmailAfterMyComment = 1;
+		if($_POST["onNews"] == "on")	$getEmailOnNews = 1;
+		
 		$db->where("userName = '".trim($_POST["username"])."' or email='".trim($_POST["email"])."'");
 		$users = $db->get("users");
 		if($db->count>0)
@@ -28,19 +44,27 @@ if ($_GET["action"]=="reg")
 											  "firstName"=>"$_POST[name]",
 											  "lastName"=>"$_POST[surname]",
 											  "gender"=>"$_POST[gender]",
-											  "email"=>"$_POST[email]",
+											  "email"=>trim($_POST["email"]),
+											  "birthDate" => $birthDate,
+											  "profession" => $_POST["profession"],
+											  "interests" =>  $_POST["interests"],
+											  "secretQuestionId" =>  $_POST["secretQuestionId"],
+											  "secretAnswer" =>  $_POST["secretAnswer"],
 											  "registered"=>date("Y-m-d H:i:s"),
 											  "registeredByIP"=>$_SERVER['REMOTE_ADDR'],
-											  "languageId"=>$langIds[$_POST["lang"]],
-											  "phoneNumber"=>"$_POST[phone]"
+											  "languageId"=>$langIds[$_POST["langId"]],
+											  "phoneNumber"=>"$_POST[phone]",
+											  "getEmailOnVideoComment"=>$getEmailOnVideoComment,
+											  "getEmailAfterMyComment"=>$getEmailAfterMyComment,
+											  "getEmailOnNews"=>$getEmailOnNews
 											  )
 											  );
 			if($id)
 			{
 				$mail->addAddress($_POST["email"], $_POST["name"].' '.$_POST["surname"]);     // Add a recipient Name is optional	
 				$mail->Subject = $content["CONFIRMSUB"];
-				$mail->Body    = $content["CONFIRMBODY"]."<br><a href=$domain?page=reg&action=confirm&userName=$_POST[username]&hash=$hash>$domain</a>";
-				
+				$mail->Body    = $content["CONFIRMBODY"]."<br><a href=$domain?page=reg&action=confirm&userName=".trim($_POST["username"])."&hash=".$hash.">$domain</a>";
+				//echo $content["CONFIRMBODY"]."<br><a href=$domain?page=reg&action=confirm&userName=".trim($_POST["username"])."&hash=".$hash.">$domain</a>";
 				if(!$mail->send()) {
 					//echo 'Message could not be sent.';
 					//echo 'Mailer Error: ' . $mail->ErrorInfo;

@@ -28,11 +28,137 @@ if($_GET["action"] == "unSubscribe" && $_GET["catId"] && $_GET["catId"] > 0)
 		$db->rawQuery($qry);
 			echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":1'> [$content[SUBSCRIBE]]</a></span>";
 }
+
+//show user profile
+if($_GET["action"] == "showProfile" && is_numeric($_GET["userId"]))
+{
+	$user = getUserProfile($_GET["userId"],$db);
+	if($user["gender"] == 'Male')
+		$mchecked = "checked";
+	if($user["gender"] == 'Female')
+		$fchecked = "checked";
+	if($user["getEmailOnVideoComment"] == 1)
+		$gchecked = "checked";	
+	switch($user["languageId"])
+	{
+		case 5:
+			$aselected = "selected";
+			break;
+		case 19:
+			$eselected = "selected";
+			break;
+		case 67:
+			$rselected = "selected";
+			break;
+	}
+		
+	$ret = "
+		<div style='float:left; width:300'>
+		<div class='topgap'>
+		<label>$content[CODE]:</label>
+		<div class='gap'>
+			<input class='field' type='text' name='code' id='code' disabled value='$user[id]' style='width:300px'>
+		</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[NAME]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='name' id='name' disabled value='$user[firstName]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[SURNAME]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='surname' id='surname' disabled value='$user[lastName]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[FATHERNAME]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='fatherName' id='fatherName' disabled value='$user[fatherName]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[BIRTHDATE]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='bday' id='bday' disabled value='$user[birthDate]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[GENDER]: $user[gender]</label>
+			<div class='gender'>
+				<input type='radio' name='gender' id='gender'  $mchecked >$content[MALE]
+				<input type='radio' name='gender' id='gender'  $fchecked >$content[FEMALE]
+			</div>
+		</div>	
+		<div class='topgap'>
+			<label>$content[POSITION]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='position' id='position' disabled value='$user[profession]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[INTERESTS]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='interests' id='interests' disabled value='$user[interests]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[EMAIL]:</label>
+			<div class='gap'>
+				<input class='field' type='email' name='email' id='email' disabled value='$user[email]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+			<label>$content[PHONE]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='phone' id='phone' disabled value='$user[phoneNumber]' style='width:300px'>
+			</div>
+		</div>
+		<div class='topgap'>
+				<label>$content[LANGUAGE]:</label>
+			<div class='gap'>
+				<select class='field' name='lang' id='lang' disabled style='width:300px'>
+					<option value='az' $aselected>$content[AZERBAIJANI]</option>
+					<option value='en' $eselected>$content[ENGLISH]</option>
+					<option value='ru' $rselected>$content[RUSSIAN]</option>
+				</select>
+			</div>
+		</div>
+		<br>
+		<div class='topgap'>
+			<label>$content[USERNAME]:</label>
+			<div class='gap'>
+				<input class='field' type='text' name='username' id='username' disabled value='$user[userName]' disabled style='width:300px'>
+			</div>
+		</div>
+		
+		<div class='topgap'>
+			<label>$content[getEmailOnComment]:</label>
+			<div class='gap'>
+				<input class='emailCheck' type='checkbox' $gchecked name='getEmailOnComment' id='getEmailOnComment' disabled>
+			</div>
+		</div>
+		</div>
+		<div class='profilePic' style='float:right; width:150px;margin-left:0px; text-align:center'>
+		<img src='$user[picturePath]' width=100 height=100>
+		</div>	
+	";
+	echo $ret;
+}
+
+function getUserProfile($id,$db)
+{
+	$db->where("id=$id");
+	$res = $db->get("users");
+	return $res[0];
+}
+
 //LIKE DISLIKE actions
 if($_GET["action"] == "likeIt" && 
-	isset($_GET["videoId"]) && $_GET["videoId"] > 0 && 
-	isset($_GET["flag"]) && $_GET["flag"] > 0 && 
-	isset($_SESSION["userId"]) && $_SESSION["userId"] > 0)
+	isset($_GET["videoId"]) && is_numeric($_GET["videoId"]) && 
+	isset($_GET["flag"]) && is_numeric($_GET["flag"]) && 
+	isset($_SESSION["userId"]) && is_numeric($_SESSION["userId"]))
 {
 	if($_GET["flag"] == 1)
 	{

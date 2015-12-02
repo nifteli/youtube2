@@ -36,6 +36,10 @@ require_once($facebookPath."facebook.php");
 
 //initiations
 //++//$dbConf = new Conf();
+if($lang == "az" || $lang == "ru")
+	$format = "DD.MM.YYYY";
+else
+	$format = "MM/DD/YYYY";
 
 if(!$db) die("Database error");
 

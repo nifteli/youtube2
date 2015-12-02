@@ -68,6 +68,23 @@ $content["REGOK"]="Qeydiyyatınızın ilkin mərhələsi tamamlandı. İstifadə
 $content["CONFIRMATIONERR"]="Bu link təsdiqlənmə üçün aktiv deyil";
 $content["REGCONFIRMED"]="Sizin istifadəçi adınız təsdiqləndi";
 $content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
+$content["ALREADYCONFIRMED"]="Bu istifadəçi adı artıq təsdiqlənmişdir";
+$content['SECRETQUESTION'] = 'Gizli sual';
+$content['SECRETANSWER'] = 'Gizli Cavab';
+$content['PASSNOTEQUAL'] = 'Girilən şifrələr eyni deyil';
+$content['MINPASSLENGTH'] = 'Minimum şifrə uzunluğu:';
+$content["NOTVALIDDATE"] = "Tarix doğru deyil";
+$content["NOTVALIDEMAIL"] = "Email doğru deyil";
+$content["MANDATORY"] = "Mandatory fields";
+$content["OPTIONAL"] = "Optional fields";
+$content["USERPASSWORD"] = "Determine your username and password";
+$content["SECQUESTIONNOT"] = "Choose question which will be asked from you, when you forget the password";
+$content["RECEIVENOT"] = "I would like to receive notification to my e-mail";
+$content["ONNEWS"] = "on the news of this Site";
+$content["ONCOMMENT"] = "when a user comments after my comment";
+$content["ONVIDEOCOMMENT"] = "when a user comments to the video I've added";
+$content["AGREE"] = "I agree with the rules. ";
+
 
 
 //End registration
@@ -122,6 +139,19 @@ $content['REPORTREASON'] = 'Şikayət səbəbi';
 $content['REPORTDESC'] = 'Şikayət açıqlaması';
 $content['REPORTSAVED'] = 'Şikayət qeydə alındı';
 $content["COMMENTSENT2CONF"] = 'Your comment is sent to admin confirmation';
+$content['AUTHORTITLE'] = 'Video əlavə edən';
+$content['PUBLISHEDTITLE'] = 'Əlavə olunma tarixi';
+$content['REPORTVIDEOTITLE'] = 'Videonu şikayət etmək';
+$content['ADDTOMYFOLDERTITLE'] = 'Videonu qovluğa əlavə etmək';
+$content['REMOVEFROMFOLDERTITLE'] = 'Videonu qovluqdan silmək';
+$content['EDITTITLE'] = 'Videonu dəyişmək';
+$content['DELETETITLE'] = 'Videonu silmək';
+$content['FBTITLE'] = 'Facebook-da paylaşmaq';
+$content['TWTTITLE'] = 'Twittet-də paylaşmaq';
+$content['LIKECOUNTTITLE'] = 'Bəyənilmə sayı';
+$content['DISLIKECOUNTTITLE'] = 'Bəyənilməmə sayı';
+$content['VIEWCOUNTTITLE'] = 'Baxılma sayı';
+$content['COMMENTCOUNTTITLE'] = 'Şərh sayı';
 
 //end Watch video
 
@@ -281,6 +311,7 @@ $content['MESSAGEBODY'] ='Mətn';
 $content['SEND'] ='Göndər';
 $content['MAILSENT'] ='Mail göndərildi';
 $content['MAILNOTSENT'] ='Mail göndərilmədi';
+$content['USERPROFILE'] ='İstifadəçi Profili';
 
 //End Admin users
 ?>

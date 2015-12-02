@@ -20,12 +20,19 @@ class WatchVideo
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
 			$this->watchVideo->assign("videoName",((strlen($videoInfo[0]["name"])>30)?substr($videoInfo[0]["name"],0,30)."...":$videoInfo[0]["name"]));
 			$this->watchVideo->assign("likeCount",$videoInfo[0]["likeCount"]);
+			$this->watchVideo->assign("likeCountTitle",$content["LIKECOUNTTITLE"]);
 			$this->watchVideo->assign("dislikeCount",$videoInfo[0]["dislikeCount"]);
+			$this->watchVideo->assign("dislikeCountTitle",$content["DISLIKECOUNTTITLE"]);
 			$this->watchVideo->assign("viewCount",$videoInfo[0]["viewCount"]);
+			$this->watchVideo->assign("viewCountTitle",$content["VIEWCOUNTTITLE"]);
+			$this->watchVideo->assign("commentCount",$videoInfo[0]["commentCount"]);
+			$this->watchVideo->assign("commentCountTitle",$content["COMMENTCOUNTTITLE"]);
 			$this->watchVideo->assign("addedById",$videoInfo[0]["addedById"]);
 			$this->watchVideo->assign("videoTags",$videoInfo[0]["tags"]);
 			$this->watchVideo->assign("publishDate",$videoInfo[0]["added"]);
+			$this->watchVideo->assign("publishDateTitle",$content['PUBLISHEDTITLE']);
 			$this->watchVideo->assign("author",$videoInfo[0]["addedBy"]);
+			$this->watchVideo->assign("authorTitle",$content["AUTHORTITLE"]);
 			$this->watchVideo->assign("language",$videoInfo[0]["language"]);
 			$this->watchVideo->assign("questions",$controller->getQuestions($videoInfo[0]["questions"]));
 			$this->watchVideo->assign("info",$videoInfo[0]["info"]);
@@ -40,18 +47,25 @@ class WatchVideo
 			$this->watchVideo->assign("tags",$content['TAGS']);
 			$this->watchVideo->assign("published",$content['PUBLISHED']);
 			$this->watchVideo->assign("reportVideo",$content['REPORTVIDEO']);
+			$this->watchVideo->assign("reportVideoTitle",$content['REPORTVIDEOTITLE']);
 			$this->watchVideo->assign("addToFolder",$content['ADDTOMYFOLDER']);
+			$this->watchVideo->assign("addToFolderTitle",$content['ADDTOMYFOLDERTITLE']);
 			$this->watchVideo->assign("recommended",$content['RECOMMENDED']);
 			$this->watchVideo->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
 			$this->watchVideo->assign("folders",$content['FOLDERS']);
 			$this->watchVideo->assign("folderName",$content['FOLDERNAME']);
 			$this->watchVideo->assign("noFolderNotf",$content['NOFOLDERNOTF']);
 			$this->watchVideo->assign("removeFromFolder",$content['REMOVEFROMFOLDER']);
+			$this->watchVideo->assign("removeFromFolderTitle",$content['REMOVEFROMFOLDERTITLE']);
 			
 			$this->watchVideo->assign("addComment",$content['ADDCOMMENT']);
 			$this->watchVideo->assign("post",$content['POST']);
 			$this->watchVideo->assign("edit",$content['EDIT']);
+			$this->watchVideo->assign("editTitle",$content['EDITTITLE']);
 			$this->watchVideo->assign("delete",$content['DELETE']);
+			$this->watchVideo->assign("deleteTitle",$content['DELETETITLE']);
+			$this->watchVideo->assign("fbTitle",$content['FBTITLE']);
+			$this->watchVideo->assign("twtTitle",$content['TWTTITLE']);
 			$this->watchVideo->assign("save",$content['SAVE']);
 			$this->watchVideo->assign("cancel",$content['CANCEL']);
 			$this->watchVideo->assign("reportDesc",$content['REPORTDESC']);
@@ -65,7 +79,7 @@ class WatchVideo
 			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access));
 			if($controller->access->hasAccess)
 			{
-				$this->watchVideo->assign("foldersArr",$this->getFolders($controller));
+				$this->watchVideo->assign("foldersArr",$controller->getFolderNames());
 				$this->watchVideo->assign("added2Folder",$this->isAddedToFolder($_GET["id"],$controller));
 			}
 			$this->watchVideo->assign("reportReasons",$this->getReportReasons($controller));
@@ -91,6 +105,7 @@ class WatchVideo
 						SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,
 								SUM(IF(action = -1, 1, 0)) dislikeCount,
+								vws.comments commentCount,
 								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.questions,v.addedById,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								tg.tags,
@@ -102,6 +117,7 @@ class WatchVideo
 						inner join users u on u.id=v.addedById
 						inner join videocats vc on vc.videoId=v.id
 						inner join categories c on c.id = vc.categoryId
+						left join vwvideostats vws on vws.id=v.id
 						left join languages l on l.id=v.languageId
 						left join (
 							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
@@ -124,13 +140,6 @@ class WatchVideo
 				where c.isConfirmed=1 and c.videoId=$id
 				order by c.created desc"; //echo $qry;
 		$res = $db->rawQuery($qry);
-		return $res;
-	}
-	
-	private function getFolders($controller)
-	{
-		$qry = "select id folderId, name folderName from folders where createdById=".$controller->access->userId;
-		$res = $controller->db->rawQuery($qry);
 		return $res;
 	}
 	

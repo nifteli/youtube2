@@ -235,6 +235,13 @@ class Controller //extends MySQL
 		return $day . '-' . $month . '-' . $year;
 	}
 	
+	public function getFolderNames()
+	{
+		$qry = "select id folderId, name folderName from folders where createdById=".$this->access->userId;
+		$res = $this->db->rawQuery($qry);
+		return $res;
+	}
+	
 	public function validate_Date($mydate,$format = 'DD-MM-YYYY',&$date) 
 	{
 		if($mydate == "")
@@ -593,6 +600,11 @@ class Controller //extends MySQL
 		}
 		$res = $this->db->rawQuery($qry);
 		return $res;
+	}
+	
+	function getSecretQuestions()
+	{
+		return $this->db->get("secretquestions");
 	}
 	
 }

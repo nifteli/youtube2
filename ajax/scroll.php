@@ -285,18 +285,29 @@ function displayData($res, $data, $colCnt=4)
 			$str .= "<div class='box'>
 						 <a href='?page=watchVideo&id=$id'>
 							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
-						 </a>
-						 <div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>";
+						 </a>";
+			if(is_numeric($_SESSION["userId"]))
+			{
+				$str .= "<div class='addVideoBtn'>";
+				if(isAddedToFolder($id))
+					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' alt='Add to folder'/></a>";
+				else
+					$str .= "<a href='#add2FolderModal' onClick=\"submitForm('?page=watchVideo&id=$id&action=add2Folder&from=main')\"><img src='img/add.png' width='15' height='15' alt='Remove from folder'/></a>";
+				$str .= "</div>";
+			}
+						 
+						 
 			//if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
 				//$str .= " style='visibility: hidden;'";
-			$str .= "<a href='?page=watchVideo?id=$id'>
+			$str .= "<div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>
+					<a href='?page=watchVideo?id=$id'>
 					 	<h2>$name</h2>
 					 </a>
 					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> </div>
 					 <div class='videoDet'>
 						 <ul class='move'>
 							<li>
-								<img class='details' width=15 height=10 src='img/tags.png'/>
+								<img class='details' width=15 height=10 src='img/tags2.png'/>
 								<span class='wood'>$tags</span>
 							</li>
 							<li>
@@ -380,6 +391,18 @@ function isSubscribed($catId)
 	if($db->count>0)
 		return true;
 	return false;
+}
+
+function isAddedToFolder($videoId)
+{
+	global $db;
+	$qry = "select * from foldervideos fv
+			inner join folders f on f.id = fv.folderId
+			where fv.videoId = $videoId and f.createdById=".$_SESSION["userId"];
+	$res = $db->rawQuery($qry);//echo "ssss=".$db->count;
+	if ($db->count>0)
+		return 1;
+	return 0;
 }
 
 ?>

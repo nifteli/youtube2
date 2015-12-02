@@ -1,4 +1,7 @@
 <script>
+$(function() {
+$( "#dateOfBirth" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+});
 $(document).ready(function() {
     var validator = $("#regForm").validate({
         rules: {
@@ -15,23 +18,75 @@ $(document).ready(function() {
         },
     });
 });
+function submitForm()
+{
+	//document.getElementById('regForm').validate();
+	if(document.getElementById('name').value.trim() == "")
+	{
+		document.getElementById('name').focus();
+		return;
+	}
+	if(document.getElementById('surname').value.trim() == "")
+	{
+		document.getElementById('surname').focus();
+		return;
+	}
+	if(document.getElementById('email').value.trim() == "")
+	{
+		document.getElementById('email').focus();
+		return;
+	}
+	if(document.getElementById('dateOfBirth').value.trim() == "")
+	{
+		document.getElementById('dateOfBirth').focus();
+		return;
+	}
+	if ($('input[name=gender]:checked').length <= 0) 
+	{
+		document.getElementById('gender').focus();
+		return;
+	}
+	if(document.getElementById('username').value.trim() == "")
+	{
+		document.getElementById('username').focus();
+		return;
+	}
+	if(document.getElementById('password').value.trim() == "")
+	{
+		document.getElementById('password').focus();
+		return;
+	}
+	if(document.getElementById('passwordAgain').value.trim() == "")
+	{
+		document.getElementById('passwordAgain').focus();
+		return;
+	}
+	if(document.getElementById('password').value.trim() != document.getElementById('passwordAgain').value.trim())
+	{
+		alert( "{$passNotEqual}" );
+		return;
+	}
+	if(document.getElementById('password').value.trim().length < {$minPassLength})
+	{
+		alert("{$passTooShort} {$minPassLength}");
+		document.getElementById('password').focus();
+		return;
+	}
+	if($('input[name=agree]:checked').length <= 0)
+	{
+		document.getElementById('agree').focus();
+		return;
+	}
+	
+	document.getElementById('regForm').submit();
+	//document.getElementById('regForm').submit();
+}
 </script>
-<div>
-<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
-</div>
-</div>
+
 
 <!--Videos thums Start-->			 
 
-	<div style="padding-top:30px;min-height: 1000px;">
-	
-	<!-- Info message boxes 
-	<div class="info">Info message</div>
-	<div class="success">Successful operation message</div>
-	<div class="warning">Warning message</div>
-	<div class="error">Error message</div>
-	<!-- End Info message boxes -->
+
 	{if isset($errorMessage)}
 	<div class="err">{$errorMessage}</div>
 	{/if}
@@ -39,57 +94,50 @@ $(document).ready(function() {
 	<div class="success1">{$okMessage}</div>
 	{/if}
 	
-<form class="reg-form" name="regForm" id="regForm" action="?page=reg&action=reg" method="post"><br><br>
-	<div class="topgap">
-	<label>{$name}:
-	<div class="gap"><input class="field" type="text" name="name" id="name" value="{if isset($nameVal)} {$nameVal} {/if}"></div></label></div><br><br>
-
-	<div class="topgap">
-	<label>{$surname}:
-	<div class="gap"><input class="field" type="text" name="surname" id="surname" value="{if isset($surnameVal)} {$surnameVal} {/if}"></div></label></div><br><br>
-
-	<div class="topgap">
-	<label>{$gender}:
-	<div class="gender">
-		<input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}
-		<label><input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}</label>
-	</div>
-	</label></div><br>
-
-
-	<div class="topgap">
-	<label>{$email}:
-	<div class="gap"><input class="field" type="email" name="email" id="email" value="{if isset($emailVal)} {$emailVal} {/if}"></div></label></div><br><br>
-
-
-	<div class="topgap">
-	<label>{$phone}:
-	<div class="gap"><input class="field" type="text" name="phone" id="phone" value="{if isset($phoneVal)} {$phoneVal} {/if}"></div></label></div><br><br>
-
-	<div class="topgap">
-			<label>{$language}:
-	<div class="gap">
-			<select class="field" name="lang" id="lang" style="width:234px; height:35px">
-				   <option value="az">Azerbaijani</option>
-				   <option value="en">English</option>
-				   <option value="ru">Russian</option>
-				  </select></div></label>
-				  </div>
-				  <br><br>
-
-
-	<div class="topgap">
-	<label>{$username}:
-	<div class="gap"><input class="field" type="text" name="username" id="username" value="{if isset($usernameVal)} {$usernameVal} {/if}"></div></label></div><br><br><br>
-
-	<div class="topgap">
-	<label>{$password}:
-	<div class="gap"><input class="field" type="password" name="password" id="password" ></div></label></div><br><br>
+<form class="reg-form" name="regForm" id="regForm" action="?page=reg&action=reg" method="post">
+	<p class="regTitles">{$mandatory} :</p>
+	<input class="field" type="text" name="name" id="name" value="{if isset($nameVal)} {$nameVal} {/if}" placeholder="{$name}*" required>
+	<input class="field" type="text" name="surname" id="surname" value="{if isset($surnameVal)} {$surnameVal} {/if}" placeholder="{$surname}*" required>
+	<input class="field" type="email" name="email" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}*" required>
+	<input class="field" type="text" name="dateOfBirth" id="dateOfBirth" value="{if isset($dateOfBirthVal)} {$dateOfBirthVal} {/if}" placeholder="{$dateOfBirth}*" required>
+	<br>
+	<input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}
+	<input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}
+	<p class="regTitles">{$optional} :</p>
+	<input class="field" type="text" name="phone" id="phone" value="{if isset($phoneVal)} {$phoneVal} {/if}" placeholder="{$phone}">
+	<select class="field" name="langId" id="langId" style="">
+		<option value="">{$language}</option>
+		<option value="az" {if {$langIdVal} == "az"} selected {/if}>Azərbaycan dili</option>
+		<option value="en" {if {$langIdVal} == "en"} selected {/if}>English</option>
+		<option value="ru" {if {$langIdVal} == "ru"} selected {/if}>Русский</option>
+	</select>
+	<input class="field" type="text" name="profession" id="profession" value="{if isset($professionVal)} {$professionVal} {/if}" placeholder="{$profession}">
+	<input class="field" type="text" name="interests" id="interests" value="{if isset($interestsVal)} {$interestsVal} {/if}" placeholder="{$interests}">
 	
-	<div class="topgap">
-	<label>{$passwordAgain}:
-	<div class="gap"><input class="field" type="password" name="passwordAgain" id="passwordAgain" ></div></label></div><br><br>
 
+	<p class="regTitles">{$userPassword}:</p>
+	<input class="field" type="text" name="username" id="username" value="{if isset($usernameVal)} {$usernameVal} {/if}" placeholder="{$username}">
+	<input class="field" type="password" name="password" id="password" placeholder="{$password}">
+	<input class="field" type="password" name="passwordAgain" id="passwordAgain" placeholder="{$passwordAgain}">
+	
+	<p class="regTitles">{$secQuestionNot} :</p>
+	<select class="field" name="secretQuestionId" id="secretQuestionId" style="">
+		<option value="">{$question}</option>
+		{section name=sec1 loop=$secQuestions}
+		<option value="{$secQuestions[sec1].id}" {if $secretQuestionIdVal == $secQuestions[sec1].id} selected {/if}>{$secQuestions[sec1].question}</option>
+		{/section}
+	</select>
+	<input class="field" type="text" name="secretAnswer" id="secretAnswer" value="{if isset($secretAnswerVal)} {$secretAnswerVal} {/if}" placeholder="{$answer}">
+	
+	<p  class="regTitles">{$receiveNot}:<p>
+	<input type="checkbox" name="onNews" id="onNews" {if isset($onNewsVal)} checked {/if}> {$onNewsNot} <br>
+	<input type="checkbox" name="onComment" id="onComment" {if $onCommentVal} checked {/if}> {$onCommentNot}<br>
+	<input type="checkbox" name="onVideoComment" id="onVideoComment" {if $onVideoCommentVal} checked {/if}> {$onVideoCommentNot}<br>
+	<input type="checkbox" name="agree" id="agree"> {$agreeNot} <a href="?page=rules">{$rules}</a><br>
+	<div style="text-align:center">
+	
+	<a href="javascript:{}" onclick="submitForm();"><img src="./img/signUp.png" width="50" height="50"></a>
+	</div>
 	<!--<div class="topgap">
 	<label>{$captcha}: 
 	<div class="gap"><img width="132" height="44" alt="" src="./Registration_files/captcha.png"></div></label></div>
@@ -102,15 +150,10 @@ $(document).ready(function() {
 	<div class="topgap" style="padding-top:8px;">
 	<label>Roles:
 	<div class="gap"><input class="field" type="text" name="username"></div></label></div>
-	--><br><br>
-
-
-	<input class="cancel2" type="submit" value="{$cancel}" name="submit">
-
-	<input class="login39" type="submit" value="{$register}" name="submit">
+	-->
 
 </form>
-</div>
+
 
              
 

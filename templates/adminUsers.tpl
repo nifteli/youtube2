@@ -24,6 +24,21 @@ function copyEmails()
    $('#to').val(emails);
 	
 }
+
+function showProfile(userId)
+{
+	//alert(userId);
+	//$('#profileDiv').html("test");
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action=showProfile&userId="+userId, 
+     success: function(data) {
+	 	//if(data=="");return;
+		$('#profileDiv').html(data);
+     }
+   });
+}
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
@@ -118,7 +133,7 @@ function copyEmails()
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$viewProfile}">
 						{if $hasViewProfileAccess}
-						<a href="?page=adminUsers&action=viewProfile&id={$users[sec1].id}"><img alt="{$viewProfile}" src="img/viewProfile.png" width="15" height="15" alt=""/></a>
+						<a  onclick="showProfile({$users[sec1].id})" href="#userProfile"><img alt="{$viewProfile}" src="img/viewProfile.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$setUser}">
@@ -212,3 +227,14 @@ function copyEmails()
 		</form>
 	</div>
 </div>
+
+{if $hasViewProfileAccess}
+<div id="userProfile" class="modalDialog" >
+	<div style="width:700px;height:480px">
+		<h4 style="font-weight:bold">{$userProfile}</h4>
+		<a href="#close" title="Close" class="close1">X</a>
+		<div id="profileDiv" >
+		</div>
+	</div>
+</div>
+{/if}

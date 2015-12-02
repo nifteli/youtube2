@@ -156,32 +156,33 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		<div class="wvDet1">
 			<img src="img/lang.png" width="15" height="15"/><span class="wvLabel">{$language}</span>
 			<img src="img/question.png" width="15" height="15"/><span class="wvLabel">{$questions}</span> <br>
-			<div style="overflow:auto; width:370px"><img src="img/tags.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div> <br>
+			<div style="overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div> <br>
 			<div class="vidInfo">
 				{$info}
 			</div>
 		</div>
 	</div>
 	<div class="wvUnder">
-		<img src="img/users.png" width="15" height="15" alt=""/>  <span class="wvLabel">{$author}</span>
-		<img src="img/upload.png" width="15" height="15" alt=""/>  <span class="wvLabel">{$publishDate}</span>
-		<img src="img/eye.png" width="20" height="15" alt=""/>  <span class="wvLabel">{$viewCount}</span>
-        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/like.png"/></a>
+		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel">{$author}</span>
+		<img src="img/upload.png" width="15" height="15" title="{$publishDateTitle}"/>  <span class="wvLabel">{$publishDate}</span>
+		<img src="img/eye.png" width="20" height="15" title="{$viewCountTitle}"/>  <span class="wvLabel">{$viewCount}</span>
+		<img src="img/comments.png" width="20" height="15" title="{$commentCountTitle}"/>  <span class="wvLabel">{$commentCount}</span>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/like.png" title="{$likeCountTitle}"/></a>
         <span id="likeCnt" class="wvLabel">{$likeCount}</span>
-        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/dislike.png"/></a>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/></a>
         <span id="dislikeCnt" class="wvLabel">{$dislikeCount}</span>  
 		{if $added2Folder == 0}
-			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" alt=""/><span class="wvLabel">{$addToFolder}</span></a>	
+			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
 		{else}
-			<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" alt=""/><span class="wvLabel">{$removeFromFolder}</span></a>	
+			<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
 		{/if}
-		<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" alt=""/><span class="wvLabel">{$reportVideo}</span></a>
+		<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
 		{if $addedById == $curUserId}
-			<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" alt=""/><span class="wvLabel">{$edit}</span></a>		
-			<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/remove.png" width="15" height="15" alt=""/><span class="wvLabel">{$delete}</span></a>
+			<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" title="{$editTitle}"/><span class="wvLabel">{$edit}</span></a>		
+			<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" title="{$deleteTitle}"/><span class="wvLabel">{$delete}</span></a>
 		{/if}
-		<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png"/></a>
-		<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png"/></a>
+		<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
+		<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
 	</div>
 	{if $result == 'error'}
 	  <div class="smallerr">

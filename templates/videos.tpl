@@ -60,7 +60,11 @@
 });
 
 
-
+function submitForm(action)
+{
+	document.getElementById('frmAddToFolder').action=action;
+	//document.getElementById('frmAddToFolder').submit();
+}
 </script>
 	
 
@@ -88,6 +92,32 @@
 		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">
 		</div>
+	</div>
+</div>
+
+<div id="add2FolderModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$folders}</h1>
+		{if count($foldersArr)>0}
+		<form name="frmAddToFolder" id="frmAddToFolder" action="" method="post">
+			<br>
+			<label>{$folderName2}:</label>
+			<div style="float:right">
+				<select class="field" name="folderId" id="folderId" style="width:250px; height:30px">
+					{section name=sec1 loop=$foldersArr}
+					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
+					{/section}
+				 </select>
+			</div>
+		<br><br>
+		<div style="text-align:center;width:100%">
+			<input type="submit" class="post" name = "add" id="add" value="{$addToFolder}">
+		</div>
+		</form>
+		{else}
+		{$noFolderNotf}
+		{/if}
 	</div>
 </div>
 	<br><br><br><br>
