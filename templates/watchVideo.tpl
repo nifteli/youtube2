@@ -140,7 +140,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 650px;">
 	<div class="wvLeft">
-		<div class="hollywd">
+		<div class="hollywd" style="margin-top:10px">
 			  <h2>{$catName}</h2>  
 		</div>
 		<div class="player">
@@ -161,6 +161,21 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 				{$info}
 			</div>
 		</div>
+		<div class="actIcons">
+			{if $added2Folder == 0}
+			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
+			{else}
+				<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
+			{/if}
+			<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
+			<br>
+			{if $addedById == $curUserId}
+				<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" title="{$editTitle}"/><span class="wvLabel">{$edit}</span></a>		
+				<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" title="{$deleteTitle}"/><span class="wvLabel">{$delete}</span></a>
+			{/if}
+			<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
+			<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
+		</div>
 	</div>
 	<div class="wvUnder">
 		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel">{$author}</span>
@@ -171,28 +186,17 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
         <span id="likeCnt" class="wvLabel">{$likeCount}</span>
         <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/></a>
         <span id="dislikeCnt" class="wvLabel">{$dislikeCount}</span>  
-		{if $added2Folder == 0}
-			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
-		{else}
-			<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
-		{/if}
-		<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
-		{if $addedById == $curUserId}
-			<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" title="{$editTitle}"/><span class="wvLabel">{$edit}</span></a>		
-			<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" title="{$deleteTitle}"/><span class="wvLabel">{$delete}</span></a>
-		{/if}
-		<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
-		<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
+		
 	</div>
 	{if $result == 'error'}
-	  <div class="smallerr">
+	  <div class="smallerr"  style="margin-top:0">
 		{foreach from=$messages item=message}
 			{$message} <br>
 		{/foreach}
 	  </div>
 	{/if}
 	{if $result == 'success' and $okMessage != ""}
-		<div class="success1">{$okMessage}</div>
+		<div class="success1" style="margin-top:0">{$okMessage}</div>
 	{/if}
 	
 	<div class="comments">

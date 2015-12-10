@@ -18,7 +18,7 @@ class WatchVideo
 			$this->watchVideo->assign("catName",$videoInfo[0]["catName".$controller->lang]);
 			$this->watchVideo->assign("lang",$controller->lang);
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
-			$this->watchVideo->assign("videoName",((strlen($videoInfo[0]["name"])>30)?substr($videoInfo[0]["name"],0,30)."...":$videoInfo[0]["name"]));
+			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>30)?mb_substr($videoInfo[0]["name"],0,30,"UTF-8")."...":$videoInfo[0]["name"]));
 			$this->watchVideo->assign("likeCount",$videoInfo[0]["likeCount"]);
 			$this->watchVideo->assign("likeCountTitle",$content["LIKECOUNTTITLE"]);
 			$this->watchVideo->assign("dislikeCount",$videoInfo[0]["dislikeCount"]);

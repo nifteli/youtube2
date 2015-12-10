@@ -20,6 +20,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	color: #3e3003;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -57,13 +58,12 @@ table {
 }
 
 .fieldv {
- width:220px;
- height:35px;
- border-radius:3px;
- border:1px solid #fff;
- padding-left:10px;
- margin-left:44px;
- margin-top: 10px;
+     width: 270px;
+    height: 25px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    margin-bottom: 5px;
+	margin-left: 1px;
 }
 
 
@@ -584,7 +584,7 @@ width: 100%;
  font-weight:bold;
  float:left;
  margin-top:30px;	
- margin-left:23px;
+ 
  color:#3e3003;	
  width: 500px;
 }
@@ -592,27 +592,26 @@ width: 100%;
 
 .box-cont{
     float: right;
-    height: 160px;
+    height: 190px;
     margin-left: 11px;
     /* margin-top: -45px; */
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     width: 100%;
-    padding: 0 0 65px 0;
 }
 
 
 .box{
  width:187px;
- height:235px;
+ height:170px;
  background:#DBCB8F;
  float:left;
  margin-left:0px;
- margin-top: 30px;	
+ margin-top: 15px;	
 }
 
 .box img{
  margin-top:8px;
- margin-left:6px;	
+ 
 }
 
 .box h2{
@@ -620,10 +619,17 @@ width: 100%;
  font-size:14px;
  color:#3e3003;
  text-decoration:none;
- margin-left: 10px;
- margin-top: 10px;	
+ margin-top: 3px;	
 }
 
+.videoName{
+	float: left;
+    text-decoration: none;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: -15px;
+	    width: 150px;
+}
 .box a{
 text-decoration:none;	
 }
@@ -682,8 +688,8 @@ text-decoration:none;
  
  
 .shape{
- margin-top:5px !important;	
- margin-left:10px !important;
+ margin-top:2px !important;	
+
 
 }
 
@@ -824,9 +830,17 @@ text-decoration:none;
 .player{
  margin-top:10px;
  float:left;	
-
+ width:550px;
+ height:350px;
 }
-
+.addVidRight{
+	float:left;
+	width:400;
+	height:350px;
+	top:10px;
+	margin-left:15px;
+	margin-top:10px;
+}
 
 .url{
  width:220px;
@@ -1509,14 +1523,10 @@ cursor: pointer;
 }
 
 .fieldtextv {
- width:220px;
- height:60px;
- border-radius:3px;
- border:1px solid #fff;
- padding-left:10px;
- padding-top:10px;
- margin-left:44px;
- margin-top: 10px;
+height: 240px;
+border-radius: 3px;
+border: 1px solid #fff;
+width: 100%;
 }
 
 .play{
@@ -1795,6 +1805,12 @@ margin-top: 22px;
     position: relative;
     font-size: smaller;
     margin-left: 20;
+	height: 15;
+    width: 15;
+}
+
+.videoImage{
+	
 }
 
 .ico2{
@@ -1868,14 +1884,15 @@ margin-top: 22px;
     color: #3e3003;
     position: relative;
     margin-left: 5px;
-    top: 3px;
+    top: 7px;
 }
 .views {
-  font-family: Calibri;
+      font-family: Calibri;
     font-size: 12px;
     color: #3e3003;
     position: relative;
-    margin-left: 5px;
+    margin-right: 5px;
+    margin-left: 2;
 }	
 
 .date {
@@ -2021,7 +2038,6 @@ margin-top: 60px;
 .comments{
     min-height: 100px;
     width: 980px;
-    margin-top: 20px;
     float: left;
 }
 
@@ -2087,7 +2103,7 @@ margin-top: 60px;
 	top: 1px;
 }
 .actionBox {
-        padding: 10px;
+    
     float: left;
     width: 950px;
 }
@@ -2100,7 +2116,7 @@ margin-top: 60px;
 
 .cmt{
 	float:left;
-	margin-bottom:10px;
+	
 }
 
 .cmtBox{
@@ -2188,7 +2204,6 @@ float: left;
     max-width: 202px;}
     
 .insidious {
-    color: #000000;
     display: block;
     font-size: 12px;
     width: auto;
@@ -2402,8 +2417,7 @@ pre{
 .vidInfo{
 	    float: left;
     width: 370px;
-    margin-top: 10px;
-    height: 280;
+    height: 260px;
     overflow: auto;
 }
 /*End Back to top*/
@@ -2484,31 +2498,37 @@ background: #C05208;
 
 .videoDet{
 	    width: 100%;
-    height: 110px;
-    padding-left: 15px;
+    
+    padding-left: 9px;
 }
 
 .wvLeft{
 	float:left;
 	width:600px;
+	height: 385px;
 }
 
 .wvRight{
 	float: right;
     width: 378px;
-    min-height: 400px;
+    min-height: 350px;
 }
 .wvUnder{
-	    float: left;
-    width: 980px;
+	float: left;
+    width: 600px;
     height: 30px;
-	margin-top: 10px;
+	margin-top: 8px;
 }
 
 .wvDet1{
 	float:left;
 	width:100%;
-	margin-top:20px;
+}
+
+.actIcons{
+	float:left;
+	width:370px;
+	height:60px;
 }
 
 .wvLabel{
@@ -2623,4 +2643,9 @@ h
 	font-weight:bold;
 	margin-bottom:5px;
 	margin-top:10px;
+}
+
+.forgotPass{
+	float:left;
+	width:600px;
 }

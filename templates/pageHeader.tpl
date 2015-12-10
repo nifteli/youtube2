@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="fonts/stylesheet.css"/>
 	<link href="css/tabcontent.css" rel="stylesheet" type="text/css" />
 	
+	
 	<script src="js/tabcontent.js" type="text/javascript"></script>
 	<!--tag scripts-->
 	<link rel="stylesheet" href="css/jqcloud.min.css">
@@ -27,6 +28,11 @@
 	<script src="js/backToTop/main.js"></script>
 	<!--validation scripts-->
 	<script src="js/jquery.validate.min.js"></script>
+	
+	<!-- Multiselect combobox -->
+	<link rel="stylesheet" href="css/jquery.multiselect.css" />
+	<script src="js/jquery.multiselect.js" type="text/javascript"></script>
+	
 </head>
 <script>
 $(document).on("click", '.subscription', function eventHandler(e) {

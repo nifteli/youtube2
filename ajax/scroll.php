@@ -37,8 +37,8 @@ function showData($data,$db,$limit)
 		
 	$qry = "SELECT vs.views viewCount,
 					vs.likes likeCount,
-					vs.dislikes dislikeCount,
-					v.id, v.name, v.info, v.duration,
+					vs.dislikes dislikeCount,vs.comments,
+					v.id, v.name, v.info, v.duration,q.question,
 					DATE_FORMAT(v.added,'%d %b %Y') added, 
 					v.languageId, v.link, v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,
@@ -52,6 +52,7 @@ function showData($data,$db,$limit)
 			join categories c on c.id = vc.categoryId
 			left join languages l on l.id = v.languageId
             left join videotags vt on vt.videoId=v.id
+			left join questions q on q.id&v.questions
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
 			where v.isDeleted=0 and lower(l.abbr)='$lang'";
@@ -90,8 +91,9 @@ function showRecommended($data,$db,$limit)
 		$start = ($page-1)*$limit;
 		
 	$qry = "Select * from (
-			SELECT l.abbr, vs.views viewCount, vs.likes likeCount, vs.dislikes dislikeCount, v.id, v.name, v.info, v.duration, 
+			SELECT l.abbr, vs.views viewCount, vs.likes likeCount, vs.dislikes dislikeCount, v.id, v.name, v.info, v.duration,vs.comments,
 					DATE_FORMAT(v.added,'%d %b %Y') added, v.languageId, v.link, v.addedById, concat(u.firstName,' ',u.lastName) addedBy, 
+					q.question,
 					GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags, vc.categoryId, c.catNameaz 
 			FROM videos v 
 			left join vwvideostats vs on v.id = vs.id 
@@ -100,6 +102,7 @@ function showRecommended($data,$db,$limit)
 			join categories c on c.id = vc.categoryId 
 			left join languages l on l.id = v.languageId 
 			left join videotags vt on vt.videoId=v.id 
+			left join questions q on q.id&v.questions
 			left join tags t on t.id=vt.tagId 
 			where v.isDeleted=0
 			group by v.id,vc.categoryId ) a";
@@ -171,7 +174,7 @@ function showSearchResults($data,$db,$limit)
 	$qry = "SELECT vs.views viewCount,
 					vs.likes likeCount,
 					vs.dislikes dislikeCount,
-					v.id, v.name, v.info, v.duration,
+					v.id, v.name, v.info, v.duration,v.questions,
 					DATE_FORMAT(v.added,'%d %b %Y') added, 
 					v.languageId, v.link, v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,
@@ -274,25 +277,28 @@ function displayData($res, $data, $colCnt=4)
 			$id = $res[$i]['id'];
 			$link = getYoutubeImage($res[$i]['link']);
 			$info = $res[$i]['info'];
-			$name = (strlen($res[$i]['name']) > 18) ? substr(trim($res[$i]['name']), 0, 15)."..." : $res[$i]['name'];
-			$tags = (strlen($res[$i]['tags']) > 17) ? substr(trim($res[$i]['tags']), 0, 14)."..." : $res[$i]['tags'];
+			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 18) ? mb_substr(trim($res[$i]['name']), 0, 14,"UTF-8")."..." : $res[$i]['name'];
+			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['tags']), 0, 14,"UTF-8")."..." : $res[$i]['tags'];
 			$viewCount = $res[$i]['viewCount'];
 			$addedDate = $res[$i]['added'];
-			$addedBy = (strlen($res[$i]['addedBy']) > 17) ? substr(trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
+			$addedBy = (mb_strlen($res[$i]['addedBy'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
 			$likes = $res[$i]['likeCount'];
 			$dislikes = $res[$i]['dislikeCount'];
 			//echo "<br><br><br><br><br>added=".$res[$i]['addedById'] ."sessionid=". $_SESSION["userId"];
 			$str .= "<div class='box'>
 						 <a href='?page=watchVideo&id=$id'>
-							<div style='text-align: center'><img src=$link width=152 height=79 alt='$info'/>
+							<div style='text-align: center'>
+							<div class='videoImage'>
+							<img src=$link width=170 height=90 title='$info'/>
+							</div>
 						 </a>";
 			if(is_numeric($_SESSION["userId"]))
 			{
 				$str .= "<div class='addVideoBtn'>";
 				if(isAddedToFolder($id))
-					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' alt='Add to folder'/></a>";
+					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
-					$str .= "<a href='#add2FolderModal' onClick=\"submitForm('?page=watchVideo&id=$id&action=add2Folder&from=main')\"><img src='img/add.png' width='15' height='15' alt='Remove from folder'/></a>";
+					$str .= "<a href='#add2FolderModal' onClick=\"submitForm('?page=watchVideo&id=$id&action=add2Folder&from=main')\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";
 			}
 						 
@@ -300,38 +306,22 @@ function displayData($res, $data, $colCnt=4)
 			//if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
 				//$str .= " style='visibility: hidden;'";
 			$str .= "<div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>
-					<a href='?page=watchVideo?id=$id'>
-					 	<h2>$name</h2>
-					 </a>
-					 <img class='shape' src='img/shape.png' width=140 height=1 alt=''/> </div>
+					<div class='videoName'>
+					<a href='?page=watchVideo&id=$id'>".trim($name)."</a>
+					 </div>
+					 <img class='shape' src='img/shape.png' width=170 height=1 alt=''/> </div>
 					 <div class='videoDet'>
 						 <ul class='move'>
+							<li>
+								<img width=12 height=10 src='img/question.png'/><span class='views'>" . $res[$i]["question"] . "</span>
+								<img width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
+								<img width=15 height=10 src='img/comments.png'/><span class='views'>" . $res[$i]["comments"] . "</span>
+							</li>
 							<li>
 								<img class='details' width=15 height=10 src='img/tags2.png'/>
 								<span class='wood'>$tags</span>
 							</li>
-							<li>
-								<img width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
-							</li>
-							<li>
-								<img width=10 height=10 src='img/upload.png' /><span class='views'>$addedDate</span>
-							</li>
-							<li>
-								<img width=10 height=10 src='img/users.png'/>
-								<span class='views'>$addedBy</span>
-							</li>
-							<li >
-								<a href='?page=like&type=1'>
-									<img width=10 height=10  src='img/like.png'/>
-								</a>
-								<span class='views'>$likes</span>
 							
-							
-								<a href='?page=like&type=2'>
-									<img width=10 height=10  src='img/dislike.png'/>
-								</a>
-								<span class='views'>$dislikes</span>
-							</li>
 						 </ul>
 					 </div>
 				</div>";

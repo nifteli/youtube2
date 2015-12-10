@@ -23,7 +23,7 @@ $(function() {
 var allCategories = {$allCategories};
 
 function controlQuestionSelection_s(el, sFlag)
-{
+{ 
 	if(el.id == sFlag + "q3" || el.id == sFlag + "q4")
 	{
 		$("#" + sFlag + "q1").prop('checked', false);
