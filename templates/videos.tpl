@@ -70,7 +70,7 @@ function submitForm(action)
 
 <div>
 <div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
+	<div class="tabcontents2"> {$news2}</div>
 </div>
 </div>
 
@@ -88,6 +88,9 @@ function submitForm(action)
 		{/if}
 		{if $okMessage != ''}
 		<div class="success1" style="width:680px; margin-top:40px">{$okMessage}</div>
+		{/if}
+		{if $news1 != ''}
+		<div class="news1">{$news1}</div>
 		{/if}
 		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">

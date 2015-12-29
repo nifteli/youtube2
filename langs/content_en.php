@@ -47,6 +47,27 @@ $content['FOLDERNOTDELETED'] = "Folder not deleted";
 $content['EDITFOLDER'] = "Edit Folder";
 $content['FOLDEREDITED'] = "Folder editted";
 $content['FOLDERNOTEDITED'] = "Folder not editted";
+$content['FROMDATE'] = "Tarixdən";
+$content['TODATE'] = "Tarixədək";
+
+//SEARCH
+$content["SORTBY"] = "Sırala";
+$content["SBDATE"] = "Tarix";
+$content["SBNAME"] = "Ad";
+$content["SBLANG"] = "Dil";
+$content["SBQUESTION"] = "Sual";
+$content["SBCATEGORY"] = "Kateqoriya";
+$content["SBDURATION"] = "Müddət";
+$content["SBWATCHES"] = "Baxılma sayı";
+$content["SBCOMMENTS"] = "Şərh sayı";
+//End SEARCH
+
+//Categories
+$content["GENERAL"] = "General";
+$content["FAVORITE"] = "Favorite";
+$content["ADDEDVIDEOS"] = "Added";
+
+//end categories
 
 //Registration
 $content['NAME'] = 'Name';

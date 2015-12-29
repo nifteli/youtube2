@@ -65,9 +65,9 @@ div.tabcontents
 	border-bottom:0;
 	border-right:0;
 	border-left:0;
-	padding: 30px;
+	padding: 15px;
     background-color:#E2DEAE;
-	width:158px;
+	width:210px;
     border-radius: 0 3px 3px 3px;
 }
 
@@ -80,4 +80,5 @@ div.tabcontents2
     background-color:#E2DEAE;
 	width:158px;
     border-radius: 0 3px 3px 3px;
+	overflow: auto;
 }

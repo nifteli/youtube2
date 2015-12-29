@@ -65,7 +65,7 @@ function showData($data,$db,$limit)
 	if(isset($tagId))
 		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
-			order by catName$lang asc,v.added desc 
+			order by v.added desc,catName$lang asc
 			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry); 
 	
@@ -113,7 +113,7 @@ function showRecommended($data,$db,$limit)
 		for ($i=0; $i<count($tagArr); $i++)
 			$qry .= " or tags like '%" . $tagArr[$i] . "%'";
 	}
-	$qry .= " ) order by a.catNameaz asc,a.added desc 
+	$qry .= " ) order by a.added desc,a.catNameaz asc 
 			limit $start,$limit";//echo $qry;
 		//echo $qry ;
 	$res =$db->rawQuery($qry); 
@@ -125,6 +125,7 @@ function showSearchResults($data,$db,$limit)
 {
 	$lang = $data["lang"];
 	$page = $data['page'];
+	$orderBy = " v.added desc,catName$lang asc ";
 	
 	$search = $data["search"];
 	$language = $data["language"];
@@ -133,6 +134,37 @@ function showSearchResults($data,$db,$limit)
 	$time = $data["time"];
 	$interval = $data["interval"];
 	$options = explode(",", $data["options"]);
+	//print_r($data);echo "<br>";
+	switch($data["orderBy"])
+	{
+		case 1:
+			$orderBy = " v.added asc,catName$lang asc ";
+			break;
+		case 2:
+			$orderBy = " v.name,catName$lang asc ";
+			break;
+		case 3:
+			$orderBy = " l.name$lang,catName$lang asc ";
+			break;
+		case 4:
+			$orderBy = " q.question,catName$lang asc ";
+			break;
+		case 5:
+			$orderBy = " catName$lang asc ";
+			break;
+		case 6:
+			$orderBy = " v.duration desc,catName$lang asc  ";
+			break;
+		case 7:
+			$orderBy = " viewCount desc,catName$lang asc  ";
+			break;
+		case 8:
+			$orderBy = " vs.comments desc,catName$lang asc  ";
+			break;
+		default:
+			$orderBy = " v.added desc,catName$lang asc ";
+			break;
+	}
 	
 	// remove when folders are linked to videos and folder table joined in the query below
 	for($i = 0; $i < count($options); $i++)
@@ -171,15 +203,14 @@ function showSearchResults($data,$db,$limit)
 	else
 		$start = ($page-1)*$limit;
 		
-	$qry = "SELECT vs.views viewCount,
-					vs.likes likeCount,
-					vs.dislikes dislikeCount,
-					v.id, v.name, v.info, v.duration,v.questions,
+	$qry = "SELECT vs.views viewCount,vs.likes likeCount,vs.dislikes dislikeCount,vs.comments,
+					v.id, v.name, v.info, v.duration,v.questions,q.question,
 					DATE_FORMAT(v.added,'%d %b %Y') added, 
 					v.languageId, v.link, v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
+					l.name$lang,
 					c.catName$lang
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
@@ -188,6 +219,7 @@ function showSearchResults($data,$db,$limit)
 			join categories c on c.id = vc.categoryId
 			left join languages l on l.id = v.languageId
             left join videotags vt on vt.videoId=v.id
+			left join questions q on q.id&v.questions
             left join tags t on t.id=vt.tagId
             left join comments ct on ct.videoId=v.id
 			where v.isDeleted=0 and ";
@@ -234,7 +266,7 @@ function showSearchResults($data,$db,$limit)
 		$qry .= " and " . createCondition("v.added", "'$fromDate' and '$toDate'", "between", false);
 	
 	$qry .= " group by v.id,vc.categoryId
-			order by catName$lang asc,v.added desc 
+			order by $orderBy
 			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry);
 	
@@ -328,7 +360,8 @@ function displayData($res, $data, $colCnt=4)
 			if($cnt % $colCnt == 0 || $i + 1 == count($res) || $cat != $res[$i + 1]["catName".$lang])
 				$str .= "</div>";
 		}
-		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'>";
+		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'> 
+				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>";
 		echo $str;
 	}
 }

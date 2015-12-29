@@ -23,6 +23,16 @@ class SearchResults
 		$this->searchRes->assign("toDate", $_POST["toDate"]);
 		$this->searchRes->assign("options", isset($_POST["opt"]) ? implode("," ,$_POST["opt"]) : "");
 		
+		$this->searchRes->assign("sortBy", $content["SORTBY"]);
+		$this->searchRes->assign("sbDate", $content["SBDATE"]);
+		$this->searchRes->assign("sbName", $content["SBNAME"]);
+		$this->searchRes->assign("sbLang", $content["SBLANG"]);
+		$this->searchRes->assign("sbQuestion", $content["SBQUESTION"]);
+		$this->searchRes->assign("sbCategory", $content["SBCATEGORY"]);
+		$this->searchRes->assign("sbDuration", $content["SBDURATION"]);
+		$this->searchRes->assign("sbWatches", $content["SBWATCHES"]);
+		$this->searchRes->assign("sbComments", $content["SBCOMMENTS"]);
+		
 		$this->searchRes->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->searchRes->assign("okMessage", isset($okMessage) ? $okMessage : "");
 		

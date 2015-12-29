@@ -447,11 +447,9 @@ display: table;
 .category{
  width:220px;	
  min-height:1000px;
- margin-top:20px;
  overflow: hidden;
  float:left;
  clear:both;
- margin-top:20px;
  background: #E2DEAE;
 }
 
@@ -1735,7 +1733,7 @@ margin-top: 22px;
 .c-name ul{
  margin:0;
  padding:0;
- list-style-type:disc;
+ 
 	
 }
 
@@ -1781,6 +1779,13 @@ margin-top: 22px;
 .strip img{
  float:left;
  margin-top:30px;
+}
+
+.liImg{
+	
+    background-size: 15px 15px !important;
+    padding-left: 24px !important;
+    background-repeat: no-repeat !important;
 }
 
 .foldr{
@@ -2353,7 +2358,7 @@ pre{
 	margin-top:5px;
 	border: 2px solid #e7e7e7;
 	border-radius: 4px 4px 4px 4px;
-	width: 90px;
+	width: 95px;
 }
 
 .advSearch{
@@ -2624,7 +2629,11 @@ background: #C05208;
 }
 
 #navigation h1 { display:block;width:100%;margin:0 auto;padding:20px 0;color:#fff; } 
-#navigation { width:100%; margin: 0 auto; }
+#navigation { 
+	width:100px;
+	float:left;
+	margin: 0 auto; 
+}
 h
 .catTitle{
     color: #E76B13;
@@ -2648,4 +2657,36 @@ h
 .forgotPass{
 	float:left;
 	width:600px;
+}
+
+.orderByDiv{
+	float: right;
+    width: 200px;
+    margin-top: 23px;
+    position: absolute;
+    margin-left: 640px;
+}
+
+.questions{
+	width:120px;
+	float:left;
+	height:80
+}
+.tabImg1{
+	float: right;
+	margin-top: 5px;
+	width:30; 
+	height:70;
+}
+.tabImg2{
+	float: right;
+	position:relative;
+	width:30; 
+	height:80;
+}
+.news1{
+	width:100%;
+	float:left;
+	height:50px;
+	
 }

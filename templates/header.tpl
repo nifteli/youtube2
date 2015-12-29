@@ -95,41 +95,41 @@ function showTimeInterval(sFlag)
 					<a href="?page=advSearch"><input class="btnSearch" type="button" value="Advanced" name="submit"></a>
 				
 				<div class="simpleSearch">
-				
+				<div style="float:left; width:630px">
 					<select class="srcCmb" name="language" id="language">
 						<option value="0" selected="selected"> {$allLangs}</option>
 						{foreach from=$languages item=row1}
 							{html_options values=$row1.id output=$row1.name selected=$languageVal}
 						{/foreach}
 					</select> 
-				<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
-				<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
-				<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
-				<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
-				<select class="srcCmb" name="category" id="scategory">
-					<option value="0" selected="selected"> {$allCats}</option>
-				</select> 
-				<input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
-				<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input>
-				<select class="srcCmb" name="interval1" id="sinterval1" style="display: none">
-					<option value="0">{$all}</option>
-					<option value="1">1-2</option>
-					<option value="2">2-3</option>
-					<option value="3">3-4</option>
-					<option value="4">{$moreThan4}</option>
-				</select>
-				<select class="srcCmb" name="interval2" id="sinterval2">
-					<option value="0">{$all}</option>
-					<option value="1">{$lessThan15}</option>
-					<option value="2">15-30</option>
-					<option value="3">30-45</option>
-					<option value="4">45-60</option>
-				</select> 
-				
-				<label class="srcLbl">{$date}</label>
-				<input class="srcCmb" style="width:70" type="text" name="fromDate" id="dpFrom">&nbsp;
-				<input class="srcCmb" style="width:70" type="text" name="toDate"  id="dpTo">&nbsp;
-				
+					<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
+					<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
+					<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
+					<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+					<select class="srcCmb" name="category" id="scategory">
+						<option value="0" selected="selected"> {$allCats}</option>
+					</select> 
+					<input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
+					<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input>
+					<select class="srcCmb" name="interval1" id="sinterval1" style="display: none">
+						<option value="0">{$all}</option>
+						<option value="1">1-2</option>
+						<option value="2">2-3</option>
+						<option value="3">3-4</option>
+						<option value="4">{$moreThan4}</option>
+					</select>
+					<select class="srcCmb" name="interval2" id="sinterval2">
+						<option value="0">{$all}</option>
+						<option value="1">{$lessThan15}</option>
+						<option value="2">15-30</option>
+						<option value="3">30-45</option>
+						<option value="4">45-60</option>
+					</select> 
+				</div>
+				<div style="float:left;width:208px;    height: 26px;">
+					<input class="srcCmb" style="width:95;    margin-left: 7;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
+					<input class="srcCmb" style="width:95" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}">&nbsp;
+				</div>
 				</div>
 				</form>
 				<div class="tags">
@@ -171,7 +171,7 @@ function showTimeInterval(sFlag)
 		<div class="user" align="center"> 
 			<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" /></a>
 			<p class="counts">{$videos} ({$videoCnt})</p>
-			<a href="?page=allTags"><img class="statistics2" width="30" height="20"  src="img/tags.png" /></a>
+			<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" /></a>
 			<p class="counts">{$tags} ({$tagCnt})</p>
 			<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" /></a>
 			<p class="counts">{$users} ({$userCnt})</p>

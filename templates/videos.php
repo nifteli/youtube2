@@ -28,6 +28,8 @@ class Videos
 		$this->videos->assign("folderName", $folderName);
 		$this->videos->assign("folderId", $folderId);
 		$this->videos->assign("addToFolder", $content['ADDTOMYFOLDER']);
+		//$this->videos->assign("news1", "test title");
+		//$this->videos->assign("news2", "test title");
 		if($controller->access->hasAccess)
 		{
 			$this->videos->assign("folders",$content['FOLDERS']);

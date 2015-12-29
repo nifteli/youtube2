@@ -169,13 +169,26 @@ class Controller //extends MySQL
 			$join = "INNER";
 			$cond = " and v.addedById = $userId";
 		}
-		$this->db->join("videocats vc", "c.id = vc.categoryId", $join);
-		$this->db->join("videos v", "v.id = vc.videoId", $join);
-		$this->db->where("c.questions &  $questions " . $cond);
-		$this->db->groupBy("c.id");
-		$this->db->orderBy("c.catName".$this->lang,"asc");
-		$cats = $this->db->get("categories c",null,"c.id, '#' as url, c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo, '#' as subscribe, IfNULL(count(vc.categoryid), 0) AS count");
+		// $this->db->join("videocats vc", "c.id = vc.categoryId", $join);
+		// $this->db->join("videos v", "v.id = vc.videoId", $join);
+		// $this->db->where(" c.questions &  $questions " . $cond);
+		// $this->db->groupBy("c.id");
+		// $this->db->orderBy("c.catName".$this->lang,"asc");
+		// $cats = $this->db->get("categories c",null,"c.id, '#' as url, c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo, '#' as subscribe, IfNULL(count(vc.categoryid), 0) AS count");
 		//echo $this->db->getLastQuery()."<br>";
+		$qry = "select a.*, ifnull(count(a.videoId),0) count
+							from(
+							SELECT c.id,  c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo,'#' as subscribe,c.img,
+								ifnull(v.isDeleted,0) isDeleted,v.id videoId
+								FROM categories c 
+								$join JOIN videocats vc on c.id = vc.categoryId 
+								$join JOIN videos v on v.id = vc.videoId 
+							WHERE c.questions & $questions $cond) a
+							where isDeleted=0
+							group by a.id,a.catName,a.catInfo
+							order by catname"; //echo $qry;
+		$cats = $this->db->rawQuery($qry);
+		
 		return $cats;
 	}
 	

@@ -69,7 +69,7 @@ $(document).ready(function() {
 		</div>
 		<div style="text-align:center">
 		<a href="javascript: submitForm()"> 
-			<img src="img/addVideo.png" width="100" height="100" alt="">
+			<img src="img/AddVideo.png" width="100" height="100" alt="">
 		</a>
 		</div>
 	

@@ -22,8 +22,12 @@ class Categories
 		$this->categories->assign("folderName",$content['FOLDERNAME']);
 		$this->categories->assign("editFolder",$content['EDITFOLDER']);
 		$this->categories->assign("save",$content['SAVE']);
+		$this->categories->assign("general",$content['GENERAL']);
+		$this->categories->assign("favorite",$content['FAVORITE']);
+		$this->categories->assign("added",$content['ADDEDVIDEOS']);
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
 		$this->categories->assign("hasAccess",$controller->access->hasAccess);
+		$this->categories->assign("lang",$controller->lang);
 		$this->categories->assign("userId",$controller->access->userId);
 		$this->categories->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->categories->assign("okMessage", isset($okMessage) ? $okMessage : "");
