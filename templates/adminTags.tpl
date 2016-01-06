@@ -77,7 +77,7 @@ function submitForm(action)
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].lang}">{$tags[sec1].lang}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$tags[sec1].name}">{$tags[sec1].name}</td>
-					<td class="vertical-middle" style="overflow: hidden;"><input style="width:100%" name="newTag[{$tags[sec1].id}]" id=name="newTag{$tags[sec1].id}" type="text"></td>
+					<td class="vertical-middle" style="overflow: hidden;"><input style="width:100%" name="newTag[{$tags[sec1].id}]" id="newTag{$tags[sec1].id}" type="text"></td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
 						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>

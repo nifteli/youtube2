@@ -49,6 +49,7 @@ class AdminVideoLinks
 			$this->adminVideoLinks->assign("nameVal", $_POST["name"]);
 			$this->adminVideoLinks->assign("infoVal", $_POST["info"]);
 			$this->adminVideoLinks->assign("addedVal", $_POST["added"]);
+			$this->adminVideoLinks->assign("addedTillVal", $_POST["addedTill"]);
 			$this->adminVideoLinks->assign("languageIdVal", $_POST["languageId"]);
 			$this->adminVideoLinks->assign("linkVal", $_POST["link"]);
 			$this->adminVideoLinks->assign("videoQuestionVal", $_POST["videoQuestion"]);

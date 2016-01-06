@@ -13,6 +13,7 @@ include($templatePath."forgotPass.php");
 include($templatePath."searchResults.php");
 include($templatePath."advSearch.php");
 include($templatePath."signIn.php");
+include($templatePath."profile.php");
 //Admin classes
 include($templatePath."adminMenu.php");
 include($templatePath."adminProfile.php");
@@ -24,6 +25,7 @@ include($templatePath."adminUsers.php");
 include($templatePath."adminComments.php");
 include($templatePath."adminFolders.php");
 include($templatePath."adminTags.php");
+include($templatePath."adminCategories.php");
 
 class Controller //extends MySQL
 {
@@ -120,6 +122,10 @@ class Controller //extends MySQL
 				$adminMenu = new AdminMenu($this);
 				$adminMenu->Show();
 				break;
+			case "profile":
+				$profile = new Profile($this);
+				$profile->Show();
+				break;
 			case "adminProfile":
 				$adminProfile = new AdminProfile($this);
 				$adminProfile->Show();
@@ -155,6 +161,10 @@ class Controller //extends MySQL
 			case "adminUsers":
 				$adminUsers = new AdminUsers($this);
 				$adminUsers->Show();
+				break;
+			case "adminCategories":
+				$adminCategories = new AdminCategories($this);
+				$adminCategories->Show();
 				break;
 		}
 	}
@@ -335,6 +345,8 @@ class Controller //extends MySQL
 	public function getVideoLinks($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
 			$sortBy = "STR_TO_DATE(added, '%d-%m-%y')";
@@ -343,7 +355,7 @@ class Controller //extends MySQL
 		$lang = $this->lang;
 		$qry = "select * from (
 						SELECT v.id, v.name, v.info, DATE_FORMAT(v.added,'%d-%m-%Y') added, v.addedByIP,DATE_FORMAT(v.updated,'%d-%m-%Y') updated,v.duration,v.questions,
-								l.name$lang lang, v.link,v.languageId,
+								l.name$lang lang, v.link,v.languageId,v.added vadded,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								concat(u2.firstName,' ',u2.lastName) updatedBy,
 								concat(u3.firstName,' ',u3.lastName) deletedBy,
@@ -370,8 +382,15 @@ class Controller //extends MySQL
 			$qry .= " and v.name like '%" . trim($post["name"]) . "%'";
 		if(isset($post["info"]) && $post["info"] != "")
 			$qry .= " and v.info like '%" . trim($post["info"]) . "%'";
+		
 		if(isset($post["added"]) && $post["added"] != "")
-			$qry .= " and v.added = '" . $this->getDateForSelect(trim($post["added"])) . "'";
+			$beginDate = $this->getDateForSelect(trim($post["added"]));
+		if(isset($post["addedTill"]) && $post["addedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["addedTill"]));
+		$qry .= " and vadded between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
+		
+		
 		if(isset($post["languageId"]) && $post["languageId"] != "")
 			$qry .= " and v.languageId = " . trim($post["languageId"]);
 		if(isset($post["link"]) && $post["link"] != "")
@@ -450,6 +469,8 @@ class Controller //extends MySQL
 	public function getComments($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
 			$sortBy = "c.created ";
@@ -470,7 +491,11 @@ class Controller //extends MySQL
 				where 1=1 ";
 				
 		if(isset($post["created"]) && $post["created"] != "")
-			$qry .= " and DATE_FORMAT(c.created,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and c.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+				
 		if(isset($post["id"]) && $post["id"] != "")
 			$qry .= " and c.id=".trim($post["id"]);
 		if(isset($post["videoId"]) && $post["videoId"] != "")
@@ -502,6 +527,8 @@ class Controller //extends MySQL
 	public function getFolders($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
 			$sortBy = "f.created ";
@@ -520,7 +547,11 @@ class Controller //extends MySQL
 				where isDeleted=0 ";
 				
 		if(isset($post["created"]) && $post["created"] != "")
-			$qry .= " and DATE_FORMAT(f.created,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and f.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+			
 		if(isset($post["id"]) && $post["id"] != "")
 			$qry .= " and f.id=".trim($post["id"]);
 		if(isset($post["authorId"]) && $post["authorId"] != "")
@@ -583,6 +614,9 @@ class Controller //extends MySQL
 			$sortBy = "u.registered ";
 			$sortType = "desc";
 		}
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
+		
 		$lang = $this->lang;
 		$qry = "SELECT u.*,r.name roleName,l.nameAz lang,
 				DATE_FORMAT(u.registered,'%d-%m-%Y %k:%i:%S') createdDate,
@@ -595,13 +629,60 @@ class Controller //extends MySQL
 				where isDeleted=0 ";
 		
 		if(isset($post["created"]) && $post["created"] != "")
-			$qry .= " and DATE_FORMAT(u.registered,'%d-%m-%Y') = '" . $this->getDateForSelect(trim($post["created"])) . "'";
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and u.registered between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+			
 		if(isset($post["id"]) && is_numeric($post["id"]))
 			$qry .= " and u.id=".trim($post["id"]);
 		if(isset($post["userName"]) && $post["userName"] != "")
 			$qry .= " and u.userName like '%" . trim($post["userName"]) . "%'";
 		if(isset($post["name"]) && $post["name"] != "")
 			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["name"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		//echo $qry;
+		$res = $this->db->rawQuery($qry);//print_r($res);
+		return $res;
+	}
+	
+	function getSecretQuestions()
+	{
+		return $this->db->get("secretquestions");
+	}
+	
+	public function getAdminCategories($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "c.catNameAz ";
+			$sortType = "asc";
+		}
+		$lang = $this->lang;
+		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*
+				FROM categories c
+				where isDeleted=0 ";
+				
+		if(isset($post["catAz"]) && $post["catAz"] != "")
+			$qry .= " and c.catNameAz like '%" . trim($post["catAz"]) . "%'";
+		if(isset($post["catInfoAz"]) && $post["catInfoAz"] != "")
+			$qry .= " and c.catInfoAz like '%" . trim($post["catInfoAz"]) . "%'";
+		if(isset($post["catEn"]) && $post["catEn"] != "")
+			$qry .= " and c.catNameEn like '%" . trim($post["catEn"]) . "%'";
+		if(isset($post["catInfoEn"]) && $post["catInfoEn"] != "")
+			$qry .= " and c.catInfoEn like '%" . trim($post["catInfoEn"]) . "%'";
+		if(isset($post["catRu"]) && $post["catRu"] != "")
+			$qry .= " and c.catNameRu like '%" . trim($post["catRu"]) . "%'";
+		if(isset($post["catInfoRu"]) && $post["catInfoRu"] != "")
+			$qry .= " and c.catInfoRu like '%" . trim($post["catInfoRu"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -614,11 +695,5 @@ class Controller //extends MySQL
 		$res = $this->db->rawQuery($qry);
 		return $res;
 	}
-	
-	function getSecretQuestions()
-	{
-		return $this->db->get("secretquestions");
-	}
-	
 }
 ?>

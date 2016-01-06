@@ -144,7 +144,7 @@ function showTimeInterval(sFlag)
 				<ul class="langs">
 					{if isset($greeting)}
 					<li><a>{$greeting}, {$loggedUser}</a></li> <br>
-					<li><a href="admin.php">{$adminPanel}</a></li>
+					<li><a href="?page=profile">{$profil}</a></li>
 					{else}
 					<li><a href="?page=signIn">{$signIn}</a></li>
 					{/if}

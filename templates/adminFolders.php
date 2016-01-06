@@ -38,6 +38,7 @@ class AdminFolders
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminFolders->assign("createdVal", $_POST["created"]);
+			$this->adminFolders->assign("createdTillVal", $_POST["createdTill"]);
 			$this->adminFolders->assign("idVal", $_POST["id"]);
 			$this->adminFolders->assign("authorIdVal", $_POST["authorId"]);
 			$this->adminFolders->assign("authorVal", $_POST["author"]);

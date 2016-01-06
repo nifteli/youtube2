@@ -1,6 +1,7 @@
 <script>
 $(function() {
 $( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 
 function submitForm(action)
@@ -37,7 +38,7 @@ function setFolderName(id,folderName)
 		<div class="table-responsive">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
 				<colgroup>
-					<col style="width: 150px; overflow: hidden;"/>
+					<col style="width: 180px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 250px; overflow: hidden;"/>
@@ -61,7 +62,10 @@ function setFolderName(id,folderName)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
-					<td class="vertical-middle"><input class="form-control" name="created" id="created" type="text" value="{$createdVal}" /></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:100px;display:initial" />
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:100px;display:initial"/>
+					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="authorId" id="authorId" type="text" value="{$authorIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="author" id="author" type="text" value="{$authorVal}"/></td>

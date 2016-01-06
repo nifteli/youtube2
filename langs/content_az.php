@@ -48,6 +48,7 @@ $content['FOLDEREDITED'] = "Folder editted";
 $content['FOLDERNOTEDITED'] = "Folder not editted";
 $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
+$content['PROFILE'] = "Profil";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -197,6 +198,7 @@ $content["PASSNOTRESET"] = "Error on password reset";
 //Admin profile
 $content['TITLEPROFILE'] = "Profil Məlumatları";
 $content['CODE'] = "Unikal kod";
+$content['NOTE'] = "Qeyd";
 $content['POSITION'] = "Vəzifə";
 $content['INTERESTS'] = "Maraqlar";
 $content['PICTURE'] = "Şəkil";
@@ -335,4 +337,31 @@ $content['MAILNOTSENT'] ='Mail göndərilmədi';
 $content['USERPROFILE'] ='İstifadəçi Profili';
 
 //End Admin users
+
+//Admin Menu
+$content['MNADMINPANEL'] ="Admin Panel";
+$content['MNPROFILE'] ="Profile";
+$content['MNROLES'] ="Roles";
+$content['MNUSERS'] ="Users";
+$content['MNVIDEOLINKS'] ="Video links";
+$content['MNCOMMENTS'] ="Comments";
+$content['MNFOLDERS'] ="Folders";
+$content['MNTAGS'] ="Tags";
+$content['MNEXPORTS'] ="Exports";
+$content['MNDEFINITIONS'] ="Definitions";
+$content['MNCATEGORIES'] ="Categories";
+$content['MNNOTIFICATIONS'] ="Notifications";
+//End admin menu
+
+//Admin categories
+$content['TITLECATEGORIES'] ="Categories";
+$content['ADDCATEGORY'] ="Add Category";
+$content['PIC'] ="Picture";
+$content['CATAZ'] ="Category Az";
+$content['CATINFOAZ'] ="Category Info Az";
+$content['CATEN'] ="Category En";
+$content['CATINFOEN'] ="Category Info En";
+$content['CATRU'] ="Category Ru";
+$content['CATINFORU'] ="Category Info Ru";
+//End Admin categories
 ?>

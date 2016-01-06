@@ -162,6 +162,21 @@ else
 				return;
 			}
 			break;
+		case "adminCategories": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(41))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminCategoriesAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminCategories");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		case "adminUsers":
 			if($access->authorized(33))
 			{

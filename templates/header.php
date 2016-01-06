@@ -38,6 +38,7 @@ class Header
 		$this->header->assign("minute",$content['MINUTE']);
 		$this->header->assign("fromDate",$content['FROMDATE']);
 		$this->header->assign("toDate",$content['TODATE']);
+		$this->header->assign("profil",$content['PROFILE']);
 		
 		$this->header->assign("randTags",$this->getRandTags($controller->lang,$controller->db));
 		

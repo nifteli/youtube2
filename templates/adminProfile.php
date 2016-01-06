@@ -33,6 +33,7 @@ class AdminProfile
 			$this->adminProfile->assign("genderVal", ($profile["gender"] == "female"?2:1));
 			$this->adminProfile->assign("positionVal", $profile["profession"]);
 			$this->adminProfile->assign("interestsVal", $profile["interests"]);
+			$this->adminProfile->assign("notesVal", $profile["notes"]);
 			$this->adminProfile->assign("emailVal", $profile["email"]);
 			$this->adminProfile->assign("phoneVal", $profile["phoneNumber"]);
 			$this->adminProfile->assign("languageVal", $langIds[$profile["languageId"]]);
@@ -50,6 +51,7 @@ class AdminProfile
 		$this->adminProfile->assign("female", $content['FEMALE']);
 		$this->adminProfile->assign("position", $content['POSITION']);
 		$this->adminProfile->assign("interests", $content['INTERESTS']);
+		$this->adminProfile->assign("notes", $content['NOTE']);
 		$this->adminProfile->assign("picture", $content['PICTURE']);
 		$this->adminProfile->assign("email", $content['EMAIL']);
 		$this->adminProfile->assign("phone", $content['PHONE']);
@@ -69,6 +71,7 @@ class AdminProfile
 			$this->adminProfile->assign("genderVal", isset($_POST["gender"]) ? $_POST["gender"] : "");
 			$this->adminProfile->assign("positionVal", isset($_POST["position"]) ? $_POST["position"] : "");
 			$this->adminProfile->assign("interestsVal", isset($_POST["interests"]) ? $_POST["interests"] : "");
+			$this->adminProfile->assign("notesVal", isset($_POST["notes"]) ? $_POST["notes"] : "");
 			$this->adminProfile->assign("emailVal", isset($_POST["email"]) ? $_POST["email"] : "");
 			$this->adminProfile->assign("phoneVal", isset($_POST["phone"]) ? $_POST["phone"] : "");
 			$this->adminProfile->assign("languageVal", isset($_POST["lang"]) ? $_POST["lang"] : "");

@@ -8,28 +8,21 @@
 <div style="width:250px; height: 600px auto; margin-left:21px;float:left">
 	<div id='cssmenu'>
 		<ul>
-		   <li class='active'><a href='#'><span>Admin Panel</span></a></li>
-			<li><a href='?page=adminProfile'><span>Profile</span></a></li>
-			<li><a href='?page=adminRoles'><span>Roles</span></a></li>
-			<li><a href='?page=adminUsers'><span>Users</span></a></li>
-		   <li><a href='?page=adminVideoLinks'><span>Video links</span></a>
-		   <li><a href='?page=adminComments'><span>Comments</span></a>
-		   <li><a href='?page=adminFolders'><span>Folders</span></a>
-		   <li><a href='?page=adminTags'><span>Tags</span></a>
-		   <li class='has-sub'><a href='#'><span>Audit</span></a>
+		   <li class='active'><a href='#'><span>{$mnAdminPanel}</span></a></li>
+			<li><a href='?page=adminProfile'><span>{$mnProfile}</span></a></li>
+			<li><a href='?page=adminRoles'><span>{$mnRoles}</span></a></li>
+			<li><a href='?page=adminUsers'><span>{$mnUsers}</span></a></li>
+		   <li><a href='?page=adminVideoLinks'><span>{$mnVideoLinks}</span></a>
+		   <li><a href='?page=adminComments'><span>{$mnComments}</span></a>
+		   <li><a href='?page=adminFolders'><span>{$mnFolders}</span></a>
+		   <li><a href='?page=adminTags'><span>{$mnTags}</span></a>
+		   <li><a href='?page=adminExports'><span>{$mnExports}</span></a>
+		   <li class='has-sub'><a href='#'><span>{$mnDefinitions}</span></a>
 			  <ul>
-				 <li><a href='#'><span>Menu 1</span></a></li>
-				 <li><a href='#'><span>Menu 2</span></a></li>
-				 <li class='last'><a href='#'><span>Product 3</span></a></li>
+				 <li><a href='?page=adminCategories'><span>{$mnCategories}</span></a></li>
+				 <li><a href='?page=adminNotifications'><span>{$mnNotifications}</span></a></li>
 			  </ul>
-		   </li>
-		   <li class='has-sub'><a href='#'><span>About</span></a>
-			  <ul>
-				 <li><a href='#'><span>Company</span></a></li>
-				 <li class='last'><a href='#'><span>Contact</span></a></li>
-			  </ul>
-		   </li>
-		   
+		   </li>		   
 		</ul>
 	</div>
 </div>

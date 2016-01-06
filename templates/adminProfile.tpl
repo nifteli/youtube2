@@ -94,6 +94,12 @@ $(document).ready(function() {
 		<div class="gap">
 			<input class="field" type="text" name="interests" id="interests" value="{$interestsVal}">
 		</div>
+	</div>
+	<div class="topgap">
+		<label>{$notes}:</label>
+		<div class="gap">
+			<input class="field" type="text" name="notes" id="notes" value="{$notesVal}">
+		</div>
 	</div>	
 	<div class="topgap">
 		<label>{$picture}:</label>

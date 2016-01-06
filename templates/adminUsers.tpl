@@ -1,6 +1,7 @@
 <script>
 $(function() {
 $( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 
 function submitForm(action)
@@ -75,7 +76,7 @@ function showProfile(userId)
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
 				<colgroup>
 					<col style="width: 30px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 120px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -102,14 +103,17 @@ function showProfile(userId)
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
 					<td class="vertical-middle"></td>
-					<td class="vertical-middle"><input class="form-control" name="created" id="created" type="text" value="{$createdVal}" /></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:100px;display:initial"/>
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:100px;display:initial" />
+					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="userName" id="userName" type="text" value="{$userNameVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
 					<td class="vertical-middle"></td>
 					<td class="vertical-middle" colspan=3>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>
 				</tr>
 				</thead>

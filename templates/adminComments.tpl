@@ -1,6 +1,7 @@
 <script>
 $(function() {
 $( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 
 function submitForm(action)
@@ -32,7 +33,7 @@ function submitForm(action)
 		<div class="table-responsive">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
 				<colgroup>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
@@ -62,7 +63,10 @@ function submitForm(action)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
-					<td class="vertical-middle"><input class="form-control" name="created" id="created" type="text" value="{$createdVal}" /></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
+					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="videoId" id="videoId" type="text" value="{$videoIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="authorId" id="authorId" type="text" value="{$authorIdVal}" /></td>

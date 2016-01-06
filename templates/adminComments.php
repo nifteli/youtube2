@@ -39,6 +39,7 @@ class AdminComments
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminComments->assign("createdVal", $_POST["created"]);
+			$this->adminComments->assign("createdTillVal", $_POST["createdTill"]);
 			$this->adminComments->assign("idVal", $_POST["id"]);
 			$this->adminComments->assign("videoIdVal", $_POST["videoId"]);
 			$this->adminComments->assign("authorIdVal", $_POST["authorId"]);

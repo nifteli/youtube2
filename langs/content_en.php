@@ -49,6 +49,7 @@ $content['FOLDEREDITED'] = "Folder editted";
 $content['FOLDERNOTEDITED'] = "Folder not editted";
 $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
+$content['PROFILE'] = "Profil";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -192,6 +193,7 @@ $content["PASSNOTRESET"] = "Error on password reset";
 
 //Admin profile
 $content['TITLEPROFILE'] = "Profil Məlumatları";
+$content['NOTE'] = "Note";
 $content['CODE'] = "Unikal kod";
 $content['POSITION'] = "Vəzifə";
 $content['INTERESTS'] = "Maraqlar";
@@ -326,5 +328,27 @@ $content['MAILSENT'] ='Mail göndərildi';
 $content['MAILNOTSENT'] ='Mail göndərilmədi';
 $content['USERPROFILE'] ='Profil';
 //End Admin users
+
+
+//Admin Menu
+$content['MNADMINPANEL'] ="Admin Panel";
+$content['MNPROFILE'] ="Profile";
+$content['MNROLES'] ="Roles";
+$content['MNUSERS'] ="Users";
+$content['MNVIDEOLINKS'] ="Video links";
+$content['MNCOMMENTS'] ="Comments";
+$content['MNFOLDERS'] ="Folders";
+$content['MNTAGS'] ="Tags";
+$content['MNEXPORTS'] ="Exports";
+$content['MNDEFINITIONS'] ="Definitions";
+$content['MNCATEGORIES'] ="Categories";
+$content['MNNOTIFICATIONS'] ="Notifications";
+//End admin menu
+
+//Admin categories
+$content['TITLECATEGORIES'] ="Categories";
+$content['ADDCATEGORY'] ="Add Category";
+$content['PIC'] ="Picture";
+//End Admin categories
 
 ?>

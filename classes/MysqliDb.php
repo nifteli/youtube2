@@ -203,7 +203,7 @@ class MysqliDb
         if ($sanitize)
             $this->_query = filter_var ($query, FILTER_SANITIZE_STRING,
                                     FILTER_FLAG_NO_ENCODE_QUOTES);
-//echo "query=".$this->_query;
+//echo "query=".$this->_query."<br>";
         $stmt = $this->_prepareQuery();
 
         if (is_array($bindParams) === true) {

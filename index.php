@@ -151,6 +151,15 @@ else
 			$controller->includeSection("searchResults");
 			$controller->includeSection("footer");
 			break;
+		case "profile":
+			if(isset($_GET["action"])) 
+				include_once($actionsPath."profileAction.php");
+			include_once($templatePath."pageHeader.tpl");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("profile");
+			$controller->includeSection("footer");
+			break;
 		default:
 			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");

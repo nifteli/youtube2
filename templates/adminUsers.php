@@ -49,6 +49,7 @@ class AdminUsers
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminUsers->assign("createdVal", $_POST["created"]);
+			$this->adminUsers->assign("createdTillVal", $_POST["createdTill"]);
 			$this->adminUsers->assign("idVal", $_POST["id"]);
 			$this->adminUsers->assign("userNameVal", $_POST["userName"]);
 			$this->adminUsers->assign("nameVal", $_POST["name"]);
