@@ -1,6 +1,13 @@
 <?php
 if ($_GET["action"]=="add")
 {
+	if(!$access->authorized(48))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	
 	$result = "success";
 	$messages = array();
 	
@@ -68,6 +75,12 @@ if ($_GET["action"]=="add")
 		
 		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0 && is_numeric($_GET["videoId"]))
 		{
+			if(!$access->authorized(49))
+			{
+				$result = "error";
+				$messages['noaccess'] = $content["INSUFFACCESS"];
+				return;
+			}
 			$videoId = $_GET["videoId"];
 			if($access->authorized(8))
 				$db->where("id=".$videoId);
@@ -110,6 +123,8 @@ if ($_GET["action"]=="add")
 					
 					$id = $db->insert("videocats", array("videoId"=>$videoId,
 									  	"categoryId"=>$value));
+					$db->where("id =".$value);
+					$db->update("categories",array("lastVideoAdded"=>date("Y-m-d H:i:s")));
 					if(!$id)
 					{
 						$continue = false;
@@ -132,7 +147,9 @@ if ($_GET["action"]=="add")
 						$id = $res["id"];
 					else
 						$id = $db->insert("tags", array("name"=>trim($tag),
-												"langId"=>$langIds[$_SESSION["lang"]]));
+												"langId"=>$langIds[$_SESSION["lang"]],
+												"created"=>date("Y-m-d H:i:s"),
+												"createdById"=>$access->userId));
 					if($id)
 					{
 						$id = $db->insert("videotags", array("tagId"=>$id,

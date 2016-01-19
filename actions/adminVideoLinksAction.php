@@ -413,7 +413,20 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					"addedByIP" => $content['ADDEDBYIP'],
 					"updated" => $content['UPDATED'],
 					"duration" => $content['DURATION'],
-					"reportCount" => $content['REPORTCOUNT']		
+					"reportCount" => $content['REPORTCOUNT'],	
+					"deleted" => $content['DATEDELETED'],	
+					"addedById" => $content['CREATEDBYID'],	
+					"updatedById" => $content['UPDATEDBYID'],	
+					"deletedById" => $content['DELETEDDBYID'],	
+					"views" => $content['VIEWCNT'],	
+					"userCntCommented" => $content['USERCNTCOMMENTED'],	
+					"comments" => $content['COMMENTCNT'],	
+					"tagCount" => $content['TAGCNT'],
+					"likes" => $content['LIKESCNT'],
+					"dislikes" => $content['DISLIKESCNT'],
+					"userReportedCnt" => $content['USERREPORTEDCNT'],
+					"userCntAddedToFolder" => $content['USERCNTADDEDTOFOLDER'],
+					"addedFolderCnt" => $content['ADDEDFOLDERCNT']
 					);
 	$links = $controller->getVideoLinks(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

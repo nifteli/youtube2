@@ -117,6 +117,19 @@ else
 				return;
 			}
 			break;
+		case "adminReports": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(25))
+			{
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminReports");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		case "adminComments": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(26))
 			{
@@ -170,6 +183,21 @@ else
 				include_once($templatePath."adminPageHeader.tpl");
 				$controller->includeSection("adminMenu");
 				$controller->includeSection("adminCategories");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
+		case "adminNotifications": //echo "<pre>"; print_r($access->auth); echo "</pre>";
+			if($access->authorized(46))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminNotificationsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminNotifications");
 			}
 			else
 			{

@@ -25,6 +25,12 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 
 if ($_GET["action"]=="deleteFolder" && $access->hasAccess && is_numeric($_GET["id"]))
 {
+	if(!$access->authorized(56))
+	{
+		$result = "error";
+		$errorMessage = $content["INSUFFACCESS"];
+		return;
+	}
 	$db->startTransaction();
 	$db->where("id=".$_GET["id"] . " and createdById=" . $access->userId);
 	$res = $db->delete("folders");
@@ -44,6 +50,18 @@ if ($_GET["action"]=="deleteFolder" && $access->hasAccess && is_numeric($_GET["i
 
 if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
 {
+	if(strlen(trim($_POST["folderName"])) < 3)
+	{
+		$result = "error";
+		$errorMessage = $content["SHORTFOLDERNAME"];
+		return;
+	}
+	if(!$access->authorized(55))
+	{
+		$result = "error";
+		$errorMessage = $content["INSUFFACCESS"];
+		return;
+	}
 	$id = $db->insert("folders",array("name" => trim($_POST["folderName"]),
 									  "created" =>date("Y-m-d H:i:s"),
 									  "createdById" => $access->userId,
@@ -58,6 +76,12 @@ if ($_GET["action"]=="delete")
 {
 	if($_GET["videoId"] > 0)
 	{
+		if(!$access->authorized(50))
+		{
+			$result = "error";
+			$messages['noaccess'] = $content["INSUFFACCESS"];
+			return;
+		}
 		$db->startTransaction();
 		//$db->rawQuery("delete from videos where addedById=".$access->userId." and id=".$_GET["videoId"]);
 		$db->where("addedById=".$access->userId." and id=".$_GET["videoId"]);

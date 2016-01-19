@@ -2,6 +2,13 @@
 //echo "<pre>"; print_r($_POST); echo "</pre>";//exit;
 if ($_GET["action"]=="save")
 {
+	if(!$access->authorized(47))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	
 	$result = "success";
 	$messages = array();
 	
@@ -93,9 +100,13 @@ if ($_GET["action"]=="save")
 			//echo "ddddddd  ".$_FILES['pic']['tmp_name'].$saveto;
 		}
 		$gender = "male";
+		$getEmailOnVideoComment =0;
+		$getEmailAfterMyComment =0;
 		if($_POST["gender"] == 2)
 			$gender = "female";
 		$arr["password"] =  md5(trim($_POST["password"])) ;
+		$arr["lastUpdate"] =  date("Y-m-d H:i:s");
+		$arr["updateUserId"] =  $access->userId;
 		if(isset($_POST["name"]) && $_POST["name"] != "")
 			$arr["firstName"] =  $_POST["name"] ;
 		if(isset($_POST["surname"]) && $_POST["surname"] != "")
@@ -116,7 +127,11 @@ if ($_GET["action"]=="save")
 		if(isset($_POST["phone"]) && $_POST["phone"] != "")
 			$arr["phoneNumber"] =  $_POST["phone"] ;
 		if(isset($_POST["getEmailOnComment"]) && $_POST["getEmailOnComment"] == "on")
-			$arr["getEmailOnVideoComment"] = 1;
+			$getEmailOnVideoComment = 1;
+		if(isset($_POST["getEmailAfterMyComment"]) && $_POST["getEmailAfterMyComment"] == "on")
+			$getEmailAfterMyComment = $arr["getEmailAfterMyComment"] = 1;
+		$arr["getEmailOnVideoComment"] = $getEmailOnVideoComment;
+		$arr["getEmailAfterMyComment"] = $getEmailAfterMyComment;
 		
 		$db->where ("id = " . $access->userId);
 		$db->update("users", $arr);

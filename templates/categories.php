@@ -61,7 +61,8 @@ class Categories
 				right join folders f on f.id=fv.folderId
 				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
 				where f.createdById=" . $controller->access->userId .
-				" group by fv.folderId, f.name";
+				" group by fv.folderId, f.name
+				order by f.created desc, f.name";
 		$res = $controller->db->rawQuery($qry);
 		return $res;
 	}

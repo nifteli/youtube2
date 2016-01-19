@@ -22,6 +22,23 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("lnAdded", $content['ADDDATE']);
 		$this->adminVideoLinks->assign("lnLang", $content['LANGUAGE']);
 		$this->adminVideoLinks->assign("lnLink", $content['VIDEOLINK']);
+		$this->adminVideoLinks->assign("lnUpdated", $content['DATEUPDATED']);
+		$this->adminVideoLinks->assign("lnDeleted", $content['DATEDELETED']);
+		$this->adminVideoLinks->assign("lnAddedById", $content['CREATEDBYID']);
+		$this->adminVideoLinks->assign("lnAddedByIP", $content['CREATEDBYIP']);
+		$this->adminVideoLinks->assign("lnUpdatedById", $content['UPDATEDBYID']);
+		$this->adminVideoLinks->assign("lnDeletedById", $content['DELETEDDBYID']);
+		$this->adminVideoLinks->assign("lnDuration", $content['DURATION']);
+		$this->adminVideoLinks->assign("lnViews", $content['VIEWCNT']);
+		$this->adminVideoLinks->assign("lnUserCntCommented", $content['USERCNTCOMMENTED']);
+		$this->adminVideoLinks->assign("lnComments", $content['COMMENTCNT']);
+		$this->adminVideoLinks->assign("lnTagCount", $content['TAGCNT']);
+		$this->adminVideoLinks->assign("lnLikes", $content['LIKESCNT']);
+		$this->adminVideoLinks->assign("lnDislikes", $content['DISLIKESCNT']);
+		$this->adminVideoLinks->assign("lnUserReportedCnt", $content['USERREPORTEDCNT']);
+		$this->adminVideoLinks->assign("lnUserCntAddedToFolder", $content['USERCNTADDEDTOFOLDER']);
+		$this->adminVideoLinks->assign("lnAddedFolderCnt", $content['ADDEDFOLDERCNT']);
+		
 		$this->adminVideoLinks->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->adminVideoLinks->assign("lnTags", $content['TAGS']);
 		$this->adminVideoLinks->assign("lnCategory", $content['CATEGORY']);

@@ -74,7 +74,7 @@ class AddVideo
 		$res = $controller->db->rawQuery("select v.link,v.languageId,v.questions,v.name,v.added,v.info,v.duration
 										  from videos v
 										  where v.id=$id");
-		$res[0]["questions"] = $this->getVideoQuesArr($res[0]["questions"]);
+		$res[0]["questions"] = $controller->getVideoQuesArr($res[0]["questions"]);
 		$res[0]["categories"] = $this->getCatsJson($controller,$id);
 		$res[0]["tags"] = $this->getTagsGroup($controller,$id);
 		return $res[0];
@@ -98,19 +98,6 @@ class AddVideo
 										 inner join tags t on t.id=vt.tagId
 										 where vt.videoId=$id");
 		return $res[0]["name"];
-	}
-	
-	private function getVideoQuesArr($id)
-	{
-		if (($id&1) == 1) 
-			$ret[] = 1;
-		if (($id&2) == 2)
-			$ret[] = 2;
-		if (($id&4) == 4)
-			$ret[] = 4;
-		if (($id&8) == 8)
-			$ret[] = 8;
-		return $ret;
 	}
 }
 

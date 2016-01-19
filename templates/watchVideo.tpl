@@ -1,5 +1,7 @@
 <script>
 $(document).ready(function() {
+document.title = "{$pageTitle}";
+$("meta[name='keywords']").attr('content', '{$keywords}');
     var validator = $("#frmComment").validate({
         rules: {
             comment: "required",

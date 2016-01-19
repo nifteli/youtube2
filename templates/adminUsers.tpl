@@ -70,13 +70,13 @@ function showProfile(userId)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;">
+	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
 		
-		<div class="table-responsive">
-			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
+		<div class="table-responsive" style="overflow-x: auto; width:4500px">
+			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;    text-align: center;">
 				<colgroup>
 					<col style="width: 30px; overflow: hidden;"/>
-					<col style="width: 120px; overflow: hidden;"/>
+					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -84,6 +84,39 @@ function showProfile(userId)
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 				</colgroup>
 				<thead>
 				<tr style="background-color:rgb(219, 203, 129);">
@@ -98,6 +131,43 @@ function showProfile(userId)
 					<th class="vertical-middle" style=" text-align:center" >{$viewProfile}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$setUser}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnDeleted}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnFatherName}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnBirthDate}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnEmail}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnTelephone}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnNote}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnGender}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnLanguage}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnProfession}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnInterests}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnRegisteredByIp}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnRegDevice}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnRegBrowser}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdateUserId}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnDeletedById}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnGetSiteNews}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnGetEmailOnComment}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnGetEmailAfterMyComment}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnDeviceCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnBrowserCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnViewCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnLikeCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnDislikeCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnCommentCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnReportCount}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntInFolder}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnFolderCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnTagClickCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnTagClicked}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnCatClickCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnCatClicked}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnSubCatCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnSearchCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntCommented}</th>
+					
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -111,7 +181,7 @@ function showProfile(userId)
 					<td class="vertical-middle"><input class="form-control" name="userName" id="userName" type="text" value="{$userNameVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
 					<td class="vertical-middle"></td>
-					<td class="vertical-middle" colspan=3>
+					<td class="vertical-middle" colspan=39 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>
@@ -150,6 +220,42 @@ function showProfile(userId)
 						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" alt="{$delete}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].updatedDate}">{$users[sec1].updatedDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deletedDate}">{$users[sec1].deletedDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].fatherName}">{$users[sec1].fatherName}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].birthDate}">{$users[sec1].birthDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].phoneNumber}">{$users[sec1].phoneNumber}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">{$users[sec1].notes}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].gender}">{$users[sec1].gender}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].lang}">{$users[sec1].lang}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].profession}">{$users[sec1].profession}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].interests}">{$users[sec1].interests}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].registeredByIP}">{$users[sec1].registeredByIP}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].regDevice}">{$users[sec1].regDevice}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].regBrowser}">{$users[sec1].regBrowser}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].updateUserId}">{$users[sec1].updateUserId}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deletedById}">{$users[sec1].deletedById}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailOnNews}">{$users[sec1].getEmailOnNews}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailOnVideoComment}">{$users[sec1].getEmailOnVideoComment}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailAfterMyComment}">{$users[sec1].getEmailAfterMyComment}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deviceCount}">{$users[sec1].deviceCount}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].browserCount}">{$users[sec1].browserCount}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoviews}">{$users[sec1].videoviews}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videos}">{$users[sec1].videos}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].likes}">{$users[sec1].likes}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].dislikes}">{$users[sec1].dislikes}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].comments}">{$users[sec1].comments}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].reportCount}">{$users[sec1].reportCount}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntInFolder}">{$users[sec1].videoCntInFolder}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].folderCnt}">{$users[sec1].folderCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClickCnt}">{$users[sec1].tagClickCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClicked}">{$users[sec1].tagClicked}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClickCnt}">{$users[sec1].catClickCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClicked}">{$users[sec1].catClicked}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].subCatCnt}">{$users[sec1].subCatCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}">{$users[sec1].searchCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}">{$users[sec1].videoCntCommented}</td>
 				</tr>
 				{/section}
 				</tbody>

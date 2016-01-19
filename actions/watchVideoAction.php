@@ -2,8 +2,15 @@
 	$result = "success";
 	$messages = array();
 	
-if ($_GET["action"]=="comment")
+if ($_GET["action"]=="comment" && is_numeric($_GET["id"]))
 {
+	if($access->hasAccess)
+		if(!$access->authorized(51))
+		{
+			$result = "error";
+			$messages['noaccess'] = $content["INSUFFACCESS"];
+			return;
+		}
 	if(!isset($_POST["comment"]) || $_POST["comment"] == "")
 	{
 		$result = "error";
@@ -31,6 +38,7 @@ if ($_GET["action"]=="comment")
 			$isConfirmed = 0;
 		}
 		
+		
 		$commentId = $db->insert("comments", array("comment"=>trim($_POST["comment"]),
 												  "videoId"=>trim($_GET["id"]),
 												  "createdById"=>$access->userId,
@@ -39,13 +47,52 @@ if ($_GET["action"]=="comment")
 												  "email"=>$email,
 												  "created"=>date("Y-m-d H:i:s")));
 		if($commentId && isset($_POST["email"]) && $_POST["email"] != "")
+		{
 			$okMessage = $content["COMMENTSENT2CONF"];
+			
+			
+		}
+		if($commentId && $_POST["email"] == "")
+		{
+			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
+								where id = (select addedById from videos where id=".trim($_GET["id"]).")");
+								//print_r($res);
+			if($res[0]["getEmailOnVideoComment"] == 1 && $res[0]["email"] != "")
+			{
+				$mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
+				$mail->Subject = $content["getEmailOnComment"];
+				$mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
+				$mail->send();
+				$mail->ClearAllRecipients( );
+			}
+			
+			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
+								where id in (select createdById from comments where videoId = ".trim($_GET["id"]).")
+								and id != ".$access->userId);
+								//print_r($res);
+			for($i=0; $i<count($res); $i++)
+			{
+				if($res[$i]["getEmailAfterMyComment"] == 1 && $res[$i]["email"] != "")
+				{
+					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					$mail->Subject = $content["getEmailAfterMyComment"];
+					$mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
+					$mail->send();
+					$mail->ClearAllRecipients( );
+				}
+			}
+		}
 		//$db->commit();
-		
 	}
 }
 if($_GET["action"]=="editComment")
 {
+	if(!$access->authorized(52))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
 	if(!isset($_GET["commentId"]) || $_GET["commentId"] == "" || $_GET["commentId"]<0)
 	{
 		$result = "error";
@@ -93,6 +140,12 @@ if($_GET["action"]=="delComment")
 
 if($_GET["action"]=="add2Folder")
 {
+	if(!$access->authorized(57))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
 	if($_GET["id"] > 0 && $_POST["folderId"] > 0)
 	{
 		$res = $db->insert("foldervideos", array("folderId"=>trim($_POST["folderId"]),
@@ -136,7 +189,23 @@ if($_GET["action"]=="reportVideo")
 												  "reporterId"=>$access->userId,
 												  "reportDate"=>date("Y-m-d H:i:s")));
 		if($db->count > 0) 
+		{
 			$okMessage = $content["REPORTSAVED"];
+			$res = $db->rawQuery("select email,firstName,lastName from users
+								where roleId in (select roleId from roleaccess where accessTypeId=58)");
+								//print_r($res);
+			for($i=0; $i<count($res); $i++)
+			{
+				if($res[$i]["email"] != "")
+				{
+					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					$mail->Subject = $content["REPORTEMAILSUBJECT"];
+					$mail->Body    = $content["REPORTEMAILBODY"].trim($_GET["id"]);
+					$mail->send();
+					$mail->ClearAllRecipients( );
+				}
+			}
+		}
 		
 	}
 }

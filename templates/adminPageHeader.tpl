@@ -8,6 +8,7 @@
    	<!--<link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/jquery.bootgrid.css" rel="stylesheet">-->
 	<script src="./js/admin/tabcontent.js" type="text/javascript"></script>   
+	<script src="./js/admin/nicEdit/nicEdit.js"></script>
 	<link rel="stylesheet" href="./css/admin/style.css">
 	<link rel="stylesheet" href="./css/admin/style2.css">
 

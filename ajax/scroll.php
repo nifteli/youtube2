@@ -278,6 +278,7 @@ function displayData($res, $data, $colCnt=4)
 	$lang = $data["lang"];
 	$page = $data['page'];
 	global $content;
+	global $db;
 	
 	if(count($res)>0)
 	{
@@ -293,10 +294,12 @@ function displayData($res, $data, $colCnt=4)
 				if(isset($_SESSION["userId"]))
 				{
 					$subscribed = isSubscribed($res[$i]["categoryId"]);
+					$subsCnt = $db->rawQuery("select count(*) cnt from subscriptions where catId=".$res[$i]["categoryId"]);
+					
 					if($subscribed)
-						$str .= " <span id='subs".$res[$i]["categoryId"]."'><a class='subscription'  id='".$res[$i]["categoryId"].":0'> [$content[UNSUBSCRIBE]]</a></span>";
+						$str .= " <span id='subs".$res[$i]["categoryId"]."'><a class='subscription'  id='".$res[$i]["categoryId"].":0'> [$content[UNSUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
 					else
-						$str .= "<span id='subs".$res[$i]["categoryId"]."'><a class='subscription' id='".$res[$i]["categoryId"].":1'> [$content[SUBSCRIBE]]</a></span>";
+						$str .= "<span id='subs".$res[$i]["categoryId"]."'><a class='subscription' id='".$res[$i]["categoryId"].":1'> [$content[SUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
 				}
 				$str .= "</h2></div>";
 				$cat = $res[$i]["catName".$lang];

@@ -40,6 +40,8 @@ class Access{
 	
 	public function authorized($accessId)
 	{
+		if(count($this->auth) < 1)
+			return false;
 		if(array_key_exists($accessId,$this->auth))
 		{
 			if($this->auth[$accessId]["endDate"] == "0000-00-00 00:00:00")

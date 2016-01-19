@@ -49,6 +49,7 @@ $content['FOLDERNOTEDITED'] = "Folder not editted";
 $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
 $content['PROFILE'] = "Profil";
+$content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -174,7 +175,8 @@ $content['LIKECOUNTTITLE'] = 'Bəyənilmə sayı';
 $content['DISLIKECOUNTTITLE'] = 'Bəyənilməmə sayı';
 $content['VIEWCOUNTTITLE'] = 'Baxılma sayı';
 $content['COMMENTCOUNTTITLE'] = 'Şərh sayı';
-
+$content['REPORTEMAILSUBJECT'] = 'Video Reported';
+$content['REPORTEMAILBODY'] = 'The following video is reported:';
 //end Watch video
 
 //All tags
@@ -208,6 +210,9 @@ $content['RUSSIAN'] = "Rus dili";
 $content['FATHERNAME'] = "Ata adı";
 $content['BIRTHDATE'] = "Doğum tarixi";
 $content['getEmailOnComment'] = "Komment zamanı email";
+$content['getEmailAfterMyComment'] = "Komentə komment zamanı email";
+$content['getEmailAfterMyCommentBody'] = "Videoya etdiyiniz komentə koment edilmişdir. Komenti görmək üçün aşağıdakı linkə daxil olun";
+$content['getEmailOnCommentBody'] = "Daxil etdiyiniz videoya komment yazılmışdır. Kommenti görmək üçün aşağıdakı linkə tıklayın";
 $content['ADMINPROFILEERR1'] = "Ad daxil edin";
 $content['ADMINPROFILEERR2'] = "Email daxil edin";
 $content['ADMINPROFILEERR3'] = "Şifrə daxil edin";
@@ -265,6 +270,19 @@ $content["ERRORONDELETE"] = "Silmədə xəta";
 $content["LINKSDELETED"] = "Videolar silindi";
 $content["LINKSUPDATED"] = "Videolar redaktə edildi:";
 $content["LINKSNOTUPDATED"] = "Videolar redaktə edilmədi:";
+$content["REPORTNOTE"] = "Report Note";
+$content["REPORTDATE"] = "Report Date";
+$content["REPORTER"] = "Reporter";
+$content["VIEWCNT"] = "VIEWCNT";
+$content["USERCNTCOMMENTED"] = "USERCNTCOMMENTED";
+$content["COMMENTCNT"] = "COMMENTCNT";
+$content["TAGCNT"] = "TAGCNT";
+$content["LIKESCNT"] = "LIKESCNT";
+$content["DISLIKESCNT"] = "DISLIKESCNT";
+$content["USERREPORTEDCNT"] = "USERREPORTEDCNT";
+$content["USERCNTADDEDTOFOLDER"] = "USERCNTADDEDTOFOLDER";
+$content["ADDEDFOLDERCNT"] = "ADDEDFOLDERCNT";
+
 //End Video links 
 
 // Admin users
@@ -315,6 +333,8 @@ $content['SUBSTITUTE'] ='Əvəzlə';
 //Admin users
 $content['TITLEUSERS'] ='İstifadəçilər';
 $content['DATECREATED'] ='Yaranma tarixi';
+$content['DATEUPDATED'] ='Dəyişdirilmə tarixi';
+$content['DATEDELETED'] ='Silinmə tarixi';
 $content['NAME'] ='Adı';
 $content['VIEWPROFILE'] ='Profilə bax';
 $content['SETUSER'] ='Adından loqin ol';
@@ -335,6 +355,28 @@ $content['SEND'] ='Göndər';
 $content['MAILSENT'] ='Mail göndərildi';
 $content['MAILNOTSENT'] ='Mail göndərilmədi';
 $content['USERPROFILE'] ='İstifadəçi Profili';
+$content['REGDEVICE'] ='Reg device';
+$content['REGBROWSER'] ='Reg browser';
+$content['LASTUPDATEUSERID'] ='Last update user ID';
+$content['DELETEDBYID'] ='Deleted by ID';
+$content['GETSITENEWS'] ='Get site news';
+$content['DEVICECOUNT'] ='DEVICE COUNT';
+$content['BROWSERCOUNT'] ='BROWSER COUNT';
+$content['VIEWCOUNT'] ='View COUNT';
+$content['VIDEOCOUNT'] ='Video COUNT';
+$content['LIKECOUNT'] ='Like COUNT';
+$content['DISLIKECOUNT'] ='Dislike COUNT';
+$content['COMMENTCOUNT'] ='COmment COUNT';
+$content['REPORTCOUNT'] ='Report COUNT';
+$content['VIDEOCNTINFOLDER'] ='VIDEO COUNT IN Folder';
+$content['FOLDERCNT'] ='FOLDER COUNT';
+$content['TAGCLICKCNT'] ='TAGCLICKC COUNT';
+$content['TAGCLICKED'] ='TAGCLICKED';
+$content['CATCLICKCNT'] ='CATCLICK COUNT';
+$content['CATCLICKED'] ='CATCLICKED';
+$content['SUBCATCNT'] ='SUBCATCNT';
+$content['SEARCHCNT'] ='SEARCHCNT';
+$content['VIDEOCNTCOMMENTED'] ='VIDEOCNTCOMMENTED';
 
 //End Admin users
 
@@ -363,5 +405,32 @@ $content['CATEN'] ="Category En";
 $content['CATINFOEN'] ="Category Info En";
 $content['CATRU'] ="Category Ru";
 $content['CATINFORU'] ="Category Info Ru";
+$content['CATQUESTION'] ="Sual";
+$content['LASTVIDEOADDED'] ="LASTVIDEOADDED";
+$content['CREATEDBYID'] ="CREATEDBYID";
+$content['CREATEDBY'] ="CREATEDBY";
+$content['CREATEDBYIP'] ="CREATEDBYIP";
+$content['DELETEDDBYID'] ="DELETEDDBYID";
+$content['DELETEDBY'] ="DELETEDBY";
+$content['DELETEDBYIP'] ="DELETEDBYIP";
+$content['VIDEOCNTINCAT'] ="VIDEOCNTINCAT";
+$content['USERCNTSUBSCRIBED'] ="USERCNTSUBSCRIBED";
+$content['CLICKUSERCNT'] ="CLICKUSERCNT";
+$content['CLICKCNT'] ="CLICKCNT";
 //End Admin categories
+
+//Admin Notifications
+$content['TITLENOTIFICATIONS'] ="Notifications";
+$content['MIDDLENOTE'] ="Middle NOTE";
+$content['RIGHTNOTE'] ="Right NOTE";
+$content['SITERULES'] ="Site rules";
+$content['ABOUTUS'] ="About us";
+$content['OTHER'] ="Other info";
+
+//End Admin Notifications
+
+//Admin Exports
+$content['TITLEEXPORTS'] ="Exports";
+
+//Admin Exports
 ?>

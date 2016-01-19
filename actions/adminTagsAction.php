@@ -41,7 +41,9 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'substitute' && count($_POS
 				}
 			}
 			$db->where("id=" . $key);
-			$res = $db->update("tags", array("name"=>trim($tag)));
+			$res = $db->update("tags", array("name"=>trim($tag),
+											  "updated"=>date("Y-m-d H:i:s"),
+											  "updatedById"=>$access->userId));
 						
 			if(!$res)
 			{

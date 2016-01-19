@@ -125,6 +125,12 @@
 					<input class="emailCheck" type="checkbox" {if isset($getEmailOnCommentVal) && $getEmailOnCommentVal == 'on'} checked {/if} name="getEmailOnComment" id="getEmailOnComment" >
 				</div>
 			</div>
+			<div class="topgap">
+		<label>{$getEmailAfterMyComment}:</label>
+			<div class="gap">
+				<input class="emailCheck" type="checkbox" {if isset($getEmailAfterMyCommentVal) && $getEmailAfterMyCommentVal == 'on'} checked {/if} name="getEmailAfterMyComment" id="getEmailAfterMyComment" >
+			</div>
+		</div>
 			<br><br>
 			<input class="cancel2" type="reset"  value="{$cancel}" name="reset">
 			<input class="login39" type="submit" value="{$save}" name="submit">

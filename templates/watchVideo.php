@@ -3,6 +3,7 @@
 class WatchVideo
 {
 	private $watchVideo;
+	private $ok;
 	
 	public function __construct($controller)
 	{
@@ -11,11 +12,17 @@ class WatchVideo
 		global $messages;
 		global $okMessage;
 		
+		$this->ok = false;
 		$this->watchVideo = new Smarty;
 		if(isset($_GET["id"]) && $_GET["id"] != "" && $_GET["id"]>0 && is_numeric($_GET["id"]))
 		{
+			$this->ok = true;
 			$videoInfo = $this->getVideoInfo($_GET["id"],$controller->lang,$controller->db,$controller->access);
+			
+			if(count($videoInfo) < 1) { $this->ok = false; return; }
 			$this->watchVideo->assign("catName",$videoInfo[0]["catName".$controller->lang]);
+			$this->watchVideo->assign("pageTitle",$videoInfo[0]["catName".$controller->lang]."-".$videoInfo[0]["name"]);
+			$this->watchVideo->assign("keywords",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tags"]);
 			$this->watchVideo->assign("lang",$controller->lang);
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
 			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>30)?mb_substr($videoInfo[0]["name"],0,30,"UTF-8")."...":$videoInfo[0]["name"]));
@@ -91,7 +98,8 @@ class WatchVideo
 	{
 		global $templatePath;
 		
-		$this->watchVideo->display($templatePath."watchVideo.tpl");
+		if($this->ok)
+			$this->watchVideo->display($templatePath."watchVideo.tpl");
 	}
 	
 	private function getVideoInfo($id,$lang,$db,$access)

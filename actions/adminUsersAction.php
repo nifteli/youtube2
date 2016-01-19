@@ -160,7 +160,25 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 					"interests" => $content['INTERESTS'],
 					"phoneNumber" => $content['PHONE'],
 					"notes" => $content['NOTES'],
-					"getMailOnVideoComment" => $content['getEmailOnComment']
+					"getEmailOnVideoComment" => $content['getEmailOnComment'],
+					"getEmailAfterMyComment" => $content['getEmailAfterMyComment'],
+					"deviceCount" => $content['DEVICECOUNT'],
+					"browserCount" => $content['BROWSERCOUNT'],
+					"videoviews" => $content['VIEWCOUNT'],
+					"videos" => $content['VIDEOCOUNT'],
+					"likes" => $content['LIKECOUNT'],
+					"dislikes" => $content['DISLIKECOUNT'],
+					"comments" => $content['COMMENTCOUNT'],
+					"reportCount" => $content['REPORTCOUNT'],
+					"videoCntInFolder" => $content['VIDEOCNTINFOLDER'],
+					"folderCnt" => $content['FOLDERCNT'],
+					"tagClickCnt" => $content['TAGCLICKCNT'],
+					"tagClicked" => $content['TAGCLICKED'],
+					"catClickCnt" => $content['CATCLICKCNT'],
+					"catClicked" => $content['CATCLICKED'],
+					"subCatCnt" => $content['SUBCATCNT'],
+					"searchCnt" => $content['SEARCHCNT'],
+					"videoCntCommented" => $content['VIDEOCNTCOMMENTED'],
 					);
 	$links = $controller->getUsers(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

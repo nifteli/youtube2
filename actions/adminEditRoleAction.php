@@ -5,7 +5,7 @@ if ($_GET["action"]=="save")
 	$result = "success";
 	$messages = array();
 	
-	if(!isset($_POST["roleId"]) || $_POST["roleId"] == "" || $_POST["roleId"] < 1)
+	if(!isset($_POST["roleId"]) || $_POST["roleId"] == "" || $_POST["roleId"] < 0)
 	{
 		$result = "error";
 		$messages["roleIdErr"] = $content['ADMINROLESERR1'];

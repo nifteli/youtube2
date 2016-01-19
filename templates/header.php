@@ -8,6 +8,7 @@ class Header
 	{
 		global $content;
 		global $errorMessage;
+		global $langIds;
 		
 		$this->header = new Smarty;
 		$this->header->assign("search",$content['SEARCH']);
@@ -24,6 +25,7 @@ class Header
 		$this->header->assign("login",$content['LOGIN']);
 		$this->header->assign("forgotPass",$content['FORGOTPASS']);
 		$this->header->assign("lang",$controller->lang);
+		$this->header->assign("languageVal",$langIds[$controller->lang]);
 		
 		
 		$this->header->assign("about",$content['ABOUT']);

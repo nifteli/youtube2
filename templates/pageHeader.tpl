@@ -2,6 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>www.howtubesmart.com</title>
+	<meta name="keywords" content="youtube,links,what,who,how,why">
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="fonts/stylesheet.css"/>
 	<link href="css/tabcontent.css" rel="stylesheet" type="text/css" />

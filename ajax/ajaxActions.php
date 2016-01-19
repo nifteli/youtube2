@@ -5,12 +5,14 @@ $sessionId = session_id();
 require_once("../configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
+require_once($classesPath."access.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 $lang = $_SESSION["lang"];
 require_once($langsPath."content_".$lang.".php");
+$access = new Access($db);
 
 //Category subscription
-if($_GET["action"] == "subscribe" && $_GET["catId"] && $_GET["catId"] > 0)
+if($_GET["action"] == "subscribe" && $_GET["catId"] && is_numeric($_GET["catId"]))
 {
 	$db->insert("subscriptions",array(
 								"userId"=>$_SESSION["userId"],
@@ -18,15 +20,19 @@ if($_GET["action"] == "subscribe" && $_GET["catId"] && $_GET["catId"] > 0)
 								"subsDate"=>date("Y-m-d H:i:s")
 								));
 	if($db->count>0)
-		echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":0'> [$content[UNSUBSCRIBE]]</a></span>";
+	{
+		$subsCnt = $db->rawQuery("select count(*) cnt from subscriptions where catId=".$_GET["catId"]);
+		echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":0'> [$content[UNSUBSCRIBE]]</a>(".$subsCnt[0]["cnt"].")</span>";
+	}
 }
 //Category unsubscription
-if($_GET["action"] == "unSubscribe" && $_GET["catId"] && $_GET["catId"] > 0)
+if($_GET["action"] == "unSubscribe" && $_GET["catId"] && is_numeric($_GET["catId"]))
 {
 	$qry = "delete from subscriptions 
 				where catId = $_GET[catId] and userId=".$_SESSION["userId"];
 		$db->rawQuery($qry);
-			echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":1'> [$content[SUBSCRIBE]]</a></span>";
+		$subsCnt = $db->rawQuery("select count(*) cnt from subscriptions where catId=".$_GET["catId"]);	
+		echo " <span id='subs".$_GET["catId"]."'><a class='subscription'  id='".$_GET["catId"].":1'> [$content[SUBSCRIBE]]</a>(".$subsCnt[0]["cnt"].")</span>";
 }
 
 //show user profile
@@ -160,8 +166,16 @@ if($_GET["action"] == "likeIt" &&
 	isset($_GET["flag"]) && is_numeric($_GET["flag"]) && 
 	isset($_SESSION["userId"]) && is_numeric($_SESSION["userId"]))
 {
+	
 	if($_GET["flag"] == 1)
 	{
+		if(!$access->authorized(53))
+		{
+			//$result = "error";
+			//$messages['noaccess'] = $content["INSUFFACCESS"];
+			echo "";
+			return;
+		}
 		$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 						values (".$_SESSION["userId"].",$_GET[videoId],1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update
@@ -169,6 +183,13 @@ if($_GET["action"] == "likeIt" &&
 	}
 	if($_GET["flag"] == 2)
 	{
+		if(!$access->authorized(54))
+		{
+			//$result = "error";
+			//$messages['noaccess'] = $content["INSUFFACCESS"];
+			echo "";
+			return;
+		}
 		$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
 						values (".$_SESSION["userId"].",$_GET[videoId],-1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update

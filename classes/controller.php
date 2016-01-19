@@ -26,6 +26,9 @@ include($templatePath."adminComments.php");
 include($templatePath."adminFolders.php");
 include($templatePath."adminTags.php");
 include($templatePath."adminCategories.php");
+include($templatePath."adminNotifications.php");
+include($templatePath."about.php");
+include($templatePath."other.php");
 
 class Controller //extends MySQL
 {
@@ -165,6 +168,18 @@ class Controller //extends MySQL
 			case "adminCategories":
 				$adminCategories = new AdminCategories($this);
 				$adminCategories->Show();
+				break;
+			case "adminNotifications":
+				$adminNotifications = new AdminNotifications($this);
+				$adminNotifications->Show();
+				break;
+			case "about":
+				$about = new About($this);
+				$about->Show();
+				break;
+			case "other":
+				$other = new Other($this);
+				$other->Show();
 				break;
 		}
 	}
@@ -313,7 +328,7 @@ class Controller //extends MySQL
 		$start = 1;
 		if($begin ==1 ) {$disabled = "disabled"; $pageUrl="#";}
 		else {$disabled = ""; $pageUrl="?page=$page&begin=" . ($begin-1) ."&perPage=$perPage";}
-		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"«");
+		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"<<");
 		$pageNum = ceil($cnt / $perPage);
 		//echo "count=".$cnt."<br>pagenum=".$pageNum;
 		$disabled = "";
@@ -337,7 +352,7 @@ class Controller //extends MySQL
 		$disabled = "";
 		if($begin ==$pageNum ) {$disabled = "disabled"; $pageUrl="";}
 		else {$disabled = ""; $pageUrl="?page=$page&begin=" . ($begin+1) . "&perPage=$perPage";}
-		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>"»");
+		$ret[] = array("pageUrl"=>$pageUrl,"pageStatus" => $disabled,"pageNum"=>">>");
 		
 		return $ret;
 	}
@@ -361,7 +376,8 @@ class Controller //extends MySQL
 								concat(u3.firstName,' ',u3.lastName) deletedBy,
 								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 								c.catName$lang catName,
-								vs.reportCount,v.isDeleted,DATE_FORMAT(v.deleted,'%d-%m-%Y') deleted
+								v.isDeleted,DATE_FORMAT(v.deleted,'%d-%m-%Y') deleted,
+								vs.reportCount,vs.views,vs.likes,vs.dislikes,vs.comments,vs.userCntCommented,vs.userReportedCnt,vs.tagCount,vs.userCntAddedToFolder,vs.addedFolderCnt
 						FROM videos v
 						left join vwvideostats vs on v.id = vs.id
 						join users u on u.id = v.addedById
@@ -447,7 +463,7 @@ class Controller //extends MySQL
 			$rowCount++;
 		}
 		 
-		// Redirect output to a client’s web browser (Excel5) 
+		// Redirect output to a client�s web browser (Excel5) 
 		header('Content-Type: application/vnd.ms-excel'); 
 		header("Content-Disposition: attachment;filename=$filename.xls"); 
 		header('Cache-Control: max-age=0'); 
@@ -583,10 +599,13 @@ class Controller //extends MySQL
 			$sortType = "asc";
 		}
 		$lang = $this->lang;
-		$qry = "select t.id,t.name,t.langId,
+		$qry = "select t.*,ts.*,u1.userName createdBy,u2.userName updatedBy,
 						l.nameAz lang
 				from tags t
 				inner join languages l on l.id=t.langId
+				left join vwtagstats ts on ts.tagId=t.id
+				left join users u1 on u1.id=t.createdById
+				left join users u2 on u2.id=t.updatedById
 				where 1=1 ";
 				
 		if(isset($post["languageId"]) && is_numeric($post["languageId"]))
@@ -621,12 +640,15 @@ class Controller //extends MySQL
 		$qry = "SELECT u.*,r.name roleName,l.nameAz lang,
 				DATE_FORMAT(u.registered,'%d-%m-%Y %k:%i:%S') createdDate,
 				DATE_FORMAT(u.lastLoggedIn,'%d-%m-%Y %k:%i:%S') lastLoginDate,
+				DATE_FORMAT(u.lastUpdate,'%d-%m-%Y %k:%i:%S') updatedDate,
+				DATE_FORMAT(u.deleted,'%d-%m-%Y %k:%i:%S') deletedDate,
 				DATE_FORMAT(u.birthDate,'%d-%m-%Y') bDate,
-				concat(u.firstName,' ',u.lastName) name
+				concat(u.firstName,' ',u.lastName) name,us.*
 				FROM users u
 				left join roles r on r.id=u.roleId
 				left join languages l on l.id=u.languageId
-				where isDeleted=0 ";
+				left join vwuserstats us on us.id=u.id
+				where 1=1 ";
 		
 		if(isset($post["created"]) && $post["created"] != "")
 			$beginDate = $this->getDateForSelect(trim($post["created"]));
@@ -667,9 +689,11 @@ class Controller //extends MySQL
 			$sortType = "asc";
 		}
 		$lang = $this->lang;
-		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*
+		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
+				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt
 				FROM categories c
-				where isDeleted=0 ";
+				left join vwcatstats cs on cs.categoryId=c.id
+				where 1=1 ";
 				
 		if(isset($post["catAz"]) && $post["catAz"] != "")
 			$qry .= " and c.catNameAz like '%" . trim($post["catAz"]) . "%'";
@@ -693,7 +717,62 @@ class Controller //extends MySQL
 			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
 		}
 		$res = $this->db->rawQuery($qry);
+		for($i=0; $i<count($res); $i++)
+			$res[$i]["questions"] = $this->getVideoQuesArr($res[$i]["questions"]);
 		return $res;
+	}
+	
+	public function getVideoQuesArr($id)
+	{
+		if (($id&1) == 1) 
+			$ret[] = 1;
+		if (($id&2) == 2)
+			$ret[] = 2;
+		if (($id&4) == 4)
+			$ret[] = 4;
+		if (($id&8) == 8)
+			$ret[] = 8;
+		return $ret;
+	}
+	
+	public function addSiteEntry()
+	{
+		$userId = 0;
+		if($this->access->hasAccess)
+			$userId=$this->access->userId;
+		
+		$browser=$_SERVER['HTTP_USER_AGENT'];
+			if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$browser)||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($browser,0,4)))
+				$device = "Mobile device";
+			else 
+				$device = "Computer";
+			
+		$this->db->rawQuery("insert into siteentry (userId,IP,device,browser,entryDate) 
+							values ($userId,'".$_SERVER['REMOTE_ADDR']."','$device','$browser',now())
+							on duplicate key update
+							entryDate = now()");
+	}
+	
+	public function addClicks()
+	{
+		$userId = 0;
+		if($this->access->hasAccess)
+			$userId=$this->access->userId;
+		$IP = $_SERVER['REMOTE_ADDR'];
+		if(isset($_GET["tagId"]) && is_numeric($_GET["tagId"]))
+			$this->db->rawQuery("insert into clicks (userId,IP,actionType,actionId,clickDate) values
+								($userId,'$IP',1,$_GET[tagId],now())");
+		if(isset($_GET["catId"]) && is_numeric($_GET["catId"]))
+			$this->db->rawQuery("insert into clicks (userId,IP,actionType,actionId,clickDate) values
+								($userId,'$IP',2,$_GET[catId],now())");
+				
+	}
+	
+	public function getNotifications($id)
+	{
+		$res = $this->db->rawQuery("select * from notifications where id=$id");
+		
+		return $res[0];
 	}
 }
 ?>

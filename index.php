@@ -6,7 +6,6 @@ require_once(dirname(__FILE__)."/configs/paths.php");
 require_once($confsPath."conf.php");
 require_once($classesPath."MysqliDb.php");
 require_once($classesPath."access.php");
-
 $db = new MysqliDb($hostname, $username, $password, $database);
 $access = new Access($db);
 
@@ -46,7 +45,10 @@ if(!$db) die("Database error");
 //print_r($access);echo "ses=".$_SESSION["userId"];
 $controller = new Controller($db);
 //end initiations
-
+//collect statistics
+$controller->addSiteEntry();
+$controller->addClicks();
+//collect statistics
 
 //defined which page to load into page
 if(!isset($_GET["page"]))
@@ -158,6 +160,27 @@ else
 			$controller->includeSection("header");
 			$controller->includeSection("categories");
 			$controller->includeSection("profile");
+			$controller->includeSection("footer");
+			break;
+		case "about":
+			include_once($templatePath."pageHeader.tpl");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("about");
+			$controller->includeSection("footer");
+			break;
+		case "siteRules":
+			include_once($templatePath."pageHeader.tpl");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("siteRules");
+			$controller->includeSection("footer");
+			break;
+		case "other":
+			include_once($templatePath."pageHeader.tpl");
+			$controller->includeSection("header");
+			$controller->includeSection("categories");
+			$controller->includeSection("other");
 			$controller->includeSection("footer");
 			break;
 		default:

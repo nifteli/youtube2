@@ -39,6 +39,7 @@ class Profile
 			$this->profile->assign("languageVal", $langIds[$profile["languageId"]]);
 			$this->profile->assign("picturePath", $profile["picturePath"]);
 			$this->profile->assign("getEmailOnCommentVal", ($profile["getEmailOnVideoComment"] == 1)?"on":"");
+			$this->profile->assign("getEmailAfterMyCommentVal", ($profile["getEmailAfterMyComment"] == 1)?"on":"");
 		}
 		
 		$this->profile->assign("code", $content['CODE']);
@@ -57,6 +58,7 @@ class Profile
 		$this->profile->assign("phone", $content['PHONE']);
 		$this->profile->assign("language", $content['LANGUAGE']);
 		$this->profile->assign("getEmailOnComment", $content['getEmailOnComment']);
+		$this->profile->assign("getEmailAfterMyComment", $content['getEmailAfterMyComment']);
 		if(isset($_GET["action"]))
 		{
 			$this->profile->assign("nameVal", isset($_POST["name"]) ? $_POST["name"] : "");
@@ -76,6 +78,7 @@ class Profile
 			$this->profile->assign("phoneVal", isset($_POST["phone"]) ? $_POST["phone"] : "");
 			$this->profile->assign("languageVal", isset($_POST["lang"]) ? $_POST["lang"] : "");
 			$this->profile->assign("getEmailOnCommentVal", isset($_POST["getEmailOnComment"]) ? $_POST["getEmailOnComment"] : "");
+			$this->profile->assign("getEmailAfterMyCommentVal", isset($_POST["getEmailAfterMyComment"]) ? $_POST["getEmailAfterMyComment"] : "");
 		}
 		$this->profile->assign("azerbaijani", $content['AZERBAIJANI']);
 		$this->profile->assign("english", $content['ENGLISH']);

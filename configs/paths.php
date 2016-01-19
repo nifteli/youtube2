@@ -12,6 +12,7 @@ $phpMailerPath = $classesPath."plugins/PHPMailer/";
 $facebookPath = $classesPath."plugins/Facebook/";
 $phpExcelPath = $classesPath."php/PHPSuito/External/phpexcel/";
 $userPicsPath =  "/uploads/userPictures/";
+$catImgPath =  "/uploads/catIcons/";
 $tmpPath = $appDirectory . "/tmp/";
 //$productImagesPath=$appDirectory."productImages/";
 //$bannerPath=$appDirectory."img/banners/";

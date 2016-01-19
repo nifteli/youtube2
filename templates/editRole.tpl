@@ -26,7 +26,7 @@ $(function() {
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 	
-		<div style="width:1000px; padding-left: 490px;">
+		<div style="width:1200px; padding-left: 490px;">
 			<form name="frmRole" id="frmRole" action="?page=editRole&action=save" method="post">
 			<input type="hidden" name="roleId" id="roleId" value="{$roleId}">
 			<div class="accessDiv" id="accessDiv" onclick="setDatePickers()">

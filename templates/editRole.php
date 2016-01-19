@@ -11,9 +11,9 @@ class EditRole
 		global $messages;
 		
 		$this->editRole = new SmartyBC;
-		if(isset($_GET["id"]) && $_GET["id"]>0)
+		if(isset($_GET["id"]) && is_numeric($_GET["id"]))
 			$roleId = $_GET["id"];
-		if(isset($_POST["roleId"]) && $_POST["roleId"]>0)
+		if(isset($_POST["roleId"]) && is_numeric($_POST["roleId"]))
 			$roleId = $_POST["roleId"];
 		$this->editRole->assign("titleRole", $this->getRoleName($controller,$roleId));
 		$this->editRole->assign("actionName", $content['ACTIONNAME']);
