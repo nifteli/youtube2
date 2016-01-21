@@ -391,7 +391,7 @@ class Controller //extends MySQL
 						left join comments ct on ct.videoId=v.id
 						group by v.id,vc.categoryId
 						) v
-						where v.isDeleted=0 ";
+						where 1=1 ";
 		if(isset($post["id"]) && $post["id"] != "")
 			$qry .= " and v.id=".trim($post["id"]);
 		if(isset($post["name"]) && $post["name"] != "")
@@ -435,6 +435,41 @@ class Controller //extends MySQL
 			$res[$i]["questions"] = $this->getQuestions($res[$i]["questions"]);
 			$res[$i]["duration"] =gmdate('H:i:s',$res[$i]["duration"]);
 		}
+		return $res;
+	}
+	
+	public function getSearches($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
+		if ($sortBy == "")
+		{
+			$sortBy = "STR_TO_DATE(s.created, '%d-%m-%y')";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select s.*, concat(u.firstName,' ',u.lastName) searcher
+				from searches s
+				left join users u on u.id=s.createdById
+				where 1=1 ";
+		
+		if(isset($post["added"]) && $post["added"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["added"]));
+		if(isset($post["addedTill"]) && $post["addedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["addedTill"]));
+		$qry .= " and s.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		
 		return $res;
 	}
 	
@@ -494,17 +529,20 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "select * from (SELECT c.*,
-				DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
-				DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
-				if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author, 
-				concat(u2.firstName,' ',u2.lastName) confirmer,
-				concat(u3.firstName,' ',u3.lastName) updatedBy
-				from comments c
-				left join users u on u.id=c.createdById
-				left join users u2 on u2.id=c.confirmedById
-				left join users u3 on u3.id=c.updatedById
-				) c
-				where 1=1 ";
+               DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
+               DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+               if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author, 
+               concat(u2.firstName,' ',u2.lastName) confirmer,
+               concat(u3.firstName,' ',u3.lastName) updatedBy,
+               v.name videoName,q.question
+               from comments c
+               left join users u on u.id=c.createdById
+               left join users u2 on u2.id=c.confirmedById
+               left join users u3 on u3.id=c.updatedById
+               left join videos v on v.id=c.videoId
+               left join questions q on q.bitValue=v.questions
+              ) c
+				where 1=1  ";
 				
 		if(isset($post["created"]) && $post["created"] != "")
 			$beginDate = $this->getDateForSelect(trim($post["created"]));
@@ -675,6 +713,49 @@ class Controller //extends MySQL
 		return $res;
 	}
 	
+	public function getMailInfo($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		if ($sortBy == "")
+		{
+			$sortBy = "e.sentDate ";
+			$sortType = "desc";
+		}
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
+		
+		$lang = $this->lang;
+		$qry = "SELECT e.*,
+				concat(u.firstName,' ',u.lastName) senderName, u.userName
+				from emails e
+				left join users u on u.id=e.senderId
+				where 1=1 ";
+		
+		if(isset($post["created"]) && $post["created"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and e.sentDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+			
+		if(isset($post["id"]) && is_numeric($post["id"]))
+			$qry .= " and e.senderId=".trim($post["id"]);
+		if(isset($post["userName"]) && $post["userName"] != "")
+			$qry .= " and u.userName like '%" . trim($post["userName"]) . "%'";
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["name"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		//echo $qry;
+		$res = $this->db->rawQuery($qry);//print_r($res);
+		return $res;
+	}
+		
 	function getSecretQuestions()
 	{
 		return $this->db->get("secretquestions");

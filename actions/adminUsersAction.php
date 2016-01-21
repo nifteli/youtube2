@@ -185,4 +185,31 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 	$controller->exportToExcel($fields,$links,$content['TITLEUSERS']);
 	return;
 }
+if ($_GET["action"]=="set" && $_POST["action"] == 'exportMailInfo')
+{
+	$result = "success";
+	$messages = array();
+	if(!$access->authorized(59))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+
+	$fields = array("id" => $content['CODE'],
+					"sentDate" => $content['SENTDATE'],
+					"senderId" => $content['SENDERID'],
+					"subject" => $content['SUBJECT'],
+					"body" => $content['MESSAGEBODY'],
+					"senderIP" => $content['SENDERIP'],
+					"to" => $content['TO'],
+					"senderName" => $content['SENDERNAME'],
+					"userName" => $content['SENDERUSERNAME'],
+					"attachment" => $content['FILE']
+					);
+	$links = $controller->getMailInfo(1,0,$_POST,$cnt,"","");
+	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
+	$controller->exportToExcel($fields,$links,$content['EMAIL']);
+	return;
+}
 ?>

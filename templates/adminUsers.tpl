@@ -73,7 +73,7 @@ function showProfile(userId)
 	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
 		
 		<div class="table-responsive" style="overflow-x: auto; width:4500px">
-			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;    text-align: center;">
+			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 220px; overflow: hidden;"/>
@@ -184,6 +184,7 @@ function showProfile(userId)
 					<td class="vertical-middle" colspan=39 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='exportMailInfo'>{$exportMailInfo}</button>
 					</td>
 				</tr>
 				</thead>

@@ -38,6 +38,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("lnUserReportedCnt", $content['USERREPORTEDCNT']);
 		$this->adminVideoLinks->assign("lnUserCntAddedToFolder", $content['USERCNTADDEDTOFOLDER']);
 		$this->adminVideoLinks->assign("lnAddedFolderCnt", $content['ADDEDFOLDERCNT']);
+		$this->adminVideoLinks->assign("exportSearches", $content['EXPORTSEARCHES']);
 		
 		$this->adminVideoLinks->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->adminVideoLinks->assign("lnTags", $content['TAGS']);

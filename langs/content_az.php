@@ -282,6 +282,10 @@ $content["DISLIKESCNT"] = "DISLIKESCNT";
 $content["USERREPORTEDCNT"] = "USERREPORTEDCNT";
 $content["USERCNTADDEDTOFOLDER"] = "USERCNTADDEDTOFOLDER";
 $content["ADDEDFOLDERCNT"] = "ADDEDFOLDERCNT";
+$content["KEYWORD"] = "KEYWORD";
+$content["SEARCHER"] = "SEARCHER";
+$content["EXPORTSEARCHES"] = "EXPORTSEARCHES";
+
 
 //End Video links 
 
@@ -314,6 +318,9 @@ $content['UPDATEDBYID'] ='Redaktə edən ID';
 $content['UPDATEDBYIP'] ='Redaktə edən IP';
 $content['UPDATEDBY'] ='Redaktə edən';
 $content['CHANGED'] ='Redaktə edildi';
+$content['CONFIRMEDBYID'] ='CONFIRMEDBYID';
+$content['CONFIRMEDBYIP'] ='CONFIRMEDBYIP';
+$content['CONFIRDATE'] ='CONFIRMDATE';
 //End Admin comments
 
 //Admin folders
@@ -326,6 +333,8 @@ $content['TITLETAGS'] ='Taqlar';
 $content['TAG'] ='Taq';
 $content['NEWTAG'] ='Yeni Taq';
 $content['SUBSTITUTE'] ='Əvəzlə';
+$content['VIDEOCNTTAGGED'] ='VIDEOCNTTAGGED';
+$content['USERCNTCLICKED'] ='USERCNTCLICKED';
 
 //End Admin Tags
 
@@ -377,6 +386,12 @@ $content['CATCLICKED'] ='CATCLICKED';
 $content['SUBCATCNT'] ='SUBCATCNT';
 $content['SEARCHCNT'] ='SEARCHCNT';
 $content['VIDEOCNTCOMMENTED'] ='VIDEOCNTCOMMENTED';
+$content['EXPORTMAILINFO'] ='EXPORTMAILINFO';
+$content['SENTDATE'] ='SENTDATE';
+$content['SENDERID'] ='SENDERID';
+$content['SENDERIP'] ='SENDERIP';
+$content['SENDERNAME'] ='SENDERNAME';
+$content['SENDERUSERNAME'] ='SENDERUSERNAME';
 
 //End Admin users
 

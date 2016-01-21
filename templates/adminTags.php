@@ -27,6 +27,13 @@ class AdminTags
 		$this->adminTags->assign("lnLang", $content['LANGUAGE']);
 		$this->adminTags->assign("lnName", $content['TAG']);
 		$this->adminTags->assign("lnNewTag", $content['NEWTAG']);
+		$this->adminTags->assign("lnCreated", $content['DATECREATED']);
+		$this->adminTags->assign("lnCreatedBy", $content['CREATEDBY']);
+		$this->adminTags->assign("lnUpdated", $content['DATEUPDATED']);
+		$this->adminTags->assign("lnUpdatedBy", $content['UPDATEDBY']);
+		$this->adminTags->assign("lnVideoCntTagged", $content['VIDEOCNTTAGGED']);
+		$this->adminTags->assign("lnUserCntClicked", $content['USERCNTCLICKED']);
+		$this->adminTags->assign("lnClickCnt", $content['CLICKCNT']);
 		
 		$this->adminTags->assign("hasEditAccess", $controller->access->authorized(31));
 		$this->adminTags->assign("hasDeleteAccess", $controller->access->authorized(30));

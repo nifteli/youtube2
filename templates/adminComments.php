@@ -31,6 +31,16 @@ class AdminComments
 		$this->adminComments->assign("lnConfirmed", $content['CONFIRMED']);
 		$this->adminComments->assign("lnConfirmer", $content['CONFIRMER']);
 		$this->adminComments->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
+		$this->adminComments->assign("lnUpdated", $content['UPDATED']);
+		$this->adminComments->assign("lnConfirmDate", $content['CONFIRDATE']);
+		$this->adminComments->assign("lnVideoName", $content['VIDEONAME']);
+		$this->adminComments->assign("lnQuestion", $content['VIDEOQUESTION']);
+		$this->adminComments->assign("lnUserIP", $content['ADDEDBYIP']);
+		$this->adminComments->assign("lnUpdatedById", $content['UPDATEDBYID']);
+		$this->adminComments->assign("lnUpdatedBy", $content['UPDATEDBY']);
+		$this->adminComments->assign("lnUpdatedByIP", $content['UPDATEDBYIP']);
+		$this->adminComments->assign("lnConfirmedById", $content['CONFIRMEDBYID']);
+		$this->adminComments->assign("lnConfirmedByIP", $content['CONFIRMEDBYIP']);
 		
 		$this->adminComments->assign("hasConfirmAccess", $controller->access->authorized(16));
 		$this->adminComments->assign("hasDeleteAccess", $controller->access->authorized(27));

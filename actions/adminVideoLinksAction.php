@@ -434,6 +434,30 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	return;
 }
 
+if ($_GET["action"]=="filter" && $_POST["action"] == 'exportSearches')
+{
+	$result = "success";
+	$messages = array();
+	if(!$access->authorized(60))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	$fields = array("id" => $content['ID'],
+					"keyword" => $content['KEYWORD'],
+					"createdById" => $content['CREATEDBYID'],
+					"createdByIP" => $content['CREATEDBYIP'],
+					"created" => $content['DATECREATED'],
+					"searcher" => $content['SEARCHER']
+					);
+	$links = $controller->getSearches(1,0,$_POST,$cnt,"","");
+	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
+	$controller->exportToExcel($fields,$links,$content['SEARCH']);
+	return;
+}
+
+
 if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])))
 {
 	$result = "success";

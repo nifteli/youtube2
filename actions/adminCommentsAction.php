@@ -23,7 +23,10 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					"athor" => $content['AUTHOR'],
 					"isConfirmed" => $content['CONFIRMED'],
 					"confirmedByIP" => $content['CONFIRMERIP'],
-					"confirmer" => $content['CONFIRMER']
+					"confirmer" => $content['CONFIRMER'],
+					"confirmed" => $content['CONFIRDATE'],
+					"videoName" => $content['VIDEONAME'],
+					"question" => $content['VIDEOQUESTION']
 					);
 	$links = $controller->getComments(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
@@ -61,7 +64,7 @@ if ($_GET["action"]=="confirm" && is_numeric(trim($_GET["id"])))
 	}
 	
 	$db->where("id=".trim($_GET["id"]));
-	$db->update("comments",array("isConfirmed"=>1,"confirmedById"=>$access->userId,"confirmedByIP"=>$_SERVER["REMOTE_ADDR"]));
+	$db->update("comments",array("isConfirmed"=>1,"confirmed"=>date("Y-m-d H:i:s"),"confirmedById"=>$access->userId,"confirmedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count > 0)
 		$messages["success"] = $content["CHANGED"];
 }

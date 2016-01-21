@@ -28,10 +28,10 @@ function submitForm(action)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;">
+	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
 		<form method="post" action="?page=adminComments&action=filter" id="vlFilter" name="vlFilter">
-		<div class="table-responsive">
-			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
+		<div class="table-responsive" style="overflow-x: auto; width:2400px">
+			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 160px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
@@ -43,6 +43,16 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 				</colgroup>
 				<thead>
 				<tr style="background-color:rgb(219, 203, 129);">
@@ -59,6 +69,16 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=confirmer&confirmerSortType={$confirmerSortType}')">{$lnConfirmer}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$confirm}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmDate}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnVideoName}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnQuestion}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUserIP}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedById}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedBy}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedByIP}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmedById}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmedByIP}</th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -74,7 +94,7 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control" name="comment" id="comment" type="text" value="{$commentVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="confirmed" id="confirmed" type="text" value="{$confirmedVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="confirmer" id="confirmer" type="text" value="{$confirmerVal}"/></td>
-					<td class="vertical-middle" colspan=2>
+					<td class="vertical-middle" colspan=12 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>
@@ -102,6 +122,16 @@ function submitForm(action)
 						<a href="?page=adminComments&action=confirm&id={$comments[sec1].id}"><img src="img/success.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updated}">{$comments[sec1].updated}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].confirmed}">{$comments[sec1].confirmed}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].videoName}">{$comments[sec1].videoName}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].question}">{$comments[sec1].question}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].userIP}">{$comments[sec1].userIP}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updatedById}">{$comments[sec1].updatedById}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updatedBy}">{$comments[sec1].updatedBy}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updatedByIP}">{$comments[sec1].updatedByIP}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].confirmedById}">{$comments[sec1].confirmedById}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].confirmedByIP}">{$comments[sec1].confirmedByIP}</td>
 				</tr>
 				{/section}
 				</tbody>

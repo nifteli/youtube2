@@ -32,14 +32,22 @@ function submitForm(action)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;">
-		<div class="table-responsive">
-			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
+	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
+		<div class="table-responsive" style="overflow-x: auto; width:2500px">
+			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 150px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					
 				</colgroup>
 				<thead>
 				<tr style="background-color:rgb(219, 203, 129);">
@@ -50,6 +58,14 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$lnNewTag}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnCreated}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnCreatedBy}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedBy}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntTagged}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnUserCntClicked}</th>
+					<th class="vertical-middle" style=" text-align:center" >{$lnClickCnt}</th>
+					
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -64,9 +80,9 @@ function submitForm(action)
 					</td>
 					<td class="vertical-middle"><input class="form-control"  name="name" id="name" type="text" value="{$nameVal}" /></td>
 					<td class="vertical-middle"></td>
-					<td class="vertical-middle">
+					<td class="vertical-middle" style="text-align: left;" colspan=8>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>
 				</tr>
 				</thead>
@@ -83,6 +99,13 @@ function submitForm(action)
 						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].created}">{$tags[sec1].created}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdBy}">{$tags[sec1].createdBy}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedBy}">{$tags[sec1].updatedBy}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].videoCntTagged}">{$tags[sec1].videoCntTagged}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].userCntClicked}">{$tags[sec1].userCntClicked}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].clickCnt}">{$tags[sec1].clickCnt}</td>
 				</tr>
 				{/section}
 				</tbody>

@@ -83,7 +83,14 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	}
 
 	$fields = array("name" => $content['TAG'],
-					"lang" => $content['LANGUAGE']
+					"lang" => $content['LANGUAGE'],
+					"created" => $content['DATECREATED'],
+					"createdBy" => $content['CREATEDBY'],
+					"updated" => $content['DATEUPDATED'],
+					"updatedBy" => $content['UPDATEDBY'],
+					"videoCntTagged" => $content['VIDEOCNTTAGGED'],
+					"userCntClicked" => $content['USERCNTCLICKED'],
+					"clickCnt" => $content['CLICKCNT']
 					);
 	$links = $controller->getTags(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
