@@ -16,7 +16,7 @@
 		   <li><a href='?page=adminComments'><span>{$mnComments}</span></a>
 		   <li><a href='?page=adminFolders'><span>{$mnFolders}</span></a>
 		   <li><a href='?page=adminTags'><span>{$mnTags}</span></a>
-		   <li><a href='?page=adminExports'><span>{$mnExports}</span></a>
+		   <li><a href='?page=adminGuests'><span>{$mnGuests}</span></a>
 		   <li class='has-sub'><a href='#'><span>{$mnDefinitions}</span></a>
 			  <ul>
 				 <li><a href='?page=adminCategories'><span>{$mnCategories}</span></a></li>

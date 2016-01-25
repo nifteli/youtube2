@@ -18,7 +18,7 @@ class AdminMenu
 		$this->adminMenu->assign("mnComments", $content['MNCOMMENTS']);
 		$this->adminMenu->assign("mnFolders", $content['MNFOLDERS']);
 		$this->adminMenu->assign("mnTags", $content['MNTAGS']);
-		$this->adminMenu->assign("mnExports", $content['MNEXPORTS']);
+		$this->adminMenu->assign("mnGuests", $content['MNGUESTS']);
 		$this->adminMenu->assign("mnDefinitions", $content['MNDEFINITIONS']);
 		$this->adminMenu->assign("mnCategories", $content['MNCATEGORIES']);
 		$this->adminMenu->assign("mnNotifications", $content['MNNOTIFICATIONS']);

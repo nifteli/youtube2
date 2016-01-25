@@ -165,6 +165,11 @@
 			<input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input><br>
 			<input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$favorite}</input><br>
 			<input id="option" name="option"  type="radio" onclick="changeView(3)" value=3>{$added}</input>
+			{if ($myUserId == $userId)}
+				<a href="?page=users" style="text-decoration: none; margin-left:10px;color: #AE4019;">{$otherUsers}</a>
+			{else}
+				<a href="?userId={$myUserId}" style="text-decoration: none; margin-left:5px;color: #AE4019;">{$myVideos}</a>
+			{/if}
 		</div>
 		<div class="questions">
 			<a href="#" onClick="shift(4)"><img class="tabImg1" id="img4" src="./img/who_{$lang}.png" /></a>
@@ -180,13 +185,17 @@
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">
 				<div class="c-name">
+				{if ($myUserId == $userId)}
 				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a><br><br>
+				{/if}
 					<ul>
 						{section name=sec1 loop=$myFolders}
 						<li>
-							<a href="?folderId={$myFolders[sec1].folderId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
+							<a href="?folderId={$myFolders[sec1].folderId}&userId={$userId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
+							{if ($myUserId == $userId)}
 							<a href="?action=deleteFolder&id={$myFolders[sec1].folderId}" onClick="return confirm('{$deleteConfirmation}')"><img src="./img/delete.png" height="10" width="10" ></a>
 							<a onclick="setFolderName({$myFolders[sec1].folderId},'{$myFolders[sec1].folderName}')" href="#editFolder"><img src="./img/edit.png" height="10" width="10"></a>
+							{/if}
 						</li>
 						{/section}					
 					</ul>

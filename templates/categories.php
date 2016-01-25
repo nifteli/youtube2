@@ -9,6 +9,7 @@ class Categories
 		global $content;
 		global $errorMessage;
 		global $okMessage;
+		$userId = 0;
 		
 		$this->categories = new Smarty;
 		$this->categories->assign("how",$content['HOW']);
@@ -26,9 +27,10 @@ class Categories
 		$this->categories->assign("favorite",$content['FAVORITE']);
 		$this->categories->assign("added",$content['ADDEDVIDEOS']);
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
+		$this->categories->assign("otherUsers",$content['OTHERUSERS']);
+		$this->categories->assign("myVideos",$content['MYVIDEOS']);
 		$this->categories->assign("hasAccess",$controller->access->hasAccess);
 		$this->categories->assign("lang",$controller->lang);
-		$this->categories->assign("userId",$controller->access->userId);
 		$this->categories->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->categories->assign("okMessage", isset($okMessage) ? $okMessage : "");
 		
@@ -38,12 +40,19 @@ class Categories
 		$this->categories->assign("catsWho",$controller->getCategories(2));
 		
 		if($controller->access->hasAccess)
+			$userId = $controller->access->userId;
+		if(isset($_GET["userId"]) && is_numeric($_GET["userId"]) && $_GET["userId"] > 0)
+			$userId = $_GET["userId"];
+		$this->categories->assign("userId",$userId);
+		$this->categories->assign("myUserId",$controller->access->userId);
+			
+		if($userId > 0)
 		{
-			$this->categories->assign("myFolders",$this->getMyFolders($controller));
-			$this->categories->assign("myVideosHow",$controller->getCategories(4,$controller->access->userId));
-			$this->categories->assign("myVideosWhy",$controller->getCategories(8,$controller->access->userId));
-			$this->categories->assign("myVideosWhat",$controller->getCategories(1,$controller->access->userId));
-			$this->categories->assign("myVideosWho",$controller->getCategories(2,$controller->access->userId));
+			$this->categories->assign("myFolders",$this->getMyFolders($controller,$userId));
+			$this->categories->assign("myVideosHow",$controller->getCategories(4,$userId));
+			$this->categories->assign("myVideosWhy",$controller->getCategories(8,$userId));
+			$this->categories->assign("myVideosWhat",$controller->getCategories(1,$userId));
+			$this->categories->assign("myVideosWho",$controller->getCategories(2,$userId));
 		}
 	}
 	
@@ -54,13 +63,13 @@ class Categories
 		$this->categories->display($templatePath."categories.tpl");
 	}
 	
-	private function getMyFolders($controller)
+	private function getMyFolders($controller,$userId)
 	{
 		$qry = "SELECT  f.id folderId, f.name folderName, IfNULL(count(distinct v.id), 0) videoCount
 				FROM foldervideos fv
 				right join folders f on f.id=fv.folderId
 				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
-				where f.createdById=" . $controller->access->userId .
+				where f.createdById=" . $userId .
 				" group by fv.folderId, f.name
 				order by f.created desc, f.name";
 		$res = $controller->db->rawQuery($qry);

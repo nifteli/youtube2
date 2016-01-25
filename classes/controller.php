@@ -29,6 +29,7 @@ include($templatePath."adminCategories.php");
 include($templatePath."adminNotifications.php");
 include($templatePath."about.php");
 include($templatePath."other.php");
+include($templatePath."adminGuests.php");
 
 class Controller //extends MySQL
 {
@@ -172,6 +173,10 @@ class Controller //extends MySQL
 			case "adminNotifications":
 				$adminNotifications = new AdminNotifications($this);
 				$adminNotifications->Show();
+				break;
+			case "adminGuests":
+				$adminGuests = new AdminGuests($this);
+				$adminGuests->Show();
 				break;
 			case "about":
 				$about = new About($this);
@@ -650,6 +655,54 @@ class Controller //extends MySQL
 			$qry .= " and t.langId=".trim($post["languageId"]);
 		if(isset($post["name"]) && $post["name"] != "")
 			$qry .= " and t.name like '%" . trim($post["name"]) . "%'";
+		
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		return $res;
+	}
+	
+	public function getGuests($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		$beginDate="01-01-1900";
+		$endDate="01-01-9999";
+		if ($sortBy == "")
+		{
+			$sortBy = "se.entryDate ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select se.entryDate,se.IP,se.device,se.browser,gs.*
+				from siteentry se
+				left join vwgueststats gs on gs.IP=se.IP
+				where se.userId=0 ";
+		
+		if(isset($post["entryDate"]) && $post["entryDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["entryDate"]));
+		if(isset($post["entryDateTill"]) && $post["entryDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["entryDateTill"]));
+		$qry .= " and se.entryDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
+		
+		if(isset($post["IP"]) && $post["IP"] != "")
+			$qry .= " and se.IP like '%" . trim($post["IP"]) . "%'";
+		if(isset($post["device"]) && $post["device"] != "")
+			$qry .= " and se.device like '%" . trim($post["device"]) . "%'";
+		if(isset($post["browser"]) && $post["browser"] != "")
+			$qry .= " and se.browser like '%" . trim($post["browser"]) . "%'";
+		if(isset($post["videCntWatched"]) && $post["videCntWatched"] != "")
+			$qry .= " and videCntWatched = " . trim($post["videCntWatched"]) ;
+		if(isset($post["videoCntCommented"]) && $post["videoCntCommented"] != "")
+			$qry .= " and videoCntCommented = " . trim($post["videoCntCommented"]) ;
+		if(isset($post["commentCnt"]) && $post["commentCnt"] != "")
+			$qry .= " and commentCnt = " . trim($post["commentCnt"]) ;
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;

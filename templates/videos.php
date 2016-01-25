@@ -54,11 +54,12 @@ class Videos
 	
 	private function getFolderName($controller, $folderId)
 	{
-		$qry = "SELECT  f.name, count(*) videoCount
+		$qry = "SELECT  f.name, IfNULL(count(distinct v.id), 0) videoCount
 				FROM foldervideos fv
-				inner join folders f on f.id=fv.folderId
-				where f.id=$folderId and f.createdById=" . $controller->access->userId .
-				" group by fv.folderId, f.name";
+				right join folders f on f.id=fv.folderId
+				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
+				where f.id=$folderId 
+				group by fv.folderId, f.name";
 		$res = $controller->db->rawQuery($qry);
 		return $res[0];
 	}

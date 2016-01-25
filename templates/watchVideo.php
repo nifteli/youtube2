@@ -104,11 +104,17 @@ class WatchVideo
 	
 	private function getVideoInfo($id,$lang,$db,$access)
 	{
+		$userId = 0;
+		$IP = $_SERVER["REMOTE_ADDR"];
 		if($access->hasAccess)
-			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate) 
-							values (".$access->userId.",$id,0,'".date("Y-m-d H:i:s")."')
+		{
+			$userId = $access->userId;
+			$IP = 0;
+		}
+			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate,IP) 
+							values ($userId,$id,0,now(),'$IP')
 							on duplicate key update
-							actionDate = '".date("Y-m-d H:i:s")."'");
+							actionDate = now()");
 		$res = $db->rawQuery("
 						SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,

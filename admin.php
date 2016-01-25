@@ -220,6 +220,21 @@ else
 				return;
 			}
 			break;
+		case "adminGuests":
+			if($access->authorized(61))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminGuestsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminGuests");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		default:
 			include_once($templatePath."adminPageHeader.tpl");
 			$controller->includeSection("adminMenu");

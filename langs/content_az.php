@@ -50,6 +50,8 @@ $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
 $content['PROFILE'] = "Profil";
 $content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
+$content['OTHERUSERS'] = "Other users";
+$content['MYVIDEOS'] = "Mine";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -408,6 +410,7 @@ $content['MNEXPORTS'] ="Exports";
 $content['MNDEFINITIONS'] ="Definitions";
 $content['MNCATEGORIES'] ="Categories";
 $content['MNNOTIFICATIONS'] ="Notifications";
+$content['MNGUESTS'] ="Qonaqlar";
 //End admin menu
 
 //Admin categories
@@ -444,8 +447,16 @@ $content['OTHER'] ="Other info";
 
 //End Admin Notifications
 
-//Admin Exports
-$content['TITLEEXPORTS'] ="Exports";
+//Admin GUESTS
+$content['TITLEGUESTS'] ="Qonaqlar";
+$content['ENTRYDATE'] ="ENTRYDATE";
+$content['IP'] ="IP";
+$content['DEVICE'] ="DEVICE";
+$content['BROWSER'] ="BROWSER";
+$content['VIDEOCNTWATCHED'] ="VIDEOCNTWATCHED";
+$content['VIDEOCNTCOMMENTED'] ="VIDEOCNTCOMMENTED";
+$content['COMMENTCNT'] ="COMMENTCNT";
+$content['SEARCHCNT'] ="SEARCHCNT";
 
-//Admin Exports
+//End Admin GUESTS
 ?>

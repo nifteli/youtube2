@@ -169,11 +169,11 @@ function showTimeInterval(sFlag)
 	<div class="min-cont bg">
 		<!--Statistics Bar Start-->
 		<div class="user" align="center"> 
-			<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" /></a>
-			<p class="counts">{$videos} ({$videoCnt})</p>
-			<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" /></a>
-			<p class="counts">{$tags} ({$tagCnt})</p>
-			<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" /></a>
-			<p class="counts">{$users} ({$userCnt})</p>
+			<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
+			<p class="counts">{$videos} ({$videoCnt})</p></a>
+			<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
+			<p class="counts">{$tags} ({$tagCnt})</p></a>
+			<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
+			<p class="counts">{$users} ({$userCnt})</p></a>
 		</div>
 		 <!--Statistics Bar End-->
