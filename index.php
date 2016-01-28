@@ -1,6 +1,11 @@
 <?php
 session_start();
 $sessionId = session_id(); 
+
+ //echo "<pre>";print_r($_COOKIE);echo "</pre>";
+// setcookie("arr[userName]", "admin2", time() + 3600);
+// setcookie("arr[password]", "admin3", time() + 3600);
+
 //includes
 require_once(dirname(__FILE__)."/configs/paths.php");
 require_once($confsPath."conf.php");
@@ -50,6 +55,13 @@ $controller->addSiteEntry();
 $controller->addClicks();
 //collect statistics
 
+if(isset($_COOKIE["arr"]["userName"]) && isset($_COOKIE["arr"]["password"]))
+{
+	$db->where("status='confirmed' and isDeleted=0 and userName = '".$_COOKIE["arr"]["userName"]."' and password = '" . md5($_COOKIE["arr"]["password"]) . "'");
+	$usr = $db->get("users");//echo $db->count."heee";
+	if($db->count == 1)
+		$controller->authenticate($_COOKIE["arr"]["userName"]);
+}
 //defined which page to load into page
 if(!isset($_GET["page"]))
 {
@@ -60,7 +72,6 @@ if(!isset($_GET["page"]))
 	$controller->includeSection("categories");
 	$controller->includeSection("videos");
 	$controller->includeSection("footer");
-	//echo "<pre>";print_r($access);echo "</pre>";
 }
 else
 {

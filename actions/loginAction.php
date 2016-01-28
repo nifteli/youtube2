@@ -106,6 +106,7 @@ if ($_GET["action"]=="login")
 	{
 		return;
 	}
+
 	else
 	{
 		$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
@@ -113,6 +114,11 @@ if ($_GET["action"]=="login")
 		//check user if registered or not
 		if($db->count == 1)
 		{
+			if($_POST["rememberMe"] == "on")
+			{
+				setcookie("arr[userName]", $_POST["userName"], time() + 3600);
+				setcookie("arr[password]", $_POST["password"], time() + 3600);
+			}
 			authenticate($_POST["userName"]);
 		}
 		else
@@ -123,6 +129,11 @@ if ($_GET["action"]=="logout")
 {
 	session_destroy();
 	$access->destroy();
+	if(isset($_COOKIE["arr"]["userName"]) && isset($_COOKIE["arr"]["password"]))
+	{
+		setcookie("arr[userName]", time() - 3600);
+		setcookie("arr[password]", time() - 3600);
+	}
 }
 if ($_GET["action"]=="fbLogin")
 {

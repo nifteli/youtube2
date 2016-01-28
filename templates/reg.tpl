@@ -130,10 +130,10 @@ function submitForm()
 	<input class="field" type="text" name="secretAnswer" id="secretAnswer" value="{if isset($secretAnswerVal)} {$secretAnswerVal} {/if}" placeholder="{$answer}">
 	
 	<p  class="regTitles">{$receiveNot}:<p>
-	<input type="checkbox" name="onNews" id="onNews" {if isset($onNewsVal)} checked {/if}> {$onNewsNot} <br>
-	<input type="checkbox" name="onComment" id="onComment" {if $onCommentVal} checked {/if}> {$onCommentNot}<br>
-	<input type="checkbox" name="onVideoComment" id="onVideoComment" {if $onVideoCommentVal} checked {/if}> {$onVideoCommentNot}<br>
-	<input type="checkbox" name="agree" id="agree"> {$agreeNot} <a href="?page=rules">{$rules}</a><br>
+	<label><input type="checkbox" name="onNews" id="onNews" {if isset($onNewsVal)} checked {/if}> {$onNewsNot} </label><br>
+	<label><input type="checkbox" name="onComment" id="onComment" {if $onCommentVal} checked {/if}> {$onCommentNot}</label><br>
+	<label><input type="checkbox" name="onVideoComment" id="onVideoComment" {if $onVideoCommentVal} checked {/if}> {$onVideoCommentNot}</label><br>
+	<label><input type="checkbox" name="agree" id="agree"> {$agreeNot} <a href="?page=rules">{$rules}</a></label><br>
 	<div style="text-align:center">
 	
 	<a href="javascript:{}" onclick="submitForm();"><img src="./img/signUp.png" width="50" height="50"></a>

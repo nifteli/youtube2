@@ -22,10 +22,15 @@
 	{$signInNote5} 
 	<div class="logForm">
 		<form name="logForm" id="logForm" action="?action=login" method="post">
+			<div style="float:left;width:100%">
 			<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
 			<input class="pw" type="password" name="password" value="" placeholder="{$password}">
 			<input class="loginLg" type="submit" value="{$login}" name="submit">		
-			<br><a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a>
+			</div>
+			<div style="float:left">
+			<a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a>
+			<label><input type="checkbox" name="rememberMe">{$rememberMe}</label>
+			</div>
 		</form>
 	</div>
 	<br><br><br>

@@ -74,6 +74,7 @@ function showData($data,$db,$limit)
 
 function showRecommended($data,$db,$limit)
 {
+	 //echo "<pre>";print_r($data);echo "</pre>";
 	$lang = $data["lang"];
 	$page = $data['page'];
 	if(isset($data["catId"]) && $data["catId"]>0)
@@ -104,7 +105,7 @@ function showRecommended($data,$db,$limit)
 			left join videotags vt on vt.videoId=v.id 
 			left join questions q on q.id&v.questions
 			left join tags t on t.id=vt.tagId 
-			where v.isDeleted=0
+			where v.link!=(select link from videos where id=$data[videoId]) and v.isDeleted=0
 			group by v.id,vc.categoryId ) a";
 	if(isset($catId))
 		$qry .= " where a.id !=".$data["videoId"]." and lower(a.abbr)='az' and (a.categoryId=$catId ";
@@ -342,7 +343,7 @@ function displayData($res, $data, $colCnt=4)
 				//$str .= " style='visibility: hidden;'";
 			$str .= "<div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>
 					<div class='videoName'>
-					<a href='?page=watchVideo&id=$id'>".trim($name)."</a>
+					<a href='?page=watchVideo&id=$id' title='".$res[$i]['name']."'>".trim($name)."</a>
 					 </div>
 					 <img class='shape' src='img/shape.png' width=170 height=1 alt=''/> </div>
 					 <div class='videoDet'>

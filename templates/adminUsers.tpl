@@ -240,23 +240,23 @@ function showProfile(userId)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailOnNews}">{$users[sec1].getEmailOnNews}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailOnVideoComment}">{$users[sec1].getEmailOnVideoComment}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].getEmailAfterMyComment}">{$users[sec1].getEmailAfterMyComment}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deviceCount}">{$users[sec1].deviceCount}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].browserCount}">{$users[sec1].browserCount}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoviews}">{$users[sec1].videoviews}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videos}">{$users[sec1].videos}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].likes}">{$users[sec1].likes}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].dislikes}">{$users[sec1].dislikes}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].comments}">{$users[sec1].comments}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].reportCount}">{$users[sec1].reportCount}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntInFolder}">{$users[sec1].videoCntInFolder}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].folderCnt}">{$users[sec1].folderCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClickCnt}">{$users[sec1].tagClickCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClicked}">{$users[sec1].tagClicked}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClickCnt}">{$users[sec1].catClickCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClicked}">{$users[sec1].catClicked}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].subCatCnt}">{$users[sec1].subCatCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}">{$users[sec1].searchCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}">{$users[sec1].videoCntCommented}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deviceCount}"><a href="?page=adminDetails&s=users&q=1&userId={$users[sec1].id}&title={$lnDeviceCount}">{$users[sec1].deviceCount}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].browserCount}"><a href="?page=adminDetails&s=users&q=1&userId={$users[sec1].id}&title={$lnDeviceCount}">{$users[sec1].browserCount}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoviews}"><a href="?page=adminDetails&s=users&q=2&userId={$users[sec1].id}&title={$lnViewCount}">{$users[sec1].videoviews}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videos}"><a href="?page=adminDetails&s=users&q=3&userId={$users[sec1].id}&title={$lnVideoCount}">{$users[sec1].videos}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].likes}"><a href="?page=adminDetails&s=users&q=4&userId={$users[sec1].id}&title={$lnLikeCount}">{$users[sec1].likes}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].dislikes}"><a href="?page=adminDetails&s=users&q=5&userId={$users[sec1].id}&title={$lnDislikeCount}">{$users[sec1].dislikes}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].comments}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnCommentCount}">{$users[sec1].comments}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].reportCount}"><a href="?page=adminDetails&s=users&q=7&userId={$users[sec1].id}&title={$lnReportCount}">{$users[sec1].reportCount}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntInFolder}"><a href="?page=adminDetails&s=users&q=8&userId={$users[sec1].id}&title={$lnVideoCntInFolder}">{$users[sec1].videoCntInFolder}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].folderCnt}"><a href="?page=adminDetails&s=users&q=9&userId={$users[sec1].id}&title={$lnFolderCnt}">{$users[sec1].folderCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClickCnt}"><a href="?page=adminDetails&s=users&q=10&userId={$users[sec1].id}&title={$lnTagClickCnt}">{$users[sec1].tagClickCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].tagClicked}"><a href="?page=adminDetails&s=users&q=10&userId={$users[sec1].id}&title={$lnTagClicked}">{$users[sec1].tagClicked}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClickCnt}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClickCnt}">{$users[sec1].catClickCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClicked}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClicked}">{$users[sec1].catClicked}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].subCatCnt}"><a href="?page=adminDetails&s=users&q=12&userId={$users[sec1].id}&title={$lnSubCatCnt}">{$users[sec1].subCatCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}"><a href="?page=adminDetails&s=users&q=13&userId={$users[sec1].id}&title={$lnSearchCnt}">{$users[sec1].searchCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnVideoCntCommented}">{$users[sec1].videoCntCommented}</a></td>
 				</tr>
 				{/section}
 				</tbody>

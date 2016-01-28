@@ -235,6 +235,21 @@ else
 				return;
 			}
 			break;
+		case "adminDetails":
+			if($access->authorized(63))
+			{
+				//if(isset($_GET["action"])) 
+				include_once($actionsPath."adminDetailsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminDetails");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		default:
 			include_once($templatePath."adminPageHeader.tpl");
 			$controller->includeSection("adminMenu");

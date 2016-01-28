@@ -30,6 +30,8 @@ include($templatePath."adminNotifications.php");
 include($templatePath."about.php");
 include($templatePath."other.php");
 include($templatePath."adminGuests.php");
+include($templatePath."adminReports.php");
+include($templatePath."adminDetails.php");
 
 class Controller //extends MySQL
 {
@@ -177,6 +179,14 @@ class Controller //extends MySQL
 			case "adminGuests":
 				$adminGuests = new AdminGuests($this);
 				$adminGuests->Show();
+				break;
+			case "adminReports":
+				$adminReports = new AdminReports($this);
+				$adminReports->Show();
+				break;
+			case "adminDetails":
+				$adminDetails = new AdminDetails($this);
+				$adminDetails->Show();
 				break;
 			case "about":
 				$about = new About($this);
@@ -734,11 +744,13 @@ class Controller //extends MySQL
 				DATE_FORMAT(u.lastUpdate,'%d-%m-%Y %k:%i:%S') updatedDate,
 				DATE_FORMAT(u.deleted,'%d-%m-%Y %k:%i:%S') deletedDate,
 				DATE_FORMAT(u.birthDate,'%d-%m-%Y') bDate,
-				concat(u.firstName,' ',u.lastName) name,us.*
+				concat(u.firstName,' ',u.lastName) name,us.*,
+				ec.deviceCount,ec.browserCount
 				FROM users u
 				left join roles r on r.id=u.roleId
 				left join languages l on l.id=u.languageId
 				left join vwuserstats us on us.id=u.id
+				left join vwentrycounts ec on ec.userId=u.id
 				where 1=1 ";
 		
 		if(isset($post["created"]) && $post["created"] != "")
@@ -824,8 +836,10 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
-				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt
+				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,
+				concat(u.firstName,' ',u.lastName) createdBy
 				FROM categories c
+				left join users u on u.id=c.createdById
 				left join vwcatstats cs on cs.categoryId=c.id
 				where 1=1 ";
 				
@@ -899,6 +913,9 @@ class Controller //extends MySQL
 		if(isset($_GET["catId"]) && is_numeric($_GET["catId"]))
 			$this->db->rawQuery("insert into clicks (userId,IP,actionType,actionId,clickDate) values
 								($userId,'$IP',2,$_GET[catId],now())");
+		if(isset($_GET["page"]) && $_GET["page"] == "searchRes" && isset($_POST["search"]) && strlen($_POST["search"]) > 2)
+			$this->db->rawQuery("insert into searches (createdById,createdByIP,keyword,created) values
+								($userId,'$IP','".$_POST["search"]."',now())");
 				
 	}
 	
@@ -907,6 +924,36 @@ class Controller //extends MySQL
 		$res = $this->db->rawQuery("select * from notifications where id=$id");
 		
 		return $res[0];
+	}
+	
+	public function authenticate($userName)
+	{
+		$_SESSION['userName'] = $userName;
+		$this->access->setValues($this->db); //echo $_SESSION['userName'];exit;
+		
+		$upData = Array ('lastLoggedIn' => $this->db->now());
+		$this->db->where("userName = '" . $userName . "'");
+		$cnt = $this->db->update("users", $upData);
+	}
+	
+	public function isSubscribed($catId)
+	{
+		$this->db->where("catId=$catId and userId=".$this->access->userId);
+		$this->db->get("subscriptions");
+		if($this->db->count>0)
+			return true;
+		return false;
+	}
+	
+	public function getSubsCnt($catId)
+	{
+		$res = $this->db->rawQuery("select count(*) cnt from subscriptions where catId=".$catId);
+		return $res[0]["cnt"];
+	}
+	
+	public function getDetailData($qry)
+	{
+		return $this->db->rawQuery($qry);
 	}
 }
 ?>

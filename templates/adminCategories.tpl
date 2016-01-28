@@ -184,10 +184,10 @@ function controlQuestionSelection(el,id)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].deletedById}">{$categories[sec1].deletedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].deletedBy}">{$categories[sec1].deletedBy}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].deletedByIP}">{$categories[sec1].deletedByIP}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].videoCntInCat}">{$categories[sec1].videoCntInCat}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].userCntSubscribed}">{$categories[sec1].userCntSubscribed}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].clickUserCnt}">{$categories[sec1].clickUserCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].clickCnt}">{$categories[sec1].clickCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].videoCntInCat}"><a href="?page=adminDetails&s=cats&q=1&catId={$categories[sec1].id}&title={$lnVideoCntInCat}">{$categories[sec1].videoCntInCat}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].userCntSubscribed}"><a href="?page=adminDetails&s=cats&q=2&catId={$categories[sec1].id}&title={$lnUserCntSubscribed}">{$categories[sec1].userCntSubscribed}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].clickUserCnt}"><a href="?page=adminDetails&s=cats&q=3&catId={$categories[sec1].id}&title={$lnClickUserCnt}">{$categories[sec1].clickUserCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].clickCnt}"><a href="?page=adminDetails&s=cats&q=3&catId={$categories[sec1].id}&title={$lnClickCnt}">{$categories[sec1].clickCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>

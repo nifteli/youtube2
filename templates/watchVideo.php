@@ -78,6 +78,15 @@ class WatchVideo
 			$this->watchVideo->assign("reportDesc",$content['REPORTDESC']);
 			$this->watchVideo->assign("reportReason",$content['REPORTREASON']);
 			
+			$this->watchVideo->assign("categoryId",$videoInfo[0]["categoryId"]);
+			if($controller->access->hasAccess)
+			{
+				$this->watchVideo->assign("isSubscribed",$controller->isSubscribed($videoInfo[0]["categoryId"]));
+				$this->watchVideo->assign("subsCnt",$controller->getSubsCnt($videoInfo[0]["categoryId"]));
+				$this->watchVideo->assign("unsubscribe",$content['UNSUBSCRIBE']);
+				$this->watchVideo->assign("subscribe",$content['SUBSCRIBE']);
+			}
+			
 			$this->watchVideo->assign("result", $result);
 			$this->watchVideo->assign("messages", $messages);
 			$this->watchVideo->assign("okMessage", $okMessage);

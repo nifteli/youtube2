@@ -291,6 +291,7 @@ $content['SIGNINNOTE4'] = 'You may sign in by';
 $content['SIGNINNOTE5'] = 'If you are registered in this site, fill in;';
 $content['SIGNINNOTE6'] = 'If you are not registered in any of above, please,';
 $content['OR'] = 'OR';
+$content['REMEMBERME'] = 'Remember me';
 //End SignIn
 
 //Admin comments

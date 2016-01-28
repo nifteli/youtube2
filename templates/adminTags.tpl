@@ -103,9 +103,9 @@ function submitForm(action)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdBy}">{$tags[sec1].createdBy}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedBy}">{$tags[sec1].updatedBy}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].videoCntTagged}">{$tags[sec1].videoCntTagged}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].userCntClicked}">{$tags[sec1].userCntClicked}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].clickCnt}">{$tags[sec1].clickCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].videoCntTagged}"><a href="?page=adminDetails&s=tags&q=1&tagId={$tags[sec1].id}&title={$lnVideoCntTagged}">{$tags[sec1].videoCntTagged}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].userCntClicked}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnUserCntClicked}">{$tags[sec1].userCntClicked}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].clickCnt}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnClickCnt}">{$tags[sec1].clickCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>

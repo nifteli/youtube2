@@ -202,16 +202,16 @@ label {
 
 
 .search{
- font-family:Calibri;
- font-size:14px;
- color:#333333;
- width:630px;
- text-indent:19px;
- height:37px;
- -webkit-height:30px;
- margin-top:30px;
- border:2px solid #e7e7e7;
- border-radius:4px 0 0 4px;	
+    font-family: Calibri;
+    font-size: 14px;
+    color: #333333;
+    width: 630px;
+    text-indent: 19px;
+    height: 37px;
+    -webkit-height: 30px;
+    margin-top: 30px;
+    border: 1px solid #FA6700;
+    border-radius: 4px 0 0 4px;
 }
 
 
@@ -372,7 +372,7 @@ form{
  border:2px solid #e1e1e1;
  border-radius: 5px;
  background:url(../img/user.png) no-repeat #fff;
-
+border: 1px solid #FA6700;
 }
 
 .pw{
@@ -386,7 +386,7 @@ margin-left: 5px;
 border: 2px solid #e1e1e1;
 border-radius: 5px;
 background: url(../img/lock.png) no-repeat #fff;
-
+border: 1px solid #FA6700;
 }
 
 
@@ -1433,23 +1433,23 @@ border-radius: 5px;
 }
 
 .loginLg{
-background: #7a672d;
-color: #fff;
-font-family: Calibri;
-font-size: 14px;
-height: 30px;
-line-height: 2;
-text-align: center;
-padding: 0px 0px;
-text-indent: 0px;
-width: 92px;
-cursor: pointer;
-transition: 0.5s;
-position: relative;
-border: 0px;
-border-radius: 5px;
-margin-top: 5px;
-margin-left: 5px;
+    background: #7a672d;
+    color: #fff;
+    font-family: Calibri;
+    font-size: 14px;
+    height: 25px;
+    line-height: 2;
+    text-align: center;
+    padding: 0px 0px;
+    text-indent: 0px;
+    width: 92px;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+    border: 0px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 .loginLg:hover{
 	background:#333333;
@@ -1746,7 +1746,7 @@ margin-top: 22px;
 
 .c-name a{
  text-decoration:none;
- color:#939393;	
+ color:#AE4019;	
 }
 
 .c-name a:hover{
@@ -2128,6 +2128,7 @@ margin-top: 60px;
 	width:530px; 
 	border-radius: 5px; 
 	vertical-align: bottom;
+	border: 1px solid #FA6700;
 }
 
 .tagArea{
@@ -2234,7 +2235,7 @@ float: left;
 	
 .forgotPass{
 	color: rgb(174, 64, 25);
-    font-size: 12px;
+    
     margin-left:5px;
 }
 
@@ -2359,6 +2360,7 @@ pre{
 	border: 2px solid #e7e7e7;
 	border-radius: 4px 4px 4px 4px;
 	width: 95px;
+	border: 1px solid #FA6700;
 }
 
 .advSearch{
@@ -2498,7 +2500,7 @@ background: #C05208;
 .logForm form{
 	float:left;
 	width: 100%;
-	height:40px;
+	height:60px;
 }
 
 .videoDet{
@@ -2656,7 +2658,7 @@ h
 
 .forgotPass{
 	float:left;
-	width:600px;
+	
 }
 
 .orderByDiv{
@@ -2711,4 +2713,8 @@ h
 .topgap{
 	width:100%;
 	height:25px
+}
+.tbl{
+   border: 1px solid black;
+   width:100%;text-align:center;
 }

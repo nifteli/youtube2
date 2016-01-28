@@ -143,7 +143,15 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 <div style="padding-top:10px;min-height: 650px;">
 	<div class="wvLeft">
 		<div class="hollywd" style="margin-top:10px">
-			  <h2>{$catName}</h2>  
+			  <h2>{$catName}
+				{if $hasAccess}
+					{if {$isSubscribed}}
+						<span id='subs{$categoryId}'><a class='subscription'  id='{$categoryId}:0'> [{$unsubscribe}]</a> ({$subsCnt})</span>
+					{else}
+						<span id='subs{$categoryId}'><a class='subscription'  id='{$categoryId}:1'> [{$subscribe}]</a> ({$subsCnt})</span>
+					{/if}
+				{/if}
+			  </h2>  
 		</div>
 		<div class="player">
 		<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="600" height="335" 

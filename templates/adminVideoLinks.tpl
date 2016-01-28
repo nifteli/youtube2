@@ -183,15 +183,15 @@ function submitForm(action)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].updatedById}">{$videoLinks[sec1].updatedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].deletedById}">{$videoLinks[sec1].deletedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].duration}">{$videoLinks[sec1].duration}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].views}">{$videoLinks[sec1].views}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntCommented}">{$videoLinks[sec1].userCntCommented}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].comments}">{$videoLinks[sec1].comments}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].tagCount}">{$videoLinks[sec1].tagCount}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].likes}">{$videoLinks[sec1].likes}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].dislikes}">{$videoLinks[sec1].dislikes}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userReportedCnt}">{$videoLinks[sec1].userReportedCnt}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntAddedToFolder}">{$videoLinks[sec1].userCntAddedToFolder}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedFolderCnt}">{$videoLinks[sec1].addedFolderCnt}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].views}"><a href="?page=adminDetails&s=videos&q=1&videoId={$videoLinks[sec1].id}&title={$lnViews}">{$videoLinks[sec1].views}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntCommented}"><a href="?page=adminDetails&s=videos&q=2&videoId={$videoLinks[sec1].id}&title={$lnUserCntCommented}">{$videoLinks[sec1].userCntCommented}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].comments}"><a href="?page=adminDetails&s=videos&q=2&videoId={$videoLinks[sec1].id}&title={$lnComments}">{$videoLinks[sec1].comments}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].tagCount}"><a href="?page=adminDetails&s=videos&q=3&videoId={$videoLinks[sec1].id}&title={$lnTagCount}">{$videoLinks[sec1].tagCount}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].likes}"><a href="?page=adminDetails&s=videos&q=4&videoId={$videoLinks[sec1].id}&title={$lnLikes}">{$videoLinks[sec1].likes}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].dislikes}"><a href="?page=adminDetails&s=videos&q=5&videoId={$videoLinks[sec1].id}&title={$lnDislikes}">{$videoLinks[sec1].dislikes}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userReportedCnt}"><a href="?page=adminDetails&s=videos&q=6&videoId={$videoLinks[sec1].id}&title={$lnUserReportedCnt}">{$videoLinks[sec1].userReportedCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntAddedToFolder}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnUserCntAddedToFolder}">{$videoLinks[sec1].userCntAddedToFolder}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedFolderCnt}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnAddedFolderCnt}">{$videoLinks[sec1].addedFolderCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>

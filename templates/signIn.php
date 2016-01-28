@@ -23,6 +23,7 @@ class SignIn
 		$this->signIn->assign("signInNote5",$content['SIGNINNOTE5']);
 		$this->signIn->assign("signInNote6",$content['SIGNINNOTE6']);
 		$this->signIn->assign("or",$content['OR']);
+		$this->signIn->assign("rememberMe",$content['REMEMBERME']);
 		
 		//$this->signIn->assign("signIn",$this->getUsers($controller->lang,$controller->db));
 	}

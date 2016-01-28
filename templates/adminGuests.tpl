@@ -83,10 +83,10 @@ function submitForm(action)
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].IP}">{$guests[sec1].IP}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].device}">{$guests[sec1].device}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].browser}">{$guests[sec1].browser}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].videCntWatched}">{$guests[sec1].videCntWatched}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].videoCntCommented}">{$guests[sec1].videoCntCommented}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].commentCnt}">{$guests[sec1].commentCnt}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].searchCnt}">{$guests[sec1].searchCnt}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].videCntWatched}"><a href="?page=adminDetails&s=guests&q=1&ip={$guests[sec1].IP}&title={$lnVideCntWatched}">{$guests[sec1].videCntWatched}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].videoCntCommented}"><a href="?page=adminDetails&s=guests&q=2&ip={$guests[sec1].IP}&title={$lnVideoCntCommented}">{$guests[sec1].videoCntCommented}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].commentCnt}"><a href="?page=adminDetails&s=guests&q=2&ip={$guests[sec1].IP}&title={$lnCommentCnt}">{$guests[sec1].commentCnt}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].searchCnt}"><a href="?page=adminDetails&s=guests&q=3&ip={$guests[sec1].IP}&title={$lnSearchCnt}">{$guests[sec1].searchCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>
