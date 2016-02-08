@@ -52,6 +52,9 @@ $content['PROFILE'] = "Profil";
 $content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
 $content['OTHERUSERS'] = "Other users";
 $content['MYVIDEOS'] = "Mine";
+$content['ADVANCED'] = "Advanced";
+$content['ASC'] = "Ascending";
+$content['DESC'] = "Descending";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -69,7 +72,10 @@ $content["SBCOMMENTS"] = "Şərh sayı";
 $content["GENERAL"] = "General";
 $content["FAVORITE"] = "Favorite";
 $content["ADDEDVIDEOS"] = "Added";
-
+$content["REGORENTERNOTE1"] = "You are not logged in. Please,";
+$content["ENTERLINK"] = "log in";
+$content["REGORENTERNOTE2"] = "If you're not registered, please,";
+$content["REGLINK"] = "register";
 //end categories
 
 //Registration
@@ -179,6 +185,9 @@ $content['VIEWCOUNTTITLE'] = 'Baxılma sayı';
 $content['COMMENTCOUNTTITLE'] = 'Şərh sayı';
 $content['REPORTEMAILSUBJECT'] = 'Video Reported';
 $content['REPORTEMAILBODY'] = 'The following video is reported:';
+$content['AGREEWITHRULES'] = 'Agree with rules';
+$content['COMMENTHINT'] = 'Please write your opinions about the video.';
+$content['EMAILHINT'] = 'Please, register for not writing email every time';
 //end Watch video
 
 //All tags

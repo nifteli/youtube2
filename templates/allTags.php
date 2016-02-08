@@ -31,6 +31,7 @@ class AllTags
 				FROM videotags vt
 				inner join tags t on t.id=vt.tagId
 				inner join languages l on l.id=t.langId
+				inner join (select * from videos where isDeleted=0) v on v.id=vt.videoId 
 				where lower(l.abbr)='$lang'
 				group by vt.tagId,t.name
 				order by t.name";

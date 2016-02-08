@@ -29,7 +29,8 @@ class Categories
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
 		$this->categories->assign("otherUsers",$content['OTHERUSERS']);
 		$this->categories->assign("myVideos",$content['MYVIDEOS']);
-		$this->categories->assign("hasAccess",$controller->access->hasAccess);
+		
+				
 		$this->categories->assign("lang",$controller->lang);
 		$this->categories->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->categories->assign("okMessage", isset($okMessage) ? $okMessage : "");
@@ -48,7 +49,13 @@ class Categories
 			
 		if($userId > 0)
 		{
+			if(isset($_GET["folderId"]) && is_numeric($_GET["folderId"]))
+				$this->categories->assign("folderTab",1);
+			if(isset($_GET["catId"]) && is_numeric($_GET["catId"]) && isset($_GET["userId"]) && is_numeric($_GET["userId"]))
+				$this->categories->assign("catTab",1);	
+			$this->categories->assign("hasAccess",1);
 			$this->categories->assign("myFolders",$this->getMyFolders($controller,$userId));
+			$this->categories->assign("userName",$controller->getUserName($userId));
 			$this->categories->assign("myVideosHow",$controller->getCategories(4,$userId));
 			$this->categories->assign("myVideosWhy",$controller->getCategories(8,$userId));
 			$this->categories->assign("myVideosWhat",$controller->getCategories(1,$userId));

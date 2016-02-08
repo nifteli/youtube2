@@ -27,9 +27,9 @@
 			<input class="pw" type="password" name="password" value="" placeholder="{$password}">
 			<input class="loginLg" type="submit" value="{$login}" name="submit">		
 			</div>
-			<div style="float:left">
-			<a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a>
-			<label><input type="checkbox" name="rememberMe">{$rememberMe}</label>
+			<div style="float:left;width:400px">
+			<div style="width:189px;float: left;    padding-left: 2px;"><label><input type="checkbox" name="rememberMe">{$rememberMe}</label></div>
+			<div style="width:189px;float: left;    padding-left: 4px;"><a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a></div>
 			</div>
 		</form>
 	</div>

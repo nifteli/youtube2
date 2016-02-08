@@ -955,5 +955,11 @@ class Controller //extends MySQL
 	{
 		return $this->db->rawQuery($qry);
 	}
+	
+	public function getUserName($userId)
+	{
+		$res = $this->db->rawQuery("select concat(firstName,' ',lastName) userName from users where id=$userId");
+		return $res[0]["userName"];
+	}
 }
 ?>

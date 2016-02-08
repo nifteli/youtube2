@@ -11,7 +11,7 @@ a.multiSelect {
 	vertical-align: top;
 	margin-bottom: 5;
 	border-radius: 3px;
-    border: 1px solid #fff;
+    border: 1px solid #FA6700;
 }
 
 a.multiSelect:link, a.multiSelect:visited, a.multiSelect:hover, a.multiSelect:active {
@@ -26,6 +26,8 @@ a.multiSelect span
 	display: -moz-inline-stack;
 	display: inline-block;
 	white-space: nowrap;
+
+  
 }
 
 a.multiSelect.hover {

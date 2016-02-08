@@ -56,13 +56,13 @@ function showData($data,$db,$limit)
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
 			where v.isDeleted=0 and lower(l.abbr)='$lang'";
-	if(isset($catId))
+	if(isset($catId)&& is_numeric($catId))
 		$qry .= " and vc.categoryId=$catId";
-	if(isset($userId))
+	if(isset($userId) && is_numeric($userId) && !isset($folderId))
 		$qry .= " and v.addedById=$userId";
-	if(isset($folderId))
+	if(isset($folderId) && is_numeric($folderId))
 		$qry .= " and fv.folderId=$folderId";
-	if(isset($tagId))
+	if(isset($tagId) && is_numeric($tagId))
 		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
 			order by v.added desc,catName$lang asc
@@ -135,35 +135,38 @@ function showSearchResults($data,$db,$limit)
 	$time = $data["time"];
 	$interval = $data["interval"];
 	$options = explode(",", $data["options"]);
+	$direction = "asc";
+	if($data["direction"] == 2)
+		$direction = "desc";
 	//print_r($data);echo "<br>";
 	switch($data["orderBy"])
 	{
 		case 1:
-			$orderBy = " v.added asc,catName$lang asc ";
+			$orderBy = " v.added $direction,catName$lang asc ";
 			break;
 		case 2:
-			$orderBy = " v.name,catName$lang asc ";
+			$orderBy = " v.name $direction,catName$lang asc ";
 			break;
 		case 3:
-			$orderBy = " l.name$lang,catName$lang asc ";
+			$orderBy = " l.name$lang $direction,catName$lang asc ";
 			break;
 		case 4:
-			$orderBy = " q.question,catName$lang asc ";
+			$orderBy = " q.question $direction,catName$lang asc ";
 			break;
 		case 5:
-			$orderBy = " catName$lang asc ";
+			$orderBy = " catName$lang $direction ";
 			break;
 		case 6:
-			$orderBy = " v.duration desc,catName$lang asc  ";
+			$orderBy = " v.duration $direction,catName$lang asc  ";
 			break;
 		case 7:
-			$orderBy = " viewCount desc,catName$lang asc  ";
+			$orderBy = " viewCount $direction,catName$lang asc  ";
 			break;
 		case 8:
-			$orderBy = " vs.comments desc,catName$lang asc  ";
+			$orderBy = " vs.comments $direction,catName$lang asc  ";
 			break;
 		default:
-			$orderBy = " v.added desc,catName$lang asc ";
+			$orderBy = " v.added $direction,catName$lang asc ";
 			break;
 	}
 	
@@ -298,9 +301,9 @@ function displayData($res, $data, $colCnt=4)
 					$subsCnt = $db->rawQuery("select count(*) cnt from subscriptions where catId=".$res[$i]["categoryId"]);
 					
 					if($subscribed)
-						$str .= " <span id='subs".$res[$i]["categoryId"]."'><a class='subscription'  id='".$res[$i]["categoryId"].":0'> [$content[UNSUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
+						$str .= " <span style='float: right;' id='subs".$res[$i]["categoryId"]."'><a class='subscription'  id='".$res[$i]["categoryId"].":0'> [$content[UNSUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
 					else
-						$str .= "<span id='subs".$res[$i]["categoryId"]."'><a class='subscription' id='".$res[$i]["categoryId"].":1'> [$content[SUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
+						$str .= " <span style='float: right;' id='subs".$res[$i]["categoryId"]."'><a class='subscription' id='".$res[$i]["categoryId"].":1'> [$content[SUBSCRIBE]]</a> (".$subsCnt[0]["cnt"].")</span>";
 				}
 				$str .= "</h2></div>";
 				$cat = $res[$i]["catName".$lang];

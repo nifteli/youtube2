@@ -20,16 +20,51 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	color: #3e3003;
+	color: #3e3003 !important;
+	font-family:calibri !important;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+input
+{
+    border: 1px solid #FA6700 !important;
+	
+}
+input[type="radio"]
+{
+	outline: 1px solid #FA6700 !important;
+}
+input[type="checkbox"]
+{
+	outline: 1px solid #FA6700 !important;
+	
+}
+textarea
+{
+	border: 1px solid #FA6700 !important;
+	
+}
+select
+{
+	border: 1px solid #FA6700 !important;	
+}
+
+ a:hover
+{
+	color:#FF5208 !important;
+	text-decoration: none;
+	
+}
+ a:visited
+{
+	color:#f00 !important;
+}
 body {
    
-	 background:#dbcb8f;
+	 background:#e2deae;
 }
 ol, ul {
 	list-style: none;
@@ -53,13 +88,14 @@ table {
  height:20px;
  border-radius:3px;
  border:1px solid #fff;
- padding-left:10px;
+ padding-left:5px;
  margin-bottom: 5px;
 }
 
 .fieldv {
      width: 270px;
     height: 25px;
+	padding-left: 2px;
     border-radius: 3px;
     border: 1px solid #fff;
     margin-bottom: 5px;
@@ -155,13 +191,15 @@ label {
 .banner{
  width:100%;
  height:140px;
- background:#dbcb8f;		
+ background:#e2deae;
+ position: fixed;
+z-index: 99999;
 }
 
 .min-cont{
  width:1200px;
  height:auto;
-  background:#DBCB8F;
+  background:#e2deae;
  margin:0 auto;
 	
 }
@@ -171,8 +209,8 @@ label {
 .bg{
   width:1200px;
  height:auto;
- 
- background:#e2deae;
+    padding-top: 140px; 
+ background:white;
  margin:0 auto;
 	
 }
@@ -180,7 +218,7 @@ label {
 .bg2{
  width:1200px;
  height:440px;
- background:#e2deae;
+ background:white;
  margin:0 auto;
 	
 }
@@ -188,7 +226,7 @@ label {
 .bg3{
  width:1200px;
  height:555px;
- background:#e2deae;
+ background:white;
  margin:0 auto;
 	
 }
@@ -434,7 +472,7 @@ border: 1px solid #FA6700;
 width: 100%;
 height: 85px;
 margin-top: 50px;
-background: #dbcb8f;
+background: #e2deae;
 display: table;	
 }
 
@@ -450,7 +488,7 @@ display: table;
  overflow: hidden;
  float:left;
  clear:both;
- background: #E2DEAE;
+ background: white;
 }
 
 .category h2{
@@ -471,7 +509,7 @@ display: table;
  float:left;
  clear:both;
  margin-top:20px;
- background:#E2DEAE;
+ background:white;
 }
 
 .category2 h2{
@@ -493,7 +531,7 @@ display: table;
  float:left;
  clear:both;
  margin-top:20px;
- background:#E2DEAE;
+ background:white;
 }
 
 .category3 h2{
@@ -584,7 +622,7 @@ width: 100%;
  margin-top:30px;	
  
  color:#3e3003;	
- width: 500px;
+ width: 100%;
 }
 
 
@@ -601,7 +639,7 @@ width: 100%;
 .box{
  width:187px;
  height:170px;
- background:#DBCB8F;
+ background:#e2deae;
  float:left;
  margin-left:0px;
  margin-top: 15px;	
@@ -1568,7 +1606,7 @@ width: 100%;
 
 .post{
 width: 139px;
-height: 35px;
+height: 22px;
 font-family: Calibri;
 font-size: 16px;
 /*margin-left: 541px;
@@ -1751,7 +1789,7 @@ margin-top: 22px;
 
 .c-name a:hover{
  text-decoration:none;
- color:#3e3003;
+ 
  transition:0.5s;
 }
 
@@ -1799,7 +1837,7 @@ margin-top: 22px;
     top: -19px;
     position: relative;
     color: white;
-    background-color: black;
+    background-color: white;
     font-size: smaller;
 }
 .addVideoBtn
@@ -2108,9 +2146,10 @@ margin-top: 60px;
 	top: 1px;
 }
 .actionBox {
-    
-    float: left;
-    width: 950px;
+        float: left;
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
 }
 }
 
@@ -2121,14 +2160,17 @@ margin-top: 60px;
 
 .cmt{
 	float:left;
-	
+	width: 100%;
 }
 
 .cmtBox{
-	width:530px; 
-	border-radius: 5px; 
-	vertical-align: bottom;
-	border: 1px solid #FA6700;
+	width:550px; 
+	border-radius: 3px; 
+	vertical-align: middle;
+	height: 22;
+    padding-left: 5px;
+	/* width: 100%; */
+	/* max-width: 460px; */
 }
 
 .tagArea{
@@ -2171,7 +2213,7 @@ float: left;
     -o-transition: all 0.5s ease;}
 
 #death a:hover{
-    color: #FF546C;
+    
     background: #FFFFFF;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -2195,7 +2237,7 @@ float: left;
     text-decoration: none;}
 
 .corpulent {
-    background-color: #E2DEAE;
+    background-color: white;
     width: 202px;
     padding: 10px;
     font-family: calibri;
@@ -2267,7 +2309,8 @@ pre{
 /* Tag cloud */
 	.tags {
 		width: 840px;
-		height: 95px;
+		height: 86px;
+		padding-top: 7;
 		/* background-color: rgb(219, 203, 143);*/
 		overflow: hidden;
 		/* word-wrap: normal; */
@@ -2290,7 +2333,7 @@ pre{
 		padding:0 2px;	
 		}
 	.tags li a:hover{	
-		color:#cff400;
+		/* color:#cff400 !important; */
 		}		
 	
 	.tag1{font-size:100%;}
@@ -2324,23 +2367,23 @@ pre{
 	
 	.tag1  a{
 		text-decoration:none;
-		color:#F70C0C;
+		color:#F70C0C !important;
 	}
 	.tag2  a{
 		text-decoration:none;
-		color:#19A52B;
+		color:#19A52B !important;
 	}
 	.tag3  a{
 		text-decoration:none;
-		color:#29F5DA;
+		color:#29F5DA !important;
 	}
 	.tag4  a{
 		text-decoration:none;
-		color:#242529;
+		color:#242529 !important;
 	}
 	.tag5  a{
 		text-decoration:none;
-		color:#485D0B;
+		color:#485D0B !important;
 	}
 /* // Tag cloud */
 
@@ -2358,7 +2401,8 @@ pre{
 .srcCmb{
 	margin-top:5px;
 	border: 2px solid #e7e7e7;
-	border-radius: 4px 4px 4px 4px;
+	border-radius: 2px 2px 2px 2px;
+    padding-left: 2px;
 	width: 95px;
 	border: 1px solid #FA6700;
 }
@@ -2463,7 +2507,7 @@ margin-top: -15px;
 .about{
 	    float: right;
     margin-right: 5px;
-    margin-top: -18px;
+    margin-top: -16px;
 }
 
 .btnSearch{
@@ -2523,8 +2567,8 @@ background: #C05208;
 .wvUnder{
 	float: left;
     width: 600px;
-    height: 30px;
-	margin-top: 8px;
+    height: 25px;
+	margin-top: 7px;
 }
 
 .wvDet1{
@@ -2535,7 +2579,7 @@ background: #C05208;
 .actIcons{
 	float:left;
 	width:370px;
-	height:60px;
+	height:40px;
 }
 
 .wvLabel{
@@ -2662,11 +2706,12 @@ h
 }
 
 .orderByDiv{
-	float: right;
-    width: 200px;
+	    width: 400px;
     margin-top: 23px;
-    position: absolute;
-    margin-left: 640px;
+    
+    position: static;
+    float: left;
+    /* margin-left: 640px; */
 }
 
 .questions{
@@ -2717,4 +2762,18 @@ h
 .tbl{
    border: 1px solid black;
    width:100%;text-align:center;
+}
+
+.textfield {
+  position: relative;
+  float: right;
+}
+.textfield .hint {
+  display: none;
+  position: absolute;
+  width: 10em;
+  bottom: 1.3em;
+  background: #ff9;
+  padding: 0 0.2em;
+  border: solid 1px;
 }

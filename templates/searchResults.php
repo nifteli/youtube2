@@ -32,6 +32,9 @@ class SearchResults
 		$this->searchRes->assign("sbDuration", $content["SBDURATION"]);
 		$this->searchRes->assign("sbWatches", $content["SBWATCHES"]);
 		$this->searchRes->assign("sbComments", $content["SBCOMMENTS"]);
+		$this->searchRes->assign("asc",$content['ASC']);
+		$this->searchRes->assign("desc",$content['DESC']);
+		$this->searchRes->assign("directionVal",$_POST["direction"]);
 		
 		$this->searchRes->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->searchRes->assign("okMessage", isset($okMessage) ? $okMessage : "");

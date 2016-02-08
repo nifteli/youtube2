@@ -12,6 +12,7 @@ class Header
 		
 		$this->header = new Smarty;
 		$this->header->assign("search",$content['SEARCH']);
+		$this->header->assign("advanced",$content['ADVANCED']);
 		$this->header->assign("addVideo",$content['ADDVIDEO']);
 		$this->header->assign("userName",$content['USERNAME']);
 		$this->header->assign("password",$content['PASSWORD']);
@@ -41,6 +42,11 @@ class Header
 		$this->header->assign("fromDate",$content['FROMDATE']);
 		$this->header->assign("toDate",$content['TODATE']);
 		$this->header->assign("profil",$content['PROFILE']);
+		$this->header->assign("regOrEnterNote1",$content['REGORENTERNOTE1']);
+		$this->header->assign("enterLink",$content['ENTERLINK']);
+		$this->header->assign("regOrEnterNote2",$content['REGORENTERNOTE2']);
+		$this->header->assign("regLink",$content['REGLINK']);
+		$this->header->assign("searchVal",$_POST['search']);
 		
 		$this->header->assign("randTags",$this->getRandTags($controller->lang,$controller->db));
 		
@@ -55,6 +61,7 @@ class Header
 		//print_r($controller->access);
 		if(isset($controller->access->userName))
 		{
+			$this->header->assign("hasAccess",1);
 			$this->header->assign("greeting",$content['GREETING']);
 			$this->header->assign("adminPanel",$content['ADMINPANEL']);
 			$this->header->assign("logout",$content['LOGOUT']);

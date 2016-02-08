@@ -70,6 +70,19 @@ function showTimeInterval(sFlag)
 	}
 }
 
+function checkAccess()
+{ 
+	var hasAccess = "{$hasAccess}";
+	if(hasAccess == 1)
+		return true;
+	//alert("no reg");
+	else
+	{
+		document.getElementById("regPop").click();
+	}
+	return false;
+}
+
 </script>
 
 <body>
@@ -90,9 +103,9 @@ function showTimeInterval(sFlag)
 			</div>
 			<div class="headerMiddle">
 				<form id="searchForm" action="?page=searchRes" method="post">
-					<input class="search" type="input" name="search" value="" placeholder="{$search}">
+					<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}">
 					<input class="btnSearch" type="submit" value="{$search}" name="submit">
-					<a href="?page=advSearch"><input class="btnSearch" type="button" value="Advanced" name="submit"></a>
+					<a href="?page=advSearch">{$advanced}</a>
 				
 				<div class="simpleSearch">
 				<div style="float:left; width:630px">
@@ -135,20 +148,21 @@ function showTimeInterval(sFlag)
 				<div class="tags">
 					<ul>
 						{section name=sec1 loop=$randTags}
-						<li class="tag{$randTags[sec1].size}"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
+						<li class="tag{$randTags[sec1].size}" style="line-height: 0.5;"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
 						{/section}
 					</ul>
 				</div>
 			</div>
 			<div class="headerRight">
+			<div style="overflow-wrap: normal;width: 110px;">
 				<ul class="langs">
 					{if isset($greeting)}
-					<li><a>{$greeting}, {$loggedUser}</a></li> <br>
-					<li><a href="?page=profile">{$profil}</a></li>
+					<li><a href="?page=profile">{$greeting}, {$loggedUser}</a></li> <br>
+					
 					{else}
 					<li><a href="?page=signIn">{$signIn}</a></li>
 					{/if}
-					
+			</div>		
 				</ul>
 				{if isset($greeting)}
 					<ul class="about">
@@ -161,7 +175,9 @@ function showTimeInterval(sFlag)
 					</ul>
 				{/if}
 				
-				<div style="text-align: center"><a href="?page=addVideo"><img align="middle" height="100" width="100" src="img/AddVideo.png" align="middle"></a></div>
+				<div style="text-align: center">
+				<a href="?page=addVideo" id="addVideo" onclick="return checkAccess();" ><img align="middle" height="100" width="100" src="img/AddVideo.png" align="middle"></a>
+				</div>
 			
 			</div>
 		</div>  
@@ -177,3 +193,11 @@ function showTimeInterval(sFlag)
 			<p class="counts">{$users} ({$userCnt})</p></a>
 		</div>
 		 <!--Statistics Bar End-->
+<a href="#regOrEnter" id="regPop"></a>
+<div id="regOrEnter" class="modalDialog" >
+	<div style="width:250px;height:60px;padding-top: 25;">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$regOrEnterNote1} <a href="?page=signIn">{$enterLink}</a> {$regOrEnterNote2} <a href="?page=reg">{$regLink}</a></h1>
+		
+	</div>
+</div>

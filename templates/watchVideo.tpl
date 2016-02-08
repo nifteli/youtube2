@@ -5,11 +5,13 @@ $("meta[name='keywords']").attr('content', '{$keywords}');
     var validator = $("#frmComment").validate({
         rules: {
             comment: "required",
-			email: "required"
+			email: "required",
+			agree: "required"
         },
         messages: {
 			comment:"",
-			email:""
+			email:"",
+			agree:""
         },
     });
 });
@@ -31,7 +33,7 @@ function editComment(id,flag)
 
 function likeIt(videoId,flag)
 {
-//alert(videoId+" "+flag); 
+//alert("ok"); 
 	$.ajax({
      type: "GET",
      url: 'ajax/ajaxActions.php',
@@ -75,6 +77,13 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 	{
 		window.open('http://twitter.com/share?text=' + title + '&related=' + descr + '&url=' + url + '&via=www.howtubesmart.com', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width='+winWidth+',height='+winHeight);
 	}
+}
+
+function hint(elem) {
+  elem.parentNode.firstElementChild.style.display = 'block';
+}
+function unhint(elem) {
+  elem.parentNode.firstElementChild.style.display = 'none';
 }
 </script>
 <script>
@@ -173,16 +182,17 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		</div>
 		<div class="actIcons">
 			{if $added2Folder == 0}
-			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
+			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
 			{else}
 				<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
 			{/if}
-			<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" {/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
-			<br>
+			<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" onclick="return checkAccess();"{/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
 			{if $addedById == $curUserId}
 				<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" title="{$editTitle}"/><span class="wvLabel">{$edit}</span></a>		
 				<a href="?action=delete&videoId={$videoId}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" title="{$deleteTitle}"/><span class="wvLabel">{$delete}</span></a>
 			{/if}
+			<br>
+			<img src="img/share.png" width="15" height="15"/> : 
 			<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
 			<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
 		</div>
@@ -192,14 +202,16 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		<img src="img/upload.png" width="15" height="15" title="{$publishDateTitle}"/>  <span class="wvLabel">{$publishDate}</span>
 		<img src="img/eye.png" width="20" height="15" title="{$viewCountTitle}"/>  <span class="wvLabel">{$viewCount}</span>
 		<img src="img/comments.png" width="20" height="15" title="{$commentCountTitle}"/>  <span class="wvLabel">{$commentCount}</span>
-        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/like.png" title="{$likeCountTitle}"/></a>
+        <div style="float:right">
+		<a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img width="15" height="15" src="img/like.png" title="{$likeCountTitle}"/></a>
         <span id="likeCnt" class="wvLabel">{$likeCount}</span>
-        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" {/if}><img width="15" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/></a>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img width="15" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/></a>
         <span id="dislikeCnt" class="wvLabel">{$dislikeCount}</span>  
+		</div>
 		
 	</div>
 	{if $result == 'error'}
-	  <div class="smallerr"  style="margin-top:0">
+	  <div class="smallerr"  style="margin-top:0;width: 890;">
 		{foreach from=$messages item=message}
 			{$message} <br>
 		{/foreach}
@@ -213,17 +225,38 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 		<div class="detailBox">
 				<div class="cmt">
 				<form name="frmComment" id="frmComment" style="float:none;" method="post" action="?page=watchVideo&action=comment&id={$videoId}">
-					{if !$hasAccess}
-					<div class="cmtEmail">
-						<label>{$email}:</label>
-						<input class="field" type="email" name="email" style="height:25px;margin-bottom:5px" id="email" value="{if isset($emailVal)} {$emailVal} {/if}">
-					</div>
+					{if $hasAccess}
+						<div class=textfield style="float:left">
+						<div class=hint>{$commentHint}</div>
+						<TEXTAREA onfocus="hint(this)" onblur="unhint(this)"  class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="width: 833px;max-width: 835px;    margin-right: 5;"></TEXTAREA>
+						</div>
+						<input class="post" type="submit" value="{$post}" name="submit">
+					{else}
+						<div style="float:left;width:841px">
+							<div class=textfield style="float:left">
+							<div class=hint>{$commentHint}</div>
+								<TEXTAREA onfocus="hint(this)" onblur="unhint(this)" class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="max-width: 835px;"></TEXTAREA>
+							</div>
+							<div class=textfield>
+							<div class=hint>{$emailHint}.</div>
+							<input onfocus="hint(this)" onblur="unhint(this)" class="field" type="email" name="email" style="height:22px;margin-bottom:5px;width:150px;vertical-align: middle;" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}">
+							<label><input type="checkbox" name="agree" id="agree"> {$agreeWithRules}</label>
+							</div>
+						</div>
+						<div style="float:right">
+							<input class="post" type="submit" value="{$post}" name="submit">
+						</div>
 					{/if}
-					<TEXTAREA class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}"></TEXTAREA>
-					<input class="post" type="submit" value="{$post}" name="submit">
+					
 				</form>
 				</div>
 			<div class="actionBox">
+		
+			{if $sort==2}
+				<a href="?page=watchVideo&id={$videoId}&sort=2"><img width="25" height="25" src="img/sortDesc.png" title="Order comments"></a>
+			{else}
+				<a href="?page=watchVideo&id={$videoId}&sort=1"><img width="25" height="25" src="img/sortAsc.png" title="Order comments"></a>
+			{/if}
 				<ul class="commentList">
 					{section name=sec1 loop=$comments}
 					<li>
@@ -231,7 +264,8 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 						  <img height=30 width=50 src="{$comments[sec1].picturePath}" />
 						</div>
 						<div class="commentText{$comments[sec1].commentId}">
-							<p>{$comments[sec1].comment}</p> <span class="date sub-text">{$comments[sec1].author}, {$comments[sec1].created} 
+							<p>{$comments[sec1].comment}</p> <span class="date sub-text">
+							{if $comments[sec1].createdById != ""}<a href="index.php?userId={$comments[sec1].createdById}">{/if}{$comments[sec1].author}</a>, {$comments[sec1].created} 
 							{if $comments[sec1].createdById == $curUserId }
 								<a href="javascript:void(0);" onclick="editComment({$comments[sec1].commentId},1)">{$edit}</a>
 								<a href="?page=watchVideo&id={$videoId}&action=delComment&commentId={$comments[sec1].commentId}">{$delete}</a>
@@ -269,7 +303,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			<br>
 			<label>{$folderName}:</label>
 			<div style="float:right">
-				<select class="field" name="folderId" id="folderId" style="width:250px; height:30px">
+				<select class="field" name="folderId" id="folderId" style="width:250px;">
 					{section name=sec1 loop=$foldersArr}
 					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
 					{/section}
@@ -294,7 +328,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 			<br>
 			<label>{$reportReason}:</label>
 			<div style="float:right">
-				<select class="field" name="reasonId" id="reasonId" style="width:250px; height:30px">
+				<select class="field" name="reasonId" id="reasonId" style="width:250px;">
 					{section name=sec1 loop=$reportReasons}
 					<option value="{$reportReasons[sec1].id}">{$reportReasons[sec1].reason} </option>
 					{/section}

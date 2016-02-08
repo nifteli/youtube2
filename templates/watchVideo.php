@@ -22,7 +22,7 @@ class WatchVideo
 			if(count($videoInfo) < 1) { $this->ok = false; return; }
 			$this->watchVideo->assign("catName",$videoInfo[0]["catName".$controller->lang]);
 			$this->watchVideo->assign("pageTitle",$videoInfo[0]["catName".$controller->lang]."-".$videoInfo[0]["name"]);
-			$this->watchVideo->assign("keywords",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tags"]);
+			$this->watchVideo->assign("keywords",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tagsOrg"]);
 			$this->watchVideo->assign("lang",$controller->lang);
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
 			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>30)?mb_substr($videoInfo[0]["name"],0,30,"UTF-8")."...":$videoInfo[0]["name"]));
@@ -77,6 +77,15 @@ class WatchVideo
 			$this->watchVideo->assign("cancel",$content['CANCEL']);
 			$this->watchVideo->assign("reportDesc",$content['REPORTDESC']);
 			$this->watchVideo->assign("reportReason",$content['REPORTREASON']);
+			$this->watchVideo->assign("agreeWithRules",$content['AGREEWITHRULES']);
+			$this->watchVideo->assign("emailVal",$_POST['email']);
+			$this->watchVideo->assign("commentHint",$content['COMMENTHINT']);
+			$this->watchVideo->assign("emailHint",$content['EMAILHINT']);
+			$sort = 1;
+			if(is_numeric($_GET["sort"]) && $_GET["sort"] == 1)
+				$sort = 2;
+			$this->watchVideo->assign("sort",$sort);
+			
 			
 			$this->watchVideo->assign("categoryId",$videoInfo[0]["categoryId"]);
 			if($controller->access->hasAccess)
@@ -92,7 +101,7 @@ class WatchVideo
 			$this->watchVideo->assign("okMessage", $okMessage);
 			
 			
-			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access));
+			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access,$sort));
 			if($controller->access->hasAccess)
 			{
 				$this->watchVideo->assign("foldersArr",$controller->getFolderNames());
@@ -131,7 +140,7 @@ class WatchVideo
 								vws.comments commentCount,
 								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.questions,v.addedById,
 								concat(u.firstName,' ',u.lastName) addedBy,
-								tg.tags,
+								tg.tags,tg.tagIds,
 								vc.categoryId,
 								c.catName$lang,
 								l.name$lang language
@@ -143,25 +152,39 @@ class WatchVideo
 						left join vwvideostats vws on vws.id=v.id
 						left join languages l on l.id=v.languageId
 						left join (
-							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags
+							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags,
+							GROUP_CONCAT(DISTINCT t.id ORDER BY t.id) AS tagIds
 							from videotags vt
 							inner join tags t on t.id=vt.tagId
 							group by vt.videoId
 						) tg on tg.videoId=v.id
 						where  v.isDeleted=0 and v.id=$id
 						group by v.id,vc.categoryId");
+		$tags = explode(",",$res[0]["tags"]);
+		$tagIds = explode(",",$res[0]["tagIds"]);
+		$res[0]["tagsOrg"] = $res[0]["tags"]; $res[0]["tags"] = "";
+		for($i=0; $i<count($tags); $i++)
+		{ 
+			$res[0]["tags"] .= "<a href='index.php?tagId=".$tagIds[$i]."'>".$tags[$i]."</a>,";
+		}
+		$res[0]["tags"] = rtrim($res[0]["tags"],",");
+		
 		return $res;
 	}
 	
-	private function getComments($id,$lang,$db,$access)
+	private function getComments($id,$lang,$db,$access,$sort)
 	{
+		$order = "asc";
+		if($sort ==1)
+			$order = "desc";
+			
 		$qry = "SELECT c.id commentId, c.comment,c.createdById,DATE_FORMAT(c.created,'%d %b %Y %T') created,c.updated,
 				if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author,
 				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById
 				where c.isConfirmed=1 and c.videoId=$id
-				order by c.created desc"; //echo $qry;
+				order by c.created $order"; //echo $qry;
 		$res = $db->rawQuery($qry);
 		return $res;
 	}

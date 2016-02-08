@@ -1,7 +1,21 @@
  <script type="text/javascript">
 	var hasAccess = "{$hasAccess}"; 
+	var folderTab = "{$folderTab}"; 
+	var catTab = "{$catTab}"; 
+	var userId="{$userId}";
+	var myUserId="{$myUserId}";
 	
 	$(document).ready(function(){
+		if(hasAccess == "1" && myUserId == userId)	
+			changeView(2);
+		
+		if(hasAccess == "1" && myUserId != userId)
+			changeView(3);
+		if(folderTab == "1")
+			$('#tabSel').val(1);
+		if(catTab == "1")
+			$('#tabSel').val(2);
+		
 		//
 		$('#navigation ul a').click(function(){
 			$('#navigation ul a').removeClass('selected');
@@ -54,14 +68,15 @@
 	}
 	
 	function shift(n)
-	{
-		var option = $('input:radio[name=option]:checked').val(); 
-		if(option == 3)
-			n = n+4;
+	{ 
+		var option = $('input:radio[name=option]:checked').val();
+		var comboVal = document.getElementById("tabSel").value;
+		if((option == 2 && comboVal == 2) || option ==3 && comboVal == 2)
+			n = n+4;  //alert(n);
 		if(option==2)
 		{
-			$("input[name=option][value=1]").prop('checked', true); 
-			$("input[name=option][value=2]").prop('checked', false);
+			$("input[name=option][value=1]").prop('checked', false); 
+			$("input[name=option][value=2]").prop('checked', true);
 			$("input[name=option][value=3]").prop('checked', false);
 		}
 		//alert(option);
@@ -77,6 +92,11 @@
 		$("#img3").attr("src","./img/what_{$lang}.png");
 		$("#img4").attr("src","./img/who_{$lang}.png");
 		
+		if(n > 0 && n < 5)
+		{
+			$("input[name=option][value=1]").prop('checked', true); 
+			document.getElementById("tabSel").disabled = true;
+		}
 		switch(n)
 		{
 			case 1:
@@ -131,28 +151,58 @@
 		{
 			case 1:
 				shift(1);
+				$('#tabSel').val(1);
+				document.getElementById("tabSel").disabled = true;
 				break;
 			case 2:
+				document.getElementById("tabSel").disabled = false;
 				if(hasAccess == "1")
 				{
+					if(userId != myUserId)
+						window.location.assign("index.php");
 					shift(0);
+					$('#tabSel').val(1);
 					$("input[name=option][value=2]").prop('checked', true); 
-					
 					$('#viewCat').show();
 				}
 				else
-					window.location.assign("?page=reg");
+				{
+					document.getElementById("regPop").click();
+					$("input[name=option][value=1]").prop('checked', true); 
+					//return false;
+				}
 				break;
 			case 3:
-				if(hasAccess == "1")
+				shift(0);
+				$("input[name=option][value=3]").prop('checked', true); 
+				document.getElementById("tabSel").disabled = false;
+				$('#viewCat').show();
+				
+				if(catTab == "1")
 				{
-					shift(1);
+					shift(5);
 					$('#viewCat').hide();
+					$("#img1").attr("src","./img/how_sel_{$lang}.png");
+					$('#img1').removeClass('tabImg1');
+					$('#img1').addClass('tabImg2');
+					$('#view5').show();
 				}
-				else
-					window.location.assign("?page=reg");
 				break;
-				break;
+			
+		}
+	}
+	
+	function showData(val)
+	{
+		if(val == 1)
+		{
+			shift(0);
+			$('#viewCat').show();
+		}
+		else
+		{
+			shift(1);
+			$('#viewCat').hide();
 		}
 	}
 </script>
@@ -161,21 +211,21 @@
 	<!--<h2>Categories</h2>-->
 	<div style="width:220px; margin: 0 auto;">
 	<div style="width:220px; height:80px">
-		<div id="navigation" >
-			<input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input><br>
-			<input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$favorite}</input><br>
-			<input id="option" name="option"  type="radio" onclick="changeView(3)" value=3>{$added}</input>
-			{if ($myUserId == $userId)}
-				<a href="?page=users" style="text-decoration: none; margin-left:10px;color: #AE4019;">{$otherUsers}</a>
-			{else}
-				<a href="?userId={$myUserId}" style="text-decoration: none; margin-left:5px;color: #AE4019;">{$myVideos}</a>
-			{/if}
+		<div id="navigation" style="line-height: 0;">
+			<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
+			<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
+			<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users'">{$otherUsers}</input></label>
+			<select class="srcCmb" name="tabSel" id="tabSel" style="margin-left: 4;" disabled onchange="showData(this.value)">
+				<option value="1" selected="selected"> {$favorite}</option>
+				<option value="2"> {$added}</option>
+			</select> 
+			
 		</div>
 		<div class="questions">
-			<a href="#" onClick="shift(4)"><img class="tabImg1" id="img4" src="./img/who_{$lang}.png" /></a>
-			<a href="#" onClick="shift(3)"><img class="tabImg1" id="img3" src="./img/what_{$lang}.png" /></a>
-			<a href="#" onClick="shift(2)"><img class="tabImg1" id="img2" src="./img/why_{$lang}.png" /></a>
-			<a href="#" onClick="shift(1)"><img class="tabImg2" id="img1" src="./img/how_sel_{$lang}.png" /></a>
+			<a href="#" onClick="shift(4)" onmouseover="shift(4)"><img class="tabImg1" id="img4" src="./img/who_{$lang}.png" /></a>
+			<a href="#" onClick="shift(3)" onmouseover="shift(3)"><img class="tabImg1" id="img3" src="./img/what_{$lang}.png" /></a>
+			<a href="#" onClick="shift(2)" onmouseover="shift(2)"><img class="tabImg1" id="img2" src="./img/why_{$lang}.png" /></a>
+			<a href="#" onClick="shift(1)" onmouseover="shift(1)"><img class="tabImg2" id="img1" src="./img/how_sel_{$lang}.png" /></a>
 		</div>
 	</div>
 	<div style="float:left;    margin-top: -5px;">
@@ -184,6 +234,9 @@
 		<div class="tabcontents">
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">
+				<div class='hollywd' >
+					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
+				</div>
 				<div class="c-name">
 				{if ($myUserId == $userId)}
 				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a><br><br>
@@ -245,6 +298,9 @@
 			</div>
 			<!-- -------------------------- -->
 			<div id="view5" style="display:none">
+				<div class='hollywd' >
+					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
+				</div>
 			   <div class="c-name">
 					<ul>
 						{section name=sec1 loop=$myVideosHow}
@@ -255,6 +311,9 @@
 				</div>
 			</div>
 			<div id="view6" style="display:none">
+				<div class='hollywd' >
+					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
+				</div>
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$myVideosWhy}
@@ -265,6 +324,9 @@
 				</div>
 			</div>
 			<div id="view7" style="display:none">
+				<div class='hollywd' >
+					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
+				</div>
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$myVideosWhat}
@@ -275,6 +337,9 @@
 				</div>
 			</div>
 			<div id="view8" style="display:none">
+				<div class='hollywd' >
+					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
+				</div>
 				<div class="c-name">
 					<ul>
 						{section name=sec1 loop=$myVideosWho}
@@ -323,5 +388,7 @@
 		</form>
 	</div>
 </div>
+
+
 <!--Category Panel End-->
 		
