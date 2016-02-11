@@ -79,6 +79,22 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 	}
 }
 
+function openNewFolderBox(n)
+{
+	if(n ==1)
+	{
+		$("#existingFolder").hide();
+		$("#newFolder").show();
+	}
+	else
+	{
+		$("#existingFolder").show();
+		$("#newFolder").hide();
+	}
+	return false;
+}
+
+
 function hint(elem) {
   elem.parentNode.firstElementChild.style.display = 'block';
 }
@@ -182,7 +198,7 @@ function unhint(elem) {
 		</div>
 		<div class="actIcons">
 			{if $added2Folder == 0}
-			<a {if $hasAccess} href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
+			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
 			{else}
 				<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
 			{/if}
@@ -295,28 +311,49 @@ function unhint(elem) {
 </div>
 
 <div id="add2FolderModal" class="modalDialog">
-	<div>
+	<div style="width:250px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$folders}</h1>
+		<div id="existingFolder">
 		{if count($foldersArr)>0}
 		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=add2Folder" method="post">
 			<br>
 			<label>{$folderName}:</label>
 			<div style="float:right">
-				<select class="field" name="folderId" id="folderId" style="width:250px;">
+				<select class="field" name="folderId" id="folderId" style="width:180px;">
 					{section name=sec1 loop=$foldersArr}
 					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
 					{/section}
 				 </select>
 			</div>
-		<br><br>
+		<br>
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">Add to new folder</a></div>
 		<div style="text-align:center;width:100%">
 			<input type="submit" class="post" name = "add" id="add" value="{$addToFolder}">
 		</div>
 		</form>
 		{else}
 		{$noFolderNotf}
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">Add to new folder</a></div>
 		{/if}
+		</div>
+		<div id="newFolder" style="display:none">
+			<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=watchVideo&id={$videoId}&action=addNewFolder" method="post">
+				<br>
+				<label>{$folderName}:</label>
+				<div style="float:right">
+					<input type="text" name="folderName" id="folderName">
+				</div>
+				<label>{$tags}:</label>
+				<div style="float:right;margin-top:3px">
+					<input type="text" name="tags" id="tags">
+				</div>
+			<br><br>
+			<div style="text-align:center;width:100%">
+				<input type="submit" class="post" name = "add" id="add" value="{$save}">
+			</div>
+			</form>
+		</div>
 	</div>
 </div>
 

@@ -492,14 +492,15 @@ display: table;
 }
 
 .category h2{
- width:220px;
- height:45px;
- font-family:Calibri;
- font-size:16px;
- color:#fff;
- line-height:2.5;
- text-indent:12px;	
- background:#333333;
+    width: 220px;
+    /* height: 45px; */
+    font-family: Calibri;
+    font-size: 16px;
+    color: #fff;
+    /* line-height: 1; */
+    text-indent: 12px;
+    font-weight: 600;	
+ 
 }
 
 .category2{
@@ -2399,12 +2400,11 @@ pre{
 }
 
 .srcCmb{
-	margin-top:5px;
-	border: 2px solid #e7e7e7;
-	border-radius: 2px 2px 2px 2px;
+	margin-top: 5px;
+    border: 2px solid #e7e7e7;
+    border-radius: 2px 2px 2px 2px;
     padding-left: 2px;
-	width: 95px;
-	border: 1px solid #FA6700;
+    width: 130px;
 }
 
 .advSearch{

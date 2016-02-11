@@ -24,8 +24,8 @@ $content["ABOUT"]="Haqqımızda";
 $content["ALLLANGS"]="Bütün dillər";
 $content["ALLCATS"]="Bütün kateqoriyalar";
 $content["ALL"]="Hamısı";
-$content["MORETHAN4"]="4-dən uzun";
-$content["LESSTHAN15"]="15-dən qısa";
+$content["MORETHAN4"]="4 saatdan uzun";
+$content["LESSTHAN15"]="15 dəqiqədən az";
 $content["DATE"]="Tarix";
 $content["SIGNIN"]="Daxil ol";
 $content["HOUR"]="saat";
@@ -55,6 +55,21 @@ $content['MYVIDEOS'] = "Mine";
 $content['ADVANCED'] = "Advanced";
 $content['ASC'] = "Ascending";
 $content['DESC'] = "Descending";
+
+$content['SELECTALL'] = "Hamısını seç";
+$content['OPT1'] = "Video linkinin unikal nömrəsi";
+$content['OPT2'] = "Videonun adındakı sözlər";
+$content['OPT3'] = "Videonun təsvirindəki sözlər";
+$content['OPT4'] = "Videodakı taqlar";
+$content['OPT5'] = "Şəxsi kataloqun unikal nömrəsi";
+$content['OPT6'] = "Şəxsi kataloqun adı";
+$content['OPT7'] = "Şəxsi kataloqdakı taqlar";
+$content['OPT8'] = "Şərhlərin unikal nömrəsi";
+$content['OPT9'] = "Şərhlərdəki sözlər";
+$content['OPT10'] = "İstifadəçinin unikal nömrəsi";
+$content['OPT11'] = "İstifadəçinin loqini";
+
+
 
 //SEARCH
 $content["SORTBY"] = "Sırala";

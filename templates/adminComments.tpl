@@ -1,7 +1,24 @@
 <script>
 $(function() {
-$( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#created" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#createdTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+//$( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+//$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 
 function submitForm(action)

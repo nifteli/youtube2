@@ -1,6 +1,15 @@
 <script>
 $(function() {
-$( "#dateOfBirth" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#dateOfBirth" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+//$( "#dateOfBirth" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
 $(document).ready(function() {
     var validator = $("#regForm").validate({

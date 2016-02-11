@@ -18,9 +18,10 @@ class SearchResults
 		$this->searchRes->assign("videoQuestion", isset($_POST["videoQuestion"]) ? array_sum($_POST["videoQuestion"]) : 0);
 		$this->searchRes->assign("category", $_POST["category"]);
 		$this->searchRes->assign("time", $_POST["time"]);
-		$this->searchRes->assign("interval", $_POST["interval".$_POST["time"]]);
+		$this->searchRes->assign("interval", $_POST["interval"]);
 		$this->searchRes->assign("fromDate", $_POST["fromDate"]);
 		$this->searchRes->assign("toDate", $_POST["toDate"]);
+		//echo "<pre>";print_r($_POST["opt"]);echo "</pre>";
 		$this->searchRes->assign("options", isset($_POST["opt"]) ? implode("," ,$_POST["opt"]) : "");
 		
 		$this->searchRes->assign("sortBy", $content["SORTBY"]);

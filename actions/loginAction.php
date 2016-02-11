@@ -62,14 +62,52 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 		$errorMessage = $content["INSUFFACCESS"];
 		return;
 	}
-	$id = $db->insert("folders",array("name" => trim($_POST["folderName"]),
+	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+	$tags = explode(",", $tagStr);
+	$continue = true;
+	$db->startTransaction();
+	$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),
 									  "created" =>date("Y-m-d H:i:s"),
 									  "createdById" => $access->userId,
 									  "createdByIP" => $_SERVER['REMOTE_ADDR']));
-	if($id)
-		$okMessage = $content["FOLDERADDED"];
+	if($folderId)
+	{
+		foreach($tags as $tag)
+		{
+			$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+			$res = $db->getOne("tags");
+			if ($db->count == 1) 
+				$id = $res["id"];
+			else
+				$id = $db->insert("tags", array("name"=>trim($tag),
+										"langId"=>$langIds[$_SESSION["lang"]],
+										"created"=>date("Y-m-d H:i:s"),
+										"createdById"=>$access->userId));
+			if($id)
+			{
+				$id = $db->insert("foldertags", array("tagId"=>$id,
+									"folderId"=>$folderId));
+			}
+			
+			if(!$id)
+			{
+				$continue = false;
+				break;
+			}
+		}
+		if($continue)
+		{
+			$db->commit();
+			$okMessage = $content["FOLDERADDED"];
+		}
+		else
+			$db->rollback();
+	}
 	else
+	{
+		$db->rollback();
 		$errorMessage = $content["FOLDERNOTADDED"];
+	}
 	
 }
 if ($_GET["action"]=="delete")
@@ -188,8 +226,8 @@ if ($_GET["action"]=="fbLogin")
 if ($_GET["action"]=="mailruLogin")
 {
 	$client_id = '734021'; // ID
-	$client_secret = '4a441d5215dc337913e96e1e141c44b0'; // Секретный ключ   Приватный ключ:4bc10af9faf53ae040d3fc025e7e3dd0
-	$redirect_uri = 'http://pfs.az/?action=mailruLogin'; // Ссылка на приложение
+	$client_secret = '4a441d5215dc337913e96e1e141c44b0'; // Nae?aoiue ee??   I?eaaoiue ee??:4bc10af9faf53ae040d3fc025e7e3dd0
+	$redirect_uri = 'http://pfs.az/?action=mailruLogin'; // Nnueea ia i?eei?aiea
 
 	$url = 'https://connect.mail.ru/oauth/authorize';
 
@@ -199,7 +237,7 @@ if ($_GET["action"]=="mailruLogin")
 		'redirect_uri'  => $redirect_uri
 	);
 
-	//echo $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Mail.ru</a></p>';
+	//echo $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Aooaioeoeeaoey ?a?ac Mail.ru</a></p>';
 
 	if (isset($_GET['code'])) {
 		$result = false;

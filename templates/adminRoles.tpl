@@ -2,10 +2,27 @@
 $('#all').delegate("a", "click", function(e)
 {
      //alert("eleee");
+	$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
 	{section name=sec1 loop=$accessTypes}
-	$( "#from{$accessTypes[sec1].id}" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-	$( "#to{$accessTypes[sec1].id}" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-	{/section}
+	$( "#from{$accessTypes[sec1].id}" ).datepicker(
+		{
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		},
+		$.datepicker.regional["{$lang}"]
+	);
+	$( "#to{$accessTypes[sec1].id}" ).datepicker(
+		{
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		},
+		$.datepicker.regional["{$lang}"]
+	);
+	//$( "#from{$accessTypes[sec1].id}" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+	//$( "#to{$accessTypes[sec1].id}" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+	{/section }
 });
 
 

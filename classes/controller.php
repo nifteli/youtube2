@@ -200,8 +200,10 @@ class Controller //extends MySQL
 	}
 	
 	//this will be common function because categories panel are located in all pages
-	public function getCategories($questions,$userId="")
+	public function getCategories($questions,&$catGroups,&$cats,$userId="")
 	{
+		$catGroups = array();
+		$cats = array();
 		$join = "LEFT";
 		$cond = "";
 		if($userId != "")
@@ -218,18 +220,32 @@ class Controller //extends MySQL
 		//echo $this->db->getLastQuery()."<br>";
 		$qry = "select a.*, ifnull(count(a.videoId),0) count
 							from(
-							SELECT c.id,  c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo,'#' as subscribe,c.img,
+							SELECT c.id, c.catName".$this->lang." as catName,catNameAz, c.catInfo".$this->lang." as catInfo,'#' as subscribe,c.img,
+								cg.id catGroupId,cg.catGroupName".$this->lang." as catGroupName, cg.info".$this->lang." as catGroupInfo,
 								ifnull(v.isDeleted,0) isDeleted,v.id videoId
 								FROM categories c 
 								$join JOIN videocats vc on c.id = vc.categoryId 
 								$join JOIN videos v on v.id = vc.videoId 
+								left join catgroups cg on cg.id=c.catGroupId
 							WHERE c.questions & $questions $cond) a
 							where isDeleted=0
 							group by a.id,a.catName,a.catInfo
-							order by catname"; //echo $qry;
-		$cats = $this->db->rawQuery($qry);
+							order by catGroupName,
+							(case when (catNameaz='Digər') then 'zzzzzz' else catName end)"; //echo $qry;
+		$rawCats = $this->db->rawQuery($qry);
 		
-		return $cats;
+		$catGroups = array();
+		for($i=0; $i<count($rawCats); $i++)
+		{
+			if(!isset($catGroups[$rawCats[$i]["catGroupId"]]["name"]))
+			{
+				$catGroups[$rawCats[$i]["catGroupId"]]["name"] =  $rawCats[$i]["catGroupName"];
+				$catGroups[$rawCats[$i]["catGroupId"]]["info"] =  $rawCats[$i]["catGroupInfo"];
+			}
+			$cats[$rawCats[$i]["catGroupId"]][] = $rawCats[$i];
+		}
+		
+		//return $cats;
 	}
 	
 	public function getAllCategories()

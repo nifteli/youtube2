@@ -29,16 +29,31 @@ class Categories
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
 		$this->categories->assign("otherUsers",$content['OTHERUSERS']);
 		$this->categories->assign("myVideos",$content['MYVIDEOS']);
+		$this->categories->assign("tags",$content['TAGS']);
 		
 				
+		//echo "<pre>";print_r($cats);echo "</pre>";
 		$this->categories->assign("lang",$controller->lang);
 		$this->categories->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
 		$this->categories->assign("okMessage", isset($okMessage) ? $okMessage : "");
 		
-		$this->categories->assign("catsHow",$controller->getCategories(4));
-		$this->categories->assign("catsWhy",$controller->getCategories(8));
-		$this->categories->assign("catsWhat",$controller->getCategories(1));
-		$this->categories->assign("catsWho",$controller->getCategories(2));
+		$controller->getCategories(4,$catGroups,$cats);
+		$this->categories->assign("catGroupsHow",$catGroups);
+		$this->categories->assign("catsHow",$cats);
+		
+		$controller->getCategories(8,$catGroups,$cats);
+		$this->categories->assign("catGroupsWhy",$catGroups);
+		$this->categories->assign("catsWhy",$cats);
+		$controller->getCategories(1,$catGroups,$cats);
+		$this->categories->assign("catGroupsWhat",$catGroups);
+		$this->categories->assign("catsWhat",$cats);
+		$controller->getCategories(2,$catGroups,$cats);
+		$this->categories->assign("catGroupsWho",$catGroups);
+		$this->categories->assign("catsWho",$cats);
+		//$this->categories->assign("catsHow",$controller->getCategories(4));
+		// $this->categories->assign("catsWhy",$controller->getCategories(8));
+		// $this->categories->assign("catsWhat",$controller->getCategories(1));
+		// $this->categories->assign("catsWho",$controller->getCategories(2));
 		
 		if($controller->access->hasAccess)
 			$userId = $controller->access->userId;
@@ -56,10 +71,19 @@ class Categories
 			$this->categories->assign("hasAccess",1);
 			$this->categories->assign("myFolders",$this->getMyFolders($controller,$userId));
 			$this->categories->assign("userName",$controller->getUserName($userId));
-			$this->categories->assign("myVideosHow",$controller->getCategories(4,$userId));
-			$this->categories->assign("myVideosWhy",$controller->getCategories(8,$userId));
-			$this->categories->assign("myVideosWhat",$controller->getCategories(1,$userId));
-			$this->categories->assign("myVideosWho",$controller->getCategories(2,$userId));
+			
+			$controller->getCategories(4,$catGroups,$cats,$userId);
+			$this->categories->assign("myCatGroupsHow",$catGroups);
+			$this->categories->assign("myCatsHow",$cats);
+			$controller->getCategories(8,$catGroups,$cats,$userId);
+			$this->categories->assign("myCatGroupsWhy",$catGroups);
+			$this->categories->assign("myCatsWhy",$cats);
+			$controller->getCategories(1,$catGroups,$cats,$userId);
+			$this->categories->assign("myCatGroupsWhat",$catGroups);
+			$this->categories->assign("myCatsWhat",$cats);
+			$controller->getCategories(2,$catGroups,$cats,$userId);
+			$this->categories->assign("myCatGroupsWho",$catGroups);
+			$this->categories->assign("myCatsWho",$cats);
 		}
 	}
 	
@@ -67,7 +91,7 @@ class Categories
 	{
 		global $templatePath;
 		
-		$this->categories->display($templatePath."categories.tpl");
+		$this->categories->display($templatePath."categories.tpl"); 
 	}
 	
 	private function getMyFolders($controller,$userId)

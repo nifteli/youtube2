@@ -215,7 +215,7 @@
 			<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
 			<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
 			<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users'">{$otherUsers}</input></label>
-			<select class="srcCmb" name="tabSel" id="tabSel" style="margin-left: 4;" disabled onchange="showData(this.value)">
+			<select class="srcCmb" name="tabSel" id="tabSel" style="margin-left: 4;width:95px" disabled onchange="showData(this.value)" >
 				<option value="1" selected="selected"> {$favorite}</option>
 				<option value="2"> {$added}</option>
 			</select> 
@@ -258,42 +258,54 @@
 			{/if}
 			<div id="view1" style="display:block">
 			   <div class="c-name">
+				{foreach from=$catGroupsHow key=k item=v}
+					<h2>{$catGroupsHow[$k]["name"]}</h2>
 					<ul>
-						{section name=sec1 loop=$catsHow}
-						<li style="background: url('{$catsHow[sec1].img}');" class="liImg" 
-						title="{$catsHow[sec1].catInfo}"><a href="?catId={$catsHow[sec1].id}">{$catsHow[sec1].catName} ({$catsHow[sec1].count}) </a></li>
-						{/section}
+						{foreach from=$catsHow[$k] key=k2 item=cat}
+						<li style="background: url('{$cat['img']}');" class="liimg" 
+						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						{/foreach}
 					</ul>
+				{/foreach}
 				</div>
 			</div>
 			<div id="view2" style="display:none">
 				<div class="c-name">
+				{foreach from=$catGroupsWhy key=k item=v}
+					<h2>{$catGroupsWhy[$k]["name"]}</h2>
 					<ul>
-						{section name=sec1 loop=$catsWhy}
-						<li style="background: url('{$catsWhy[sec1].img}');" class="liImg" 
-						 title="{$catsWhy[sec1].catInfo}"><a href="?catId={$catsWhy[sec1].id}">{$catsWhy[sec1].catName} ({$catsWhy[sec1].count}) </a></li>
-						{/section}
+						{foreach from=$catsWhy[$k] key=k2 item=cat}
+						<li style="background: url('{$cat['img']}');" class="liimg" 
+						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						{/foreach}
 					</ul>
+				{/foreach}
 				</div>
 			</div>
 			<div id="view3" style="display:none">
 				<div class="c-name">
+				{foreach from=$catGroupsWhat key=k item=v}
+					<h2>{$catGroupsWhat[$k]["name"]}</h2>
 					<ul>
-						{section name=sec1 loop=$catsWhat}
-						<li style="background: url('{$catsWhat[sec1].img}');" class="liImg" 
-						 title="{$catsWhat[sec1].catInfo}"><a href="?catId={$catsWhat[sec1].id}">{$catsWhat[sec1].catName} ({$catsWhat[sec1].count}) </a></li>
-						{/section}
+						{foreach from=$catsWhat[$k] key=k2 item=cat}
+						<li style="background: url('{$cat['img']}');" class="liimg" 
+						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						{/foreach}
 					</ul>
+				{/foreach}
 				</div>
 			</div>
 			<div id="view4" style="display:none">
 				<div class="c-name">
-					<ul>
-						{section name=sec1 loop=$catsWho}
-						<li style="background: url('{$catsWho[sec1].img}');" class="liImg" 
-						 title="{$catsWho[sec1].catInfo}"><a href="?catId={$catsWho[sec1].id}">{$catsWho[sec1].catName} ({$catsWho[sec1].count}) </a></li>
-						{/section}
-					</ul>
+					{foreach from=$catGroupsWho key=k item=v}
+						<h2>{$catGroupsWho[$k]["name"]}</h2>
+						<ul>
+							{foreach from=$catsWho[$k] key=k2 item=cat}
+							<li style="background: url('{$cat['img']}');" class="liimg" 
+							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							{/foreach}
+						</ul>
+					{/foreach}
 				</div>
 			</div>
 			<!-- -------------------------- -->
@@ -302,12 +314,15 @@
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 			   <div class="c-name">
-					<ul>
-						{section name=sec1 loop=$myVideosHow}
-						<li style="background: url('{$myVideosHow[sec1].img}');" class="liImg" 
-						 title="{$myVideosHow[sec1].catInfo}"><a href="?catId={$myVideosHow[sec1].id}&userId={$userId}">{$myVideosHow[sec1].catName} ({$myVideosHow[sec1].count}) </a></li>
-						{/section}
-					</ul>
+					{foreach from=$myCatGroupsHow key=k item=v}
+						<h2>{$myCatGroupsHow[$k]["name"]}</h2>
+						<ul>
+							{foreach from=$myCatsHow[$k] key=k2 item=cat}
+							<li style="background: url('{$cat['img']}');" class="liimg" 
+							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							{/foreach}
+						</ul>
+					{/foreach}
 				</div>
 			</div>
 			<div id="view6" style="display:none">
@@ -315,12 +330,15 @@
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
-					<ul>
-						{section name=sec1 loop=$myVideosWhy}
-						<li style="background: url('{$myVideosWhy[sec1].img}');" class="liImg" 
-						 title="{$myVideosWhy[sec1].catInfo}"><a href="?catId={$myVideosWhy[sec1].id}&userId={$userId}">{$myVideosWhy[sec1].catName} ({$myVideosWhy[sec1].count}) </a></li>
-						{/section}
-					</ul>
+					{foreach from=$myCatGroupsWhy key=k item=v}
+						<h2>{$myCatGroupsWhy[$k]["name"]}</h2>
+						<ul>
+							{foreach from=$myCatsWhy[$k] key=k2 item=cat}
+							<li style="background: url('{$cat['img']}');" class="liimg" 
+							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							{/foreach}
+						</ul>
+					{/foreach}
 				</div>
 			</div>
 			<div id="view7" style="display:none">
@@ -328,12 +346,15 @@
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
-					<ul>
-						{section name=sec1 loop=$myVideosWhat}
-						<li style="background: url('{$myVideosWhat[sec1].img}');" class="liImg" 
-						 title="{$myVideosWhat[sec1].catInfo}"><a href="?catId={$myVideosWhat[sec1].id}&userId={$userId}">{$myVideosWhat[sec1].catName} ({$myVideosWhat[sec1].count}) </a></li>
-						{/section}
-					</ul>
+					{foreach from=$myCatGroupsWhat key=k item=v}
+						<h2>{$myCatGroupsWhat[$k]["name"]}</h2>
+						<ul>
+							{foreach from=$myCatsWhat[$k] key=k2 item=cat}
+							<li style="background: url('{$cat['img']}');" class="liimg" 
+							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							{/foreach}
+						</ul>
+					{/foreach}
 				</div>
 			</div>
 			<div id="view8" style="display:none">
@@ -341,12 +362,15 @@
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
-					<ul>
-						{section name=sec1 loop=$myVideosWho}
-						<li style="background: url('{$myVideosWho[sec1].img}');" class="liImg" 
-						 title="{$myVideosWho[sec1].catInfo}"><a href="?catId={$myVideosWho[sec1].id}&userId={$userId}">{$myVideosWho[sec1].catName} ({$myVideosWho[sec1].count}) </a></li>
-						{/section}
-					</ul>
+					{foreach from=$myCatGroupsWho key=k item=v}
+						<h2>{$myCatGroupsWho[$k]["name"]}</h2>
+						<ul>
+							{foreach from=$myCatsWho[$k] key=k2 item=cat}
+							<li style="background: url('{$cat['img']}');" class="liimg" 
+							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							{/foreach}
+						</ul>
+					{/foreach}
 				</div>
 			</div>
 			<!-- ----------------------------- -->
@@ -380,6 +404,10 @@
 			<label>{$folderName}:</label>
 			<div style="float:right">
 				<input type="text" name="folderName" id="folderName">
+			</div>
+			<label>{$tags}:</label>
+			<div style="float:right;margin-top:3px">
+				<input type="text" name="tags" id="tags">
 			</div>
 		<br><br>
 		<div style="text-align:center;width:100%">

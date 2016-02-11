@@ -19,70 +19,74 @@
 <h2>Advanced search</h2>  
 </div>
 	<form id="advSearchForm" action="?page=searchRes" method="post">
-				<input class="search" type="input" name="search" value="" placeholder="{$search}">
-				<input class="btnSearch" type="submit" value="{$search}" name="submit">
+		<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}" style="width:730px">
+			<input class="btnSearch" type="submit" value="{$search}" name="submit">
+			<a href="?page=advSearch">{$advanced}</a>
+		
+		<div class="simpleSearch">
+		<div style="float:left; width:630px">
+			<select class="srcCmb" name="language" id="language">
+				<option value="0" selected="selected"> {$allLangs}</option>
+				{foreach from=$languages item=row1}
+					{html_options values=$row1.id output=$row1.name selected=$languageVal}
+				{/foreach}
+			</select> 
 			
-			<div class="advSearch">
-			|
-				<select class="srcCmb" name="language" id="language">
-					<option value="0" selected="selected"> Bütün dillər</option>
-	              	{foreach from=$languages item=row1}
-	    				{html_options values=$row1.id output=$row1.name selected=$languageVal}
-	  				{/foreach}
-				</select> |
-			<input id="aq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 'a')" name="videoQuestion[]">{$vqHow}</input>
-			<input id="aq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 'a')" name="videoQuestion[]">{$vqWhy}</input>
-			<input id="aq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 'a')" name="videoQuestion[]">{$vqWhat}</input>
-			<input id="aq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 'a')" name="videoQuestion[]">{$vqWho}</input>
-			<select class="srcCmb" name="category" id="acategory">
-				<option value="0" selected="selected"> Bütün kateqoriyalar</option>
-			</select> |
-			<input id="atime" name="time"  type="radio" onclick="showTimeInterval('a')" value="1">saat</input>
-			<input id="atime" name="time" type="radio" onclick="showTimeInterval('a')" value="2" checked="">deq</input>
-			<select class="srcCmb" name="interval1" id="ainterval1" style="display: none">
-				<option value="0">Hamısı</option>
-				<option value="1">1-2</option>
-				<option value="2">2-3</option>
-				<option value="3">3-4</option>
-				<option value="4">4-dən uzun</option>
+				<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
+				<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
+				<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
+				<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+		
+			<div style="float:right">
+			<select class="srcCmb" name="category" id="scategory">
+				<option value="0" selected="selected"> {$allCats}</option>
+			</select> 
+			<!-- <input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
+			<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input> -->
+			<select class="srcCmb" name="interval" id="sinterval1">
+				<option value="0">{$all}</option>
+				<option value="1">{$lessThan15}</option>
+				<option value="2">15-30 {$minute}</option>
+				<option value="3">30-45 {$minute}</option>
+				<option value="4">45-60 {$minute}</option>
+				<option value="5">1-2 {$hour}</option>
+				<option value="6">2-3 {$hour}</option>
+				<option value="7">3-4 {$hour}</option>
+				<option value="8">{$moreThan4}</option>
 			</select>
-			<select class="srcCmb" name="interval2" id="ainterval2">
-				<option value="0">Hamısı</option>
-				<option value="1">15-dən qısa</option>
-				<option value="2">15-30</option>
-				<option value="3">30-45</option>
-				<option value="4">45-60</option>
-			</select> |
-			
-			<label class="srcLbl">Tarix</label>
-				<input class="srcCmb" style="width:104" type="text" name="fromDate" id="dpFrom2">&nbsp;
-				<input class="srcCmb" style="width:104" type="text" name="toDate" id="dpTo2">&nbsp;
+			</div>
+		</div>
+		<div style="float:left;width:208px;    height: 26px;">
+			<input class="srcCmb" style="width:95;    margin-left: 7;" type="text" name="fromDate" id="dpFrom2" placeholder="{$fromDate}">&nbsp;
+			<input class="srcCmb" style="width:95" type="text" name="toDate"  id="dpTo2" placeholder="{$toDate}">&nbsp;
+		</div>
+		</div>
 				<br/><br/><br/>
 				<table cellpadding=0 cellspacing=0 width="100%" >
 					<tr>
-						<td oolspan=3><input id="checkAll"  type="checkbox" value="0">Hamısını seç</input> <br/><br/></td>
+						<td oolspan=3><input id="checkAll"  type="checkbox" value="0">{$selectAll}</input> <br/><br/></td>
 					</tr>
 					<tr>
-						<td><input class="sOpt" id="o1"  type="checkbox" value="v.id" name="opt[]" >Video linkinin unikal nömrəsi</input></td>
-						<td><input class="sOpt" id="o2"  type="checkbox" value="v.name" name="opt[]" >Videonun adındakı sözlər</input></td>
-						<td><input class="sOpt" id="o3"  type="checkbox" value="v.info" name="opt[]" >Videonun təsvirindəki sözlər</input></td>
-						<td><input class="sOpt" id="o4"  type="checkbox" value="t.name" name="opt[]" >Videodakı taqlar</input></td>
+						<td><input class="sOpt" id="o1"  type="checkbox" value="v.id" name="opt[]" >{$opt1}</input></td>
+						<td><input class="sOpt" id="o2"  type="checkbox" value="v.name" name="opt[]" >{$opt2}</input></td>
+						<td><input class="sOpt" id="o3"  type="checkbox" value="v.info" name="opt[]" >{$opt3}</input></td>
+						<td><input class="sOpt" id="o4"  type="checkbox" value="t.name" name="opt[]" >{$opt4}</input></td>
 					</tr>
 					<tr>
-						<td><input class="sOpt" id="o5"  type="checkbox" value="f.id" name="opt[]" >Şəxsi kataloqun unikal nömrəsi</input></td>
-						<td><input class="sOpt" id="o6"  type="checkbox" value="f.name" name="opt[]" >Şəxsi kataloqun adı</input></td>
-						<td><input class="sOpt" id="o7"  type="checkbox" value="t.name" name="opt[]" >Şəxsi kataloqdakı taqlar</input></td>
+						<td><input class="sOpt" id="o5"  type="checkbox" value="f.id" name="opt[]" >{$opt5}</input></td>
+						<td><input class="sOpt" id="o6"  type="checkbox" value="f.name" name="opt[]" >{$opt6}</input></td>
+						<td><input class="sOpt" id="o7"  type="checkbox" value="t.name" name="opt[]" >{$opt7}</input></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td><input class="sOpt" id="o8"  type="checkbox" value="ct.id" name="opt[]" >Şərhlərin unikal nömrəsi</input></td>
-						<td><input class="sOpt" id="o9"  type="checkbox" value="ct.comment" name="opt[]" >Şərhlərdəki sözlər</input></td>
+						<td><input class="sOpt" id="o8"  type="checkbox" value="ct.id" name="opt[]" >{$opt8}</input></td>
+						<td><input class="sOpt" id="o9"  type="checkbox" value="ct.comment" name="opt[]" >{$opt9}</input></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td><input class="sOpt" id="o10"  type="checkbox" value="u.id" name="opt[]" >İstifadəçinin unikal nömrəsi</input></td>
-						<td><input class="sOpt" id="o11"  type="checkbox" value="u.userName" name="opt[]" >İstifadəçinin loqini</input></td>
+						<td><input class="sOpt" id="o10"  type="checkbox" value="u.id" name="opt[]" >{$opt10}</input></td>
+						<td><input class="sOpt" id="o11"  type="checkbox" value="u.userName" name="opt[]" >{$opt11}</input></td>
 						<td></td>
 						<td></td>
 					</tr>

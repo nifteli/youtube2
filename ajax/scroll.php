@@ -138,7 +138,7 @@ function showSearchResults($data,$db,$limit)
 	$direction = "asc";
 	if($data["direction"] == 2)
 		$direction = "desc";
-	//print_r($data);echo "<br>";
+	//print_r($options);echo "<br>";
 	switch($data["orderBy"])
 	{
 		case 1:
@@ -171,12 +171,12 @@ function showSearchResults($data,$db,$limit)
 	}
 	
 	// remove when folders are linked to videos and folder table joined in the query below
-	for($i = 0; $i < count($options); $i++)
-	{
-		if(substr($options[$i], 0, strlen("f.")) == "f.")
-			$options[$i] = "";
-	}
-	$options = array_filter($options);
+	// for($i = 0; $i < count($options); $i++)
+	// {
+		// if(substr($options[$i], 0, strlen("f.")) == "f.")
+			// $options[$i] = "";
+	// }
+	 $options = array_filter($options);
 	//
 	
 	// format dates
@@ -215,7 +215,8 @@ function showSearchResults($data,$db,$limit)
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
 					l.name$lang,
-					c.catName$lang
+					c.catName$lang,
+					f.name
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
 			join users u on u.id = v.addedById
@@ -226,9 +227,11 @@ function showSearchResults($data,$db,$limit)
 			left join questions q on q.id&v.questions
             left join tags t on t.id=vt.tagId
             left join comments ct on ct.videoId=v.id
+			left join foldervideos fv on fv.videoId=v.id
+			left join folders f on f.id=fv.folderId
 			where v.isDeleted=0 and ";
 	$qry .= "(";
-	
+	//echo "<pre>";print_r($options);echo "</pre>";
 	if(count($options) == 0)
 	{
 		$qry .= createCondition("v.name", $search, "like", true); //" and v.name like '%$search%'";
@@ -256,15 +259,12 @@ function showSearchResults($data,$db,$limit)
 		$qry .= " and " . createCondition("c.id", $category, "=", false);
 	if($interval != "0")
 	{
-		if($time == "1")
-		{
-			if($interval < 4)
-				$qry .= " and " . createCondition("v.duration", ($interval * 60 * 60 + 1)  . " and " . (($interval + 1) * 60 * 60), "between", false);
-			else
-				$qry .= " and " . createCondition("v.duration", $interval * 60 * 60 + 1, ">=", false);
-		}
-		else
+		if($interval < 5)
 			$qry .= " and " . createCondition("v.duration", (($interval - 1) * 15 * 60 + 1) . " and " . ($interval * 15 * 60), "between", false);
+		elseif($interval<8)
+			$qry .= " and " . createCondition("v.duration", (($interval - 4) * 60 * 60 + 1)  . " and " . (($interval - 3) * 60 * 60), "between", false);
+		else
+			$qry .= " and " . createCondition("v.duration", ($interval - 4) * 60 * 60 + 1, ">=", false);
 	}
 	if($fromDate != "" || $toDate != "")
 		$qry .= " and " . createCondition("v.added", "'$fromDate' and '$toDate'", "between", false);

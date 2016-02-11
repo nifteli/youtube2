@@ -146,7 +146,7 @@ if($_GET["action"]=="add2Folder")
 		$messages['noaccess'] = $content["INSUFFACCESS"];
 		return;
 	}
-	if($_GET["id"] > 0 && $_POST["folderId"] > 0)
+	if(is_numeric($_GET["id"]) && is_numeric($_POST["folderId"]))
 	{
 		$res = $db->insert("foldervideos", array("folderId"=>trim($_POST["folderId"]),
 												  "videoId"=>trim($_GET["id"]),
@@ -161,7 +161,79 @@ if($_GET["action"]=="add2Folder")
 		header("Location: index.php");
 	}
 }
-
+if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
+{
+	if(strlen(trim($_POST["folderName"])) < 3)
+	{
+		$result = "error";
+		$errorMessage = $content["SHORTFOLDERNAME"];
+		return;
+	}
+	if(!$access->authorized(57))
+	{
+		$result = "error";
+		$errorMessage = $content["INSUFFACCESS"];
+		return;
+	}
+	
+	if(is_numeric($_GET["id"]))
+	{
+		$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+		$tags = explode(",", $tagStr);
+		$continue = true;
+		$db->startTransaction();
+		$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),
+										  "created" =>date("Y-m-d H:i:s"),
+										  "createdById" => $access->userId,
+										  "createdByIP" => $_SERVER['REMOTE_ADDR']));
+		if($folderId)
+		{
+			foreach($tags as $tag)
+			{
+				$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+				$res = $db->getOne("tags");
+				if ($db->count == 1) 
+					$id = $res["id"];
+				else
+					$id = $db->insert("tags", array("name"=>trim($tag),
+											"langId"=>$langIds[$_SESSION["lang"]],
+											"created"=>date("Y-m-d H:i:s"),
+											"createdById"=>$access->userId));
+				if($id)
+				{
+					$id = $db->insert("foldertags", array("tagId"=>$id,
+										"folderId"=>$folderId));
+				}
+				
+				if(!$id)
+				{
+					$continue = false;
+					break;
+				}
+			}
+			if($continue)
+			{
+				$res = $db->insert("foldervideos", array("folderId"=>trim($folderId),
+													  "videoId"=>trim($_GET["id"]),
+													  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
+													  "added"=>date("Y-m-d H:i:s")));
+				if($db->count > 0) 
+				{
+					$db->commit();
+					$okMessage = $content["ADDEDTOFOLDER"];
+				}
+			}
+			else
+				$db->rollback();
+		}
+		else
+		{
+			$db->rollback();
+			$errorMessage = $content["FOLDERNOTADDED"];
+		}
+	}
+	
+}
 if($_GET["action"]=="delFromFolder")
 {
 	if($_GET["id"] > 0)

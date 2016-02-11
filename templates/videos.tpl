@@ -107,7 +107,7 @@ function submitForm(action)
 			<br>
 			<label>{$folderName2}:</label>
 			<div style="float:right">
-				<select class="field" name="folderId" id="folderId" style="width:250px; height:30px">
+				<select class="field" name="folderId" id="folderId" style="width:250px;">
 					{section name=sec1 loop=$foldersArr}
 					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
 					{/section}

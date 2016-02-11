@@ -1,10 +1,31 @@
 <script>
 $(function() {
-$( "#dpFrom" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-$( "#dpTo" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-$( "#dpFrom2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
-$( "#dpTo2" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
+$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#dpFrom" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#dpTo" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},$.datepicker.regional[ "{$lang}" ] );
+$( "#dpFrom2" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	}, $.datepicker.regional[ "{$lang}" ] );
+$( "#dpTo2" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	}, $.datepicker.regional[ "{$lang}" ] );
 });
+
 </script>	
 <script>
 $(function() {
@@ -115,29 +136,30 @@ function checkAccess()
 							{html_options values=$row1.id output=$row1.name selected=$languageVal}
 						{/foreach}
 					</select> 
-					<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
-					<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
-					<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
-					<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+					
+						<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
+						<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
+						<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
+						<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+				
+					<div style="float:right">
 					<select class="srcCmb" name="category" id="scategory">
 						<option value="0" selected="selected"> {$allCats}</option>
 					</select> 
-					<input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
-					<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input>
-					<select class="srcCmb" name="interval1" id="sinterval1" style="display: none">
-						<option value="0">{$all}</option>
-						<option value="1">1-2</option>
-						<option value="2">2-3</option>
-						<option value="3">3-4</option>
-						<option value="4">{$moreThan4}</option>
-					</select>
-					<select class="srcCmb" name="interval2" id="sinterval2">
+					<!-- <input id="stime" name="time"  type="radio" onclick="showTimeInterval('s')" value="1">{$hour}</input>
+					<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input> -->
+					<select class="srcCmb" name="interval" id="sinterval1">
 						<option value="0">{$all}</option>
 						<option value="1">{$lessThan15}</option>
-						<option value="2">15-30</option>
-						<option value="3">30-45</option>
-						<option value="4">45-60</option>
-					</select> 
+						<option value="2">15-30 {$minute}</option>
+						<option value="3">30-45 {$minute}</option>
+						<option value="4">45-60 {$minute}</option>
+						<option value="5">1-2 {$hour}</option>
+						<option value="6">2-3 {$hour}</option>
+						<option value="7">3-4 {$hour}</option>
+						<option value="8">{$moreThan4}</option>
+					</select>
+					</div>
 				</div>
 				<div style="float:left;width:208px;    height: 26px;">
 					<input class="srcCmb" style="width:95;    margin-left: 7;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
