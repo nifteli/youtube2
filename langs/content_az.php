@@ -52,7 +52,7 @@ $content['PROFILE'] = "Profil";
 $content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
 $content['OTHERUSERS'] = "Other users";
 $content['MYVIDEOS'] = "Mine";
-$content['ADVANCED'] = "Advanced";
+$content['ADVANCED'] = "Advanced search";
 $content['ASC'] = "Ascending";
 $content['DESC'] = "Descending";
 
@@ -442,6 +442,7 @@ $content['MNGUESTS'] ="Qonaqlar";
 $content['TITLECATEGORIES'] ="Categories";
 $content['ADDCATEGORY'] ="Add Category";
 $content['PIC'] ="Picture";
+$content['CATGROUP'] ="Category Group";
 $content['CATAZ'] ="Category Az";
 $content['CATINFOAZ'] ="Category Info Az";
 $content['CATEN'] ="Category En";

@@ -19,7 +19,8 @@
 	<script src="js/videoJs/video.js"></script>
 	<script src="js/videoJs/youtube.js"></script>
 	<!--Dateapicker-->
-	  <link rel="stylesheet" href="css/datePicker/jquery-ui.css">
+	  <!-- <link rel="stylesheet" href="css/datePicker/jquery-ui.css"> -->
+	  <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/jquery-ui-1.11.4.custom/jquery-ui.css" />
 	  <!--<script src="js/datePicker/jquery-1.10.2.js"></script>-->
 	  <script src="js/datePicker/jquery-ui.js"></script>
 	  <script src="js/datePicker/datepicker-az.js"></script>

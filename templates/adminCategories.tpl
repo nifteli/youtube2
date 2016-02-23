@@ -58,6 +58,7 @@ function controlQuestionSelection(el,id)
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 140px; overflow: hidden;"/>
@@ -88,6 +89,7 @@ function controlQuestionSelection(el,id)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
+					<th class="vertical-middle" style=" text-align:center" >{$lnCatGroup}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catAz&catAzSortType={$catAzSortType}')">{$lnCatAz}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoAz&catInfoAzSortType={$catInfoAzSortType}')">{$lnCatAzInfo}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catEn&catEnSortType={$catEnSortType}')">{$lnCatEn}</a></th>
@@ -117,6 +119,7 @@ function controlQuestionSelection(el,id)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
+					<td class="vertical-middle"><input class="form-control"  name="catGroup" id="catGroup" type="text" value="{$catGroupVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catAz" id="catAz" type="text" value="{$catAzVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catInfoAz" id="catInfoAz" type="text" value="{$catInfoAzVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catEn" id="catEn" type="text" value="{$catEnVal}" /></td>
@@ -134,6 +137,14 @@ function controlQuestionSelection(el,id)
 				{section name=sec1 loop=$categories}
 				<tr>
 					<!-- <input type="hidden" name="catId[{$categories[sec1].id}]" id="catId[{$categories[sec1].id}]" value="{$categories[sec1].id}"> -->
+					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].author}">
+						<select name="catGroupIdArr[{$categories[sec1].id}]" id="catGroupIdArr[{$categories[sec1].id}]"  class="form-control">
+							<option value="">{$lnCatGroup}</option>
+							{section name=key loop=$catGroups}
+							<option value="{$catGroups[key].id}" {if $categories[sec1].catGroupId == $catGroups[key].id} selected {/if}>{$catGroups[key].name}</option>
+							{/section}
+						</select>
+					</td>
 					<td class="vertical-middle" style="overflow: hidden;">
 						<input style="width:100%" name="catAzArr[{$categories[sec1].id}]" id="catAzArr{$categories[sec1].id}" type="text" value="{$categories[sec1].catAz}">
 					</td>
@@ -228,10 +239,22 @@ function controlQuestionSelection(el,id)
 	</div>
 </div>
 <div id="addCat" class="modalDialog" >
-	<div style="width:800px;height:350px">
+	<div style="width:800px;height:380px">
 	<h4 style="font-weight:bold">{$sendMail}</h4>
 		<a href="#close" title="Close" class="close1">X</a>
 		<form action="?page=adminCategories&action=addCat" method="post" enctype="multipart/form-data" style="width: 100%;">
+			<div class="topgap" style="margin-left:0px">
+				<label>{$lnCatGroup}:</label>
+				<div class="gap" style="margin-left:0px">
+					<select name="catGroup1" id="catGroup1"  class="field" style="width:600px">
+						<option value="">{$lnCatGroup}</option>
+						{section name=key loop=$catGroups}
+						<option value="{$catGroups[key].id}">{$catGroups[key].name}</option>
+						{/section}
+					</select>
+				</div>
+			</div>
+			
 			<div class="topgap" style="margin-left:0px">
 				<label>{$lnCatAz}:</label>
 				<div class="gap" style="margin-left:0px">

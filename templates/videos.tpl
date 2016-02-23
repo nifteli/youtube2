@@ -29,8 +29,9 @@
 	   var page = $('#demoajax').find('.nextpage').val();
 	   var isload = $('#demoajax').find('.isload').val();
 	   
-		 //alert('scrollTop='+$(window).scrollTop()+' clientHeight='+document.body.clientHeight+' winheight='+$(document).height()+' total='+($(window).scrollTop()+document.body.clientHeight)+'isload='+isload);
-	     if ((($(window).scrollTop()+document.body.clientHeight)==$(document).height()) && isload=='true'){
+		 //alert('scrollTop='+Math.ceil($(window).scrollTop())+1+' clientHeight='+document.body.clientHeight+' winheight='+$(document).height()+' total='+Math.ceil(($(window).scrollTop()+1+document.body.clientHeight))+"getDocHeight()="+getDocHeight());
+	     //if ((Math.ceil(($(window).scrollTop() +1 +document.body.clientHeight))>=$(document).height()) && isload=='true'){
+		 if($(window).scrollTop() + $(window).height() >= getDocHeight() && isload=='true') {
 		   $('#loading').show();
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
@@ -59,6 +60,14 @@
 
 });
 
+function getDocHeight() {
+    var D = document;
+    return Math.max(
+        D.body.scrollHeight, D.documentElement.scrollHeight,
+        D.body.offsetHeight, D.documentElement.offsetHeight,
+        D.body.clientHeight, D.documentElement.clientHeight
+    );
+}
 
 function submitForm(action)
 {

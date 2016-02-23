@@ -348,9 +348,9 @@ function displayData($res, $data, $colCnt=4)
 					<div class='videoName'>
 					<a href='?page=watchVideo&id=$id' title='".$res[$i]['name']."'>".trim($name)."</a>
 					 </div>
-					 <img class='shape' src='img/shape.png' width=170 height=1 alt=''/> </div>
+					 <img class='shape' src='img/shape.png' width=170 height=0 alt=''/> </div>
 					 <div class='videoDet'>
-						 <ul class='move'>
+						 <ul class='move' style='    line-height: 0.3;'>
 							<li>
 								<img width=12 height=10 src='img/question.png'/><span class='views'>" . $res[$i]["question"] . "</span>
 								<img width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>

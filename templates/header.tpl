@@ -104,6 +104,7 @@ function checkAccess()
 	return false;
 }
 
+
 </script>
 
 <body>
@@ -124,10 +125,15 @@ function checkAccess()
 			</div>
 			<div class="headerMiddle">
 				<form id="searchForm" action="?page=searchRes" method="post">
-					<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}">
-					<input class="btnSearch" type="submit" value="{$search}" name="submit">
-					<a href="?page=advSearch">{$advanced}</a>
 				
+					<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}">
+					<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
+					onmouseover="this.src='img/searchSelected_{$lang}.png';"
+					onmouseout="this.src='img/search_{$lang}.png';"
+					onmousedown="this.src='img/searchPushed_{$lang}.png';"> 
+					<div class="advSrc">
+					<a href="?page=advSearch">{$advanced}</a>
+					</div>
 				<div class="simpleSearch">
 				<div style="float:left; width:630px">
 					<select class="srcCmb" name="language" id="language">
@@ -162,8 +168,8 @@ function checkAccess()
 					</div>
 				</div>
 				<div style="float:left;width:208px;    height: 26px;">
-					<input class="srcCmb" style="width:95;    margin-left: 7;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
-					<input class="srcCmb" style="width:95" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}">&nbsp;
+					<input class="srcCmb" style="width:95;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
+					<input class="srcCmb" style="width:95;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}">&nbsp;
 				</div>
 				</div>
 				</form>
@@ -194,11 +200,23 @@ function checkAccess()
 				{if !isset($greeting)}
 					<ul class="about">
 						<li><a href="?page=reg">{$signUp}</a></li>
+						<!-- <li><a href="?page=reg">
+						<input class="btnSearch" type="image" src="img/register_{$lang}.png" name="submit" style="width:75;height:20;margin-top: 6;"
+						onmouseover="this.src='img/registerSelected_{$lang}.png';"
+						onmouseout="this.src='img/register_{$lang}.png';"
+						onmousedown="this.src='img/registerPushed_{$lang}.png';"> 
+						</a></li> -->
 					</ul>
 				{/if}
 				
-				<div style="text-align: center">
-				<a href="?page=addVideo" id="addVideo" onclick="return checkAccess();" ><img align="middle" height="100" width="100" src="img/AddVideo.png" align="middle"></a>
+				<div style="text-align: center;margin-top: 20;" >
+				<a href="?page=addVideo" id="addVideo" onclick="return checkAccess();" >
+				<img align="middle" height="100" width="100" src="img/addVideo_{$lang}.png" align="middle" 
+				class="addVideoImg1" id="addVideoImg1"
+				onmouseover="this.src='img/addVideoSelected_{$lang}.png';"
+				onmouseout="this.src='img/addVideo_{$lang}.png';"
+				onmousedown="this.src='img/addVideoPushed_{$lang}.png';">
+				 </a>
 				</div>
 			
 			</div>

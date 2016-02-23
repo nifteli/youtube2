@@ -199,7 +199,7 @@ if($_GET["action"] == "likeIt" &&
 	//{
 		$res = $db->rawQuery("SELECT SUM(IF(action = 1, 1, 0)) likeCount,
 									  SUM(IF(action = -1, 1, 0)) dislikeCount						  		
-								FROM videoViews
+								FROM videoviews
 								where videoId=".$_GET["videoId"]);
 		if($res[0]["likeCount"]>=0 && $res[0]["dislikeCount"]>=0)
 			echo $res[0]["likeCount"].";".$res[0]["dislikeCount"];

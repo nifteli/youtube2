@@ -418,6 +418,7 @@ $content['TITLECATEGORIES'] ="Categories";
 $content['ADDCATEGORY'] ="Add Category";
 $content['PIC'] ="Picture";
 $content['CATAZ'] ="Category Az";
+$content['CATGROUP'] ="Category Group";
 $content['CATINFOAZ'] ="Category Info Az";
 $content['CATEN'] ="Category En";
 $content['CATINFOEN'] ="Category Info En";

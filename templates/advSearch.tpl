@@ -20,9 +20,10 @@
 </div>
 	<form id="advSearchForm" action="?page=searchRes" method="post">
 		<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}" style="width:730px">
-			<input class="btnSearch" type="submit" value="{$search}" name="submit">
-			<a href="?page=advSearch">{$advanced}</a>
-		
+			<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
+					onmouseover="this.src='img/searchSelected_{$lang}.png';"
+					onmouseout="this.src='img/search_{$lang}.png';"
+					onmousedown="this.src='img/searchPushed_{$lang}.png';"> 		
 		<div class="simpleSearch">
 		<div style="float:left; width:630px">
 			<select class="srcCmb" name="language" id="language">

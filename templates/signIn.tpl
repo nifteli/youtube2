@@ -25,7 +25,11 @@
 			<div style="float:left;width:100%">
 			<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
 			<input class="pw" type="password" name="password" value="" placeholder="{$password}">
-			<input class="loginLg" type="submit" value="{$login}" name="submit">		
+			<!-- <input class="loginLg" type="submit" value="{$login}" name="submit">	 -->
+			<input class="btnSearch" type="image" src="img/signIn_{$lang}.png" name="submit" style="height: 25;margin-left: 5;margin-top: 4;"
+					onmouseover="this.src='img/signInSelected_{$lang}.png';"
+					onmouseout="this.src='img/signIn_{$lang}.png';"
+					onmousedown="this.src='img/signInPushed_{$lang}.png';">			
 			</div>
 			<div style="float:left;width:400px">
 			<div style="width:189px;float: left;    padding-left: 2px;"><label><input type="checkbox" name="rememberMe">{$rememberMe}</label></div>

@@ -32,6 +32,7 @@ class AdminCategories
 		
 		$this->adminCategories->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
 		
+		$this->adminCategories->assign("lnCatGroup", $content['CATGROUP']);
 		$this->adminCategories->assign("lnCatAz", $content['CATAZ']);
 		$this->adminCategories->assign("lnCatAzInfo", $content['CATINFOAZ']);
 		$this->adminCategories->assign("lnCatEn", $content['CATEN']);
@@ -59,11 +60,14 @@ class AdminCategories
 		$this->adminCategories->assign("hasDeleteAccess", $controller->access->authorized(43));
 		$this->adminCategories->assign("hasAddAccess", $controller->access->authorized(44));
 		
+		$this->adminCategories->assign("catGroups", $this->getCatGroups($controller));
+		
 		//echo "<pre>"; print_r($_POST); echo "</pre>";
 		if(isset($_POST) && count($_POST) > 0)
 		{//echo "dddd";print_r($_POST["catInfoEn"]);
 			$this->adminCategories->assign("flvideoQuestionVal",$_POST["flvideoQuestion"]);
 			$this->adminCategories->assign("catAzVal", $_POST["catAz"]);
+			$this->adminCategories->assign("catGroupVal", $_POST["catGroup"]);
 			$this->adminCategories->assign("catInfoAzVal", $_POST["catInfoAz"]);
 			$this->adminCategories->assign("catEnVal", $_POST["catEn"]);
 			$this->adminCategories->assign("catInfoEnVal", $_POST["catInfoEn"]);
@@ -109,6 +113,11 @@ class AdminCategories
 		global $templatePath;
 		
 		$this->adminCategories->display($templatePath."adminCategories.tpl");
+	}
+	
+	private function getCatGroups($controller)
+	{
+		return $controller->db->rawQuery("select id,catGroupNameAz name from catgroups");
 	}
 	
 }

@@ -32,6 +32,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'edit')
 			}
 		}
 		$updArr = array("catNameAz"=>$data,
+						  "catGroupId"=>trim($_POST["catGroupIdArr"][$id]),
 						  "catInfoAz"=>trim($_POST["catInfoAzArr"][$id]),
 						  "catNameEn"=>trim($_POST["catEnArr"][$id]),
 						  "catInfoEn"=>trim($_POST["catInfoEnArr"][$id]),
@@ -85,6 +86,9 @@ if ($_GET["action"]=="addCat")
 		$insArr = array("catNameAz"=>trim($_POST["catAz1"]),"catNameEn"=>trim($_POST["catEn1"]),"catNameRu"=>trim($_POST["catRu1"]),
 						"createdById"=> $access->userId, "createdByIP"=>$_SERVER["REMOTE_ADDR"],"created"=>date("Y-m-d H:i:s"),
 						"questions"=>array_sum($_POST["videoQuestion"][0]));
+		//echo "<pre>";print_r($_POST);echo "</pre>";
+		if(trim($_POST["catGroup1"]) != "")
+			$insArr["catGroupId"] = trim($_POST["catGroup1"]);
 		if(trim($_POST["catInfoAz1"]) != "")
 			$insArr["catInfoAz"] = trim($_POST["catInfoAz1"]);
 		if(trim($_POST["catInfoEn1"]) != "")

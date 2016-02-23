@@ -853,12 +853,16 @@ class Controller //extends MySQL
 		$lang = $this->lang;
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
 				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,
-				concat(u.firstName,' ',u.lastName) createdBy
+				concat(u.firstName,' ',u.lastName) createdBy,
+				cg.catGroupNameAz
 				FROM categories c
 				left join users u on u.id=c.createdById
 				left join vwcatstats cs on cs.categoryId=c.id
+				left join catgroups cg on cg.id=c.catGroupId
 				where 1=1 ";
 				
+		if(isset($post["catGroup"]) && $post["catGroup"] != "")
+			$qry .= " and cg.catGroupNameAz like '%" . trim($post["catGroup"]) . "%'";
 		if(isset($post["catAz"]) && $post["catAz"] != "")
 			$qry .= " and c.catNameAz like '%" . trim($post["catAz"]) . "%'";
 		if(isset($post["catInfoAz"]) && $post["catInfoAz"] != "")
