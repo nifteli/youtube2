@@ -158,6 +158,8 @@ if ($_GET["action"]=="login")
 				setcookie("arr[password]", $_POST["password"], time() + 3600);
 			}
 			authenticate($_POST["userName"]);
+			if($_POST["src"] == "addVideo")
+				header("Location: index.php?page=addVideo");
 		}
 		else
 			$errorMessage=$content['WRONGLOGIN'];

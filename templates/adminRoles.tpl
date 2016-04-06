@@ -61,8 +61,8 @@ function setDatePickers()
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
-	<div class="titles">
+	
+	<div class="titles" style="width:100%">
 		<h1>{$titleRoles}</h1>
 	</div>
 	{if $result == 'error'}
@@ -75,7 +75,7 @@ function setDatePickers()
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:right; margin-right:15px">
+	<div id="all" style="float:left; margin-left:15px">
 	{include_php 'roles.php'}
 	</div>
 	

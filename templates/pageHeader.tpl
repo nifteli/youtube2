@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="fonts/stylesheet.css"/>
 	<link href="css/tabcontent.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	
 	
 	<script src="js/tabcontent.js" type="text/javascript"></script>

@@ -1,5 +1,6 @@
 <?php
 //echo "<pre>"; print_r($_POST); echo "</pre>";//exit;
+//echo "<pre>"; print_r($_FILES); echo "</pre>";//exit;
 if ($_GET["action"]=="reg")
 {
 	$result = true;
@@ -21,14 +22,48 @@ if ($_GET["action"]=="reg")
 		$result = false;
 		$errorMessage=$content["NOTVALIDDATE"];
 	}
+	
+	if(isset($_FILES['pic']['name']) && $_FILES['pic']['name'] != "")
+	{ //echo "eee";
+		$target_file = $appDirectory .$userPicsPath . basename($_FILES["pic"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "pjpeg" && $imageFileType != "gif" ) 
+		{
+			$result = false;
+			$errorMessage = $content['ADMINPROFILEERR5'];
+		}
+		
+		
+		if ($_FILES["pic"]["size"] > $maxPicSize * 1024 * 1024 && ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "pjpeg" || $imageFileType == "gif" )) 
+		{
+			$pathParts = pathinfo($_FILES["pic"]["tmp_name"]);
+			
+			$filename = $controller->compressImage($_FILES["pic"]["tmp_name"], $tmpPath . $pathParts['basename'], $imageQuality); 
+			//echo "filesize=".filesize("tmp/" . $pathParts['basename'])."<br> allowed_size=".$maxPicSize * 1024 * 1024;
+			if (filesize($tmpPath . $pathParts['basename']) < $maxPicSize * 1024 * 1024)
+			{
+				unlink($_FILES["pic"]["tmp_name"]);
+				$_FILES["pic"]["tmp_name"] = $tmpPath . $pathParts['basename'];
+				//echo "<br> new path ".$_FILES["pic"]["tmp_name"];
+			}
+			else
+			{
+				$result = false;
+				$errorMessage = $content['ADMINPROFILEERR6'];
+			}
+		}
+	}
+	
 	if($result)
-	{
+	{ 
 		$getEmailOnVideoComment = 0; $getEmailAfterMyComment = 0; $getEmailOnNews = 0;
 		if($_POST["onVideoComment"] == "on")	$getEmailOnVideoComment = 1;
 		if($_POST["onComment"] == "on")	$getEmailAfterMyComment = 1;
 		if($_POST["onNews"] == "on")	$getEmailOnNews = 1;
 		
-		$db->where("userName = '".trim($_POST["username"])."' or email='".trim($_POST["email"])."'");
+		$db->where("(userName = '".trim($_POST["username"])."' or email='".trim($_POST["email"])."') and isDeleted=0");
 		$users = $db->get("users");
 		if($db->count>0)
 		{
@@ -43,6 +78,17 @@ if ($_GET["action"]=="reg")
 				$regDevice = "Computer";
 			//insert user registration data to database
 			$hash=uniqid();
+			$picturePath = "";
+			if (isset($_FILES['pic']['name']) && $_FILES['pic']['name'] != "")
+			{
+				$saveto = $appDirectory . $userPicsPath . $access->userId.".jpeg";
+				copy($_FILES['pic']['tmp_name'], $saveto);
+				unlink($_FILES['pic']['tmp_name']);
+				$picturePath = '.'.$userPicsPath . $access->userId.".jpeg";
+				//echo $_FILES['pic']['tmp_name'];
+				//echo "<br>to dir".$saveto;
+				//echo "ddddddd  ".$_FILES['pic']['tmp_name'].$saveto;
+			}
 			$id = $db->insert("users", array("userName"=>trim($_POST["username"]),
 											  "password"=> md5(trim($_POST["password"])),
 											  "status"=>"pending",
@@ -58,15 +104,16 @@ if ($_GET["action"]=="reg")
 											  "secretAnswer" =>  $_POST["secretAnswer"],
 											  "registered"=>date("Y-m-d H:i:s"),
 											  "registeredByIP"=>$_SERVER['REMOTE_ADDR'],
-											  "languageId"=>$langIds[$_POST["langId"]],
+											  "languageId"=>$_POST["langId"],
 											  "phoneNumber"=>"$_POST[phone]",
 											  "getEmailOnVideoComment"=>$getEmailOnVideoComment,
 											  "getEmailAfterMyComment"=>$getEmailAfterMyComment,
 											  "getEmailOnNews"=>$getEmailOnNews,
 											  "regDevice"=>$regDevice,
-											  "regBrowser"=>$regBrowser
+											  "regBrowser"=>$regBrowser,
+											  "picturePath"=>$picturePath
 											  )
-											  );//echo $db->getLastError(); echo "reg".$id;
+											  );echo $db->getLastError(); //echo "reg".$id;
 			if($id)
 			{
 				$mail->addAddress($_POST["email"], $_POST["name"].' '.$_POST["surname"]);     // Add a recipient Name is optional	

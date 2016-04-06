@@ -16,7 +16,7 @@ class Profile
 		$this->profile->assign("uName", $controller->access->userName);
 		$this->profile->assign("userId", $controller->access->userId);
 		
-		$profile = $this->getUserProfile($controller->access-userId,$controller->db);
+		$profile = $this->getUserProfile($controller->access->userId,$controller->db);
 		//echo "<pre>"; print_r($profile); echo "</pre>";//exit; 
 		if(count($profile)>0)
 		{

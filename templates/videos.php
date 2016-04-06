@@ -16,6 +16,25 @@ class Videos
 		$this->videos->assign("catId", isset($_GET["catId"]) ? $_GET["catId"] : "");
 		$this->videos->assign("userId", isset($_GET["userId"]) ? $_GET["userId"] : "");
 		$this->videos->assign("tagId", isset($_GET["tagId"]) ? $_GET["tagId"] : "");
+		$this->videos->assign("sortBy", $content["SORTBY"]);
+		$this->videos->assign("sbDate", $content["SBDATE"]);
+		$this->videos->assign("sbName", $content["SBNAME"]);
+		$this->videos->assign("sbLang", $content["SBLANG"]);
+		$this->videos->assign("sbQuestion", $content["SBQUESTION"]);
+		$this->videos->assign("sbCategory", $content["SBCATEGORY"]);
+		$this->videos->assign("sbDuration", $content["SBDURATION"]);
+		$this->videos->assign("sbWatches", $content["SBWATCHES"]);
+		$this->videos->assign("sbComments", $content["SBCOMMENTS"]);
+		$this->videos->assign("asc",$content['ASC']);
+		$this->videos->assign("desc",$content['DESC']);
+		if(is_numeric($_GET["catId"]))
+			$this->videos->assign("catIdVal",$_GET["catId"]);
+		if(is_numeric($_GET["tagId"]))
+			$this->videos->assign("tagIdVal",$_GET["tagId"]);
+		if(is_numeric($_GET["userId"]))
+			$this->videos->assign("userIdVal",$_GET["userId"]);
+		if(is_numeric($_GET["folderId"]))
+			$this->videos->assign("folderIdVal",$_GET["folderId"]);	
 		
 		$folderId = "";
 		$folderName = "";

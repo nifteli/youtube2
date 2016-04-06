@@ -9,6 +9,7 @@ class AddVideo
 		global $content;
 		global $result;
 		global $messages;
+		global $langIds;
 		
 		$this->videos = new Smarty;
 		
@@ -17,7 +18,7 @@ class AddVideo
 		$this->videos->assign("language", $content['LANGUAGE']);
 		$this->videos->assign("addVideoNote1", $content['ADDVIDEONOTE1']);
 		$this->videos->assign("languages", $controller->getLanguages());
-		$this->videos->assign("languageVal", isset($_POST["language"]) ? $_POST["language"] : "");
+		$this->videos->assign("languageVal", isset($_POST["language"]) ? $_POST["language"] : $langIds[$controller->lang]);
 		$this->videos->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->videos->assign("vqHow", $content['HOW']);
 		$this->videos->assign("vqWhy", $content['WHY']);

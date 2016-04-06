@@ -1,6 +1,7 @@
 <script>
 $(function() {
 $.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#search" ).focus();
 $( "#dpFrom" ).datepicker( 
 	{
 		changeMonth: true,
@@ -100,33 +101,52 @@ function checkAccess()
 	else
 	{
 		document.getElementById("regPop").click();
+		$("a[href='?page=signIn']").attr('href', '?page=signIn&src=addVideo');
 	}
 	return false;
 }
-
 
 </script>
 
 <body>
 <div id="wrapper">
-				
 	<div class="banner">
 		<div class="min-cont">
 			<div class="headerLeft">
 				<ul class="langs">
-					{if $lang!='az'}<li><a href="?lang=az">AZ</a></li>{/if}
-					{if $lang!='ru'}<li><a href="?lang=ru">RU</a></li>{/if}
-					{if $lang!='en'}<li><a href="?lang=en">EN</a></li>{/if}
+					{if $lang!='az'}<li><a href="?lang=az&page={$page}">AZ</a></li>{/if}
+					{if $lang!='ru'}<li><a href="?lang=ru&page={$page}">RU</a></li>{/if}
+					{if $lang!='en'}<li><a href="?lang=en&page={$page}">EN</a></li>{/if}
 				</ul>
 				<ul class="about">
 					<li><a href="?page=about">{$about}</a></li>
 				</ul>
-				<a href="index.php"><img height="118" width="200" src="img/logo.png" ></a>
+				<div style="width:200px; height:105px">
+					<div id="navigation" style="line-height: 0;">
+						<a href="index.php"><img height="30" width="70" src="img/logo.png" ></a>
+						<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
+						<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
+						<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users'">{$otherUsers}</input></label>
+						<select class="srcCmb" name="tabSel" id="tabSel" style="margin-left: 4;width:75px" disabled onchange="showData(this.value)" >
+							<option value="1" selected="selected"> {$favorite}</option>
+							<option value="2"> {$added}</option>
+						</select>
+					</div>
+					<div class="questions">
+						<a href="#" onClick="shift(4)" onmouseover="shift(4)"><img class="tabImg1" id="img4" src="./img/who_{$lang}.png" /></a>
+						<a href="#" onClick="shift(3)" onmouseover="shift(3)"><img class="tabImg1" id="img3" src="./img/what_{$lang}.png" /></a>
+						<a href="#" onClick="shift(2)" onmouseover="shift(2)"><img class="tabImg1" id="img2" src="./img/why_{$lang}.png" /></a>
+						<a href="#" onClick="shift(1)" onmouseover="shift(1)"><img class="tabImg2" id="img1" src="./img/how_sel_{$lang}.png" /></a>
+					</div>
+				</div>
+				<div style="float:left;    margin-top: -5px;">
+					<img style="float: right;" src="./img/underLine.png" width=200 height=20/>
+				</div> 
 			</div>
 			<div class="headerMiddle">
 				<form id="searchForm" action="?page=searchRes" method="post">
 				
-					<input class="search" type="input" name="search" value="{$searchVal}" placeholder="{$search}">
+					<input class="search" type="input" name="search" id="search" value="{$searchVal}" placeholder="{$search}">
 					<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
 					onmouseover="this.src='img/searchSelected_{$lang}.png';"
 					onmouseout="this.src='img/search_{$lang}.png';"
@@ -135,7 +155,7 @@ function checkAccess()
 					<a href="?page=advSearch">{$advanced}</a>
 					</div>
 				<div class="simpleSearch">
-				<div style="float:left; width:630px">
+				<div style="float:left; width:631px">
 					<select class="srcCmb" name="language" id="language">
 						<option value="0" selected="selected"> {$allLangs}</option>
 						{foreach from=$languages item=row1}
@@ -180,12 +200,23 @@ function checkAccess()
 						{/section}
 					</ul>
 				</div>
+				<!--Statistics Bar Start-->
+				<div class="user"> 
+					<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
+					<p class="counts">{$videos} ({$videoCnt})</p></a>
+					<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
+					<p class="counts">{$tags} ({$tagCnt})</p></a>
+					<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
+					<p class="counts">{$users} ({$userCnt})</p></a>
+					<br><hr>
+				</div>
+				 <!--Statistics Bar End-->
 			</div>
 			<div class="headerRight">
 			<div style="overflow-wrap: normal;width: 110px;">
 				<ul class="langs">
 					{if isset($greeting)}
-					<li><a href="?page=profile">{$greeting}, {$loggedUser}</a></li> <br>
+					<li><a href="?page=profile">{$loggedUser}</a></li> <br>
 					
 					{else}
 					<li><a href="?page=signIn">{$signIn}</a></li>
@@ -223,21 +254,11 @@ function checkAccess()
 		</div>  
 	</div>
 	<div class="min-cont bg">
-		<!--Statistics Bar Start-->
-		<div class="user" align="center"> 
-			<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
-			<p class="counts">{$videos} ({$videoCnt})</p></a>
-			<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
-			<p class="counts">{$tags} ({$tagCnt})</p></a>
-			<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
-			<p class="counts">{$users} ({$userCnt})</p></a>
-		</div>
-		 <!--Statistics Bar End-->
+		
 <a href="#regOrEnter" id="regPop"></a>
 <div id="regOrEnter" class="modalDialog" >
 	<div style="width:250px;height:60px;padding-top: 25;">
 		<a href="#close" title="Close" class="close">X</a>
-		<h1 style="font-weight:bold">{$regOrEnterNote1} <a href="?page=signIn">{$enterLink}</a> {$regOrEnterNote2} <a href="?page=reg">{$regLink}</a></h1>
-		
+		<h1 style="font-weight:bold">{$regOrEnterNote1} <a id="loginHref" name="loginHref" href="?page=signIn">{$enterLink}</a> {$regOrEnterNote2} <a href="?page=reg">{$regLink}</a></h1>
 	</div>
 </div>

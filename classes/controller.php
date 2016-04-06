@@ -981,5 +981,18 @@ class Controller //extends MySQL
 		$res = $this->db->rawQuery("select concat(firstName,' ',lastName) userName from users where id=$userId");
 		return $res[0]["userName"];
 	}
+	
+	public function compressImage($source_url, $destination_url, $quality) 
+	{
+		$info = getimagesize($source_url); 
+		if ($info['mime'] == 'image/jpeg') 
+			$image = imagecreatefromjpeg($source_url); 
+		elseif ($info['mime'] == 'image/gif') 
+			$image = imagecreatefromgif($source_url); 
+		elseif ($info['mime'] == 'image/png') 
+			$image = imagecreatefrompng($source_url); 
+		imagejpeg($image, $destination_url, $quality); 
+		return $destination_url; 
+	} 
 }
 ?>

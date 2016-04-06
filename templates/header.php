@@ -27,6 +27,11 @@ class Header
 		$this->header->assign("forgotPass",$content['FORGOTPASS']);
 		$this->header->assign("lang",$controller->lang);
 		$this->header->assign("languageVal",$langIds[$controller->lang]);
+		$this->header->assign("general",$content['GENERAL']);
+		$this->header->assign("favorite",$content['FAVORITE']);
+		$this->header->assign("added",$content['ADDEDVIDEOS']);
+		$this->header->assign("otherUsers",$content['OTHERUSERS']);
+		$this->header->assign("myVideos",$content['MYVIDEOS']);
 		
 		
 		$this->header->assign("about",$content['ABOUT']);
@@ -47,6 +52,7 @@ class Header
 		$this->header->assign("regOrEnterNote2",$content['REGORENTERNOTE2']);
 		$this->header->assign("regLink",$content['REGLINK']);
 		$this->header->assign("searchVal",$_POST['search']);
+		$this->header->assign("page",isset($_GET['page'])?$_GET['page']:"");
 		
 		$this->header->assign("randTags",$this->getRandTags($controller->lang,$controller->db));
 		
@@ -65,7 +71,7 @@ class Header
 			$this->header->assign("greeting",$content['GREETING']);
 			$this->header->assign("adminPanel",$content['ADMINPANEL']);
 			$this->header->assign("logout",$content['LOGOUT']);
-			$this->header->assign("loggedUser",$controller->access->firstName);
+			$this->header->assign("loggedUser",$controller->access->userName);
 		}
 	}
 	

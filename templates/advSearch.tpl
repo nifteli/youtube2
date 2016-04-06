@@ -58,8 +58,8 @@
 			</div>
 		</div>
 		<div style="float:left;width:208px;    height: 26px;">
-			<input class="srcCmb" style="width:95;    margin-left: 7;" type="text" name="fromDate" id="dpFrom2" placeholder="{$fromDate}">&nbsp;
-			<input class="srcCmb" style="width:95" type="text" name="toDate"  id="dpTo2" placeholder="{$toDate}">&nbsp;
+			<input class="srcCmb" style="width:95;    margin-left: 7;    height: 19px !important;" type="text" name="fromDate" id="dpFrom2" placeholder="{$fromDate}">&nbsp;
+			<input class="srcCmb" style="width:95;    height: 19px !important;" type="text" name="toDate"  id="dpTo2" placeholder="{$toDate}">&nbsp;
 		</div>
 		</div>
 				<br/><br/><br/>

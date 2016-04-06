@@ -74,6 +74,25 @@ function submitForm(action)
 	document.getElementById('frmAddToFolder').action=action;
 	//document.getElementById('frmAddToFolder').submit();
 }
+
+function changeOrderBy(orderBy,dir)
+ {
+ //alert(orderBy);
+	$('#loading').show();
+	//queryStr = queryStr + "1"+"&orderBy="+orderBy;
+	 $.ajax({
+	     url:"ajax/scroll.php",
+                  type:"POST",
+                  data:"actionfunction=showData&lang={$lang}&page=1"+"&orderBy="+orderBy+"&direction="+dir+"&catId={$catIdVal}&userId={$userIdVal}&tagId={$tagIdVal}&folderId={$folderIdVal}",
+        cache: false,
+        success: function(response){ //alert(queryStr);
+		   $('#loading').hide();
+		  $('#demoajax').html(response);
+		   //return;
+		}
+		
+	   });
+ }
 </script>
 	
 
@@ -87,8 +106,8 @@ function submitForm(action)
 
 <div class="videos">
 	<div style="padding-top:10px;min-height: 1000px;">
-		{if $folderName != "()"}
-			<div class='hollywd'>
+		{if $folderName != "()" && $folderName != ""}
+			<div class='hollywd' style="    height: 50px;">
 				<h2>{$folderName}</h2>  
 			</div>
 		{/if}
@@ -101,6 +120,21 @@ function submitForm(action)
 		{if $news1 != ''}
 		<div class="news1">{$news1}</div>
 		{/if}
+		<div class="orderByDiv">
+			<select name="reorder" id="reorder" onchange="changeOrderBy(this.value,2)">
+				<!-- <option value="">{$sortBy}</option> -->
+				<option value="1" selected>{$sbDate}</option>
+				<option value="2">{$sbName}</option>
+				<option value="3">{$sbLang}</option>
+				<option value="4">{$sbQuestion}</option>
+				<option value="5">{$sbCategory}</option>
+				<option value="6">{$sbDuration}</option>
+				<option value="7">{$sbWatches}</option>
+				<option value="8">{$sbComments}</option>
+			</select>
+			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,1)" type="radio" name="direction" id="direction" value=1 {if isset($directionVal) && $directionVal==1 } checked {/if}>{$asc}</label>
+			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,2)" type="radio" name="direction" id="direction" value=2 {if (isset($directionVal) && $directionVal==2) || !isset($directionVal)} checked {/if}>{$desc}</label>
+		</div>
 		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">
 		</div>

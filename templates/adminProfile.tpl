@@ -26,8 +26,8 @@ $(document).ready(function() {
     });
 });
 </script>
-<div>
-<div style="padding-top:30px;min-height: 500px;">
+
+<div >
 	
 	<!-- Info message boxes 
 	<div class="info">Info message</div>
@@ -41,7 +41,7 @@ $(document).ready(function() {
 	{if isset($okMessage)}
 	<div class="success1">{$okMessage}</div>
 	{/if}-->
-	<div class="titles">
+	<div class="titles" style="width:100%">
 		<h1>{$titleProfile}</h1>
 	</div>
 	{if $result == 'error'}
@@ -195,4 +195,3 @@ $(document).ready(function() {
 </div>
 </div>
 
-</div>

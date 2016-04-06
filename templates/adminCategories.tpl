@@ -53,7 +53,7 @@ function controlQuestionSelection(el,id)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		<div class="table-responsive" style="overflow-x: auto; width:3400px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
@@ -206,16 +206,13 @@ function controlQuestionSelection(el,id)
 		</div>
 		<!-- /.table-responsive -->
 		<div class="row pagination-zone np-l" >
-                <div class="col-lg-6 col-lg-offset-3" style="text-align: center">
+                <div class="col-lg-6 col-lg-offset-3" style="margin-left:0">
                     <ul class="pagination ui-port-paginate pull-left">
                         {section name=sec1 loop=$catPages}
 						<li class="{$catPages[sec1].pageStatus}"><a href="javascript:{}" onclick="submitForm('{$catPages[sec1].pageUrl}')">{$catPages[sec1].pageNum}</a></li>
 						{/section}
                     </ul>
-                </div>
-                <!-- /.col-lg-9 -->
-                <div class="col-lg-3">
-                    <ul class="list-unstyled list-inline pagination-per-page pull-right">
+                    <ul class="list-unstyled list-inline pagination-per-page">
                         
                         <li class="text-muted">
                             <div class="dropdown ui-dropdown-brd-list">
@@ -224,6 +221,7 @@ function controlQuestionSelection(el,id)
                                     <span class="caret"></span>
                                 </button>
                                 <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
+                                    <li role="presentation"><a href="?page=adminCategories&perPage=10" tabindex="-1" role="menuitem">10</a></li>
                                     <li role="presentation"><a href="?page=adminCategories&perPage=25" tabindex="-1" role="menuitem">25</a></li>
                                     <li role="presentation"><a href="?page=adminCategories&perPage=50" tabindex="-1" role="menuitem">50</a></li>
                                     <li role="presentation"><a href="?page=adminCategories&perPage=100" tabindex="-1" role="menuitem">100</a></li>
@@ -233,7 +231,7 @@ function controlQuestionSelection(el,id)
                         
                     </ul>
                 </div>
-                <!-- /.col-lg-3 -->
+                <!-- /.col-lg-9 -->
             </div>
 		</form>
 	</div>

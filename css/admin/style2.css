@@ -84,6 +84,7 @@ label {
 
 #wrapper{
  width:100%;	
+ height:50px;
 }
 
 .g-strip{
@@ -165,9 +166,9 @@ label {
 }
 
 .bg{
-  width:1500px;
+  width:100%;
  height:auto;
- margin-top: -70px;
+ /* margin-top: -70px; */
  background:#e2deae;
 }
 

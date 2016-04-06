@@ -4,9 +4,10 @@
 	var catTab = "{$catTab}"; 
 	var userId="{$userId}";
 	var myUserId="{$myUserId}";
+	var general="{$general}";
 	
 	$(document).ready(function(){
-		if(hasAccess == "1" && myUserId == userId)	
+		if(hasAccess == "1" && myUserId == userId && general=="true")	
 			changeView(2);
 		
 		if(hasAccess == "1" && myUserId != userId)
@@ -167,6 +168,8 @@
 				}
 				else
 				{
+					//$("loginHref").attr("href", "http://www.google.com/");
+					$("a[href='?page=signIn']").attr('href', '?page=signIn&src=mine');
 					document.getElementById("regPop").click();
 					$("input[name=option][value=1]").prop('checked', true); 
 					//return false;
@@ -210,7 +213,7 @@
 <div class="category">
 	<!--<h2>Categories</h2>-->
 	<div style="width:220px; margin: 0 auto;">
-	<div style="width:220px; height:80px">
+	<!-- <div style="width:220px; height:80px">
 		<div id="navigation" style="line-height: 0;">
 			<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
 			<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
@@ -230,7 +233,7 @@
 	</div>
 	<div style="float:left;    margin-top: -5px;">
 		<img style="float: right;" src="./img/underLine.png" width=220 height=20/>
-	</div>
+	</div>  -->
 		<div class="tabcontents">
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">
@@ -262,8 +265,13 @@
 					<h2>{$catGroupsHow[$k]["name"]}</h2>
 					<ul>
 						{foreach from=$catsHow[$k] key=k2 item=cat}
-						<li style="background: url('{$cat['img']}');" class="liimg" 
-						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+						{if $currCatId != {$cat['id']}}
+						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						{else}
+						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						{/if}
+						</li>
 						{/foreach}
 					</ul>
 				{/foreach}
@@ -275,8 +283,13 @@
 					<h2>{$catGroupsWhy[$k]["name"]}</h2>
 					<ul>
 						{foreach from=$catsWhy[$k] key=k2 item=cat}
-						<li style="background: url('{$cat['img']}');" class="liimg" 
-						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+						{if $currCatId != {$cat['id']}}
+						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						{else}
+						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						{/if}
+						</li>
 						{/foreach}
 					</ul>
 				{/foreach}
@@ -288,8 +301,13 @@
 					<h2>{$catGroupsWhat[$k]["name"]}</h2>
 					<ul>
 						{foreach from=$catsWhat[$k] key=k2 item=cat}
-						<li style="background: url('{$cat['img']}');" class="liimg" 
-						title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+						<li style="background: url('{$cat['img']}');" class="liimg"	title="{$cat['catInfo']}">
+						{if $currCatId != {$cat['id']}}
+						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						{else}
+						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						{/if}
+						</li>
 						{/foreach}
 					</ul>
 				{/foreach}
@@ -301,8 +319,13 @@
 						<h2>{$catGroupsWho[$k]["name"]}</h2>
 						<ul>
 							{foreach from=$catsWho[$k] key=k2 item=cat}
-							<li style="background: url('{$cat['img']}');" class="liimg" 
-							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $currCatId != {$cat['id']}}
+							<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							{else}
+							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							{/if}
+							</li>
 							{/foreach}
 						</ul>
 					{/foreach}
@@ -318,8 +341,13 @@
 						<h2>{$myCatGroupsHow[$k]["name"]}</h2>
 						<ul>
 							{foreach from=$myCatsHow[$k] key=k2 item=cat}
-							<li style="background: url('{$cat['img']}');" class="liimg" 
-							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $currCatId != {$cat['id']}}
+							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							{else}
+							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							{/if}
+							</li>
 							{/foreach}
 						</ul>
 					{/foreach}
@@ -334,8 +362,13 @@
 						<h2>{$myCatGroupsWhy[$k]["name"]}</h2>
 						<ul>
 							{foreach from=$myCatsWhy[$k] key=k2 item=cat}
-							<li style="background: url('{$cat['img']}');" class="liimg" 
-							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $currCatId != {$cat['id']}}
+							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							{else}
+							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							{/if}
+							</li>
 							{/foreach}
 						</ul>
 					{/foreach}
@@ -350,8 +383,13 @@
 						<h2>{$myCatGroupsWhat[$k]["name"]}</h2>
 						<ul>
 							{foreach from=$myCatsWhat[$k] key=k2 item=cat}
-							<li style="background: url('{$cat['img']}');" class="liimg" 
-							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $currCatId != {$cat['id']}}
+							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							{else}
+							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							{/if}
+							</li>
 							{/foreach}
 						</ul>
 					{/foreach}
@@ -366,8 +404,13 @@
 						<h2>{$myCatGroupsWho[$k]["name"]}</h2>
 						<ul>
 							{foreach from=$myCatsWho[$k] key=k2 item=cat}
-							<li style="background: url('{$cat['img']}');" class="liimg" 
-							title="{$cat['catInfo']}"><a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a></li>
+							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $currCatId != {$cat['id']}}
+							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							{else}
+							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							{/if}
+							</li>
 							{/foreach}
 						</ul>
 					{/foreach}

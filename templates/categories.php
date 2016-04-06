@@ -23,12 +23,7 @@ class Categories
 		$this->categories->assign("folderName",$content['FOLDERNAME']);
 		$this->categories->assign("editFolder",$content['EDITFOLDER']);
 		$this->categories->assign("save",$content['SAVE']);
-		$this->categories->assign("general",$content['GENERAL']);
-		$this->categories->assign("favorite",$content['FAVORITE']);
-		$this->categories->assign("added",$content['ADDEDVIDEOS']);
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
-		$this->categories->assign("otherUsers",$content['OTHERUSERS']);
-		$this->categories->assign("myVideos",$content['MYVIDEOS']);
 		$this->categories->assign("tags",$content['TAGS']);
 		
 				
@@ -50,6 +45,12 @@ class Categories
 		$controller->getCategories(2,$catGroups,$cats);
 		$this->categories->assign("catGroupsWho",$catGroups);
 		$this->categories->assign("catsWho",$cats);
+		//echo "eee";print_r($_POST);exit;
+		$this->categories->assign("general","true");
+		if($_REQUEST["src"] == "")
+			$this->categories->assign("general","false");
+		
+			
 		//$this->categories->assign("catsHow",$controller->getCategories(4));
 		// $this->categories->assign("catsWhy",$controller->getCategories(8));
 		// $this->categories->assign("catsWhat",$controller->getCategories(1));
@@ -62,12 +63,15 @@ class Categories
 		$this->categories->assign("userId",$userId);
 		$this->categories->assign("myUserId",$controller->access->userId);
 			
+		if(isset($_GET["catId"]) && is_numeric($_GET["catId"]))
+			$this->categories->assign("currCatId",$_GET["catId"]);
 		if($userId > 0)
 		{
 			if(isset($_GET["folderId"]) && is_numeric($_GET["folderId"]))
 				$this->categories->assign("folderTab",1);
 			if(isset($_GET["catId"]) && is_numeric($_GET["catId"]) && isset($_GET["userId"]) && is_numeric($_GET["userId"]))
 				$this->categories->assign("catTab",1);	
+				
 			$this->categories->assign("hasAccess",1);
 			$this->categories->assign("myFolders",$this->getMyFolders($controller,$userId));
 			$this->categories->assign("userName",$controller->getUserName($userId));

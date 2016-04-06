@@ -34,6 +34,10 @@ input[type="text"]
 {
 	height: 27px !important;
 }
+input[type="file"]
+{
+	height: 27px !important;
+}
 input[type="email"]
 {
 	height: 27px !important;
@@ -437,7 +441,7 @@ form{
  height:27px;
  font-family:Calibri;
  margin-top:5px;
- text-indent:40px;
+ text-indent:32px;
  float:left;
  margin-left:5px;
  border:2px solid #e1e1e1;
@@ -451,7 +455,7 @@ width: 189px;
 height: 27px;
 font-family: Calibri;
 margin-top: 5px;
-text-indent: 40px;
+text-indent: 32px;
 float: left;
 margin-left: 5px;
 border: 2px solid #e1e1e1;
@@ -582,9 +586,12 @@ display: table;
 
 .user
 {
-position: absolute;
+/* position: absolute;
 left: 50%;
-margin-left: -300px;
+margin-left: -300px; */
+float:left;
+width: 100%;
+height: 25px;
 }
 
 
@@ -595,7 +602,7 @@ font-family:Calibri;
  text-align: center;
  float:left;
  position:relative;
- top:10px;
+ /* top:10px; */
  left:10px;
  text-decoration:none;
      font-weight: bold;
@@ -603,26 +610,26 @@ font-family:Calibri;
 
 
 .statistics{
-	margin-top:10px;
+	/* margin-top:10px; */
 	margin-left:60px;
 }
 
 
 .statistics1{
-	margin-top:10px;
+	/* margin-top:10px; */
 	margin-left:60px;
 	float:left;
 }
 
 .statistics2{
-	margin-top:10px;
+	/* margin-top:10px; */
 	margin-left:60px;
 	float:left;
 }
 
 .vid{
-	margin-top:10px;
-	margin-left:60px;
+	/* margin-top:10px; */
+	margin-left:180px;
 	float:left;
 	
 }
@@ -683,7 +690,7 @@ width: 100%;
 }
 
 .box img{
- margin-top:4px;
+  margin-top:2px; 
  
 }
 
@@ -696,12 +703,12 @@ width: 100%;
 }
 
 .videoName{
-	float: left;
+	    float: left;
     text-decoration: none;
     text-align: left;
-    margin-left: 10px;
+    margin-left: 7px;
     margin-top: -19px;
-	    width: 150px;
+    width: 172px;
 }
 .box a{
 text-decoration:none;	
@@ -762,8 +769,6 @@ text-decoration:none;
  
 .shape{
  margin-top:2px !important;	
-
-
 }
 
 	
@@ -1151,11 +1156,12 @@ border-radius: 5px;
 }
 
 .pic-cont{
-width: 750px;
-height: 480px;
-float: left;
-margin-left: 70px;
-margin-top: -40px;
+    width: 970;
+    /* height: 480px; */
+    float: left;
+    /* vertical-align: top; */
+    /* margin-left: 70px; */
+    margin-top: 0;
 }
 
 
@@ -1171,7 +1177,7 @@ margin-top: -40px;
  font-family:Calibri;
  font-size:14px;
  color:#3e3003;
- text-indent:25px;	
+ /* text-indent:25px;	 */
 }
 
 .tags2{
@@ -1673,7 +1679,7 @@ height: 1px;
 float: left;
 margin-left: -203px;
 margin-top: 102px;
-background: url(../img/line.png);	
+/* background: url(../img/line.png);	 */
 }
 
 
@@ -1743,7 +1749,7 @@ margin-top: 22px;
  float:left;
  margin-left:3px;
  margin-top: 14px;
- background:url(../img/line.png);	
+ /* background:url(../img/line.png);	 */
 }
 
 .v-details{
@@ -1837,7 +1843,7 @@ margin-top: 22px;
   float: left;
   margin-left: 20;
   margin-top: 120px;
-  background: url(../img/line.png);	
+  /* background: url(../img/line.png);	 */
 }
 
 .flag{
@@ -1964,7 +1970,7 @@ margin-top: 22px;
     color: #3e3003;
     position: relative;
     margin-left: 5px;
-    top: 7px;
+    /* top: 7px; */
 }
 .views {
       font-family: Calibri;
@@ -2314,7 +2320,7 @@ float: left;
 	
 .forgotPass{
 	color: rgb(174, 64, 25);
-    
+    width: 500px;
     margin-left:5px;
 }
 
@@ -2346,8 +2352,8 @@ pre{
 /* Tag cloud */
 	.tags {
 		width: 840px;
-		height: 86px;
-		padding-top: 7;
+		height: 55px;
+		/* padding-top: 7; */
 		/* background-color: rgb(219, 203, 143);*/
 		overflow: hidden;
 		/* word-wrap: normal; */
@@ -2436,7 +2442,7 @@ pre{
 }
 
 .srcCmb{
-	margin-top: 5px;
+	margin-top: 2px;
     border: 2px solid #e7e7e7;
     border-radius: 2px 2px 2px 2px;
     padding-left: 2px;
@@ -2511,29 +2517,32 @@ pre{
 /*End Back to top*/
     
 .headerLeft{
-    width: 200px;
-    height: 130px;
-	float: left;
-    margin-top: 15px;
+        width: 200px;
+    height: 140px;
+    float: left;
+    /* margin-top: 15px; */
+    background-color: white;
 }
 
 .headerMiddle{
-	    float: left;
+	float: left;
     width: 840px;
     height: 170px;
-        margin-top: -25px;
+    margin-top: -25px;
+	background-color: white;
 }
 
 .headerRight{
 	float: left;
     width: 160px;
-    height: 130px;
-    margin-top: 15px;
+    height: 140px;
+    /* margin-top: 15px; */
+	background-color: white;
 }
 
 .langs{
 	list-style-type: none;
-        margin-top: -12;
+        /* margin-top: -12; */
 }
 
 .langs li{
@@ -2717,7 +2726,7 @@ background: #C05208;
 
 #navigation h1 { display:block;width:100%;margin:0 auto;padding:20px 0;color:#fff; } 
 #navigation { 
-	width:100px;
+	width:80px;
 	float:left;
 	margin: 0 auto; 
 }
@@ -2748,7 +2757,7 @@ h
 
 .orderByDiv{
 	    width: 400px;
-    margin-top: 23px;
+    /* margin-top: 23px; */
     
     position: static;
     float: left;
@@ -2758,19 +2767,19 @@ h
 .questions{
 	width:120px;
 	float:left;
-	height:80
+	height:105px
 }
 .tabImg1{
 	float: right;
 	margin-top: 5px;
 	width:30; 
-	height:70;
+	height:100;
 }
 .tabImg2{
 	float: right;
 	position:relative;
 	width:30; 
-	height:80;
+	height:110;
 }
 .news1{
 	width:100%;
@@ -2826,4 +2835,14 @@ h
     width: 100;
     height: 27px;
     line-height: 1;
+	text-align: center;
+}
+
+.stat1{
+	float:left;
+	width: 172px;
+}
+.stat2{
+	float:left;
+	width:172px;
 }

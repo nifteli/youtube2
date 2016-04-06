@@ -7,6 +7,7 @@ class SignIn
 	public function __construct($controller)
 	{
 		global $content;
+		global $errorMessage;
 		
 		$this->signIn = new Smarty;
 		$this->signIn->assign("login",$content['LOGIN']);
@@ -24,6 +25,9 @@ class SignIn
 		$this->signIn->assign("signInNote6",$content['SIGNINNOTE6']);
 		$this->signIn->assign("or",$content['OR']);
 		$this->signIn->assign("rememberMe",$content['REMEMBERME']);
+		$this->signIn->assign("src",$_GET["src"]);
+		$this->signIn->assign("errorMessage", isset($errorMessage) ? $errorMessage : "");
+		//$this->videos->assign("okMessage", isset($okMessage) ? $okMessage : "");
 		
 		//$this->signIn->assign("signIn",$this->getUsers($controller->lang,$controller->db));
 	}

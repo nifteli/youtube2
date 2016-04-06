@@ -63,7 +63,7 @@ $(document).ready(function() {
 			<select id="category" name="category[]" multiple="multiple" class="fieldv" style="width:377px">
 			</select>
 			<input class="fieldv" type="text" name="tags" id="tags" value="{$tagsVal}" placeholder="{$tags}" style="width: 100%;">
-			<textarea class="fieldtextv" type="text" name="information" id="information" placeholder="{$information}" style="width: 100%;">{$informationVal}</textarea>
+			<textarea class="fieldtextv" type="text" name="information" id="information" placeholder="{$information}" style="width: 100%;height:237px !important">{$informationVal}</textarea>
 			<input type="hidden" name="duration" id="duration" value="{$durationVal}"/>
 			<input type="hidden" name="validVideo" id="validVideo" value="{$validVideoVal}"/>
 		</div>

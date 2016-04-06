@@ -7,6 +7,7 @@ class AdvSearch
 	public function __construct($controller)
 	{
 		global $content;
+		global $langIds;
 		
 		$this->advSearch = new Smarty;
 		$this->advSearch->assign("allLangs",$content['ALLLANGS']);
@@ -25,6 +26,7 @@ class AdvSearch
 		$this->advSearch->assign("enterLink",$content['ENTERLINK']);
 		$this->advSearch->assign("regOrEnterNote2",$content['REGORENTERNOTE2']);
 		$this->advSearch->assign("regLink",$content['REGLINK']);
+		$this->advSearch->assign("languageVal",$langIds[$controller->lang]);
 		
 		$this->advSearch->assign("selectAll",$content['SELECTALL']);
 		$this->advSearch->assign("opt1",$content['OPT1']);

@@ -112,7 +112,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("reportCountSortType", ($_GET["reportCountSortType"] == "" || $_GET["reportCountSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
 		$this->adminVideoLinks->assign("perPage", $perPage);
 		$this->adminVideoLinks->assign("videoLinks", $controller->getVideoLinks($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		

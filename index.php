@@ -91,7 +91,7 @@ else
 			break;
 		case "signIn":
 			if(isset($_GET["action"])) 
-				include_once($actionsPath."loginAction.php");
+				include_once($actionsPath."signInAction.php");
 			include_once($templatePath."pageHeader.tpl");
 			$controller->includeSection("header");
 			$controller->includeSection("categories");

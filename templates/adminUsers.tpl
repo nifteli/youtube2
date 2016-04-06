@@ -60,7 +60,7 @@ function showProfile(userId)
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
+	
 	<div class="titles">
 		<h1>{$titleUsers}</h1>
 	</div>
@@ -87,7 +87,7 @@ function showProfile(userId)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		
 		<div class="table-responsive" style="overflow-x: auto; width:4500px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
@@ -281,16 +281,13 @@ function showProfile(userId)
 		</div>
 		<!-- /.table-responsive -->
 		<div class="row pagination-zone np-l" >
-                <div class="col-lg-6 col-lg-offset-3" style="text-align: center">
+                <div class="col-lg-6 col-lg-offset-3" style="margin-left: 0;">
                     <ul class="pagination ui-port-paginate pull-left">
                         {section name=sec1 loop=$userPages}
 						<li class="{$userPages[sec1].pageStatus}"><a href="javascript:{}" onclick="submitForm('{$userPages[sec1].pageUrl}')">{$userPages[sec1].pageNum}</a></li>
 						{/section}
                     </ul>
-                </div>
-                <!-- /.col-lg-9 -->
-                <div class="col-lg-3">
-                    <ul class="list-unstyled list-inline pagination-per-page pull-right">
+					<ul class="list-unstyled list-inline pagination-per-page ">
                         
                         <li class="text-muted">
                             <div class="dropdown ui-dropdown-brd-list">
@@ -299,6 +296,7 @@ function showProfile(userId)
                                     <span class="caret"></span>
                                 </button>
                                 <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
+                                    <li role="presentation"><a href="?page=adminUsers&perPage=10" tabindex="-1" role="menuitem">10</a></li>
                                     <li role="presentation"><a href="?page=adminUsers&perPage=25" tabindex="-1" role="menuitem">25</a></li>
                                     <li role="presentation"><a href="?page=adminUsers&perPage=50" tabindex="-1" role="menuitem">50</a></li>
                                     <li role="presentation"><a href="?page=adminUsers&perPage=100" tabindex="-1" role="menuitem">100</a></li>
@@ -308,7 +306,8 @@ function showProfile(userId)
                         
                     </ul>
                 </div>
-                <!-- /.col-lg-3 -->
+                <!-- /.col-lg-9 -->
+                
             </div>
 		</form>
 	</div>

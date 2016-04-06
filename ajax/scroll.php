@@ -14,6 +14,7 @@ if(isset($_POST['actionfunction']) && $_POST['actionfunction']!='' && $_POST['la
 {
 	$actionfunction = $_POST['actionfunction'];
 	call_user_func($actionfunction,$_POST,$db,$limit);
+	//print_r($_POST);
 }
 
 function showData($data,$db,$limit)
@@ -28,6 +29,40 @@ function showData($data,$db,$limit)
 		$userId = $data["userId"];
 	if(isset($data["folderId"]) && $data["folderId"]>0)
 		$folderId = $data["folderId"];
+	$direction = "asc";
+	if($data["direction"] == 2)
+		$direction = "desc";
+	switch($data["orderBy"])
+	{
+		case 1:
+			$orderBy = " v.added $direction,catName$lang asc ";
+			break;
+		case 2:
+			$orderBy = " v.name $direction,catName$lang asc ";
+			break;
+		case 3:
+			$orderBy = " l.name$lang $direction,catName$lang asc ";
+			break;
+		case 4:
+			$orderBy = " q.question $direction,catName$lang asc ";
+			break;
+		case 5:
+			$orderBy = " catName$lang $direction ";
+			break;
+		case 6:
+			$orderBy = " v.duration $direction,catName$lang asc  ";
+			break;
+		case 7:
+			$orderBy = " viewCount $direction,catName$lang asc  ";
+			break;
+		case 8:
+			$orderBy = " vs.comments $direction,catName$lang asc  ";
+			break;
+		default:
+			$orderBy = " v.added desc,catName$lang asc ";
+			break;
+	}
+	
 	if($page==1)
 		$start = 0;  
 	else
@@ -65,7 +100,7 @@ function showData($data,$db,$limit)
 	if(isset($tagId) && is_numeric($tagId))
 		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
-			order by v.added desc,catName$lang asc
+			order by $orderBy
 			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry); 
 	
@@ -166,7 +201,7 @@ function showSearchResults($data,$db,$limit)
 			$orderBy = " vs.comments $direction,catName$lang asc  ";
 			break;
 		default:
-			$orderBy = " v.added $direction,catName$lang asc ";
+			$orderBy = " v.added desc,catName$lang asc ";
 			break;
 	}
 	
@@ -251,11 +286,11 @@ function showSearchResults($data,$db,$limit)
 	}
 	
 	$qry .= ")";
-	if($language != "0")
+	if(is_numeric($language))
 		$qry .= " and " . createCondition("v.languageId", $language, "=", false);
-	if($videoQuestion != "0")
+	if(is_numeric($videoQuestion))
 		$qry .= " and " . createCondition("v.questions & ".$videoQuestion, $videoQuestion, "=", false);
-	if($category != "0")
+	if($category != "0" && is_numeric($category))
 		$qry .= " and " . createCondition("c.id", $category, "=", false);
 	if($interval != "0")
 	{
@@ -316,8 +351,8 @@ function displayData($res, $data, $colCnt=4)
 			$id = $res[$i]['id'];
 			$link = getYoutubeImage($res[$i]['link']);
 			$info = $res[$i]['info'];
-			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 18) ? mb_substr(trim($res[$i]['name']), 0, 14,"UTF-8")."..." : $res[$i]['name'];
-			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['tags']), 0, 14,"UTF-8")."..." : $res[$i]['tags'];
+			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 20) ? mb_substr(trim($res[$i]['name']), 0, 20,"UTF-8")."..." : $res[$i]['name'];
+			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 20) ? mb_substr (trim($res[$i]['tags']), 0, 20,"UTF-8")."..." : $res[$i]['tags'];
 			$viewCount = $res[$i]['viewCount'];
 			$addedDate = $res[$i]['added'];
 			$addedBy = (mb_strlen($res[$i]['addedBy'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
@@ -350,18 +385,15 @@ function displayData($res, $data, $colCnt=4)
 					 </div>
 					 <img class='shape' src='img/shape.png' width=170 height=0 alt=''/> </div>
 					 <div class='videoDet'>
-						 <ul class='move' style='    line-height: 0.3;'>
-							<li>
-								<img width=12 height=10 src='img/question.png'/><span class='views'>" . $res[$i]["question"] . "</span>
-								<img width=15 height=10 src='img/eye.png'/><span class='views'>$viewCount</span>
-								<img width=15 height=10 src='img/comments.png'/><span class='views'>" . $res[$i]["comments"] . "</span>
-							</li>
-							<li>
-								<img class='details' width=15 height=10 src='img/tags2.png'/>
-								<span class='wood'>$tags</span>
-							</li>
-							
-						 </ul>
+						<div class='stat1'> 
+							<img class='details' width=15 height=10 src='img/tags2.png' title='".$content["HINTTAGS"]."' />
+							<span class='wood' title='".$res[$i]['tags']."'>$tags</span>
+						</div>	
+						<div class='stat2'> 	
+								<img width=12 height=10 src='img/question.png' title='".$content["HINTQUESTION"]."' /><span class='views' title='".$content["HINTQUESTION"]."' >" . $res[$i]["question"] . "</span>
+								<img width=15 height=10 src='img/eye.png' title='".$content["VIEWCOUNTTITLE"]."' /><span class='views' title='".$content["VIEWCOUNTTITLE"]."' >$viewCount</span>
+								<img width=15 height=10 src='img/comments.png' title='".$content["COMMENTCOUNTTITLE"]."' /><span class='views' title='".$content["COMMENTCOUNTTITLE"]."' >" . $res[$i]["comments"] . "</span>
+						</div>						 
 					 </div>
 				</div>";
 			if($cnt % $colCnt == 0 || $i + 1 == count($res) || $cat != $res[$i + 1]["catName".$lang])

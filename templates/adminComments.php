@@ -88,7 +88,7 @@ class AdminComments
 		$this->adminComments->assign("confirmerSortType", ($_GET["confirmerSortType"] == "" || $_GET["confirmerSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
 		$this->adminComments->assign("perPage", $perPage);
 		$this->adminComments->assign("comments", $controller->getComments($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminComments->assign("commentPages",$controller->getPages($begin,$perPage,$cnt,"adminComments"));

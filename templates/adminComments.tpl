@@ -30,7 +30,7 @@ function submitForm(action)
 </script>
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
+	
 	<div class="titles">
 		<h1>{$titleComments}</h1>
 	</div>
@@ -45,9 +45,9 @@ function submitForm(action)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; width: 1200px;overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		<form method="post" action="?page=adminComments&action=filter" id="vlFilter" name="vlFilter">
-		<div class="table-responsive" style="overflow-x: auto; width:2400px">
+		<div class="table-responsive" style="overflow-x: auto; width:2600px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 160px; overflow: hidden;"/>
@@ -61,8 +61,8 @@ function submitForm(action)
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 130px; overflow: hidden;"/>
+					<col style="width: 170px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -156,16 +156,13 @@ function submitForm(action)
 		</div>
 		<!-- /.table-responsive -->
 		<div class="row pagination-zone np-l" >
-                <div class="col-lg-6 col-lg-offset-3" style="text-align: center">
+                <div class="col-lg-6 col-lg-offset-3" style="margin-left: 0;">
                     <ul class="pagination ui-port-paginate pull-left">
                         {section name=sec1 loop=$commentPages}
 						<li class="{$commentPages[sec1].pageStatus}"><a href="javascript:{}" onclick="submitForm('{$commentPages[sec1].pageUrl}')">{$commentPages[sec1].pageNum}</a></li>
 						{/section}
                     </ul>
-                </div>
-                <!-- /.col-lg-9 -->
-                <div class="col-lg-3">
-                    <ul class="list-unstyled list-inline pagination-per-page pull-right">
+                    <ul class="list-unstyled list-inline pagination-per-page ">
                         
                         <li class="text-muted">
                             <div class="dropdown ui-dropdown-brd-list">
@@ -174,6 +171,7 @@ function submitForm(action)
                                     <span class="caret"></span>
                                 </button>
                                 <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
+                                    <li role="presentation"><a href="?page=adminComments&perPage=10" tabindex="-1" role="menuitem">10</a></li>
                                     <li role="presentation"><a href="?page=adminComments&perPage=25" tabindex="-1" role="menuitem">25</a></li>
                                     <li role="presentation"><a href="?page=adminComments&perPage=50" tabindex="-1" role="menuitem">50</a></li>
                                     <li role="presentation"><a href="?page=adminComments&perPage=100" tabindex="-1" role="menuitem">100</a></li>
@@ -183,7 +181,8 @@ function submitForm(action)
                         
                     </ul>
                 </div>
-                <!-- /.col-lg-3 -->
+                <!-- /.col-lg-9 -->
+               
             </div>
 		</form>
 	</div>

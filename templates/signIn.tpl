@@ -1,12 +1,16 @@
-<div>
-<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
-</div>
-</div>
+<script>
+$(function() {
+$( "#userName" ).focus();
+});
+
+</script>	
 
 <!--Videos thums Start-->			 
 
 <div style="padding-top:10px;min-height: 1000px;">
+	{if $errorMessage != ''}
+	<div class="err" style="width:911px; margin-top:40px">{$errorMessage}</div>
+	{/if}
 	<div class="pic-cont" style="font-weight:bold">
 	
 	<b> {$signInNote1} <a href="?page=rules">{$signInNote2} </a> <br><br>
@@ -21,10 +25,11 @@
 	<br><br>
 	{$signInNote5} 
 	<div class="logForm">
-		<form name="logForm" id="logForm" action="?action=login" method="post">
+		<form name="logForm" id="logForm" action="?page=signIn&action=login" method="post">
 			<div style="float:left;width:100%">
-			<input class="u-n" type="text" name="userName" value="" placeholder="{$userName}">
+			<input class="u-n" type="text" name="userName" id="userName" value="" placeholder="{$userName}">
 			<input class="pw" type="password" name="password" value="" placeholder="{$password}">
+			<input type="hidden" name="src" value="{$src}">
 			<!-- <input class="loginLg" type="submit" value="{$login}" name="submit">	 -->
 			<input class="btnSearch" type="image" src="img/signIn_{$lang}.png" name="submit" style="height: 25;margin-left: 5;margin-top: 4;"
 					onmouseover="this.src='img/signInSelected_{$lang}.png';"
@@ -32,7 +37,7 @@
 					onmousedown="this.src='img/signInPushed_{$lang}.png';">			
 			</div>
 			<div style="float:left;width:400px">
-			<div style="width:189px;float: left;    padding-left: 2px;"><label><input type="checkbox" name="rememberMe">{$rememberMe}</label></div>
+			<div style="width:189px;float: left;    padding-left: 2px;"><label><input type="checkbox" checked name="rememberMe">{$rememberMe}</label></div>
 			<div style="width:189px;float: left;    padding-left: 4px;"><a class="forgotPass" href="?page=forgotPass">{$forgotPass}</a></div>
 			</div>
 		</form>

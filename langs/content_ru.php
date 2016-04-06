@@ -50,11 +50,25 @@ $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
 $content['PROFILE'] = "Profil";
 $content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
-$content['OTHERUSERS'] = "Other users";
+$content['OTHERUSERS'] = "Others";
 $content['MYVIDEOS'] = "Mine";
 $content['ADVANCED'] = "Advanced";
 $content['ASC'] = "Ascending";
 $content['DESC'] = "Descending";
+$content['SELECTALL'] = "Hamısını seç";
+$content['OPT1'] = "Video linkinin unikal nömrəsi";
+$content['OPT2'] = "Videonun adındakı sözlər";
+$content['OPT3'] = "Videonun təsvirindəki sözlər";
+$content['OPT4'] = "Videodakı taqlar";
+$content['OPT5'] = "Şəxsi kataloqun unikal nömrəsi";
+$content['OPT6'] = "Şəxsi kataloqun adı";
+$content['OPT7'] = "Şəxsi kataloqdakı taqlar";
+$content['OPT8'] = "Şərhlərin unikal nömrəsi";
+$content['OPT9'] = "Şərhlərdəki sözlər";
+$content['OPT10'] = "İstifadəçinin unikal nömrəsi";
+$content['OPT11'] = "İstifadəçinin loqini";
+$content['HINTTAGS'] = "Taqlar";
+$content['HINTQUESTION'] = "Sual";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -114,7 +128,23 @@ $content["ONNEWS"] = "on the news of this Site";
 $content["ONCOMMENT"] = "when a user comments after my comment";
 $content["ONVIDEOCOMMENT"] = "when a user comments to the video I've added";
 $content["AGREE"] = "I agree with the rules. ";
+$content["VALIDATIONERR1"] = "Write name";
+$content["VALIDATIONERR2"] = "Number in name";
+$content["VALIDATIONERR3"] = "Too small name";
+$content["VALIDATIONERR4"] = "Write surname";
+$content["VALIDATIONERR5"] = "Number in surname";
+$content["VALIDATIONERR6"] = "Too small surname";
+$content["VALIDATIONERR7"] = "Wrong telephone number";
+$content["VALIDATIONERR8"] = "Write email";
+$content["VALIDATIONERR9"] = "Select gender";
+$content["VALIDATIONERR10"] = "Write username";
+$content["VALIDATIONERR11"] = "Too small username";
+$content["VALIDATIONERR12"] = "Write password";
+$content["VALIDATIONERR13"] = "Write password again";
+$content["VALIDATIONERR14"] = "Too small secretAnswer";
+$content["VALIDATIONERR15"] = "Check agreement";
 //end registration
+
 // add video
 $content['VIDEOLINK'] = 'Video Link';
 $content['VIDEOQUESTION'] = 'Video Question';
