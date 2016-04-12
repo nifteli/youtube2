@@ -11,6 +11,8 @@ class Users
 		$this->users = new Smarty;
 		$this->users->assign("users",$this->getUsers($controller->lang,$controller->db));
 		$this->users->assign("titleUsers",$content["TITLEUSERS"]);
+		$this->users->assign("usersNote",$content["USERSNOTE"]);
+		$this->users->assign("others",isset($_GET["others"])?"others":"");
 	}
 	
 	public function Show()

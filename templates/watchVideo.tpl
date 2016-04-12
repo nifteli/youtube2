@@ -340,13 +340,9 @@ function unhint(elem) {
 		<div id="newFolder" style="display:none">
 			<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=watchVideo&id={$videoId}&action=addNewFolder" method="post">
 				<br>
-				<label>{$folderName}:</label>
-				<div style="float:right">
-					<input type="text" name="folderName" id="folderName">
-				</div>
-				<label>{$tags}:</label>
-				<div style="float:right;margin-top:3px">
-					<input type="text" name="tags" id="tags">
+				<div style="float:right;width:100%">
+					<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width:100%" required>
+					<input type="text" name="tags" id="tags" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
 				</div>
 			<br><br>
 			<div style="text-align:center;width:100%">
@@ -358,7 +354,7 @@ function unhint(elem) {
 </div>
 
 <div id="reportVideoModal" class="modalDialog" >
-	<div style="height:200px; width:400px">
+	<div style="height:150px; width:400px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$reportVideo}</h1>
 		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=reportVideo" method="post">
@@ -374,7 +370,7 @@ function unhint(elem) {
 			<br><br>
 			<label>{$reportDesc}:</label>
 			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
-			<br><br><br><br>
+			<br><br>
 			<div style="text-align:center;width:100%">
 				<input type="submit" class="post" name = "add" id="add" value="{$reportVideo}">
 			</div>

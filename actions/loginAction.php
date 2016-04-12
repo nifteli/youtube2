@@ -7,14 +7,99 @@
 	header("Location: index.php");
 }*/
 
+if ($_GET["action"]=="delProfile" && $access->hasAccess)
+{
+	$db->where("id=" . $access->userId);
+	$db->update("users",array("isDeleted"=>1,
+								"deleted"=>date("Y-m-d H:i:s"),
+								"deletedById"=>$access->userId,
+								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
+	if($db->count>0)
+	{
+		$okMessage = $content["ACCOUNTREMOVED"];
+		session_destroy();
+		$access->destroy();
+		if(isset($_COOKIE["arr"]["userName"]) && isset($_COOKIE["arr"]["password"]))
+		{
+			setcookie("arr[userName]", time() - 3600);
+			setcookie("arr[password]", time() - 3600);
+		}
+	}
+}
 if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["folderId"]) && trim($_POST["folderName"]) != "")
 {
+	if(!$access->authorized(55))
+	{
+		$result = "error";
+		$errorMessage = $content["INSUFFACCESS"];
+		return;
+	}
+	if(strlen(trim($_POST["folderName"])) < 3 || strlen(trim($_POST["folderName"])) > 25)
+	{
+		$result = "error";
+		$errorMessage = $content["SHORTFOLDERNAME"];
+		return;
+	}
+	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+	$tags = explode(",", $tagStr);
+	if(count($tags) < 2)
+	{
+		$result = "error";
+		$errorMessage = $content["NOTENGOUGHTAG"];
+		return;
+	}
+	foreach($tags as $tag)
+	{
+		if(strlen(trim($tag) == 1))
+		{
+			$result = "error";
+			$errorMessage = $content["SHORTTAG"];
+			return;
+		}
+	}
+	$continue = true;
+	$db->startTransaction();
 	$db->where("id=".$_POST["folderId"] . " and createdById=" . $access->userId);
 	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
 	if($res)
 	{
-		$okMessage = $content["FOLDEREDITED"];
-		$db->commit();
+		$db->rawQuery("delete from foldertags where folderId=".$_POST["folderId"]);
+		foreach($tags as $tag)
+		{
+			$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+			$res = $db->getOne("tags");
+			
+			
+			if ($db->count == 1) 
+				$id = $res["id"];
+			else
+				$id = $db->insert("tags", array("name"=>trim($tag),
+										"langId"=>$langIds[$_SESSION["lang"]],
+										"created"=>date("Y-m-d H:i:s"),
+										"createdById"=>$access->userId));
+			if($id)
+			{
+				
+				$id = $db->insert("foldertags", array("tagId"=>$id,
+									"folderId"=>$_POST["folderId"]));
+									//echo "Error=".$db->getLastError()."<br>"; echo "Query=".$db->getLastQuery()."<br>";
+			}
+			
+			if(!$id)
+			{ 
+				$continue = false;
+				break;
+			}
+		}
+		if($continue)
+		{
+			$db->commit();
+			$okMessage = $content["FOLDEREDITED"];
+		}
+		else
+			$db->rollback();
+		//$okMessage = $content["FOLDEREDITED"];
+		//$db->commit();
 	}
 	else
 	{
@@ -50,20 +135,35 @@ if ($_GET["action"]=="deleteFolder" && $access->hasAccess && is_numeric($_GET["i
 
 if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
 {
-	if(strlen(trim($_POST["folderName"])) < 3)
-	{
-		$result = "error";
-		$errorMessage = $content["SHORTFOLDERNAME"];
-		return;
-	}
 	if(!$access->authorized(55))
 	{
 		$result = "error";
 		$errorMessage = $content["INSUFFACCESS"];
 		return;
 	}
+	if(strlen(trim($_POST["folderName"])) < 3 || strlen(trim($_POST["folderName"])) > 25)
+	{
+		$result = "error";
+		$errorMessage = $content["SHORTFOLDERNAME"];
+		return;
+	}
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
 	$tags = explode(",", $tagStr);
+	if(count($tags) < 2)
+	{
+		$result = "error";
+		$errorMessage = $content["NOTENGOUGHTAG"];
+		return;
+	}
+	foreach($tags as $tag)
+	{
+		if(strlen(trim($tag) == 1))
+		{
+			$result = "error";
+			$errorMessage = $content["SHORTTAG"];
+			return;
+		}
+	}
 	$continue = true;
 	$db->startTransaction();
 	$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),

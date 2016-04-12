@@ -9,14 +9,19 @@ class Profile
 		global $content;
 		global $result;
 		global $messages;
+		global $langIds;
+		global $minPasswordLength;
 		
 		$this->profile = new Smarty;
 		$this->profile->assign("titleProfile", $content['TITLEPROFILE']);
 		$this->profile->assign("lang", $controller->lang);
 		$this->profile->assign("uName", $controller->access->userName);
-		$this->profile->assign("userId", $controller->access->userId);
+		$this->profile->assign("userId", $controller->access->userName);
+		
 		
 		$profile = $this->getUserProfile($controller->access->userId,$controller->db);
+		$this->profile->assign("minPassLength",$minPasswordLength);
+		$this->profile->assign("passTooShort",$content["MINPASSLENGTH"]);
 		//echo "<pre>"; print_r($profile); echo "</pre>";//exit; 
 		if(count($profile)>0)
 		{
@@ -36,7 +41,7 @@ class Profile
 			$this->profile->assign("notesVal", $profile["notes"]);
 			$this->profile->assign("emailVal", $profile["email"]);
 			$this->profile->assign("phoneVal", $profile["phoneNumber"]);
-			$this->profile->assign("languageVal", $langIds[$profile["languageId"]]);
+			$this->profile->assign("langIdVal", $profile["languageId"]);
 			$this->profile->assign("picturePath", $profile["picturePath"]);
 			$this->profile->assign("getEmailOnCommentVal", ($profile["getEmailOnVideoComment"] == 1)?"on":"");
 			$this->profile->assign("getEmailAfterMyCommentVal", ($profile["getEmailAfterMyComment"] == 1)?"on":"");
@@ -59,6 +64,52 @@ class Profile
 		$this->profile->assign("language", $content['LANGUAGE']);
 		$this->profile->assign("getEmailOnComment", $content['getEmailOnComment']);
 		$this->profile->assign("getEmailAfterMyComment", $content['getEmailAfterMyComment']);
+		
+		/////
+		$this->profile->assign("question",$content['SECRETQUESTION']);
+		if (isset($_POST["question"])) $this->profile->assign("questionVal",trim($_POST["question"]));
+		$this->profile->assign("answer",$content['SECRETANSWER']);
+		if (isset($_POST["answer"])) $this->profile->assign("answerVal",trim($_POST["answer"]));
+		$this->profile->assign("passNotEqual",$content['PASSNOTEQUAL']);
+		$this->profile->assign("secQuestions",$controller->getSecretQuestions());
+		$this->profile->assign("secretQuestionIdVal",trim($_POST["secretQuestionId"]));
+		$this->profile->assign("secretAnswerVal",trim($_POST["secretAnswer"]));
+		$this->profile->assign("minPassLength",$minPasswordLength);
+		$this->profile->assign("passTooShort",$content["MINPASSLENGTH"]);
+		//$this->profile->assign("lang",$controller->lang);
+		if (isset($_POST["onNews"])) $this->profile->assign("onNewsVal",1);
+		if (isset($_POST["onComment"])) $this->profile->assign("onCommentVal",1);
+		if (isset($_POST["onVideoComment"])) $this->profile->assign("onVideoCommentVal",1);
+		$this->profile->assign("languages", $controller->getLanguages());//echo isset($_POST["langId"])?trim($_POST["langId"]):$langIds[$controller->lang];
+		
+		$this->profile->assign("mandatory",$content['MANDATORY']);
+		$this->profile->assign("optional",$content['OPTIONAL']);
+		$this->profile->assign("userPassword",$content['USERPASSWORD']);
+		$this->profile->assign("secQuestionNot",$content['SECQUESTIONNOT']);
+		$this->profile->assign("receiveNot",$content['RECEIVENOT']);
+		$this->profile->assign("onNewsNot",$content['ONNEWS']);
+		$this->profile->assign("onCommentNot",$content['ONCOMMENT']);
+		$this->profile->assign("onVideoCommentNot",$content['ONVIDEOCOMMENT']);
+		$this->profile->assign("agreeNot",$content['AGREE']);
+		$this->profile->assign("rules",$content['SIGNINNOTE2']);
+		$this->profile->assign("validationError1",$content['VALIDATIONERR1']);
+		$this->profile->assign("validationError2",$content['VALIDATIONERR2']);
+		$this->profile->assign("validationError3",$content['VALIDATIONERR3']);
+		$this->profile->assign("validationError4",$content['VALIDATIONERR4']);
+		$this->profile->assign("validationError5",$content['VALIDATIONERR5']);
+		$this->profile->assign("validationError6",$content['VALIDATIONERR6']);
+		$this->profile->assign("validationError7",$content['VALIDATIONERR7']);
+		$this->profile->assign("validationError8",$content['VALIDATIONERR8']);
+		$this->profile->assign("validationError9",$content['VALIDATIONERR9']);
+		$this->profile->assign("validationError10",$content['VALIDATIONERR10']);
+		$this->profile->assign("validationError11",$content['VALIDATIONERR11']);
+		$this->profile->assign("validationError12",$content['VALIDATIONERR12']);
+		$this->profile->assign("validationError13",$content['VALIDATIONERR13']);
+		$this->profile->assign("validationError14",$content['VALIDATIONERR14']);
+		$this->profile->assign("validationError15",$content['VALIDATIONERR15']);
+		$this->profile->assign("deleteProfile",$content['DELETEPROFILE']);
+		$this->profile->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
+		//////
 		if(isset($_GET["action"]))
 		{
 			$this->profile->assign("nameVal", isset($_POST["name"]) ? $_POST["name"] : "");
@@ -76,9 +127,10 @@ class Profile
 			$this->profile->assign("notesVal", isset($_POST["notes"]) ? $_POST["notes"] : "");
 			$this->profile->assign("emailVal", isset($_POST["email"]) ? $_POST["email"] : "");
 			$this->profile->assign("phoneVal", isset($_POST["phone"]) ? $_POST["phone"] : "");
-			$this->profile->assign("languageVal", isset($_POST["lang"]) ? $_POST["lang"] : "");
+			//$this->profile->assign("languageVal", isset($_POST["lang"]) ? $_POST["lang"] : "");
 			$this->profile->assign("getEmailOnCommentVal", isset($_POST["getEmailOnComment"]) ? $_POST["getEmailOnComment"] : "");
 			$this->profile->assign("getEmailAfterMyCommentVal", isset($_POST["getEmailAfterMyComment"]) ? $_POST["getEmailAfterMyComment"] : "");
+			$this->profile->assign("langIdVal",isset($_POST["langId"])?trim($_POST["langId"]):$langIds[$controller->lang]);
 		}
 		$this->profile->assign("azerbaijani", $content['AZERBAIJANI']);
 		$this->profile->assign("english", $content['ENGLISH']);

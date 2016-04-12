@@ -49,7 +49,7 @@ $content['FOLDERNOTEDITED'] = "Folder not editted";
 $content['FROMDATE'] = "Tarixdən";
 $content['TODATE'] = "Tarixədək";
 $content['PROFILE'] = "Profil";
-$content['SHORTFOLDERNAME'] = "Qovluq adı 3 simvoldan az ola bilməz";
+$content['SHORTFOLDERNAME'] = "Qovluq adı minimum 3 maksimum 25 simvoldan ibaret olmalidir";
 $content['OTHERUSERS'] = "Others";
 $content['MYVIDEOS'] = "Mine";
 $content['ADVANCED'] = "Advanced";
@@ -69,6 +69,12 @@ $content['OPT10'] = "İstifadəçinin unikal nömrəsi";
 $content['OPT11'] = "İstifadəçinin loqini";
 $content['HINTTAGS'] = "Taqlar";
 $content['HINTQUESTION'] = "Sual";
+$content['DELETEPROFILE'] = "Delete profile";
+$content['ACCOUNTREMOVED'] = "Your account is deleted";
+$content['USERSNOTE'] = "Digər istifadəçilərin videolarını görmək üçün, istifadəçini seçin";
+$content['NOTENGOUGHTAG'] = "Must be min 2 tags for folder";
+$content['SHORTTAG'] = "Tags must be min 2 char long";
+
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -90,6 +96,9 @@ $content["REGORENTERNOTE1"] = "You are not logged in. Please,";
 $content["ENTERLINK"] = "log in";
 $content["REGORENTERNOTE2"] = "If you're not registered, please,";
 $content["REGLINK"] = "register";
+$content["SORTALPHABETICALLY"] = "Əlifba sırası ilə";
+$content["SORTVIDEOCOUNT"] = "Vİdeo sayına görə";
+$content["SORTDATE"] = "Tarixə görə";
 //end categories
 
 //Registration

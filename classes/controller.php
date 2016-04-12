@@ -220,18 +220,20 @@ class Controller //extends MySQL
 		//echo $this->db->getLastQuery()."<br>";
 		$qry = "select a.*, ifnull(count(a.videoId),0) count
 							from(
-							SELECT c.id, c.catName".$this->lang." as catName,catNameAz, c.catInfo".$this->lang." as catInfo,'#' as subscribe,c.img,
+							SELECT c.id, c.catName".$this->lang." as catName,catNameAz, 
+								(case when (c.catInfo".$this->lang." = '') then 'hererherer' else c.catInfo".$this->lang." end) catInfo,
+								'#' as subscribe,c.img,
 								cg.id catGroupId,cg.catGroupName".$this->lang." as catGroupName, cg.info".$this->lang." as catGroupInfo,
 								ifnull(v.isDeleted,0) isDeleted,v.id videoId
 								FROM categories c 
 								$join JOIN videocats vc on c.id = vc.categoryId 
-								$join JOIN videos v on v.id = vc.videoId 
+								$join JOIN (select * from videos where languageId=(select id from languages where LOWER(abbr) = '".$this->lang."')) v on v.id = vc.videoId 
 								left join catgroups cg on cg.id=c.catGroupId
-							WHERE c.questions & $questions $cond) a
+							WHERE  c.questions & $questions $cond) a
 							where isDeleted=0
 							group by a.id,a.catName,a.catInfo
 							order by catGroupName,
-							(case when (catNameaz='Digər') then 'zzzzzz' else catName end)"; //echo $qry;
+							(case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)"; //echo $qry;
 		$rawCats = $this->db->rawQuery($qry);
 		
 		$catGroups = array();
@@ -250,7 +252,7 @@ class Controller //extends MySQL
 	
 	public function getAllCategories()
 	{
-		return $this->db->get("categories", null, "id, questions, catName".$this->lang." as catName");
+		return $this->db->get("categories order by catName".$this->lang, null, "id, questions, catName".$this->lang." as catName");
 	}
 	
 	public function getLanguages()

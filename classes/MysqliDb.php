@@ -617,12 +617,12 @@ class MysqliDb
         $this->_buildLimit ($numRows);
 
         $this->_lastQuery = $this->replacePlaceHolders ($this->_query, $this->_bindParams);
-
         if ($this->isSubQuery)
             return;
 
         // Prepare query
         $stmt = $this->_prepareQuery();
+//echo $stmt."<br>";	
 
         // Bind parameters to statement if any
         if (count ($this->_bindParams) > 1)

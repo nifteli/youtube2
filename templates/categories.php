@@ -25,6 +25,15 @@ class Categories
 		$this->categories->assign("save",$content['SAVE']);
 		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
 		$this->categories->assign("tags",$content['TAGS']);
+		$this->categories->assign("sbAlph",$content['SORTALPHABETICALLY']);
+		$this->categories->assign("sbVideoCnt",$content['SORTVIDEOCOUNT']);
+		$this->categories->assign("sbDate",$content['SORTDATE']);
+		$this->categories->assign("asc",$content['ASC']);
+		$this->categories->assign("desc",$content['DESC']);
+		$this->categories->assign("dirVal",1);
+		if(isset($_GET["dir"])) $this->categories->assign("dirVal",$_GET["dir"]);
+		$this->categories->assign("by",1);
+		if(isset($_GET["by"])) $this->categories->assign("by",$_GET["by"]);
 		
 				
 		//echo "<pre>";print_r($cats);echo "</pre>";
@@ -100,13 +109,47 @@ class Categories
 	
 	private function getMyFolders($controller,$userId)
 	{
-		$qry = "SELECT  f.id folderId, f.name folderName, IfNULL(count(distinct v.id), 0) videoCount
+		$by = "fc.folderName";
+		$dir = "asc";
+		if(is_numeric($_GET["by"]))
+		{
+			switch($_GET["by"])
+			{
+				case 1:
+					$by = "fc.folderName";
+					break;
+				case 2:
+					$by = "fc.videoCount";
+					break;
+				case 3:
+					$by = "fc.folderName";
+					break;
+			}
+		}
+		if(is_numeric($_GET["dir"]))
+		{
+			switch($_GET["dir"])
+			{
+				case 1:
+					$dir = "asc";
+					break;
+				case 2:
+					$dir = "desc";
+					break;
+			}
+		}
+		$qry = "select fc.*,group_concat(t.name) tags from (
+				SELECT  f.id folderId, f.name folderName, IfNULL(count(distinct v.id), 0) videoCount
 				FROM foldervideos fv
 				right join folders f on f.id=fv.folderId
 				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
-				where f.createdById=" . $userId .
-				" group by fv.folderId, f.name
-				order by f.created desc, f.name";
+				where f.createdById=$userId
+				group by fv.folderId, f.name
+				order by f.created desc, f.name) fc 
+				left join foldertags ft on ft.folderId=fc.folderId
+				left join tags t on t.id=ft.tagId
+				group by fc.folderId,fc.folderName,fc.videoCount
+				order by $by $dir";
 		$res = $controller->db->rawQuery($qry);
 		return $res;
 	}

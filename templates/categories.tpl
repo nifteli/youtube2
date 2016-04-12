@@ -62,10 +62,11 @@
 		$('#view4').hide();
 	}
 	
-	function setFolderName(id,folderName)
+	function setFolderName(id,folderName,tags)
 	{
 		 $( "#folderId" ).val( id );
 		 $( "#folderName" ).val( folderName );
+		 $( "#tags" ).val( tags );
 	}
 	
 	function shift(n)
@@ -92,7 +93,11 @@
 		$("#img2").attr("src","./img/why_{$lang}.png");
 		$("#img3").attr("src","./img/what_{$lang}.png");
 		$("#img4").attr("src","./img/who_{$lang}.png");
-		
+		if((option == 2 && comboVal == 1) || (option == 3 && comboVal == 1))
+		{
+			$('#viewCat').show();
+			return;
+		}
 		if(n > 0 && n < 5)
 		{
 			$("input[name=option][value=1]").prop('checked', true); 
@@ -208,6 +213,25 @@
 			$('#viewCat').hide();
 		}
 	}
+	
+	 function orderFolders(orderBy,dir)
+	 {
+	 //alert(orderBy);
+		$('#loading').show();
+		//queryStr = queryStr + "1"+"&orderBy="+orderBy;
+		 $.ajax({
+			 url:"ajax/scroll.php",
+					  type:"POST",
+					  data:queryStr + "&page=1"+"&orderBy="+orderBy+"&direction="+dir,
+			cache: false,
+			success: function(response){ //alert(queryStr);
+			   $('#loading').hide();
+			  $('#demoajax').html(response);
+			   //return;
+			}
+			
+		   });
+	 }
 </script>
  <!--Category Panel Starts-->
 <div class="category">
@@ -244,13 +268,31 @@
 				{if ($myUserId == $userId)}
 				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a><br><br>
 				{/if}
+				<div class="orderByDiv">
+					<select name="fldOrder" id="fldOrder" 
+					onchange="self.location='?by='+this.value+'&dir={$dirVal}'"
+					style="width: 185;height: 23px !important;">
+						<option value="1" {if $by == 1 || !isset($by) } selected {/if} >{$sbAlph}</option>
+						<option value="2" {if $by == 2 } selected {/if} >{$sbVideoCnt}</option>
+						<option value="3" {if $by == 3 } selected {/if} >{$sbDate}</option>
+					</select>
+					<br>
+					<label>
+					<input onclick="self.location='?by='+document.getElementById('fldOrder').value+'&dir=1'" 
+					type="radio" name="dir" id="dir" value=1 {if (isset($dirVal) && $dirVal==1) || !isset($dirVal)} checked {/if} style="margin-left: 2px;">{$asc}
+					</label>
+					<label>
+					<input onclick="self.location='?by='+document.getElementById('fldOrder').value+'&dir=2'"  
+					type="radio" name="dir" id="dir" value=2 {if isset($dirVal) && $dirVal==2} checked {/if}>{$desc}
+					</label>
+				</div>
 					<ul>
 						{section name=sec1 loop=$myFolders}
 						<li>
 							<a href="?folderId={$myFolders[sec1].folderId}&userId={$userId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
 							{if ($myUserId == $userId)}
 							<a href="?action=deleteFolder&id={$myFolders[sec1].folderId}" onClick="return confirm('{$deleteConfirmation}')"><img src="./img/delete.png" height="10" width="10" ></a>
-							<a onclick="setFolderName({$myFolders[sec1].folderId},'{$myFolders[sec1].folderName}')" href="#editFolder"><img src="./img/edit.png" height="10" width="10"></a>
+							<a onclick="setFolderName({$myFolders[sec1].folderId},'{$myFolders[sec1].folderName}','{$myFolders[sec1].tags}')" href="#editFolder"><img src="./img/edit.png" height="10" width="10"></a>
 							{/if}
 						</li>
 						{/section}					
@@ -426,10 +468,10 @@
 		<h1 style="font-weight:bold">{$editFolder}</h1>
 		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?action=editFolder" method="post">
 			<br>
-			<label>{$folderName}:</label>
-			<div style="float:right">
-				<input type="hidden" name="folderId" id="folderId">
-				<input type="text" name="folderName" id="folderName">
+			<div style="float:right;width: 100%;">
+				<input type="hidden" name="folderId" id="folderId" >
+				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%;" required>
+				<input type="text" name="tags" id="tags" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
 			</div>
 		<br><br>
 		<div style="text-align:center;width:100%">
@@ -444,13 +486,9 @@
 		<h1 style="font-weight:bold">{$newFolder}</h1>
 		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?action=addNewFolder" method="post">
 			<br>
-			<label>{$folderName}:</label>
-			<div style="float:right">
-				<input type="text" name="folderName" id="folderName">
-			</div>
-			<label>{$tags}:</label>
-			<div style="float:right;margin-top:3px">
-				<input type="text" name="tags" id="tags">
+			<div style="float:right;width: 100%;">
+				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%;" required>
+				<input type="text" name="tags" id="tags" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
 			</div>
 		<br><br>
 		<div style="text-align:center;width:100%">

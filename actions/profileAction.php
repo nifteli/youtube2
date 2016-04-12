@@ -115,7 +115,11 @@ if ($_GET["action"]=="save")
 			$arr["birthDate"] =  $_POST["bday"] ;
 		$arr["gender"] = $gender;
 		$arr["email"] =  $_POST["email"] ;
-		$arr["languageId"] = $langIds[$_POST["lang"]];
+		$arr["languageId"] = $_POST["langId"];
+		if(isset($_POST["secretQuestionId"]) && is_numeric($_POST["secretQuestionId"]))
+			$arr["secretQuestionId"] = $_POST["secretQuestionId"];
+		if(isset($_POST["secretAnswer"]) && $_POST["secretAnswer"] != "")
+			$arr["secretAnswer"] =  $_POST["secretAnswer"] ;
 		if(isset($_POST["position"]) && $_POST["position"] != "")
 			$arr["profession"] =  $_POST["position"] ;
 		if(isset($_POST["interests"]) && $_POST["interests"] != "")

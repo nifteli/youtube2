@@ -2667,7 +2667,7 @@ background: #C05208;
 		background: #fff;
 		background: -moz-linear-gradient(#fff, #999);
 		background: -webkit-linear-gradient(#fff, #999);
-		background: -o-linear-gradient(#fff, #999);
+		    background: -webkit-linear-gradient(#fff, #321D05);
 		height: 120px;
 	}
 

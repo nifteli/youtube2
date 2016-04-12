@@ -126,7 +126,7 @@ function checkAccess()
 						<a href="index.php"><img height="30" width="70" src="img/logo.png" ></a>
 						<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
 						<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
-						<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users'">{$otherUsers}</input></label>
+						<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users&others=o'">{$otherUsers}</input></label>
 						<select class="srcCmb" name="tabSel" id="tabSel" style="margin-left: 4;width:75px" disabled onchange="showData(this.value)" >
 							<option value="1" selected="selected"> {$favorite}</option>
 							<option value="2"> {$added}</option>
