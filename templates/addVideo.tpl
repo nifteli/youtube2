@@ -33,10 +33,10 @@ $(document).ready(function() {
 	{/if}
 
 	<p style="font-weight:bold; margin-top: 40px;">{$addVideoNote1}</p>
+	<div style="float:left;width:900px;text-align:center"><label class="labelv" style="color: red !important" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>{$addVideoError9}</label></div>
 	<form  id="addVideoForm" action="?page=addVideo&action=add{if isset($videoId)}&videoId={$videoId}{/if}" method="post">
 		<div class="player" style="margin-left: 5px;">
 			<input class="fieldv" type="url" name="videoLink" id="videoLink" value="{$videoLinkVal}" placeholder="{$videoLink}" onblur="blured()">
-			<label class="labelv" style="color: red" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>{$addVideoError9}</label>
 			<input class="fieldv" type="text" name="videoName" id="videoName" value="{$videoNameVal}" placeholder="{$videoName}"> 
 			<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="550" height="300" 
 			  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLinkVal}" }'>
@@ -51,7 +51,7 @@ $(document).ready(function() {
 			</select>
 			<table style="float:right; margin-left: 0; margin-right: 0;font-weight: bold;">
 				<tr>
-					<td><input id="q3" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("4", $videoQuestionVal)} checked {/if}>{$vqHow}</input></td>
+					<td><input id="q3" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("4", $videoQuestionVal)} checked {/if} style="margin-left: 0;">{$vqHow}</input></td>
 					<td><input id="q4" class="checkbox" type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("8", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
 					<td><input id="q1" class="checkbox" type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
 					<td><input id="q2" class="checkbox" type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
@@ -159,24 +159,33 @@ $(document).ready(function() {
 			loadVideoData(document.getElementById("videoLink").value);
 		}
 	
-			
+		function capitalize(s)
+		{
+			return s && s[0].toUpperCase() + s.slice(1);
+		}
+		
 		function loadVideoData(link)
 		{
 			//alert(link);
-			if(link.indexOf("https://www.youtube.com/watch?") == 0)
+			var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+			var match = link.match(regExp);
+			
+			//if(link.indexOf("https://www.youtube.com/watch?") == 0 || link.indexOf("https://youtu.be/") == 0)
+			if (match && match[2].length == 11)
 			{
 				if(link != oldLink)
 				{
-					var urlObj = parseURL(link);
+					//var urlObj = parseURL(link);
+					var v = match[2];
 					var apiUrl = 'https://www.googleapis.com/youtube/v3/videos?';
 					var parts = 'id,snippet,contentDetails,player,statistics,status';
 					
-					$.getJSON(apiUrl + 'id=' + urlObj.searchObject.v + '&part=' + parts + '&key=' + API_KEY + '&callback=?',function(data)
+					$.getJSON(apiUrl + 'id=' + v + '&part=' + parts + '&key=' + API_KEY + '&callback=?',function(data)
 						{
 							if (typeof(data.items[0]) != "undefined") 
 							{
-								$("#videoName").val(data.items[0].snippet.title);
-								$("#information").val(data.items[0].snippet.description);
+								$("#videoName").val(capitalize(data.items[0].snippet.title));
+								$("#information").val(capitalize(data.items[0].snippet.description));
 								$("#duration").val(ISO8601toSeconds(data.items[0].contentDetails.duration));
 								$("#validVideo").val("true");
 								//var video = document.getElementById('vid1');

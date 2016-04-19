@@ -179,7 +179,7 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 	if(is_numeric($_GET["id"]))
 	{
 		$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
-		$tags = explode(",", $tagStr);
+		$tags = array_unique(explode(",", $tagStr));
 		$continue = true;
 		$db->startTransaction();
 		$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),

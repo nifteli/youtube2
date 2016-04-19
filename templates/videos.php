@@ -29,6 +29,8 @@ class Videos
 		$this->videos->assign("desc",$content['DESC']);
 		if(is_numeric($_GET["catId"]))
 			$this->videos->assign("catIdVal",$_GET["catId"]);
+		if(is_numeric($_GET["q"]))
+			$this->videos->assign("q",$_GET["q"]);
 		if(is_numeric($_GET["tagId"]))
 			$this->videos->assign("tagIdVal",$_GET["tagId"]);
 		if(is_numeric($_GET["userId"]))

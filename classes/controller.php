@@ -205,7 +205,8 @@ class Controller //extends MySQL
 		$catGroups = array();
 		$cats = array();
 		$join = "LEFT";
-		$cond = "";
+		//$cond = 1;
+		$cond="";
 		if($userId != "")
 		{
 			$join = "INNER";
@@ -218,22 +219,67 @@ class Controller //extends MySQL
 		// $this->db->orderBy("c.catName".$this->lang,"asc");
 		// $cats = $this->db->get("categories c",null,"c.id, '#' as url, c.catName".$this->lang." as catName, c.catInfo".$this->lang." as catInfo, '#' as subscribe, IfNULL(count(vc.categoryid), 0) AS count");
 		//echo $this->db->getLastQuery()."<br>";
-		$qry = "select a.*, ifnull(count(a.videoId),0) count
-							from(
-							SELECT c.id, c.catName".$this->lang." as catName,catNameAz, 
-								(case when (c.catInfo".$this->lang." = '') then 'hererherer' else c.catInfo".$this->lang." end) catInfo,
-								'#' as subscribe,c.img,
-								cg.id catGroupId,cg.catGroupName".$this->lang." as catGroupName, cg.info".$this->lang." as catGroupInfo,
-								ifnull(v.isDeleted,0) isDeleted,v.id videoId
-								FROM categories c 
-								$join JOIN videocats vc on c.id = vc.categoryId 
-								$join JOIN (select * from videos where languageId=(select id from languages where LOWER(abbr) = '".$this->lang."')) v on v.id = vc.videoId 
-								left join catgroups cg on cg.id=c.catGroupId
-							WHERE  c.questions & $questions $cond) a
-							where isDeleted=0
-							group by a.id,a.catName,a.catInfo
-							order by catGroupName,
-							(case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)"; //echo $qry;
+		// $qry = "select a.*, ifnull(count(a.videoId),0) count
+							// from(
+							// SELECT c.id, c.catName".$this->lang." as catName,catNameAz, 
+								// (case when (c.catInfo".$this->lang." = '') then 'hererherer' else c.catInfo".$this->lang." end) catInfo,
+								// '#' as subscribe,c.img,
+								// cg.id catGroupId,cg.catGroupName".$this->lang." as catGroupName, cg.info".$this->lang." as catGroupInfo,
+								// ifnull(v.isDeleted,0) isDeleted,v.id videoId
+								// FROM categories c 
+								// $join JOIN videocats vc on c.id = vc.categoryId 
+								// $join JOIN (select * from videos where languageId=(select id from languages where LOWER(abbr) = '".$this->lang."')) v on v.id = vc.videoId 
+								// left join catgroups cg on cg.id=c.catGroupId
+							// WHERE  c.questions & $questions $cond) a
+							// where isDeleted=0
+							// group by a.id,a.catName,a.catInfo
+							// order by catGroupName,
+							// (case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)"; //echo $qry;
+		$qry = "select
+				(case when (a.catInfo = '') then group_concat(trim(b.name)) else a.catInfo end) catInfo,
+				a.id,a.catName,a.subscribe,a.img,a.catGroupId,a.catGroupName,a.catGroupInfo,a.isDeleted,a.videoId,a.count,a.questions
+				from (
+				select a.*, ifnull(count(a.videoId),0) count
+						from(SELECT c.id, c.catName".$this->lang." as catName,catNameAz,c.catInfo".$this->lang." catInfo,
+								'#' as subscribe,c.img,cg.id catGroupId,cg.catGroupName".$this->lang." as catGroupName, cg.info".$this->lang." as catGroupInfo,
+								ifnull(v.isDeleted,0) isDeleted,v.id videoId,v.questions
+							FROM categories c 
+							left JOIN videocats vc on c.id = vc.categoryId 
+							left JOIN (select * from videos where questions &  $questions and languageId=(select id from languages where LOWER(abbr) = '".$this->lang."')) v on v.id = vc.videoId 
+							left join catgroups cg on cg.id=c.catGroupId
+							WHERE c.questions &  $questions $cond ) a
+						where isDeleted=0
+						group by a.id,a.catName,a.catInfo) a
+						left join 
+						(select name,categoryId from (
+				select max_name.name,max_name.categoryId,max_name.added
+				from
+				(select vc.categoryId,max(v.added) added
+				from videos v
+				inner join videocats vc on vc.videoId=v.id 
+				group by categoryId) as max_added
+				join 
+				(select name,added,vc.categoryId from videos v
+					inner join videocats vc on vc.videoId=v.id) 
+				as max_name on (max_added.added=max_name.added and max_name.categoryId=max_added.categoryId)
+				union all
+				select max_name.name,max_name.categoryId,max(max_name.added) added
+				from
+				(select vc.categoryId,max(v.added) added
+				from videos v
+				inner join videocats vc on vc.videoId=v.id
+				where isDeleted=0 
+				group by categoryId) as max_added
+				join 
+				(select name,added,vc.categoryId from videos v
+					inner join videocats vc on vc.videoId=v.id
+					where isDeleted=0) 
+				as max_name on (max_added.added>max_name.added and max_name.categoryId=max_added.categoryId) 
+				group by max_name.categoryId) a
+				order by categoryId) b on a.id=b.categoryId
+				group by a.id
+				order by catGroupName,
+				(case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)";//echo $qry;exit;;
 		$rawCats = $this->db->rawQuery($qry);
 		
 		$catGroups = array();

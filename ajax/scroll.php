@@ -21,8 +21,11 @@ function showData($data,$db,$limit)
 {
 	$lang = $data["lang"];
 	$page = $data['page'];
+	//print_r($data);
 	if(isset($data["catId"]) && $data["catId"]>0)
 		$catId = $data["catId"];
+	if(isset($data["q"]) && $data["q"]>0)
+		$questions = $data["q"];
 	if(isset($data["tagId"]) && $data["tagId"]>0)
 		$tagId = $data["tagId"];
 	if(isset($data["userId"]) && $data["userId"]>0)
@@ -75,7 +78,7 @@ function showData($data,$db,$limit)
 					vs.dislikes dislikeCount,vs.comments,
 					v.id, v.name, v.info, v.duration,q.question,
 					DATE_FORMAT(v.added,'%d %b %Y') added, 
-					v.languageId, v.link, v.addedById,
+					v.languageId, v.link, v.addedById,v.questions,
 					concat(u.firstName,' ',u.lastName) addedBy,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
@@ -87,12 +90,14 @@ function showData($data,$db,$limit)
 			join categories c on c.id = vc.categoryId
 			left join languages l on l.id = v.languageId
             left join videotags vt on vt.videoId=v.id
-			left join questions q on q.id&v.questions
+			left join questions q on q.bitValue=v.questions
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
 			where v.isDeleted=0 and lower(l.abbr)='$lang'";
 	if(isset($catId)&& is_numeric($catId))
 		$qry .= " and vc.categoryId=$catId";
+	if(isset($questions)&& is_numeric($questions))
+		$qry .= " and v.questions&$questions";
 	if(isset($userId) && is_numeric($userId) && !isset($folderId))
 		$qry .= " and v.addedById=$userId";
 	if(isset($folderId) && is_numeric($folderId))
@@ -407,10 +412,12 @@ function displayData($res, $data, $colCnt=4)
 
 function getYoutubeImage($url)
 {
-	$queryString = parse_url($url, PHP_URL_QUERY);
-	parse_str($queryString, $params);
-	$v = $params['v'];  
+	// $queryString = parse_url($url, PHP_URL_QUERY);
+	// parse_str($queryString, $params);
+	// $v = $params['v'];  
 	//DISPLAY THE IMAGE
+	preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
+	$v = $matches[0]; //print_r($matches);
 	return (strlen($v)>0) ? "'http://i3.ytimg.com/vi/$v/default.jpg'" : "";
 }
 

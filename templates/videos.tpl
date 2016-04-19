@@ -7,7 +7,7 @@
  $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}&folderId={$folderId}",
+                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}",
         cache: false,
         success: function(response){
 		   $('#loading').hide();
@@ -36,7 +36,7 @@
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page,
+                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();
@@ -83,7 +83,7 @@ function changeOrderBy(orderBy,dir)
 	 $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&page=1"+"&orderBy="+orderBy+"&direction="+dir+"&catId={$catIdVal}&userId={$userIdVal}&tagId={$tagIdVal}&folderId={$folderIdVal}",
+                  data:"actionfunction=showData&lang={$lang}&page=1"+"&orderBy="+orderBy+"&direction="+dir+"&catId={$catIdVal}&q={$q}&userId={$userIdVal}&tagId={$tagIdVal}&folderId={$folderIdVal}",
         cache: false,
         success: function(response){ //alert(queryStr);
 		   $('#loading').hide();

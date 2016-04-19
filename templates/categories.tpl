@@ -81,7 +81,6 @@
 			$("input[name=option][value=2]").prop('checked', true);
 			$("input[name=option][value=3]").prop('checked', false);
 		}
-		//alert(option);
 		for(i=1; i<9; i++)
 		{
 			$('#view'+i).hide();
@@ -146,6 +145,7 @@
 				$('#img4').addClass('tabImg2');
 				break;	
 		}
+		//alert('#view'+n);
 		$('#view'+n).show();
 		
 		//alert("done");
@@ -309,7 +309,7 @@
 						{foreach from=$catsHow[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 						{if $currCatId != {$cat['id']}}
-						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						<a href="?catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
 						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 						{/if}
@@ -327,7 +327,7 @@
 						{foreach from=$catsWhy[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 						{if $currCatId != {$cat['id']}}
-						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						<a href="?catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
 						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 						{/if}
@@ -345,7 +345,7 @@
 						{foreach from=$catsWhat[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg"	title="{$cat['catInfo']}">
 						{if $currCatId != {$cat['id']}}
-						<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+						<a href="?catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
 						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 						{/if}
@@ -363,7 +363,7 @@
 							{foreach from=$catsWho[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 							{if $currCatId != {$cat['id']}}
-							<a href="?catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
 							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 							{/if}
@@ -385,7 +385,7 @@
 							{foreach from=$myCatsHow[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 							{if $currCatId != {$cat['id']}}
-							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?userId={$userId}&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
 							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 							{/if}
@@ -406,7 +406,7 @@
 							{foreach from=$myCatsWhy[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 							{if $currCatId != {$cat['id']}}
-							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?userId={$userId}&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
 							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 							{/if}
@@ -427,7 +427,7 @@
 							{foreach from=$myCatsWhat[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 							{if $currCatId != {$cat['id']}}
-							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?userId={$userId}&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
 							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 							{/if}
@@ -448,7 +448,7 @@
 							{foreach from=$myCatsWho[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
 							{if $currCatId != {$cat['id']}}
-							<a href="?userId={$userId}&catId={$cat['id']}">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?userId={$userId}&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
 							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
 							{/if}

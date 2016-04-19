@@ -122,7 +122,7 @@ class Categories
 					$by = "fc.videoCount";
 					break;
 				case 3:
-					$by = "fc.folderName";
+					$by = "fc.created";
 					break;
 			}
 		}
@@ -139,7 +139,7 @@ class Categories
 			}
 		}
 		$qry = "select fc.*,group_concat(t.name) tags from (
-				SELECT  f.id folderId, f.name folderName, IfNULL(count(distinct v.id), 0) videoCount
+				SELECT  f.created,f.id folderId, f.name folderName, IfNULL(count(distinct v.id), 0) videoCount
 				FROM foldervideos fv
 				right join folders f on f.id=fv.folderId
 				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
@@ -148,7 +148,7 @@ class Categories
 				order by f.created desc, f.name) fc 
 				left join foldertags ft on ft.folderId=fc.folderId
 				left join tags t on t.id=ft.tagId
-				group by fc.folderId,fc.folderName,fc.videoCount
+				group by fc.folderId,fc.folderName,fc.videoCount,fc.created
 				order by $by $dir";
 		$res = $controller->db->rawQuery($qry);
 		return $res;

@@ -41,7 +41,7 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 		return;
 	}
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
-	$tags = explode(",", $tagStr);
+	$tags = array_unique(explode(",", $tagStr));
 	if(count($tags) < 2)
 	{
 		$result = "error";
@@ -148,7 +148,7 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 		return;
 	}
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
-	$tags = explode(",", $tagStr);
+	$tags = array_unique(explode(",", $tagStr));
 	if(count($tags) < 2)
 	{
 		$result = "error";

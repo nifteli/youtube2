@@ -70,7 +70,7 @@ if ($_GET["action"]=="add")
 		$db->startTransaction();
 		
 		$questions = array_sum($_POST["videoQuestion"]);
-		$tags = explode(",", $tagStr);
+		$tags = array_unique(explode(",", $tagStr));
 		$continue = true;
 		
 		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0 && is_numeric($_GET["videoId"]))

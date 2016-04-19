@@ -90,7 +90,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 						//////////////////
 					if($continue)
 					{
-						$tags = explode(",", trim($rowData[0][6]));
+						$tags = array_unique(explode(",", trim($rowData[0][6])));
 						foreach($tags as $tag)
 						{
 							$db->where("name='" . trim($tag) . "' and langId=" . $langIds[strtolower(trim($rowData[0][1]))]);
