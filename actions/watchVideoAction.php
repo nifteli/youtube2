@@ -255,6 +255,21 @@ if($_GET["action"]=="reportVideo")
 {
 	if(trim($_GET["id"]) > 0 && $_POST["reasonId"] > 0)
 	{
+		$db->where("videoId=".trim($_GET["id"])." and reporterId=".$access->userId);
+		$db->get("videoreports");
+		if($db->count>0)
+		{
+			$result = "error";
+			$messages[] = $content["DUPLICATEREPORT"];
+			return;
+		}
+		if(strlen(trim($_POST["desc"])) < 5)
+		{
+			$result = "error";
+			$messages[] = $content["SHORTDESC"];
+			return;
+		}
+		
 		$res = $db->insert("videoreports", array("videoId"=>trim($_GET["id"]),
 												  "reasonId"=>$_POST["reasonId"],
 												  "desc"=>trim($_POST["desc"]),

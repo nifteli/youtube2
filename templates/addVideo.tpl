@@ -17,6 +17,20 @@ $(document).ready(function() {
 	$("#category option:selected").removeAttr("selected");
 	loadCategories();
 });
+
+function uncheckAll()
+{
+	var checkboxes = new Array(); 
+	checkboxes = document["addVideoForm"].getElementsByTagName('input');
+	//alert(checkboxes.length);
+
+	for (var i=0; i<checkboxes.length; i++)  
+	{	//alert(checkboxes[i].name);
+		if (checkboxes[i].type == 'checkbox' && checkboxes[i].name == "category[]")   {
+			checkboxes[i].checked = false;
+		}
+	}
+}
 </script>
 
 <!--Videos thums Start-->			 
@@ -34,13 +48,15 @@ $(document).ready(function() {
 
 	<p style="font-weight:bold; margin-top: 40px;">{$addVideoNote1}</p>
 	<div style="float:left;width:900px;text-align:center"><label class="labelv" style="color: red !important" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>{$addVideoError9}</label></div>
-	<form  id="addVideoForm" action="?page=addVideo&action=add{if isset($videoId)}&videoId={$videoId}{/if}" method="post">
+	<form  id="addVideoForm"  name="addVideoForm" action="?page=addVideo&action=add{if isset($videoId)}&videoId={$videoId}{/if}" method="post">
 		<div class="player" style="margin-left: 5px;">
 			<input class="fieldv" type="url" name="videoLink" id="videoLink" value="{$videoLinkVal}" placeholder="{$videoLink}" onblur="blured()">
 			<input class="fieldv" type="text" name="videoName" id="videoName" value="{$videoNameVal}" placeholder="{$videoName}"> 
 			<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="550" height="300" 
 			  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLinkVal}" }'>
 			</video>
+			<div style="float:left;width:50%;margin-top:5px"><input type="submit" class="post" name = "add" id="add" value="{$confirm}"></div>
+			<div style="float:right;width:50%; text-align:right;margin-top:5px"><input type="reset" class="post" name = "reset" id="reset" value="{$reset}"></div>
 		</div>
 		<div class="addVidRight">
 			<select class="fieldv" name="language" id="language" style="width:120px" cellpadding=0 cellspacing=0>
@@ -60,18 +76,18 @@ $(document).ready(function() {
 			<!-- <select class="fieldv" name="category[]" id="category1">
 				<option value=0>{$category}<option>
 			</select> -->
-			<select id="category" name="category[]" multiple="multiple" class="fieldv" style="width:377px">
-			</select>
+			<select id="category" name="category[]" multiple="multiple" class="fieldv" style="width:353px">
+			</select> <img src="img/delete.png" width="20" height="20" title="{$uncheckAll}" onclick="uncheckAll()" style="cursor:pointer">
 			<input class="fieldv" type="text" name="tags" id="tags" value="{$tagsVal}" placeholder="{$tags}" style="width: 100%;">
-			<textarea class="fieldtextv" type="text" name="information" id="information" placeholder="{$information}" style="width: 100%;height:237px !important">{$informationVal}</textarea>
+			<textarea class="fieldtextv" type="text" name="information" id="information" placeholder="{$information}" style="width: 100%;height:265px !important">{$informationVal}</textarea>
 			<input type="hidden" name="duration" id="duration" value="{$durationVal}"/>
 			<input type="hidden" name="validVideo" id="validVideo" value="{$validVideoVal}"/>
 		</div>
-		<div style="text-align:center">
+		<!-- <div style="text-align:center">
 		<a href="javascript: submitForm()"> 
 			<img src="img/AddVideo.png" width="100" height="100" alt="">
 		</a>
-		</div>
+		</div> -->
 	
 
      <!--          <label class="labelv">{$videoQuestion}:</label><br> -->

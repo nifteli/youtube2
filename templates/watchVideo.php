@@ -25,7 +25,8 @@ class WatchVideo
 			$this->watchVideo->assign("keywords",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tagsOrg"]);
 			$this->watchVideo->assign("lang",$controller->lang);
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
-			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>30)?mb_substr($videoInfo[0]["name"],0,30,"UTF-8")."...":$videoInfo[0]["name"]));
+			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>65)?mb_substr($videoInfo[0]["name"],0,65,"UTF-8")."...":$videoInfo[0]["name"]));
+			$this->watchVideo->assign("fullVideoName",$videoInfo[0]["name"]);
 			$this->watchVideo->assign("likeCount",$videoInfo[0]["likeCount"]);
 			$this->watchVideo->assign("likeCountTitle",$content["LIKECOUNTTITLE"]);
 			$this->watchVideo->assign("dislikeCount",$videoInfo[0]["dislikeCount"]);
@@ -64,6 +65,7 @@ class WatchVideo
 			$this->watchVideo->assign("noFolderNotf",$content['NOFOLDERNOTF']);
 			$this->watchVideo->assign("removeFromFolder",$content['REMOVEFROMFOLDER']);
 			$this->watchVideo->assign("removeFromFolderTitle",$content['REMOVEFROMFOLDERTITLE']);
+			$this->watchVideo->assign("addToNewFolder",$content['ADDTONEWFOLDER']);
 			
 			$this->watchVideo->assign("addComment",$content['ADDCOMMENT']);
 			$this->watchVideo->assign("post",$content['POST']);
@@ -99,6 +101,7 @@ class WatchVideo
 			$this->watchVideo->assign("result", $result);
 			$this->watchVideo->assign("messages", $messages);
 			$this->watchVideo->assign("okMessage", $okMessage);
+			$this->watchVideo->assign("cancel", $content["CANCEL"]);
 			
 			
 			$this->watchVideo->assign("comments",$this->getComments($_GET["id"],$controller->lang,$controller->db,$controller->access,$sort));

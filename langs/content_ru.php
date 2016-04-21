@@ -163,7 +163,8 @@ $content['CATEGORY'] = 'Category';
 $content['TAGS'] = 'Tags';
 $content['ADDTOMYFOLDER'] = 'Add to My Folder';
 $content['ADD'] = 'Add';
-
+$content['UNCKECKALL'] = 'Unckeck all';
+$content['RESET'] = 'Reset';
 $content['ADDVIDEOERROR1'] = "Video Link is not set";
 $content['ADDVIDEOERROR2'] = "Video does not exist";
 $content['ADDVIDEOERROR3'] = "Language is not set";
@@ -173,6 +174,7 @@ $content['ADDVIDEOERROR6'] = "Category is not set";
 $content['ADDVIDEOERROR7'] = "This video link is already added to category ";
 $content['ADDVIDEOERROR8'] = "DB error";
 $content['ADDVIDEOERROR9'] = "Incorrect video link";
+$content['ADDVIDEOERROR10'] = "There must be minimum 3 unique tags";
 $content['ADDVIDEONOTF1'] = "Video added";
 $content['ADDVIDEONOTE1'] = "This is not an entertainment site.<br> 
 							So, please, add only links of the videos, which carry practical information";
@@ -185,7 +187,9 @@ $content['PUBLISHED'] = 'Published';
 $content['NOCOMMENT'] = 'No comment is written';
 $content['NOEMAIL'] = 'No email is written';
 $content['NOID'] = 'No video ID';
-
+$content['ADDTONEWFOLDER'] = 'Add to new folder';
+$content['DUPLICATEREPORT'] = 'You\'ve already reported this video';
+$content['SHORTDESC'] = 'Description is too short,must be minimum 5 characters';
 $content['ADDCOMMENT']  = 'Add comment';
 $content['POST'] = 'Post';
 $content['EDIT'] = 'Edir';

@@ -77,7 +77,8 @@ input[type="checkbox"]
 textarea
 {
 	border: 1px solid #FA6700 !important;
-	height: 27px !important;
+	height: 27px ;
+	resize: vertical;
 }
 select
 {
@@ -914,7 +915,7 @@ text-decoration:none;
 .addVidRight{
 	float:left;
 	width:400;
-	height:350px;
+	height:360px;
 	top:10px;
 	margin-left:15px;
 	margin-top:10px;
@@ -2511,7 +2512,7 @@ pre{
 .vidInfo{
 	    float: left;
     width: 370px;
-    height: 260px;
+    height: 280px;
     overflow: auto;
 }
 /*End Back to top*/
@@ -2635,6 +2636,7 @@ background: #C05208;
 .wvLabel{
 	padding-left:5px;
 	padding-right: 5px;
+	cursor: pointer;
 }
 
 .modalDialog {

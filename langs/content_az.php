@@ -165,7 +165,8 @@ $content['CATEGORY'] = 'Kateqoriya';
 $content['TAGS'] = 'Təqlər';
 $content['ADDTOMYFOLDER'] = 'Əlavə et';
 $content['ADD'] = 'Əlavə et';
-
+$content['UNCKECKALL'] = 'Unckeck all';
+$content['RESET'] = 'Reset';
 $content['ADDVIDEOERROR1'] = "Video Link is not set";
 $content['ADDVIDEOERROR2'] = "Video does not exist";
 $content['ADDVIDEOERROR3'] = "Language is not set";
@@ -175,6 +176,7 @@ $content['ADDVIDEOERROR6'] = "Category is not set";
 $content['ADDVIDEOERROR7'] = "This video link is already added to category ";
 $content['ADDVIDEOERROR8'] = "DB error";
 $content['ADDVIDEOERROR9'] = "Yanlış video linki";
+$content['ADDVIDEOERROR10'] = "There must be minimum 3 unique tags";
 $content['ADDVIDEONOTF1'] = "Video added";
 
 $content['ADDVIDEONOTE1'] = "This is not an entertainment site.<br> 
@@ -185,11 +187,13 @@ $content['ADDVIDEONOTE1'] = "This is not an entertainment site.<br>
 $content['VIEWS'] = 'Baxışlar';
 $content['REPORTVIDEO'] = 'Videonu şikayət et';
 $content['PUBLISHED'] = 'Tarix';
+$content['ADDTONEWFOLDER'] = 'Add to new folder';
 
 $content['NOCOMMENT'] = 'Şərh yazılmayıb';
 $content['NOEMAIL'] = 'Email qeyd olunmayıb';
 $content['NOID'] = 'Video nömrəsi yoxdur';
-
+$content['DUPLICATEREPORT'] = 'You\'ve already reported this video';
+$content['SHORTDESC'] = 'Description is too short,must be minimum 5 characters';
 $content['ADDCOMMENT']  = 'Şərh yaz';
 $content['POST'] = 'Göndər';
 $content['EDIT'] = 'Dəyiş';

@@ -64,13 +64,21 @@ if ($_GET["action"]=="add")
 		
 	}
 	$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+	$tags = array_unique(explode(",", $tagStr));
+	
+	if(count($tags) < 3)
+	{
+		$result = "error";
+		$messages["notEnoughTags"] = $content['ADDVIDEOERROR10'];
+	}
 		
 	if($result == "success")
 	{
+		$questions = array_sum($_POST["videoQuestion"]);
 		$db->startTransaction();
 		
-		$questions = array_sum($_POST["videoQuestion"]);
-		$tags = array_unique(explode(",", $tagStr));
+		
+		
 		$continue = true;
 		
 		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0 && is_numeric($_GET["videoId"]))

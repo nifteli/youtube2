@@ -298,7 +298,11 @@ class Controller //extends MySQL
 	
 	public function getAllCategories()
 	{
-		return $this->db->get("categories order by catName".$this->lang, null, "id, questions, catName".$this->lang." as catName");
+		//return $this->db->get("categories order by catName".$this->lang, null, "id, questions, catName".$this->lang." as catName");
+		$sql = "select id, questions, catName".$this->lang." as catName 
+				from categories
+				order by (case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)";
+		return $this->db->rawQuery($sql);
 	}
 	
 	public function getLanguages()

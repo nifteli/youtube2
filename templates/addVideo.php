@@ -24,6 +24,9 @@ class AddVideo
 		$this->videos->assign("vqWhy", $content['WHY']);
 		$this->videos->assign("vqWho", $content['WHO']);
 		$this->videos->assign("vqWhat", $content['WHAT']);
+		$this->videos->assign("uncheckAll", $content['UNCKECKALL']);
+		$this->videos->assign("confirm", $content['CONFIRM']);
+		$this->videos->assign("reset", $content['RESET']);
 		$this->videos->assign("videoQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : array());
 		$this->videos->assign("videoName", $content['VIDEONAME']);
 		$this->videos->assign("videoNameVal", isset($_POST["videoName"]) ? $_POST["videoName"] : "");

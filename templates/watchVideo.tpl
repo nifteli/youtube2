@@ -1,6 +1,7 @@
 <script>
 $(document).ready(function() {
 document.title = "{$pageTitle}";
+$( "#comment" ).focus();
 $("meta[name='keywords']").attr('content', '{$keywords}');
     var validator = $("#frmComment").validate({
         rules: {
@@ -45,6 +46,61 @@ function likeIt(videoId,flag)
 		var res = data.split(";");
         $('#likeCnt').html(res[0]);
 		$('#dislikeCnt').html(res[1]);
+     }
+   });
+}
+function addToNewFolder(videoId,folderName,tags)
+{
+//alert(tags);
+	$.ajax({
+     type: "POST",
+     url: 'ajax/ajaxActions.php',
+     data: "action=addToNewFolder&videoId="+videoId+"&folderName="+folderName+"&tags="+tags, 
+	 //alert("action=addToNewFolder&videoId="+videoId+"&folderName='"+folderName+"'&tags='"+tags+"'");
+     success: function(data) {
+		if(data=="") return;
+		if(data == "1")
+		{
+			//alert(folderId);
+			//$('#addToFolder').html(data);
+			$('#removeFromFolder').show();
+			$('#addToFolder').hide();
+			window.location.href = "#close";
+			return;
+		}
+     }
+   })
+}
+function addRemoveFromFolder(videoId,flag,folderId)
+{
+//alert(videoId);
+	if(flag == 1)
+	{
+		if(!confirm("{$deleteConfirmation}"))
+			return;
+	}
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId, 
+     success: function(data) {
+	 //alert("action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId);
+	 //alert(data)
+		if(data=="") return;
+		if(flag == 1 && data == "1")
+		{
+			$('#removeFromFolder').hide();
+			$('#addToFolder').show();
+		}
+		if(flag == 2 && data == "1")
+		{
+			//alert(folderId);
+			//$('#addToFolder').html(data);
+			$('#removeFromFolder').show();
+			$('#addToFolder').hide();
+			window.location.href = "#close";
+			return;
+		}
      }
    });
 }
@@ -168,6 +224,17 @@ function unhint(elem) {
 <div style="padding-top:10px;min-height: 650px;">
 	<div class="wvLeft">
 		<div class="hollywd" style="margin-top:10px">
+			 <h2 title="{$fullVideoName}">{$videoName}</h2>  
+		</div>
+		<div class="player">
+		<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="600" height="335" 
+		  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLink}" }'>
+		  </video>
+		</div>
+	</div>
+	<div class="wvRight">
+		<div class="v-name">
+			  
 			  <h2>{$catName}
 				{if $hasAccess}
 					{if {$isSubscribed}}
@@ -178,30 +245,24 @@ function unhint(elem) {
 				{/if}
 			  </h2>  
 		</div>
-		<div class="player">
-		<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="600" height="335" 
-		  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLink}" }'>
-		  </video>
-		</div>
-	</div>
-	<div class="wvRight">
-		<div class="v-name">
-			  <h2>{$videoName}</h2>  
-		</div>
 		<div class="wvDet1">
 			<img src="img/lang.png" width="15" height="15"/><span class="wvLabel">{$language}</span>
 			<img src="img/question.png" width="15" height="15"/><span class="wvLabel">{$questions}</span> <br>
-			<div style="overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div> <br>
+			<div style="overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div>
 			<div class="vidInfo">
 				{$info}
 			</div>
 		</div>
 		<div class="actIcons">
-			{if $added2Folder == 0}
-			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/><span class="wvLabel">{$addToFolder}</span></a>	
-			{else}
-				<a href="?page=watchVideo&id={$videoId}&action=delFromFolder"><img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}"/><span class="wvLabel">{$removeFromFolder}</span></a>	
-			{/if}
+			<span class="wvLabel" id="addToFolder" name="addToFolder" {if $added2Folder != 0} style="display:none" {/if}>
+			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
+			<img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/>{$addToFolder}</a>
+			</span>	
+			
+			<span onclick="addRemoveFromFolder({$videoId},1,0)" class="wvLabel" id="removeFromFolder" name="removeFromFolder" {if $added2Folder == 0} style="display:none" {/if}>
+			<img src="img/remove.png" width="15" height="15" title="{$removeFromFolderTitle}" />{$removeFromFolder}
+			</span>
+			
 			<a {if $hasAccess} href="#reportVideoModal" {else} href="?page=signIn" onclick="return checkAccess();"{/if}><img src="img/report.png" width="15" height="15" title="{$reportVideoTitle}"/><span class="wvLabel">{$reportVideo}</span></a>
 			{if $addedById == $curUserId}
 				<a href="?page=addVideo&id={$videoId}"><img src="img/edit.png" width="15" height="15" title="{$editTitle}"/><span class="wvLabel">{$edit}</span></a>		
@@ -214,7 +275,7 @@ function unhint(elem) {
 		</div>
 	</div>
 	<div class="wvUnder">
-		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel">{$author}</span>
+		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel"><a href="?userId={$addedById}">{$author}</a></span>
 		<img src="img/upload.png" width="15" height="15" title="{$publishDateTitle}"/>  <span class="wvLabel">{$publishDate}</span>
 		<img src="img/eye.png" width="20" height="15" title="{$viewCountTitle}"/>  <span class="wvLabel">{$viewCount}</span>
 		<img src="img/comments.png" width="20" height="15" title="{$commentCountTitle}"/>  <span class="wvLabel">{$commentCount}</span>
@@ -310,7 +371,7 @@ function unhint(elem) {
 	</div>
 </div>
 
-<div id="add2FolderModal" class="modalDialog">
+<div id="add2FolderModal" name="add2FolderModal"  class="modalDialog">
 	<div style="width:250px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$folders}</h1>
@@ -320,44 +381,44 @@ function unhint(elem) {
 			<br>
 			<label>{$folderName}:</label>
 			<div style="float:right">
-				<select class="field" name="folderId" id="folderId" style="width:180px;">
+				<select class="field" name="folderId" id="fldId" style="width:180px;">
 					{section name=sec1 loop=$foldersArr}
 					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
 					{/section}
-				 </select>
+				</select>
 			</div>
-		<br>
-		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">Add to new folder</a></div>
-		<div style="text-align:center;width:100%">
-			<input type="submit" class="post" name = "add" id="add" value="{$addToFolder}">
-		</div>
+			<br>
+			<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+			<div style="text-align:center;width:100%">
+				<input type="button" class="post" name = "add" id="add" onclick="addRemoveFromFolder({$videoId},2,document.getElementById('fldId').value)" href="#close"  value="{$addToFolder}">
+			</div>
 		</form>
 		{else}
 		{$noFolderNotf}
-		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">Add to new folder</a></div>
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
 		{/if}
 		</div>
 		<div id="newFolder" style="display:none">
 			<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=watchVideo&id={$videoId}&action=addNewFolder" method="post">
 				<br>
 				<div style="float:right;width:100%">
-					<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width:100%" required>
-					<input type="text" name="tags" id="tags" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
+					<input type="text" name="folderName" id="fldName" placeholder="{$folderName}" style="width:100%" required>
+					<input type="text" name="tags" id="tgs" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
 				</div>
-			<br><br>
-			<div style="text-align:center;width:100%">
-				<input type="submit" class="post" name = "add" id="add" value="{$save}">
-			</div>
+				<br><br>
+				<div style="text-align:center;width:100%">
+					<input type="button" class="post" onclick="addToNewFolder({$videoId},document.getElementById('fldName').value,document.getElementById('tgs').value)" name = "add" id="add" value="{$save}">
+				</div>
 			</form>
 		</div>
 	</div>
 </div>
 
 <div id="reportVideoModal" class="modalDialog" >
-	<div style="height:150px; width:400px">
+	<div style="height:160px; width:400px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$reportVideo}</h1>
-		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=reportVideo" method="post">
+		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=reportVideo" method="post" style="width:100%">
 			<br>
 			<label>{$reportReason}:</label>
 			<div style="float:right">
@@ -370,9 +431,10 @@ function unhint(elem) {
 			<br><br>
 			<label>{$reportDesc}:</label>
 			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
-			<br><br>
-			<div style="text-align:center;width:100%">
+			
+			<div style="text-align:center;width:100%;margin-top: 48;">
 				<input type="submit" class="post" name = "add" id="add" value="{$reportVideo}">
+				<input type="reset" class="post" name = "add" id="add" onClick="window.location.href = '#close'" value="{$cancel}">
 			</div>
 		</form>
 	</div>

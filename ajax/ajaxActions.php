@@ -159,6 +159,116 @@ function getUserProfile($id,$db)
 	$res = $db->get("users");
 	return $res[0];
 }
+//Add/Remove video from folder
+if($_GET["action"] == "addRemove" && 
+	isset($_GET["videoId"]) && is_numeric($_GET["videoId"]) && 
+	isset($_GET["flag"]) && is_numeric($_GET["flag"]) && 
+	isset($_SESSION["userId"]) && is_numeric($_SESSION["userId"]))
+{
+	if($_GET["flag"] == 1)
+	{
+		$qry = "delete from foldervideos 
+				where videoId = $_GET[videoId] and exists(select 1 from folders where folders.id=foldervideos.folderId and createdById=".$_SESSION["userId"].")";
+		$db->rawQuery($qry);
+		if($db->count>0) 
+			echo 1;
+		else
+			echo "";
+	}
+	if($_GET["flag"] == 2)
+	{
+		if(!$access->authorized(57))
+		{
+			echo $content["INSUFFACCESS"];
+			return;
+		}
+		if(is_numeric($_GET["videoId"]) && is_numeric($_GET["folderId"]))
+		{
+			$res = $db->insert("foldervideos", array("folderId"=>trim($_GET["folderId"]),
+													  "videoId"=>trim($_GET["videoId"]),
+													  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
+													  "added"=>date("Y-m-d H:i:s")));
+			if($db->count > 0) 
+				echo 1;
+			else
+				echo "";
+		}
+	}
+}
+if($_POST["action"] == "addToNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
+{
+	if(strlen(trim($_POST["folderName"])) < 3)
+	{
+		echo $content["SHORTFOLDERNAME"];
+		return;
+	}
+	if(!$access->authorized(57))
+	{
+		echo $content["INSUFFACCESS"];
+		return;
+	}
+	
+	if(is_numeric($_POST["videoId"]))
+	{
+		$tagStr = isset($_POST["tags"]) ? $_POST["tags"] : "";
+		$tags = array_unique(explode(",", $tagStr));
+		$continue = true;
+		$db->startTransaction();
+		$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),
+										  "created" =>date("Y-m-d H:i:s"),
+										  "createdById" => $access->userId,
+										  "createdByIP" => $_SERVER['REMOTE_ADDR']));
+		if($folderId)
+		{
+			foreach($tags as $tag)
+			{
+				$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+				$res = $db->getOne("tags");
+				if ($db->count == 1) 
+					$id = $res["id"];
+				else
+					$id = $db->insert("tags", array("name"=>trim($tag),
+											"langId"=>$langIds[$_SESSION["lang"]],
+											"created"=>date("Y-m-d H:i:s"),
+											"createdById"=>$access->userId));
+				if($id)
+				{
+					$id = $db->insert("foldertags", array("tagId"=>$id,
+										"folderId"=>$folderId));
+				}
+				
+				if(!$id)
+				{
+					$continue = false;
+					break;
+				}
+			}
+			if($continue)
+			{
+				$res = $db->insert("foldervideos", array("folderId"=>trim($folderId),
+													  "videoId"=>trim($_POST["videoId"]),
+													  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
+													  "added"=>date("Y-m-d H:i:s")));
+				if($db->count > 0) 
+				{
+					$db->commit();
+					//$okMessage = $content["ADDEDTOFOLDER"];
+					echo 1;
+				}
+			}
+			else
+			{
+				$db->rollback();
+				echo "";
+			}
+		}
+		else
+		{
+			$db->rollback();
+			echo "";
+		}
+	}
+}
 
 //LIKE DISLIKE actions
 if($_GET["action"] == "likeIt" && 
