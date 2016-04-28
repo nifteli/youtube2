@@ -270,6 +270,121 @@ if($_POST["action"] == "addToNewFolder" && $access->hasAccess && trim($_POST["fo
 	}
 }
 
+//Comment actions
+if($_POST["action"] == "delComment" && $access->hasAccess && is_numeric($_POST["commentId"]) && is_numeric($_POST["videoId"]))
+{
+	$db->where("id=".$_POST["commentId"]." and createdById=".$access->userId);
+	$res = $db->delete("comments");
+	if($res)
+		echo "1";
+}
+if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
+{
+	$result = "success";
+	if($access->hasAccess)
+		if(!$access->authorized(51))
+		{
+			$result = "error";
+			$messages['noaccess'] = $content["INSUFFACCESS"];
+			return;
+		}
+		//echo ""$result; return;
+	if(!isset($_POST["comment"]) || trim($_POST["comment"]) == "")
+	{
+		$result = "error";
+		$messages["noComment"] = $content["NOCOMMENT"];
+		return;
+	} 
+	if(!$access->hasAccess && (!isset($_POST["email"]) || $_POST["email"] == ""))
+	{
+		$result = "error";
+		$messages["noEmail"] = $content["NOEMAIL"];
+		return;
+	}
+	
+	if($result == "success")
+	{
+		//$db->startTransaction();
+		$isConfirmed = 1;
+		$email = "";
+		$created = date("Y-m-d H:i:s");
+		if(isset($_POST["email"]) && $_POST["email"] != "")
+		{
+			$email = $_POST["email"];
+			$isConfirmed = 0;
+		}
+		
+		
+		$commentId = $db->insert("comments", array("comment"=>trim($_POST["comment"]),
+												  "videoId"=>trim($_POST["videoId"]),
+												  "createdById"=>$access->userId,
+												  "userIP"=>$_SERVER['REMOTE_ADDR'],
+												  "isConfirmed"=>$isConfirmed,
+												  "email"=>$email,
+												  "created"=>$created)); 
+		if($commentId && isset($_POST["email"]) && $_POST["email"] != "")
+			$okMessage = $content["COMMENTSENT2CONF"];
+		
+		if($commentId && $_POST["email"] == "")
+		{
+			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
+								where id = (select addedById from videos where id=".trim($_POST["videoId"]).")");
+								//print_r($res);
+			if($res[0]["getEmailOnVideoComment"] == 1 && $res[0]["email"] != "")
+			{
+				$mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
+				$mail->Subject = $content["getEmailOnComment"];
+				$mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
+				$mail->send();
+				$mail->ClearAllRecipients( );
+			}
+			
+			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
+								where id in (select createdById from comments where videoId = ".trim($_POST["videoId"]).")
+								and id != ".$access->userId);
+								//print_r($res);
+			for($i=0; $i<count($res); $i++)
+			{
+				if($res[$i]["getEmailAfterMyComment"] == 1 && $res[$i]["email"] != "")
+				{
+					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					$mail->Subject = $content["getEmailAfterMyComment"];
+					$mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
+					$mail->send();
+					$mail->ClearAllRecipients( );
+				}
+			}
+		}
+		//$db->commit();
+		$str = "<li id='li$commentId'>
+			<div class='commenterImage'>
+			  <img height=30 width=50 src='".$access->picture."' />
+			</div>
+			<div class='commentText$commentId'>
+				<p>".trim($_POST["comment"])."</p> 
+			<span class='date sub-text'>";
+		if($access->hasAccess)
+			$str .="<a href='index.php?userId=" . $access->userId . "'>";
+				
+		$str .= $access->userName."</a>, $created 
+				<a href='javascript:void(0);' onclick='editComment($commentId,1)'>".$content["EDIT"]."</a>
+				<a onclick='commentAction(".$_POST["videoId"].",$commentId,1)' href='#'>".$content["DELETE"]."</a>
+			</span>
+			</div>
+			<div class='commentTextEdit$commentId}' style='display:none'>
+				<form name='frmComment' id='frmComment' style='float:none;' method='post' action='?page=watchVideo&id=".$_POST["videoId"]."&action=editComment&commentId=$commentId'>
+					<input type='hidden' name='commentId' id='commentId' value='$commentId'>
+					<TEXTAREA id='$commentId' name='$commentId' required ROWS=2 COLS=20 class='cmtBox' style='width:350px;'>".$_POST["comment"]."</TEXTAREA>
+					<input class='post'  type='submit' value='".$content["SAVE"]."'>
+					<input class='post'  type='button' value='".$content["CANCEL"]."' onclick='editComment($commentId,2)'>
+				</form>
+			</div>
+		</li>";
+	}
+	
+	echo $str;
+}
+
 //LIKE DISLIKE actions
 if($_GET["action"] == "likeIt" && 
 	isset($_GET["videoId"]) && is_numeric($_GET["videoId"]) && 

@@ -15,7 +15,19 @@ $("meta[name='keywords']").attr('content', '{$keywords}');
 			agree:""
         },
     });
+	
+	$('#comment').on('keyup', function(e) { 
+		if (e.which == 13 && ! e.shiftKey) {
+			//alert(document.getElementById("frmComm").id);
+			//$('#frmComm').submit();
+			commentAction({$videoId},0,2);
+			document.getElementById("comment").value = "";
+			return false;
+		}
+	});
+	
 });
+
 
 function editComment(id,flag)
 {
@@ -105,6 +117,52 @@ function addRemoveFromFolder(videoId,flag,folderId)
    });
 }
 
+function commentAction(videoId,commentId,flag)
+{ 
+	var action="";
+	var email = $("#email").val();
+	if(email == 'undefined');
+		email = "";
+		
+	var comment = $("#comment").val();
+	
+	if(flag == 1)
+	{
+		if(!confirm("{$deleteConfirmation}"))
+			return;
+		action = "delComment";
+	}
+	if(flag == 2)
+		action = "comment";
+	
+	//alert(videoId+" "+commentId);
+	$.ajax({
+		 type: "POST",
+		 url: 'ajax/ajaxActions.php',
+		 data: "action="+action+"&videoId="+videoId+"&commentId="+commentId+"&email="+email+"&comment="+comment, 
+		 success: function(data) {
+		 //alert("action="+action+"&videoId="+videoId+"&commentId="+commentId+"&email="+email+"&comment="+comment);
+		 //alert(data)
+			if(data=="") return;
+			if(flag == 1 && data == "1")
+			{
+				element = document.getElementById("li"+commentId);
+				element.parentNode.removeChild(element);
+			}
+			if(flag == 2)
+			{
+				//alert("add");
+				//var ul = document.getElementById("commList");
+				//var li = document.createElement("li");
+				//li.appendChild(document.create(data));
+				//li.setAttribute("id", "element4"); // added line
+				//ul.appendChild(li);
+				$("#commList").append(data);
+			}
+		 }
+	});
+}
+
 function saveComment(id)
 {
 //alert(id);return;
@@ -149,7 +207,6 @@ function openNewFolderBox(n)
 	}
 	return false;
 }
-
 
 function hint(elem) {
   elem.parentNode.firstElementChild.style.display = 'block';
@@ -301,13 +358,13 @@ function unhint(elem) {
 	<div class="comments">
 		<div class="detailBox">
 				<div class="cmt">
-				<form name="frmComment" id="frmComment" style="float:none;" method="post" action="?page=watchVideo&action=comment&id={$videoId}">
+				<form name="frmComment" id="frmComm" style="float:none;" method="post" action="?page=watchVideo&action=comment&id={$videoId}">
 					{if $hasAccess}
 						<div class=textfield style="float:left">
 						<div class=hint>{$commentHint}</div>
 						<TEXTAREA onfocus="hint(this)" onblur="unhint(this)"  class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="width: 833px;max-width: 835px;    margin-right: 5;"></TEXTAREA>
 						</div>
-						<input class="post" type="submit" value="{$post}" name="submit">
+						<input class="post" type="button" value="{$post}" name="sub" onclick="commentAction({$videoId},0,2)">
 					{else}
 						<div style="float:left;width:841px">
 							<div class=textfield style="float:left">
@@ -321,7 +378,7 @@ function unhint(elem) {
 							</div>
 						</div>
 						<div style="float:right">
-							<input class="post" type="submit" value="{$post}" name="submit">
+							<input class="post" type="button" onclick="commentAction({$videoId},0,2)" value="{$post}" name="submit">
 						</div>
 					{/if}
 					
@@ -334,18 +391,21 @@ function unhint(elem) {
 			{else}
 				<a href="?page=watchVideo&id={$videoId}&sort=1"><img width="25" height="25" src="img/sortAsc.png" title="Order comments"></a>
 			{/if}
-				<ul class="commentList">
+				<ul class="commentList" id="commList">
 					{section name=sec1 loop=$comments}
-					<li>
+					<li id="li{$comments[sec1].commentId}">
 						<div class="commenterImage">
 						  <img height=30 width=50 src="{$comments[sec1].picturePath}" />
 						</div>
 						<div class="commentText{$comments[sec1].commentId}">
 							<p>{$comments[sec1].comment}</p> <span class="date sub-text">
-							{if $comments[sec1].createdById != ""}<a href="index.php?userId={$comments[sec1].createdById}">{/if}{$comments[sec1].author}</a>, {$comments[sec1].created} 
+							{if $comments[sec1].createdById != ""}
+								<a href="index.php?userId={$comments[sec1].createdById}">
+							{/if}
+							{$comments[sec1].author}</a>, {$comments[sec1].created} 
 							{if $comments[sec1].createdById == $curUserId }
 								<a href="javascript:void(0);" onclick="editComment({$comments[sec1].commentId},1)">{$edit}</a>
-								<a href="?page=watchVideo&id={$videoId}&action=delComment&commentId={$comments[sec1].commentId}">{$delete}</a>
+								<a onclick="commentAction({$videoId},{$comments[sec1].commentId},1)" href="#">{$delete}</a>
 							{/if}
 							</span>
 						</div>

@@ -11,7 +11,7 @@ if ($_GET["action"]=="comment" && is_numeric($_GET["id"]))
 			$messages['noaccess'] = $content["INSUFFACCESS"];
 			return;
 		}
-	if(!isset($_POST["comment"]) || $_POST["comment"] == "")
+	if(!isset($_POST["comment"]) || trim($_POST["comment"]) == "")
 	{
 		$result = "error";
 		$messages["noComment"] = $content["NOCOMMENT"];

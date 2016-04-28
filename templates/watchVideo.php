@@ -182,7 +182,7 @@ class WatchVideo
 			$order = "desc";
 			
 		$qry = "SELECT c.id commentId, c.comment,c.createdById,DATE_FORMAT(c.created,'%d %b %Y %T') created,c.updated,
-				if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author,
+				if(c.createdById!='NULL',u.userName,c.email) author,
 				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById
