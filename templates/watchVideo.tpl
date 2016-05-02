@@ -1,8 +1,9 @@
 <script>
+var hasAccess = "{$hasAccess}";
 $(document).ready(function() {
 document.title = "{$pageTitle}";
 $( "#comment" ).focus();
-$("meta[name='keywords']").attr('content', '{$keywords}');
+$("meta[name='keywords']").attr('content', "{$keywords}");
     var validator = $("#frmComment").validate({
         rules: {
             comment: "required",
@@ -117,13 +118,21 @@ function addRemoveFromFolder(videoId,flag,folderId)
    });
 }
 
+{literal} 
+function isEmailAddress(str) {
+   var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+   return pattern.test(str);  // returns a boolean 
+}
+{/literal} 
+
 function commentAction(videoId,commentId,flag)
 { 
+	//alert(videoId+" "+commentId);
 	var action="";
-	var email = $("#email").val();
-	if(email == 'undefined');
+	var email = $("#email").val(); 
+	if(email == 'undefined')
 		email = "";
-		
+	
 	var comment = $("#comment").val();
 	
 	if(flag == 1)
@@ -133,9 +142,30 @@ function commentAction(videoId,commentId,flag)
 		action = "delComment";
 	}
 	if(flag == 2)
+	{
 		action = "comment";
-	
-	//alert(videoId+" "+commentId);
+		if(hasAccess == "")
+		{
+			//re =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{ 2,3 })+$/;
+			if(email == "" || !isEmailAddress(email))
+			{
+				alert("Please enter email correctly");
+				$( "#email" ).focus();
+				return;
+			}
+			if(!$('#agree').is(":checked"))
+			{
+				alert("Please agree with rules");
+				$( "#agree" ).focus();
+				return;
+			}
+		}
+	}
+	if(flag == 3)
+	{
+		action = "editComment";
+		comment = $("#comment"+commentId).val();
+	}
 	$.ajax({
 		 type: "POST",
 		 url: 'ajax/ajaxActions.php',
@@ -151,13 +181,12 @@ function commentAction(videoId,commentId,flag)
 			}
 			if(flag == 2)
 			{
-				//alert("add");
-				//var ul = document.getElementById("commList");
-				//var li = document.createElement("li");
-				//li.appendChild(document.create(data));
-				//li.setAttribute("id", "element4"); // added line
-				//ul.appendChild(li);
 				$("#commList").append(data);
+			}
+			if(flag == 3)
+			{
+				editComment(commentId,2)
+				$('#cmt'+commentId).html('<p>'+comment+'</p>');
 			}
 		 }
 	});
@@ -305,7 +334,7 @@ function unhint(elem) {
 		<div class="wvDet1">
 			<img src="img/lang.png" width="15" height="15"/><span class="wvLabel">{$language}</span>
 			<img src="img/question.png" width="15" height="15"/><span class="wvLabel">{$questions}</span> <br>
-			<div style="overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div>
+			<div style="height: 20;overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div>
 			<div class="vidInfo">
 				{$info}
 			</div>
@@ -368,17 +397,17 @@ function unhint(elem) {
 					{else}
 						<div style="float:left;width:841px">
 							<div class=textfield style="float:left">
-							<div class=hint>{$commentHint}</div>
+								<div class=hint>{$commentHint}</div>
 								<TEXTAREA onfocus="hint(this)" onblur="unhint(this)" class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="max-width: 835px;"></TEXTAREA>
 							</div>
 							<div class=textfield>
-							<div class=hint>{$emailHint}.</div>
-							<input onfocus="hint(this)" onblur="unhint(this)" class="field" type="email" name="email" style="height:22px;margin-bottom:5px;width:150px;vertical-align: middle;" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}">
-							<label><input type="checkbox" name="agree" id="agree"> {$agreeWithRules}</label>
+								<div class=hint>{$emailHint}.</div>
+								<input onfocus="hint(this)" onblur="unhint(this)" class="field" type="email" name="email" style="height:22px;margin-bottom:5px;width:150px;vertical-align: middle;" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}">
+								<label><input type="checkbox" name="agree" id="agree"> {$agreeWithRules} <a href='?page=siteRules'>{$rules}</a></label>
 							</div>
 						</div>
 						<div style="float:right">
-							<input class="post" type="button" onclick="commentAction({$videoId},0,2)" value="{$post}" name="submit">
+							<input class="post" type="button" value="{$post}" name="sub" onclick="commentAction({$videoId},0,2)">
 						</div>
 					{/if}
 					
@@ -398,7 +427,8 @@ function unhint(elem) {
 						  <img height=30 width=50 src="{$comments[sec1].picturePath}" />
 						</div>
 						<div class="commentText{$comments[sec1].commentId}">
-							<p>{$comments[sec1].comment}</p> <span class="date sub-text">
+							<span id='cmt{$comments[sec1].commentId}'><p>{$comments[sec1].comment}</p></span>
+							<span class="date sub-text">
 							{if $comments[sec1].createdById != ""}
 								<a href="index.php?userId={$comments[sec1].createdById}">
 							{/if}
@@ -412,8 +442,8 @@ function unhint(elem) {
 						<div class="commentTextEdit{$comments[sec1].commentId}" style="display:none">
 							<form name="frmComment" id="frmComment" style="float:none;" method="post" action="?page=watchVideo&id={$videoId}&action=editComment&commentId={$comments[sec1].commentId}">
 								<input type="hidden" name="commentId" id="commentId" value="{$comments[sec1].commentId}">
-								<TEXTAREA id="comment{$comments[sec1].commentId}" name="comment{$comments[sec1].commentId}" required ROWS=2 COLS=20 class="cmtBox" style="width:350px;">{$comments[sec1].comment}</TEXTAREA>
-								<input class="post"  type="submit" value="{$save}" >
+								<TEXTAREA id="comment{$comments[sec1].commentId}" name="comment{$comments[sec1].commentId}" required ROWS=2 COLS=20 class="cmtBox" style="width:640px;">{$comments[sec1].comment}</TEXTAREA>
+								<input class="post"  type="button" onclick="commentAction({$videoId},{$comments[sec1].commentId},3)" value="{$save}" >
 								<input class="post"  type="button" value="{$cancel}" onclick="editComment({$comments[sec1].commentId},2)">
 							</form>
 						</div>

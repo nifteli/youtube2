@@ -223,9 +223,12 @@ $content['VIEWCOUNTTITLE'] = 'Baxılma sayı';
 $content['COMMENTCOUNTTITLE'] = 'Şərh sayı';
 $content['REPORTEMAILSUBJECT'] = 'Video Reported';
 $content['REPORTEMAILBODY'] = 'The following video is reported:';
-$content['AGREEWITHRULES'] = 'Agree with rules';
+$content['AGREEWITHRULES'] = 'Agree with';
+$content['WRULES'] = 'rules';
 $content['COMMENTHINT'] = 'Please write your opinions about the video.';
 $content['EMAILHINT'] = 'Please, register for not writing email every time';
+$content['GUEST'] = 'Qonaq';
+$content['USER'] = 'User';
 //end Watch video
 
 //All tags

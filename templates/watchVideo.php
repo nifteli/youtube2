@@ -80,6 +80,7 @@ class WatchVideo
 			$this->watchVideo->assign("reportDesc",$content['REPORTDESC']);
 			$this->watchVideo->assign("reportReason",$content['REPORTREASON']);
 			$this->watchVideo->assign("agreeWithRules",$content['AGREEWITHRULES']);
+			$this->watchVideo->assign("rules",$content['WRULES']);
 			$this->watchVideo->assign("emailVal",$_POST['email']);
 			$this->watchVideo->assign("commentHint",$content['COMMENTHINT']);
 			$this->watchVideo->assign("emailHint",$content['EMAILHINT']);
@@ -168,7 +169,7 @@ class WatchVideo
 		$res[0]["tagsOrg"] = $res[0]["tags"]; $res[0]["tags"] = "";
 		for($i=0; $i<count($tags); $i++)
 		{ 
-			$res[0]["tags"] .= "<a href='index.php?tagId=".$tagIds[$i]."'>".$tags[$i]."</a>,";
+			$res[0]["tags"] .= "<a href='index.php?tagId=".$tagIds[$i]."'>".$tags[$i]."</a>, ";
 		}
 		$res[0]["tags"] = rtrim($res[0]["tags"],",");
 		
@@ -177,12 +178,15 @@ class WatchVideo
 	
 	private function getComments($id,$lang,$db,$access,$sort)
 	{
+		global $content;
 		$order = "asc";
 		if($sort ==1)
 			$order = "desc";
 			
 		$qry = "SELECT c.id commentId, c.comment,c.createdById,DATE_FORMAT(c.created,'%d %b %Y %T') created,c.updated,
-				if(c.createdById!='NULL',u.userName,c.email) author,
+				if(c.createdById!='NULL',
+					(case when (u.isDeleted = 1) then concat('".$content["USER"]."-',u.id) else u.userName end),
+					concat('".$content["GUEST"]."-',c.id)) author,
 				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById

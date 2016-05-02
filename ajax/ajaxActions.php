@@ -308,7 +308,7 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 		$isConfirmed = 1;
 		$email = "";
 		$created = date("Y-m-d H:i:s");
-		if(isset($_POST["email"]) && $_POST["email"] != "")
+		if(!$access->hasAccess) 
 		{
 			$email = $_POST["email"];
 			$isConfirmed = 0;
@@ -356,26 +356,32 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 			}
 		}
 		//$db->commit();
+		if(trim($access->picture) == "")
+			$access->picture = "./uploads/images/noimage.jpg";
 		$str = "<li id='li$commentId'>
-			<div class='commenterImage'>
-			  <img height=30 width=50 src='".$access->picture."' />
-			</div>
+			<div class='commenterImage'>";
+			if($access->hasAccess)  
+				$str .= "<img height=30 width=50 src='".$access->picture."' />";
+		    else
+				$str .= "<img height=30 width=50 src='./uploads/images/noimage.jpg' />";
+		$str .= "</div>
 			<div class='commentText$commentId'>
-				<p>".trim($_POST["comment"])."</p> 
+				<span id='cmt$commentId'><p>".trim($_POST["comment"])."</p> </span>
 			<span class='date sub-text'>";
 		if($access->hasAccess)
-			$str .="<a href='index.php?userId=" . $access->userId . "'>";
-				
-		$str .= $access->userName."</a>, $created 
-				<a href='javascript:void(0);' onclick='editComment($commentId,1)'>".$content["EDIT"]."</a>
-				<a onclick='commentAction(".$_POST["videoId"].",$commentId,1)' href='#'>".$content["DELETE"]."</a>
-			</span>
+			$str .="<a href='index.php?userId=" . $access->userId . "'>".
+					$access->userName."</a>, $created 
+					<a href='javascript:void(0);' onclick='editComment($commentId,1)'>".$content["EDIT"]."</a>
+					<a onclick='commentAction(".$_POST["videoId"].",$commentId,1)' href='#'>".$content["DELETE"]."</a>";
+		else
+			$str .= $_POST["email"] .", $created";
+		$str .=	"</span>
 			</div>
-			<div class='commentTextEdit$commentId}' style='display:none'>
+			<div class='commentTextEdit$commentId' style='display:none'>
 				<form name='frmComment' id='frmComment' style='float:none;' method='post' action='?page=watchVideo&id=".$_POST["videoId"]."&action=editComment&commentId=$commentId'>
 					<input type='hidden' name='commentId' id='commentId' value='$commentId'>
-					<TEXTAREA id='$commentId' name='$commentId' required ROWS=2 COLS=20 class='cmtBox' style='width:350px;'>".$_POST["comment"]."</TEXTAREA>
-					<input class='post'  type='submit' value='".$content["SAVE"]."'>
+					<TEXTAREA id='comment$commentId' name='comment$commentId' required ROWS=2 COLS=20 class='cmtBox' style='width:640px;'>".$_POST["comment"]."</TEXTAREA>
+					<input class='post'  type='button' onclick='commentAction(".$_POST["videoId"].",$commentId,3)' value='".$content["SAVE"]."'>
 					<input class='post'  type='button' value='".$content["CANCEL"]."' onclick='editComment($commentId,2)'>
 				</form>
 			</div>
@@ -383,6 +389,47 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 	}
 	
 	echo $str;
+}
+
+if($_POST["action"]=="editComment")
+{
+	$result = "success";
+	if(!$access->authorized(52))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	if(!is_numeric($_POST["commentId"]))
+	{
+		$result = "error";
+		$messages["noComment"] = $content["NOCOMMENT"];
+	}
+	
+	if(!isset($_POST["comment"]) || trim($_POST["comment"]) == "")
+	{
+		$result = "error";
+		$messages["noComment"] = $content["NOCOMMENT"];
+	}
+	
+	if(!is_numeric($_POST["videoId"]))
+	{
+		$result = "error";
+		$messages["noVideoId"] = $content["NOID"];
+	}
+	if($result == "success")
+	{
+		//$db->startTransaction();
+		$db->where("id=".$_POST["commentId"]." and createdById=".$access->userId);
+		$commentId = $db->update("comments", array("comment"=>trim($_POST["comment"]),
+												  "updatedByIP"=>$_SERVER['REMOTE_ADDR'],
+												  "updatedById"=>$access->userId,
+												  "updated"=>date("Y-m-d H:i:s")));
+		if($commentId)
+			echo "1";
+		//$db->commit();
+		
+	}
 }
 
 //LIKE DISLIKE actions
