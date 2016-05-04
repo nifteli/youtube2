@@ -133,10 +133,10 @@ function checkAccess()
 						</select>
 					</div>
 					<div class="questions">
-						<a href="#" onClick="shift(4)" onmouseover="shift(4)"><img class="tabImg1" id="img4" src="./img/who_{$lang}.png" /></a>
-						<a href="#" onClick="shift(3)" onmouseover="shift(3)"><img class="tabImg1" id="img3" src="./img/what_{$lang}.png" /></a>
-						<a href="#" onClick="shift(2)" onmouseover="shift(2)"><img class="tabImg1" id="img2" src="./img/why_{$lang}.png" /></a>
-						<a href="#" onClick="shift(1)" onmouseover="shift(1)"><img class="tabImg2" id="img1" src="./img/how_sel_{$lang}.png" /></a>
+						<a href="#" onClick="shift(4)" onmouseover="shift(4)"><img class="tabImg1" title="{$whoHint}" id="img4" src="./img/who_{$lang}.png" /></a>
+						<a href="#" onClick="shift(3)" onmouseover="shift(3)"><img class="tabImg1" title="{$whatHint}" id="img3" src="./img/what_{$lang}.png" /></a>
+						<a href="#" onClick="shift(2)" onmouseover="shift(2)"><img class="tabImg1" title="{$whyHint}" id="img2" src="./img/why_{$lang}.png" /></a>
+						<a href="#" onClick="shift(1)" onmouseover="shift(1)"><img class="tabImg2" title="{$howHint}" id="img1" src="./img/how_sel_{$lang}.png" /></a>
 					</div>
 				</div>
 				<div style="float:left;    margin-top: -5px;">

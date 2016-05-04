@@ -75,6 +75,11 @@ $content['ACCOUNTREMOVED'] = "Your account is deleted";
 $content['USERSNOTE'] = "Digər istifadəçilərin videolarını görmək üçün, istifadəçini seçin";
 $content['NOTENGOUGHTAG'] = "Must be min 2 tags for folder";
 $content['SHORTTAG'] = "Tags must be min 2 char long";
+$content['WHOHINT'] = "WHOHINT";
+$content['WHATHINT'] = "WHATHINT";
+$content['WHYHINT'] = "WHYHINT";
+$content['HOWHINT'] = "HOWHINT";
+
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -193,7 +198,7 @@ $content['DUPLICATEREPORT'] = 'You\'ve already reported this video';
 $content['SHORTDESC'] = 'Description is too short,must be minimum 5 characters';
 $content['ADDCOMMENT']  = 'Add comment';
 $content['POST'] = 'Post';
-$content['EDIT'] = 'Edir';
+$content['EDIT'] = 'Edit';
 $content['DELETE'] = 'Delete';
 $content['SAVE'] = 'Save';
 $content['RECOMMENDED'] = 'Recommended';

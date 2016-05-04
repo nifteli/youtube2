@@ -125,6 +125,32 @@ function isEmailAddress(str) {
 }
 {/literal} 
 
+function orderComments(videoId,dir)
+{
+	
+//$("#commList").val("dddddd");
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action=sortComm&videoId="+videoId+"&dir="+dir, 
+     success: function(data) {
+		if(data=="") return;
+		document.getElementById("commList").innerHTML = data;
+		if(dir==1)
+		{
+			$("#orderDesc").show();
+			$("#orderAsc").hide();
+		}
+		if(dir==2)
+		{
+			$("#orderDesc").hide();
+			$("#orderAsc").show();
+		}
+     }
+
+   });
+}
+
 function commentAction(videoId,commentId,flag)
 { 
 	//alert(videoId+" "+commentId);
@@ -415,11 +441,13 @@ function unhint(elem) {
 				</div>
 			<div class="actionBox">
 		
-			{if $sort==2}
-				<a href="?page=watchVideo&id={$videoId}&sort=2"><img width="25" height="25" src="img/sortDesc.png" title="Order comments"></a>
-			{else}
-				<a href="?page=watchVideo&id={$videoId}&sort=1"><img width="25" height="25" src="img/sortAsc.png" title="Order comments"></a>
-			{/if}
+			<div id="orderDesc" style="display:none;cursor:pointer">
+				<a onclick="orderComments({$videoId},2)"><img width="25" height="25" src="img/sortDesc.png" title="Order comments"></a>
+			</div>
+			<div id="orderAsc" style="display:block;cursor:pointer">
+				<a onclick="orderComments({$videoId},1)"><img width="25" height="25" src="img/sortAsc.png" title="Order comments"></a>
+			</div>
+			
 				<ul class="commentList" id="commList">
 					{section name=sec1 loop=$comments}
 					<li id="li{$comments[sec1].commentId}">

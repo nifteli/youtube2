@@ -32,6 +32,10 @@ class Header
 		$this->header->assign("added",$content['ADDEDVIDEOS']);
 		$this->header->assign("otherUsers",$content['OTHERUSERS']);
 		$this->header->assign("myVideos",$content['MYVIDEOS']);
+		$this->header->assign("whoHint",$content['WHOHINT']);
+		$this->header->assign("whatHint",$content['WHATHINT']);
+		$this->header->assign("whyHint",$content['WHYHINT']);
+		$this->header->assign("howHint",$content['HOWHINT']);
 		
 		
 		$this->header->assign("about",$content['ABOUT']);

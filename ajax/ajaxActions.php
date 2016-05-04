@@ -390,6 +390,57 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 	
 	echo $str;
 }
+//sort comments
+if($_GET["action"] == "sortComm" && is_numeric($_GET["videoId"]) && is_numeric($_GET["dir"]))
+{
+	if($_GET["dir"] == 1)
+		$sort = "asc";
+	if($_GET["dir"] == 2)
+		$sort = "desc";
+	
+	$qry = "SELECT c.id commentId, c.comment,c.createdById,DATE_FORMAT(c.created,'%d %b %Y %T') created,c.updated,
+				if(c.createdById!='NULL',
+					(case when (u.isDeleted = 1) then concat('".$content["USER"]."-',u.id) else u.userName end),
+					concat('".$content["GUEST"]."-',c.id)) author,
+				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
+				FROM comments c
+				left join users u on u.id=c.createdById
+				where c.isConfirmed=1 and c.videoId=$_GET[videoId]
+				order by c.created $sort"; //echo $qry;
+	$res = $db->rawQuery($qry);
+	
+	if($res)
+	{
+		for($i=0; $i<count($res); $i++)
+		{
+			$str .= "<li id='li" . $res[$i]["commentId"] . "'>
+						<div class='commenterImage'>
+						  <img height=30 width=50 src='".$res[$i]["picturePath"]."' />
+						</div>
+						<div class='commentText" . $res[$i]["commentId"] . "'>
+							<span id='cmt" . $res[$i]["commentId"] . "'><p>" . $res[$i]["comment"] . "</p></span>
+							<span class='date sub-text'>";
+							if ($res[$i]["createdById"] != "")
+								$str .= "<a href='index.php?userId=" . $res[$i]["createdById"] . "'>";
+							$str .= $res[$i]["author"] . "</a>, " . $res[$i]["created"];
+							if ($res[$i]["createdById"] == $access-userId)
+								$str .= "<a href='javascript:void(0);' onclick='editComment(" . $res[$i]["commentId"] . ",1)'>" . $content["EDIT"] . "</a>
+										 <a onclick='commentAction(".$_GET["videoId"]."," . $res[$i]["commentId"] . ",1)' href='#'>" . $content["DELETE"] . "</a>";
+						$str .= "</span>
+						</div>
+						<div class='commentTextEdit" . $res[$i]["commentId"] . "' style='display:none'>
+							<form name='frmComment' id='frmComment' style='float:none;' method='post' action='?page=watchVideo&id=".$_GET["videoId"]."&action=editComment&commentId=" . $res[$i]["commentId"] . "'>
+								<input type='hidden' name='commentId' id='commentId' value='" . $res[$i]["commentId"] . "'>
+								<TEXTAREA id='comment" . $res[$i]["commentId"] . "' name='comment" . $res[$i]["commentId"] . "' required ROWS=2 COLS=20 class='cmtBox' style='width:640px;'>" . $res[$i]["comment"] . "</TEXTAREA>
+								<input class='post'  type='button' onclick='commentAction(".$_GET["videoId"]."," . $res[$i]["commentId"] . ",3)' value='" . $content["SAVE"] . "' >
+								<input class='post'  type='button' value='" . $content["CANCEL"] . "' onclick='editComment(" . $res[$i]["commentId"] . ",2)'>
+							</form>
+						</div>
+					</li>";
+		}
+		echo $str;
+	}
+}
 
 if($_POST["action"]=="editComment")
 {

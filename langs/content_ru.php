@@ -74,7 +74,10 @@ $content['ACCOUNTREMOVED'] = "Your account is deleted";
 $content['USERSNOTE'] = "Digər istifadəçilərin videolarını görmək üçün, istifadəçini seçin";
 $content['NOTENGOUGHTAG'] = "Must be min 2 tags for folder";
 $content['SHORTTAG'] = "Tags must be min 2 char long";
-
+$content['WHOHINT'] = "WHOHINT";
+$content['WHATHINT'] = "WHATHINT";
+$content['WHYHINT'] = "WHYHINT";
+$content['HOWHINT'] = "HOWHINT";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
