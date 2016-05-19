@@ -143,7 +143,7 @@ class WatchVideo
 								SUM(IF(action = -1, 1, 0)) dislikeCount,
 								vws.comments commentCount,
 								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.questions,v.addedById,
-								concat(u.firstName,' ',u.lastName) addedBy,
+								u.userName addedBy,
 								tg.tags,tg.tagIds,
 								vc.categoryId,
 								c.catName$lang,

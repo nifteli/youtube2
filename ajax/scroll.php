@@ -377,7 +377,7 @@ function displayData($res, $data, $colCnt=4)
 				if(isAddedToFolder($id))
 					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
-					$str .= "<a href='#add2FolderModal' onClick=\"submitForm('?page=watchVideo&id=$id&action=add2Folder&from=main')\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
+					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";
 			}
 						 

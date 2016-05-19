@@ -25,6 +25,10 @@ class Videos
 		$this->videos->assign("sbDuration", $content["SBDURATION"]);
 		$this->videos->assign("sbWatches", $content["SBWATCHES"]);
 		$this->videos->assign("sbComments", $content["SBCOMMENTS"]);
+		$this->videos->assign("addToNewFolder", $content["ADDTONEWFOLDER"]);
+		$this->videos->assign("folderNm",$content['FOLDERNAME']);
+		$this->videos->assign("tags",$content['TAGS']);
+		$this->videos->assign("save",$content['SAVE']);
 		$this->videos->assign("asc",$content['ASC']);
 		$this->videos->assign("desc",$content['DESC']);
 		if(is_numeric($_GET["catId"]))

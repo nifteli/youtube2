@@ -24,7 +24,7 @@ class Users
 	private function getUsers($lang,$db)
 	{
 		$qry = "select u.id, 
-				concat(u.firstName,' ',u.lastName) user,concat('?userId=',u.id) url,
+				u.userName user,concat('?userId=',u.id) url,
 				CASE WHEN u.picturePath='' THEN './uploads/userPictures/noImage.png' ELSE ifNull(u.picturePath,'./uploads/userPictures/noImage.png') END picPath,
 				count(v.id) videoCount
 				from  users u 

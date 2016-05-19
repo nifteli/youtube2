@@ -1,13 +1,12 @@
-
 <!--Videos thums Start-->			 
-
 <div style="padding-top:10px;min-height: 1000px;">
-<div class="hollywd" style="margin-top:30px;width:500px">
-<h2>{$allTagsTitle}</h2>  
-</div>
 
 <div id="eerie">
-
+<div style="text-align:center;font-weight: bold;font-size: 20px;width: 950px;">
+{section name=record loop=$allLetters}
+	<a href="?page=allTags&l={if {$allLetters[record]} == '#'}0{else}{$allLetters[record]}{/if}">{$allLetters[record]}</a>
+{/section}
+</div>
 <table border=0>
 <tr>
 	{for $i=0 to 3}
@@ -26,9 +25,5 @@
 	{/for}
 </tr>
 </table>
-</div>		  
-		 
+</div>	 
 </div>
-
-             
-

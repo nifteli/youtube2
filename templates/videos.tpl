@@ -69,9 +69,11 @@ function getDocHeight() {
     );
 }
 
-function submitForm(action)
+function submitForm(id)
 {
-	document.getElementById('frmAddToFolder').action=action;
+	openNewFolderBox(2);
+	document.getElementById('frmAddToFolder').action = "?page=watchVideo&id="+id+"&action=add2Folder&from=main";
+	document.getElementById('frmAAA').action = "?page=watchVideo&id="+id+"&action=addNewFolder&from=main";
 	//document.getElementById('frmAddToFolder').submit();
 }
 
@@ -93,6 +95,20 @@ function changeOrderBy(orderBy,dir)
 		
 	   });
  }
+ function openNewFolderBox(n)
+{
+	if(n ==1)
+	{
+		$("#existingFolder").hide();
+		$("#newFolder").show();
+	}
+	else
+	{
+		$("#existingFolder").show();
+		$("#newFolder").hide();
+	}
+	return false;
+}
 </script>
 	
 
@@ -141,7 +157,7 @@ function changeOrderBy(orderBy,dir)
 	</div>
 </div>
 
-<div id="add2FolderModal" class="modalDialog">
+<!-- <div id="add2FolderModal" class="modalDialog">
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$folders}</h1>
@@ -164,6 +180,48 @@ function changeOrderBy(orderBy,dir)
 		{else}
 		{$noFolderNotf}
 		{/if}
+	</div>
+</div> -->
+<div id="add2FolderModal" name="add2FolderModal"  class="modalDialog">
+	<div style="width:250px">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$folders}</h1>
+		<div id="existingFolder">
+		{if count($foldersArr)>0}
+		<form name="frmAddToFolder" id="frmAddToFolder" action="" method="post">
+			<br>
+			<label>{$folderName2}:</label>
+			<div style="float:right">
+				<select class="field" name="folderId" id="fldId" style="width:180px;">
+					{section name=sec1 loop=$foldersArr}
+					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
+					{/section}
+				</select>
+			</div>
+			<br>
+			<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+			<div style="text-align:center;width:100%">
+				<input type="submit" class="post" name = "add" id="add"  value="{$addToFolder}">
+			</div>
+		</form>
+		{else}
+		{$noFolderNotf}
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+		{/if}
+		</div>
+		<div id="newFolder" style="display:none">
+			<form name="frmAAA" id="frmAAA" action="1" method="post">
+				<br>
+				<div style="float:right;width:100%">
+					<input type="text" name="folderName" id="fldName" placeholder="{$folderNm}" style="width:100%" required>
+					<input type="text" name="tags" id="tgs" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
+				</div>
+				<br><br>
+				<div style="text-align:center;width:100%">
+					<input type="submit" class="post" name = "add" id="add" value="{$save}">
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 	<br><br><br><br>

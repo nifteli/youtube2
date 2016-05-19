@@ -2264,18 +2264,19 @@ float: left;
     -o-transition: all 0.5s ease;}
 
 .phantom {
-    background-color: #7A672D;
+        background-color: #E2DEAE;
     color: #FFFFFF;
     display: block;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 222px;
-    height: 35px;
+    height: 20px;
     font-family: "Penguins";
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
-    line-height: 35px;}
+    line-height: 20px;
+}
 
 .phantom a {
     text-decoration: none;}
@@ -2303,7 +2304,9 @@ float: left;
     margin-bottom: 3px;
     text-align: center;
     background-color: #F1F1F1;
-    text-transform: uppercase;}
+    text-transform: uppercase;
+	height: 5px;
+	}
 
 #annihilation {
     font-family: "Penguins";

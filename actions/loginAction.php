@@ -267,6 +267,7 @@ if ($_GET["action"]=="login")
 }
 if ($_GET["action"]=="logout")
 {
+	session_unset(); 
 	session_destroy();
 	$access->destroy();
 	if(isset($_COOKIE["arr"]["userName"]) && isset($_COOKIE["arr"]["password"]))

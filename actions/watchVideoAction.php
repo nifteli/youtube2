@@ -161,6 +161,7 @@ if($_GET["action"]=="add2Folder")
 		header("Location: index.php");
 	}
 }
+
 if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "")
 {
 	if(strlen(trim($_POST["folderName"])) < 3)
@@ -232,7 +233,10 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 			$errorMessage = $content["FOLDERNOTADDED"];
 		}
 	}
-	
+	if($_GET["from"] == "main")
+	{
+		header("Location: index.php");
+	}
 }
 if($_GET["action"]=="delFromFolder")
 {

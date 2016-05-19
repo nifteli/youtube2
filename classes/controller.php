@@ -29,6 +29,8 @@ include($templatePath."adminCategories.php");
 include($templatePath."adminNotifications.php");
 include($templatePath."about.php");
 include($templatePath."other.php");
+include($templatePath."page1.php");
+include($templatePath."page2.php");
 include($templatePath."adminGuests.php");
 include($templatePath."adminReports.php");
 include($templatePath."adminDetails.php");
@@ -195,6 +197,14 @@ class Controller //extends MySQL
 			case "other":
 				$other = new Other($this);
 				$other->Show();
+				break;
+			case "page1":
+				$page1 = new Page1($this);
+				$page1->Show();
+				break;
+			case "page2":
+				$page2 = new Page2($this);
+				$page2->Show();
 				break;
 		}
 	}
