@@ -12,6 +12,9 @@ class Videos
 		
 		$this->videos = new Smarty;
 		$this->videos->assign("lang",$controller->lang);
+		$this->videos->assign("dataFunction","showData");
+		if($_GET["df"] == 1)
+			$this->videos->assign("dataFunction","showAllData");
 		
 		$this->videos->assign("catId", isset($_GET["catId"]) ? $_GET["catId"] : "");
 		$this->videos->assign("userId", isset($_GET["userId"]) ? $_GET["userId"] : "");

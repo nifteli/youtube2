@@ -7,7 +7,7 @@
  $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&page=1&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}",
+                  data:"actionfunction={$dataFunction}&page=1&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}",
         cache: false,
         success: function(response){
 		   $('#loading').hide();
@@ -28,7 +28,6 @@
 	}
 	   var page = $('#demoajax').find('.nextpage').val();
 	   var isload = $('#demoajax').find('.isload').val();
-	   var exCatId = $('#demoajax').find('.exCatId').val();
 	   
 		 //alert('scrollTop='+Math.ceil($(window).scrollTop())+1+' clientHeight='+document.body.clientHeight+' winheight='+$(document).height()+' total='+Math.ceil(($(window).scrollTop()+1+document.body.clientHeight))+"getDocHeight()="+getDocHeight());
 	     //if ((Math.ceil(($(window).scrollTop() +1 +document.body.clientHeight))>=$(document).height()) && isload=='true'){
@@ -37,12 +36,11 @@
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page+"&exCatId="+exCatId,
+                  data:"actionfunction={$dataFunction}&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();
 		   $('#demoajax').find('.isload').remove();
-		   $('#demoajax').find('.exCatId').remove();
 		   $('#loading').hide();
 		   
 		  $('#demoajax').append(response);
@@ -87,7 +85,7 @@ function changeOrderBy(orderBy,dir)
 	 $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&page=1"+"&orderBy="+orderBy+"&direction="+dir+"&catId={$catIdVal}&q={$q}&userId={$userIdVal}&tagId={$tagIdVal}&folderId={$folderIdVal}",
+                  data:"actionfunction=showAllData&lang={$lang}&page=1"+"&orderBy="+orderBy+"&direction="+dir+"&catId={$catIdVal}&q={$q}&userId={$userIdVal}&tagId={$tagIdVal}&folderId={$folderIdVal}",
         cache: false,
         success: function(response){ //alert(queryStr);
 		   $('#loading').hide();
@@ -138,6 +136,7 @@ function changeOrderBy(orderBy,dir)
 		{if $news1 != ''}
 		<div class="news1">{$news1}</div>
 		{/if}
+		{if $dataFunction != 'showData'}
 		<div class="orderByDiv">
 			<select name="reorder" id="reorder" onchange="changeOrderBy(this.value,2)">
 				<!-- <option value="">{$sortBy}</option> -->
@@ -153,6 +152,7 @@ function changeOrderBy(orderBy,dir)
 			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,1)" type="radio" name="direction" id="direction" value=1 {if isset($directionVal) && $directionVal==1 } checked {/if}>{$asc}</label>
 			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,2)" type="radio" name="direction" id="direction" value=2 {if (isset($directionVal) && $directionVal==2) || !isset($directionVal)} checked {/if}>{$desc}</label>
 		</div>
+		{/if}
 		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">
 		</div>

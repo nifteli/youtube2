@@ -202,7 +202,7 @@ function checkAccess()
 				</div>
 				<!--Statistics Bar Start-->
 				<div class="user"> 
-					<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
+					<a href="?index.php&df=1"><img class="vid" width="20" height="20" src="img/videos.png" />
 					<p class="counts">{$videos} ({$videoCnt})</p></a>
 					<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
 					<p class="counts">{$tags} ({$tagCnt})</p></a>

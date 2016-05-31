@@ -131,44 +131,111 @@ function showData($data,$db,$limit)
 			}
 		}
 	}
-	//echo "<pre>";print_r($res3);echo "</pre>";
-	//echo "<br>start=$start  end=".$limit*$page;
-	//////////
-	// $vdcnt = 0;
-	// $cn = "";
-	// $dates = array();
-	// for($i=0; $i<count($res); $i++)
-	// {
-		// if($cn != $res[$i]["catName$lang"])
-		// {
-			// $dates[$i] = $res[$i]["addDate"];
-			// $vdcnt = 0;
-		// }
-		// $vdcnt++;
-		// $res2[] = $res[$i];
-		// //$dates[] = $res[$i]["added"];
-		// if($vdcnt == 8)
-		// {
-			// $vdcnt = 0;
-			// $k = $i;
-			// for($j=$k; $j<count($res); $j++)
-			// {
-				// if($cn == $res[$j]["catName$lang"])
-					// $i++;
-			// }
-		// }
-		// $cn = $res[$i]["catName$lang"];
-		// //$n=$i;
-	// }
-	
-	////////////
-	
-	//array_multisort($dates, $res2);
-	$data["exCatId"] = $res[$limit-1]["categoryId"];
+	//$data["exCatId"] = $res[$limit-1]["categoryId"];
 	//echo "<pre>";print_r($res2);echo "</pre>";
 	//echo "n=$n"."exCatId=".$data["exCatId"];
 	displayData($res3, $data);
 }
+function showAllData($data,$db,$limit)
+{
+	$lang = $data["lang"];
+	$page = $data['page'];
+	//print_r($data);
+	if(isset($data["catId"]) && $data["catId"]>0)
+		$catId = $data["catId"];
+	if(isset($data["exCatId"]) && $data["exCatId"]>0)
+		$exCatId = $data["exCatId"];
+	if(isset($data["q"]) && $data["q"]>0)
+		$questions = $data["q"];
+	if(isset($data["tagId"]) && $data["tagId"]>0)
+		$tagId = $data["tagId"];
+	if(isset($data["userId"]) && $data["userId"]>0)
+		$userId = $data["userId"];
+	if(isset($data["folderId"]) && $data["folderId"]>0)
+		$folderId = $data["folderId"];
+	$direction = "asc";
+	if($data["direction"] == 2)
+		$direction = "desc";
+	switch($data["orderBy"])
+	{
+		case 1:
+			$orderBy = " v.added $direction,catName$lang asc ";
+			break;
+		case 2:
+			$orderBy = " v.name $direction,catName$lang asc ";
+			break;
+		case 3:
+			$orderBy = " l.name$lang $direction,catName$lang asc ";
+			break;
+		case 4:
+			$orderBy = " q.question $direction,catName$lang asc ";
+			break;
+		case 5:
+			$orderBy = " catName$lang $direction ";
+			break;
+		case 6:
+			$orderBy = " v.duration $direction,catName$lang asc  ";
+			break;
+		case 7:
+			$orderBy = " viewCount $direction,catName$lang asc  ";
+			break;
+		case 8:
+			$orderBy = " vs.comments $direction,catName$lang asc  ";
+			break;
+		default:
+			$orderBy = " v.added desc,catName$lang asc ";
+			break;
+	}
+	
+	if($page==1)
+		$start = 0;  
+	else
+		$start = ($page-1)*$limit;
+		//echo "<pre>";print_r($data);echo "</pre>";
+		//echo "page=$page; limit=$limit; start=$start";
+		
+	$qry = "SELECT vs.views viewCount,
+					vs.likes likeCount,
+					vs.dislikes dislikeCount,vs.comments,
+					v.id, v.name, v.info, v.duration,q.question,
+					DATE_FORMAT(v.added,'%d %b %Y') added, v.added addDate,
+					v.languageId, v.link, v.addedById,v.questions,
+					concat(u.firstName,' ',u.lastName) addedBy,
+                    GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
+					vc.categoryId,
+					c.catName$lang
+			FROM videos v
+            left join vwvideostats vs on v.id = vs.id
+			join users u on u.id = v.addedById
+			join videocats vc on vc.videoId = v.id
+			join categories c on c.id = vc.categoryId
+			left join languages l on l.id = v.languageId
+            left join videotags vt on vt.videoId=v.id
+			left join questions q on q.bitValue=v.questions
+            left join tags t on t.id=vt.tagId
+			left join foldervideos fv on fv.videoId=v.id
+			where v.isDeleted=0 and lower(l.abbr)='$lang'";
+	if(isset($catId)&& is_numeric($catId))
+		$qry .= " and vc.categoryId=$catId";
+	if(isset($exCatId)&& is_numeric($exCatId))
+		$qry .= " and vc.categoryId!=$exCatId";
+	if(isset($questions)&& is_numeric($questions))
+		$qry .= " and v.questions&$questions";
+	if(isset($userId) && is_numeric($userId) && !isset($folderId))
+		$qry .= " and v.addedById=$userId";
+	if(isset($folderId) && is_numeric($folderId))
+		$qry .= " and fv.folderId=$folderId";
+	if(isset($tagId) && is_numeric($tagId))
+		$qry .= " and vt.tagId=$tagId";
+	$qry .= " group by v.id,vc.categoryId
+			order by $orderBy
+			limit $start,$limit";
+	$res =$db->rawQuery($qry); 
+	
+	
+	displayAllData($res, $data);
+}
+
 
 function showRecommended($data,$db,$limit)
 {
@@ -375,6 +442,83 @@ function showSearchResults($data,$db,$limit)
 	displayData($res, $data);
 }
 
+function displayAllData($res, $data, $colCnt=4)
+{
+	$lang = $data["lang"];
+	$page = $data['page'];
+	global $content;
+	global $db;
+	
+	if(count($res)>0)
+	{
+		$cat="";
+		$str="";
+		$cnt = 0;
+		for($i=0; $i<count($res); $i++)
+		{
+			
+			if($cnt % $colCnt == 0)
+				$str .= "<div class='box-cont'>";
+			$cnt++;
+			
+			$id = $res[$i]['id'];
+			$link = getYoutubeImage($res[$i]['link']);
+			$info = $res[$i]['info'];
+			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 20) ? mb_substr(trim($res[$i]['name']), 0, 20,"UTF-8")."..." : $res[$i]['name'];
+			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 20) ? mb_substr (trim($res[$i]['tags']), 0, 20,"UTF-8")."..." : $res[$i]['tags'];
+			$viewCount = $res[$i]['viewCount'];
+			$addedDate = $res[$i]['added'];
+			$addedBy = (mb_strlen($res[$i]['addedBy'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
+			$likes = $res[$i]['likeCount'];
+			$dislikes = $res[$i]['dislikeCount'];
+			//echo "<br><br><br><br><br>added=".$res[$i]['addedById'] ."sessionid=". $_SESSION["userId"];
+			$str .= "<div class='box'>
+						 <a href='?page=watchVideo&id=$id'>
+							<div style='text-align: center'>
+							<div class='videoImage'>
+							<img src=$link width=170 height=90 title='$info'/>
+							</div>
+						 </a>";
+			if(is_numeric($_SESSION["userId"]))
+			{
+				$str .= "<div class='addVideoBtn'>";
+				if(isAddedToFolder($id))
+					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+				else
+					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
+				$str .= "</div>";
+			}
+						 
+						 
+			//if(isset($_SESSION["userId"]) && $res[$i]['addedById'] != $_SESSION["userId"])
+				//$str .= " style='visibility: hidden;'";
+			$str .= "<div class='ico1'>".gmdate('H:i:s',$res[$i]["duration"])."</div>
+					<div class='videoName'>
+					<a href='?page=watchVideo&id=$id' title='".$res[$i]['name']."'>".trim($name)."</a>
+					 </div>
+					 <img class='shape' src='img/shape.png' width=170 height=0 alt=''/> </div>
+					 <div class='videoDet'>
+						<div class='stat1'> 
+							<img class='details' width=15 height=10 src='img/tags2.png' title='".$content["HINTTAGS"]."' />
+							<span class='wood' title='".$res[$i]['tags']."'>$tags</span>
+						</div>	
+						<div class='stat2'> 	
+								<img width=12 height=10 src='img/question.png' title='".$content["HINTQUESTION"]."' /><span class='views' title='".$content["HINTQUESTION"]."' >" . $res[$i]["question"] . "</span>
+								<img width=15 height=10 src='img/eye.png' title='".$content["VIEWCOUNTTITLE"]."' /><span class='views' title='".$content["VIEWCOUNTTITLE"]."' >$viewCount</span>
+								<img width=15 height=10 src='img/comments.png' title='".$content["COMMENTCOUNTTITLE"]."' /><span class='views' title='".$content["COMMENTCOUNTTITLE"]."' >" . $res[$i]["comments"] . "</span>
+						</div>						 
+					 </div>
+				</div>";
+			if($cnt % $colCnt == 0 || $i + 1 == count($res))
+				$str .= "</div>";
+		}
+		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'> 
+				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>"; 
+		echo $str;
+	}
+}
+
+
 function displayData($res, $data, $colCnt=4)
 {
 	$lang = $data["lang"];
@@ -463,8 +607,7 @@ function displayData($res, $data, $colCnt=4)
 				$str .= "</div>";
 		}
 		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'> 
-				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>
-				<input type='hidden' class='exCatId' value='".$data["exCatId"]."'>"; //echo "exCatId=".$data["exCatId"];
+				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>"; 
 		echo $str;
 	}
 }
