@@ -24,6 +24,8 @@ function showData($data,$db,$limit)
 	//print_r($data);
 	if(isset($data["catId"]) && $data["catId"]>0)
 		$catId = $data["catId"];
+	if(isset($data["exCatId"]) && $data["exCatId"]>0)
+		$exCatId = $data["exCatId"];
 	if(isset($data["q"]) && $data["q"]>0)
 		$questions = $data["q"];
 	if(isset($data["tagId"]) && $data["tagId"]>0)
@@ -77,7 +79,7 @@ function showData($data,$db,$limit)
 					vs.likes likeCount,
 					vs.dislikes dislikeCount,vs.comments,
 					v.id, v.name, v.info, v.duration,q.question,
-					DATE_FORMAT(v.added,'%d %b %Y') added, 
+					DATE_FORMAT(v.added,'%d %b %Y') added, v.added addDate,
 					v.languageId, v.link, v.addedById,v.questions,
 					concat(u.firstName,' ',u.lastName) addedBy,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
@@ -96,6 +98,8 @@ function showData($data,$db,$limit)
 			where v.isDeleted=0 and lower(l.abbr)='$lang'";
 	if(isset($catId)&& is_numeric($catId))
 		$qry .= " and vc.categoryId=$catId";
+	if(isset($exCatId)&& is_numeric($exCatId))
+		$qry .= " and vc.categoryId!=$exCatId";
 	if(isset($questions)&& is_numeric($questions))
 		$qry .= " and v.questions&$questions";
 	if(isset($userId) && is_numeric($userId) && !isset($folderId))
@@ -105,11 +109,65 @@ function showData($data,$db,$limit)
 	if(isset($tagId) && is_numeric($tagId))
 		$qry .= " and vt.tagId=$tagId";
 	$qry .= " group by v.id,vc.categoryId
-			order by $orderBy
-			limit $start,$limit";//echo $qry;
+			order by v.id desc";//echo $qry;
+			//limit $start,$limit";
 	$res =$db->rawQuery($qry); 
 	
-	displayData($res, $data);
+	for($i=0; $i<count($res); $i++)
+	{
+		$res2[$res[$i]["categoryId"]][] = $res[$i];
+	}
+	foreach($res2 as $key=>$value)
+	{
+		$cnt=0;
+		$n++;
+		foreach($value as $key1=>$value1)
+		{
+			if(is_array($value1))
+			{
+				$cnt++;
+				if($cnt <= 8 && $n > ($page - 1)*4 && $n <= $page*4)
+					$res3[] = $value1;
+			}
+		}
+	}
+	//echo "<pre>";print_r($res3);echo "</pre>";
+	//echo "<br>start=$start  end=".$limit*$page;
+	//////////
+	// $vdcnt = 0;
+	// $cn = "";
+	// $dates = array();
+	// for($i=0; $i<count($res); $i++)
+	// {
+		// if($cn != $res[$i]["catName$lang"])
+		// {
+			// $dates[$i] = $res[$i]["addDate"];
+			// $vdcnt = 0;
+		// }
+		// $vdcnt++;
+		// $res2[] = $res[$i];
+		// //$dates[] = $res[$i]["added"];
+		// if($vdcnt == 8)
+		// {
+			// $vdcnt = 0;
+			// $k = $i;
+			// for($j=$k; $j<count($res); $j++)
+			// {
+				// if($cn == $res[$j]["catName$lang"])
+					// $i++;
+			// }
+		// }
+		// $cn = $res[$i]["catName$lang"];
+		// //$n=$i;
+	// }
+	
+	////////////
+	
+	//array_multisort($dates, $res2);
+	$data["exCatId"] = $res[$limit-1]["categoryId"];
+	//echo "<pre>";print_r($res2);echo "</pre>";
+	//echo "n=$n"."exCatId=".$data["exCatId"];
+	displayData($res3, $data);
 }
 
 function showRecommended($data,$db,$limit)
@@ -405,7 +463,8 @@ function displayData($res, $data, $colCnt=4)
 				$str .= "</div>";
 		}
 		$str.="<input type='hidden' class='nextpage' value='".($page+1)."'><input type='hidden' class='isload' value='true'> 
-				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>";
+				<input type='hidden' class='orderBy' value='".$data["orderBy"]."'>
+				<input type='hidden' class='exCatId' value='".$data["exCatId"]."'>"; //echo "exCatId=".$data["exCatId"];
 		echo $str;
 	}
 }
@@ -423,7 +482,7 @@ function getYoutubeImage($url)
 
 function createCondition($column, $value, $operator, $accentSensitive)
 {
-	$accent = array("ə", "ı", "ö", "ü", "ğ", "ç", "ş");
+	$accent = array("?", "i", "�", "�", "g", "�", "s");
 	$replace = array("e", "i", "o", "u", "g", "c", "s");
 	
 	$str = "";

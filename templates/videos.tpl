@@ -28,6 +28,7 @@
 	}
 	   var page = $('#demoajax').find('.nextpage').val();
 	   var isload = $('#demoajax').find('.isload').val();
+	   var exCatId = $('#demoajax').find('.exCatId').val();
 	   
 		 //alert('scrollTop='+Math.ceil($(window).scrollTop())+1+' clientHeight='+document.body.clientHeight+' winheight='+$(document).height()+' total='+Math.ceil(($(window).scrollTop()+1+document.body.clientHeight))+"getDocHeight()="+getDocHeight());
 	     //if ((Math.ceil(($(window).scrollTop() +1 +document.body.clientHeight))>=$(document).height()) && isload=='true'){
@@ -36,11 +37,12 @@
 	   var ajaxreq = $.ajax({
 	     url:"ajax/scroll.php",
                   type:"POST",
-                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page,
+                  data:"actionfunction=showData&lang={$lang}&catId={$catId}&q={$q}&userId={$userId}&tagId={$tagId}&folderId={$folderId}&page="+page+"&exCatId="+exCatId,
         cache: false,
         success: function(response){
 		   $('#demoajax').find('.nextpage').remove();
 		   $('#demoajax').find('.isload').remove();
+		   $('#demoajax').find('.exCatId').remove();
 		   $('#loading').hide();
 		   
 		  $('#demoajax').append(response);
