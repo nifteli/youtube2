@@ -79,6 +79,7 @@ $content['WHOHINT'] = "WHOHINT";
 $content['WHATHINT'] = "WHATHINT";
 $content['WHYHINT'] = "WHYHINT";
 $content['HOWHINT'] = "HOWHINT";
+$content['EMAILEXISTS'] = "This email is already registered";
 
 
 //SEARCH
@@ -252,6 +253,8 @@ $content["RESETCONFERR1"] = "Link is not valid";
 $content["RESETCONFERR2"] = "Password must be minumum 5 characters long";
 $content["PASSRESET"] = "Password changed. You can login with your new password";
 $content["PASSNOTRESET"] = "Error on password reset";
+$content["FORGOTPASSNOTE"] = "Choose secret question and write answer which you mentioned during registration";
+$content["CHANGEPASS"] = "Change Pass";
 //END FORGOT PASSWORD
 
 //Admin profile

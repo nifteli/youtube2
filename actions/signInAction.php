@@ -10,8 +10,10 @@ if ($_GET["action"]=="login")
 
 	else
 	{
-		$db->where("status='confirmed' and isDeleted=0 and userName = '$_POST[userName]' and password = '" . md5($_POST["password"]) . "'");
-		$usr = $db->get("users");
+		$db->where("status='confirmed' and isDeleted=0 
+					and (userName = '$_POST[userName]' or email = '$_POST[userName]' or phoneNumber = '$_POST[userName]')
+					and password = '" . md5($_POST["password"]) . "'");
+		$usr = $db->get("users"); //echo $db->getLastQuery();
 		//check user if registered or not
 		if($db->count == 1)
 		{
@@ -20,7 +22,7 @@ if ($_GET["action"]=="login")
 				setcookie("arr[userName]", $_POST["userName"], time() + 3600);
 				setcookie("arr[password]", $_POST["password"], time() + 3600);
 			}
-			authenticate($_POST["userName"]);
+			authenticate($usr[0]["userName"]);
 			
 			if(trim($_POST["src"]) == "addVideo")
 				header("Location: index.php?page=addVideo");

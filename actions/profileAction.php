@@ -88,6 +88,14 @@ if ($_GET["action"]=="save")
 	
 	if($result == "success")
 	{
+		$db->where("isDeleted=0 and userName != '" . $access->userName . "' and email='".$_POST["email"] ."'");
+		$db->get("users");
+		if($db->count>0)
+		{
+			$result = "error";
+			$messages["typeErr"] = $content['EMAILEXISTS'];
+			return;
+		}
 		$arr = array();
 		if (isset($_FILES['pic']['name']) && $_FILES['pic']['name'] != "")
 		{

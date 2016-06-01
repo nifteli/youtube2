@@ -35,7 +35,7 @@ if ($_GET["action"]=="sendToMail")
 	}
 }
 if ($_GET["action"]=="resetPass")
-{
+{ 
 	if(!isset($_GET["email"]) || !isset($_GET["hash"]) || $_GET["email"] == "" || $_GET["hash"] == "")
 	{
 		$errorMessage=$content["RESETCONFERR1"];
@@ -50,7 +50,7 @@ if ($_GET["action"]=="resetPass")
 	}
 	
 	$db->where("email = '$_GET[email]' and hash = '$_GET[hash]'");
-	$db->update("users",array("password"=> "'".md5(trim($_POST["password"]))."'","hash"=>"'".uniqid()."'"));//echo $db->getLastQuery();echo $db->getLastError();
+	$db->update("users",array("password"=> md5(trim($_POST["password"])),"hash"=>uniqid()));//echo $db->getLastQuery();echo $db->getLastError();
 	if($db->count>0)
 		$okMessage=$content["PASSRESET"];
 	else

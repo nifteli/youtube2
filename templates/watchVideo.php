@@ -40,6 +40,8 @@ class WatchVideo
 			$this->watchVideo->assign("publishDate",$videoInfo[0]["added"]);
 			$this->watchVideo->assign("publishDateTitle",$content['PUBLISHEDTITLE']);
 			$this->watchVideo->assign("author",$videoInfo[0]["addedBy"]);
+			$this->watchVideo->assign("isDeleted",$videoInfo[0]["isDeleted"]);
+			$this->watchVideo->assign("userId",$videoInfo[0]["userId"]);
 			$this->watchVideo->assign("authorTitle",$content["AUTHORTITLE"]);
 			$this->watchVideo->assign("language",$videoInfo[0]["language"]);
 			$this->watchVideo->assign("questions",$controller->getQuestions($videoInfo[0]["questions"]));
@@ -143,7 +145,7 @@ class WatchVideo
 								SUM(IF(action = -1, 1, 0)) dislikeCount,
 								vws.comments commentCount,
 								v.id,v.name,v.info,v.duration,DATE_FORMAT(v.added,'%d %b %Y') added,v.languageId,v.link,v.questions,v.addedById,
-								u.userName addedBy,
+								u.userName addedBy,u.isDeleted,u.id userId,
 								tg.tags,tg.tagIds,
 								vc.categoryId,
 								c.catName$lang,

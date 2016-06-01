@@ -387,7 +387,8 @@ function unhint(elem) {
 		</div>
 	</div>
 	<div class="wvUnder">
-		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel"><a href="?userId={$addedById}">{$author}</a></span>
+		<img src="img/users.png" width="15" height="15" title="{$authorTitle}"/>  <span class="wvLabel">
+			<a href="?userId={$addedById}">{$author}{if $isDeleted==1} - {$userId}{/if}</a></span>
 		<img src="img/upload.png" width="15" height="15" title="{$publishDateTitle}"/>  <span class="wvLabel">{$publishDate}</span>
 		<img src="img/eye.png" width="20" height="15" title="{$viewCountTitle}"/>  <span class="wvLabel">{$viewCount}</span>
 		<img src="img/comments.png" width="20" height="15" title="{$commentCountTitle}"/>  <span class="wvLabel">{$commentCount}</span>

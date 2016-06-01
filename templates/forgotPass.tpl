@@ -43,7 +43,7 @@ $(document).ready(function() {
 		<div class="success1" style="margin-top:20px; float:left; ">{$okMessage}</div>
 		{/if}
 		
-		{if (isset($rEmail) && isset($rHash))}
+		{if ($secret == 1 || (isset($rEmail) && isset($rHash)))}
 		<form class="reg-form" name="regForm" id="regForm" action="?page=forgotPass&action=resetPass&hash={$rHash}&email={$rEmail}" method="post" style="margin-top:20px">
 			<input class="field" type="password" name="password" id="password" placeholder="{$password}" style="margin-left:0"><br>
 			<input class="field" type="password" name="passwordAgain" id="passwordAgain" placeholder="{$passwordAgain}" style="margin-left:0"><br>
@@ -57,8 +57,22 @@ $(document).ready(function() {
 				</div>
 			</div>
 		</form>
+		<div style="width:900px;float: left;">
+		{$or} <br>
+		{$forgotPassNote}
+		<form name="regForm" id="regForm" action="?page=forgotPass" method="post">
+		<input class="field" type="text" name="userName" id="userName" required placeholder="{$userName}">
+		<select class="field" name="secretQuestionId" id="secretQuestionId" style="" required>
+			<option value="">{$question}</option>
+			{section name=sec1 loop=$secQuestions}
+			<option value="{$secQuestions[sec1].id}">{$secQuestions[sec1].question}</option>
+			{/section}
+		</select>
+		<input class="field" type="text" name="secretAnswer" id="secretAnswer" required placeholder="{$answer}">
+		<input class="login39" type="submit" value="{$changePass}" name="submit" style="height:30px;margin-left:5px;    margin-top: 2px;">
+		</form>
+		</div>
 		{/if}
-
 	</div>
  </div>
 
