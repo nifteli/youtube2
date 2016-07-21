@@ -110,6 +110,7 @@ if ($_GET["action"]=="save")
 		$gender = "male";
 		$getEmailOnVideoComment =0;
 		$getEmailAfterMyComment =0;
+		$getEmailOnNews =0;
 		if($_POST["gender"] == 2)
 			$gender = "female";
 		$arr["password"] =  md5(trim($_POST["password"])) ;
@@ -136,12 +137,16 @@ if ($_GET["action"]=="save")
 			$arr["notes"] =  $_POST["notes"] ;
 		if(isset($_POST["phone"]) && $_POST["phone"] != "")
 			$arr["phoneNumber"] =  $_POST["phone"] ;
-		if(isset($_POST["getEmailOnComment"]) && $_POST["getEmailOnComment"] == "on")
+		if(isset($_POST["onNews"]) && $_POST["onNews"] == "on")
+			$getEmailOnNews = 1;
+		if(isset($_POST["onVideoComment"]) && $_POST["onVideoComment"] == "on")
 			$getEmailOnVideoComment = 1;
-		if(isset($_POST["getEmailAfterMyComment"]) && $_POST["getEmailAfterMyComment"] == "on")
+		if(isset($_POST["onComment"]) && $_POST["onComment"] == "on")
 			$getEmailAfterMyComment = $arr["getEmailAfterMyComment"] = 1;
 		$arr["getEmailOnVideoComment"] = $getEmailOnVideoComment;
 		$arr["getEmailAfterMyComment"] = $getEmailAfterMyComment;
+		$arr["getEmailOnNews"] = $getEmailOnNews;
+		//echo "<pre>"; print_r($arr); echo "</pre>";//exit;
 		
 		$db->where ("id = " . $access->userId);
 		$db->update("users", $arr);

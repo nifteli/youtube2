@@ -335,8 +335,7 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 			$email = $_POST["email"];
 			$isConfirmed = 0;
 		}
-		
-		
+				
 		$commentId = $db->insert("comments", array("comment"=>trim($_POST["comment"]),
 												  "videoId"=>trim($_POST["videoId"]),
 												  "createdById"=>$access->userId,
@@ -347,18 +346,23 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 		if($commentId && isset($_POST["email"]) && $_POST["email"] != "")
 			$okMessage = $content["COMMENTSENT2CONF"];
 		
-		if($commentId && $_POST["email"] == "")
+		if($commentId)
 		{
 			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
 								where id = (select addedById from videos where id=".trim($_POST["videoId"]).")");
 								//print_r($res);
 			if($res[0]["getEmailOnVideoComment"] == 1 && $res[0]["email"] != "")
 			{
-				$mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
-				$mail->Subject = $content["getEmailOnComment"];
-				$mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
-				$mail->send();
-				$mail->ClearAllRecipients( );
+				$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[0]["email"] . "','" . 
+								$content["getEmailOnComment"] . "','" .
+								base64_encode($content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>") . "',0)");
+								;
+				// $mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
+				// $mail->Subject = $content["getEmailOnComment"];
+				// $mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
+				// $mail->send();
+				// $mail->ClearAllRecipients( );
 			}
 			
 			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
@@ -369,23 +373,27 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 			{
 				if($res[$i]["getEmailAfterMyComment"] == 1 && $res[$i]["email"] != "")
 				{
-					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
-					$mail->Subject = $content["getEmailAfterMyComment"];
-					$mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
-					$mail->send();
-					$mail->ClearAllRecipients( );
+					$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[$i]["email"] . "','" . 
+								$content["getEmailAfterMyComment"] . "','" .
+								base64_encode($content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>") . "',0)");
+					// $mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					// $mail->Subject = $content["getEmailAfterMyComment"];
+					// $mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_POST["videoId"]).">$domain</a>";
+					// $mail->send();
+					// $mail->ClearAllRecipients( );
 				}
 			}
 		}
 		//$db->commit();
 		if(trim($access->picture) == "")
-			$access->picture = "./uploads/images/noimage.jpg";
+			$access->picture = "./uploads/images/noimage.png";
 		$str = "<li id='li$commentId'>
 			<div class='commenterImage'>";
 			if($access->hasAccess)  
 				$str .= "<img height=30 width=50 src='".$access->picture."' />";
 		    else
-				$str .= "<img height=30 width=50 src='./uploads/images/noimage.jpg' />";
+				$str .= "<img height=30 width=50 src='./uploads/images/noimage.png' />";
 		$str .= "</div>
 			<div class='commentText$commentId'>
 				<span id='cmt$commentId'><p>".trim($_POST["comment"])."</p> </span>
@@ -424,7 +432,7 @@ if($_GET["action"] == "sortComm" && is_numeric($_GET["videoId"]) && is_numeric($
 				if(c.createdById!='NULL',
 					(case when (u.isDeleted = 1) then concat('".$content["USER"]."-',u.id) else u.userName end),
 					concat('".$content["GUEST"]."-',c.id)) author,
-				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
+				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.png') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById
 				where c.isConfirmed=1 and c.videoId=$_GET[videoId]
