@@ -232,6 +232,29 @@
 			
 		   });
 	 }
+	 
+	 function subscription(catId,flag)
+	 {
+	 //alert(orderBy);
+		 $.ajax({
+			 url:"ajax/ajaxActions.php",
+					  type:"POST",
+					  data:"action=subs&catId="+catId+"&flag="+flag,
+			cache: false,
+			success: function(res){ //alert(res);
+			   if(res == 1 && flag == 1)
+			   {
+			   		$("#subs"+catId).attr("src","img/subs.png");
+					$("#subs"+catId).attr("onclick","subscription("+catId+",0)");
+				}
+			   if(res == 1 && flag == 0)
+			   {
+			   		$("#subs"+catId).attr("src","img/unsubs.png");
+					$("#subs"+catId).attr("onclick","subscription("+catId+",1)");
+				}
+			}
+		});
+	 }
 </script>
  <!--Category Panel Starts-->
 <div class="category">
@@ -287,6 +310,13 @@
 					<ul>
 						{foreach from=$catsHow[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+						{if $hasAccess}
+						{if {$cat['userId']} != ''}
+						<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+						{else}
+						<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+						{/if}
+						{/if}
 						{if $currCatId != {$cat['id']}}
 						<a href="?df=1&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
@@ -305,6 +335,13 @@
 					<ul>
 						{foreach from=$catsWhy[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+						{if $hasAccess}
+						{if {$cat['userId']} != ''}
+						<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+						{else}
+						<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+						{/if}
+						{/if}
 						{if $currCatId != {$cat['id']}}
 						<a href="?df=1&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
@@ -323,6 +360,13 @@
 					<ul>
 						{foreach from=$catsWhat[$k] key=k2 item=cat}
 						<li style="background: url('{$cat['img']}');" class="liimg"	title="{$cat['catInfo']}">
+						{if $hasAccess}
+						{if {$cat['userId']} != ''}
+						<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+						{else}
+						<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+						{/if}
+						{/if}
 						{if $currCatId != {$cat['id']}}
 						<a href="?df=1&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
@@ -341,6 +385,13 @@
 						<ul>
 							{foreach from=$catsWho[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $hasAccess}
+							{if {$cat['userId']} != ''}
+							<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+							{else}
+							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+							{/if}
+							{/if}
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
@@ -363,6 +414,13 @@
 						<ul>
 							{foreach from=$myCatsHow[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $hasAccess}
+							{if {$cat['userId']} != ''}
+							<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+							{else}
+							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+							{/if}
+							{/if}
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
@@ -384,6 +442,13 @@
 						<ul>
 							{foreach from=$myCatsWhy[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $hasAccess}
+							{if {$cat['userId']} != ''}
+							<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+							{else}
+							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+							{/if}
+							{/if}
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
@@ -405,6 +470,13 @@
 						<ul>
 							{foreach from=$myCatsWhat[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $hasAccess}
+							{if {$cat['userId']} != ''}
+							<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+							{else}
+							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+							{/if}
+							{/if}
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
@@ -426,6 +498,13 @@
 						<ul>
 							{foreach from=$myCatsWho[$k] key=k2 item=cat}
 							<li style="background: url('{$cat['img']}');" class="liimg" title="{$cat['catInfo']}">
+							{if $hasAccess}
+							{if {$cat['userId']} != ''}
+							<a href="#"><img title="{$unsubscribe}" onclick="subscription({$cat['id']},0)" id="subs{$cat['id']}" src="img/subs.png" height=15 width=15></a>
+							{else}
+							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
+							{/if}
+							{/if}
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
@@ -441,6 +520,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="editFolder" class="modalDialog" >
 	<div style="width:250px">
 		<a href="#close" title="Close" class="close">X</a>

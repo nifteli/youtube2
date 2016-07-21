@@ -6,7 +6,7 @@ body { margin:0; }
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #333 !important;
     position: fixed;
     top: 0;
     width: 100%;
@@ -18,18 +18,22 @@ body { margin:0; }
 
 #wrapper li a {
     display: block;
-    color: white;
+    color: white !important;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
 #wrapper li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #111 !important;
 }
 
 #wrapper .active {
-    background-color: #4CAF50;
+    background-color: #4CAF50 !important;
+}
+
+#wrapper li span{
+	color: white !important;
 }
 </style>
 

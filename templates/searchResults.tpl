@@ -111,7 +111,7 @@
 		{/if}
 		<div class="orderByDiv">
 			<select name="reorder" id="reorder" onchange="changeOrderBy(this.value,2)">
-				<option value="">{$sortBy}</option>
+				<!-- <option value="">{$sortBy}</option> -->
 				<option value="1">{$sbDate}</option>
 				<option value="2">{$sbName}</option>
 				<option value="3">{$sbLang}</option>
@@ -121,8 +121,8 @@
 				<option value="7">{$sbWatches}</option>
 				<option value="8">{$sbComments}</option>
 			</select>
-			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,1)" type="radio" name="direction" id="direction" value=1 {if (isset($directionVal) && $directionVal==1) || !isset($directionVal)} checked {/if}>{$asc}</label>
-			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,2)" type="radio" name="direction" id="direction" value=2 {if isset($directionVal) && $directionVal==2} checked {/if}>{$desc}</label>
+			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,1)" type="radio" name="direction" id="direction" value=1 {if (isset($directionVal) && $directionVal==1)} checked {/if}>{$asc}</label>
+			<label><input onclick="changeOrderBy(document.getElementById('reorder').value,2)" type="radio" name="direction" id="direction" value=2 {if isset($directionVal) && $directionVal==2|| !isset($directionVal)} checked {/if}>{$desc}</label>
 		</div>
 		<img id='loading' src='img/loading.gif'>
 		<div id="demoajax" cellspacing="0">

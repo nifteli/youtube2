@@ -121,7 +121,7 @@ function changeOrderBy(orderBy,dir)
 <!--Videos thums Start-->			 
 
 <div class="videos">
-	<div style="padding-top:10px;min-height: 1000px;">
+	<div style="padding-top:5px;min-height: 1000px;">
 		{if $folderName != "()" && $folderName != ""}
 			<div class='hollywd' style="    height: 50px;">
 				<h2>{$folderName}</h2>  
@@ -134,6 +134,7 @@ function changeOrderBy(orderBy,dir)
 		<div class="success1" style="width:680px; margin-top:40px">{$okMessage}</div>
 		{/if}
 		{if $news1 != ''}
+		<div class="news1Hidden">{$news1}</div>
 		<div class="news1">{$news1}</div>
 		{/if}
 		{if $dataFunction != 'showData'}

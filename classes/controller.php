@@ -222,6 +222,10 @@ class Controller //extends MySQL
 			$join = "INNER";
 			$cond = " and v.addedById = $userId";
 		}
+		if($this->access->hasAccess)
+			$userId = $this->access->userId;
+		else
+			$userId = -1; 
 		// $this->db->join("videocats vc", "c.id = vc.categoryId", $join);
 		// $this->db->join("videos v", "v.id = vc.videoId", $join);
 		// $this->db->where(" c.questions &  $questions " . $cond);
@@ -247,7 +251,7 @@ class Controller //extends MySQL
 							// (case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)"; //echo $qry;
 		$qry = "select
 				(case when (a.catInfo = '') then group_concat(trim(b.name)) else a.catInfo end) catInfo,
-				a.id,a.catName,a.subscribe,a.img,a.catGroupId,a.catGroupName,a.catGroupInfo,a.isDeleted,a.videoId,a.count,a.questions
+				s.userId,a.id,a.catName,a.subscribe,a.img,a.catGroupId,a.catGroupName,a.catGroupInfo,a.isDeleted,a.videoId,a.count,a.questions
 				from (
 				select a.*, ifnull(count(a.videoId),0) count
 						from(SELECT c.id, c.catName".$this->lang." as catName,catNameAz,c.catInfo".$this->lang." catInfo,
@@ -287,6 +291,7 @@ class Controller //extends MySQL
 				as max_name on (max_added.added>max_name.added and max_name.categoryId=max_added.categoryId) 
 				group by max_name.categoryId) a
 				order by categoryId) b on a.id=b.categoryId
+				left join (select * from subscriptions where userId=$userId) s on s.catId= a.id
 				group by a.id
 				order by catGroupName,
 				(case when (catNameAz like '%Digər%') then 'яяяяяя' else catName end)";//echo $qry;exit;;

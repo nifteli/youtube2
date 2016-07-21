@@ -94,7 +94,7 @@ a{
 {
 	color:#FF5208 !important;
 	text-decoration: none !important;
-	
+	font-weight:bold;
 }
  a:active
 {
@@ -1866,8 +1866,9 @@ margin-top: 22px;
 .liImg{
 	
     background-size: 15px 15px !important;
-    padding-left: 24px !important;
+    padding-left: 20px !important;
     background-repeat: no-repeat !important;
+	margin-left: -10px;
 }
 
 .foldr{
@@ -1883,6 +1884,7 @@ margin-top: 22px;
     color: white;
     background-color: white;
     font-size: smaller;
+	color: #fc8231 !important;
 }
 .addVideoBtn
 {
@@ -2224,7 +2226,7 @@ margin-top: 60px;
 
 
 #eerie {
-margin-top: 30px;
+
 float: left;
     margin-left: 20px;
 }
@@ -2778,19 +2780,27 @@ h
 	float: right;
 	margin-top: 5px;
 	width:30; 
-	height:100;
+	height:105;
 }
 .tabImg2{
 	float: right;
 	position:relative;
 	width:30; 
-	height:110;
+	height:115;
 }
 .news1{
-	width:100%;
-	float:left;
-	/* height:50px; */
+	    width: 800px;
+    float: left;
+    position: fixed;
+    z-index: 99999;
+    background-color: white;
 	
+}
+.news1Hidden
+{
+	    width: 800px;
+    float: left;
+    display:block;
 }
 
 .profilePic{

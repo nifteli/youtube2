@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
    
-	 background:#dbcb8f;
+	 background:#FFFFFF;
 }
 ol, ul {
 	list-style: none;
@@ -2135,7 +2135,7 @@ margin-right:45px;
   border: 0px;
   border-radius: 5px;
   padding: 0px 0px;
-  background: #7a672d;
+  background: #999;
   text-decoration: none;
   margin-bottom: 15px;
 }

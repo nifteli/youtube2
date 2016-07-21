@@ -11,7 +11,29 @@ $lang = $_SESSION["lang"];
 require_once($langsPath."content_".$lang.".php");
 $access = new Access($db);
 
-//Category subscription
+//Category subscriptions
+if($_POST["action"] == "subs" && is_numeric($_POST["catId"]))
+{
+	if($_POST["flag"] ==1)
+	{
+		$db->insert("subscriptions",array(
+								"userId"=>$_SESSION["userId"],
+								"catId"=>$_POST["catId"],
+								"subsDate"=>date("Y-m-d H:i:s")
+								));
+		$cnt = $db->count>0; //echo $db->getLastError();
+	}
+	else
+	{
+		$db->where("catId=$_POST[catId] and userId=".$_SESSION["userId"]);
+		$cnt = $db->delete("subscriptions"); //echo $db->getLastError()." ".$db->getLastQuery();
+	}
+	if($cnt)
+	{
+		echo 1;
+	}
+}
+
 if($_GET["action"] == "subscribe" && $_GET["catId"] && is_numeric($_GET["catId"]))
 {
 	$db->insert("subscriptions",array(

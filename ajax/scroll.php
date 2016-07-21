@@ -284,7 +284,7 @@ function showRecommended($data,$db,$limit)
 		//echo $qry ;
 	$res =$db->rawQuery($qry); 
 	
-	displayData($res, $data,5);
+	displayAllData($res, $data,5);
 }
 
 function showSearchResults($data,$db,$limit)
@@ -307,31 +307,31 @@ function showSearchResults($data,$db,$limit)
 	switch($data["orderBy"])
 	{
 		case 1:
-			$orderBy = " v.added $direction,catName$lang asc ";
+			$orderBy = " a.added $direction,catName$lang asc ";
 			break;
 		case 2:
-			$orderBy = " v.name $direction,catName$lang asc ";
+			$orderBy = " a.name $direction,catName$lang asc ";
 			break;
 		case 3:
-			$orderBy = " l.name$lang $direction,catName$lang asc ";
+			$orderBy = " a.name$lang $direction,catName$lang asc ";
 			break;
 		case 4:
-			$orderBy = " q.question $direction,catName$lang asc ";
+			$orderBy = " a.question $direction,catName$lang asc ";
 			break;
 		case 5:
 			$orderBy = " catName$lang $direction ";
 			break;
 		case 6:
-			$orderBy = " v.duration $direction,catName$lang asc  ";
+			$orderBy = " a.duration $direction,catName$lang asc  ";
 			break;
 		case 7:
 			$orderBy = " viewCount $direction,catName$lang asc  ";
 			break;
 		case 8:
-			$orderBy = " vs.comments $direction,catName$lang asc  ";
+			$orderBy = " a.comments $direction,catName$lang asc  ";
 			break;
 		default:
-			$orderBy = " v.added desc,catName$lang asc ";
+			$orderBy = " a.added desc,catName$lang asc ";
 			break;
 	}
 	
@@ -372,16 +372,17 @@ function showSearchResults($data,$db,$limit)
 	else
 		$start = ($page-1)*$limit;
 		
-	$qry = "SELECT vs.views viewCount,vs.likes likeCount,vs.dislikes dislikeCount,vs.comments,
+	$qry = "select * from (SELECT vs.views viewCount,vs.likes likeCount,vs.dislikes dislikeCount,vs.comments,
 					v.id, v.name, v.info, v.duration,v.questions,q.question,
 					DATE_FORMAT(v.added,'%d %b %Y') added, 
 					v.languageId, v.link, v.addedById,
-					concat(u.firstName,' ',u.lastName) addedBy,
+					concat(u.firstName,' ',u.lastName) addedBy,u.id userId,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
 					l.name$lang,
 					c.catName$lang,
-					f.name
+					f.name folderName,f.id folderId,
+					ct.id commentId,ct.comment
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
 			join users u on u.id = v.addedById
@@ -394,13 +395,15 @@ function showSearchResults($data,$db,$limit)
             left join comments ct on ct.videoId=v.id
 			left join foldervideos fv on fv.videoId=v.id
 			left join folders f on f.id=fv.folderId
-			where v.isDeleted=0 and ";
+			where v.isDeleted=0 
+			group by v.id,vc.categoryId) a 
+			where ";
 	$qry .= "(";
 	//echo "<pre>";print_r($options);echo "</pre>";
 	if(count($options) == 0)
 	{
-		$qry .= createCondition("v.name", $search, "like", true); //" and v.name like '%$search%'";
-		$qry .= " or " . createCondition("v.info", $search, "like", true);
+		$qry .= createCondition("a.name", $search, "like", true); //" and v.name like '%$search%'";
+		$qry .= " or " . createCondition("a.info", $search, "like", true);
 	}
 	else
 	{
@@ -417,29 +420,29 @@ function showSearchResults($data,$db,$limit)
 	
 	$qry .= ")";
 	if(is_numeric($language))
-		$qry .= " and " . createCondition("v.languageId", $language, "=", false);
+		$qry .= " and " . createCondition("a.languageId", $language, "=", false);
 	if(is_numeric($videoQuestion))
-		$qry .= " and " . createCondition("v.questions & ".$videoQuestion, $videoQuestion, "=", false);
+		$qry .= " and " . createCondition("a.questions & ".$videoQuestion, $videoQuestion, "=", false);
 	if($category != "0" && is_numeric($category))
-		$qry .= " and " . createCondition("c.id", $category, "=", false);
+		$qry .= " and " . createCondition("a.categoryId", $category, "=", false);
 	if($interval != "0")
 	{
 		if($interval < 5)
-			$qry .= " and " . createCondition("v.duration", (($interval - 1) * 15 * 60 + 1) . " and " . ($interval * 15 * 60), "between", false);
+			$qry .= " and " . createCondition("a.duration", (($interval - 1) * 15 * 60 + 1) . " and " . ($interval * 15 * 60), "between", false);
 		elseif($interval<8)
-			$qry .= " and " . createCondition("v.duration", (($interval - 4) * 60 * 60 + 1)  . " and " . (($interval - 3) * 60 * 60), "between", false);
+			$qry .= " and " . createCondition("a.duration", (($interval - 4) * 60 * 60 + 1)  . " and " . (($interval - 3) * 60 * 60), "between", false);
 		else
-			$qry .= " and " . createCondition("v.duration", ($interval - 4) * 60 * 60 + 1, ">=", false);
+			$qry .= " and " . createCondition("a.duration", ($interval - 4) * 60 * 60 + 1, ">=", false);
 	}
 	if($fromDate != "" || $toDate != "")
-		$qry .= " and " . createCondition("v.added", "'$fromDate' and '$toDate'", "between", false);
+		$qry .= " and " . createCondition("a.added", "'$fromDate' and '$toDate'", "between", false);
 	
-	$qry .= " group by v.id,vc.categoryId
+	$qry .= " 
 			order by $orderBy
 			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry);
-	
-	displayData($res, $data);
+	//print_r($res[1]);
+	displayAllData($res, $data);
 }
 
 function displayAllData($res, $data, $colCnt=4)
@@ -464,8 +467,8 @@ function displayAllData($res, $data, $colCnt=4)
 			$id = $res[$i]['id'];
 			$link = getYoutubeImage($res[$i]['link']);
 			$info = $res[$i]['info'];
-			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 20) ? mb_substr(trim($res[$i]['name']), 0, 20,"UTF-8")."..." : $res[$i]['name'];
-			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 20) ? mb_substr (trim($res[$i]['tags']), 0, 20,"UTF-8")."..." : $res[$i]['tags'];
+			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 18) ? mb_substr(trim($res[$i]['name']), 0, 18,"UTF-8")."..." : $res[$i]['name'];
+			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 18) ? mb_substr (trim($res[$i]['tags']), 0, 18,"UTF-8")."..." : $res[$i]['tags'];
 			$viewCount = $res[$i]['viewCount'];
 			$addedDate = $res[$i]['added'];
 			$addedBy = (mb_strlen($res[$i]['addedBy'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
@@ -558,8 +561,8 @@ function displayData($res, $data, $colCnt=4)
 			$id = $res[$i]['id'];
 			$link = getYoutubeImage($res[$i]['link']);
 			$info = $res[$i]['info'];
-			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 20) ? mb_substr(trim($res[$i]['name']), 0, 20,"UTF-8")."..." : $res[$i]['name'];
-			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 20) ? mb_substr (trim($res[$i]['tags']), 0, 20,"UTF-8")."..." : $res[$i]['tags'];
+			$name = (mb_strlen($res[$i]['name'],"UTF-8") > 19) ? mb_substr(trim($res[$i]['name']), 0, 19,"UTF-8")."..." : $res[$i]['name'];
+			$tags = (mb_strlen($res[$i]['tags'],"UTF-8") > 19) ? mb_substr (trim($res[$i]['tags']), 0, 19,"UTF-8")."..." : $res[$i]['tags'];
 			$viewCount = $res[$i]['viewCount'];
 			$addedDate = $res[$i]['added'];
 			$addedBy = (mb_strlen($res[$i]['addedBy'],"UTF-8") > 17) ? mb_substr (trim($res[$i]['addedBy']), 0, 14)."..." : $res[$i]['addedBy'];
@@ -625,7 +628,7 @@ function getYoutubeImage($url)
 
 function createCondition($column, $value, $operator, $accentSensitive)
 {
-	$accent = array("?", "i", "ö", "ü", "g", "ç", "s");
+	$accent = array("?", "i", "Ã¶", "Ã¼", "ÄŸ", "Ã§", "s");
 	$replace = array("e", "i", "o", "u", "g", "c", "s");
 	
 	$str = "";

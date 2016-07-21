@@ -59,11 +59,16 @@ if ($_GET["action"]=="comment" && is_numeric($_GET["id"]))
 								//print_r($res);
 			if($res[0]["getEmailOnVideoComment"] == 1 && $res[0]["email"] != "")
 			{
-				$mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
-				$mail->Subject = $content["getEmailOnComment"];
-				$mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
-				$mail->send();
-				$mail->ClearAllRecipients( );
+				$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[0]["email"] . "','" . 
+								$content["getEmailOnComment"] . "','" .
+								base64_encode($content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>") . "',0)");
+								;
+				// $mail->addAddress($res[0]["email"], $res[0]["firstName"].' '.$res[0]["lastName"]);     // Add a recipient Name is optional	
+				// $mail->Subject = $content["getEmailOnComment"];
+				// $mail->Body    = $content["getEmailOnCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
+				// $mail->send();
+				// $mail->ClearAllRecipients( );
 			}
 			
 			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
@@ -74,11 +79,15 @@ if ($_GET["action"]=="comment" && is_numeric($_GET["id"]))
 			{
 				if($res[$i]["getEmailAfterMyComment"] == 1 && $res[$i]["email"] != "")
 				{
-					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
-					$mail->Subject = $content["getEmailAfterMyComment"];
-					$mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
-					$mail->send();
-					$mail->ClearAllRecipients( );
+					$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[$i]["email"] . "','" . 
+								$content["getEmailAfterMyComment"] . "','" .
+								base64_encode($content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>") . "',0)");
+					// $mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					// $mail->Subject = $content["getEmailAfterMyComment"];
+					// $mail->Body    = $content["getEmailAfterMyCommentBody"]."<br><a href=$domain?page=watchVideo&id=".trim($_GET["id"]).">$domain</a>";
+					// $mail->send();
+					// $mail->ClearAllRecipients( );
 				}
 			}
 		}
@@ -289,11 +298,16 @@ if($_GET["action"]=="reportVideo")
 			{
 				if($res[$i]["email"] != "")
 				{
-					$mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
-					$mail->Subject = $content["REPORTEMAILSUBJECT"];
-					$mail->Body    = $content["REPORTEMAILBODY"].trim($_GET["id"]);
-					$mail->send();
-					$mail->ClearAllRecipients( );
+					$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[$i]["email"] . "','" . 
+								$content["REPORTEMAILSUBJECT"] . "','" .
+								base64_encode($content["REPORTEMAILBODY"].trim($_GET["id"])) . "',0)");
+								;
+					// $mail->addAddress($res[$i]["email"], $res[$i]["firstName"].' '.$res[$i]["lastName"]);     // Add a recipient Name is optional	
+					// $mail->Subject = $content["REPORTEMAILSUBJECT"];
+					// $mail->Body    = $content["REPORTEMAILBODY"].trim($_GET["id"]);
+					// $mail->send();
+					// $mail->ClearAllRecipients( );
 				}
 			}
 		}

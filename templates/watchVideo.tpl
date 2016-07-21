@@ -59,6 +59,16 @@ function likeIt(videoId,flag)
 		var res = data.split(";");
         $('#likeCnt').html(res[0]);
 		$('#dislikeCnt').html(res[1]);
+		if(flag==1)
+		{
+			$("#likeIcn").attr("src","img/liked.png");
+			$("#dislikeIcn").attr("src","img/dislike.png");
+		}
+		if(flag==2)
+		{
+			$("#dislikeIcn").attr("src","img/disliked.png");
+			$("#likeIcn").attr("src","img/like.png");
+		}
      }
    });
 }
@@ -393,9 +403,21 @@ function unhint(elem) {
 		<img src="img/eye.png" width="20" height="15" title="{$viewCountTitle}"/>  <span class="wvLabel">{$viewCount}</span>
 		<img src="img/comments.png" width="20" height="15" title="{$commentCountTitle}"/>  <span class="wvLabel">{$commentCount}</span>
         <div style="float:right">
-		<a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img width="15" height="15" src="img/like.png" title="{$likeCountTitle}"/></a>
+		<a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},1)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
+		{if $liked == 1}
+		<img width="15" height="15" id="likeIcn" src="img/liked.png" title="{$likeCountTitle}"/>
+		{else}
+		<img width="15" height="15" id="likeIcn" src="img/like.png" title="{$likeCountTitle}"/>
+		{/if}
+		</a>
         <span id="likeCnt" class="wvLabel">{$likeCount}</span>
-        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}><img width="15" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/></a>
+        <a {if $hasAccess} href="javascript:void(0);" onclick="likeIt({$videoId},2)" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
+		{if $liked == -1}
+		<img width="15" id="dislikeIcn" height="15" src="img/disliked.png" title="{$dislikeCountTitle}"/>
+		{else}
+		<img width="15" id="dislikeIcn" height="15" src="img/dislike.png" title="{$dislikeCountTitle}"/>
+		{/if}
+		</a>
         <span id="dislikeCnt" class="wvLabel">{$dislikeCount}</span>  
 		</div>
 		

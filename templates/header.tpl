@@ -66,7 +66,7 @@ function loadCategories_s(sFlag)
 	q += $("#" + sFlag + "q2").prop('checked') ? 2 : 0;
 	q += $("#" + sFlag + "q3").prop('checked') ? 4 : 0;
 	q += $("#" + sFlag + "q4").prop('checked') ? 8 : 0;
-	var html = '<option value="0"> Bütün kateqoriyalar</option>';
+	var html = '<option value="0">{$allCats}</option>';
 	$.each(allCategories, function(key,value)
 	{
 		if(q & value.questions)
@@ -121,9 +121,9 @@ function checkAccess()
 				<ul class="about">
 					<li><a href="?page=about">{$about}</a></li>
 				</ul>
-				<div style="width:200px; height:105px">
+				<div style="width:200px; height:114px">
 					<div id="navigation" style="line-height: 0;">
-						<a href="index.php"><img height="30" width="70" src="img/logo.png" ></a>
+						<a href="index.php"><img height="40" width="68" src="img/logo.png" ></a>
 						<label><input id="option" name="option"  type="radio" checked onclick="changeView(1)" value=1>{$general}</input></label><br>
 						<label><input id="option" name="option"  type="radio" onclick="changeView(2)" value=2>{$myVideos}</input></label><br>
 						<label><input id="option" name="option"  type="radio" value=3 onclick = "document.location.href='?page=users&others=o'">{$otherUsers}</input></label>
@@ -202,13 +202,13 @@ function checkAccess()
 				</div>
 				<!--Statistics Bar Start-->
 				<div class="user"> 
-					<a href="?index.php&df=1"><img class="vid" width="20" height="20" src="img/videos.png" />
-					<p class="counts">{$videos} ({$videoCnt})</p></a>
+					<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
+					<p class="counts"><a href="?index.php">{$videos} ({$videoCnt})</a></p></a>
 					<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
-					<p class="counts">{$tags} ({$tagCnt})</p></a>
+					<p class="counts"><a href="?page=allTags">{$tags} ({$tagCnt})</a></p></a>
 					<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
-					<p class="counts">{$users} ({$userCnt})</p></a>
-					<br><hr>
+					<p class="counts"><a  href="?page=users">{$users} ({$userCnt})</a></p></a>
+					<br><hr style="margin-top: 12px;">
 				</div>
 				 <!--Statistics Bar End-->
 			</div>
@@ -240,7 +240,7 @@ function checkAccess()
 					</ul>
 				{/if}
 				
-				<div style="text-align: center;margin-top: 20;" >
+				<div style="text-align: center;margin-top: 15;" >
 				<a href="?page=addVideo" id="addVideo" onclick="return checkAccess();" >
 				<img align="middle" height="100" width="100" src="img/addVideo_{$lang}.png" align="middle" 
 				class="addVideoImg1" id="addVideoImg1"

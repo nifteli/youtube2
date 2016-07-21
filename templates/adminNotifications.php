@@ -32,6 +32,8 @@ class AdminNotifications
 		$this->adminNotifications->assign("siteRulesVal", $notifications['siteRules']);
 		$this->adminNotifications->assign("aboutUsVal", $notifications['aboutUs']);
 		$this->adminNotifications->assign("otherVal", $notifications['other']);
+		$this->adminNotifications->assign("page1Val", $notifications['page1']);
+		$this->adminNotifications->assign("page2Val", $notifications['page2']);
 		
 	}
 	

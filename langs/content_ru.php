@@ -79,6 +79,9 @@ $content['WHATHINT'] = "WHATHINT";
 $content['WHYHINT'] = "WHYHINT";
 $content['HOWHINT'] = "HOWHINT";
 $content['EMAILEXISTS'] = "This email is already registered";
+$content['ADVANCEDTITLE'] = "Advanced search";
+
+
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -169,6 +172,8 @@ $content['ADDTOMYFOLDER'] = 'Add to My Folder';
 $content['ADD'] = 'Add';
 $content['UNCKECKALL'] = 'Unckeck all';
 $content['RESET'] = 'Reset';
+$content['SUBSCRIPTIONSUBJECT'] = 'Category subscription';
+$content['SUBSCRIPTIONBODY'] = 'The link below is related to your subsribed category <br>';
 $content['ADDVIDEOERROR1'] = "Video Link is not set";
 $content['ADDVIDEOERROR2'] = "Video does not exist";
 $content['ADDVIDEOERROR3'] = "Language is not set";

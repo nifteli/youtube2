@@ -51,6 +51,7 @@ class WatchVideo
 			$this->watchVideo->assign("views",$content['VIEWS']);
 			$this->watchVideo->assign("hasAccess",$controller->access->hasAccess);
 			$this->watchVideo->assign("curUserId",-1);
+			$this->watchVideo->assign("liked",$this->isVideoLiked($controller));
 			if($controller->access->hasAccess)
 				$this->watchVideo->assign("curUserId",$controller->access->userId);
 			$this->watchVideo->assign("email",$content['EMAIL']);
@@ -189,7 +190,7 @@ class WatchVideo
 				if(c.createdById!='NULL',
 					(case when (u.isDeleted = 1) then concat('".$content["USER"]."-',u.id) else u.userName end),
 					concat('".$content["GUEST"]."-',c.id)) author,
-				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.jpg') picturePath
+				if(u.picturePath!='',u.picturePath,'./uploads/images/noimage.png') picturePath
 				FROM comments c
 				left join users u on u.id=c.createdById
 				where c.isConfirmed=1 and c.videoId=$id
@@ -225,6 +226,18 @@ class WatchVideo
 		if ($controller->db->count>0)
 			return 1;
 		return 0;
+	}
+	
+	private function isVideoLiked($controller)
+	{
+		$liked = 0;
+		if(is_numeric($_GET["id"]))
+		{ 
+			$res = $controller->db->rawQuery("select action from videoviews where videoId=$_GET[id] and userId=".$controller->access->userId);
+			if ($controller->db->count>0)
+				return $res[0]["action"];
+		} 
+		return $liked;
 	}
 }
 

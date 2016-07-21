@@ -1,7 +1,12 @@
 <!--Videos thums Start-->			 
-<div style="padding-top:10px;min-height: 1000px;">
+<div style="padding-top:5px;min-height: 1000px;">
 
 <div id="eerie">
+<div style="text-align:center;font-weight: bold;font-size: 20px;width: 950px;position:fixed;background:white;">
+{section name=record loop=$allLetters}
+	<a href="?page=allTags&l={if {$allLetters[record]} == '#'}0{else}{$allLetters[record]}{/if}">{$allLetters[record]}</a>
+{/section}
+</div>
 <div style="text-align:center;font-weight: bold;font-size: 20px;width: 950px;">
 {section name=record loop=$allLetters}
 	<a href="?page=allTags&l={if {$allLetters[record]} == '#'}0{else}{$allLetters[record]}{/if}">{$allLetters[record]}</a>

@@ -30,6 +30,8 @@ class Categories
 		$this->categories->assign("sbDate",$content['SORTDATE']);
 		$this->categories->assign("asc",$content['ASC']);
 		$this->categories->assign("desc",$content['DESC']);
+		$this->categories->assign("subscribe",$content['SUBSCRIBE']);
+		$this->categories->assign("unsubscribe",$content['UNSUBSCRIBE']);
 		$this->categories->assign("dirVal",1);
 		if(isset($_GET["dir"])) $this->categories->assign("dirVal",$_GET["dir"]);
 		$this->categories->assign("by",1);

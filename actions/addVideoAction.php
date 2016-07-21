@@ -128,11 +128,19 @@ if ($_GET["action"]=="add")
 			{
 				if($value != "0")
 				{
-					
 					$id = $db->insert("videocats", array("videoId"=>$videoId,
 									  	"categoryId"=>$value));
 					$db->where("id =".$value);
 					$db->update("categories",array("lastVideoAdded"=>date("Y-m-d H:i:s")));
+					
+					$subject = $content["SUBSCRIPTIONSUBJECT"];
+					$body = $content["SUBSCRIPTIONBODY"]."\n <br> <a href='$domain?page=watchVideo&id=$videoId'>$domain?page=watchVideo&id=$videoId</a>";
+					$db->rawQuery("insert into subsmails (sendTo,subject,body,status) 
+									SELECT 
+									u.email,'$subject','" . base64_encode ($body) . "',0
+									FROM subscriptions s
+									inner join users u on u.id=s.userId
+									where s.catId=$value and u.email!='' and u.email is not null");
 					if(!$id)
 					{
 						$continue = false;
