@@ -36,7 +36,72 @@
 	<link rel="stylesheet" href="css/jquery.multiselect.css" />
 	<script src="js/jquery.multiselect.js" type="text/javascript"></script>
 	
+	<!--AwesomeCloud-->
+	
 </head>
+<script type="text/javascript">
+	var hasAccess = "{$hasAccess}"; 
+	var folderTab = "{$folderTab}"; 
+	var catTab = "{$catTab}"; 
+	var userId="{$userId}";
+	var myUserId="{$myUserId}";
+	var general="{$general}";
+	
+	$(document).ready(function(){
+	$("#wordcloud1" ).show();
+	$("#wordcloud1").awesomeCloud({
+			"size" : {
+				"grid" : 1,
+				"factor" : 10,
+				"normalize" : false						
+			},
+			"options" : {
+				"color" : "random-dark",
+				"rotationRatio" : 0,
+				"printMultiplier" : 1,
+				"sort" : "random"
+			},
+			"font" : "'Times New Roman', Times, serif",
+			"shape" : "square"
+		});
+		if(hasAccess == "1" && myUserId == userId && general=="true")	
+			changeView(2);
+		
+		if(hasAccess == "1" && myUserId != userId)
+			changeView(3);
+		if(folderTab == "1")
+			$('#tabSel').val(1);
+		if(catTab == "1")
+			$('#tabSel').val(2);
+		
+		//
+		$('#navigation ul a').click(function(){
+			$('#navigation ul a').removeClass('selected');
+			$(this).addClass('selected');
+			//$('#content_changer').html('You have selected '+ $(this).html());
+			if($(this).attr("id") == 1)
+			{
+				showCatalogues();
+			}
+			else if($(this).attr("id") == 2)
+			{
+				showAdded();
+			}
+			else	
+			{	
+				$('#viewCat').hide();
+				$('#viewAdd').hide();
+			}
+		});
+		$('#tabs li a').click(function(){	
+			$('#navigation ul a').removeClass('selected');
+			$('#viewCat').hide();
+			$('#viewAdd').hide();
+		});
+	});
+	
+</script>
+ 
 <script>
 $(document).on("click", '.subscription', function eventHandler(e) {
     //alert(e.target.id);

@@ -88,31 +88,31 @@ class Header
 	
 	private function getRandTags($lang,$db)
 	{
-		$qry = "SELECT vt.tagId,t.name,count(*) cnt,1 size
+		$qry = "SELECT vt.tagId,t.name,count(*) size
 				from videotags vt
 				inner join tags t on t.id=vt.tagId
 				inner join languages l on l.id=t.langId
 				where l.abbr='$lang'
 				group by vt.tagId,t.name
 				ORDER BY t.id * RAND( )
-				limit 30";
+				limit 100";
 		$res = $db->rawQuery($qry);
 		
 		$maxCnt = $this->getMaxCnt($res);
 
-		for($i=0; $i<count($res); $i++)
-		{
-			if($res[$i]["cnt"] >= $maxCnt - floor($maxCnt*0.1))
-				$res[$i]["size"] = 5;
-			if($res[$i]["cnt"] < $maxCnt - floor($maxCnt*0.1) && $res[$i]["cnt"] >= floor($maxCnt*0.7))
-				$res[$i]["size"] = 4;
-			if($res[$i]["cnt"] < floor($maxCnt*0.7) && $res[$i]["cnt"] >= floor($maxCnt*0.5))
-				$res[$i]["size"] = 3;
-			if($res[$i]["cnt"] < floor($maxCnt*0.5) && $res[$i]["cnt"] >= floor($maxCnt*0.3))
-				$res[$i]["size"] = 2;
-			if($res[$i]["cnt"] < floor($maxCnt*0.3))
-				$res[$i]["size"] = 1;
-		}
+		// for($i=0; $i<count($res); $i++)
+		// {
+			// if($res[$i]["cnt"] >= $maxCnt - floor($maxCnt*0.1))
+				// $res[$i]["size"] = 5;
+			// if($res[$i]["cnt"] < $maxCnt - floor($maxCnt*0.1) && $res[$i]["cnt"] >= floor($maxCnt*0.7))
+				// $res[$i]["size"] = 4;
+			// if($res[$i]["cnt"] < floor($maxCnt*0.7) && $res[$i]["cnt"] >= floor($maxCnt*0.5))
+				// $res[$i]["size"] = 3;
+			// if($res[$i]["cnt"] < floor($maxCnt*0.5) && $res[$i]["cnt"] >= floor($maxCnt*0.3))
+				// $res[$i]["size"] = 2;
+			// if($res[$i]["cnt"] < floor($maxCnt*0.3))
+				// $res[$i]["size"] = 1;
+		// }
 		
 		return $res;
 	}

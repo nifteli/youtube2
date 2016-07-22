@@ -521,7 +521,7 @@ display: table;
 
 
 .category{
- width:220px;	
+ width:200px;	
  min-height:1000px;
  overflow: hidden;
  float:left;
@@ -530,7 +530,7 @@ display: table;
 }
 
 .category h2{
-    width: 220px;
+    width: 200px;
     /* height: 45px; */
     font-family: Calibri;
     font-size: 16px;
@@ -1824,6 +1824,7 @@ margin-top: 22px;
  font-size:14px;
  color:#3e3003;
  padding:1px 0;	
+ margin-left: 3;
 }
 
 .c-name a{
@@ -2438,7 +2439,7 @@ pre{
 
 .simpleSearch{
 	width:840px;
-	height:25px;
+	height:22px;
 }
 .srcLbl{
 	color: #AE4019;
@@ -2533,8 +2534,8 @@ pre{
 .headerMiddle{
 	float: left;
     width: 840px;
-    height: 170px;
-    margin-top: -25px;
+    height: 175px;
+    margin-top: -30px;
 	background-color: white;
 }
 

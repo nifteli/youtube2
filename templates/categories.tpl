@@ -1,4 +1,4 @@
- <script type="text/javascript">
+<script type="text/javascript">
 	var hasAccess = "{$hasAccess}"; 
 	var folderTab = "{$folderTab}"; 
 	var catTab = "{$catTab}"; 
@@ -6,42 +6,7 @@
 	var myUserId="{$myUserId}";
 	var general="{$general}";
 	
-	$(document).ready(function(){
-		if(hasAccess == "1" && myUserId == userId && general=="true")	
-			changeView(2);
-		
-		if(hasAccess == "1" && myUserId != userId)
-			changeView(3);
-		if(folderTab == "1")
-			$('#tabSel').val(1);
-		if(catTab == "1")
-			$('#tabSel').val(2);
-		
-		//
-		$('#navigation ul a').click(function(){
-			$('#navigation ul a').removeClass('selected');
-			$(this).addClass('selected');
-			//$('#content_changer').html('You have selected '+ $(this).html());
-			if($(this).attr("id") == 1)
-			{
-				showCatalogues();
-			}
-			else if($(this).attr("id") == 2)
-			{
-				showAdded();
-			}
-			else	
-			{	
-				$('#viewCat').hide();
-				$('#viewAdd').hide();
-			}
-		});
-		$('#tabs li a').click(function(){	
-			$('#navigation ul a').removeClass('selected');
-			$('#viewCat').hide();
-			$('#viewAdd').hide();
-		});
-	});
+	
 	function showCatalogues()
 	{
 		$('#viewCat').show();
@@ -256,10 +221,12 @@
 		});
 	 }
 </script>
+ 
+
  <!--Category Panel Starts-->
 <div class="category">
 	<!--<h2>Categories</h2>-->
-	<div style="width:220px; margin: 0 auto;">
+	<div style="width:200px;">
 		<div class="tabcontents">
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">

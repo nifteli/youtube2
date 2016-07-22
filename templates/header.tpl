@@ -107,7 +107,21 @@ function checkAccess()
 }
 
 </script>
-
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.awesomeCloud.min.js"></script>
+<link href="css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.wordcloud {
+height: 70px;
+margin: 0in auto;
+padding: 0;
+page-break-after: always;
+page-break-inside: avoid;
+width: 840px;
+float: left;
+display:none;
+}
+</style> 
 <body>
 <div id="wrapper">
 	<div class="banner">
@@ -187,18 +201,16 @@ function checkAccess()
 					</select>
 					</div>
 				</div>
-				<div style="float:left;width:208px;    height: 26px;">
+				<div style="float:left;width:208px;    height: 22px;">
 					<input class="srcCmb" style="width:95;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
 					<input class="srcCmb" style="width:95;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}">&nbsp;
 				</div>
 				</div>
 				</form>
-				<div class="tags">
-					<ul>
+				<div id="wordcloud1" class="wordcloud">
 						{section name=sec1 loop=$randTags}
-						<li class="tag{$randTags[sec1].size}" style="line-height: 0.5;"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></li> 
+						<span data-weight="{$randTags[sec1].size}"><a href="?tagId={$randTags[sec1].tagId}">{$randTags[sec1].name}</a></span>
 						{/section}
-					</ul>
 				</div>
 				<!--Statistics Bar Start-->
 				<div class="user"> 
@@ -208,7 +220,7 @@ function checkAccess()
 					<p class="counts"><a href="?page=allTags">{$tags} ({$tagCnt})</a></p></a>
 					<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
 					<p class="counts"><a  href="?page=users">{$users} ({$userCnt})</a></p></a>
-					<br><hr style="margin-top: 12px;">
+					<br><hr style="margin-top: 7px;">
 				</div>
 				 <!--Statistics Bar End-->
 			</div>

@@ -37,36 +37,36 @@ function showData($data,$db,$limit)
 	$direction = "asc";
 	if($data["direction"] == 2)
 		$direction = "desc";
-	switch($data["orderBy"])
-	{
-		case 1:
-			$orderBy = " v.added $direction,catName$lang asc ";
-			break;
-		case 2:
-			$orderBy = " v.name $direction,catName$lang asc ";
-			break;
-		case 3:
-			$orderBy = " l.name$lang $direction,catName$lang asc ";
-			break;
-		case 4:
-			$orderBy = " q.question $direction,catName$lang asc ";
-			break;
-		case 5:
-			$orderBy = " catName$lang $direction ";
-			break;
-		case 6:
-			$orderBy = " v.duration $direction,catName$lang asc  ";
-			break;
-		case 7:
-			$orderBy = " viewCount $direction,catName$lang asc  ";
-			break;
-		case 8:
-			$orderBy = " vs.comments $direction,catName$lang asc  ";
-			break;
-		default:
-			$orderBy = " v.added desc,catName$lang asc ";
-			break;
-	}
+	// switch($data["orderBy"])
+	// {
+		// case 1:
+			// $orderBy = " v.added $direction,catName$lang asc ";
+			// break;
+		// case 2:
+			// $orderBy = " v.name $direction,catName$lang asc ";
+			// break;
+		// case 3:
+			// $orderBy = " l.name$lang $direction,catName$lang asc ";
+			// break;
+		// case 4:
+			// $orderBy = " q.question $direction,catName$lang asc ";
+			// break;
+		// case 5:
+			// $orderBy = " catName$lang $direction ";
+			// break;
+		// case 6:
+			// $orderBy = " v.duration $direction,catName$lang asc  ";
+			// break;
+		// case 7:
+			// $orderBy = " viewCount $direction,catName$lang asc  ";
+			// break;
+		// case 8:
+			// $orderBy = " vs.comments $direction,catName$lang asc  ";
+			// break;
+		// default:
+			// $orderBy = " v.added desc,catName$lang asc ";
+			// break;
+	// }
 	
 	if($page==1)
 		$start = 0;  
@@ -75,7 +75,7 @@ function showData($data,$db,$limit)
 		//echo "<pre>";print_r($data);echo "</pre>";
 		//echo "page=$page; limit=$limit; start=$start";
 		
-	$qry = "SELECT vs.views viewCount,
+	$qry = "select * from (SELECT vs.views viewCount,
 					vs.likes likeCount,
 					vs.dislikes dislikeCount,vs.comments,
 					v.id, v.name, v.info, v.duration,q.question,
@@ -83,7 +83,8 @@ function showData($data,$db,$limit)
 					v.languageId, v.link, v.addedById,v.questions,
 					concat(u.firstName,' ',u.lastName) addedBy,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
-					vc.categoryId,
+					GROUP_CONCAT(DISTINCT t.id ORDER BY t.name asc) tagIds, 
+					vc.categoryId,fv.folderId,
 					c.catName$lang
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
@@ -95,28 +96,33 @@ function showData($data,$db,$limit)
 			left join questions q on q.bitValue=v.questions
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
-			where v.isDeleted=0 and lower(l.abbr)='$lang'";
+			where v.isDeleted=0 and lower(l.abbr)='$lang'
+			group by v.id,vc.categoryId
+			order by v.id desc) a where 1=1 ";
 	if(isset($catId)&& is_numeric($catId))
-		$qry .= " and vc.categoryId=$catId";
+		$qry .= " and categoryId=$catId";
 	if(isset($exCatId)&& is_numeric($exCatId))
-		$qry .= " and vc.categoryId!=$exCatId";
+		$qry .= " and categoryId!=$exCatId";
 	if(isset($questions)&& is_numeric($questions))
-		$qry .= " and v.questions&$questions";
+		$qry .= " and questions&$questions";
 	if(isset($userId) && is_numeric($userId) && !isset($folderId))
-		$qry .= " and v.addedById=$userId";
+		$qry .= " and addedById=$userId";
 	if(isset($folderId) && is_numeric($folderId))
-		$qry .= " and fv.folderId=$folderId";
+		$qry .= " and folderId=$folderId";
 	if(isset($tagId) && is_numeric($tagId))
-		$qry .= " and vt.tagId=$tagId";
-	$qry .= " group by v.id,vc.categoryId
-			order by v.id desc";//echo $qry;
+		$qry .= " and (tagIds like '%,$tagId,%' or tagIds like '$tagId,%' or tagIds like '%,$tagId'  or tagIds ='$tagId')";
+	// $qry .= " group by v.id,vc.categoryId
+			// order by v.id desc";//echo $qry;
 			//limit $start,$limit";
+			//echo $qry;
 	$res =$db->rawQuery($qry); 
-	
+	if(count($res) == 0)
+		return;
 	for($i=0; $i<count($res); $i++)
 	{
 		$res2[$res[$i]["categoryId"]][] = $res[$i];
 	}
+	
 	foreach($res2 as $key=>$value)
 	{
 		$cnt=0;
@@ -439,7 +445,7 @@ function showSearchResults($data,$db,$limit)
 	
 	$qry .= " 
 			order by $orderBy
-			limit $start,$limit";//echo $qry;
+			limit $start,$limit";echo $qry;
 	$res =$db->rawQuery($qry);
 	//print_r($res[1]);
 	displayAllData($res, $data);
