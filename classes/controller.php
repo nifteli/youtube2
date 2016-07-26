@@ -320,6 +320,14 @@ class Controller //extends MySQL
 		return $this->db->rawQuery($sql);
 	}
 	
+	public function getAllUsers()
+	{
+		$sql = "select id, concat(firstName,' ',lastName,'(',userName,')') user 
+				from users
+				where isDeleted=0";
+		return $this->db->rawQuery($sql);
+	}
+	
 	public function getLanguages()
 	{
 		return $this->db->get("languages", null, "id, name".$this->lang." as name");
@@ -462,7 +470,7 @@ class Controller //extends MySQL
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
-			$sortBy = "STR_TO_DATE(added, '%d-%m-%y')";
+			$sortBy = "vadded ";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
@@ -596,7 +604,7 @@ class Controller //extends MySQL
 			$rowCount++;
 		}
 		 
-		// Redirect output to a client’s web browser (Excel5) 
+		// Redirect output to a clients web browser (Excel5) 
 		header('Content-Type: application/vnd.ms-excel'); 
 		header("Content-Disposition: attachment;filename=$filename.xls"); 
 		header('Cache-Control: max-age=0'); 
@@ -629,6 +637,7 @@ class Controller //extends MySQL
 		$qry = "select * from (SELECT c.*,
                DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
                DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+               c.confirmed confirmDate,
                if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author, 
                concat(u2.firstName,' ',u2.lastName) confirmer,
                concat(u3.firstName,' ',u3.lastName) updatedBy,
@@ -690,11 +699,15 @@ class Controller //extends MySQL
 		$qry = "select * from (SELECT f.*,
 				DATE_FORMAT(f.created,'%d-%m-%Y %k:%i:%S') createdDate,
 				DATE_FORMAT(f.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+               	GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 				concat(u.firstName,' ',u.lastName) author, 
 				concat(u3.firstName,' ',u3.lastName) updatedBy
 				from folders f
 				left join users u on u.id=f.createdById
 				left join users u3 on u3.id=f.updatedById
+                left join foldertags ft on ft.folderId=f.id
+                left join tags t on t.id=ft.tagId
+               	group by f.id
 				) f
 				where isDeleted=0 ";
 				
@@ -711,7 +724,9 @@ class Controller //extends MySQL
 		if(isset($post["author"]) && $post["author"] != "")
 			$qry .= " and f.author like '%" . trim($post["author"]) . "%'";
 		if(isset($post["name"]) && $post["name"] != "")
-			$qry .= " and f.name like '%" . trim($post["comment"]) . "%'";
+			$qry .= " and f.name like '%" . trim($post["name"]) . "%'";
+		if(isset($post["tags"]) && $post["tags"] != "")
+			$qry .= " and f.tags like '%" . trim($post["tags"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -731,8 +746,8 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "t.name ";
-			$sortType = "asc";
+			$sortBy = "created ";
+			$sortType = "desc";
 		}
 		$lang = $this->lang;
 		$qry = "select t.*,ts.*,u1.userName createdBy,u2.userName updatedBy,
@@ -914,8 +929,8 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "c.catNameAz ";
-			$sortType = "asc";
+			$sortBy = "c.created ";
+			$sortType = "desc";
 		}
 		$lang = $this->lang;
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,

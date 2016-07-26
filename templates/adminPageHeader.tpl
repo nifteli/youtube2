@@ -27,8 +27,8 @@
 	<!--<link rel="stylesheet" type="text/css" media="screen" href="./css/jquery-ui.css" />-->
     <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/trirand/ui.jqgrid.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/ui.multiselect.css" />
-	<!-- <link rel="stylesheet" type="text/css" media="screen" href="./css/admin/jquery-ui-1.11.4.custom/jquery-ui.css" /> -->
-	<link rel="stylesheet" href="css/datePicker/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="./css/admin/jquery-ui-1.11.4.custom/jquery-ui.css" /> 
+	<!-- <link rel="stylesheet" href="css/datePicker/jquery-ui.css"> -->
 	<!--<link rel="stylesheet" type="text/css" media="screen" href="./css/jquery-ui.css" />-->
 	<style type="text">
         html, body {

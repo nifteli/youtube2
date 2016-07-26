@@ -27,11 +27,7 @@ function controlQuestionSelection(el,id)
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
-	<div class="titles">
-		<h1>{$titleCategories}</h1>
-	</div>
+
 	<div class="actionButtons" >
 	
 	<form method="post" action="?page=adminCategories&action=filter" id="vlFilter" name="vlFilter" enctype='multipart/form-data'>
@@ -64,7 +60,7 @@ function controlQuestionSelection(el,id)
 					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 140px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
@@ -100,21 +96,21 @@ function controlQuestionSelection(el,id)
 					<th class="vertical-middle" style=" text-align:center" >{$pic}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$pic}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnlastVideoAdded}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeleted}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnId}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreatedById}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreatedBy}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreatedByIP}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeletedById}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeletedBy}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeletedByIP}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntInCat}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUserCntSubscribed}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnClickUserCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnClickCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedById&deletedByIdSortType={$deletedByIdSortType}')">{$lnDeletedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedBy&deletedBySortType={$deletedBySortType}')">{$lnDeletedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedByIP&deletedByIPSortType={$deletedByIPSortType}')">{$lnDeletedByIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=videoCntInCat&videoCntInCatSortType={$videoCntInCatSortType}')">{$lnVideoCntInCat}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=userCntSubscribed&userCntSubscribedSortType={$userCntSubscribedSortType}')">{$lnUserCntSubscribed}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickUserCnt&clickUserCntSortType={$clickUserCntSortType}')">{$lnClickUserCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">

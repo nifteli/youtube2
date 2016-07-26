@@ -50,7 +50,7 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 	}
 	foreach($tags as $tag)
 	{
-		if(strlen(trim($tag) == 1))
+		if(strlen(trim($tag)) == 1)
 		{
 			$result = "error";
 			$errorMessage = $content["SHORTTAG"];

@@ -91,7 +91,37 @@ class AdminCategories
 			$sortType = ($_GET["catInfoRuSortType"] == "" || $_GET["catInfoRuSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["videoQuestionSortType"]))
 			$sortType = ($_GET["videoQuestionSortType"] == "" || $_GET["videoQuestionSortType"] == "ASC")? 'DESC' : 'ASC';
-				
+		
+		if(isset($_GET["createdSortType"]))
+			$sortType = ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedSortType"]))
+			$sortType = ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["lastVideoAddedSortType"]))
+			$sortType = ($_GET["lastVideoAddedSortType"] == "" || $_GET["lastVideoAddedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["deletedSortType"]))
+			$sortType = ($_GET["deletedSortType"] == "" || $_GET["deletedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["idSortType"]))
+			$sortType = ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdByIdSortType"]))
+			$sortType = ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdBySortType"]))
+			$sortType = ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdByIPSortType"]))
+			$sortType = ($_GET["createdByIPSortType"] == "" || $_GET["createdByIPSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["deletedByIdSortType"]))
+			$sortType = ($_GET["deletedByIdSortType"] == "" || $_GET["deletedByIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["deletedBySortType"]))
+			$sortType = ($_GET["deletedBySortType"] == "" || $_GET["deletedBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["deletedByIPSortType"]))
+			$sortType = ($_GET["deletedByIPSortType"] == "" || $_GET["deletedByIPSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["videoCntInCatSortType"]))
+			$sortType = ($_GET["videoCntInCatSortType"] == "" || $_GET["videoCntInCatSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["userCntSubscribedSortType"]))
+			$sortType = ($_GET["userCntSubscribedSortType"] == "" || $_GET["userCntSubscribedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["clickUserCntSortType"]))
+			$sortType = ($_GET["clickUserCntSortType"] == "" || $_GET["clickUserCntSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["clickCntSortType"]))
+			$sortType = ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC';
 		
 		$this->adminCategories->assign("catAzSortType", ($_GET["catAzSortType"] == "" || $_GET["catAzSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("catInfoAzSortType", ($_GET["catInfoAzSortType"] == "" || $_GET["catInfoAzSortType"] == "ASC")? 'DESC' : 'ASC');
@@ -100,6 +130,22 @@ class AdminCategories
 		$this->adminCategories->assign("catRuSortType", ($_GET["catRuSortType"] == "" || $_GET["catRuSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("catInfoRuSortType", ($_GET["catInfoRuSortType"] == "" || $_GET["catInfoRuSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("videoQuestionSortType", ($_GET["videoQuestionSortType"] == "" || $_GET["videoQuestionSortType"] == "ASC")? 'DESC' : 'ASC');
+		
+		$this->adminCategories->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("updatedSortType", ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("lastVideoAddedSortType", ($_GET["lastVideoAddedSortType"] == "" || $_GET["lastVideoAddedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("deletedSortType", ($_GET["deletedSortType"] == "" || $_GET["deletedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("createdByIdSortType", ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("createdBySortType", ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("createdByIPSortType", ($_GET["createdByIPSortType"] == "" || $_GET["createdByIPSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("deletedByIdSortType", ($_GET["deletedByIdSortType"] == "" || $_GET["deletedByIdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("deletedBySortType", ($_GET["deletedBySortType"] == "" || $_GET["deletedBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("deletedByIPSortType", ($_GET["deletedByIPSortType"] == "" || $_GET["deletedByIPSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("videoCntInCatSortType", ($_GET["videoCntInCatSortType"] == "" || $_GET["videoCntInCatSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("userCntSubscribedSortType", ($_GET["userCntSubscribedSortType"] == "" || $_GET["userCntSubscribedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("clickUserCntSortType", ($_GET["clickUserCntSortType"] == "" || $_GET["clickUserCntSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminCategories->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;

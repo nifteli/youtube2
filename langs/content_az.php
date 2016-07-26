@@ -350,8 +350,8 @@ $content["ADDEDFOLDERCNT"] = "ADDEDFOLDERCNT";
 $content["KEYWORD"] = "KEYWORD";
 $content["SEARCHER"] = "SEARCHER";
 $content["EXPORTSEARCHES"] = "EXPORTSEARCHES";
-
-
+$content["UNDELETECONFIRMATION"] = "Silinməni ləğv etməyə əminsinizmi?";
+$content["UNDELETED"] = "Silinmə ləğv edildi";
 //End Video links 
 
 // Admin users
@@ -391,6 +391,7 @@ $content['CONFIRDATE'] ='CONFIRMDATE';
 
 //Admin folders
 $content['TITLEFOLDERS'] ='Qovluqlar';
+$content['ADDFOLDER'] ='Add folder';
 
 //End Admin folders
 

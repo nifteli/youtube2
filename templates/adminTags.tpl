@@ -7,11 +7,7 @@ function submitForm(action)
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	
-	<div class="titles">
-		<h1>{$titleTags}</h1>
-	</div>
+
 	<div class="actionButtons" >
 	
 	<form method="post" action="?page=adminTags&action=filter" id="vlFilter" name="vlFilter">
@@ -58,13 +54,13 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$lnNewTag}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCreatedBy}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedBy}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntTagged}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUserCntClicked}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnClickCnt}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedBy&updatedBySortType={$updatedBySortType}')">{$lnUpdatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=videoCntTagged&videoCntTaggedSortType={$videoCntTaggedSortType}')">{$lnVideoCntTagged}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=userCntClicked&userCntClickedSortType={$userCntClickedSortType}')">{$lnUserCntClicked}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
 					
 				</tr>
 				</thead>

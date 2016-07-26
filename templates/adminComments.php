@@ -77,6 +77,26 @@ class AdminComments
 		if(isset($_GET["confirmerSortType"]))
 			$sortType = ($_GET["confirmerSortType"] == "" || $_GET["confirmerSortType"] == "ASC")? 'DESC' : 'ASC';
 		
+		if(isset($_GET["updatedSortType"]))
+			$sortType = ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["confirmDateSortType"]))
+			$sortType = ($_GET["confirmDateSortType"] == "" || $_GET["confirmDateSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["videoNameSortType"]))
+			$sortType = ($_GET["videoNameSortType"] == "" || $_GET["videoNameSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["questionSortType"]))
+			$sortType = ($_GET["questionSortType"] == "" || $_GET["questionSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["userIPSortType"]))
+			$sortType = ($_GET["userIPSortType"] == "" || $_GET["userIPSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedByIdSortType"]))
+			$sortType = ($_GET["updatedByIdSortType"] == "" || $_GET["updatedByIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedBySortType"]))
+			$sortType = ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedByIPSortType"]))
+			$sortType = ($_GET["updatedByIPSortType"] == "" || $_GET["updatedByIPSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["confirmedByIdSortType"]))
+			$sortType = ($_GET["confirmedByIdSortType"] == "" || $_GET["confirmedByIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["confirmedByIPSortType"]))
+			$sortType = ($_GET["confirmedByIPSortType"] == "" || $_GET["confirmedByIPSortType"] == "ASC")? 'DESC' : 'ASC';
 		
 		$this->adminComments->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
@@ -86,6 +106,16 @@ class AdminComments
 		$this->adminComments->assign("commentSortType", ($_GET["commentSortType"] == "" || $_GET["commentSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("confirmedSortType", ($_GET["confirmedSortType"] == "" || $_GET["confirmedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("confirmerSortType", ($_GET["confirmerSortType"] == "" || $_GET["confirmerSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("updatedSortType", ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("confirmDateSortType", ($_GET["confirmDateSortType"] == "" || $_GET["confirmDateSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("videoNameSortType", ($_GET["videoNameSortType"] == "" || $_GET["videoNameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("questionSortType", ($_GET["questionSortType"] == "" || $_GET["questionSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("userIPSortType", ($_GET["userIPSortType"] == "" || $_GET["userIPSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("updatedByIdSortType", ($_GET["updatedByIdSortType"] == "" || $_GET["updatedByIdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("updatedBySortType", ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("updatedByIPSortType", ($_GET["updatedByIPSortType"] == "" || $_GET["updatedByIPSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("confirmedByIdSortType", ($_GET["confirmedByIdSortType"] == "" || $_GET["confirmedByIdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("confirmedByIPSortType", ($_GET["confirmedByIPSortType"] == "" || $_GET["confirmedByIPSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;

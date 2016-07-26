@@ -41,9 +41,7 @@ $(document).ready(function() {
 	{if isset($okMessage)}
 	<div class="success1">{$okMessage}</div>
 	{/if}-->
-	<div class="titles" style="width:100%">
-		<h1>{$titleProfile}</h1>
-	</div>
+
 	{if $result == 'error'}
 	  <div class="err" style="width:1100px">
 		{foreach from=$messages item=message}

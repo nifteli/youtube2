@@ -51,9 +51,11 @@ class WatchVideo
 			$this->watchVideo->assign("views",$content['VIEWS']);
 			$this->watchVideo->assign("hasAccess",$controller->access->hasAccess);
 			$this->watchVideo->assign("curUserId",-1);
-			$this->watchVideo->assign("liked",$this->isVideoLiked($controller));
 			if($controller->access->hasAccess)
+			{
+				$this->watchVideo->assign("liked",$this->isVideoLiked($controller));
 				$this->watchVideo->assign("curUserId",$controller->access->userId);
+			}
 			$this->watchVideo->assign("email",$content['EMAIL']);
 			$this->watchVideo->assign("tags",$content['TAGS']);
 			$this->watchVideo->assign("published",$content['PUBLISHED']);

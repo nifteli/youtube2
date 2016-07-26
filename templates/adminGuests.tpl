@@ -29,11 +29,6 @@ function submitForm(action)
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
-	<div class="titles">
-		<h1>{$titleGuests}</h1>
-	</div>
 	
 	{if $result == 'error'}
 	  <div class="err">

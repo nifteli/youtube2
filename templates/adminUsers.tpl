@@ -59,11 +59,7 @@ function showProfile(userId)
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	
-	<div class="titles">
-		<h1>{$titleUsers}</h1>
-	</div>
+
 	<div class="actionButtons">
 	<form method="post" action="?page=adminUsers&action=set" id="vlFilter" name="vlFilter">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>

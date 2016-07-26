@@ -2,12 +2,7 @@
 	bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	
-	<div class="titles">
-		<h1>{$titleNotifications}</h1>
-	</div>
-	
+
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}

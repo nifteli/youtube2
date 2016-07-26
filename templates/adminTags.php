@@ -50,10 +50,32 @@ class AdminTags
 			$sortType = ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["nameSortType"]))
 			$sortType = ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC';
-				
+		if(isset($_GET["createdSortType"]))
+			$sortType = ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdBySortType"]))
+			$sortType = ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedSortType"]))
+			$sortType = ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedBySortType"]))
+			$sortType = ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["videoCntTaggedSortType"]))
+			$sortType = ($_GET["videoCntTaggedSortType"] == "" || $_GET["videoCntTaggedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["userCntClickedSortType"]))
+			$sortType = ($_GET["userCntClickedSortType"] == "" || $_GET["userCntClickedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["clickCntSortType"]))
+			$sortType = ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC';
+		
+		
 		
 		$this->adminTags->assign("langSortType", ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("createdBySortType", ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("updatedSortType", ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("updatedBySortType", ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("videoCntTaggedSortType", ($_GET["videoCntTaggedSortType"] == "" || $_GET["videoCntTaggedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("userCntClickedSortType", ($_GET["userCntClickedSortType"] == "" || $_GET["userCntClickedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;

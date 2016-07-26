@@ -29,12 +29,7 @@ function submitForm(action)
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	
-	<div class="titles">
-		<h1>{$titleComments}</h1>
-	</div>
-	
+
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -86,16 +81,16 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=confirmer&confirmerSortType={$confirmerSortType}')">{$lnConfirmer}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$confirm}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmDate}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoName}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnQuestion}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUserIP}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedById}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedBy}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdatedByIP}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmedById}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnConfirmedByIP}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=confirmDate&confirmDateSortType={$confirmDateSortType}')">{$lnConfirmDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=videoName&videoNameSortType={$videoNameSortType}')">{$lnVideoName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=question&questionSortType={$questionSortType}')">{$lnQuestion}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=userIP&userIPSortType={$userIPSortType}')">{$lnUserIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=updatedById&updatedByIdSortType={$updatedByIdSortType}')">{$lnUpdatedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=updatedBy&updatedBySortType={$updatedBySortType}')">{$lnUpdatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=updatedByIP&updatedByIPSortType={$updatedByIPSortType}')">{$lnUpdatedByIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=confirmedById&confirmedByIdSortType={$confirmedByIdSortType}')">{$lnConfirmedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=confirmedByIP&confirmedByIPSortType={$confirmedByIPSortType}')">{$lnConfirmedByIP}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">

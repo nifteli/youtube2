@@ -28,19 +28,22 @@ function submitForm(action)
 	document.getElementById('vlFilter').action=action;
 	document.getElementById('vlFilter').submit();
 }
-function setFolderName(id,folderName)
+function setFolderName(id,folderName,tags)
 {
 	 $( "#folderId" ).val( id );
 	 $( "#folderName" ).val( folderName );
+	 $( "#tagsp" ).val( tags );
 }
 </script>
 <div>
-	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
-	<div class="titles" style="width:100%">
-		<h1>{$titleFolders}</h1>
-	</div>
+	<div class="actionButtons" style="margin-top:3px">
+	<table border=1 cellpadding=25 cellspacing=25 align=right>
+		<tr style="text-align:right">
+			<td><a href="#addNewFolder">{$addFolder}</a></td>
+		</tr>
+	</table>
 	
+	</div>
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -54,13 +57,14 @@ function setFolderName(id,folderName)
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		<form method="post" action="?page=adminFolders&action=filter" id="vlFilter" name="vlFilter">
 		<div class="table-responsive">
-			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;">
+			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed; text-align: center;">
 				<colgroup>
 					<col style="width: 180px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 250px; overflow: hidden;"/>
 					<col style="width: 250px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 				</colgroup>
@@ -74,6 +78,7 @@ function setFolderName(id,folderName)
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=createdById&authorIdSortType={$authorIdSortType}')">{$lnAuthorId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=author&authorSortType={$authorSortType}')">{$lnAuthor}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=name&nameSortType={$nameSortType}')">{$lnTags}</a></th>
 					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center" >{$edit}</th>
 				</tr>
@@ -88,6 +93,7 @@ function setFolderName(id,folderName)
 					<td class="vertical-middle"><input class="form-control" name="authorId" id="authorId" type="text" value="{$authorIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="author" id="author" type="text" value="{$authorVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="tags" id="tags" type="text" value="{$tagsVal}"/></td>
 					<td class="vertical-middle" colspan=2>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
@@ -103,6 +109,7 @@ function setFolderName(id,folderName)
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].createdById}">{$folders[sec1].createdById}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].author}">{$folders[sec1].author}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].name}">{$folders[sec1].name}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].tags}">{$folders[sec1].tags}</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
 						<a href="?page=adminFolders&action=delete&id={$folders[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
@@ -110,7 +117,7 @@ function setFolderName(id,folderName)
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$confirm}">
 						{if $hasEditAccess}
-						<a onclick="setFolderName({$folders[sec1].id},'{$folders[sec1].name}')" href="#editFolder"><img src="img/edit.png" width="15" height="15" alt=""/></a>
+						<a onclick="setFolderName({$folders[sec1].id},'{$folders[sec1].name}','{$folders[sec1].tags}')" href="#editFolder"><img src="img/edit.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 				</tr>
@@ -152,15 +159,37 @@ function setFolderName(id,folderName)
 	</div>
 </div>
 <div id="editFolder" class="modalDialog" >
-	<div style="width:290px">
+	<div style="width:290px;height:150px">
 		<a href="#close" title="Close" class="close1">X</a>
 		<h4 style="font-weight:bold">{$editFolder}</h4>
 		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminFolders&action=editFolder" method="post" style="width:250px">
-			
 			<div style="float:right;width:250px" >
-				<label>{$folderName}:</label>
 				<input type="hidden" name="folderId" id="folderId">
-				<input type="text" name="folderName" id="folderName">
+				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<input type="text" name="tagsp" id="tagsp" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
+				<br>
+				<div style="text-align:center;">
+				<input type="submit" class="login39" name = "add" id="add" value="{$save}" style="margin-left:0;">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div id="addNewFolder" class="modalDialog" >
+	<div style="width:290px;height:185px">
+		<a href="#close" title="Close" class="close1">X</a>
+		<h4 style="font-weight:bold">{$addFolder}</h4>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminFolders&action=addNewFolder" method="post" style="width:250px">
+			<div style="float:right;width:250px" >
+				<input type="hidden" name="folderId" id="folderId">
+				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<input type="text" name="tagsp" id="tagsp" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
+				<select class="srcCmb" name="userId" id="userId" style="width: 100%;margin-bottom: 5px;">
+						{section name=sec1 loop=$users}
+							<option value="{$users[sec1].id}"> {$users[sec1].user}</option>
+						{/section}
+					</select> 
 				<br>
 				<div style="text-align:center;">
 				<input type="submit" class="login39" name = "add" id="add" value="{$save}" style="margin-left:0;">

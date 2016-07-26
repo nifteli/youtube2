@@ -23,6 +23,7 @@ class AdminFolders
 		$this->adminFolders->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
 		$this->adminFolders->assign("folderName",$content['FOLDERNAME']);
 		$this->adminFolders->assign("editFolder",$content['EDITFOLDER']);
+		$this->adminFolders->assign("tags",$content['TAGS']);
 		//$this->adminFolders->assign("confirm", $content['CONFIRM']);
 		
 		$this->adminFolders->assign("lnCreated", $content['ADDDATE']);
@@ -30,6 +31,9 @@ class AdminFolders
 		$this->adminFolders->assign("lnAuthorId", $content['AUTHORID']);
 		$this->adminFolders->assign("lnAuthor", $content['AUTHOR']);
 		$this->adminFolders->assign("lnName", $content['FOLDERNAME']);
+		$this->adminFolders->assign("lnTags", $content['TAGS']);
+		$this->adminFolders->assign("addFolder", $content['ADDFOLDER']);
+		$this->adminFolders->assign("users", $controller->getAllUsers());
 		
 		$this->adminFolders->assign("hasEditAccess", $controller->access->authorized(29));
 		$this->adminFolders->assign("hasDeleteAccess", $controller->access->authorized(12));
@@ -43,6 +47,7 @@ class AdminFolders
 			$this->adminFolders->assign("authorIdVal", $_POST["authorId"]);
 			$this->adminFolders->assign("authorVal", $_POST["author"]);
 			$this->adminFolders->assign("nameVal", $_POST["name"]);
+			$this->adminFolders->assign("tagsVal", $_POST["tags"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

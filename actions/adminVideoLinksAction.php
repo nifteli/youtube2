@@ -458,7 +458,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'exportSearches')
 }
 
 
-if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])))
+if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])) && is_numeric($_GET["flag"]))
 {
 	$result = "success";
 	$messages = array();
@@ -469,13 +469,25 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])))
 		$messages['noaccess'] = $content["INSUFFACCESS"];
 		return;
 	}
-	
+	if ($_GET["flag"] == 0 )
+	{
+		$isDeleted = 1;
+		$deleted = date("Y-m-d H:i:s");
+	}
+	else
+	{
+		$isDeleted = 0;
+		$deleted = "NULL";
+	}
 	$db->where("id=".trim($_GET["videoId"]));
-	$db->update("videos",array("isDeleted"=>1,
-								"deleted"=>date("Y-m-d H:i:s"),
+	$db->update("videos",array("isDeleted"=>$isDeleted,
+								"deleted"=>$deleted,
 								"deletedById"=>$access->userId));
 	if($db->count>0)
-		$messages["success"] = $content["REMOVED"];
+		if($_GET["flag"] == 0)
+			$messages["success"] = $content["REMOVED"];
+		else
+			$messages["success"] = $content["UNDELETED"];
 }
 
 function getLinkId($link)

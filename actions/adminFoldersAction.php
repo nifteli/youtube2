@@ -9,13 +9,64 @@ if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_PO
 		$messages['noaccess'] = $content["INSUFFACCESS"];
 		return;
 	}
-	
+	$tagStr = isset($_POST["tagsp"]) ? $_POST["tagsp"] : "";
+	$tags = array_unique(explode(",", $tagStr));
+	if(count($tags) < 2)
+	{
+		$result = "error";
+		$messages["err"] = $content["NOTENGOUGHTAG"];
+		return;
+	}
+	foreach($tags as $tag)
+	{
+		if(strlen(trim($tag)) == 1)
+		{
+			$result = "error";
+			$messages["err"] = $content["SHORTTAG"];
+			return;
+		}
+	}
+	$continue = true;
+	$db->startTransaction();
 	$db->where("id=".$_POST["folderId"]);
 	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
 	if($res)
 	{
-		$messages["success"] = $content["FOLDEREDITED"];
-		$db->commit();
+		$db->rawQuery("delete from foldertags where folderId=".$_POST["folderId"]);
+		foreach($tags as $tag)
+		{
+			$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+			$res = $db->getOne("tags");
+			
+			
+			if ($db->count == 1) 
+				$id = $res["id"];
+			else
+				$id = $db->insert("tags", array("name"=>trim($tag),
+										"langId"=>$langIds[$_SESSION["lang"]],
+										"created"=>date("Y-m-d H:i:s"),
+										"createdById"=>$access->userId));
+			if($id)
+			{
+				
+				$id = $db->insert("foldertags", array("tagId"=>$id,
+									"folderId"=>$_POST["folderId"]));
+									//echo "Error=".$db->getLastError()."<br>"; echo "Query=".$db->getLastQuery()."<br>";
+			}
+			
+			if(!$id)
+			{ 
+				$continue = false;
+				break;
+			}
+		}
+		if($continue)
+		{
+			$db->commit();
+			$messages["success"] = $content["FOLDEREDITED"];
+		}
+		else
+			$db->rollback();
 	}
 	else
 	{
@@ -23,8 +74,100 @@ if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_PO
 		$messages["err"] = $content["FOLDERNOTEDITED"];
 		$db->rollback();
 	}
+	
+	
+	// $db->where("id=".$_POST["folderId"]);
+	// $res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
+	// if($res)
+	// {
+		// $messages["success"] = $content["FOLDEREDITED"];
+		// $db->commit();
+	// }
+	// else
+	// {
+		// $result = "error";
+		// $messages["err"] = $content["FOLDERNOTEDITED"];
+		// $db->rollback();
+	// }
 }
 
+if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folderName"]) != "" && is_numeric($_POST["userId"]))
+{ 
+	if(!$access->authorized(55))
+	{
+		$result = "error";
+		$messages["err"] = $content["INSUFFACCESS"];
+		return;
+	}
+	if(strlen(trim($_POST["folderName"])) < 3 || strlen(trim($_POST["folderName"])) > 25)
+	{
+		$result = "error";
+		$messages["err"] = $content["SHORTFOLDERNAME"];
+		return;
+	}
+	$tagStr = isset($_POST["tagsp"]) ? $_POST["tagsp"] : "";
+	$tags = array_unique(explode(",", $tagStr));
+	if(count($tags) < 2)
+	{
+		$result = "error";
+		$messages["err"] = $content["NOTENGOUGHTAG"];
+		return;
+	}
+	foreach($tags as $tag)
+	{
+		if(strlen(trim($tag) == 1))
+		{
+			$result = "error";
+			$messages["err"] = $content["SHORTTAG"];
+			return;
+		}
+	}
+	$continue = true;
+	$db->startTransaction();
+	$folderId = $db->insert("folders",array("name" => trim($_POST["folderName"]),
+									  "created" =>date("Y-m-d H:i:s"),
+									  "createdById" => $_POST["userId"],
+									  "createdByIP" => $_SERVER['REMOTE_ADDR'])); 
+	if($folderId)
+	{
+		foreach($tags as $tag)
+		{
+			$db->where("name='" . trim($tag) . "' and langId=".$langIds[$_SESSION["lang"]]);
+			$res = $db->getOne("tags");
+			if ($db->count == 1) 
+				$id = $res["id"];
+			else
+				$id = $db->insert("tags", array("name"=>trim($tag),
+										"langId"=>$langIds[$_SESSION["lang"]],
+										"created"=>date("Y-m-d H:i:s"),
+										"createdById"=>$_POST["userId"]));
+			if($id)
+			{
+				$id = $db->insert("foldertags", array("tagId"=>$id,
+									"folderId"=>$folderId));
+			}
+			
+			if(!$id)
+			{
+				$continue = false;
+				break;
+			}
+		}
+		if($continue)
+		{
+			$db->commit();
+			$okMessage = $content["FOLDERADDED"];
+		}
+		else
+			$db->rollback();
+	}
+	else
+	{
+		$db->rollback();
+		$messages["err"] = $content["FOLDERNOTADDED"];
+	}
+	
+}
 if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 {
 	$result = "success";

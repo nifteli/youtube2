@@ -170,7 +170,7 @@ label {
   width:100%;
  height:auto;
  /* margin-top: -70px; */
- background:#e2deae;
+ background:white;
 }
 
 .bg2{
@@ -2127,7 +2127,13 @@ color: #D8000C;
 .emailCheck{
 	
 }
-
+.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
+    padding: 0.1px !important;
+    line-height: 1 !important;
+}
+.form-control{
+	padding:0 !important;
+}
 
 
 
