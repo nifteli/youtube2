@@ -345,6 +345,35 @@ $content["KEYWORD"] = "KEYWORD";
 $content["SEARCHER"] = "SEARCHER";
 $content["UNDELETECONFIRMATION"] = "Silinməni ləğv etməyə əminsinizmi?";
 $content["UNDELETED"] = "Silinmə ləğv edildi";
+$content['vaddedVidLinksHint']="vaddedVidLinksHint";
+$content['idVidLinksHint']="idVidLinksHint";
+$content['nameVidLinksHint']="nameVidLinksHint";
+$content['infoVidLinksHint']="infoVidLinksHint";
+$content['langVidLinksHint']="langVidLinksHint";
+$content['linkVidLinksHint']="linkVidLinksHint";
+$content['catNameVidLinksHint']="catNameVidLinksHint";
+$content['tagsVidLinksHint']="tagsVidLinksHint";
+$content['questionsVidLinksHint']="questionsVidLinksHint";
+$content['reportCountVidLinksHint']="reportCountVidLinksHint";
+$content['deleteVidLinksHint']="deleteVidLinksHint";
+$content['editVidLinksHint']="editVidLinksHint";
+$content['updatedVidLinksHint']="updatedVidLinksHint";
+$content['deletedVidLinksHint']="deletedVidLinksHint";
+$content['addedByIdVidLinksHint']="addedByIdVidLinksHint";
+$content['addedByIPVidLinksHint']="addedByIPVidLinksHint";
+$content['updatedByIdVidLinksHint']="updatedByIdVidLinksHint";
+$content['deletedByIdVidLinksHint']="deletedByIdVidLinksHint";
+$content['durationVidLinksHint']="durationVidLinksHint";
+$content['viewsVidLinksHint']="viewsVidLinksHint";
+$content['userCntCommentedVidLinksHint']="userCntCommentedVidLinksHint";
+$content['commentsVidLinksHint']="commentsVidLinksHint";
+$content['tagCountVidLinksHint']="tagCountVidLinksHint";
+$content['likesVidLinksHint']="likesVidLinksHint";
+$content['dislikesVidLinksHint']="dislikesVidLinksHint";
+$content['userReportedCntVidLinksHint']="userReportedCntVidLinksHint";
+$content['userCntAddedToFolderVidLinksHint']="userCntAddedToFolderVidLinksHint";
+$content['addedFolderCntVidLinksHint']="addedFolderCntVidLinksHint";
+
 //End Video links 
 
 // Admin users
@@ -380,11 +409,41 @@ $content['CHANGED'] ='Redaktə edildi';
 $content['CONFIRMEDBYID'] ='CONFIRMEDBYID';
 $content['CONFIRMEDBYIP'] ='CONFIRMEDBYIP';
 $content['CONFIRDATE'] ='CONFIRDATE';
+$content['createdCommentsHint']="createdCommentsHint";
+$content['idCommentsHint']="idCommentsHint";
+$content['videoIdCommentsHint']="videoIdCommentsHint";
+$content['createdByIdCommentsHint']="createdByIdCommentsHint";
+$content['authorCommentsHint']="authorCommentsHint";
+$content['commentCommentsHint']="commentCommentsHint";
+$content['isConfirmedCommentsHint']="isConfirmedCommentsHint";
+$content['confirmerCommentsHint']="confirmerCommentsHint";
+$content['deleteCommentsHint']="deleteCommentsHint";
+$content['confirmCommentsHint']="confirmCommentsHint";
+$content['updatedCommentsHint']="updatedCommentsHint";
+$content['confirmDateCommentsHint']="confirmDateCommentsHint";
+$content['videoNameCommentsHint']="videoNameCommentsHint";
+$content['questionCommentsHint']="questionCommentsHint";
+$content['userIPCommentsHint']="userIPCommentsHint";
+$content['updatedByIdCommentsHint']="updatedByIdCommentsHint";
+$content['updatedByCommentsHint']="updatedByCommentsHint";
+$content['updatedByIPCommentsHint']="updatedByIPCommentsHint";
+$content['confirmedByIdCommentsHint']="confirmedByIdCommentsHint";
+$content['confirmedByIPCommentsHint']="confirmedByIPCommentsHint";
+
 //End Admin comments
 
 //Admin folders
 $content['TITLEFOLDERS'] ='Qovluqlar';
 $content['ADDFOLDER'] ='Add folder';
+$content['createdFolderHint']="createdFolderHint";
+$content['idFolderHint']="idFolderHint";
+$content['createdByIdFolderHint']="createdByIdFolderHint";
+$content['authorFolderHint']="authorFolderHint";
+$content['nameFolderHint']="nameFolderHint";
+$content['tagsFolderHint']="tagsFolderHint";
+$content['deleteFolderHint']="deleteFolderHint";
+$content['editFolderHint']="editFolderHint";
+
 //End Admin folders
 
 //Admin Tags
@@ -394,6 +453,18 @@ $content['NEWTAG'] ='Yeni Taq';
 $content['SUBSTITUTE'] ='Əvəzlə';
 $content['VIDEOCNTTAGGED'] ='VIDEOCNTTAGGED';
 $content['USERCNTCLICKED'] ='USERCNTCLICKED';
+$content['langTagsHint']="langTagsHint";
+$content['nameTagsHint']="nameTagsHint";
+$content['lnNewTagTagsHint']="lnNewTagTagsHint";
+$content['deleteTagsHint']="deleteTagsHint";
+$content['createdTagsHint']="createdTagsHint";
+$content['createdByTagsHint']="createdByTagsHint";
+$content['updatedTagsHint']="updatedTagsHint";
+$content['updatedByTagsHint']="updatedByTagsHint";
+$content['videoCntTaggedTagsHint']="videoCntTaggedTagsHint";
+$content['userCntClickedTagsHint']="userCntClickedTagsHint";
+$content['clickCntTagsHint']="clickCntTagsHint";
+
 //End Admin Tags
 
 //Admin users
@@ -447,6 +518,52 @@ $content['SENDERID'] ='SENDERID';
 $content['SENDERIP'] ='SENDERIP';
 $content['SENDERNAME'] ='SENDERNAME';
 $content['SENDERUSERNAME'] ='SENDERUSERNAME';
+$content['createdUsersHint']="createdUsersHint";
+$content['idUsersHint']="idUsersHint";
+$content['userNameUsersHint']="userNameUsersHint";
+$content['nameUsersHint']="nameUsersHint";
+$content['lnRoleUsersHint']="lnRoleUsersHint";
+$content['viewProfileUsersHint']="viewProfileUsersHint";
+$content['setUserUsersHint']="setUserUsersHint";
+$content['deleteUsersHint']="deleteUsersHint";
+$content['updatedUsersHint']="updatedUsersHint";
+$content['deletedUsersHint']="deletedUsersHint";
+$content['fatherNameUsersHint']="fatherNameUsersHint";
+$content['birthDateUsersHint']="birthDateUsersHint";
+$content['adminUsersUsersHint']="adminUsersUsersHint";
+$content['telephoneUsersHint']="telephoneUsersHint";
+$content['noteUsersHint']="noteUsersHint";
+$content['genderUsersHint']="genderUsersHint";
+$content['languageUsersHint']="languageUsersHint";
+$content['professionUsersHint']="professionUsersHint";
+$content['interestsUsersHint']="interestsUsersHint";
+$content['registeredByIpUsersHint']="registeredByIpUsersHint";
+$content['regDeviceUsersHint']="regDeviceUsersHint";
+$content['regBrowserUsersHint']="regBrowserUsersHint";
+$content['updateUserIdUsersHint']="updateUserIdUsersHint";
+$content['deletedByIdUsersHint']="deletedByIdUsersHint";
+$content['getSiteNewsUsersHint']="getSiteNewsUsersHint";
+$content['getEmailOnCommentUsersHint']="getEmailOnCommentUsersHint";
+$content['getEmailAfterMyCommentUsersHint']="getEmailAfterMyCommentUsersHint";
+$content['deviceCountUsersHint']="deviceCountUsersHint";
+$content['browserCountUsersHint']="browserCountUsersHint";
+$content['viewCountUsersHint']="viewCountUsersHint";
+$content['videoCountUsersHint']="videoCountUsersHint";
+$content['likeCountUsersHint']="likeCountUsersHint";
+$content['dislikeCountUsersHint']="dislikeCountUsersHint";
+$content['commentCountUsersHint']="commentCountUsersHint";
+$content['reportCountUsersHint']="reportCountUsersHint";
+$content['videoCntInFolderUsersHint']="videoCntInFolderUsersHint";
+$content['folderCntUsersHint']="folderCntUsersHint";
+$content['tagClickCntUsersHint']="tagClickCntUsersHint";
+$content['tagClickedUsersHint']="tagClickedUsersHint";
+$content['catClickCntUsersHint']="catClickCntUsersHint";
+$content['catClickedUsersHint']="catClickedUsersHint";
+$content['subCatCntUsersHint']="subCatCntUsersHint";
+$content['searchCntUsersHint']="searchCntUsersHint";
+$content['videoCntCommentedUsersHint']="videoCntCommentedUsersHint";
+
+
 //End Admin users
 
 
@@ -489,6 +606,33 @@ $content['VIDEOCNTINCAT'] ="VIDEOCNTINCAT";
 $content['USERCNTSUBSCRIBED'] ="USERCNTSUBSCRIBED";
 $content['CLICKUSERCNT'] ="CLICKUSERCNT";
 $content['CLICKCNT'] ="CLICKCNT";
+$content['catGroupCatsHint']="catGroupCatsHint";
+$content['catAzCatsHint']="catAzCatsHint";
+$content['catInfoAzCatsHint']="catInfoAzCatsHint";
+$content['catEnCatsHint']="catEnCatsHint";
+$content['catInfoEnCatsHint']="catInfoEnCatsHint";
+$content['catRuCatsHint']="catRuCatsHint";
+$content['catInfoRuCatsHint']="catInfoRuCatsHint";
+$content['questionsCatsHint']="questionsCatsHint";
+$content['picCatsHint']="picCatsHint";
+$content['picCatsHint']="picCatsHint";
+$content['deleteCatsHint']="deleteCatsHint";
+$content['createdCatsHint']="createdCatsHint";
+$content['updatedCatsHint']="updatedCatsHint";
+$content['lastVideoAddedCatsHint']="lastVideoAddedCatsHint";
+$content['deletedCatsHint']="deletedCatsHint";
+$content['idCatsHint']="idCatsHint";
+$content['createdByIdCatsHint']="createdByIdCatsHint";
+$content['createdByCatsHint']="createdByCatsHint";
+$content['createdByIPCatsHint']="createdByIPCatsHint";
+$content['deletedByIdCatsHint']="deletedByIdCatsHint";
+$content['deletedByCatsHint']="deletedByCatsHint";
+$content['deletedByIPCatsHint']="deletedByIPCatsHint";
+$content['videoCntInCatCatsHint']="videoCntInCatCatsHint";
+$content['userCntSubscribedCatsHint']="userCntSubscribedCatsHint";
+$content['clickUserCntCatsHint']="clickUserCntCatsHint";
+$content['clickCntCatsHint']="clickCntCatsHint";
+
 //End Admin categories
 
 //Admin Notifications
@@ -500,5 +644,27 @@ $content['ABOUTUS'] ="About us";
 $content['OTHER'] ="Other info";
 
 //End Admin Notifications
+
+//Admin Guests
+$content['TITLEGUESTS'] ="Qonaqlar";
+$content['ENTRYDATE'] ="ENTRYDATE";
+$content['IP'] ="IP";
+$content['DEVICE'] ="DEVICE";
+$content['BROWSER'] ="BROWSER";
+$content['VIDEOCNTWATCHED'] ="VIDEOCNTWATCHED";
+$content['VIDEOCNTCOMMENTED'] ="VIDEOCNTCOMMENTED";
+$content['COMMENTCNT'] ="COMMENTCNT";
+$content['SEARCHCNT'] ="SEARCHCNT";
+
+$content['entryDateGuestHint']="entryDateGuestHint";
+$content['IPGuestHint']="IPGuestHint";
+$content['deviceGuestHint']="deviceGuestHint";
+$content['browserGuestHint']="browserGuestHint";
+$content['videCntWatchedGuestHint']="videCntWatchedGuestHint";
+$content['videoCntCommentedGuestHint']="videoCntCommentedGuestHint";
+$content['commentCntGuestHint']="commentCntGuestHint";
+$content['searchCntGuestHint']="searchCntGuestHint";
+
+//End Admin Guests
 
 ?>

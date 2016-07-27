@@ -837,6 +837,8 @@ class Controller //extends MySQL
 		
 		$lang = $this->lang;
 		$qry = "SELECT u.*,r.name roleName,l.nameAz lang,
+				u.lastUpdate updated,u.phoneNumber telephone,u.notes note,l.name".$_SESSION["lang"]." language,u.getEmailOnNews getSiteNews,u.getEmailOnVideoComment getEmailOnComment,
+				us.videoviews viewcount,us.videoviews videoCount,us.likes likeCount, us.dislikes dislikeCount,us.comments commentCount,
 				DATE_FORMAT(u.registered,'%d-%m-%Y %k:%i:%S') createdDate,
 				DATE_FORMAT(u.lastLoggedIn,'%d-%m-%Y %k:%i:%S') lastLoginDate,
 				DATE_FORMAT(u.lastUpdate,'%d-%m-%Y %k:%i:%S') updatedDate,
@@ -934,7 +936,7 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
-				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,
+				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,cg.catGroupName".$_SESSION["lang"]." catGroup,
 				concat(u.firstName,' ',u.lastName) createdBy,
 				cg.catGroupNameAz
 				FROM categories c

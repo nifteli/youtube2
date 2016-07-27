@@ -29,6 +29,32 @@ class AdminCategories
 		$this->adminCategories->assign("vqWho", $content['WHO']);
 		$this->adminCategories->assign("vqWhat", $content['WHAT']);
 		
+		$this->adminCategories->assign("catGroupCatsHint", $content['catGroupCatsHint']);
+		$this->adminCategories->assign("catAzCatsHint", $content['catAzCatsHint']);
+		$this->adminCategories->assign("catInfoAzCatsHint", $content['catInfoAzCatsHint']);
+		$this->adminCategories->assign("catEnCatsHint", $content['catEnCatsHint']);
+		$this->adminCategories->assign("catInfoEnCatsHint", $content['catInfoEnCatsHint']);
+		$this->adminCategories->assign("catRuCatsHint", $content['catRuCatsHint']);
+		$this->adminCategories->assign("catInfoRuCatsHint", $content['catInfoRuCatsHint']);
+		$this->adminCategories->assign("questionsCatsHint", $content['questionsCatsHint']);
+		$this->adminCategories->assign("picCatsHint", $content['picCatsHint']);
+		$this->adminCategories->assign("picCatsHint", $content['picCatsHint']);
+		$this->adminCategories->assign("deleteCatsHint", $content['deleteCatsHint']);
+		$this->adminCategories->assign("createdCatsHint", $content['createdCatsHint']);
+		$this->adminCategories->assign("updatedCatsHint", $content['updatedCatsHint']);
+		$this->adminCategories->assign("lastVideoAddedCatsHint", $content['lastVideoAddedCatsHint']);
+		$this->adminCategories->assign("deletedCatsHint", $content['deletedCatsHint']);
+		$this->adminCategories->assign("idCatsHint", $content['idCatsHint']);
+		$this->adminCategories->assign("createdByIdCatsHint", $content['createdByIdCatsHint']);
+		$this->adminCategories->assign("createdByCatsHint", $content['createdByCatsHint']);
+		$this->adminCategories->assign("createdByIPCatsHint", $content['createdByIPCatsHint']);
+		$this->adminCategories->assign("deletedByIdCatsHint", $content['deletedByIdCatsHint']);
+		$this->adminCategories->assign("deletedByCatsHint", $content['deletedByCatsHint']);
+		$this->adminCategories->assign("deletedByIPCatsHint", $content['deletedByIPCatsHint']);
+		$this->adminCategories->assign("videoCntInCatCatsHint", $content['videoCntInCatCatsHint']);
+		$this->adminCategories->assign("userCntSubscribedCatsHint", $content['userCntSubscribedCatsHint']);
+		$this->adminCategories->assign("clickUserCntCatsHint", $content['clickUserCntCatsHint']);
+		$this->adminCategories->assign("clickCntCatsHint", $content['clickCntCatsHint']);		
 		
 		$this->adminCategories->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
 		
@@ -77,6 +103,8 @@ class AdminCategories
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);
 		
+		if(isset($_GET["catGroupSortType"]))
+			$sortType = ($_GET["catGroupSortType"] == "" || $_GET["catGroupSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["catAzSortType"]))
 			$sortType = ($_GET["catAzSortType"] == "" || $_GET["catAzSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["catInfoAzSortType"]))
@@ -131,6 +159,7 @@ class AdminCategories
 		$this->adminCategories->assign("catInfoRuSortType", ($_GET["catInfoRuSortType"] == "" || $_GET["catInfoRuSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("videoQuestionSortType", ($_GET["videoQuestionSortType"] == "" || $_GET["videoQuestionSortType"] == "ASC")? 'DESC' : 'ASC');
 		
+		$this->adminCategories->assign("catGroupSortType", ($_GET["catGroupSortType"] == "" || $_GET["catGroupSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("updatedSortType", ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminCategories->assign("lastVideoAddedSortType", ($_GET["lastVideoAddedSortType"] == "" || $_GET["lastVideoAddedSortType"] == "ASC")? 'DESC' : 'ASC');

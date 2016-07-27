@@ -31,6 +31,15 @@ class AdminGuests
 		$this->adminGuests->assign("lnCommentCnt", $content['COMMENTCNT']);
 		$this->adminGuests->assign("lnSearchCnt", $content['SEARCHCNT']);
 		
+		$this->adminGuests->assign("entryDateGuestHint", $content['entryDateGuestHint']);
+		$this->adminGuests->assign("IPGuestHint", $content['IPGuestHint']);
+		$this->adminGuests->assign("deviceGuestHint", $content['deviceGuestHint']);
+		$this->adminGuests->assign("browserGuestHint", $content['browserGuestHint']);
+		$this->adminGuests->assign("videCntWatchedGuestHint", $content['videCntWatchedGuestHint']);
+		$this->adminGuests->assign("videoCntCommentedGuestHint", $content['videoCntCommentedGuestHint']);
+		$this->adminGuests->assign("commentCntGuestHint", $content['commentCntGuestHint']);
+		$this->adminGuests->assign("searchCntGuestHint", $content['searchCntGuestHint']);
+		
 		//echo "<pre>"; print_r($_POST); echo "</pre>";
 		if(isset($_POST) && count($_POST) > 0)
 		{

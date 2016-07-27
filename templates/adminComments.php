@@ -42,6 +42,27 @@ class AdminComments
 		$this->adminComments->assign("lnConfirmedById", $content['CONFIRMEDBYID']);
 		$this->adminComments->assign("lnConfirmedByIP", $content['CONFIRMEDBYIP']);
 		
+		$this->adminComments->assign("createdCommentsHint", $content['createdCommentsHint']);
+		$this->adminComments->assign("idCommentsHint", $content['idCommentsHint']);
+		$this->adminComments->assign("videoIdCommentsHint", $content['videoIdCommentsHint']);
+		$this->adminComments->assign("createdByIdCommentsHint", $content['createdByIdCommentsHint']);
+		$this->adminComments->assign("authorCommentsHint", $content['authorCommentsHint']);
+		$this->adminComments->assign("commentCommentsHint", $content['commentCommentsHint']);
+		$this->adminComments->assign("isConfirmedCommentsHint", $content['isConfirmedCommentsHint']);
+		$this->adminComments->assign("confirmerCommentsHint", $content['confirmerCommentsHint']);
+		$this->adminComments->assign("deleteCommentsHint", $content['deleteCommentsHint']);
+		$this->adminComments->assign("confirmCommentsHint", $content['confirmCommentsHint']);
+		$this->adminComments->assign("updatedCommentsHint", $content['updatedCommentsHint']);
+		$this->adminComments->assign("confirmDateCommentsHint", $content['confirmDateCommentsHint']);
+		$this->adminComments->assign("videoNameCommentsHint", $content['videoNameCommentsHint']);
+		$this->adminComments->assign("questionCommentsHint", $content['questionCommentsHint']);
+		$this->adminComments->assign("userIPCommentsHint", $content['userIPCommentsHint']);
+		$this->adminComments->assign("updatedByIdCommentsHint", $content['updatedByIdCommentsHint']);
+		$this->adminComments->assign("updatedByCommentsHint", $content['updatedByCommentsHint']);
+		$this->adminComments->assign("updatedByIPCommentsHint", $content['updatedByIPCommentsHint']);
+		$this->adminComments->assign("confirmedByIdCommentsHint", $content['confirmedByIdCommentsHint']);
+		$this->adminComments->assign("confirmedByIPCommentsHint", $content['confirmedByIPCommentsHint']);
+		
 		$this->adminComments->assign("hasConfirmAccess", $controller->access->authorized(16));
 		$this->adminComments->assign("hasDeleteAccess", $controller->access->authorized(27));
 		

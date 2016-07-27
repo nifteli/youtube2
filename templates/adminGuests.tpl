@@ -59,14 +59,14 @@ function submitForm(action)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=entryDate&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=IP&IPSortType={$IPSortType}')">{$lnIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=device&deviceSortType={$deviceSortType}')">{$lnDevice}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=browser&browserSortType={$browserSortType}')">{$lnBrowser}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=videCntWatched&videCntWatchedSortType={$videCntWatchedSortType}')">{$lnVideCntWatched}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=commentCnt&commentCntSortType={$commentCntSortType}')">{$lnCommentCnt}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$entryDateGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=entryDate&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$IPGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=IP&IPSortType={$IPSortType}')">{$lnIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deviceGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=device&deviceSortType={$deviceSortType}')">{$lnDevice}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$browserGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=browser&browserSortType={$browserSortType}')">{$lnBrowser}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videCntWatchedGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=videCntWatched&videCntWatchedSortType={$videCntWatchedSortType}')">{$lnVideCntWatched}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$commentCntGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=commentCnt&commentCntSortType={$commentCntSortType}')">{$lnCommentCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">

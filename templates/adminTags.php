@@ -35,6 +35,18 @@ class AdminTags
 		$this->adminTags->assign("lnUserCntClicked", $content['USERCNTCLICKED']);
 		$this->adminTags->assign("lnClickCnt", $content['CLICKCNT']);
 		
+		$this->adminTags->assign("langTagsHint", $content['langTagsHint']);
+		$this->adminTags->assign("nameTagsHint", $content['nameTagsHint']);
+		$this->adminTags->assign("lnNewTagTagsHint", $content['lnNewTagTagsHint']);
+		$this->adminTags->assign("deleteTagsHint", $content['deleteTagsHint']);
+		$this->adminTags->assign("createdTagsHint", $content['createdTagsHint']);
+		$this->adminTags->assign("createdByTagsHint", $content['createdByTagsHint']);
+		$this->adminTags->assign("updatedTagsHint", $content['updatedTagsHint']);
+		$this->adminTags->assign("updatedByTagsHint", $content['updatedByTagsHint']);
+		$this->adminTags->assign("videoCntTaggedTagsHint", $content['videoCntTaggedTagsHint']);
+		$this->adminTags->assign("userCntClickedTagsHint", $content['userCntClickedTagsHint']);
+		$this->adminTags->assign("clickCntTagsHint", $content['clickCntTagsHint']);
+		
 		$this->adminTags->assign("hasEditAccess", $controller->access->authorized(31));
 		$this->adminTags->assign("hasDeleteAccess", $controller->access->authorized(30));
 		

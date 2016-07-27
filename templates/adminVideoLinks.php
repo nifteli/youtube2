@@ -41,6 +41,35 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("exportSearches", $content['EXPORTSEARCHES']);
 		$this->adminVideoLinks->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		
+		$this->adminVideoLinks->assign("vaddedVidLinksHint", $content['vaddedVidLinksHint']);
+		$this->adminVideoLinks->assign("idVidLinksHint", $content['idVidLinksHint']);
+		$this->adminVideoLinks->assign("nameVidLinksHint", $content['nameVidLinksHint']);
+		$this->adminVideoLinks->assign("infoVidLinksHint", $content['infoVidLinksHint']);
+		$this->adminVideoLinks->assign("langVidLinksHint", $content['langVidLinksHint']);
+		$this->adminVideoLinks->assign("linkVidLinksHint", $content['linkVidLinksHint']);
+		$this->adminVideoLinks->assign("catNameVidLinksHint", $content['catNameVidLinksHint']);
+		$this->adminVideoLinks->assign("tagsVidLinksHint", $content['tagsVidLinksHint']);
+		$this->adminVideoLinks->assign("questionsVidLinksHint", $content['questionsVidLinksHint']);
+		$this->adminVideoLinks->assign("reportCountVidLinksHint", $content['reportCountVidLinksHint']);
+		$this->adminVideoLinks->assign("deleteVidLinksHint", $content['deleteVidLinksHint']);
+		$this->adminVideoLinks->assign("editVidLinksHint", $content['editVidLinksHint']);
+		$this->adminVideoLinks->assign("updatedVidLinksHint", $content['updatedVidLinksHint']);
+		$this->adminVideoLinks->assign("deletedVidLinksHint", $content['deletedVidLinksHint']);
+		$this->adminVideoLinks->assign("addedByIdVidLinksHint", $content['addedByIdVidLinksHint']);
+		$this->adminVideoLinks->assign("addedByIPVidLinksHint", $content['addedByIPVidLinksHint']);
+		$this->adminVideoLinks->assign("updatedByIdVidLinksHint", $content['updatedByIdVidLinksHint']);
+		$this->adminVideoLinks->assign("deletedByIdVidLinksHint", $content['deletedByIdVidLinksHint']);
+		$this->adminVideoLinks->assign("durationVidLinksHint", $content['durationVidLinksHint']);
+		$this->adminVideoLinks->assign("viewsVidLinksHint", $content['viewsVidLinksHint']);
+		$this->adminVideoLinks->assign("userCntCommentedVidLinksHint", $content['userCntCommentedVidLinksHint']);
+		$this->adminVideoLinks->assign("commentsVidLinksHint", $content['commentsVidLinksHint']);
+		$this->adminVideoLinks->assign("tagCountVidLinksHint", $content['tagCountVidLinksHint']);
+		$this->adminVideoLinks->assign("likesVidLinksHint", $content['likesVidLinksHint']);
+		$this->adminVideoLinks->assign("dislikesVidLinksHint", $content['dislikesVidLinksHint']);
+		$this->adminVideoLinks->assign("userReportedCntVidLinksHint", $content['userReportedCntVidLinksHint']);
+		$this->adminVideoLinks->assign("userCntAddedToFolderVidLinksHint", $content['userCntAddedToFolderVidLinksHint']);
+		$this->adminVideoLinks->assign("addedFolderCntVidLinksHint", $content['addedFolderCntVidLinksHint']);
+				
 		$this->adminVideoLinks->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->adminVideoLinks->assign("lnTags", $content['TAGS']);
 		$this->adminVideoLinks->assign("lnCategory", $content['CATEGORY']);

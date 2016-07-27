@@ -136,50 +136,50 @@ function showProfile(userId)
 					<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnRole}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$viewProfile}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$setUser}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdated}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeleted}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnFatherName}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnBirthDate}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnEmail}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnTelephone}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnNote}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnGender}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnLanguage}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnProfession}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnInterests}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnRegisteredByIp}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnRegDevice}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnRegBrowser}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnUpdateUserId}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeletedById}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnGetSiteNews}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnGetEmailOnComment}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnGetEmailAfterMyComment}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDeviceCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnBrowserCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnViewCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnLikeCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnDislikeCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCommentCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnReportCount}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntInFolder}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnFolderCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnTagClickCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnTagClicked}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCatClickCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnCatClicked}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnSubCatCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnSearchCnt}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$lnVideoCntCommented}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$userNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" title="{$lnRoleUsersHint}" >{$lnRole}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$viewProfileUsersHint}" >{$viewProfile}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$setUserUsersHint}" >{$setUser}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$deleteUsersHint}" >{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$fatherNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=fatherName&fatherNameSortType={$fatherNameSortType}')">{$lnFatherName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$birthDateUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=birthDate&birthDateSortType={$birthDateSortType}')">{$lnBirthDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$adminUsersUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=email&emailSortType={$emailSortType}')">{$lnEmail}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$telephoneUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=telephone&telephoneSortType={$telephoneSortType}')">{$lnTelephone}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$noteUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=note&noteSortType={$noteSortType}')">{$lnNote}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$genderUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=gender&genderSortType={$genderSortType}')">{$lnGender}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$languageUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=language&languageSortType={$languageSortType}')">{$lnLanguage}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$professionUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=profession&professionSortType={$professionSortType}')">{$lnProfession}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$interestsUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=interests&interestsSortType={$interestsSortType}')">{$lnInterests}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$registeredByIpUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=registeredByIp&registeredByIpSortType={$registeredByIpSortType}')">{$lnRegisteredByIp}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$regDeviceUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=regDevice&regDeviceSortType={$regDeviceSortType}')">{$lnRegDevice}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$regBrowserUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=regBrowser&regBrowserSortType={$regBrowserSortType}')">{$lnRegBrowser}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updateUserIdUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=updateUserId&updateUserIdSortType={$updateUserIdSortType}')">{$lnUpdateUserId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedByIdUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deletedById&deletedByIdSortType={$deletedByIdSortType}')">{$lnDeletedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$getSiteNewsUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=getSiteNews&getSiteNewsSortType={$getSiteNewsSortType}')">{$lnGetSiteNews}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$getEmailOnCommentUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=getEmailOnComment&getEmailOnCommentSortType={$getEmailOnCommentSortType}')">{$lnGetEmailOnComment}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$getEmailAfterMyCommentUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=getEmailAfterMyComment&getEmailAfterMyCommentSortType={$getEmailAfterMyCommentSortType}')">{$lnGetEmailAfterMyComment}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deviceCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deviceCount&deviceCountSortType={$deviceCountSortType}')">{$lnDeviceCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$browserCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=browserCount&browserCountSortType={$browserCountSortType}')">{$lnBrowserCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$viewCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=viewCount&viewCountSortType={$viewCountSortType}')">{$lnViewCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCount&videoCountSortType={$videoCountSortType}')">{$lnVideoCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$likeCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=likeCount&likeCountSortType={$likeCountSortType}')">{$lnLikeCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$dislikeCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=dislikeCount&dislikeCountSortType={$dislikeCountSortType}')">{$lnDislikeCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$commentCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=commentCount&commentCountSortType={$commentCountSortType}')">{$lnCommentCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$reportCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$lnReportCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntInFolderUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntInFolder&videoCntInFolderSortType={$videoCntInFolderSortType}')">{$lnVideoCntInFolder}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$folderCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=folderCnt&folderCntSortType={$folderCntSortType}')">{$lnFolderCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$tagClickCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=tagClickCnt&tagClickCntSortType={$tagClickCntSortType}')">{$lnTagClickCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$tagClickedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=tagClicked&tagClickedSortType={$tagClickedSortType}')">{$lnTagClicked}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClickCnt&catClickCntSortType={$catClickCntSortType}')">{$lnCatClickCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClicked&catClickedSortType={$catClickedSortType}')">{$lnCatClicked}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$subCatCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=subCatCnt&subCatCntSortType={$subCatCntSortType}')">{$lnSubCatCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
 					
 				</tr>
 				</thead>

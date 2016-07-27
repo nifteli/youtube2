@@ -25,6 +25,15 @@ class AdminFolders
 		$this->adminFolders->assign("editFolder",$content['EDITFOLDER']);
 		$this->adminFolders->assign("tags",$content['TAGS']);
 		//$this->adminFolders->assign("confirm", $content['CONFIRM']);
+
+		$this->adminFolders->assign("createdFolderHint",$content['createdFolderHint']);
+		$this->adminFolders->assign("idFolderHint",$content['idFolderHint']);
+		$this->adminFolders->assign("createdByIdFolderHint",$content['createdByIdFolderHint']);
+		$this->adminFolders->assign("authorFolderHint",$content['authorFolderHint']);
+		$this->adminFolders->assign("nameFolderHint",$content['nameFolderHint']);
+		$this->adminFolders->assign("tagsFolderHint",$content['tagsFolderHint']);
+		$this->adminFolders->assign("deleteFolderHint",$content['deleteFolderHint']);
+		$this->adminFolders->assign("editFolderHint",$content['editFolderHint']);
 		
 		$this->adminFolders->assign("lnCreated", $content['ADDDATE']);
 		$this->adminFolders->assign("lnId", $content['ID']);
@@ -61,7 +70,8 @@ class AdminFolders
 			$sortType = ($_GET["authorSortType"] == "" || $_GET["authorSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["nameSortType"]))
 			$sortType = ($_GET["nametSortType"] == "" || $_GET["nametSortType"] == "ASC")? 'DESC' : 'ASC';
-		
+		if(isset($_GET["tags"]))
+			$sortType = ($_GET["tags"] == "" || $_GET["tags"] == "ASC")? 'DESC' : 'ASC';
 		
 		
 		$this->adminFolders->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
@@ -69,6 +79,7 @@ class AdminFolders
 		$this->adminFolders->assign("authorIdSortType", ($_GET["authorIdSortType"] == "" || $_GET["authorIdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminFolders->assign("authorSortType", ($_GET["authorSortType"] == "" || $_GET["authorSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminFolders->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminFolders->assign("tags", ($_GET["tags"] == "" || $_GET["tags"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;

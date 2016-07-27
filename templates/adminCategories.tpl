@@ -85,32 +85,32 @@ function controlQuestionSelection(el,id)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" >{$lnCatGroup}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catAz&catAzSortType={$catAzSortType}')">{$lnCatAz}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoAz&catInfoAzSortType={$catInfoAzSortType}')">{$lnCatAzInfo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catEn&catEnSortType={$catEnSortType}')">{$lnCatEn}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoEn&catInfoEnSortType={$catInfoEnSortType}')">{$lnCatEnInfo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catRu&catRuSortType={$catRuSortType}')">{$lnCatRu}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoRu&catInfoRuSortType={$catInfoRuSortType}')">{$lnCatRuInfo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=questions&videoQuestionSortType={$videoQuestionSortType}')">{$lnQuestion}</a></th>
-					<th class="vertical-middle" style=" text-align:center" >{$pic}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$pic}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedById&deletedByIdSortType={$deletedByIdSortType}')">{$lnDeletedById}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedBy&deletedBySortType={$deletedBySortType}')">{$lnDeletedBy}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedByIP&deletedByIPSortType={$deletedByIPSortType}')">{$lnDeletedByIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=videoCntInCat&videoCntInCatSortType={$videoCntInCatSortType}')">{$lnVideoCntInCat}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=userCntSubscribed&userCntSubscribedSortType={$userCntSubscribedSortType}')">{$lnUserCntSubscribed}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickUserCnt&clickUserCntSortType={$clickUserCntSortType}')">{$lnClickUserCnt}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catGroupCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catGroup&catGroupSortType={$catGroupSortType}')">{$lnCatGroup}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catAzCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catAz&catAzSortType={$catAzSortType}')">{$lnCatAz}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoAzCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoAz&catInfoAzSortType={$catInfoAzSortType}')">{$lnCatAzInfo}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catEnCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catEn&catEnSortType={$catEnSortType}')">{$lnCatEn}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoEnCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoEn&catInfoEnSortType={$catInfoEnSortType}')">{$lnCatEnInfo}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catRuCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catRu&catRuSortType={$catRuSortType}')">{$lnCatRu}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoRuCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoRu&catInfoRuSortType={$catInfoRuSortType}')">{$lnCatRuInfo}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=questions&videoQuestionSortType={$videoQuestionSortType}')">{$lnQuestion}</a></th>
+					<th class="vertical-middle" style=" text-align:center"  title="{$picCatsHint}">{$pic}</th>
+					<th class="vertical-middle" style=" text-align:center"  title="{$picCatsHint}">{$pic}</th>
+					<th class="vertical-middle" style=" text-align:center"  title="{$deleteCatsHint}">{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$lastVideoAddedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIPCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedByIdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedById&deletedByIdSortType={$deletedByIdSortType}')">{$lnDeletedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedByCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedBy&deletedBySortType={$deletedBySortType}')">{$lnDeletedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedByIPCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deletedByIP&deletedByIPSortType={$deletedByIPSortType}')">{$lnDeletedByIP}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntInCatCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=videoCntInCat&videoCntInCatSortType={$videoCntInCatSortType}')">{$lnVideoCntInCat}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$userCntSubscribedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=userCntSubscribed&userCntSubscribedSortType={$userCntSubscribedSortType}')">{$lnUserCntSubscribed}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$clickUserCntCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickUserCnt&clickUserCntSortType={$clickUserCntSortType}')">{$lnClickUserCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$clickCntCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">

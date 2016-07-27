@@ -73,14 +73,14 @@ function setFolderName(id,folderName,tags)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=createdById&authorIdSortType={$authorIdSortType}')">{$lnAuthorId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=author&authorSortType={$authorSortType}')">{$lnAuthor}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=name&nameSortType={$nameSortType}')">{$lnTags}</a></th>
-					<th class="vertical-middle" style=" text-align:center" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" >{$edit}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIdFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=createdById&authorIdSortType={$authorIdSortType}')">{$lnAuthorId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$authorFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=author&authorSortType={$authorSortType}')">{$lnAuthor}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$tagsFolderHint}" href="javascript:{}" onclick="submitForm('?page=adminFolders&sortBy=tags&tagsSortType={$tagsSortType}')">{$lnTags}</a></th>
+					<th class="vertical-middle" style=" text-align:center" title="{$deleteFolderHint}" >{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$editFolderHint}" >{$edit}</th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
