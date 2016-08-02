@@ -473,7 +473,10 @@ $content['updatedByTagsHint']="updatedByTagsHint";
 $content['videoCntTaggedTagsHint']="videoCntTaggedTagsHint";
 $content['userCntClickedTagsHint']="userCntClickedTagsHint";
 $content['clickCntTagsHint']="clickCntTagsHint";
-
+$content['updatedByIdTagsHint']="updatedByIdTagsHint";
+$content['updatedByIPTagsHint']="updatedByIPTagsHint";
+$content['createdByIdTagsHint']="createdByIdTagsHint";
+$content['createdByIPTagsHint']="createdByIPTagsHint";
 //End Admin Tags
 
 

@@ -133,18 +133,20 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 		return;
 	}
 
-	$fields = array("catInfoAz" => $content['CATAZ'],
-					"catInfoAz" => $content['CATINFOAZ'],
-					"catEn" => $content['CATEN'],
-					"catInfoEn" => $content['CATINFOEN'],
-					"catRu" => $content['CATRU'],
-					"catInfoRu" => $content['CATINFORU'],
-					"catQuestion" => $content['CATQUESTION'],
+	$fields = array(
 					"created" => $content['LASTVIDEOADDED'],
 					"updated" => $content['UPDATED'],
 					"lastVideoAdded" => $content['LASTVIDEOADDED'],
 					"deleted" => $content['DELETED'],
 					"id" => $content['ID'],
+					"catQuestion" => $content['CATQUESTION'],
+					"catGroup" => $content['CATGROUP'],
+					"catInfoAz" => $content['CATAZ'],
+					"catInfoAz" => $content['CATINFOAZ'],
+					"catEn" => $content['CATEN'],
+					"catInfoEn" => $content['CATINFOEN'],
+					"catRu" => $content['CATRU'],
+					"catInfoRu" => $content['CATINFORU'],
 					"createdById" => $content['CREATEDBYID'],
 					"createdBy" => $content['CREATEDBY'],
 					"createdByIP" => $content['CREATEDBYIP'],

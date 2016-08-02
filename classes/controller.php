@@ -854,6 +854,10 @@ class Controller //extends MySQL
 		$qry .= " and t.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 		if(isset($post["createdBy"]) && $post["createdBy"] != "")
 			$qry .= " and u1.userName like '%" . trim($post["createdBy"]) . "%'";
+		if(isset($post["createdById"]) && $post["createdById"] != "")
+			$qry .= " and createdById = " . trim($post["createdById"]);
+		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
+			$qry .= " and createdByIP like '%" . trim($post["createdByIP"]) . "%'";
 		$beginDate="00-00-0000";
 		$endDate="01-01-9999";
 		if(isset($post["updated"]) && $post["updated"] != "")
@@ -863,6 +867,10 @@ class Controller //extends MySQL
 		$qry .= " and updated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 		if(isset($post["updatedBy"]) && $post["updatedBy"] != "")
 			$qry .= " and u2.userName like '%" . trim($post["updatedBy"]) . "%'";
+		if(isset($post["updatedById"]) && $post["updatedById"] != "")
+			$qry .= " and updatedById = " . trim($post["updatedById"]);
+		if(isset($post["updatedByIP"]) && $post["updatedByIP"] != "")
+			$qry .= " and updatedByIP like '%" . trim($post["updatedByIP"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;

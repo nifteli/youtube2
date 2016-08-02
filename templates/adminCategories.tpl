@@ -276,7 +276,7 @@ $( "#deletedTill" ).datepicker(
 					<td class="vertical-middle" style="overflow: hidden;">
 						<input style="width:100%" name="catImgArr[{$categories[sec1].id}]" id="catImgArr{$categories[sec1].id}" type="file">
 					</td>
-					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" >
 						<img src="{$categories[sec1].img}" width="15" height="15" alt=""/>
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].createdById}">{$categories[sec1].createdById}</td>

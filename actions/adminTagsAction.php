@@ -43,7 +43,9 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'substitute' && count($_POS
 			$db->where("id=" . $key);
 			$res = $db->update("tags", array("name"=>trim($tag),
 											  "updated"=>date("Y-m-d H:i:s"),
-											  "updatedById"=>$access->userId));
+											  "updatedById"=>$access->userId,
+											  "updatedByIP"=>$_SERVER["REMOTE_ADDR"]
+											  ));
 						
 			if(!$res)
 			{
@@ -82,12 +84,17 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 		return;
 	}
 
-	$fields = array("name" => $content['TAG'],
-					"lang" => $content['LANGUAGE'],
+	$fields = array(
 					"created" => $content['DATECREATED'],
+					"lang" => $content['LANGUAGE'],
+					"name" => $content['TAG'],
+					"createdById" => $content['CREATEDBYID'],
 					"createdBy" => $content['CREATEDBY'],
+					"createdByIP" => $content['CREATEDBYIP'],
 					"updated" => $content['DATEUPDATED'],
+					"updatedById" => $content['UPDATEDBYID'],
 					"updatedBy" => $content['UPDATEDBY'],
+					"updatedByIP" => $content['UPDATEDBYIP'],
 					"videoCntTagged" => $content['VIDEOCNTTAGGED'],
 					"userCntClicked" => $content['USERCNTCLICKED'],
 					"clickCnt" => $content['CLICKCNT']

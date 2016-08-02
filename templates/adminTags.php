@@ -28,9 +28,13 @@ class AdminTags
 		$this->adminTags->assign("lnName", $content['TAG']);
 		$this->adminTags->assign("lnNewTag", $content['NEWTAG']);
 		$this->adminTags->assign("lnCreated", $content['DATECREATED']);
+		$this->adminTags->assign("lnCreatedById", $content['CREATEDBYID']);
 		$this->adminTags->assign("lnCreatedBy", $content['CREATEDBY']);
+		$this->adminTags->assign("lnCreatedByIP", $content['CREATEDBYIP']);
 		$this->adminTags->assign("lnUpdated", $content['DATEUPDATED']);
+		$this->adminTags->assign("lnUpdatedById", $content['UPDATEDBYID']);
 		$this->adminTags->assign("lnUpdatedBy", $content['UPDATEDBY']);
+		$this->adminTags->assign("lnUpdatedByIP", $content['UPDATEDBYIP']);
 		$this->adminTags->assign("lnVideoCntTagged", $content['VIDEOCNTTAGGED']);
 		$this->adminTags->assign("lnUserCntClicked", $content['USERCNTCLICKED']);
 		$this->adminTags->assign("lnClickCnt", $content['CLICKCNT']);
@@ -40,9 +44,13 @@ class AdminTags
 		$this->adminTags->assign("lnNewTagTagsHint", $content['lnNewTagTagsHint']);
 		$this->adminTags->assign("deleteTagsHint", $content['deleteTagsHint']);
 		$this->adminTags->assign("createdTagsHint", $content['createdTagsHint']);
+		$this->adminTags->assign("createdByIdTagsHint", $content['createdByIdTagsHint']);
 		$this->adminTags->assign("createdByTagsHint", $content['createdByTagsHint']);
+		$this->adminTags->assign("createdByIPTagsHint", $content['createdByIPTagsHint']);
 		$this->adminTags->assign("updatedTagsHint", $content['updatedTagsHint']);
+		$this->adminTags->assign("updatedByIdTagsHint", $content['updatedByIdTagsHint']);
 		$this->adminTags->assign("updatedByTagsHint", $content['updatedByTagsHint']);
+		$this->adminTags->assign("updatedByIPTagsHint", $content['updatedByIPTagsHint']);
 		$this->adminTags->assign("videoCntTaggedTagsHint", $content['videoCntTaggedTagsHint']);
 		$this->adminTags->assign("userCntClickedTagsHint", $content['userCntClickedTagsHint']);
 		$this->adminTags->assign("clickCntTagsHint", $content['clickCntTagsHint']);
@@ -59,8 +67,12 @@ class AdminTags
 			$this->adminTags->assign("createdTillVal", $_POST["createdTill"]);
 			$this->adminTags->assign("updatedVal", $_POST["updated"]);
 			$this->adminTags->assign("updatedTillVal", $_POST["updatedTill"]);
+			$this->adminTags->assign("updatedByIdVal", $_POST["updatedById"]);
 			$this->adminTags->assign("updatedByVal", $_POST["updatedBy"]);
+			$this->adminTags->assign("updatedByIPVal", $_POST["updatedByIP"]);
+			$this->adminTags->assign("createdByIdVal", $_POST["createdById"]);
 			$this->adminTags->assign("createdByVal", $_POST["createdBy"]);
+			$this->adminTags->assign("createdByIPVal", $_POST["createdByIP"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);
@@ -72,10 +84,18 @@ class AdminTags
 			$sortType = ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["createdBySortType"]))
 			$sortType = ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdByIdSortType"]))
+			$sortType = ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["createdByIPSortType"]))
+			$sortType = ($_GET["createdByIPSortType"] == "" || $_GET["createdByIPSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["updatedSortType"]))
 			$sortType = ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedByIdSortType"]))
+			$sortType = ($_GET["updatedByIdSortType"] == "" || $_GET["updatedByIdSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["updatedBySortType"]))
 			$sortType = ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["updatedByIPSortType"]))
+			$sortType = ($_GET["updatedByIPSortType"] == "" || $_GET["updatedByIPSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["videoCntTaggedSortType"]))
 			$sortType = ($_GET["videoCntTaggedSortType"] == "" || $_GET["videoCntTaggedSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["userCntClickedSortType"]))
@@ -83,14 +103,17 @@ class AdminTags
 		if(isset($_GET["clickCntSortType"]))
 			$sortType = ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC';
 		
-		
-		
+			
 		$this->adminTags->assign("langSortType", ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("createdByIdSortType", ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("createdBySortType", ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("createdByIPSortType", ($_GET["createdByIPSortType"] == "" || $_GET["createdByIPSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("updatedSortType", ($_GET["updatedSortType"] == "" || $_GET["updatedSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("updatedByIdSortType", ($_GET["updatedByIdSortType"] == "" || $_GET["updatedByIdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("updatedBySortType", ($_GET["updatedBySortType"] == "" || $_GET["updatedBySortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("updatedByIPSortType", ($_GET["updatedByIPSortType"] == "" || $_GET["updatedByIPSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("videoCntTaggedSortType", ($_GET["videoCntTaggedSortType"] == "" || $_GET["videoCntTaggedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("userCntClickedSortType", ($_GET["userCntClickedSortType"] == "" || $_GET["userCntClickedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');

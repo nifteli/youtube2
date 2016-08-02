@@ -65,20 +65,24 @@ function submitForm(action)
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
-		<div class="table-responsive" style="overflow-x: auto; width:2500px">
+		<div class="table-responsive" style="overflow-x: auto; width:2100px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
-					<col style="width: 150px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
 					
 				</colgroup>
 				<thead>
@@ -86,14 +90,18 @@ function submitForm(action)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
+					<th class="vertical-middle" style=" text-align:center"  title="$deleteTagsHint">{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$createdTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$langTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$nameTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center"  title="$lnNewTagTagsHint">{$lnNewTag}</th>
-					<th class="vertical-middle" style=" text-align:center"  title="$deleteTagsHint">{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="$createdTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedById&updatedByIdSortType={$updatedByIdSortType}')">{$lnUpdatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedBy&updatedBySortType={$updatedBySortType}')">{$lnUpdatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByIPTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedByIP&updatedByIPSortType={$updatedByIPSortType}')">{$lnUpdatedByIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$videoCntTaggedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=videoCntTagged&videoCntTaggedSortType={$videoCntTaggedSortType}')">{$lnVideoCntTagged}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$userCntClickedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=userCntClicked&userCntClickedSortType={$userCntClickedSortType}')">{$lnUserCntClicked}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$clickCntTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
@@ -102,6 +110,11 @@ function submitForm(action)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
+					<td class="vertical-middle"></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
+					</td>
 					<td class="vertical-middle">
 						<select name="languageId" id="languageId"  class="form-control">
 							<option value="">{$lnLang}</option>
@@ -111,17 +124,17 @@ function submitForm(action)
 						</select>
 					</td>
 					<td class="vertical-middle"><input class="form-control"  name="name" id="name" type="text" value="{$nameVal}" /></td>
-					<td class="vertical-middle" colspan=2></td>
-					<td class="vertical-middle">
-						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
-						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
-					</td>
+					<td class="vertical-middle"></td>
+					<td class="vertical-middle"><input class="form-control"  name="createdById" id="createdById" type="text" value="{$createdByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" /></td>
 					<td class="vertical-middle">
 						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
 						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
 					</td>
+					<td class="vertical-middle"><input class="form-control"  name="updatedById" id="updatedById" type="text" value="{$updatedByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedBy" id="updatedBy" type="text" value="{$updatedByVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="updatedByIP" id="updatedByIP" type="text" value="{$updatedByIPVal}" /></td>
 					<td class="vertical-middle" style="text-align: left;" colspan=3>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
@@ -133,18 +146,22 @@ function submitForm(action)
 				<tr>
 					<input type="hidden" name="langId[{$tags[sec1].id}]" id="langId[{$tags[sec1].id}]" value="{$tags[sec1].langId}">
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].lang}">{$tags[sec1].lang}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$tags[sec1].name}">{$tags[sec1].name}</td>
-					<td class="vertical-middle" style="overflow: hidden;"><input style="width:100%" name="newTag[{$tags[sec1].id}]" id="newTag{$tags[sec1].id}" type="text"></td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
 						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].created}">{$tags[sec1].created}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].lang}">{$tags[sec1].lang}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$tags[sec1].name}">{$tags[sec1].name}</td>
+					<td class="vertical-middle" style="overflow: hidden;"><input style="width:100%" name="newTag[{$tags[sec1].id}]" id="newTag{$tags[sec1].id}" type="text"></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdById}">{$tags[sec1].createdById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdBy}">{$tags[sec1].createdBy}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdByIP}">{$tags[sec1].createdByIP}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedById}">{$tags[sec1].updatedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedBy}">{$tags[sec1].updatedBy}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedByIP}">{$tags[sec1].updatedByIP}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].videoCntTagged}"><a href="?page=adminDetails&s=tags&q=1&tagId={$tags[sec1].id}&title={$lnVideoCntTagged}">{$tags[sec1].videoCntTagged}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].userCntClicked}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnUserCntClicked}">{$tags[sec1].userCntClicked}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].clickCnt}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnClickCnt}">{$tags[sec1].clickCnt}</a></td>

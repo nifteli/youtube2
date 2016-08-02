@@ -11,6 +11,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	}
 
 	$fields = array("entryDate" => $content['ENTRYDATE'],
+					"id" => $content['ID'],
 					"IP" => $content['IP'],
 					"device" => $content['DEVICE'],
 					"browser" => $content['BROWSER'],

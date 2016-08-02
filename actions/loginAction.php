@@ -80,7 +80,8 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 				$id = $db->insert("tags", array("name"=>trim($tag),
 										"langId"=>$langIds[$_SESSION["lang"]],
 										"created"=>date("Y-m-d H:i:s"),
-										"createdById"=>$access->userId));
+										"createdById"=>$access->userId,
+										"createdByIP"=>$_SERVER["REMOTE_ADDR"]));
 			if($id)
 			{
 				
@@ -186,7 +187,8 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 				$id = $db->insert("tags", array("name"=>trim($tag),
 										"langId"=>$langIds[$_SESSION["lang"]],
 										"created"=>date("Y-m-d H:i:s"),
-										"createdById"=>$access->userId));
+										"createdById"=>$access->userId,
+										"createdByIP"=>$_SERVER["REMOTE_ADDR"]));
 			if($id)
 			{
 				$id = $db->insert("foldertags", array("tagId"=>$id,

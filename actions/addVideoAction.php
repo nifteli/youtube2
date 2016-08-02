@@ -165,7 +165,8 @@ if ($_GET["action"]=="add")
 						$id = $db->insert("tags", array("name"=>trim($tag),
 												"langId"=>$langIds[$_SESSION["lang"]],
 												"created"=>date("Y-m-d H:i:s"),
-												"createdById"=>$access->userId));
+												"createdById"=>$access->userId,
+												"createdByIP"=>$_SERVER["REMOTE_ADDR"]));
 					if($id)
 					{
 						$id = $db->insert("videotags", array("tagId"=>$id,
