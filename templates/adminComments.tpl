@@ -17,6 +17,38 @@ $( "#createdTill" ).datepicker(
 	},
 	$.datepicker.regional["{$lang}"]
 );
+$( "#updated" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updatedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#confirmDate" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#confirmDateTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
 //$( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 //$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
@@ -55,8 +87,8 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 130px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
 					<col style="width: 170px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -106,7 +138,22 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control" name="comment" id="comment" type="text" value="{$commentVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="confirmed" id="confirmed" type="text" value="{$confirmedVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="confirmer" id="confirmer" type="text" value="{$confirmerVal}"/></td>
-					<td class="vertical-middle" colspan=12 style="text-align: left;">
+					<td class="vertical-middle" colspan=2></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="confirmDate" id="confirmDate" type="text" value="{$confirmDateVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="confirmDateTill" id="confirmDateTill" type="text" value="{$confirmDateTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle"><input class="form-control" name="videoName" id="videoName" type="text" value="{$videoNameVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="question" id="question" type="text" value="{$questionVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="userIP" id="userIP" type="text" value="{$userIPVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="updatedById" id="updatedById" type="text" value="{$updatedByIdVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="updatedBy" id="updatedBy" type="text" value="{$updatedByVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="updatedByIP" id="updatedByIP" type="text" value="{$updatedByIPVal}"/></td>
+					<td class="vertical-middle" colspan=2 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>

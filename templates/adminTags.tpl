@@ -1,4 +1,40 @@
 <script>
+$(function() {
+$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#created" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#createdTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updated" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updatedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+});
+
 function submitForm(action)
 {
 	if(action=='#') return;
@@ -75,8 +111,18 @@ function submitForm(action)
 						</select>
 					</td>
 					<td class="vertical-middle"><input class="form-control"  name="name" id="name" type="text" value="{$nameVal}" /></td>
-					<td class="vertical-middle"></td>
-					<td class="vertical-middle" style="text-align: left;" colspan=8>
+					<td class="vertical-middle" colspan=2></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle"><input class="form-control"  name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle"><input class="form-control"  name="updatedBy" id="updatedBy" type="text" value="{$updatedByVal}" /></td>
+					<td class="vertical-middle" style="text-align: left;" colspan=3>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>

@@ -29,7 +29,10 @@ if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_PO
 	$continue = true;
 	$db->startTransaction();
 	$db->where("id=".$_POST["folderId"]);
-	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
+	$res = $db->update("folders",array("name"=>trim($_POST["folderName"]),
+										"updated"=>date("Y-m-d H:i:s"),
+										"updatedById"=>$access->userId,
+										"updatedByIP"=>$_SERVER['REMOTE_ADDR']));
 	if($res)
 	{
 		$db->rawQuery("delete from foldertags where folderId=".$_POST["folderId"]);
@@ -179,16 +182,24 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 		return;
 	}
 
-	$fields = array("id" => $content['ID'],
-					"name" => $content['FOLDERNAME'],
-					"createdById" => $content['AUTHORID'],
-					"createdByIP" => $content['AUTHORIP'],
-					"createdDate" => $content['ADDDATE'],
+	$fields = array("createdDate" => $content['ADDDATE'],
 					"updatedDate" => $content['UPDATED'],
+					"lastVideoAddedDate" => $content['LASTVIDEOADDED'],
+					"deletedDate" => $content['DELETED'],
+					"id" => $content['ID'],
+					"name" => $content['FOLDERNAME'],
+					"tags" => $content['TAGS'],
+					"createdById" => $content['AUTHORID'],
+					"athor" => $content['AUTHOR'],
+					"createdByIP" => $content['AUTHORIP'],
 					"updatedById" => $content['UPDATEDBYID'],
 					"updatedByIP" => $content['UPDATEDBYIP'],
 					"updatedBy" => $content['UPDATEDBY'],
-					"athor" => $content['AUTHOR']
+					"deletedById" => $content['DELETEDBYID'],
+					"deletedBy" => $content['DELETEDBY'],
+					"deletedByIP" => $content['DELETEDBYIP'],
+					"tagCnt" => $content['lnTagCnt'],
+					"videoCnt" => $content['lnVideoCnt']
 					);
 	$links = $controller->getFolders(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

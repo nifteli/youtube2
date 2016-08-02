@@ -1,10 +1,13 @@
 <?php
-$result="success";
+
 //echo "<pre>"; print_r($_POST); print_r($_FILES); echo "</pre>";//return;
 if ($_GET["action"]=="filter" && $_POST["action"] == 'edit')
 {
+	$result="";
+	//echo "<br><br><br>here";
 	////////////
 	$uploads_dir =  $appDirectory .$catImgPath;
+	if(count($_FILES["catImgArr"]["error"]) > 0)
 	foreach ($_FILES["catImgArr"]["error"] as $key => $error) {
 		if ($error == UPLOAD_ERR_OK) {
 			$tmp_name = $_FILES["catImgArr"]["tmp_name"][$key];
@@ -18,6 +21,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'edit')
 	
 	//echo "<pre>"; print_r($_FILES); echo "</pre>";//return;
 	$db->startTransaction();
+	if(count($_POST["catAzArr"]) > 0)
 	foreach($_POST["catAzArr"] as $id=>$data)
 	{
 		$upFileName = basename($_FILES["catImgArr"]["name"][$id]);
@@ -72,6 +76,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'edit')
 
 if ($_GET["action"]=="addCat")
 {
+	$result="success";
 	if(!$access->authorized(44))
 	{
 		$result = "error";

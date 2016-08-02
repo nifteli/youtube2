@@ -54,7 +54,13 @@ class AdminTags
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminTags->assign("languageIdVal", $_POST["languageId"]);
+			$this->adminTags->assign("createdVal", $_POST["created"]);
 			$this->adminTags->assign("nameVal", $_POST["name"]);
+			$this->adminTags->assign("createdTillVal", $_POST["createdTill"]);
+			$this->adminTags->assign("updatedVal", $_POST["updated"]);
+			$this->adminTags->assign("updatedTillVal", $_POST["updatedTill"]);
+			$this->adminTags->assign("updatedByVal", $_POST["updatedBy"]);
+			$this->adminTags->assign("createdByVal", $_POST["createdBy"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

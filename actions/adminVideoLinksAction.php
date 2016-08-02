@@ -400,24 +400,24 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 		$messages['noaccess'] = $content["INSUFFACCESS"];
 		return;
 	}
-	$fields = array("id" => $content['ID'],
+	$fields = array(
+					"added" => $content['ADDDATE'],
+					"updated" => $content['UPDATED'],
+					"deleted" => $content['DATEDELETED'],	
+					"id" => $content['ID'],
+					"link" => $content['VIDEOLINK'],
+					"lang" => $content['LANGUAGE'],
+					"questions" => $content['VIDEOQUESTION'],
+					"catName" => $content['CATEGORY'],
 					"name" => $content['VIDEONAME'],
 					"info" => $content['INFORMATION'],
-					"questions" => $content['VIDEOQUESTION'],
-					"added" => $content['ADDDATE'],
-					"lang" => $content['LANGUAGE'],
-					"link" => $content['VIDEOLINK'],
-					"addedBy" => $content['ADDEDBY'],
 					"tags" => $content['TAGS'],
-					"catName" => $content['CATEGORY'],
+					"addedById" => $content['CREATEDBYID'],
+					"addedBy" => $content['ADDEDBY'],
 					"addedByIP" => $content['ADDEDBYIP'],
-					"updated" => $content['UPDATED'],
-					"duration" => $content['DURATION'],
-					"reportCount" => $content['REPORTCOUNT'],	
-					"deleted" => $content['DATEDELETED'],	
-					"addedById" => $content['CREATEDBYID'],	
 					"updatedById" => $content['UPDATEDBYID'],	
 					"deletedById" => $content['DELETEDDBYID'],	
+					"duration" => $content['DURATION'],
 					"views" => $content['VIEWCNT'],	
 					"userCntCommented" => $content['USERCNTCOMMENTED'],	
 					"comments" => $content['COMMENTCNT'],	
@@ -425,8 +425,9 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					"likes" => $content['LIKESCNT'],
 					"dislikes" => $content['DISLIKESCNT'],
 					"userReportedCnt" => $content['USERREPORTEDCNT'],
+					"reportCount" => $content['REPORTCOUNT'],	
+					"addedFolderCnt" => $content['ADDEDFOLDERCNT'],
 					"userCntAddedToFolder" => $content['USERCNTADDEDTOFOLDER'],
-					"addedFolderCnt" => $content['ADDEDFOLDERCNT']
 					);
 	$links = $controller->getVideoLinks(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

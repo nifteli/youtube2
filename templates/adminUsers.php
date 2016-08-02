@@ -127,8 +127,14 @@ class AdminUsers
 		$this->adminUsers->assign("hasViewProfileAccess", $controller->access->authorized(2));
 		$this->adminUsers->assign("hasSetUserAccess", $controller->access->authorized(34));
 		$this->adminUsers->assign("roles", $this->getRoles($controller));
+		$this->adminUsers->assign("langs", $controller->getLanguages());
+		$this->adminUsers->assign("language", $content["LANGUAGE"]);
+		$this->adminUsers->assign("gender", $content["GENDER"]);
+		$this->adminUsers->assign("male", $content["MALE"]);
+		$this->adminUsers->assign("female", $content["FEMALE"]);
 		
-		//echo "<pre>"; print_r($_POST); echo "</pre>";
+		//echo "<pre>"; print_r($_POST["roleIdFlt"]); echo "</pre>";
+		$this->adminUsers->assign("roleIdFltVal", "-1");
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminUsers->assign("createdVal", $_POST["created"]);
@@ -136,6 +142,26 @@ class AdminUsers
 			$this->adminUsers->assign("idVal", $_POST["id"]);
 			$this->adminUsers->assign("userNameVal", $_POST["userName"]);
 			$this->adminUsers->assign("nameVal", $_POST["name"]);
+			if($_POST["roleIdFlt"] >-1)
+				$this->adminUsers->assign("roleIdFltVal", $_POST["roleIdFlt"]);
+
+			$this->adminUsers->assign("updatedDateVal", $_POST["updatedDate"]);
+			$this->adminUsers->assign("updatedDateTillVal", $_POST["updatedDateTill"]);
+			$this->adminUsers->assign("deletedDateVal", $_POST["deletedDate"]);
+			$this->adminUsers->assign("deletedDateTillVal", $_POST["deletedDateTill"]);
+			$this->adminUsers->assign("fatherNameVal", $_POST["fatherName"]);
+			$this->adminUsers->assign("birthDateVal", $_POST["birthDate"]);
+			$this->adminUsers->assign("birthDateTillVal", $_POST["birthDateTill"]);
+			$this->adminUsers->assign("emailVal", $_POST["email"]);
+			$this->adminUsers->assign("phoneNumberVal", $_POST["phoneNumber"]);
+			$this->adminUsers->assign("notesVal", $_POST["notes"]);
+			$this->adminUsers->assign("genderVal", $_POST["gender"]);
+			$this->adminUsers->assign("langIdVal", $_POST["langId"]);
+			$this->adminUsers->assign("professionVal", $_POST["profession"]);
+			$this->adminUsers->assign("interestsVal", $_POST["interests"]);
+			$this->adminUsers->assign("registeredByIPVal", $_POST["registeredByIP"]);
+			$this->adminUsers->assign("regDeviceVal", $_POST["regDevice"]);
+			$this->adminUsers->assign("regBrowserVal", $_POST["regBrowser"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

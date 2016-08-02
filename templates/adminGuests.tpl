@@ -46,6 +46,7 @@ function submitForm(action)
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 300px; overflow: hidden;"/>
@@ -60,6 +61,7 @@ function submitForm(action)
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$entryDateGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=entryDate&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$IPGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=IP&IPSortType={$IPSortType}')">{$lnIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$deviceGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=device&deviceSortType={$deviceSortType}')">{$lnDevice}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$browserGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=browser&browserSortType={$browserSortType}')">{$lnBrowser}</a></th>
@@ -75,6 +77,7 @@ function submitForm(action)
 						<input class="form-control" name="entryDate" id="entryDate" type="text" value="{$entryDateVal}" style="width:90px;display:initial"/>
 						<input class="form-control" name="entryDateTill" id="entryDateTill" type="text" value="{$entryDateTillVal}" style="width:90px;display:initial"/>
 					</td>
+					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="IP" id="IP" type="text" value="{$IPVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="device" id="device" type="text" value="{$deviceVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="browser" id="browser" type="text" value="{$browserVal}" /></td>
@@ -92,6 +95,7 @@ function submitForm(action)
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$guests[sec1].entryDate}">{$guests[sec1].entryDate}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].id}">{$guests[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].IP}">{$guests[sec1].IP}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].device}">{$guests[sec1].device}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$guests[sec1].browser}">{$guests[sec1].browser}</td>

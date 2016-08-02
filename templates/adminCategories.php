@@ -99,6 +99,21 @@ class AdminCategories
 			$this->adminCategories->assign("catInfoEnVal", $_POST["catInfoEn"]);
 			$this->adminCategories->assign("catRuVal", $_POST["catRu"]);
 			$this->adminCategories->assign("catInfoRuVal", $_POST["catInfoRu"]);
+			
+			$this->adminCategories->assign("createdVal", $_POST["created"]);
+			$this->adminCategories->assign("createdTillVal", $_POST["createdTill"]);
+			$this->adminCategories->assign("updatedVal", $_POST["updated"]);
+			$this->adminCategories->assign("updatedTillVal", $_POST["updatedTill"]);
+			$this->adminCategories->assign("lastVideoAddedVal", $_POST["lastVideoAdded"]);
+			$this->adminCategories->assign("lastVideoAddedTillVal", $_POST["lastVideoAddedTill"]);
+			$this->adminCategories->assign("deletedVal", $_POST["deleted"]);
+			$this->adminCategories->assign("deletedTillVal", $_POST["deletedTill"]);
+			$this->adminCategories->assign("idVal", $_POST["id"]);
+			$this->adminCategories->assign("createdByIdVal", $_POST["createdById"]);
+			$this->adminCategories->assign("createdByVal", $_POST["createdBy"]);
+			$this->adminCategories->assign("createdByIPVal", $_POST["createdByIP"]);
+			$this->adminCategories->assign("deletedByIdVal", $_POST["deletedById"]);
+			$this->adminCategories->assign("deletedByIPVal", $_POST["deletedByIP"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

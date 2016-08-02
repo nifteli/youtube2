@@ -161,9 +161,12 @@ if($_GET["action"]=="add2Folder")
 												  "videoId"=>trim($_GET["id"]),
 												  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
 												  "added"=>date("Y-m-d H:i:s")));
-		if($db->count > 0) 
+		if($db->count > 0)
+		{
+			$db->where("id=".trim($_POST["folderId"]));
+			$db->update("folders",array("lastVideoAddedById"=>$access->userId,"lastVideoAdded"=>date("Y-m-d H:i:s")));
 			$okMessage = $content["ADDEDTOFOLDER"];
-		
+		}
 	}
 	if($_GET["from"] == "main")
 	{

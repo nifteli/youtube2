@@ -59,10 +59,10 @@ if ($_GET["action"]=="sendMail")
 		$messages["success"] = $content["MAILNOTSENT"];
 	
 }
-
+//echo  "<br><br><br><pre>";print_r($_POST);echo  "</pre>";
 if ($_GET["action"]=="set" && $_POST["action"] == "saveRoles")
-{
-	$result = "success";
+{ 
+	$result = "";
 	$messages = array();
 	if(!$access->authorized(39))
 	{
@@ -70,7 +70,7 @@ if ($_GET["action"]=="set" && $_POST["action"] == "saveRoles")
 		$messages['noaccess'] = $content["INSUFFACCESS"];
 		return;
 	}
-	
+	if(count($_POST["roleId"]) >0)
 	foreach ($_POST["roleId"] as $key=>$value)
 	{
 		if(trim($value) != "")
@@ -82,8 +82,10 @@ if ($_GET["action"]=="set" && $_POST["action"] == "saveRoles")
 				$result = "error";
 				break;
 			}
+			else
+				$result = "success";
 		}
-	}
+	} 
 	if($result == "success")
 		$messages["success"] = $content["ROLESEDITED"];
 	else
@@ -143,25 +145,34 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 		return;
 	}
 
-	$fields = array("id" => $content['CODE'],
+	$fields = array(
+					"createdDate" => $content['DATECREATED'],
+					"updatedDate" => $content['DATEUPDATED'],
+					"deletedDate" => $content['DATEDELETED'],
+					"id" => $content['CODE'],
 					"userName" => $content['USERNAME'],
+					"firstName" => $content['NAME'],
+					"fatherName" => $content['FATHERNAME'],
 					"status" => $content['STATUS'],
 					"roleName" => $content['ROLENAME'],
-					"firstName" => $content['NAME'],
 					"lastName" => $content['SURNAME'],
-					"fatherName" => $content['FATHERNAME'],
 					"bDate" => $content['BIRTHDATE'],
-					"gender" => $content['GENDER'],
 					"email" => $content['EMAIL'],
-					"createdDate" => $content['DATECREATED'],
-					"registeredByIP" => $content['REGISTEREDBYIP'],
-					"lastLoginDate" => $content['LASTLOGINDATE'],
-					"profession" => $content['POSITION'],
-					"interests" => $content['INTERESTS'],
 					"phoneNumber" => $content['PHONE'],
 					"notes" => $content['NOTES'],
+					"gender" => $content['GENDER'],
+					"lang" => $content['LANGUAGE'],
+					"profession" => $content['POSITION'],
+					"interests" => $content['INTERESTS'],
+					"registeredByIP" => $content['REGISTEREDBYIP'],
+					"regDevice" => $content['REGDEVICE'],
+					"regBrowser" => $content['REGBROWSER'],
+					"updateUserId" => $content['LASTUPDATEUSERID'],
+					"deletedById" => $content['DELETEDBYID'],
+					"getEmailOnNews" => $content['GETSITENEWS'],
 					"getEmailOnVideoComment" => $content['getEmailOnComment'],
 					"getEmailAfterMyComment" => $content['getEmailAfterMyComment'],
+					"lastLoginDate" => $content['LASTLOGINDATE'],
 					"deviceCount" => $content['DEVICECOUNT'],
 					"browserCount" => $content['BROWSERCOUNT'],
 					"videoviews" => $content['VIEWCOUNT'],
@@ -177,8 +188,8 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 					"catClickCnt" => $content['CATCLICKCNT'],
 					"catClicked" => $content['CATCLICKED'],
 					"subCatCnt" => $content['SUBCATCNT'],
-					"searchCnt" => $content['SEARCHCNT'],
 					"videoCntCommented" => $content['VIDEOCNTCOMMENTED'],
+					"searchCnt" => $content['SEARCHCNT']
 					);
 	$links = $controller->getUsers(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

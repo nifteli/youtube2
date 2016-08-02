@@ -98,6 +98,10 @@ class AdminVideoLinks
 			$this->adminVideoLinks->assign("infoVal", $_POST["info"]);
 			$this->adminVideoLinks->assign("addedVal", $_POST["added"]);
 			$this->adminVideoLinks->assign("addedTillVal", $_POST["addedTill"]);
+			$this->adminVideoLinks->assign("updatedVal", $_POST["updated"]);
+			$this->adminVideoLinks->assign("updatedTillVal", $_POST["updatedTill"]);
+			$this->adminVideoLinks->assign("deletedVal", $_POST["deleted"]);
+			$this->adminVideoLinks->assign("deletedTillVal", $_POST["deletedTill"]);
 			$this->adminVideoLinks->assign("languageIdVal", $_POST["languageId"]);
 			$this->adminVideoLinks->assign("linkVal", $_POST["link"]);
 			$this->adminVideoLinks->assign("videoQuestionVal", $_POST["videoQuestion"]);
@@ -105,6 +109,10 @@ class AdminVideoLinks
 			$this->adminVideoLinks->assign("tagsVal", $_POST["tags"]);
 			$this->adminVideoLinks->assign("reportCountVal", $_POST["reportCount"]);
 			$this->adminVideoLinks->assign("questionsVal", $_POST["questions"]);
+			$this->adminVideoLinks->assign("addedByIdVal", $_POST["addedById"]);
+			$this->adminVideoLinks->assign("addedByIPVal", $_POST["addedByIP"]);
+			$this->adminVideoLinks->assign("updatedByIdVal", $_POST["updatedById"]);
+			$this->adminVideoLinks->assign("deletedByIdVal", $_POST["deletedById"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

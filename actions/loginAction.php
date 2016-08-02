@@ -60,7 +60,11 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 	$continue = true;
 	$db->startTransaction();
 	$db->where("id=".$_POST["folderId"] . " and createdById=" . $access->userId);
-	$res = $db->update("folders",array("name"=>trim($_POST["folderName"])));
+	$res = $db->update("folders",array("name"=>trim($_POST["folderName"]),
+										"updated"=>date("Y-m-d H:i:s"),
+										"updatedById"=>$access->userId,
+										"updatedByIP"=>$_SERVER['REMOTE_ADDR']
+										));
 	if($res)
 	{
 		$db->rawQuery("delete from foldertags where folderId=".$_POST["folderId"]);

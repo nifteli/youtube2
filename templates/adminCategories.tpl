@@ -25,6 +25,74 @@ function controlQuestionSelection(el,id)
 		document.getElementById(q4).checked = false;
 	}
 }
+
+$(function() {
+$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+$( "#created" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#createdTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updated" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updatedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#lastVideoAdded" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#lastVideoAddedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deleted" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deletedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+});
 </script>
 <div>
 
@@ -33,7 +101,9 @@ function controlQuestionSelection(el,id)
 	<form method="post" action="?page=adminCategories&action=filter" id="vlFilter" name="vlFilter" enctype='multipart/form-data'>
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
 		<tr style="text-align:right">
-			<td><button class="btn btn-light-combo btn-sm" name="action" value="edit" type="submit" >{$edit}</button></td>
+			<td>
+			<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter' style="display:none">{$filter}</button>
+			<button class="btn btn-light-combo btn-sm" name="action" value="edit" type="submit" >{$edit}</button></td>
 			<td><a href="#addCat">{$addCategory}</a></td>
 		</tr>
 	</table>
@@ -50,23 +120,23 @@ function controlQuestionSelection(el,id)
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
-		<div class="table-responsive" style="overflow-x: auto; width:3400px">
+		<div class="table-responsive" style="overflow-x: auto; width:3600px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 140px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 140px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 140px; overflow: hidden;"/>
+					<col style="width: 30px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 160px; overflow: hidden;"/>
+					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 30px; overflow: hidden;"/>
-					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
@@ -85,6 +155,13 @@ function controlQuestionSelection(el,id)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
+					<th class="vertical-middle" style=" text-align:center"  title="{$deleteCatsHint}">{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$lastVideoAddedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=questions&videoQuestionSortType={$videoQuestionSortType}')">{$lnQuestion}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catGroupCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catGroup&catGroupSortType={$catGroupSortType}')">{$lnCatGroup}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catAzCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catAz&catAzSortType={$catAzSortType}')">{$lnCatAz}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoAzCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoAz&catInfoAzSortType={$catInfoAzSortType}')">{$lnCatAzInfo}</a></th>
@@ -92,15 +169,8 @@ function controlQuestionSelection(el,id)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoEnCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoEn&catInfoEnSortType={$catInfoEnSortType}')">{$lnCatEnInfo}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catRuCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catRu&catRuSortType={$catRuSortType}')">{$lnCatRu}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catInfoRuCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catInfoRu&catInfoRuSortType={$catInfoRuSortType}')">{$lnCatRuInfo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=questions&videoQuestionSortType={$videoQuestionSortType}')">{$lnQuestion}</a></th>
 					<th class="vertical-middle" style=" text-align:center"  title="{$picCatsHint}">{$pic}</th>
 					<th class="vertical-middle" style=" text-align:center"  title="{$picCatsHint}">{$pic}</th>
-					<th class="vertical-middle" style=" text-align:center"  title="{$deleteCatsHint}">{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$lastVideoAddedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$idCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIPCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
@@ -115,6 +185,25 @@ function controlQuestionSelection(el,id)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
+					<td class="vertical-middle"></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="lastVideoAdded" id="lastVideoAdded" type="text" value="{$lastVideoAddedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="lastVideoAddedTill" id="lastVideoAddedTill" type="text" value="{$lastVideoAddedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="deleted" id="deleted" type="text" value="{$deletedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="deletedTill" id="deletedTill" type="text" value="{$deletedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle"><input class="form-control"  name="id" id="id" type="text" value="{$idVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="flvideoQuestion" id="flvideoQuestion" type="text" value="{$flvideoQuestionVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catGroup" id="catGroup" type="text" value="{$catGroupVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catAz" id="catAz" type="text" value="{$catAzVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catInfoAz" id="catInfoAz" type="text" value="{$catInfoAzVal}" /></td>
@@ -122,8 +211,13 @@ function controlQuestionSelection(el,id)
 					<td class="vertical-middle"><input class="form-control"  name="catInfoEn" id="catInfoEn" type="text" value="{$catInfoEnVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catRu" id="catRu" type="text" value="{$catRuVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="catInfoRu" id="catInfoRu" type="text" value="{$catInfoRuVal}" /></td>
-					<td class="vertical-middle"><input class="form-control"  name="flvideoQuestion" id="flvideoQuestion" type="text" value="{$flvideoQuestionVal}" /></td>
-					<td class="vertical-middle" colspan=18 style="text-align: left;">
+					<td class="vertical-middle" colspan=2></td>
+					<td class="vertical-middle"><input class="form-control"  name="createdById" id="createdById" type="text" value="{$createdByIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="deletedById" id="deletedById" type="text" value="{$deletedByIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="deletedByIP" id="deletedByIP" type="text" value="{$deletedByIPVal}" /></td>
+					<td class="vertical-middle" colspan=5 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 					</td>
@@ -133,6 +227,26 @@ function controlQuestionSelection(el,id)
 				{section name=sec1 loop=$categories}
 				<tr>
 					<!-- <input type="hidden" name="catId[{$categories[sec1].id}]" id="catId[{$categories[sec1].id}]" value="{$categories[sec1].id}"> -->
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
+						{if $hasDeleteAccess}
+						<a href="?page=adminCategories&action=delete&id={$categories[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+						{/if}
+					</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].created}">{$categories[sec1].created}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].updated}">{$categories[sec1].updated}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].lastVideoAdded}">{$categories[sec1].lastVideoAdded}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].deleted}">{$categories[sec1].deleted}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].id}">{$categories[sec1].id}</td>
+					<td class="vertical-middle" style="overflow: hidden;">
+						<table style="float:right; margin-left: 0; margin-right: 0;font-weight: bold;">
+							<tr>
+								<td><input id="q3[{$categories[sec1].id}]" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("4", $categories[sec1].questions)} checked {/if}>{$vqHow}</input></td>
+								<td><input id="q4[{$categories[sec1].id}]" class="checkbox" type="checkbox" value="8" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("8", $categories[sec1].questions)} checked {/if}>{$vqWhy}</input></td>
+								<td><input id="q1[{$categories[sec1].id}]" class="checkbox" type="radio" value="1" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("1", $categories[sec1].questions)} checked {/if}>{$vqWhat}</input></td>
+								<td><input id="q2[{$categories[sec1].id}]" class="checkbox" type="radio" value="2" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("2", $categories[sec1].questions)} checked {/if}>{$vqWho}</input></td>
+							</tr>
+						</table>
+					</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].author}">
 						<select name="catGroupIdArr[{$categories[sec1].id}]" id="catGroupIdArr[{$categories[sec1].id}]"  class="form-control">
 							<option value="">{$lnCatGroup}</option>
@@ -160,31 +274,11 @@ function controlQuestionSelection(el,id)
 						<textarea style="width:100%" name="catInfoRuArr[{$categories[sec1].id}]" id="catInfoRuArr{$categories[sec1].id}"> {$categories[sec1].catInfoRu}</textarea>
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;">
-						<table style="float:right; margin-left: 0; margin-right: 0;font-weight: bold;">
-							<tr>
-								<td><input id="q3[{$categories[sec1].id}]" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("4", $categories[sec1].questions)} checked {/if}>{$vqHow}</input></td>
-								<td><input id="q4[{$categories[sec1].id}]" class="checkbox" type="checkbox" value="8" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("8", $categories[sec1].questions)} checked {/if}>{$vqWhy}</input></td>
-								<td><input id="q1[{$categories[sec1].id}]" class="checkbox" type="radio" value="1" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("1", $categories[sec1].questions)} checked {/if}>{$vqWhat}</input></td>
-								<td><input id="q2[{$categories[sec1].id}]" class="checkbox" type="radio" value="2" onclick="controlQuestionSelection(this,{$categories[sec1].id})" name="videoQuestion[{$categories[sec1].id}][]" {if in_array("2", $categories[sec1].questions)} checked {/if}>{$vqWho}</input></td>
-							</tr>
-						</table>
-					</td>
-					<td class="vertical-middle" style="overflow: hidden;">
 						<input style="width:100%" name="catImgArr[{$categories[sec1].id}]" id="catImgArr{$categories[sec1].id}" type="file">
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						<img src="{$categories[sec1].img}" width="15" height="15" alt=""/>
 					</td>
-					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
-						{if $hasDeleteAccess}
-						<a href="?page=adminCategories&action=delete&id={$categories[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
-						{/if}
-					</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].created}">{$categories[sec1].created}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].updated}">{$categories[sec1].updated}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].lastVideoAdded}">{$categories[sec1].lastVideoAdded}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].deleted}">{$categories[sec1].deleted}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].id}">{$categories[sec1].id}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].createdById}">{$categories[sec1].createdById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].createdBy}">{$categories[sec1].createdBy}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].createdByIP}">{$categories[sec1].createdByIP}</td>

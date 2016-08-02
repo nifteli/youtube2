@@ -466,7 +466,7 @@ class Controller //extends MySQL
 	public function getVideoLinks($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
-		$beginDate="01-01-1900";
+		$beginDate="01-01-0000";
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
@@ -476,12 +476,12 @@ class Controller //extends MySQL
 		$lang = $this->lang;
 		$qry = "select * from (
 						SELECT v.id, v.name, v.info, DATE_FORMAT(v.added,'%d-%m-%Y') added, v.addedByIP,DATE_FORMAT(v.updated,'%d-%m-%Y') updated,v.duration,v.questions,
-								l.name$lang lang, v.link,v.languageId,v.added vadded,
+								l.name$lang lang, v.link,v.languageId,v.added vadded,v.updatedById,v.addedById,v.deletedById,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								concat(u2.firstName,' ',u2.lastName) updatedBy,
 								concat(u3.firstName,' ',u3.lastName) deletedBy,
 								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
-								c.catName$lang catName,
+								c.catName$lang catName,v.deleted vdeleted,v.updated vupdated,
 								v.isDeleted,DATE_FORMAT(v.deleted,'%d-%m-%Y') deleted,
 								vs.reportCount,vs.views,vs.likes,vs.dislikes,vs.comments,vs.userCntCommented,vs.userReportedCnt,vs.tagCount,vs.userCntAddedToFolder,vs.addedFolderCnt
 						FROM videos v
@@ -511,7 +511,26 @@ class Controller //extends MySQL
 			$endDate = $this->getDateForSelect(trim($post["addedTill"]));
 		$qry .= " and vadded between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 		
-		
+		$beginDate="00-00-0000"; $endDate="01-01-9999";
+		if(isset($post["updated"]) && $post["updated"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updated"]));
+		if(isset($post["updatedTill"]) && $post["updatedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and vupdated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["deleted"]) && $post["deleted"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["deleted"]));
+		if(isset($post["deletedTill"]) && $post["deletedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and vdeleted between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["addedById"]) && $post["addedById"] != "")
+			$qry .= " and v.addedById = " . trim($post["addedById"]);
+		if(isset($post["addedByIP"]) && $post["addedByIP"] != "")
+			$qry .= " and v.addedByIP like '%" . trim($post["addedByIP"]) . "%'";
+		if(isset($post["updatedById"]) && $post["updatedById"] != "")
+			$qry .= " and v.updatedById = " . trim($post["updatedById"]);
+		if(isset($post["deletedById"]) && $post["deletedById"] != "")
+			$qry .= " and v.deletedById = " . trim($post["deletedById"]);
 		
 		if(isset($post["languageId"]) && $post["languageId"] != "")
 			$qry .= " and v.languageId = " . trim($post["languageId"]);
@@ -626,7 +645,7 @@ class Controller //extends MySQL
 	public function getComments($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
-		$beginDate="01-01-1900";
+		$beginDate="01-01-0000";
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
@@ -672,6 +691,33 @@ class Controller //extends MySQL
 		if(isset($post["confirmer"]) && $post["confirmer"] != "")
 			$qry .= " and c.confirmer like '%" . trim($post["confirmer"]) . "%'";
 		
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		if(isset($post["updated"]) && $post["updated"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updated"]));
+		if(isset($post["updatedTill"]) && $post["updatedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and updated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		if(isset($post["confirmDate"]) && $post["confirmDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["confirmDate"]));
+		if(isset($post["confirmDateTill"]) && $post["confirmDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["confirmDateTill"]));
+		$qry .= " and confirmed between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["videoName"]) && $post["videoName"] != "")
+			$qry .= " and c.videoName like '%" . trim($post["videoName"]) . "%'";
+		if(isset($post["question"]) && $post["question"] != "")
+			$qry .= " and c.question like '%" . trim($post["question"]) . "%'";
+		if(isset($post["userIP"]) && $post["userIP"] != "")
+			$qry .= " and c.userIP like '%" . trim($post["userIP"]) . "%'";
+		if(isset($post["updatedById"]) && $post["updatedById"] != "")
+			$qry .= " and c.updatedById = " . trim($post["updatedById"]);
+		if(isset($post["updatedBy"]) && $post["updatedBy"] != "")
+			$qry .= " and c.updatedBy like '%" . trim($post["updatedBy"]) . "%'";
+		if(isset($post["updatedByIP"]) && $post["updatedByIP"] != "")
+			$qry .= " and c.updatedByIP like '%" . trim($post["updatedByIP"]) . "%'";
+		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
 		if($perPage>0)
@@ -688,7 +734,7 @@ class Controller //extends MySQL
 	public function getFolders($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
-		$beginDate="01-01-1900";
+		$beginDate="01-01-0000";
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
@@ -697,17 +743,23 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "select * from (SELECT f.*,
-				DATE_FORMAT(f.created,'%d-%m-%Y %k:%i:%S') createdDate,
-				DATE_FORMAT(f.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
-               	GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
-				concat(u.firstName,' ',u.lastName) author, 
-				concat(u3.firstName,' ',u3.lastName) updatedBy
-				from folders f
-				left join users u on u.id=f.createdById
-				left join users u3 on u3.id=f.updatedById
-                left join foldertags ft on ft.folderId=f.id
-                left join tags t on t.id=ft.tagId
-               	group by f.id
+							DATE_FORMAT(f.created,'%d-%m-%Y %k:%i:%S') createdDate,
+							DATE_FORMAT(f.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+							DATE_FORMAT(f.lastVideoAdded,'%d-%m-%Y %k:%i:%S') lastVideoAddedDate,
+							DATE_FORMAT(f.deleted,'%d-%m-%Y %k:%i:%S') deletedDate,
+							GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
+							concat(u.firstName,' ',u.lastName,'(',u.userName,')') author, 
+							concat(u2.firstName,' ',u2.lastName,'(',u2.userName,')') deletedBy, 
+							concat(u3.firstName,' ',u3.lastName) updatedBy,
+							fs.tagCnt,fs.videoCnt
+							from folders f
+							left join users u on u.id=f.createdById
+							left join users u2 on u2.id=f.deletedById
+							left join users u3 on u3.id=f.updatedById
+							left join foldertags ft on ft.folderId=f.id
+							left join tags t on t.id=ft.tagId
+							left join vwfolderstats fs on fs.folderId=f.id 
+							group by f.id
 				) f
 				where isDeleted=0 ";
 				
@@ -716,6 +768,26 @@ class Controller //extends MySQL
 		if(isset($post["createdTill"]) && $post["createdTill"] != "")
 			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
 		$qry .= " and f.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["updated"]) && $post["updated"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updated"]));
+		if(isset($post["updatedTill"]) && $post["updatedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and f.updated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000"; $endDate="01-01-9999";
+		if(isset($post["lastVideoAdded"]) && $post["lastVideoAdded"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["lastVideoAdded"]));
+		if(isset($post["lastVideoAddedTill"]) && $post["lastVideoAddedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["lastVideoAddedTill"]));
+		$qry .= " and f.lastVideoAdded between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["deleted"]) && $post["deleted"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["deleted"]));
+		if(isset($post["deletedTill"]) && $post["deletedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["deletedTill"]));
+		$qry .= " and f.deleted between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
 			
 		if(isset($post["id"]) && $post["id"] != "")
 			$qry .= " and f.id=".trim($post["id"]);
@@ -727,6 +799,15 @@ class Controller //extends MySQL
 			$qry .= " and f.name like '%" . trim($post["name"]) . "%'";
 		if(isset($post["tags"]) && $post["tags"] != "")
 			$qry .= " and f.tags like '%" . trim($post["tags"]) . "%'";
+		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
+			$qry .= " and f.createdByIP like '%" . trim($post["createdByIP"]) . "%'";
+		if(isset($post["deletedById"]) && $post["deletedById"] != "")
+			$qry .= " and f.deletedById =" . trim($post["deletedById"]);
+		if(isset($post["deletedBy"]) && $post["deletedBy"] != "")
+			$qry .= " and f.deletedBy like '%" . trim($post["deletedBy"]) . "%'";
+		if(isset($post["deletedByIP"]) && $post["deletedByIP"] != "")
+			$qry .= " and f.deletedByIP like '%" . trim($post["deletedByIP"]) . "%'";
+
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -764,6 +845,25 @@ class Controller //extends MySQL
 		if(isset($post["name"]) && $post["name"] != "")
 			$qry .= " and t.name like '%" . trim($post["name"]) . "%'";
 		
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		if(isset($post["created"]) && $post["created"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and t.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["createdBy"]) && $post["createdBy"] != "")
+			$qry .= " and u1.userName like '%" . trim($post["createdBy"]) . "%'";
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		if(isset($post["updated"]) && $post["updated"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updated"]));
+		if(isset($post["updatedTill"]) && $post["updatedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and updated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["updatedBy"]) && $post["updatedBy"] != "")
+			$qry .= " and u2.userName like '%" . trim($post["updatedBy"]) . "%'";
+		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
 		if($perPage>0)
@@ -787,7 +887,7 @@ class Controller //extends MySQL
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "select se.entryDate,se.IP,se.device,se.browser,gs.*
+		$qry = "select se.id, se.entryDate,se.IP,se.device,se.browser,gs.*
 				from siteentry se
 				left join vwgueststats gs on gs.IP=se.IP
 				where se.userId=0 ";
@@ -799,6 +899,8 @@ class Controller //extends MySQL
 		$qry .= " and se.entryDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 		
 		
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and se.id = " . trim($post["id"]);
 		if(isset($post["IP"]) && $post["IP"] != "")
 			$qry .= " and se.IP like '%" . trim($post["IP"]) . "%'";
 		if(isset($post["device"]) && $post["device"] != "")
@@ -827,12 +929,13 @@ class Controller //extends MySQL
 	public function getUsers($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
+		//echo "<pre>";print_r($post);echo "</pre>";
 		if ($sortBy == "")
 		{
 			$sortBy = "u.registered ";
 			$sortType = "desc";
 		}
-		$beginDate="01-01-1900";
+		$beginDate="00-00-0000";
 		$endDate="01-01-9999";
 		
 		$lang = $this->lang;
@@ -858,13 +961,60 @@ class Controller //extends MySQL
 		if(isset($post["createdTill"]) && $post["createdTill"] != "")
 			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
 		$qry .= " and u.registered between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
-			
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		
 		if(isset($post["id"]) && is_numeric($post["id"]))
 			$qry .= " and u.id=".trim($post["id"]);
 		if(isset($post["userName"]) && $post["userName"] != "")
 			$qry .= " and u.userName like '%" . trim($post["userName"]) . "%'";
 		if(isset($post["name"]) && $post["name"] != "")
 			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["name"]) . "%'";
+		if(isset($post["roleIdFlt"]) && is_numeric($post["roleIdFlt"]) && $post["roleIdFlt"]>-1)
+			$qry .= " and u.roleId=".trim($post["roleIdFlt"]);
+		
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		if(isset($post["updatedDate"]) && $post["updatedDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updatedDate"]));
+		if(isset($post["updatedDateTill"]) && $post["updatedDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedDateTill"]));
+		$qry .= " and lastUpdate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["deleteddate"]) && $post["deleteddate"] != "")
+			$begindate = $this->getdateforselect(trim($post["deleteddate"]));
+		if(isset($post["deleteddatetill"]) && $post["deleteddatetill"] != "")
+			$enddate = $this->getdateforselect(trim($post["deleteddatetill"]));
+		$qry .= " and u.deleted between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";
+		$endDate="01-01-9999";
+		
+		if(isset($post["fatherName"]) && $post["fatherName"] != "")
+			$qry .= " and u.fatherName like '%" . trim($post["fatherName"]) . "%'";
+		if(isset($post["birthDate"]) && $post["birthDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["birthDate"]));
+		if(isset($post["birthDateTill"]) && $post["birthDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["birthDateTill"]));
+		$qry .= " and u.birthDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["email"]) && $post["email"] != "")
+			$qry .= " and u.email like '%" . trim($post["email"]) . "%'";
+		if(isset($post["phoneNumber"]) && $post["phoneNumber"] != "")
+			$qry .= " and u.phoneNumber like '%" . trim($post["phoneNumber"]) . "%'";
+		if(isset($post["notes"]) && $post["notes"] != "")
+			$qry .= " and u.notes like '%" . trim($post["notes"]) . "%'";
+		if(isset($post["gender"]) && $post["gender"] != "")
+			$qry .= " and u.gender = '" . trim($post["gender"]) . "'";
+		if(isset($post["langId"]) && is_numeric($post["langId"]))
+			$qry .= " and u.languageId=".trim($post["langId"]);
+		if(isset($post["profession"]) && $post["profession"] != "")
+			$qry .= " and u.profession like '%" . trim($post["profession"]) . "%'";
+		if(isset($post["interests"]) && $post["interests"] != "")
+			$qry .= " and u.interests like '%" . trim($post["interests"]) . "%'";
+		if(isset($post["registeredByIP"]) && $post["registeredByIP"] != "")
+			$qry .= " and u.registeredByIP like '%" . trim($post["registeredByIP"]) . "%'";
+		if(isset($post["regDevice"]) && $post["regDevice"] != "")
+			$qry .= " and u.regDevice like '%" . trim($post["regDevice"]) . "%'";
+		if(isset($post["regBrowser"]) && $post["regBrowser"] != "")
+			$qry .= " and u.regBrowser like '%" . trim($post["regBrowser"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		if($perPage>0)
@@ -874,7 +1024,7 @@ class Controller //extends MySQL
 			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
 		}
 		//echo $qry;
-		$res = $this->db->rawQuery($qry);//print_r($res);
+		$res = $this->db->rawQuery($qry);//
 		return $res;
 	}
 	
@@ -943,6 +1093,7 @@ class Controller //extends MySQL
 				left join users u on u.id=c.createdById
 				left join vwcatstats cs on cs.categoryId=c.id
 				left join catgroups cg on cg.id=c.catGroupId
+				left join questions q on q.bitValue=c.questions
 				where 1=1 ";
 				
 		if(isset($post["catGroup"]) && $post["catGroup"] != "")
@@ -959,6 +1110,45 @@ class Controller //extends MySQL
 			$qry .= " and c.catNameRu like '%" . trim($post["catRu"]) . "%'";
 		if(isset($post["catInfoRu"]) && $post["catInfoRu"] != "")
 			$qry .= " and c.catInfoRu like '%" . trim($post["catInfoRu"]) . "%'";
+		if(isset($post["flvideoQuestion"]) && $post["flvideoQuestion"] != "")
+			$qry .= " and q.question like '%" . trim($post["flvideoQuestion"]) . "%'";
+		
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["created"]) && $post["created"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and c.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["updated"]) && $post["updated"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["updated"]));
+		if(isset($post["updatedTill"]) && $post["updatedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["updatedTill"]));
+		$qry .= " and c.updated between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["lastVideoAdded"]) && $post["lastVideoAdded"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["lastVideoAdded"]));
+		if(isset($post["lastVideoAddedTill"]) && $post["lastVideoAddedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and c.lastVideoAdded between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$beginDate="00-00-0000";$endDate="01-01-9999";
+		if(isset($post["deleted"]) && $post["deleted"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["deleted"]));
+		if(isset($post["deletedTill"]) && $post["deletedTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and c.deleted between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and c.id = " . trim($post["id"]);
+		if(isset($post["createdById"]) && $post["createdById"] != "")
+			$qry .= " and c.createdById like '%" . trim($post["createdById"]) . "%'";
+		if(isset($post["createdBy"]) && $post["createdBy"] != "")
+			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["createdBy"]) . "%'";
+		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
+			$qry .= " and c.createdByIP like '%" . trim($post["createdByIP"]) . "%'";
+		if(isset($post["deletedById"]) && $post["deletedById"] != "")
+			$qry .= " and c.deletedById like '%" . trim($post["deletedById"]) . "%'";
+		if(isset($post["deletedByIP"]) && $post["deletedByIP"] != "")
+			$qry .= " and c.deletedByIP like '%" . trim($post["deletedByIP"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;

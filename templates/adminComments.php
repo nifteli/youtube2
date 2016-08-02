@@ -77,7 +77,16 @@ class AdminComments
 			$this->adminComments->assign("authorVal", $_POST["author"]);
 			$this->adminComments->assign("commentVal", $_POST["comment"]);
 			$this->adminComments->assign("confirmedVal", $_POST["confirmed"]);
-			$this->adminComments->assign("confirmerVal", $_POST["confirmer"]);
+			$this->adminComments->assign("updatedVal", $_POST["updated"]);
+			$this->adminComments->assign("updatedTillVal", $_POST["updatedTill"]);
+			$this->adminComments->assign("confirmDateVal", $_POST["confirmDate"]);
+			$this->adminComments->assign("confirmDateTillVal", $_POST["confirmDateTill"]);
+			$this->adminComments->assign("videoNameVal", $_POST["videoName"]);
+			$this->adminComments->assign("questionVal", $_POST["question"]);
+			$this->adminComments->assign("userIPVal", $_POST["userIP"]);
+			$this->adminComments->assign("updatedByIdVal", $_POST["updatedById"]);
+			$this->adminComments->assign("updatedByVal", $_POST["updatedBy"]);
+			$this->adminComments->assign("updatedByIPVal", $_POST["updatedByIP"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);

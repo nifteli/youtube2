@@ -23,6 +23,7 @@ class AdminGuests
 		$this->adminGuests->assign("confirm", $content['CONFIRM']);
 		
 		$this->adminGuests->assign("lnEntryDate", $content['ENTRYDATE']);
+		$this->adminGuests->assign("lnId", $content['ID']);
 		$this->adminGuests->assign("lnIP", $content['IP']);
 		$this->adminGuests->assign("lnDevice", $content['DEVICE']);
 		$this->adminGuests->assign("lnBrowser", $content['BROWSER']);
@@ -32,6 +33,7 @@ class AdminGuests
 		$this->adminGuests->assign("lnSearchCnt", $content['SEARCHCNT']);
 		
 		$this->adminGuests->assign("entryDateGuestHint", $content['entryDateGuestHint']);
+		$this->adminGuests->assign("idGuestHint", $content['idGuestHint']);
 		$this->adminGuests->assign("IPGuestHint", $content['IPGuestHint']);
 		$this->adminGuests->assign("deviceGuestHint", $content['deviceGuestHint']);
 		$this->adminGuests->assign("browserGuestHint", $content['browserGuestHint']);
@@ -45,6 +47,7 @@ class AdminGuests
 		{
 			$this->adminGuests->assign("entryDateVal", $_POST["entryDate"]);
 			$this->adminGuests->assign("IPVal", $_POST["IP"]);
+			$this->adminGuests->assign("idVal", $_POST["id"]);
 			$this->adminGuests->assign("deviceVal", $_POST["device"]);
 			$this->adminGuests->assign("browserVal", $_POST["browser"]);
 			$this->adminGuests->assign("videCntWatchedVal", $_POST["videCntWatched"]);
@@ -56,6 +59,8 @@ class AdminGuests
 			$sortBy = trim($_GET["sortBy"]);
 		if(isset($_GET["entryDateSortType"]))
 			$sortType = ($_GET["entryDateSortType"] == "" || $_GET["entryDateSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["idSortType"]))
+			$sortType = ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["IPSortType"]))
 			$sortType = ($_GET["IPSortType"] == "" || $_GET["IPSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["deviceSortType"]))
@@ -73,6 +78,7 @@ class AdminGuests
 		
 		
 		$this->adminGuests->assign("entryDateSortType", ($_GET["entryDateSortType"] == "" || $_GET["entryDateSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminGuests->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminGuests->assign("IPSortType", ($_GET["IPSortType"] == "" || $_GET["IPSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminGuests->assign("deviceSortType", ($_GET["deviceSortType"] == "" || $_GET["deviceSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminGuests->assign("browserSortType", ($_GET["browserSortType"] == "" || $_GET["browserSortType"] == "ASC")? 'DESC' : 'ASC');

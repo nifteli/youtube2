@@ -17,6 +17,38 @@ $( "#addedTill" ).datepicker(
 	},
 	$.datepicker.regional["{$lang}"]
 );
+$( "#updated" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updatedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deleted" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deletedTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
 //$( "#added" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 //$( "#addedTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
@@ -67,25 +99,25 @@ function submitForm(action)
 		<div class="table-responsive" style="overflow-x: auto; width:3600px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed; text-align: center;">
 				<colgroup>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 40px; overflow: hidden;"/>
+					<col style="width: 150px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
+					<col style="width: 70px; overflow: hidden;"/>
+					<col style="width: 90px; overflow: hidden;"/>
 					<col style="width: 200px; overflow: hidden;"/>
 					<col style="width: 500px; overflow: hidden;"/>
-					<col style="width: 80px; overflow: hidden;"/>
-					<col style="width: 150px; overflow: hidden;"/>
 					<col style="width: 90px; overflow: hidden;"/>
-					<col style="width: 90px; overflow: hidden;"/>
-					<col style="width: 70px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -101,20 +133,19 @@ function submitForm(action)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$vaddedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=vadded&addedSortType={$addedSortType}')">{$lnAdded}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$idVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$infoVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=info&infoSortType={$infoSortType}')">{$lnInfo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$langVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$linkVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=link&linkSortType={$linkSortType}')">{$lnLink}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$catNameVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=catName&catNameSortType={$catNameSortType}')">{$lnCategory}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$tagsVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=tags&tagsSortType={$tagsSortType}')">{$lnTags}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=questions&questionsSortType={$questionsSortType}')">{$videoQuestion}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$reportCountVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$reportCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center"  title="{$deleteVidLinksHint}">{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center"  title="{$editVidLinksHint}">{$edit}</th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$vaddedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=vadded&addedSortType={$addedSortType}')">{$lnAdded}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$linkVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=link&linkSortType={$linkSortType}')">{$lnLink}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$langVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=questions&questionsSortType={$questionsSortType}')">{$videoQuestion}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$catNameVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=catName&catNameSortType={$catNameSortType}')">{$lnCategory}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$infoVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=info&infoSortType={$infoSortType}')">{$lnInfo}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$tagsVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=tags&tagsSortType={$tagsSortType}')">{$lnTags}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$addedByIdVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=addedById&addedByIdSortType={$addedByIdSortType}')">{$lnAddedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$addedByIPVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=addedByIP&addedByIPSortType={$addedByIPSortType}')">{$lnAddedByIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedByIdVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=updatedById&updatedByIdSortType={$updatedByIdSortType}')">{$lnUpdatedById}</a></th>
@@ -127,19 +158,29 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$likesVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=likes&likesSortType={$likesSortType}')">{$lnLikes}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$dislikesVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=dislikes&dislikesSortType={$dislikesSortType}')">{$lnDislikes}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userReportedCntVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=userReportedCnt&userReportedCntSortType={$userReportedCntSortType}')">{$lnUserReportedCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$reportCountVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$reportCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userCntAddedToFolderVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=userCntAddedToFolder&userCntAddedToFolderSortType={$userCntAddedToFolderSortType}')">{$lnUserCntAddedToFolder}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$addedFolderCntVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=addedFolderCnt&addedFolderCntSortType={$addedFolderCntSortType}')">{$lnAddedFolderCnt}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
+					<td class="vertical-middle"></td>
+					<td class="vertical-middle"></td>
 					<td class="vertical-middle">
 						<input class="form-control" name="added" id="added" type="text" value="{$addedVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
 						<input class="form-control" name="addedTill" id="addedTill" type="text" value="{$addedTillVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
 					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
+						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="deleted" id="deleted" type="text" value="{$deletedVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
+						<input class="form-control" name="deletedTill" id="deletedTill" type="text" value="{$deletedTillVal}" style="width:70px;display:initial;padding-left: 0;padding-right: 0;"/>
+					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="info" id="info" type="text" value="{$infoVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="link" id="link" type="text" value="{$linkVal}"/></td>
 					<td class="vertical-middle">
 						<select name="languageId" id="languageId"  class="form-control">
 							<option value="">{$lnLang}</option>
@@ -148,9 +189,6 @@ function submitForm(action)
 							<option value="67" {if $languageIdVal == 67} selected {/if}>RU</option>
 						</select>
 					</td>
-					<td class="vertical-middle"><input class="form-control" name="link" id="link" type="text" value="{$linkVal}"/></td>
-					<td class="vertical-middle"><input class="form-control" name="category" id="category" type="text" value="{$categoryVal}"/></td>
-					<td class="vertical-middle"><input class="form-control" name="tags" id="tags" type="text" value="{$tagsVal}"/></td>
 					<td class="vertical-middle">
 						<select name="questions" id="questions"  class="form-control">
 							<option value="">{$videoQuestion}</option>
@@ -160,8 +198,15 @@ function submitForm(action)
 							<option value="8" {if $questionsVal == 8} selected {/if}>{$why}</option>
 						</select>
 					</td>
-					<td class="vertical-middle"><input class="form-control" name="reportCount" id="reportCount" type="text" value="{$reportCountVal}"/></td>
-					<td class="vertical-middle" colspan=18 style="text-align: left;">
+					<td class="vertical-middle"><input class="form-control" name="category" id="category" type="text" value="{$categoryVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="info" id="info" type="text" value="{$infoVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="tags" id="tags" type="text" value="{$tagsVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="addedById" id="addedById" type="text" value="{$addedByIdVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="addedByIP" id="addedByIP" type="text" value="{$addedByIPVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="updatedById" id="updatedById" type="text" value="{$updatedByIdVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="deletedById" id="deletedById" type="text" value="{$deletedByIdVal}"/></td>
+					<td class="vertical-middle" colspan=11 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='exportSearches'>{$exportSearches}</button>
@@ -172,16 +217,6 @@ function submitForm(action)
 				{section name=sec1 loop=$videoLinks}
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].added}">{$videoLinks[sec1].vadded}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].id}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].id}</a></td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].name}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].name}</a></td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].info}">{$videoLinks[sec1].info}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].lang}">{$videoLinks[sec1].lang}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].link}">{$videoLinks[sec1].link}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].catName}">{$videoLinks[sec1].catName}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].tags}">{$videoLinks[sec1].tags}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].addedBy}">{$videoLinks[sec1].questions}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].reportCount}"><a href="?page=adminReports&id={$videoLinks[sec1].id}">{$videoLinks[sec1].reportCount}</a></td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $videoLinks[sec1].isDeleted == 1}
 						<a href="?page=adminVideoLinks&action=delete&videoId={$videoLinks[sec1].id}&flag=1" onClick="return confirm('{$undeleteConfirmation}')"><img src="img/success.png" width="15" height="15" alt=""/></a>
@@ -194,8 +229,17 @@ function submitForm(action)
 						<a href="index.php?page=addVideo&id={$videoLinks[sec1].id}"><img src="img/edit.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].vadded}">{$videoLinks[sec1].vadded}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].updated}">{$videoLinks[sec1].updated}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].deleted}">{$videoLinks[sec1].deleted}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].id}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].id}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].link}">{$videoLinks[sec1].link}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].lang}">{$videoLinks[sec1].lang}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].questions}">{$videoLinks[sec1].questions}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].catName}">{$videoLinks[sec1].catName}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].name}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].name}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].info}">{$videoLinks[sec1].info}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].tags}">{$videoLinks[sec1].tags}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedById}">{$videoLinks[sec1].addedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedByIP}">{$videoLinks[sec1].addedByIP}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].updatedById}">{$videoLinks[sec1].updatedById}</td>
@@ -208,6 +252,7 @@ function submitForm(action)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].likes}"><a href="?page=adminDetails&s=videos&q=4&videoId={$videoLinks[sec1].id}&title={$lnLikes}">{$videoLinks[sec1].likes}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].dislikes}"><a href="?page=adminDetails&s=videos&q=5&videoId={$videoLinks[sec1].id}&title={$lnDislikes}">{$videoLinks[sec1].dislikes}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userReportedCnt}"><a href="?page=adminDetails&s=videos&q=6&videoId={$videoLinks[sec1].id}&title={$lnUserReportedCnt}">{$videoLinks[sec1].userReportedCnt}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].reportCount}"><a href="?page=adminReports&id={$videoLinks[sec1].id}">{$videoLinks[sec1].reportCount}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntAddedToFolder}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnUserCntAddedToFolder}">{$videoLinks[sec1].userCntAddedToFolder}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedFolderCnt}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnAddedFolderCnt}">{$videoLinks[sec1].addedFolderCnt}</a></td>
 				</tr>

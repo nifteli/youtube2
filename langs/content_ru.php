@@ -442,7 +442,17 @@ $content['nameFolderHint']="nameFolderHint";
 $content['tagsFolderHint']="tagsFolderHint";
 $content['deleteFolderHint']="deleteFolderHint";
 $content['editFolderHint']="editFolderHint";
-
+$content['updatedFolderHint']="updatedFolderHint";
+$content['lastAddedFolderHint']="lastAddedFolderHint";
+$content['deletedFolderHint']="deletedFolderHint";
+$content['createdByIPFolderHint']="createdByIPFolderHint";
+$content['deletedByIdFolderHint']="deletedByIdFolderHint";
+$content['deletedByFolderHint']="deletedByFolderHint";
+$content['deletedByIPFolderHint']="deletedByIPFolderHint";
+$content['tagCntFolderHint']="tagCntFolderHint";
+$content['videoCntSortType']="videoCntSortType";
+$content['lnTagCnt']="lnTagCnt";
+$content['lnVideoCnt']="lnVideoCnt";
 //End Admin folders
 
 //Admin Tags

@@ -17,6 +17,54 @@ $( "#createdTill" ).datepicker(
 	},
 	$.datepicker.regional["{$lang}"]
 );
+$( "#updatedDate" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#updatedDateTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deletedDate" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#deletedDateTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#birthDate" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
+$( "#birthDateTill" ).datepicker( 
+	{
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "-100:+5"
+	},
+	$.datepicker.regional["{$lang}"]
+);
 //$( "#created" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 //$( "#createdTill" ).datepicker( $.datepicker.regional[ "{$lang}" ] );
 });
@@ -59,7 +107,6 @@ function showProfile(userId)
 }
 </script>
 <div>
-
 	<div class="actionButtons">
 	<form method="post" action="?page=adminUsers&action=set" id="vlFilter" name="vlFilter">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
@@ -69,7 +116,9 @@ function showProfile(userId)
 				<img src="img/sendMail.png" width="65" height="55" alt="sendMail"/>
 				</a>
 			</td>
-			<td><button class="btn btn-light-combo btn-sm" name="action" value="saveRoles" type="submit" >{$saveRoles}</button></td>
+			<td>
+			<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter' style="display:hidden">{$filter}</button>
+			<button class="btn btn-light-combo btn-sm" name="action" value="saveRoles" type="submit" >{$saveRoles}</button></td>
 		</tr>
 	</table>
 	</div>
@@ -85,18 +134,22 @@ function showProfile(userId)
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		
-		<div class="table-responsive" style="overflow-x: auto; width:4500px">
+		<div class="table-responsive" style="overflow-x: auto; width:5000px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 30px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 220px; overflow: hidden;"/>
+					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 50px; overflow: hidden;"/>
-					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -106,11 +159,7 @@ function showProfile(userId)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 250px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -136,16 +185,16 @@ function showProfile(userId)
 					<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$setUserUsersHint}" >{$setUser}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$lnRoleUsersHint}" >{$lnRole}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$viewProfileUsersHint}" >{$viewProfile}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$deleteUsersHint}" >{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" title="{$lnRoleUsersHint}" >{$lnRole}</th>
-					<th class="vertical-middle" style=" text-align:center" title="{$viewProfileUsersHint}" >{$viewProfile}</th>
-					<th class="vertical-middle" style=" text-align:center" title="{$setUserUsersHint}" >{$setUser}</th>
-					<th class="vertical-middle" style=" text-align:center" title="{$deleteUsersHint}" >{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$fatherNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=fatherName&fatherNameSortType={$fatherNameSortType}')">{$lnFatherName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$birthDateUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=birthDate&birthDateSortType={$birthDateSortType}')">{$lnBirthDate}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$adminUsersUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=email&emailSortType={$emailSortType}')">{$lnEmail}</a></th>
@@ -178,23 +227,67 @@ function showProfile(userId)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClickCnt&catClickCntSortType={$catClickCntSortType}')">{$lnCatClickCnt}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClicked&catClickedSortType={$catClickedSortType}')">{$lnCatClicked}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$subCatCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=subCatCnt&subCatCntSortType={$subCatCntSortType}')">{$lnSubCatCnt}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
 					
 				</tr>
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
-					<td class="vertical-middle"></td>
+					<td class="vertical-middle" colspan=2></td>
+					<td class="vertical-middle"> 
+						<select name="roleIdFlt" id="roleIdFlt"  class="form-control">
+							<option value="-1" selected>{$lnRole}</option>
+							{section name=key loop=$roles}
+							<option value="{$roles[key].id}" {if $roles[key].id == {$roleIdFltVal}} selected {/if} > {$roles[key].name}</option>
+							{/section}
+						</select>
+					</td>
+					<td class="vertical-middle" colspan=2></td>
 					<td class="vertical-middle">
 						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:100px;display:initial"/>
 						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:100px;display:initial" />
 					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="updatedDate" id="updatedDate" type="text" value="{$updatedDateVal}" style="width:100px;display:initial"/>
+						<input class="form-control" name="updatedDateTill" id="updatedDateTill" type="text" value="{$updatedDateTillVal}" style="width:100px;display:initial" />
+					</td>
+					<td class="vertical-middle">
+						<input class="form-control" name="deletedDate" id="deletedDate" type="text" value="{$deletedDateVal}" style="width:100px;display:initial"/>
+						<input class="form-control" name="deletedDateTill" id="deletedDateTill" type="text" value="{$deletedDateTillVal}" style="width:100px;display:initial" />
+					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="userName" id="userName" type="text" value="{$userNameVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
-					<td class="vertical-middle"></td>
-					<td class="vertical-middle" colspan=39 style="text-align: left;">
+					<td class="vertical-middle"><input class="form-control" name="fatherName" id="fatherName" type="text" value="{$fatherNameVal}" /></td>
+					<td class="vertical-middle">
+						<input class="form-control" name="birthDate" id="birthDate" type="text" value="{$birthDateVal}" style="width:100px;display:initial"/>
+						<input class="form-control" name="birthDateTill" id="birthDateTill" type="text" value="{$birthDateTillVal}" style="width:100px;display:initial" />
+					</td>
+					<td class="vertical-middle"><input class="form-control" name="email" id="email" type="text" value="{$emailVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="phoneNumber" id="phoneNumber" type="text" value="{$phoneNumberVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="notes" id="notes" type="text" value="{$notesVal}" /></td>
+					<td class="vertical-middle">
+						<select name="gender" id="gender"  class="form-control">
+							<option value="">{$gender}</option>
+							<option value="Male">{$male}</option>
+							<option value="Female">{$female}</option>
+						</select>
+					</td>
+					<td class="vertical-middle">
+						<select name="langId" id="langId"  class="form-control">
+							<option value="">{$language}</option>
+							{section name=key loop=$langs}
+							<option value="{$langs[key].id}"{if $langs[key].id == $langIdVal} selected {/if} > {$langs[key].name}</option>
+							{/section}
+						</select>
+					</td>
+					<td class="vertical-middle"><input class="form-control" name="profession" id="profession" type="text" value="{$professionVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="interests" id="interests" type="text" value="{$interestsVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="registeredByIP" id="registeredByIP" type="text" value="{$registeredByIPVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="regDevice" id="regDevice" type="text" value="{$regDeviceVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="regBrowser" id="regBrowser" type="text" value="{$regBrowserVal}" /></td>
+					<td class="vertical-middle" colspan=22 style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='exportMailInfo'>{$exportMailInfo}</button>
@@ -207,10 +300,11 @@ function showProfile(userId)
 					<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="{$users[sec1].id}" name="Test"/>
 					<input type="hidden" name="email_{$users[sec1].id}" id="email_{$users[sec1].id}" value="{$users[sec1].email}">
 					</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].createdDate}">{$users[sec1].createdDate}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].id}">{$users[sec1].id}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].userName}">{$users[sec1].userName}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$setUser}">
+						{if $hasSetUserAccess}
+						<a href="?page=adminUsers&action=setUser&id={$users[sec1].id}"><img alt="{$setUser}" src="img/setUser.png" width="15" height="15" alt=""/></a>
+						{/if}
+					</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].author}">
 						<select name="roleId[{$users[sec1].id}]" id="roleId[{$users[sec1].id}]"  class="form-control">
 							<option value="0">{$lnRole}</option>
@@ -224,18 +318,17 @@ function showProfile(userId)
 						<a  onclick="showProfile({$users[sec1].id})" href="#userProfile"><img alt="{$viewProfile}" src="img/viewProfile.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
-					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$setUser}">
-						{if $hasSetUserAccess}
-						<a href="?page=adminUsers&action=setUser&id={$users[sec1].id}"><img alt="{$setUser}" src="img/setUser.png" width="15" height="15" alt=""/></a>
-						{/if}
-					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
 						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" alt="{$delete}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].createdDate}">{$users[sec1].createdDate}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].updatedDate}">{$users[sec1].updatedDate}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deletedDate}">{$users[sec1].deletedDate}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].id}">{$users[sec1].id}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].userName}">{$users[sec1].userName}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].fatherName}">{$users[sec1].fatherName}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].birthDate}">{$users[sec1].birthDate}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
@@ -268,8 +361,8 @@ function showProfile(userId)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClickCnt}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClickCnt}">{$users[sec1].catClickCnt}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClicked}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClicked}">{$users[sec1].catClicked}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].subCatCnt}"><a href="?page=adminDetails&s=users&q=12&userId={$users[sec1].id}&title={$lnSubCatCnt}">{$users[sec1].subCatCnt}</a></td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}"><a href="?page=adminDetails&s=users&q=13&userId={$users[sec1].id}&title={$lnSearchCnt}">{$users[sec1].searchCnt}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnVideoCntCommented}">{$users[sec1].videoCntCommented}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}"><a href="?page=adminDetails&s=users&q=13&userId={$users[sec1].id}&title={$lnSearchCnt}">{$users[sec1].searchCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>
