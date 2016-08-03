@@ -235,6 +235,51 @@ else
 				return;
 			}
 			break;
+		case "adminSearches":
+			if($access->authorized(64))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminSearchesAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminSearches");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
+		case "adminMessages":
+			if($access->authorized(68))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminMessagesAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminMessages");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
+		case "adminLogs":
+			if($access->authorized(66))
+			{
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminLogsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminLogs");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
 		case "adminDetails":
 			if($access->authorized(63))
 			{

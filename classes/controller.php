@@ -34,6 +34,9 @@ include($templatePath."page2.php");
 include($templatePath."adminGuests.php");
 include($templatePath."adminReports.php");
 include($templatePath."adminDetails.php");
+include($templatePath."adminSearches.php");
+include($templatePath."adminMessages.php");
+include($templatePath."adminLogs.php");
 
 class Controller //extends MySQL
 {
@@ -181,6 +184,18 @@ class Controller //extends MySQL
 			case "adminGuests":
 				$adminGuests = new AdminGuests($this);
 				$adminGuests->Show();
+				break;
+			case "adminSearches":
+				$adminSearches = new AdminSearches($this);
+				$adminSearches->Show();
+				break;
+			case "adminMessages":
+				$adminMessages = new AdminMessages($this);
+				$adminMessages->Show();
+				break;
+			case "adminLogs":
+				$adminLogs = new AdminLogs($this);
+				$adminLogs->Show();
 				break;
 			case "adminReports":
 				$adminReports = new AdminReports($this);
@@ -566,24 +581,35 @@ class Controller //extends MySQL
 	public function getSearches($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
-		$beginDate="01-01-1900";
+		$beginDate="01-01-0000";
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
-			$sortBy = "STR_TO_DATE(s.created, '%d-%m-%y')";
+			$sortBy = "s.created";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "select s.*, concat(u.firstName,' ',u.lastName) searcher
+		$qry = "select s.*, 
+				DATE_FORMAT(s.created,'%d-%m-%Y %k:%i:%S') createdDate,
+				u.userName searcher
 				from searches s
 				left join users u on u.id=s.createdById
 				where 1=1 ";
 		
-		if(isset($post["added"]) && $post["added"] != "")
-			$beginDate = $this->getDateForSelect(trim($post["added"]));
-		if(isset($post["addedTill"]) && $post["addedTill"] != "")
-			$endDate = $this->getDateForSelect(trim($post["addedTill"]));
+		if(isset($post["createdDate"]) && $post["createdDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["createdDate"]));
+		if(isset($post["createdDateTill"]) && $post["createdDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdDateTill"]));
 		$qry .= " and s.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		
+		if(isset($post["keyword"]) && $post["keyword"] != "")
+			$qry .= " and s.keyword like '%".trim($post["keyword"])."%'";
+		if(isset($post["createdById"]) && $post["createdById"] != "")
+			$qry .= " and s.createdById like '%".trim($post["createdById"])."%'";
+		if(isset($post["searcher"]) && $post["searcher"] != "")
+			$qry .= " and u.userName like '%".trim($post["searcher"])."%'";
+		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
+			$qry .= " and s.createdByIP like '%".trim($post["createdByIP"])."%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -657,10 +683,10 @@ class Controller //extends MySQL
                DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
                DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
                c.confirmed confirmDate,
-               if(c.createdById!='NULL',concat(u.firstName,' ',u.lastName),c.email) author, 
+               if(c.createdById!='NULL',u.userName,c.email) author, 
                concat(u2.firstName,' ',u2.lastName) confirmer,
-               concat(u3.firstName,' ',u3.lastName) updatedBy,
-               v.name videoName,q.question
+               u3.userName updatedBy,
+               v.name videoName,q.question,v.link
                from comments c
                left join users u on u.id=c.createdById
                left join users u2 on u2.id=c.confirmedById
@@ -690,6 +716,8 @@ class Controller //extends MySQL
 			$qry .= " and c.isConfirmed=".trim($post["confirmed"]);
 		if(isset($post["confirmer"]) && $post["confirmer"] != "")
 			$qry .= " and c.confirmer like '%" . trim($post["confirmer"]) . "%'";
+		if(isset($post["confirmedById"]) && $post["confirmedById"] != "")
+			$qry .= " and c.confirmedById like '%" . trim($post["confirmedById"]) . "%'";
 		
 		$beginDate="00-00-0000";
 		$endDate="01-01-9999";
@@ -717,6 +745,8 @@ class Controller //extends MySQL
 			$qry .= " and c.updatedBy like '%" . trim($post["updatedBy"]) . "%'";
 		if(isset($post["updatedByIP"]) && $post["updatedByIP"] != "")
 			$qry .= " and c.updatedByIP like '%" . trim($post["updatedByIP"]) . "%'";
+		if(isset($post["link"]) && $post["link"] != "")
+			$qry .= " and c.link like '%" . trim($post["link"]) . "%'";
 		
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -1044,28 +1074,38 @@ class Controller //extends MySQL
 			$sortBy = "e.sentDate ";
 			$sortType = "desc";
 		}
-		$beginDate="01-01-1900";
+		$beginDate="01-01-0000";
 		$endDate="01-01-9999";
 		
 		$lang = $this->lang;
-		$qry = "SELECT e.*,
+		$qry = "SELECT e.*,e.to sentTo,
 				concat(u.firstName,' ',u.lastName) senderName, u.userName
 				from emails e
 				left join users u on u.id=e.senderId
 				where 1=1 ";
 		
-		if(isset($post["created"]) && $post["created"] != "")
-			$beginDate = $this->getDateForSelect(trim($post["created"]));
-		if(isset($post["createdTill"]) && $post["createdTill"] != "")
-			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		if(isset($post["sentDate"]) && $post["sentDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["sentDate"]));
+		if(isset($post["sentDateTill"]) && $post["sentDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["sentDateTill"]));
 		$qry .= " and e.sentDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 			
 		if(isset($post["id"]) && is_numeric($post["id"]))
-			$qry .= " and e.senderId=".trim($post["id"]);
+			$qry .= " and e.id=".trim($post["id"]);
+		if(isset($post["subject"]) && $post["subject"] != "")
+			$qry .= " and e.subject like '%" . trim($post["subject"]) . "%'";
+		if(isset($post["body"]) && $post["body"] != "")
+			$qry .= " and e.body like '%" . trim($post["body"]) . "%'";
+		if(isset($post["senderId"]) && is_numeric($post["senderId"]))
+			$qry .= " and e.senderId=".trim($post["senderId"]);
 		if(isset($post["userName"]) && $post["userName"] != "")
 			$qry .= " and u.userName like '%" . trim($post["userName"]) . "%'";
-		if(isset($post["name"]) && $post["name"] != "")
-			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["name"]) . "%'";
+		if(isset($post["senderIP"]) && $post["senderIP"] != "")
+			$qry .= " and e.senderIP like '%" . trim($post["senderIP"]) . "%'";
+		if(isset($post["to"]) && $post["to"] != "")
+			$qry .= " and e.to like '%" . trim($post["to"]) . "%'";
+	
+		
 		
 		$qry .= " order by $sortBy $sortType";
 		if($perPage>0)

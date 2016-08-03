@@ -411,6 +411,7 @@ $content['CONFIRMER'] ='Təsdiqləyən';
 $content['CONFIRMERIP'] ='Təsdiqləyən IP';
 $content['UPDATEDBYID'] ='Redaktə edən ID';
 $content['UPDATEDBYIP'] ='Redaktə edən IP';
+$content['videoIdCommentsHint']="videoIdCommentsHint";
 $content['UPDATEDBY'] ='Redaktə edən';
 $content['CHANGED'] ='Redaktə edildi';
 $content['CONFIRMEDBYID'] ='CONFIRMEDBYID';
@@ -604,6 +605,9 @@ $content['MNDEFINITIONS'] ="Definitions";
 $content['MNCATEGORIES'] ="Categories";
 $content['MNNOTIFICATIONS'] ="Notifications";
 $content['MNGUESTS'] ="Qonaqlar";
+$content['MNSEARCHES'] ="Searches";
+$content['MNMESSAGES'] ="Messages";
+$content['MNLOGS'] ="Logs";
 //End admin menu
 
 //Admin categories
@@ -689,4 +693,28 @@ $content['commentCntGuestHint']="commentCntGuestHint";
 $content['searchCntGuestHint']="searchCntGuestHint";
 
 //End Admin GUESTS
+//Admin Searches
+$content['SEARCHDATE']="SEARCHDATE";
+$content['SEARCHERID']="SEARCHERID";
+$content['SEARCHERIP']="SEARCHERIP";
+$content['createdDateSearchesHint']="createdDateSearchesHint";
+$content['keywordSearchesHint']="keywordSearchesHint";
+$content['createdByIdSearchesHint']="createdByIdSearchesHint";
+$content['searcherSearchesHint']="searcherSearchesHint";
+$content['createdByIPSearcesHint']="createdByIPSearcesHint";
+
+//End Admin Searches
+
+//Admin messages
+$content['sentDateMessagesHint']="sentDateMessagesHint";
+$content['idMessagesHint']="idMessagesHint";
+$content['subjectMessagesHint']="subjectMessagesHint";
+$content['bodyMessagesHint']="bodyMessagesHint";
+$content['senderIdMessagesHint']="senderIdMessagesHint";
+$content['userNameMessagesHint']="userNameMessagesHint";
+$content['senderIPMessagesHint']="senderIPMessagesHint";
+$content['toMessagesHint']="toMessagesHint";
+$content['attachmentMessagesHint']="attachmentMessagesHint";
+
+//End Admin messages
 ?>

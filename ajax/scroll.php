@@ -445,7 +445,7 @@ function showSearchResults($data,$db,$limit)
 	
 	$qry .= " 
 			order by $orderBy
-			limit $start,$limit";echo $qry;
+			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry);
 	//print_r($res[1]);
 	displayAllData($res, $data);

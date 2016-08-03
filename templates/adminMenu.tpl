@@ -56,6 +56,9 @@ body { margin:0; }
 		<li><a {if $page=="adminGuests" } class='active' {/if} href='?page=adminGuests'><span>{$mnGuests}</span></a>
 		<li><a {if $page=="adminCategories" } class='active' {/if} href='?page=adminCategories'><span>{$mnCategories}</span></a></li>
 		<li><a {if $page=="adminNotifications" } class='active' {/if} href='?page=adminNotifications'><span>{$mnNotifications}</span></a></li>
+		<li><a {if $page=="adminSearches" } class='active' {/if} href='?page=adminSearches'><span>{$mnSearches}</span></a></li>
+		<li><a {if $page=="adminMessages" } class='active' {/if} href='?page=adminMessages'><span>{$mnMessages}</span></a></li>
+		<li><a {if $page=="adminLogs" } class='active' {/if} href='?page=adminLogs'><span>{$mnLogs}</span></a></li>
 		<li><a href="index.php?action=logout">{$logout}</a></li>
 	</ul>
 </div>

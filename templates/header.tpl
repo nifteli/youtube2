@@ -1,46 +1,48 @@
 <script>
 $(function() {
-$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
-$( "#search" ).focus();
-$( "#dpFrom" ).datepicker( 
-	{
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "-100:+5"
-	},
-	$.datepicker.regional["{$lang}"]
-);
-$( "#dpTo" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "-100:+5"
-	},$.datepicker.regional[ "{$lang}" ] );
-$( "#dpFrom2" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "-100:+5"
-	}, $.datepicker.regional[ "{$lang}" ] );
-$( "#dpTo2" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "-100:+5"
-	}, $.datepicker.regional[ "{$lang}" ] );
+//alert("ee");
+	$( "#search" ).focus();
+	$.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
+	$( "#dpFrom" ).datepicker( 
+		{
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		},
+		$.datepicker.regional["{$lang}"]
+	);
+	$( "#dpTo" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		},$.datepicker.regional[ "{$lang}" ] );
+	$( "#dpFrom2" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		}, $.datepicker.regional[ "{$lang}" ] );
+	$( "#dpTo2" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "-100:+5"
+		}, $.datepicker.regional[ "{$lang}" ] );
 });
 
 </script>	
+
 <script>
-$(function() {
-    var validator = $("#logForm").validate({
-        rules: {
-            userName: "required",
-			password: "required",
-        },
-        messages: {
-			userName:"",
-			password:"",
-        },
-    });
-});
+//$(function() {
+  //  var validator = $("#logForm").validate({
+    //    rules: {
+      //      userName: "required",
+		//	password: "required",
+        //},
+        //messages: {
+			//userName:"",
+			/password:"",
+        //},
+    //});
+//});
 
 var allCategories = {$allCategories};
 
@@ -106,23 +108,11 @@ function checkAccess()
 	return false;
 }
 
-</script>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.awesomeCloud.min.js"></script>
-<link href="css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-.wordcloud {
-height: 70px;
-margin: 0in auto;
-padding: 0;
-page-break-after: always;
-page-break-inside: avoid;
-width: 840px;
-float: left;
-display:none;
-}
-</style> 
-<body>
+</script> 
+
+<!-- <script src="js/jquery.min.js"></script> -->
+
+<body> 
 <div id="wrapper">
 	<div class="banner">
 		<div class="min-cont">

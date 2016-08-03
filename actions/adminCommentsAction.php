@@ -10,23 +10,26 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 		return;
 	}
 
-	$fields = array("id" => $content['ID'],
-					"comment" => $content['COMMENT'],
-					"videoId" => $content['VIDEOID'],
-					"createdById" => $content['AUTHORID'],
-					"userIP" => $content['AUTHORIP'],
+	$fields = array(
 					"createdDate" => $content['ADDDATE'],
 					"updatedDate" => $content['UPDATED'],
-					"updatedById" => $content['UPDATEDBYID'],
-					"updatedByIP" => $content['UPDATEDBYIP'],
-					"updatedBy" => $content['UPDATEDBY'],
-					"athor" => $content['AUTHOR'],
-					"isConfirmed" => $content['CONFIRMED'],
-					"confirmedByIP" => $content['CONFIRMERIP'],
-					"confirmer" => $content['CONFIRMER'],
 					"confirmed" => $content['CONFIRDATE'],
+					"id" => $content['ID'],
+					"comment" => $content['COMMENT'],
+					"isConfirmed" => $content['CONFIRMED'],
+					"videoId" => $content['VIDEOID'],
+					"link" => $content['VIDEOLINK'],
 					"videoName" => $content['VIDEONAME'],
-					"question" => $content['VIDEOQUESTION']
+					"question" => $content['VIDEOQUESTION'],
+					"createdById" => $content['AUTHORID'],
+					"athor" => $content['AUTHOR'],
+					"userIP" => $content['AUTHORIP'],
+					"updatedById" => $content['UPDATEDBYID'],
+					"updatedBy" => $content['UPDATEDBY'],
+					"updatedByIP" => $content['UPDATEDBYIP'],
+					"confirmedById" => $content['CONFIRMEDBYID'],
+					"confirmer" => $content['CONFIRMER'],
+					"confirmedByIP" => $content['CONFIRMERIP']
 					);
 	$links = $controller->getComments(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;

@@ -1,16 +1,7 @@
 <script>
 $(document).ready(function() {
-    var validator = $("#addVideoForm").validate({
-        rules: {
-            userName: "required",
-			password: "required",
-        },
-        messages: {
-			userName:"",
-			password:"",
-        },
-    });
-	
+    
+	//alert("{$category}");
 	$("#category").multiSelect({ oneOrMoreSelected: '*',
 								  noneSelected: '{$category}'
 								});
@@ -77,7 +68,8 @@ function uncheckAll()
 				<option value=0>{$category}<option>
 			</select> -->
 			<select id="category" name="category[]" multiple="multiple" class="fieldv" style="width:353px">
-			</select> <img src="img/delete.png" width="20" height="20" title="{$uncheckAll}" onclick="uncheckAll()" style="cursor:pointer">
+			</select> 
+			<img src="img/delete.png" width="20" height="20" title="{$uncheckAll}" onclick="uncheckAll()" style="cursor:pointer">
 			<input class="fieldv" type="text" name="tags" id="tags" value="{$tagsVal}" placeholder="{$tags}" style="width: 100%;">
 			<textarea class="fieldtextv" type="text" name="information" id="information" placeholder="{$information}" style="width: 100%;height:265px !important">{$informationVal}</textarea>
 			<input type="hidden" name="duration" id="duration" value="{$durationVal}"/>

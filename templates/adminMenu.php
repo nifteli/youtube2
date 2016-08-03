@@ -22,6 +22,9 @@ class AdminMenu
 		$this->adminMenu->assign("mnDefinitions", $content['MNDEFINITIONS']);
 		$this->adminMenu->assign("mnCategories", $content['MNCATEGORIES']);
 		$this->adminMenu->assign("mnNotifications", $content['MNNOTIFICATIONS']);
+		$this->adminMenu->assign("mnSearches", $content['MNSEARCHES']);
+		$this->adminMenu->assign("mnMessages", $content['MNMESSAGES']);
+		$this->adminMenu->assign("mnLogs", $content['MNLOGS']);
 		$this->adminMenu->assign("page", isset($_GET["page"])?$_GET["page"]:"adminProfile" );
 		
 		$this->adminMenu->assign("logout",$content['LOGOUT']);

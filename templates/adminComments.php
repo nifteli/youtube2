@@ -25,6 +25,7 @@ class AdminComments
 		$this->adminComments->assign("lnCreated", $content['ADDDATE']);
 		$this->adminComments->assign("lnId", $content['ID']);
 		$this->adminComments->assign("lnVideoId", $content['VIDEOID']);
+		$this->adminComments->assign("lnLink", $content['VIDEOLINK']);
 		$this->adminComments->assign("lnAuthorId", $content['AUTHORID']);
 		$this->adminComments->assign("lnAuthor", $content['AUTHOR']);
 		$this->adminComments->assign("lnComment", $content['COMMENT']);
@@ -45,6 +46,7 @@ class AdminComments
 		$this->adminComments->assign("createdCommentsHint", $content['createdCommentsHint']);
 		$this->adminComments->assign("idCommentsHint", $content['idCommentsHint']);
 		$this->adminComments->assign("videoIdCommentsHint", $content['videoIdCommentsHint']);
+		$this->adminComments->assign("linkCommentsHint", $content['linkCommentsHint']);
 		$this->adminComments->assign("createdByIdCommentsHint", $content['createdByIdCommentsHint']);
 		$this->adminComments->assign("authorCommentsHint", $content['authorCommentsHint']);
 		$this->adminComments->assign("commentCommentsHint", $content['commentCommentsHint']);
@@ -73,6 +75,7 @@ class AdminComments
 			$this->adminComments->assign("createdTillVal", $_POST["createdTill"]);
 			$this->adminComments->assign("idVal", $_POST["id"]);
 			$this->adminComments->assign("videoIdVal", $_POST["videoId"]);
+			$this->adminComments->assign("linkVal", $_POST["link"]);
 			$this->adminComments->assign("authorIdVal", $_POST["authorId"]);
 			$this->adminComments->assign("authorVal", $_POST["author"]);
 			$this->adminComments->assign("commentVal", $_POST["comment"]);
@@ -87,6 +90,8 @@ class AdminComments
 			$this->adminComments->assign("updatedByIdVal", $_POST["updatedById"]);
 			$this->adminComments->assign("updatedByVal", $_POST["updatedBy"]);
 			$this->adminComments->assign("updatedByIPVal", $_POST["updatedByIP"]);
+			$this->adminComments->assign("confirmedByIdVal", $_POST["confirmedById"]);
+			$this->adminComments->assign("confirmerVal", $_POST["confirmer"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);
@@ -96,6 +101,8 @@ class AdminComments
 			$sortType = ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["videoIdSortType"]))
 			$sortType = ($_GET["videoIdSortType"] == "" || $_GET["videoIdSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["linkSortType"]))
+			$sortType = ($_GET["linkSortType"] == "" || $_GET["linkSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["authorIdSortType"]))
 			$sortType = ($_GET["authorIdSortType"] == "" || $_GET["authorIdSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["authorSortType"]))
@@ -131,6 +138,7 @@ class AdminComments
 		$this->adminComments->assign("createdSortType", ($_GET["createdSortType"] == "" || $_GET["createdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("videoIdSortType", ($_GET["videoIdSortType"] == "" || $_GET["videoIdSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminComments->assign("linkSortType", ($_GET["linkSortType"] == "" || $_GET["linkSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("authorIdSortType", ($_GET["authorIdSortType"] == "" || $_GET["authorIdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("authorSortType", ($_GET["authorSortType"] == "" || $_GET["authorSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminComments->assign("commentSortType", ($_GET["commentSortType"] == "" || $_GET["commentSortType"] == "ASC")? 'DESC' : 'ASC');
