@@ -39,7 +39,7 @@ $(function() {
         //},
         //messages: {
 			//userName:"",
-			/password:"",
+			//password:"",
         //},
     //});
 //});
@@ -95,11 +95,10 @@ function showTimeInterval(sFlag)
 }
 
 function checkAccess()
-{ 
+{
 	var hasAccess = "{$hasAccess}";
 	if(hasAccess == 1)
 		return true;
-	//alert("no reg");
 	else
 	{
 		document.getElementById("regPop").click();

@@ -17,6 +17,7 @@ if(!$access->hasAccess)
 	header("location:index.php");
 	return;
 }
+
 	//set website language
 if(isset($_GET["lang"]) && $_GET["lang"] != "" && in_array($_GET["lang"],$langs)) 
 {

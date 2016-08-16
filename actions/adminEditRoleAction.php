@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>"; print_r($_POST); echo "</pre>"; //exit;
 if ($_GET["action"]=="save")
-{
+{ 
 	$result = "success";
 	$messages = array();
 	
@@ -65,6 +65,9 @@ if ($_GET["action"]=="save")
 	} 
 	
 	if($result=="success")
+	{ 
 		$messages["success"] = $content['ADMINROLESNOTF1'];
+		$controller->logAction(44);
+	}
 } 
 ?>

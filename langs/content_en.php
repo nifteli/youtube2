@@ -708,4 +708,17 @@ $content['toMessagesHint']="toMessagesHint";
 $content['attachmentMessagesHint']="attachmentMessagesHint";
 
 //End Admin messages
+
+//Admin Logs
+$content['ACTIONDATE']="ACTIONDATE";
+$content['ACTIONNAME']="ACTIONNAME";
+$content['actionDateLogsHint']="actionDateLogsHint";
+$content['idLogsHint']="idLogsHint";
+$content['actionNameLogsHint']="actionNameLogsHint";
+$content['createdByIdLogsHint']="createdByIdLogsHint";
+$content['createdByLogsHint']="createdByLogsHint";
+$content['createdByIPLogsHint']="createdByIPLogsHint";
+
+//End Admin Logs
+
 ?>

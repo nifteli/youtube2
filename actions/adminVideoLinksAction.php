@@ -128,6 +128,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 				{
 					$db->commit();
 					$okRows .= $row . ",";
+					$controller->logAction(47);
 				}
 			}
 			else
@@ -287,6 +288,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 				{
 					$db->commit();
 					$okRows .= $row . ",";
+					$controller->logAction(48);
 				}
 			}
 			else
@@ -387,6 +389,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 	}
 	$messages["success"] = $content["LINKSDELETED"];
 	$db->commit();
+	$controller->logAction(48);
 	unlink($saveto);
 }
 
@@ -432,6 +435,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$links = $controller->getVideoLinks(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->exportToExcel($fields,$links,$content['TITLEVIDEOLINKS']);
+	$controller->logAction(10);
 	return;
 }
 
@@ -486,7 +490,10 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])) && is_numeri
 								"deletedById"=>$access->userId));
 	if($db->count>0)
 		if($_GET["flag"] == 0)
+		{
 			$messages["success"] = $content["REMOVED"];
+			$controller->logAction(9);
+		}
 		else
 			$messages["success"] = $content["UNDELETED"];
 }

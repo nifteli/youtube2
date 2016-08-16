@@ -144,7 +144,10 @@ if ($_GET["action"]=="save")
 	}
 	
 	if($result=="success")
+	{
 		$messages["success"] = $content['ADMINPROFILENOTF1'];
+		$controller->logAction(2);
+	}
 }
 
 function compressImage($source_url, $destination_url, $quality) 

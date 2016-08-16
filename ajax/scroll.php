@@ -297,7 +297,7 @@ function showSearchResults($data,$db,$limit)
 {
 	$lang = $data["lang"];
 	$page = $data['page'];
-	$orderBy = " v.added desc,catName$lang asc ";
+	$orderBy = " a.vadded desc,catName$lang asc ";
 	
 	$search = $data["search"];
 	$language = $data["language"];
@@ -313,7 +313,7 @@ function showSearchResults($data,$db,$limit)
 	switch($data["orderBy"])
 	{
 		case 1:
-			$orderBy = " a.added $direction,catName$lang asc ";
+			$orderBy = " a.vadded $direction,catName$lang asc ";
 			break;
 		case 2:
 			$orderBy = " a.name $direction,catName$lang asc ";
@@ -337,7 +337,7 @@ function showSearchResults($data,$db,$limit)
 			$orderBy = " a.comments $direction,catName$lang asc  ";
 			break;
 		default:
-			$orderBy = " a.added desc,catName$lang asc ";
+			$orderBy = " a.vadded desc,catName$lang asc ";
 			break;
 	}
 	
@@ -380,10 +380,11 @@ function showSearchResults($data,$db,$limit)
 		
 	$qry = "select * from (SELECT vs.views viewCount,vs.likes likeCount,vs.dislikes dislikeCount,vs.comments,
 					v.id, v.name, v.info, v.duration,v.questions,q.question,
-					DATE_FORMAT(v.added,'%d %b %Y') added, 
+					DATE_FORMAT(v.added,'%d %b %Y') added, v.added vadded,
 					v.languageId, v.link, v.addedById,
 					concat(u.firstName,' ',u.lastName) addedBy,u.id userId,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
+					GROUP_CONCAT(DISTINCT t.id ORDER BY t.name asc) tagIds,
 					vc.categoryId,
 					l.name$lang,
 					c.catName$lang,
@@ -441,14 +442,30 @@ function showSearchResults($data,$db,$limit)
 			$qry .= " and " . createCondition("a.duration", ($interval - 4) * 60 * 60 + 1, ">=", false);
 	}
 	if($fromDate != "" || $toDate != "")
-		$qry .= " and " . createCondition("a.added", "'$fromDate' and '$toDate'", "between", false);
+		$qry .= " and " . createCondition("a.vadded", "'$fromDate' and '$toDate'", "between", false);
 	
 	$qry .= " 
 			order by $orderBy
 			limit $start,$limit";//echo $qry;
 	$res =$db->rawQuery($qry);
 	//print_r($res[1]);
+	//linkTags($res);
 	displayAllData($res, $data);
+}
+
+function linkTags(&$res)
+{
+	for($i=0; $i<count($res); $i++)
+	{
+		$tags = explode(",",$res[$i]["tags"]);
+		$tagIds = explode(",",$res[$i]["tagIds"]);
+		$res[$i]["tagsOrg"] = $res[$i]["tags"]; $res[$i]["tags"] = "";
+		for($j=0; $j<count($tags); $j++)
+		{ 
+			$res[$i]["tags"] .= "<a href='index.php?tagId=".$tagIds[$j]."'>".$tags[$j]."</a>, ";
+		}
+		$res[$i]["tags"] = rtrim($res[$i]["tags"],",");
+	}
 }
 
 function displayAllData($res, $data, $colCnt=4)
@@ -545,7 +562,7 @@ function displayData($res, $data, $colCnt=4)
 			if($cat != $res[$i]["catName".$lang])
 			{
 				$str .= "<div class='hollywd'>
-							<h2>".$res[$i]["catName".$lang];
+							<h2><a href='?df=1&catId=" . $res[$i]["categoryId"] . "&q=" . $res[$i]["questions"] . "'>".$res[$i]["catName".$lang]."</a>";
 				if(isset($_SESSION["userId"]))
 				{
 					$subscribed = isSubscribed($res[$i]["categoryId"]);

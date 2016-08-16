@@ -9,6 +9,7 @@ class AdminFolders
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminFolders = new SmartyBC;
 		$this->adminFolders->assign("titleFolders", $content['TITLEFOLDERS']);
@@ -139,7 +140,7 @@ class AdminFolders
 		$this->adminFolders->assign("videoCntSortType", ($_GET["videoCntSortType"] == "" || $_GET["videoCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminFolders->assign("perPage", $perPage);
 		$this->adminFolders->assign("folders", $controller->getFolders($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminFolders->assign("folderPages",$controller->getPages($begin,$perPage,$cnt,"adminFolders"));

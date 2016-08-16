@@ -273,12 +273,7 @@ function openNewFolderBox(n)
 	return false;
 }
 
-function hint(elem) {
-  elem.parentNode.firstElementChild.style.display = 'block';
-}
-function unhint(elem) {
-  elem.parentNode.firstElementChild.style.display = 'none';
-}
+
 </script>
 <script>
  var ajax_arry=[];
@@ -345,8 +340,8 @@ function unhint(elem) {
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 650px;">
 	<div class="wvLeft">
-		<div class="hollywd" style="margin-top:10px">
-			 <h2 title="{$fullVideoName}">{$videoName}</h2>  
+		<div class="hollywd" >
+			 <h2 style="margin-top:22px" title="{$fullVideoName}">{$videoName}</h2>  
 		</div>
 		<div class="player">
 		<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="600" height="335" 
@@ -378,7 +373,7 @@ function unhint(elem) {
 		<div class="actIcons">
 			<span class="wvLabel" id="addToFolder" name="addToFolder" {if $added2Folder != 0} style="display:none" {/if}>
 			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
-			<img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/>{$addToFolder}</a>
+			<img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/>&nbsp{$addToFolder}</a>
 			</span>	
 			
 			<span onclick="addRemoveFromFolder({$videoId},1,0)" class="wvLabel" id="removeFromFolder" name="removeFromFolder" {if $added2Folder == 0} style="display:none" {/if}>
@@ -439,19 +434,19 @@ function unhint(elem) {
 				<form name="frmComment" id="frmComm" style="float:none;" method="post" action="?page=watchVideo&action=comment&id={$videoId}">
 					{if $hasAccess}
 						<div class=textfield style="float:left">
-						<div class=hint>{$commentHint}</div>
-						<TEXTAREA onfocus="hint(this)" onblur="unhint(this)"  class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="width: 833px;max-width: 835px;    margin-right: 5;"></TEXTAREA>
+						
+						<TEXTAREA class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="width: 833px;max-width: 835px;    margin-right: 5;"></TEXTAREA>
 						</div>
 						<input class="post" type="button" value="{$post}" name="sub" onclick="commentAction({$videoId},0,2)">
 					{else}
 						<div style="float:left;width:841px">
 							<div class=textfield style="float:left">
-								<div class=hint>{$commentHint}</div>
-								<TEXTAREA onfocus="hint(this)" onblur="unhint(this)" class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="max-width: 835px;"></TEXTAREA>
+								
+								<TEXTAREA  class="cmtBox" id="comment" name="comment" COLS=20 placeholder="{$addComment}" style="max-width: 835px;"></TEXTAREA>
 							</div>
 							<div class=textfield>
-								<div class=hint>{$emailHint}.</div>
-								<input onfocus="hint(this)" onblur="unhint(this)" class="field" type="email" name="email" style="height:22px;margin-bottom:5px;width:150px;vertical-align: middle;" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}">
+								
+								<input class="field" type="email" name="email" style="height:22px;margin-bottom:5px;width:150px;vertical-align: middle;" id="email" value="{if isset($emailVal)} {$emailVal} {/if}" placeholder="{$email}">
 								<label><input type="checkbox" name="agree" id="agree"> {$agreeWithRules} <a href='?page=siteRules'>{$rules}</a></label>
 							</div>
 						</div>

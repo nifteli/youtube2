@@ -9,6 +9,7 @@ class AdminCategories
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminCategories = new SmartyBC;
 		$this->adminCategories->assign("titleCategories", $content['TITLECATEGORIES']);
@@ -192,7 +193,7 @@ class AdminCategories
 		$this->adminCategories->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminCategories->assign("perPage", $perPage);
 		$this->adminCategories->assign("categories", $controller->getAdminCategories($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminCategories->assign("catPages",$controller->getPages($begin,$perPage,$cnt,"adminCategories"));

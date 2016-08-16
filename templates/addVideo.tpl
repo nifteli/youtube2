@@ -27,7 +27,7 @@ function uncheckAll()
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 1000px;">
 	{if $result == 'error'}
-	  <div class="smallerr" style="width: 895;">
+	  <div class="smallerr" style="width: 895;margin-top:0">
 		{foreach from=$messages item=message}
 			{$message} <br>
 		{/foreach}
@@ -37,7 +37,7 @@ function uncheckAll()
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 
-	<p style="font-weight:bold; margin-top: 40px;">{$addVideoNote1}</p>
+	<p style="font-weight:bold; ">{$addVideoNote1}</p>
 	<div style="float:left;width:900px;text-align:center"><label class="labelv" style="color: red !important" id="linkerror" {if $validVideoVal == "true"}hidden{/if}>{$addVideoError9}</label></div>
 	<form  id="addVideoForm"  name="addVideoForm" action="?page=addVideo&action=add{if isset($videoId)}&videoId={$videoId}{/if}" method="post">
 		<div class="player" style="margin-left: 5px;">

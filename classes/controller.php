@@ -964,6 +964,51 @@ class Controller //extends MySQL
 		return $res;
 	}
 	
+	public function getLogs($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		$beginDate="01-01-0000";
+		$endDate="01-01-9999";
+		if ($sortBy == "")
+		{
+			$sortBy = "actionDate ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "select * from (select l.*, u.userName createdBy, la.actionName".$this->lang." actionName
+				from logs l
+				inner join logactions la on l.actionId=la.id
+				inner join users u on u.id=l.createdById
+				)a where 1=1 ";
+		
+		if(isset($post["actionDate"]) && $post["actionDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["actionDate"]));
+		if(isset($post["actionDateTill"]) && $post["actionDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["actionDateTill"]));
+		$qry .= " and actionDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and id = " . trim($post["id"]);
+		if(isset($post["actionName"]) && $post["actionName"] != "")
+			$qry .= " and actionName like '%" . trim($post["actionName"]) . "%'";
+		if(isset($post["createdById"]) && $post["createdById"] != "")
+			$qry .= " and createdById = " . trim($post["createdById"]);
+		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
+			$qry .= " and createdByIP like '%" . trim($post["createdByIP"]) . "%'";
+		if(isset($post["userName"]) && $post["userName"] != "")
+			$qry .= " and createdBy like '%" . trim($post["userName"]) . "%'";
+
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		return $res;
+	}
+	
 	public function getUsers($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
@@ -1316,5 +1361,16 @@ class Controller //extends MySQL
 		imagejpeg($image, $destination_url, $quality); 
 		return $destination_url; 
 	} 
+	
+	public function logAction($actionId)
+	{ 
+		$id = $this->db->insert("logs",array(
+								"actionDate"=>date("Y-m-d H:i:s"),
+								"actionId"=>$actionId,
+								"createdById"=>$this->access->userId,
+								"createdByIP"=>$_SERVER["REMOTE_ADDR"]								
+								)); 
+								//echo "id=".$id.$this->db->getLastQuery();
+	}
 }
 ?>

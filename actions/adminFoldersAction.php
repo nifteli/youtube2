@@ -66,6 +66,7 @@ if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_PO
 		if($continue)
 		{
 			$db->commit();
+			$controller->logAction(16);
 			$messages["success"] = $content["FOLDEREDITED"];
 		}
 		else
@@ -160,6 +161,7 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 		{
 			$db->commit();
 			$okMessage = $content["FOLDERADDED"];
+			$controller->logAction(15);
 		}
 		else
 			$db->rollback();
@@ -203,6 +205,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getFolders(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
+	$controller->logAction(18);
 	$controller->exportToExcel($fields,$links,$content['TITLEFOLDERS']);
 	return;
 }
@@ -225,6 +228,9 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
+	{
 		$messages["success"] = $content["REMOVED"];
+		$controller->logAction(17);
+	}
 }
 ?>

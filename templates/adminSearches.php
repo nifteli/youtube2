@@ -9,6 +9,7 @@ class AdminSearches
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminSearches = new SmartyBC;
 		$this->adminSearches->assign("lang", $controller->lang);
@@ -68,7 +69,7 @@ class AdminSearches
 		
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminSearches->assign("perPage", $perPage);
 		$this->adminSearches->assign("searches", $controller->getSearches($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminSearches->assign("searchPages",$controller->getPages($begin,$perPage,$cnt,"adminSearches"));

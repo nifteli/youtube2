@@ -9,6 +9,7 @@ class AdminGuests
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminGuests = new SmartyBC;
 		$this->adminGuests->assign("titleGuests", $content['TITLEGUESTS']);
@@ -88,7 +89,7 @@ class AdminGuests
 		$this->adminGuests->assign("searchCntSortType", ($_GET["searchCntSortType"] == "" || $_GET["searchCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminGuests->assign("perPage", $perPage);
 		$this->adminGuests->assign("guests", $controller->getGuests($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminGuests->assign("guestPages",$controller->getPages($begin,$perPage,$cnt,"adminGuests"));

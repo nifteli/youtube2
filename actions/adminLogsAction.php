@@ -11,15 +11,17 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	}
 
 	$fields = array(
-					"createdDate" => $content['SEARCHDATE'],
-					"keyword" => $content['KEYWORD'],
-					"createdById" => $content['SEARCHERID'],
-					"searcher" => $content['SEARCHER'],
-					"createdByIP" => $content['SEARCHERIP']
+					"actionDate" => $content['ACTIONDATE'],
+					"id" => $content['ID'],
+					"actionName" => $content['ACTIONNAME'],
+					"createdById" => $content['CREATEDBYID'],
+					"createdBy" => $content['CREATEDBY'],
+					"createdByIP" => $content['CREATEDBYIP']
 					);
-	$links = $controller->getSearches(1,0,$_POST,$cnt,"","");
+	$links = $controller->getLogs(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->exportToExcel($fields,$links,$content['MNSEARCHES']);
+	$controller->logAction(51);
+	$controller->exportToExcel($fields,$links,$content['MNLOGS']);
 	return;
 }
 ?>

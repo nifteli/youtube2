@@ -4,7 +4,6 @@ $sessionId = session_id();
 
 include("./configs/paths.php");
 include($langsPath."content_".$_SESSION["lang"].".php");
-
 require_once 'configs/conf.php';
 // include the jqGrid Class
 require_once ABSPATH."classes/php/PHPSuito/jqGrid.php";
@@ -30,6 +29,7 @@ $grid->SelectCommand = "SELECT r.id,
 $grid->table = 'roles'; 
 //$grid->setPrimaryKeyId('id'); 
 $grid->serialKey = false; 
+//print_r($_POST);
 
 // set the ouput format to json
 $grid->dataType = 'json';
@@ -54,13 +54,13 @@ $grid->setColProperty('name', array("label"=>$content['ROLENAME'],"editrules"=>a
 $grid->setColProperty("created", array("editable"=>false,"label"=>$content["ROLECREATED"],"formatter"=>"date","formatoptions"=>array("srcformat"=>"Y-m-d H:i:s","newformat"=>"d-m-Y")));
 $grid->setColProperty("createdBy", array("label"=>$content["ROLECREATEDBY"],"editable"=>false,"editrules"=>array("edithidden"=>false, "required"=>true),"editoptions"=>array("defaultValue"=>"1"),"hidden"=>false));
 
-/*$myevent = <<<ONSELECT
+$myevent = <<<ONSELECT
 function(rowid, selected)
 {
    if (rowid) alert("Row is selected");
 }
 ONSELECT;
-$grid->setGridEvent('onSelectRow',$myevent);*/
+$grid->setGridEvent('onSelectRow',$myevent);
 
 
 //$grid->setColProperty("ShipName",array("classes"=>"ui-ellipsis"));

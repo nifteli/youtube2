@@ -1698,13 +1698,13 @@ margin-right: -5px !important;
 
 .v-name{
 	float: left;
-margin-top: 22px;
+/* margin-top: 2px; */
 
 }
 
 .v-name h2{
  font-family:Calibri;
- font-size:24px;
+ font-size:20px;
  color:#333;
  font-weight:bold;	
 }
@@ -1878,14 +1878,15 @@ margin-top: 22px;
 
 
 .ico1{
-    float: right;
+        float: right;
     right: 16px;
     top: -19px;
     position: relative;
     color: white;
-    background-color: white;
+    background-color: fc8231;
     font-size: smaller;
-	color: #fc8231 !important;
+    color: white !important;
+    font-weight: bold;
 }
 .addVideoBtn
 {
@@ -2327,7 +2328,7 @@ float: left;
 	
 .forgotPass{
 	color: rgb(174, 64, 25);
-    width: 500px;
+    
     margin-left:5px;
 }
 
@@ -2613,7 +2614,7 @@ background: #C05208;
 .wvLeft{
 	float:left;
 	width:600px;
-	height: 385px;
+	height: 357px;
 }
 
 .wvRight{

@@ -57,6 +57,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'substitute' && count($_POS
 			else
 			{
 				$result = "success";
+				$controller->logAction(19);
 				//echo trim($tag)." updated<br>";
 			}
 		}
@@ -101,6 +102,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getTags(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
+	$controller->logAction(22);
 	$controller->exportToExcel($fields,$links,$content['TITLETAGS']);
 	return;
 }
@@ -123,6 +125,9 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
+	{
 		$messages["success"] = $content["REMOVED"];
+		$controller->logAction(21);
+	}
 }
 ?>

@@ -1,7 +1,7 @@
 <script>
 $(function() {
 $.datepicker.setDefaults( $.datepicker.regional[ "{$lang}" ] );
-$( "#entryDate" ).datepicker( 
+$( "#actionDate" ).datepicker( 
 	{
 		changeMonth: true,
 		changeYear: true,
@@ -9,7 +9,7 @@ $( "#entryDate" ).datepicker(
 	},
 	$.datepicker.regional["{$lang}"]
 );
-$( "#entryDateTill" ).datepicker( 
+$( "#actionDateTill" ).datepicker( 
 	{
 		changeMonth: true,
 		changeYear: true,
@@ -42,48 +42,39 @@ function submitForm(action)
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		<form method="post" action="?page=adminLogs&action=filter" id="vlFilter" name="vlFilter">
-		<div class="table-responsive" style="overflow-x: auto; width:1800px">
+		<div class="table-responsive" style="overflow-x: auto; width:1500px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 160px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 300px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
-					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
 				</colgroup>
 				<thead>
 				<tr style="background-color:rgb(219, 203, 129);">
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$entryDateGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=entryDate&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$idHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$IPGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=IP&IPSortType={$IPSortType}')">{$lnIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$deviceGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=device&deviceSortType={$deviceSortType}')">{$lnDevice}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$browserGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=browser&browserSortType={$browserSortType}')">{$lnBrowser}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$videCntWatchedGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=videCntWatched&videCntWatchedSortType={$videCntWatchedSortType}')">{$lnVideCntWatched}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$commentCntGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=commentCnt&commentCntSortType={$commentCntSortType}')">{$lnCommentCnt}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionDateLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionDate&actionDateSortType={$actionDateSortType}')">{$lnActionDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$idLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionNameLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionName&actionNameSortType={$actionNameSortType}')">{$lnActionName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIdLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIPLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
 					<td class="vertical-middle">
-						<input class="form-control" name="entryDate" id="entryDate" type="text" value="{$entryDateVal}" style="width:90px;display:initial"/>
-						<input class="form-control" name="entryDateTill" id="entryDateTill" type="text" value="{$entryDateTillVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="actionDate" id="actionDate" type="text" value="{$actionDateVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="actionDateTill" id="actionDateTill" type="text" value="{$actionDateTillVal}" style="width:90px;display:initial"/>
 					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="IP" id="IP" type="text" value="{$IPVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="device" id="device" type="text" value="{$deviceVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="browser" id="browser" type="text" value="{$browserVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="videCntWatched" id="videCntWatched" type="text" value="{$videCntWatchedVal}"/></td>
-					<td class="vertical-middle"><input class="form-control" name="videoCntCommented" id="videoCntCommented" type="text" value="{$videoCntCommentedVal}"/></td>
-					<td class="vertical-middle"><input class="form-control" name="commentCnt" id="commentCnt" type="text" value="{$commentCntVal}"/></td>
+					<td class="vertical-middle"><input class="form-control" name="actionName" id="actionName" type="text" value="{$actionNameVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="createdById" id="createdById" type="text" value="{$createdByIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
 					<td class="vertical-middle"  style="text-align: left;">
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
@@ -94,15 +85,12 @@ function submitForm(action)
 				{section name=sec1 loop=$logs}
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$logs[sec1].entryDate}">{$logs[sec1].entryDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$logs[sec1].actionDate}">{$logs[sec1].actionDate}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].id}">{$logs[sec1].id}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].IP}">{$logs[sec1].IP}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].device}">{$logs[sec1].device}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].browser}">{$logs[sec1].browser}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].videCntWatched}"><a href="?page=adminDetails&s=logs&q=1&ip={$logs[sec1].IP}&title={$lnVideCntWatched}">{$logs[sec1].videCntWatched}</a></td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].videoCntCommented}"><a href="?page=adminDetails&s=logs&q=2&ip={$logs[sec1].IP}&title={$lnVideoCntCommented}">{$logs[sec1].videoCntCommented}</a></td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].commentCnt}"><a href="?page=adminDetails&s=logs&q=2&ip={$logs[sec1].IP}&title={$lnCommentCnt}">{$logs[sec1].commentCnt}</a></td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].searchCnt}"><a href="?page=adminDetails&s=logs&q=3&ip={$logs[sec1].IP}&title={$lnSearchCnt}">{$logs[sec1].searchCnt}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].actionName}">{$logs[sec1].actionName}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdById}">{$logs[sec1].createdById}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdBy}">{$logs[sec1].createdBy}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdByIP}">{$logs[sec1].createdByIP}</td>
 				</tr>
 				{/section}
 				</tbody>

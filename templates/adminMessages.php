@@ -9,6 +9,7 @@ class AdminMessages
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminMessages = new SmartyBC;
 		$this->adminMessages->assign("lang", $controller->lang);
@@ -91,7 +92,7 @@ class AdminMessages
 		
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=25;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"];else $perPage=$recsPerPage;
 		$this->adminMessages->assign("perPage", $perPage);
 		$this->adminMessages->assign("messages2", $controller->getMailInfo($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminMessages->assign("messagePages",$controller->getPages($begin,$perPage,$cnt,"adminMessages"));

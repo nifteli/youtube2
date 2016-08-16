@@ -39,11 +39,17 @@ if ($_GET["action"]=="save")
 			$messages["err"] = $content['ADMINROLESERR2'];
 		}
 		else
+		{
 			$db->commit();
+			
+		}
 	} 
 	
 	if($result=="success")
+	{
 		$messages["success"] = $content['ADMINROLESNOTF1'];
+		$controller->logAction(44);
+	}
 }
 	
 function validate_Date($mydate,$format = 'DD-MM-YYYY',&$date) 

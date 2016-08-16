@@ -102,6 +102,7 @@ if ($_GET["action"]=="add")
 									  "info"=>$_POST["information"],
 									  "updatedById"=>$access->userId,
 									  "duration"=>$_POST["duration"]));
+			$controller->logAction(8);
 			if($db->count == 0)
 			{
 				$result = 'error';
@@ -110,6 +111,7 @@ if ($_GET["action"]=="add")
 
 		}
 		else
+		{
 			$videoId = $db->insert("videos", array("link"=>trim($_POST["videoLink"]),
 									  "languageId"=>$_POST["language"],
 									  "questions"=>$questions,
@@ -119,6 +121,8 @@ if ($_GET["action"]=="add")
 									  "addedById"=>$access->userId,
 									  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
 									  "duration"=>$_POST["duration"]));
+			$controller->logAction(7);
+		}
 		if($videoId)
 		{
 			$db->where("videoId=".$videoId);
@@ -190,7 +194,10 @@ if ($_GET["action"]=="add")
 			$messages["dbError"] = $content['ADDVIDEOERROR8'];
 		}
 		else
+		{
 			$db->commit();
+			
+		}
 		
 	}
 		

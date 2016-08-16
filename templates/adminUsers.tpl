@@ -134,7 +134,7 @@ function showProfile(userId)
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
 		
-		<div class="table-responsive" style="overflow-x: auto; width:5000px">
+		<div class="table-responsive" style="overflow-x: auto; width:{if $canSeeDetails} 5000px; {else} 4200px;{/if}">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 30px; overflow: hidden;"/>
@@ -147,12 +147,14 @@ function showProfile(userId)
 					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					{if $canSeeDetails}
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 220px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					{/if}
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -194,12 +196,14 @@ function showProfile(userId)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$nameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$fatherNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=fatherName&fatherNameSortType={$fatherNameSortType}')">{$lnFatherName}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$birthDateUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=birthDate&birthDateSortType={$birthDateSortType}')">{$lnBirthDate}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$adminUsersUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=email&emailSortType={$emailSortType}')">{$lnEmail}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$telephoneUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=telephone&telephoneSortType={$telephoneSortType}')">{$lnTelephone}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$noteUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=note&noteSortType={$noteSortType}')">{$lnNote}</a></th>
+					{if $canSeeDetails}
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$nameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$fatherNameUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=fatherName&fatherNameSortType={$fatherNameSortType}')">{$lnFatherName}</a></th>
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$birthDateUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=birthDate&birthDateSortType={$birthDateSortType}')">{$lnBirthDate}</a></th>
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$adminUsersUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=email&emailSortType={$emailSortType}')">{$lnEmail}</a></th>
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$telephoneUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=telephone&telephoneSortType={$telephoneSortType}')">{$lnTelephone}</a></th>
+						<th class="vertical-middle" style=" text-align:center" ><a title="{$noteUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=note&noteSortType={$noteSortType}')">{$lnNote}</a></th>
+					{/if}
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$genderUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=gender&genderSortType={$genderSortType}')">{$lnGender}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$languageUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=language&languageSortType={$languageSortType}')">{$lnLanguage}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$professionUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=profession&professionSortType={$professionSortType}')">{$lnProfession}</a></th>
@@ -258,15 +262,17 @@ function showProfile(userId)
 					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="userName" id="userName" type="text" value="{$userNameVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="fatherName" id="fatherName" type="text" value="{$fatherNameVal}" /></td>
-					<td class="vertical-middle">
-						<input class="form-control" name="birthDate" id="birthDate" type="text" value="{$birthDateVal}" style="width:100px;display:initial"/>
-						<input class="form-control" name="birthDateTill" id="birthDateTill" type="text" value="{$birthDateTillVal}" style="width:100px;display:initial" />
-					</td>
-					<td class="vertical-middle"><input class="form-control" name="email" id="email" type="text" value="{$emailVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="phoneNumber" id="phoneNumber" type="text" value="{$phoneNumberVal}" /></td>
-					<td class="vertical-middle"><input class="form-control" name="notes" id="notes" type="text" value="{$notesVal}" /></td>
+					{if $canSeeDetails}
+						<td class="vertical-middle"><input class="form-control" name="name" id="name" type="text" value="{$nameVal}" /></td>
+						<td class="vertical-middle"><input class="form-control" name="fatherName" id="fatherName" type="text" value="{$fatherNameVal}" /></td>
+						<td class="vertical-middle">
+							<input class="form-control" name="birthDate" id="birthDate" type="text" value="{$birthDateVal}" style="width:100px;display:initial"/>
+							<input class="form-control" name="birthDateTill" id="birthDateTill" type="text" value="{$birthDateTillVal}" style="width:100px;display:initial" />
+						</td>
+						<td class="vertical-middle"><input class="form-control" name="email" id="email" type="text" value="{$emailVal}" /></td>
+						<td class="vertical-middle"><input class="form-control" name="phoneNumber" id="phoneNumber" type="text" value="{$phoneNumberVal}" /></td>
+						<td class="vertical-middle"><input class="form-control" name="notes" id="notes" type="text" value="{$notesVal}" /></td>
+					{/if}
 					<td class="vertical-middle">
 						<select name="gender" id="gender"  class="form-control">
 							<option value="">{$gender}</option>
@@ -328,12 +334,14 @@ function showProfile(userId)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].deletedDate}">{$users[sec1].deletedDate}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].id}">{$users[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].userName}">{$users[sec1].userName}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].fatherName}">{$users[sec1].fatherName}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].birthDate}">{$users[sec1].birthDate}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].phoneNumber}">{$users[sec1].phoneNumber}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">{$users[sec1].notes}</td>
+					{if $canSeeDetails}
+						<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].fatherName}">{$users[sec1].fatherName}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].birthDate}">{$users[sec1].birthDate}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].phoneNumber}">{$users[sec1].phoneNumber}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">{$users[sec1].notes}</td>
+					{/if}
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].gender}">{$users[sec1].gender}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].lang}">{$users[sec1].lang}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].profession}">{$users[sec1].profession}</td>

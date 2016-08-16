@@ -989,3 +989,151 @@ Array
         )
 
 )
+Executed 2 query(s) - 2016-08-04 10:40:58
+Array
+(
+    [0] => Array
+        (
+            [time] => 2016-08-04 10:40:58
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2016-08-04 10:40:58
+            [query] => SELECT r.id,
+						 name,
+						r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 1 query(s) - 2016-08-04 10:41:04
+Array
+(
+    [0] => Array
+        (
+            [time] => 2016-08-04 10:41:04
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)
+Executed 2 query(s) - 2016-08-04 10:41:04
+Array
+(
+    [0] => Array
+        (
+            [time] => 2016-08-04 10:41:04
+            [query] => SELECT * FROM roles WHERE 1=2
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2016-08-04 10:41:04
+            [query] => INSERT INTO roles (id, name, createdBy, created) VALUES( ?, ?, ?, ?)
+            [data] => Array
+                (
+                    [0] => _empty
+                    [1] => sdf
+                    [2] => 1
+                    [3] => 2016-04-08
+                )
+
+            [types] => Array
+                (
+                    [0] => int
+                    [1] => string
+                    [2] => int
+                    [3] => date
+                )
+
+            [fields] => Array
+                (
+                    [id] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [name] => Array
+                        (
+                            [type] => string
+                        )
+
+                    [createdBy] => Array
+                        (
+                            [type] => int
+                        )
+
+                    [created] => Array
+                        (
+                            [type] => date
+                        )
+
+                )
+
+            [primary] => id
+            [input] => Array
+                (
+                    [name] => sdf
+                    [oper] => add
+                    [id] => _empty
+                    [createdBy] => 1
+                    [created] => 08/04/2016
+                )
+
+        )
+
+)
+Executed 2 query(s) - 2016-08-04 10:41:04
+Array
+(
+    [0] => Array
+        (
+            [time] => 2016-08-04 10:41:04
+            [query] => SELECT COUNT(*) AS COUNTR  FROM roles r  
+						inner join users u on u.id=r.createdBy
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+    [1] => Array
+        (
+            [time] => 2016-08-04 10:41:04
+            [query] => SELECT r.id,
+						 name,
+						r.created,concat(u.firstName,' ',u.lastName) createdBy 
+						FROM roles r 
+						inner join users u on u.id=r.createdBy ORDER BY id asc LIMIT 0, 100
+            [data] => 
+            [types] => 
+            [fields] => 
+            [primary] => 
+            [input] => 
+        )
+
+)

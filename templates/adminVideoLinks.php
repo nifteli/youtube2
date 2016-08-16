@@ -9,6 +9,7 @@ class AdminVideoLinks
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminVideoLinks = new SmartyBC;
 		$this->adminVideoLinks->assign("titleVideoLinks", $content['TITLEVIDEOLINKS']);
@@ -198,7 +199,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("addedFolderCntSortType", ($_GET["addedFolderCntSortType"] == "" || $_GET["addedFolderCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminVideoLinks->assign("perPage", $perPage);
 		$this->adminVideoLinks->assign("videoLinks", $controller->getVideoLinks($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		

@@ -59,12 +59,14 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'edit')
 		else
 		{
 			$result = "success";
+			
 			//echo trim($tag)." updated<br>";
 		}
 	}
 	if($result == "success")
 	{
 		$messages['success'] = $content["SUCCESSFULLYSAVED"];
+		$controller->logAction(28);
 		$db->commit();
 	}
 	else
@@ -112,6 +114,7 @@ if ($_GET["action"]=="addCat")
 				$db->update("categories",array("img"=>".".$catImgPath.$name));
 			}
 			$messages['success'] = $content["SUCCESSFULLYSAVED"];
+			$controller->logAction(27);
 		}
 		else
 		{
@@ -160,6 +163,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getAdminCategories(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
+	$controller->logAction(30);
 	$controller->exportToExcel($fields,$links,$content['TITLECATEGORIES']);
 	return;
 }
@@ -182,6 +186,9 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
+	{
 		$messages["success"] = $content["REMOVED"];
+		$controller->logAction(29);
+	}
 }
 ?>

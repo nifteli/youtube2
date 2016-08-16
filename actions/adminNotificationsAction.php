@@ -26,7 +26,10 @@ if ($_GET["action"]=="save")
 										"page2"=>trim($_POST["page2"])
 									));
 	if($res)
+	{
 		$messages['success'] = $content["SUCCESSFULLYSAVED"];
+		$controller->logAction(32);
+	}
 	else
 	{
 		$result = "error";

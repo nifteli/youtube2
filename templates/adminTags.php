@@ -9,6 +9,7 @@ class AdminTags
 		global $content;
 		global $result;
 		global $messages;
+		global $recsPerPage;
 		
 		$this->adminTags = new SmartyBC;
 		$this->adminTags->assign("titleTags", $content['TITLETAGS']);
@@ -119,7 +120,7 @@ class AdminTags
 		$this->adminTags->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
-		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=10;
+		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;
 		$this->adminTags->assign("perPage", $perPage);
 		$this->adminTags->assign("tags", $controller->getTags($begin,$perPage,$_POST,$cnt,$sortBy,$sortType));
 		$this->adminTags->assign("tagPages",$controller->getPages($begin,$perPage,$cnt,"adminTags"));
