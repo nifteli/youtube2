@@ -1,7 +1,7 @@
 <?php 
 
 if ($_GET["action"]=="login")
-{
+{ 
 	//server side validations
 	if(!isset($_POST["userName"]) || !isset($_POST["password"]) || trim($_POST["password"])=="" || trim($_POST["userName"]==""))
 	{
@@ -9,11 +9,12 @@ if ($_GET["action"]=="login")
 	}
 
 	else
-	{
+	{ 
 		$db->where("status='confirmed' and isDeleted=0 
 					and (userName = '$_POST[userName]' or email = '$_POST[userName]' or phoneNumber = '$_POST[userName]')
 					and password = '" . md5($_POST["password"]) . "'");
-		$usr = $db->get("users"); //echo $db->getLastQuery();
+		$usr = $db->get("users"); 
+		//echo $db->getLastQuery()."<br><br><br><br><br><br>";
 		//check user if registered or not
 		if($db->count == 1)
 		{

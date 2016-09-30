@@ -9,7 +9,7 @@ $( "#userName" ).focus();
 
 <div style="padding-top:10px;min-height: 1000px;">
 	{if $errorMessage != ''}
-	<div class="err" style="width:911px; margin-top:40px">{$errorMessage}</div>
+	<div class="err" style="width:932px; margin-top:40px">{$errorMessage}</div>
 	{/if}
 	<div class="pic-cont" style="font-weight:bold">
 	

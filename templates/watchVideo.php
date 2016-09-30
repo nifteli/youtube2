@@ -11,6 +11,7 @@ class WatchVideo
 		global $result;
 		global $messages;
 		global $okMessage;
+		global $domain;
 		
 		$this->ok = false;
 		$this->watchVideo = new Smarty;
@@ -21,8 +22,8 @@ class WatchVideo
 			
 			if(count($videoInfo) < 1) { $this->ok = false; return; }
 			$this->watchVideo->assign("catName",$videoInfo[0]["catName".$controller->lang]);
-			$this->watchVideo->assign("pageTitle",$videoInfo[0]["catName".$controller->lang]."-".$videoInfo[0]["name"]);
-			$this->watchVideo->assign("keywords",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tagsOrg"]);
+			$this->watchVideo->assign("pageTitle",str_replace('"',"'",$videoInfo[0]["catName".$controller->lang]."-".$videoInfo[0]["name"]));
+			$this->watchVideo->assign("keywords",str_replace('"',"'",$videoInfo[0]["catName".$controller->lang].",".$videoInfo[0]["name"].",".$videoInfo[0]["tagsOrg"]));
 			$this->watchVideo->assign("lang",$controller->lang);
 			$this->watchVideo->assign("videoLink",$videoInfo[0]["link"]);
 			$this->watchVideo->assign("videoName",((mb_strlen($videoInfo[0]["name"],"UTF-8")>65)?mb_substr($videoInfo[0]["name"],0,65,"UTF-8")."...":$videoInfo[0]["name"]));
@@ -49,6 +50,7 @@ class WatchVideo
 			$this->watchVideo->assign("catId",$videoInfo[0]["categoryId"]);
 			$this->watchVideo->assign("videoId",$_GET["id"]);
 			$this->watchVideo->assign("views",$content['VIEWS']);
+			$this->watchVideo->assign("domain",$domain);
 			$this->watchVideo->assign("hasAccess",$controller->access->hasAccess);
 			$this->watchVideo->assign("curUserId",-1);
 			if($controller->access->hasAccess)
@@ -89,6 +91,9 @@ class WatchVideo
 			$this->watchVideo->assign("emailVal",$_POST['email']);
 			$this->watchVideo->assign("commentHint",$content['COMMENTHINT']);
 			$this->watchVideo->assign("emailHint",$content['EMAILHINT']);
+			$this->watchVideo->assign("langHint",$content['langHint']);
+			$this->watchVideo->assign("questionHint",$content['questionHint']);
+			$this->watchVideo->assign("tagsHint",$content['tagsHint']);
 			$sort = 1;
 			if(is_numeric($_GET["sort"]) && $_GET["sort"] == 1)
 				$sort = 2;
@@ -162,7 +167,7 @@ class WatchVideo
 						left join languages l on l.id=v.languageId
 						left join (
 							select videoId,GROUP_CONCAT(DISTINCT t.name ORDER BY t.name) AS tags,
-							GROUP_CONCAT(DISTINCT t.id ORDER BY t.id) AS tagIds
+							GROUP_CONCAT(DISTINCT t.id ORDER BY t.name) AS tagIds
 							from videotags vt
 							inner join tags t on t.id=vt.tagId
 							group by vt.videoId

@@ -108,7 +108,7 @@ class Profile
 		$this->profile->assign("validationError14",$content['VALIDATIONERR14']);
 		$this->profile->assign("validationError15",$content['VALIDATIONERR15']);
 		$this->profile->assign("deleteProfile",$content['DELETEPROFILE']);
-		$this->profile->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
+		$this->profile->assign("deleteProfileConfirmation",$content['deleteProfileConfirmation']);
 		//////
 		if(isset($_GET["action"]))
 		{

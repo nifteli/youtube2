@@ -73,12 +73,14 @@ div.tabcontents
 
 div.tabcontents2
 {
-   	border-bottom:0;
-	border-right:0;
-	border-left:0;
-	padding: 30px;
-    background-color:white;
-	width:158px;
+       border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+    /* padding: 30px; */
+    background-color: white;
+    width: 183px;
     border-radius: 0 3px 3px 3px;
-	overflow: auto;
+    overflow: auto;
+    padding-top: 0;
+    padding-left: 30;
 }

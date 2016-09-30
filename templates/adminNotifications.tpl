@@ -11,7 +11,7 @@
 	  </div>
 	{/if}
 	{if $result == 'success'}
-	<div class="success1">{$messages['success']}</div>
+	<div class="success1" style="width: 1194px;">{$messages['success']}</div>
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; width: 1200px;">
 		<form method="post" action="?page=adminNotifications&action=save" id="vlFilter" name="vlFilter" style="width:100%;">

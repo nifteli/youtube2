@@ -226,21 +226,24 @@ if ($_GET["action"]=="delete")
 			$messages['noaccess'] = $content["INSUFFACCESS"];
 			return;
 		}
-		$db->startTransaction();
+		//$db->startTransaction();
 		//$db->rawQuery("delete from videos where addedById=".$access->userId." and id=".$_GET["videoId"]);
 		$db->where("addedById=".$access->userId." and id=".$_GET["videoId"]);
-		if($db->delete("videos",1))
-		{
-			$db->where("videoId=".$_GET["videoId"]);
-			$db->delete("videocats");
-			$db->where("videoId=".$_GET["videoId"]);
-			$db->delete("videotags");
-			$db->where("videoId=".$_GET["videoId"]);
-			$db->delete("videoviews");
-			$db->commit();
-		}
-		else 
-			$db->rollback();
+		$db->update("videos",array("isDeleted"=>1,
+								   "deletedById"=>$access->userId,
+								   "deleted"=>date("Y-m-d H:i:s"),
+								   "deletedByIP"=>$_SERVER['REMOTE_ADDR']));
+		// {
+			// $db->where("videoId=".$_GET["videoId"]);
+			// $db->delete("videocats");
+			// $db->where("videoId=".$_GET["videoId"]);
+			// $db->delete("videotags");
+			// $db->where("videoId=".$_GET["videoId"]);
+			// $db->delete("videoviews");
+			// $db->commit();
+		// }
+		// else 
+			// $db->rollback();
 	}
 }
 if ($_GET["action"]=="login")
@@ -316,7 +319,8 @@ if ($_GET["action"]=="fbLogin")
 											  "lastName"=>$user_profile["last_name"],
 											  "gender"=>$user_profile["gender"],
 											  "registered"=>date("Y-m-d H:i:s"),
-											  "registeredByIP"=>$_SERVER['REMOTE_ADDR']
+											  "registeredByIP"=>$_SERVER['REMOTE_ADDR'],
+											  "languageId"=>5
 											  )
 											  );
 					}

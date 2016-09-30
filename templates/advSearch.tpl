@@ -112,7 +112,7 @@
 	<h2>{$advancedTitle}</h2>  
 	</div>
 	<form id="advSearchForm" action="?page=advSearch" method="post">
-		<input class="search" type="input" name="search"  placeholder="{$searchph}" value="{$search}" style="width:730px">
+		<input class="search" type="input" name="search"  placeholder="{$searchph}" value="{$search}" style="width:730px" value="{$sVal}">
 			<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
 					onmouseover="this.src='img/searchSelected_{$lang}.png';"
 					onmouseout="this.src='img/search_{$lang}.png';"
@@ -125,10 +125,10 @@
 					{html_options values=$row1.id output=$row1.name selected=$languageVal}
 				{/foreach}
 			</select> 
-				<input id="s_q3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 4 || $videoQuestion == 12 } checked {/if} name="videoQuestion[]">{$vqHow}</input>
-				<input id="s_q4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion== 8 || $videoQuestion == 12} checked {/if} name="videoQuestion[]">{$vqWhy}</input>
-				<input id="s_q1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 1} checked {/if} name="videoQuestion[]">{$vqWhat}</input>
-				<input id="s_q2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 2} checked {/if} name="videoQuestion[]">{$vqWho}</input>
+				<label><input id="s_q3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 4 || $videoQuestion == 12 } checked {/if} name="videoQuestion[]">{$vqHow}</input></label>
+				<label><input id="s_q4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion== 8 || $videoQuestion == 12} checked {/if} name="videoQuestion[]">{$vqWhy}</input></label>
+				<label><input id="s_q1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 1} checked {/if} name="videoQuestion[]">{$vqWhat}</input></label>
+				<label><input id="s_q2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's_')" {if $videoQuestion == 2} checked {/if} name="videoQuestion[]">{$vqWho}</input></label>
 			<div style="float:right">
 			<select class="srcCmb" name="category" id="s_category">
 				<option value="0" selected="selected"> {$allCats}</option>

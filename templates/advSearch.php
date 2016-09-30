@@ -30,6 +30,8 @@ class AdvSearch
 		$this->advSearch->assign("languageVal",$langIds[$controller->lang]);
 		$this->advSearch->assign("category", 99999999);
 		
+		$this->advSearch->assign("vQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : array());
+
 		if(count($_POST)>0)
 		{
 			$this->advSearch->assign("search", $_POST["search"]);
@@ -43,6 +45,8 @@ class AdvSearch
 			$this->advSearch->assign("selAll", $_POST["selAll"]);
 			//echo "<pre>";print_r($_POST);echo "</pre>";
 			$this->advSearch->assign("options", isset($_POST["opt"]) ? implode("," ,$_POST["opt"]) : "");
+			
+			
 		}
 			
 		

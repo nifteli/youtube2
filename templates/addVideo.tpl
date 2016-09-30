@@ -27,14 +27,14 @@ function uncheckAll()
 <!--Videos thums Start-->			 
 <div style="padding-top:10px;min-height: 1000px;">
 	{if $result == 'error'}
-	  <div class="smallerr" style="width: 895;margin-top:0">
+	  <div class="smallerr" style="width: 918;margin-top:0">
 		{foreach from=$messages item=message}
 			{$message} <br>
 		{/foreach}
 	  </div>
 	{/if}
 	{if $result == 'success'}
-	<div class="success1">{$messages['success']}</div>
+	<div class="success1" style="width: 932;margin-top:0px">{$messages['success']}</div>
 	{/if}
 
 	<p style="font-weight:bold; ">{$addVideoNote1}</p>
@@ -46,8 +46,20 @@ function uncheckAll()
 			<video id="vid1" src="" class="video-js vjs-default-skin" controls preload="auto" width="550" height="300" 
 			  data-setup='{ "language":["tr"],"ytcontrols":["true"], "techOrder": ["youtube"], "src": "{$videoLinkVal}" }'>
 			</video>
-			<div style="float:left;width:50%;margin-top:5px"><input type="submit" class="post" name = "add" id="add" value="{$confirm}"></div>
-			<div style="float:right;width:50%; text-align:right;margin-top:5px"><input type="reset" class="post" name = "reset" id="reset" value="{$reset}"></div>
+			<div style="float:left;width:50%;margin-top:5px">
+			<!-- <input type="reset" class="post" name = "reset" id="reset" value="{$reset}"> -->
+			<img src="img/cancel_{$lang}.png" height=30 title="{$reset}" onclick="window.history.back();"
+				onmouseover="this.src='img/cancelSelected_{$lang}.png';"
+				onmouseout="this.src='img/cancel_{$lang}.png';"
+				onmousedown="this.src='img/cancelPushed_{$lang}.png';">
+			</div>
+			<div style="float:right;width:50%; text-align:right;margin-top:5px">
+			<!-- <input type="submit" class="post" name = "add" id="add" value="{$confirm}"> -->
+			<img src="img/confirm_{$lang}.png" height=30 title="{$confirm}" onclick="addVideoForm.submit();"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
+			</div>
 		</div>
 		<div class="addVidRight">
 			<select class="fieldv" name="language" id="language" style="width:120px" cellpadding=0 cellspacing=0>

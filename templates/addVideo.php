@@ -18,6 +18,7 @@ class AddVideo
 		$this->videos->assign("language", $content['LANGUAGE']);
 		$this->videos->assign("addVideoNote1", $content['ADDVIDEONOTE1']);
 		$this->videos->assign("languages", $controller->getLanguages());
+		$this->videos->assign("lang", $controller->lang);
 		$this->videos->assign("languageVal", isset($_POST["language"]) ? $_POST["language"] : $langIds[$controller->lang]);
 		$this->videos->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->videos->assign("vqHow", $content['HOW']);
@@ -63,6 +64,8 @@ class AddVideo
 			$this->videos->assign("tagsVal", $videoInfo["tags"]);
 			$this->videos->assign("videoId", $_GET["id"]);
 		}
+		if(isset($_GET["videoId"]) && $_GET["videoId"] > 0 && is_numeric($_GET["videoId"]) && $controller->hasAccessToVideo($_GET["videoId"]))
+			$this->videos->assign("videoId", $_GET["videoId"]);
 		
 	}
 	

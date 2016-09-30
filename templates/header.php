@@ -37,6 +37,16 @@ class Header
 		$this->header->assign("whyHint",$content['WHYHINT']);
 		$this->header->assign("howHint",$content['HOWHINT']);
 		
+		// if(count($_POST)>0)
+		// {
+			//echo "<pre>";print_r($_POST);echo "</pre>";
+		$this->header->assign("vQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : array());
+		$this->header->assign("cIdVal",$_POST["category"]);
+		$this->header->assign("intVal",$_POST["interval"]);
+		$this->header->assign("frDateVal",$_POST["fromDate"]);
+		$this->header->assign("tDateVal",$_POST["toDate"]);
+		$this->header->assign("sVal",$_POST["search"]);
+		// }
 		
 		$this->header->assign("about",$content['ABOUT']);
 		$this->header->assign("allLangs",$content['ALLLANGS']);

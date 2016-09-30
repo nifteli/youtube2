@@ -396,7 +396,7 @@ class Controller //extends MySQL
 	
 	public function getFolderNames()
 	{
-		$qry = "select id folderId, name folderName from folders where createdById=".$this->access->userId;
+		$qry = "select id folderId, name folderName from folders where createdById=".$this->access->userId . " order by created desc";
 		$res = $this->db->rawQuery($qry);
 		return $res;
 	}

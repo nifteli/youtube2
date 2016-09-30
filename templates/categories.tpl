@@ -5,7 +5,8 @@
 	var userId="{$userId}";
 	var myUserId="{$myUserId}";
 	var general="{$general}";
-	
+	var s="{$s}";
+	var q={$q};
 	
 	function showCatalogues()
 	{
@@ -66,7 +67,7 @@
 		{
 			$("input[name=option][value=1]").prop('checked', true); 
 			document.getElementById("tabSel").disabled = true;
-		}
+		}  
 		switch(n)
 		{
 			case 1:
@@ -92,7 +93,7 @@
 			case 3:
 				$("#img3").attr("src","./img/what_sel_{$lang}.png");
 				$('#img3').removeClass('tabImg1');
-				$('#img3').addClass('tabImg2');
+				$('#img3').addClass('tabImg2'); 
 				break;
 			case 7:
 				$("#img3").attr("src","./img/what_sel_{$lang}.png");
@@ -130,11 +131,17 @@
 				if(hasAccess == "1")
 				{
 					if(userId != myUserId)
-						window.location.assign("index.php");
+						window.location.assign("index.php?src=1&userId="+myUserId);
 					shift(0);
 					$('#tabSel').val(1);
 					$("input[name=option][value=2]").prop('checked', true); 
 					$('#viewCat').show();
+					for(i=1; i<9; i++)
+					{
+						$('#view'+i).hide();
+						$('#img'+i).removeClass('tabImg2');
+						$('#img'+i).addClass('tabImg1');
+					}
 				}
 				else
 				{
@@ -209,19 +216,140 @@
 			success: function(res){ //alert(res);
 			   if(res == 1 && flag == 1)
 			   {
-			   		$("#subs"+catId).attr("src","img/subs.png");
-					$("#subs"+catId).attr("onclick","subscription("+catId+",0)");
+			   		jQuery("[id=subs"+catId+"]").attr("src","img/subs.png");
+					jQuery("[id=subs"+catId+"]").attr("onclick","subscription("+catId+",0)");
 				}
 			   if(res == 1 && flag == 0)
 			   {
-			   		$("#subs"+catId).attr("src","img/unsubs.png");
-					$("#subs"+catId).attr("onclick","subscription("+catId+",1)");
+			   		jQuery("[id=subs"+catId+"]").attr("src","img/unsubs.png");
+					jQuery("[id=subs"+catId+"]").attr("onclick","subscription("+catId+",1)");
 				}
 			}
 		});
 	 }
 </script>
- 
+<script type="text/javascript">	
+	$(document).ready(function(){
+	if(((hasAccess == "1" && general=="true") || folderTab == "1" || s == "1") && myUserId == userId)
+		changeView(2);
+	
+	if(hasAccess == "1" && myUserId != userId)
+		changeView(3);
+
+	if(folderTab == "1")
+		$('#tabSel').val(1);
+	if(catTab == "1")
+		$('#tabSel').val(2);
+	shift(q);
+		
+		//
+	$('#navigation ul a').click(function(){
+		$('#navigation ul a').removeClass('selected');
+		$(this).addClass('selected');
+		//$('#content_changer').html('You have selected '+ $(this).html());
+		if($(this).attr("id") == 1)
+		{
+			showCatalogues();
+		}
+		else if($(this).attr("id") == 2)
+		{
+			showAdded();
+		}
+		else	
+		{	
+			$('#viewCat').hide();
+			$('#viewAdd').hide();
+		}
+	});
+	$('#tabs li a').click(function(){	
+		$('#navigation ul a').removeClass('selected');
+		$('#viewCat').hide();
+		$('#viewAdd').hide();
+	});
+	});
+	
+	
+	function openNewFolderBox(n)
+	{
+		if(n ==1)
+		{
+			$("#existingFolder").hide();
+			$("#newFolder").show();
+		}
+		else
+		{
+			$("#existingFolder").show();
+			$("#newFolder").hide();
+		}
+		return false;
+	}
+	
+	function addRemFromFolder(videoId,flag,folderId)
+	{
+	//alert(videoId+flag+folderId);
+		if(flag == 1)
+		{
+			if(!confirm("{$deleteConfirmation}"))
+				return;
+		}
+		$.ajax({
+		 type: "GET",
+		 url: 'ajax/ajaxActions.php',
+		 data: "action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId, 
+		 success: function(data) {
+		 //alert("action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId);
+		 //alert(data)
+			if(data=="") return;
+			if(flag == 1 && data == "1")
+			{
+				document.getElementById(videoId).innerHTML = "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='{$addToMyFolder}'/></a>";
+			}
+			if(flag == 2 && data == "1")
+			{
+				//alert(folderId);
+				//$('#addToFolder').html(data);
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+				//$('#addToFolder').hide();
+				window.location.href = "#close";
+				return;
+			}
+		 }
+	   });
+	}
+	
+	function submitForm(id)
+	{
+		openNewFolderBox(2);
+		document.getElementById('hdnVideoId').value = id;
+		//document.getElementById('frmAddToFolder').action = "?page=watchVideo&id="+id+"&action=add2Folder&from=main";
+		//document.getElementById('frmAAA').action = "?page=watchVideo&id="+id+"&action=addNewFolder&from=main";
+		//document.getElementById('frmAddToFolder').submit();
+	}
+	
+	function addToNewFolder2(videoId,folderName,tags)
+	{
+	//alert(tags);
+		$.ajax({
+		 type: "POST",
+		 url: 'ajax/ajaxActions.php',
+		 data: "action=addToNewFolder&videoId="+videoId+"&folderName="+folderName+"&tags="+tags, 
+		 //alert("action=addToNewFolder&videoId="+videoId+"&folderName='"+folderName+"'&tags='"+tags+"'");
+		 success: function(data) {
+			if(data=="") return;
+			if(data == "1")
+			{
+				//alert(folderId);
+				//$('#addToFolder').html(data);
+				//$('#removeFromFolder').show();
+				//$('#addToFolder').hide();
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+				window.location.href = "#close";
+				return;
+			}
+		 }
+	   })
+	}
+</script>
 
  <!--Category Panel Starts-->
 <div class="category">
@@ -230,16 +358,16 @@
 		<div class="tabcontents">
 			{if $hasAccess}
 			<div id="viewCat" style="display:none">
-				<div class='hollywd' >
+				<div class='hollywd' style="text-align:center;padding-top:2px">
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
-				<div class="c-name">
+				<div class="c-name" style="padding-left:5px">
 				{if ($myUserId == $userId)}
-				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a><br><br>
+				<a href="#addNewFolder"><img src="./img/add.png" height="15" width="15">&nbsp {$addNewFolder}</a>
 				{/if}
 				<div class="orderByDiv">
 					<select name="fldOrder" id="fldOrder" 
-					onchange="self.location='?by='+this.value+'&dir={$dirVal}'"
+					onchange="self.location='?userId={$userId}&by='+this.value+'&dir={$dirVal}'"
 					style="width: 185;height: 23px !important;">
 						<option value="1" {if $by == 1 || !isset($by) } selected {/if} >{$sbAlph}</option>
 						<option value="2" {if $by == 2 } selected {/if} >{$sbVideoCnt}</option>
@@ -247,18 +375,22 @@
 					</select>
 					<br>
 					<label>
-					<input onclick="self.location='?by='+document.getElementById('fldOrder').value+'&dir=1'" 
+					<input onclick="self.location='?userId={$userId}&by='+document.getElementById('fldOrder').value+'&dir=1'" 
 					type="radio" name="dir" id="dir" value=1 {if (isset($dirVal) && $dirVal==1) || !isset($dirVal)} checked {/if} style="margin-left: 2px;">{$asc}
 					</label>
 					<label>
-					<input onclick="self.location='?by='+document.getElementById('fldOrder').value+'&dir=2'"  
+					<input onclick="self.location='?userId={$userId}&by='+document.getElementById('fldOrder').value+'&dir=2'"  
 					type="radio" name="dir" id="dir" value=2 {if isset($dirVal) && $dirVal==2} checked {/if}>{$desc}
 					</label>
 				</div>
 					<ul>
 						{section name=sec1 loop=$myFolders}
 						<li>
-							<a href="?folderId={$myFolders[sec1].folderId}&userId={$userId}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
+							{if $folderId == {$myFolders[sec1].folderId}}
+							<font color="red">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </font>
+							{else}
+							<a href="?folderId={$myFolders[sec1].folderId}&userId={$userId}&by={$by}&dir={$dirVal}">{$myFolders[sec1].folderName} ({$myFolders[sec1].videoCount}) </a> 
+							{/if}
 							{if ($myUserId == $userId)}
 							<a href="?action=deleteFolder&id={$myFolders[sec1].folderId}" onClick="return confirm('{$deleteConfirmation}')"><img src="./img/delete.png" height="10" width="10" ></a>
 							<a onclick="setFolderName({$myFolders[sec1].folderId},'{$myFolders[sec1].folderName}','{$myFolders[sec1].tags}')" href="#editFolder"><img src="./img/edit.png" height="10" width="10"></a>
@@ -284,10 +416,10 @@
 						<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
 						{/if}
 						{/if}
-						{if $currCatId != {$cat['id']}}
-						<a href="?df=1&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
+						{if $currCatId == {$cat['id']} && $qs == 4}
+						<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 						{else}
-						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						<a href="?df=1&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 						{/if}
 						</li>
 						{/foreach}
@@ -309,10 +441,10 @@
 						<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
 						{/if}
 						{/if}
-						{if $currCatId != {$cat['id']}}
-						<a href="?df=1&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
+						{if $currCatId == {$cat['id']} && $qs == '8'}
+						<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 						{else}
-						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						<a href="?df=1&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 						{/if}
 						</li>
 						{/foreach}
@@ -337,7 +469,7 @@
 						{if $currCatId != {$cat['id']}}
 						<a href="?df=1&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 						{else}
-						<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+						<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 						{/if}
 						</li>
 						{/foreach}
@@ -362,7 +494,7 @@
 							{if $currCatId != {$cat['id']}}
 							<a href="?df=1&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
-							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 							{/if}
 							</li>
 							{/foreach}
@@ -372,7 +504,7 @@
 			</div>
 			<!-- -------------------------- -->
 			<div id="view5" style="display:none">
-				<div class='hollywd' >
+				<div class='hollywd' style="text-align:center;padding-top:2px">
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 			   <div class="c-name">
@@ -388,10 +520,10 @@
 							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
 							{/if}
 							{/if}
-							{if $currCatId != {$cat['id']}}
-							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
+							{if $currCatId == {$cat['id']} && $qs == 4}
+							<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 							{else}
-							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							<a href="?s=1&df=1&userId={$userId}&catId={$cat['id']}&q=4">{$cat["catName"]} ({$cat["count"]}) </a>
 							{/if}
 							</li>
 							{/foreach}
@@ -400,7 +532,7 @@
 				</div>
 			</div>
 			<div id="view6" style="display:none">
-				<div class='hollywd' >
+				<div class='hollywd' style="text-align:center;padding-top:2px">
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
@@ -416,10 +548,10 @@
 							<a href="#"><img title="{$subscribe}" onclick="subscription({$cat['id']},1)" id="subs{$cat['id']}" src="img/unsubs.png" height=15 width=15></a>
 							{/if}
 							{/if}
-							{if $currCatId != {$cat['id']}}
-							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
+							{if $currCatId == {$cat['id']} && $qs == 8}
+							<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 							{else}
-							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							<a href="?s=1&df=1&userId={$userId}&catId={$cat['id']}&q=8">{$cat["catName"]} ({$cat["count"]}) </a>
 							{/if}
 							</li>
 							{/foreach}
@@ -428,7 +560,7 @@
 				</div>
 			</div>
 			<div id="view7" style="display:none">
-				<div class='hollywd' >
+				<div class='hollywd' style="text-align:center;padding-top:2px">
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
@@ -445,9 +577,9 @@
 							{/if}
 							{/if}
 							{if $currCatId != {$cat['id']}}
-							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?s=1&df=1&userId={$userId}&catId={$cat['id']}&q=1">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
-							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 							{/if}
 							</li>
 							{/foreach}
@@ -456,7 +588,7 @@
 				</div>
 			</div>
 			<div id="view8" style="display:none">
-				<div class='hollywd' >
+				<div class='hollywd' style="text-align:center;padding-top:2px">
 					<h2 style="background:white;margin-top:0;width: 100%;line-height: 1;height: 30;overflow: auto;">{$userName}</h2>  
 				</div>
 				<div class="c-name">
@@ -473,9 +605,9 @@
 							{/if}
 							{/if}
 							{if $currCatId != {$cat['id']}}
-							<a href="?df=1&userId={$userId}&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
+							<a href="?s=1&df=1&userId={$userId}&catId={$cat['id']}&q=2">{$cat["catName"]} ({$cat["count"]}) </a>
 							{else}
-							<p style="color:red !important">{$cat["catName"]} ({$cat["count"]})<p>
+							<font color="red">{$cat["catName"]} ({$cat["count"]})</font>
 							{/if}
 							</li>
 							{/foreach}
@@ -492,7 +624,7 @@
 	<div style="width:250px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$editFolder}</h1>
-		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?action=editFolder" method="post">
+		<form name="frmEditFolder" id="frmEditFolder" action="?action=editFolder" method="post">
 			<br>
 			<div style="float:right;width: 100%;">
 				<input type="hidden" name="folderId" id="folderId" >
@@ -501,7 +633,11 @@
 			</div>
 		<br><br>
 		<div style="text-align:center;width:100%">
-			<input type="submit" class="post" name = "add" id="add" value="{$save}">
+			<!-- <input type="submit" class="post" name = "add" id="add" value="{$save}"> -->
+			<img src="img/confirm_{$lang}.png" height=30 title="{$save}" onclick="frmEditFolder.submit();"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
 		</div>
 		</form>
 	</div>
@@ -518,9 +654,67 @@
 			</div>
 		<br><br>
 		<div style="text-align:center;width:100%">
-			<input type="submit" class="post" name = "add" id="add" value="{$save}">
+			<!-- <input type="submit" class="post" name = "add" id="add" value="{$save}"> -->
+			<img src="img/confirm_{$lang}.png" height=30 title="{$save}" onclick="frmAddNewFolder.submit();"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
 		</div>
 		</form>
+	</div>
+</div>
+
+<div id="add2FolderModal" name="add2FolderModal"  class="modalDialog">
+	<div style="width:260px">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1 style="font-weight:bold">{$folders}</h1>
+		<div id="existingFolder">
+		{if count($foldersArr)>0}
+		<form name="frmAddToFolder" id="frmAddToFolder" action="" method="post">
+			<br>
+			<label>{$folderName2}:</label>
+			<div style="float:right">
+				<select class="field" name="folderId" id="fldId" style="width:180px;">
+					{section name=sec1 loop=$foldersArr}
+					<option value="{$foldersArr[sec1].folderId}">{$foldersArr[sec1].folderName} </option>
+					{/section}
+				</select>
+			</div>
+			<br>
+			<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+			<input type="hidden" value="" name="hdnVideoId" id="hdnVideoId">
+			<div style="text-align:center;width:100%;float:left">
+				<!-- <input type="submit" class="post" name = "add" id="add"  value="{$addToFolder}"> -->
+				<img src="img/confirm_{$lang}.png" height=30 title="{$addToFolder}" onclick="addRemFromFolder(document.getElementById('hdnVideoId').value,2,document.getElementById('fldId').value)" href="#close"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
+			</div>
+		</form>
+		{else}
+		{$noFolderNotf}
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+		{/if}
+		</div>
+		<div id="newFolder" style="display:none">
+			<form name="frmAAA" id="frmAAA" action="1" method="post">
+				<br>
+				<div style="float:right;width:100%">
+					<input type="text" name="folderName" id="fldName" placeholder="{$folderNm}" style="width:100%" required>
+					<input type="text" name="tags" id="tgs" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
+				</div>
+				<br><br>
+				<div style="text-align:center;width:100%;float:left">
+					<!-- <input type="submit" class="post" name = "add" id="add" value="{$save}"> -->
+					<img src="img/confirm_{$lang}.png" height=30 title="{$save}" onclick="addToNewFolder2(document.getElementById('hdnVideoId').value,
+																						document.getElementById('fldName').value,
+																						document.getElementById('tgs').value)"  
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 

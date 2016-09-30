@@ -1,4 +1,10 @@
 <script>
+$(document).ready(function() {
+    
+	//alert("www");
+	
+	loadCategories_s("s");
+});
 $(function() {
 //alert("ee");
 	$( "#search" ).focus();
@@ -68,14 +74,20 @@ function loadCategories_s(sFlag)
 	q += $("#" + sFlag + "q2").prop('checked') ? 2 : 0;
 	q += $("#" + sFlag + "q3").prop('checked') ? 4 : 0;
 	q += $("#" + sFlag + "q4").prop('checked') ? 8 : 0;
+	var selected = "";
+	var cIdVal = "{$cIdVal}";
 	var html = '<option value="0">{$allCats}</option>';
 	$.each(allCategories, function(key,value)
 	{
 		if(q & value.questions)
 		{
-			html += '<option value="' + value.id + '"' + '>' + value.catName + '</option>';
+			if(cIdVal == value.id)
+				selected = "selected";
+			html += '<option ' + selected + ' value="' + value.id + '"' + '>' + value.catName + '</option>';
+			selected = "";
 		}
 	});
+	
 	
 	$("#" + sFlag + "category").html(html);
 }
@@ -149,7 +161,7 @@ function checkAccess()
 			<div class="headerMiddle">
 				<form id="searchForm" action="?page=searchRes" method="post">
 				
-					<input class="search" type="input" name="search" id="search" value="{$searchVal}" placeholder="{$search}">
+					<input class="search" type="input" name="search" id="search" value="{$searchVal}" placeholder="{$search}" value="{$sVal}">
 					<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
 					onmouseover="this.src='img/searchSelected_{$lang}.png';"
 					onmouseout="this.src='img/search_{$lang}.png';"
@@ -166,10 +178,10 @@ function checkAccess()
 						{/foreach}
 					</select> 
 					
-						<input id="sq3" type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input>
-						<input id="sq4"  type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input>
-						<input id="sq1"  type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input>
-						<input id="sq2"  type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input>
+						<label><input id="sq3" {if in_array("4", $vQuestionVal)} checked {/if} type="checkbox" value="4" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqHow}</input></label>
+						<label><input id="sq4" {if in_array("8", $vQuestionVal)} checked {/if} type="checkbox" value="8" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhy}</input></label>
+						<label><input id="sq1" {if in_array("1", $vQuestionVal)} checked {/if} type="radio" value="1" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWhat}</input></label>
+						<label><input id="sq2" {if in_array("2", $vQuestionVal)} checked {/if} type="radio" value="2" onclick="controlQuestionSelection_s(this, 's')" name="videoQuestion[]">{$vqWho}</input></label>
 				
 					<div style="float:right">
 					<select class="srcCmb" name="category" id="scategory">
@@ -179,20 +191,20 @@ function checkAccess()
 					<input id="stime" name="time" type="radio" onclick="showTimeInterval('s')" value="2" checked="">{$minute}</input> -->
 					<select class="srcCmb" name="interval" id="sinterval1">
 						<option value="0">{$all}</option>
-						<option value="1">{$lessThan15}</option>
-						<option value="2">15-30 {$minute}</option>
-						<option value="3">30-45 {$minute}</option>
-						<option value="4">45-60 {$minute}</option>
-						<option value="5">1-2 {$hour}</option>
-						<option value="6">2-3 {$hour}</option>
-						<option value="7">3-4 {$hour}</option>
-						<option value="8">{$moreThan4}</option>
+						<option value="1" {if $intVal ==1}selected{/if}>{$lessThan15}</option>
+						<option value="2" {if $intVal ==2}selected{/if}>15-30 {$minute}</option>
+						<option value="3" {if $intVal ==3}selected{/if}>30-45 {$minute}</option>
+						<option value="4" {if $intVal ==4}selected{/if}>45-60 {$minute}</option>
+						<option value="5" {if $intVal ==5}selected{/if}>1-2 {$hour}</option>
+						<option value="6" {if $intVal ==6}selected{/if}>2-3 {$hour}</option>
+						<option value="7" {if $intVal ==7}selected{/if}>3-4 {$hour}</option>
+						<option value="8" {if $intVal ==8}selected{/if}>{$moreThan4}</option>
 					</select>
 					</div>
 				</div>
 				<div style="float:left;width:208px;    height: 22px;">
-					<input class="srcCmb" style="width:95;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}">&nbsp;
-					<input class="srcCmb" style="width:95;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}">&nbsp;
+					<input class="srcCmb" style="width:95;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}" value = "{$frDateVal}">&nbsp;
+					<input class="srcCmb" style="width:95;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}"  value = "{$tDateVal}">&nbsp;
 				</div>
 				</div>
 				</form>
@@ -204,7 +216,7 @@ function checkAccess()
 				<!--Statistics Bar Start-->
 				<div class="user"> 
 					<a href="?index.php"><img class="vid" width="20" height="20" src="img/videos.png" />
-					<p class="counts"><a href="?index.php">{$videos} ({$videoCnt})</a></p></a>
+					<p class="counts"><a href="?df=1">{$videos} ({$videoCnt})</a></p></a>
 					<a href="?page=allTags"><img class="statistics2" width="24" height="22"  src="img/tags.png" />
 					<p class="counts"><a href="?page=allTags">{$tags} ({$tagCnt})</a></p></a>
 					<a  href="?page=users"><img class="statistics1"  width="20" height="20"  src="img/users.png" />
@@ -258,7 +270,7 @@ function checkAccess()
 		
 <a href="#regOrEnter" id="regPop"></a>
 <div id="regOrEnter" class="modalDialog" >
-	<div style="width:250px;height:60px;padding-top: 25;">
+	<div style="width:250px;height:134px;padding-top: 25;">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$regOrEnterNote1} <a id="loginHref" name="loginHref" href="?page=signIn">{$enterLink}</a> {$regOrEnterNote2} <a href="?page=reg">{$regLink}</a></h1>
 	</div>

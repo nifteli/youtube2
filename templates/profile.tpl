@@ -137,7 +137,7 @@ function submitForm()
 	  </div>
 	{/if}
 	{if $result == 'success'}
-	<div class="success1" style="width:900px">{$messages['success']}</div>
+	<div class="success1" style="width:932px;    margin-top: 0px;">{$messages['success']}</div>
 	{/if}
 	<form name="profile" id="profile" action="?page=profile&action=save" method="post" enctype='multipart/form-data'>
 		<p class="regTitles">{$mandatory} :</p>
@@ -147,8 +147,8 @@ function submitForm()
 		<input class="field" type="email" name="email" id="email" value="{if isset($emailVal)}{$emailVal}{/if}" placeholder="{$email}*" required> 
 		<input class="field" type="text" name="bday" id="bday" value="{if isset($birthDateVal)}{$birthDateVal}{/if}" placeholder="{$birthDate}*" required>
 		
-		<input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}
-		<input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}
+		<label><input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}</label>
+		<label><input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}</label>
 		<p class="regTitles">{$optional} :</p>
 		<input class="field" type="text" name="fatherName" id="fatherName" value="{if isset($fatherNameVal)}{$fatherNameVal}{/if}" placeholder="{$fatherName}" required>
 		<input class="field" type="text" name="phone" id="phone" value="{if isset($phoneVal)}{$phoneVal}{/if}" placeholder="{$phone}">
@@ -179,7 +179,7 @@ function submitForm()
 		<label><input type="checkbox" checked name="onComment" id="onComment" {if $onCommentVal} checked {/if}> {$onCommentNot}</label><br>
 		<label><input type="checkbox" checked name="onVideoComment" id="onVideoComment" {if $onVideoCommentVal} checked {/if}> {$onVideoCommentNot}</label><br>
 		<!-- <label><input type="checkbox" name="agree" id="agree"> {$agreeNot} <a href="?page=rules">{$rules}</a></label><br> -->
-		<a href="?action=delProfile" onClick="return confirm('{$deleteConfirmation}')">{$deleteProfile}</a>
+		
 		<div style="text-align:left">
 		
 		<!-- <a href="javascript:{}" onclick="submitForm();"><img src="./img/signUp.png" width="50" height="50"></a> -->
@@ -191,6 +191,7 @@ function submitForm()
 	</form>
 <div class="profilePic">
 <img src="{$picturePath}" width=100 height=100>
+<a href="?action=delProfile" onClick="return confirm('{$deleteProfileConfirmation}')">{$deleteProfile}</a>
 </div>
 </div>
 

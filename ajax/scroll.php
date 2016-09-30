@@ -74,7 +74,8 @@ function showData($data,$db,$limit)
 		$start = ($page-1)*$limit;
 		//echo "<pre>";print_r($data);echo "</pre>";
 		//echo "page=$page; limit=$limit; start=$start";
-		
+	if(isset($folderId) && is_numeric($folderId))
+		$fld .= ",fv.folderId ";
 	$qry = "select * from (SELECT vs.views viewCount,
 					vs.likes likeCount,
 					vs.dislikes dislikeCount,vs.comments,
@@ -97,7 +98,7 @@ function showData($data,$db,$limit)
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
 			where v.isDeleted=0 and lower(l.abbr)='$lang'
-			group by v.id,vc.categoryId
+			group by v.id,vc.categoryId $fld
 			order by v.id desc) a where 1=1 ";
 	if(isset($catId)&& is_numeric($catId))
 		$qry .= " and categoryId=$catId";
@@ -442,7 +443,7 @@ function showSearchResults($data,$db,$limit)
 			$qry .= " and " . createCondition("a.duration", ($interval - 4) * 60 * 60 + 1, ">=", false);
 	}
 	if($fromDate != "" || $toDate != "")
-		$qry .= " and " . createCondition("a.vadded", "'$fromDate' and '$toDate'", "between", false);
+		$qry .= " and " . createCondition("a.vadded", "'$fromDate' and '$toDate 23:59:59'", "between", false);
 	
 	$qry .= " 
 			order by $orderBy
@@ -507,9 +508,9 @@ function displayAllData($res, $data, $colCnt=4)
 						 </a>";
 			if(is_numeric($_SESSION["userId"]))
 			{
-				$str .= "<div class='addVideoBtn'>";
+				$str .= "<div class='addVideoBtn' id='$id'>  ";
 				if(isAddedToFolder($id))
-					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
 					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";
@@ -601,9 +602,9 @@ function displayData($res, $data, $colCnt=4)
 						 </a>";
 			if(is_numeric($_SESSION["userId"]))
 			{
-				$str .= "<div class='addVideoBtn'>";
+				$str .= "<div class='addVideoBtn' id='$id'>  ";
 				if(isAddedToFolder($id))
-					$str .= "<a href='?page=watchVideo&id=$id&action=delFromFolder&from=main'><img src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0)' src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
 					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";

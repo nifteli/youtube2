@@ -34,6 +34,52 @@ if($_POST["action"] == "subs" && is_numeric($_POST["catId"]))
 	}
 }
 
+if($_POST["action"] == "repVideo" && is_numeric($_POST["reasonId"]) && is_numeric($_POST["id"]) && trim($_POST["desc"]) != "")
+{
+	if(trim($_POST["id"]) > 0 && $_POST["reasonId"] > 0)
+	{
+		$db->where("videoId=".trim($_POST["id"])." and reporterId=".$access->userId);
+		$db->get("videoreports");
+		if($db->count>0)
+		{
+			$result = "error";
+			echo $content["DUPLICATEREPORT"];
+			return;
+		}
+		if(strlen(trim($_POST["desc"])) < 5)
+		{
+			$result = "error";
+			echo  $content["SHORTDESC"];
+			return;
+		}
+		
+		$res = $db->insert("videoreports", array("videoId"=>trim($_POST["id"]),
+												  "reasonId"=>$_POST["reasonId"],
+												  "desc"=>trim($_POST["desc"]),
+												  "reporterId"=>$access->userId,
+												  "reportDate"=>date("Y-m-d H:i:s")));
+		if($db->count > 0) 
+		{
+			$res = $db->rawQuery("select email,firstName,lastName from users
+								where roleId in (select roleId from roleaccess where accessTypeId=58)");
+								//print_r($res);
+			for($i=0; $i<count($res); $i++)
+			{
+				if($res[$i]["email"] != "")
+				{
+					$db->rawQuery("insert into subsmails (sendTo,subject,body,status) values
+							    ('" . $res[$i]["email"] . "','" . 
+								$content["REPORTEMAILSUBJECT"] . "','" .
+								base64_encode($content["REPORTEMAILBODY"].trim($_POST["id"])) . "',0)");
+								;
+				}
+			}
+			echo $content["REPORTSAVED"];
+		}
+		
+	}
+}
+
 if($_GET["action"] == "subscribe" && $_GET["catId"] && is_numeric($_GET["catId"]))
 {
 	$db->insert("subscriptions",array(

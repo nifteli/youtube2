@@ -1,11 +1,11 @@
 <?php
-//echo "<pre>"; print_r($_POST); echo "<pre>";exit;
+//echo "<pre>"; print_r($_POST); echo "</pre>";//exit;
 if ($_GET["action"]=="sendToMail")
-{
+{ 
 	//server side validations
-	if(!isset($_POST["email"]) || $_POST["email"] == "")
+	if((!isset($_POST["email"]) || $_POST["email"] == "") && $_POST["uname"] == "" && $_POST["secretQuestionId"] == "" && $_POST["secretAnswer"] == "")
 		$errorMessage=$content["EMAILERROR"];
-	else
+	if(isset($_POST["email"]) || trim($_POST["email"]) != "")
 	{
 		$db->where("status='confirmed' and isDeleted=0 and email='".trim($_POST["email"])."'");
 		$users = $db->get("users");
@@ -20,12 +20,14 @@ if ($_GET["action"]=="sendToMail")
 			$db->where ("email = '".trim($_POST["email"])."'");
 			$db->update("users", array("hash"=>"$hash"));
 			if($db->count>0)
-			{
+			{ 
 				$mail->addAddress($_POST["email"]);     // Add a recipient Name is optional	
 				$mail->Subject = $content["RESETPASS"];
 				$mail->Body    = $content["RESETPASSBODY"]."<br><a href=$domain?page=forgotPass&email=$_POST[email]&hash=$hash>$domain</a>";
 				
-				if(!$mail->send()){ 
+				if(!$mail->send())
+				{ 
+					//echo "herererer";
 					//echo 'Message could not be sent.';
 					//echo 'Mailer Error: ' . $mail->ErrorInfo;
 				}else 

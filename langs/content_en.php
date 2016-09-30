@@ -81,6 +81,7 @@ $content['WHYHINT'] = "WHYHINT";
 $content['HOWHINT'] = "HOWHINT";
 $content['EMAILEXISTS'] = "This email is already registered";
 $content['ADVANCEDTITLE'] = "Advanced search";
+$content['deleteProfileConfirmation'] = "Are you sure to delete profile?";
 
 //SEARCH
 $content["SORTBY"] = "Sırala";
@@ -237,6 +238,9 @@ $content['COMMENTHINT'] = 'Please write your opinions about the video.';
 $content['EMAILHINT'] = 'Please, register for not writing email every time';
 $content['GUEST'] = 'Qonaq';
 $content['USER'] = 'User';
+$content['langHint'] = 'langHint';
+$content['questionHint'] = 'questionHint';
+$content['tagsHint'] = 'tagsHint';
 //end Watch video
 
 //All tags

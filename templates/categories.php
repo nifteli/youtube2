@@ -33,10 +33,23 @@ class Categories
 		$this->categories->assign("subscribe",$content['SUBSCRIBE']);
 		$this->categories->assign("unsubscribe",$content['UNSUBSCRIBE']);
 		$this->categories->assign("dirVal",1);
+		$this->categories->assign("removeFromFolder",$content['REMOVEFROMFOLDER']);
+		$this->categories->assign("addToMyFolder",$content['ADDTOMYFOLDER']);
 		if(isset($_GET["dir"])) $this->categories->assign("dirVal",$_GET["dir"]);
 		$this->categories->assign("by",1);
 		if(isset($_GET["by"])) $this->categories->assign("by",$_GET["by"]);
 		
+		if($controller->access->hasAccess)
+		{
+			$this->categories->assign("folders",$content['FOLDERS']);
+			$this->categories->assign("folderName2",$content['FOLDERNAME']);
+			$this->categories->assign("noFolderNotf",$content['NOFOLDERNOTF']);
+			$this->categories->assign("foldersArr",$controller->getFolderNames($controller));
+		}
+		$this->categories->assign("addToNewFolder", $content["ADDTONEWFOLDER"]);
+		$this->categories->assign("folderNm",$content['FOLDERNAME']);
+		$this->categories->assign("tags",$content['TAGS']);
+		$this->categories->assign("save",$content['SAVE']);
 				
 		//echo "<pre>";print_r($cats);echo "</pre>";
 		$this->categories->assign("lang",$controller->lang);
@@ -61,6 +74,17 @@ class Categories
 		if($_REQUEST["src"] == "")
 			$this->categories->assign("general","false");
 		
+		switch ($_GET["q"])
+		{
+			case 4:	$q = 1; break;
+			case 8:	$q = 2; break;
+			case 1:	$q = 3; break;
+			case 2:	$q = 4; break;
+			default: $q = 1;	
+		}
+		$this->categories->assign("q",$q);
+		$this->categories->assign("qs",$_GET["q"]);
+		
 			
 		//$this->categories->assign("catsHow",$controller->getCategories(4));
 		// $this->categories->assign("catsWhy",$controller->getCategories(8));
@@ -78,10 +102,13 @@ class Categories
 			$this->categories->assign("currCatId",$_GET["catId"]);
 		if($userId > 0)
 		{
-			if(isset($_GET["folderId"]) && is_numeric($_GET["folderId"]))
+			if((isset($_GET["folderId"]) && is_numeric($_GET["folderId"])) || is_numeric($_GET["by"]))
 				$this->categories->assign("folderTab",1);
+			if(isset($_GET["s"]) && is_numeric($_GET["s"]))
+				$this->categories->assign("s",1);
 			if(isset($_GET["catId"]) && is_numeric($_GET["catId"]) && isset($_GET["userId"]) && is_numeric($_GET["userId"]))
 				$this->categories->assign("catTab",1);	
+			$this->categories->assign("folderId",$_GET["folderId"]);
 				
 			$this->categories->assign("hasAccess",1);
 			$this->categories->assign("myFolders",$this->getMyFolders($controller,$userId));

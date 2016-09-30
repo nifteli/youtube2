@@ -159,8 +159,8 @@ function submitForm()
 	<input class="field" type="email" name="email" id="email" value="{if isset($emailVal)}{$emailVal}{/if}" placeholder="{$email}*" required>
 	<input class="field" type="text" name="dateOfBirth" id="dateOfBirth" value="{if isset($dateOfBirthVal)}{$dateOfBirthVal}{/if}" placeholder="{$dateOfBirth}*" required>
 	<br>
-	<input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}
-	<input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}
+	<label><input type="radio" name="gender" id="gender" value=1 {if isset($genderVal) && $genderVal==1} checked {/if}>{$male}</label>
+	<label><input type="radio" name="gender" id="gender" value=2 {if isset($genderVal) && $genderVal==2} checked {/if}>{$female}</label>
 	<p class="regTitles">{$optional} :</p>
 	<input class="field" type="text" name="phone" id="phone" value="{if isset($phoneVal)}{$phoneVal}{/if}" placeholder="{$phone}">
 	<select class="field" name="langId" id="langId" style="">
@@ -198,10 +198,14 @@ function submitForm()
 	<div style="text-align:left">
 	
 	<!-- <a href="javascript:{}" onclick="submitForm();"><img src="./img/signUp.png" width="50" height="50"></a> -->
-	<input class="btnSearch" onclick="return submitForm();" type="image" src="img/register_{$lang}.png" name="submit" style="margin-top: 5;"
-						onmouseover="this.src='img/registerSelected_{$lang}.png';"
-						onmouseout="this.src='img/register_{$lang}.png';"
-						onmousedown="this.src='img/registerPushed_{$lang}.png';"> 
+	<img src="img/cancel_{$lang}.png" height=30 title="{$reset}" onclick="window.history.back();"
+				onmouseover="this.src='img/cancelSelected_{$lang}.png';"
+				onmouseout="this.src='img/cancel_{$lang}.png';"
+				onmousedown="this.src='img/cancelPushed_{$lang}.png';">
+	<img src="img/confirm_{$lang}.png" height=30 title="{$confirm}" onclick="return submitForm();" style="margin-top: 5;"
+	onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+	onmouseout="this.src='img/confirm_{$lang}.png';"
+	onmousedown="this.src='img/confirmPushed_{$lang}.png';">
 	</div>
 	<!--<div class="topgap">
 	<label>{$captcha}: 

@@ -1,4 +1,38 @@
 <script>
+function addRemoveFromFolder(videoId,flag,folderId)
+{
+//alert(videoId+flag+folderId);
+	if(flag == 1)
+	{
+		if(!confirm("{$deleteConfirmation}"))
+			return;
+	}
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId, 
+     success: function(data) {
+	 //alert("action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId);
+	 //alert(data)
+		if(data=="") return;
+		if(flag == 1 && data == "1")
+		{
+			$('#removeFromFolder').hide();
+			$('#addToFolder').show();
+		}
+		if(flag == 2 && data == "1")
+		{
+			//alert(folderId);
+			//$('#addToFolder').html(data);
+			$('#removeFromFolder').show();
+			$('#addToFolder').hide();
+			window.location.href = "#close";
+			return;
+		}
+     }
+   });
+}
+
 var hasAccess = "{$hasAccess}";
 $(document).ready(function() {
 document.title = "{$pageTitle}";
@@ -74,7 +108,7 @@ function likeIt(videoId,flag)
 }
 function addToNewFolder(videoId,folderName,tags)
 {
-//alert(tags);
+alert(tags);
 	$.ajax({
      type: "POST",
      url: 'ajax/ajaxActions.php',
@@ -94,39 +128,7 @@ function addToNewFolder(videoId,folderName,tags)
      }
    })
 }
-function addRemoveFromFolder(videoId,flag,folderId)
-{
-//alert(videoId);
-	if(flag == 1)
-	{
-		if(!confirm("{$deleteConfirmation}"))
-			return;
-	}
-	$.ajax({
-     type: "GET",
-     url: 'ajax/ajaxActions.php',
-     data: "action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId, 
-     success: function(data) {
-	 //alert("action=addRemove&videoId="+videoId+"&flag="+flag+"&folderId="+folderId);
-	 //alert(data)
-		if(data=="") return;
-		if(flag == 1 && data == "1")
-		{
-			$('#removeFromFolder').hide();
-			$('#addToFolder').show();
-		}
-		if(flag == 2 && data == "1")
-		{
-			//alert(folderId);
-			//$('#addToFolder').html(data);
-			$('#removeFromFolder').show();
-			$('#addToFolder').hide();
-			window.location.href = "#close";
-			return;
-		}
-     }
-   });
-}
+
 
 {literal} 
 function isEmailAddress(str) {
@@ -250,7 +252,7 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 	var winLeft = (screen.width / 2) - (winWidth / 2);
 	if(flag==1)
 	{
-		window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width='+winWidth+',height='+winHeight);
+		window.open('http://www.facebook.com/sharer.php?app_id=1621049338132733&sdk=joey&u=' + url + '&display=popup&ref=plugin&src=share_button&s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width='+winWidth+',height='+winHeight);
 	}
 	if(flag==2)
 	{
@@ -258,17 +260,17 @@ function share(url, title, descr, image, winWidth, winHeight,flag)
 	}
 }
 
-function openNewFolderBox(n)
+function openNewFolderBox2(n)
 {
 	if(n ==1)
-	{
-		$("#existingFolder").hide();
-		$("#newFolder").show();
+	{ 
+		$("#existingFolder2").hide();
+		$("#newFolder2").show();
 	}
 	else
 	{
-		$("#existingFolder").show();
-		$("#newFolder").hide();
+		$("#existingFolder2").show();
+		$("#newFolder2").hide();
 	}
 	return false;
 }
@@ -335,6 +337,27 @@ function openNewFolderBox(n)
 	});
 
 });
+
+function repVideo(videoId,reasonId,desc)
+{
+	//alert(videoId+reasonId+desc);
+	$.ajax({
+     type: "POST",
+     url: 'ajax/ajaxActions.php',
+     data: "action=repVideo&id="+videoId+"&reasonId="+reasonId+"&desc="+desc, 
+     success: function(data) {
+		window.location.href = "#close";
+		if(data=="") 
+			return;
+		//document.getElementById('success1').style.display = "block";
+		$('#success1').show();
+		document.getElementById("success1").innerHTML = data;
+		//alert("ddd");
+		
+     }
+	
+   });
+}
 </script>
 
 <!--Videos thums Start-->			 
@@ -363,16 +386,16 @@ function openNewFolderBox(n)
 			  </h2>  
 		</div>
 		<div class="wvDet1">
-			<img src="img/lang.png" width="15" height="15"/><span class="wvLabel">{$language}</span>
-			<img src="img/question.png" width="15" height="15"/><span class="wvLabel">{$questions}</span> <br>
-			<div style="height: 20;overflow:auto; width:370px"><img src="img/tags2.png" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div>
+			<img src="img/lang.png" width="15" height="15" title="{$langHint}"/><span class="wvLabel">{$language}</span>
+			<img src="img/question.png" width="15" height="15"  title="{$questionHint}"/><span class="wvLabel">{$questions}</span> <br>
+			<div style="height: 40;overflow:auto; width:396px"><img src="img/tags2.png"  title="{$tagsHint}" width="20" height="15"/><span class="wvLabel">{$videoTags}</span></div>
 			<div class="vidInfo">
 				{$info}
 			</div>
 		</div>
 		<div class="actIcons">
 			<span class="wvLabel" id="addToFolder" name="addToFolder" {if $added2Folder != 0} style="display:none" {/if}>
-			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
+			<a {if $hasAccess} onclick="openNewFolderBox(2)" href="#add2FolderModal2" {else} href="?page=signIn" onclick="return checkAccess();" {/if}>
 			<img src="img/add.png" width="15" height="15" title="{$addToFolderTitle}"/>&nbsp{$addToFolder}</a>
 			</span>	
 			
@@ -387,8 +410,8 @@ function openNewFolderBox(n)
 			{/if}
 			<br>
 			<img src="img/share.png" width="15" height="15"/> : 
-			<a href="javascript:share('?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
-			<a href="javascript:share('pfs.az?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
+			<a href="javascript:share('{$domain}?page=watchVideo&id={$videoId}', 'Fb Share', 'Facebook share popup', 'img/fb.png', 520, 350,1)"><img width="20" height="20"  src="img/fb.png" title="{$fbTitle}"/></a>
+			<a href="javascript:share('{$domain}?page=watchVideo&id={$videoId}', 'pfs.az?page=watchVideo&id={$videoId}', 'Twitter share popup', 'img/fb.png', 520, 350,2)"><img width="20" height="20"  src="img/twitter.png" title="{$twtTitle}"/></a>
 		</div>
 	</div>
 	<div class="wvUnder">
@@ -417,6 +440,8 @@ function openNewFolderBox(n)
 		</div>
 		
 	</div>
+	<div class="smallerr"   id="smallerr" style="margin-top:0;width: 890;display:none"> </div>
+	<div class="success1"  id="success1" style="margin-top:0;display:none;float: left;width: 913px;"></div>
 	{if $result == 'error'}
 	  <div class="smallerr"  style="margin-top:0;width: 890;">
 		{foreach from=$messages item=message}
@@ -481,7 +506,6 @@ function openNewFolderBox(n)
 							{$comments[sec1].author}</a>, {$comments[sec1].created} 
 							{if $comments[sec1].createdById == $curUserId }
 								<a href="javascript:void(0);" onclick="editComment({$comments[sec1].commentId},1)">{$edit}</a>
-								<a onclick="commentAction({$videoId},{$comments[sec1].commentId},1)" href="#">{$delete}</a>
 							{/if}
 							</span>
 						</div>
@@ -507,11 +531,11 @@ function openNewFolderBox(n)
 	</div>
 </div>
 
-<div id="add2FolderModal" name="add2FolderModal"  class="modalDialog">
-	<div style="width:250px">
+<div id="add2FolderModal2" name="add2FolderModal2"  class="modalDialog">
+	<div style="width:260px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$folders}</h1>
-		<div id="existingFolder">
+		<div id="existingFolder2">
 		{if count($foldersArr)>0}
 		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=add2Folder" method="post">
 			<br>
@@ -524,26 +548,34 @@ function openNewFolderBox(n)
 				</select>
 			</div>
 			<br>
-			<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
-			<div style="text-align:center;width:100%">
-				<input type="button" class="post" name = "add" id="add" onclick="addRemoveFromFolder({$videoId},2,document.getElementById('fldId').value)" href="#close"  value="{$addToFolder}">
+			<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox2(1)">{$addToNewFolder}</a></div>
+			<div style="text-align:center;width:100%;float:left">
+				<!-- <input type="button" class="post" name = "add" id="add" onclick="addRemoveFromFolder({$videoId},2,document.getElementById('fldId').value)" href="#close"  value="{$addToFolder}"> -->
+				<img src="img/confirm_{$lang}.png" height=30 title="{$addToFolder}" onclick="addRemoveFromFolder({$videoId},2,document.getElementById('fldId').value)" href="#close"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
 			</div>
 		</form>
 		{else}
 		{$noFolderNotf}
-		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox(1)">{$addToNewFolder}</a></div>
+		<div style="float:right"><a href="#" id="newFolderLink" onclick="return openNewFolderBox2(1)">{$addToNewFolder}</a></div>
 		{/if}
 		</div>
-		<div id="newFolder" style="display:none">
+		<div id="newFolder2" style="display:none">
 			<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=watchVideo&id={$videoId}&action=addNewFolder" method="post">
 				<br>
 				<div style="float:right;width:100%">
-					<input type="text" name="folderName" id="fldName" placeholder="{$folderName}" style="width:100%" required>
-					<input type="text" name="tags" id="tgs" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
+					<input type="text" name="folderName" id="fldName2" placeholder="{$folderName}" style="width:100%" required>
+					<input type="text" name="tags" id="tgs2" placeholder="{$tags}" style="width:100%;margin-bottom:5px;margin-top:5px" required>
 				</div>
 				<br><br>
-				<div style="text-align:center;width:100%">
-					<input type="button" class="post" onclick="addToNewFolder({$videoId},document.getElementById('fldName').value,document.getElementById('tgs').value)" name = "add" id="add" value="{$save}">
+				<div style="text-align:center;width:100%;float:left">
+					<!-- <input type="button" class="post" onclick="addToNewFolder({$videoId},document.getElementById('fldName').value,document.getElementById('tgs').value)" name = "add" id="add" value="{$save}"> -->
+					<img src="img/confirm_{$lang}.png" height=30 title="{$save}" onclick="addToNewFolder({$videoId},document.getElementById('fldName2').value,document.getElementById('tgs2').value)" 
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
 				</div>
 			</form>
 		</div>
@@ -551,10 +583,10 @@ function openNewFolderBox(n)
 </div>
 
 <div id="reportVideoModal" class="modalDialog" >
-	<div style="height:160px; width:400px">
+	<div style="height:160px; width:426px">
 		<a href="#close" title="Close" class="close">X</a>
 		<h1 style="font-weight:bold">{$reportVideo}</h1>
-		<form name="frmAddToFolder" id="frmAddToFolder" action="?page=watchVideo&id={$videoId}&action=reportVideo" method="post" style="width:100%">
+		<form name="frmReport" id="frmReport" action="?page=watchVideo&id={$videoId}&action=reportVideo" method="post" style="width:100%">
 			<br>
 			<label>{$reportReason}:</label>
 			<div style="float:right">
@@ -569,8 +601,17 @@ function openNewFolderBox(n)
 			<textarea type="text" name="desc" id="desc" style="float:right;width:250px;height:60;border: 1px solid #fff;"></textarea>
 			
 			<div style="text-align:center;width:100%;margin-top: 48;">
-				<input type="submit" class="post" name = "add" id="add" value="{$reportVideo}">
-				<input type="reset" class="post" name = "add" id="add" onClick="window.location.href = '#close'" value="{$cancel}">
+				<!-- <input type="submit" class="post" name = "add" id="add" value="{$reportVideo}"> -->
+				<img src="img/confirm_{$lang}.png" height=30 title="{$reportVideo}" onclick="repVideo({$videoId},document.getElementById('reasonId').value,document.getElementById('desc').value)" 
+				href="#close"
+				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
+				onmouseout="this.src='img/confirm_{$lang}.png';"
+				onmousedown="this.src='img/confirmPushed_{$lang}.png';">
+				<!-- <input type="reset" class="post" name = "add" id="add" onClick="window.location.href = '#close'" value="{$cancel}"> -->
+				<img src="img/cancel_{$lang}.png" height=30 title="{$cancel}" onclick="window.location.href = '#close'"
+				onmouseover="this.src='img/cancelSelected_{$lang}.png';"
+				onmouseout="this.src='img/cancel_{$lang}.png';"
+				onmousedown="this.src='img/cancelPushed_{$lang}.png';">
 			</div>
 		</form>
 	</div>

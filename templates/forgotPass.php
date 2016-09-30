@@ -13,6 +13,7 @@ class ForgotPass
 		$this->forgotPass = new Smarty;
 		$this->forgotPass->assign("email",$content['EMAIL']);
 		if (isset($_POST["email"])) $this->forgotPass->assign("emailVal",$_POST["email"]);
+		$this->forgotPass->assign("lang",$controller->lang);
 		$this->forgotPass->assign("forgotPass",$content['FORGOTPASS']);
 		$this->forgotPass->assign("sendToMail",$content['SENDTOMAIL']);
 		$this->forgotPass->assign("secQuestions",$controller->getSecretQuestions());
@@ -31,9 +32,9 @@ class ForgotPass
 			$this->forgotPass->assign("rEmail",$_GET["email"]);
 			$this->forgotPass->assign("rHash",$_GET["hash"]);
 		}
-		if(is_numeric($_POST["secretQuestionId"]) && trim($_POST["secretAnswer"]) != "" && trim($_POST["userName"]) != "")
+		if(is_numeric($_POST["secretQuestionId"]) && trim($_POST["secretAnswer"]) != "" && trim($_POST["uname"]) != "")
 		{
-			if($this->checkAnswer(trim($_POST["userName"]),$_POST["secretQuestionId"],trim($_POST["secretAnswer"]),$controller,$rEmail,$rHash))
+			if($this->checkAnswer(trim($_POST["uname"]),$_POST["secretQuestionId"],trim($_POST["secretAnswer"]),$controller,$rEmail,$rHash))
 			{
 				$this->forgotPass->assign("secret",1);
 				$this->forgotPass->assign("rEmail",$rEmail);

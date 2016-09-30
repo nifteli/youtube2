@@ -637,7 +637,8 @@ font-family:Calibri;
 
 .videos{
     width: 750px;
-    float: right;
+    float: left;
+	margin-top: 1;
 }
 
 .rightCol{
@@ -2518,8 +2519,8 @@ pre{
 
 .vidInfo{
 	float: left;
-    width: 370px;
-    height: 280px;
+    width: 100%;
+    height: 259px;
     overflow: auto;
 }
 /*End Back to top*/
@@ -2618,9 +2619,10 @@ background: #C05208;
 }
 
 .wvRight{
-	float: right;
-    width: 378px;
+	    float: right;
+    width: 396px;
     min-height: 350px;
+    margin-left: 3px;
 }
 .wvUnder{
 	float: left;
@@ -2766,8 +2768,7 @@ h
 
 .orderByDiv{
 	    width: 400px;
-    /* margin-top: 23px; */
-    
+    margin-top: 4px;
     position: static;
     float: left;
     /* margin-left: 640px; */
@@ -2794,7 +2795,7 @@ h
 	    width: 800px;
     float: left;
     position: fixed;
-    z-index: 99999;
+    z-index: 9999;
     background-color: white;
 	
 }
@@ -2809,8 +2810,8 @@ h
 	  float: left;
 	  height: 100px;
 	  width: 100px;
-	  margin-left: 90px;
-	  margin-top: 20px;
+	  /* margin-left: 90px;
+	  margin-top: 20px; */
 }
 .titles{
 	      float: left;
