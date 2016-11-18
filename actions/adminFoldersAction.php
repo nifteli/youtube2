@@ -206,7 +206,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$links = $controller->getFolders(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->logAction(18);
-	$controller->exportToExcel($fields,$links,$content['TITLEFOLDERS']);
+	$controller->exportToExcel($fields,$links,$content['TITLEFOLDERS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
 

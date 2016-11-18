@@ -33,7 +33,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getComments(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->exportToExcel($fields,$links,$content['TITLECOMMENTS']);
+	$controller->exportToExcel($fields,$links,$content['TITLECOMMENTS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	$controller->logAction(14);
 	return;
 }

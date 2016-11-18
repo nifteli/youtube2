@@ -170,7 +170,7 @@ function checkAccess()
 					<a href="?page=advSearch">{$advanced}</a>
 					</div>
 				<div class="simpleSearch">
-				<div style="float:left; width:631px">
+				<div style="float:left; width:606px">
 					<select class="srcCmb" name="language" id="language">
 						<option value="0" selected="selected"> {$allLangs}</option>
 						{foreach from=$languages item=row1}
@@ -202,9 +202,9 @@ function checkAccess()
 					</select>
 					</div>
 				</div>
-				<div style="float:left;width:208px;    height: 22px;">
-					<input class="srcCmb" style="width:95;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}" value = "{$frDateVal}">&nbsp;
-					<input class="srcCmb" style="width:95;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}"  value = "{$tDateVal}">&nbsp;
+				<div style="float:left;width:199px;    height: 22px;">
+					<input class="srcCmb" style="width:90;height: 19px !important;margin-left: 4;" type="text" name="fromDate" id="dpFrom" placeholder="{$fromDate}" value = "{$frDateVal}">&nbsp;
+					<input class="srcCmb" style="width:90;height: 19px !important;" type="text" name="toDate"  id="dpTo" placeholder="{$toDate}"  value = "{$tDateVal}">&nbsp;
 				</div>
 				</div>
 				</form>

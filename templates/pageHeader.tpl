@@ -49,7 +49,7 @@
 	padding: 0;
 	page-break-after: always;
 	page-break-inside: avoid;
-	width: 840px;
+	width: 805px;
 	float: left;
 	display:none;
 	}

@@ -281,7 +281,7 @@ z-index: 99999;
     font-family: Calibri;
     font-size: 14px;
     color: #333333;
-    width: 630px;
+    width: 599px;
     text-indent: 19px;
     height: 37px;
     -webkit-height: 30px;
@@ -630,7 +630,7 @@ font-family:Calibri;
 
 .vid{
 	/* margin-top:10px; */
-	margin-left:180px;
+	margin-left:130px;
 	float:left;
 	
 }
@@ -672,17 +672,17 @@ width: 100%;
 
 
 .box-cont{
-    float: right;
+    /* float: right; */
     height: 150px;
-    margin-left: 11px;
+    /* margin-left: 11px; */
     /* margin-top: -45px; */
     /* margin-bottom: 30px; */
-    width: 100%;
+    width: 805px;
 }
 
 
 .box{
- width:187px;
+ width:201px;
  height:140px;
  background:#FFFFFF;
  float:left;
@@ -2440,7 +2440,7 @@ pre{
 /* // Tag cloud */
 
 .simpleSearch{
-	width:840px;
+	width:805px;
 	height:22px;
 }
 .srcLbl{
@@ -2455,7 +2455,7 @@ pre{
     border: 2px solid #e7e7e7;
     border-radius: 2px 2px 2px 2px;
     padding-left: 2px;
-    width: 130px;
+    width: 131px;
 	height: 19px !important;
 }
 
@@ -2535,7 +2535,7 @@ pre{
 
 .headerMiddle{
 	float: left;
-    width: 840px;
+    width: 805px;
     height: 175px;
     margin-top: -30px;
 	background-color: white;
@@ -2543,7 +2543,7 @@ pre{
 
 .headerRight{
 	float: left;
-    width: 160px;
+    width: 195px;
     height: 140px;
     /* margin-top: 15px; */
 	background-color: white;
@@ -2767,7 +2767,7 @@ h
 }
 
 .orderByDiv{
-	    width: 400px;
+	    width: 805px;
     margin-top: 4px;
     position: static;
     float: left;

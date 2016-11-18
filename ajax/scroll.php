@@ -503,7 +503,7 @@ function displayAllData($res, $data, $colCnt=4)
 						 <a href='?page=watchVideo&id=$id'>
 							<div style='text-align: center'>
 							<div class='videoImage'>
-							<img src=$link width=170 height=90 title='$info'/>
+							<img src=$link width=190 height=100 title='$info'/>
 							</div>
 						 </a>";
 			if(is_numeric($_SESSION["userId"]))
@@ -597,7 +597,7 @@ function displayData($res, $data, $colCnt=4)
 						 <a href='?page=watchVideo&id=$id'>
 							<div style='text-align: center'>
 							<div class='videoImage'>
-							<img src=$link width=170 height=90 title='$info'/>
+							<img src=$link width=190 height=100 title='$info'/>
 							</div>
 						 </a>";
 			if(is_numeric($_SESSION["userId"]))

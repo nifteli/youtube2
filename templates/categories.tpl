@@ -308,7 +308,7 @@
 			{
 				//alert(folderId);
 				//$('#addToFolder').html(data);
-				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
 				//$('#addToFolder').hide();
 				window.location.href = "#close";
 				return;
@@ -342,7 +342,7 @@
 				//$('#addToFolder').html(data);
 				//$('#removeFromFolder').show();
 				//$('#addToFolder').hide();
-				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
 				window.location.href = "#close";
 				return;
 			}

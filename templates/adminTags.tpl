@@ -91,14 +91,14 @@ function submitForm(action)
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center"  title="$deleteTagsHint">{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="$createdTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$createdTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created1&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$langTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$nameTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center"  title="$lnNewTagTagsHint">{$lnNewTag}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated1&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedById&updatedByIdSortType={$updatedByIdSortType}')">{$lnUpdatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedBy&updatedBySortType={$updatedBySortType}')">{$lnUpdatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByIPTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedByIP&updatedByIPSortType={$updatedByIPSortType}')">{$lnUpdatedByIP}</a></th>

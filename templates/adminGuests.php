@@ -47,6 +47,7 @@ class AdminGuests
 		if(isset($_POST) && count($_POST) > 0)
 		{
 			$this->adminGuests->assign("entryDateVal", $_POST["entryDate"]);
+			$this->adminGuests->assign("entryDateTillVal", $_POST["entryDateTill"]);
 			$this->adminGuests->assign("IPVal", $_POST["IP"]);
 			$this->adminGuests->assign("idVal", $_POST["id"]);
 			$this->adminGuests->assign("deviceVal", $_POST["device"]);

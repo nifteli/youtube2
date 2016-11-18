@@ -23,6 +23,8 @@ class SearchResults
 		$this->searchRes->assign("toDate", $_POST["toDate"]);
 		//echo "<pre>";print_r($_POST["opt"]);echo "</pre>";
 		$this->searchRes->assign("options", isset($_POST["opt"]) ? implode("," ,$_POST["opt"]) : "");
+		$data = $controller->getNotifications(1);
+		$this->searchRes->assign("news2", $data["rightNote"]);
 		
 		$this->searchRes->assign("sortBy", $content["SORTBY"]);
 		$this->searchRes->assign("sbDate", $content["SBDATE"]);

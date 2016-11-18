@@ -60,7 +60,7 @@ function submitForm(action)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$entryDateGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=entryDate&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$entryDateGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=entryDate1&entryDateSortType={$entryDateSortType}')">{$lnEntryDate}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$IPGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=IP&IPSortType={$IPSortType}')">{$lnIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$deviceGuestHint}" href="javascript:{}" onclick="submitForm('?page=adminGuests&sortBy=device&deviceSortType={$deviceSortType}')">{$lnDevice}</a></th>

@@ -178,8 +178,8 @@ function submitForm(action)
 						{/if}
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].createdDate}">{$comments[sec1].createdDate}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updated}">{$comments[sec1].updated}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].confirmed}">{$comments[sec1].confirmed}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updatedDate}">{$comments[sec1].updatedDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].confirmedDate}">{$comments[sec1].confirmedDate}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$comments[sec1].id}">{$comments[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$comments[sec1].comment}">{$comments[sec1].comment}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$comments[sec1].isConfirmed}">{$comments[sec1].isConfirmed}</td>

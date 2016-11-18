@@ -85,7 +85,7 @@ function submitForm(action)
 				{section name=sec1 loop=$logs}
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$logs[sec1].actionDate}">{$logs[sec1].actionDate}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$logs[sec1].actionDate1}">{$logs[sec1].actionDate1}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].id}">{$logs[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].actionName}">{$logs[sec1].actionName}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdById}">{$logs[sec1].createdById}</td>

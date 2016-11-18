@@ -193,7 +193,7 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getUsers(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->exportToExcel($fields,$links,$content['TITLEUSERS']);
+	$controller->exportToExcel($fields,$links,$content['TITLEUSERS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
 if ($_GET["action"]=="set" && $_POST["action"] == 'exportMailInfo')

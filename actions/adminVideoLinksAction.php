@@ -434,7 +434,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getVideoLinks(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->exportToExcel($fields,$links,$content['TITLEVIDEOLINKS']);
+	$controller->exportToExcel($fields,$links,$content['TITLEVIDEOLINKS']."-".$_POST["added"]."-".$_POST["addedTill"]);
 	$controller->logAction(10);
 	return;
 }

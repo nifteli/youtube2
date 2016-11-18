@@ -70,8 +70,8 @@ function uncheckAll()
 			</select>
 			<table style="float:right; margin-left: 0; margin-right: 0;font-weight: bold;">
 				<tr>
-					<td><input id="q3" class="checkbox" type="checkbox" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("4", $videoQuestionVal)} checked {/if} style="margin-left: 0;">{$vqHow}</input></td>
-					<td><input id="q4" class="checkbox" type="checkbox" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("8", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
+					<td><input id="q3" class="checkbox" type="radio" value="4" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("4", $videoQuestionVal)} checked {/if} style="margin-left: 0;">{$vqHow}</input></td>
+					<td><input id="q4" class="checkbox" type="radio" value="8" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("8", $videoQuestionVal)} checked {/if}>{$vqWhy}</input></td>
 					<td><input id="q1" class="checkbox" type="radio" value="1" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("1", $videoQuestionVal)} checked {/if}>{$vqWhat}</input></td>
 					<td><input id="q2" class="checkbox" type="radio" value="2" onclick="controlQuestionSelection(this)" name="videoQuestion[]" {if in_array("2", $videoQuestionVal)} checked {/if}>{$vqWho}</input></td>
 				</tr>

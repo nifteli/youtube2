@@ -107,18 +107,20 @@
 });
 
 </script>
+<div class="tabcontents2" style="padding-left:0;float:right"> {$news2}</div>
+
 <div style="padding-top:10px;min-height: 1000px;">
-	<div class="hollywd" style="width:900px">
+	<div class="hollywd" style="width:805px">
 	<h2>{$advancedTitle}</h2>  
 	</div>
 	<form id="advSearchForm" action="?page=advSearch" method="post">
-		<input class="search" type="input" name="search"  placeholder="{$searchph}" value="{$search}" style="width:730px" value="{$sVal}">
+		<input class="search" type="input" name="search"  placeholder="{$searchph}" value="{$search}" style="width:700px" value="{$sVal}">
 			<input class="btnSearch" type="image" src="img/search_{$lang}.png" name="submit" 
 					onmouseover="this.src='img/searchSelected_{$lang}.png';"
 					onmouseout="this.src='img/search_{$lang}.png';"
 					onmousedown="this.src='img/searchPushed_{$lang}.png';"> 		
 		<div class="simpleSearch">
-		<div style="float:left; width:630px">
+		<div style="float:left; width:606px">
 			<select class="srcCmb" name="language" id="language">
 				<option value="0" selected="selected"> {$allLangs}</option>
 				{foreach from=$languages item=row1}
@@ -148,9 +150,9 @@
 			</select>
 			</div>
 		</div>
-		<div style="float:left;width:208px;    height: 26px;">
-			<input class="srcCmb" style="width:95;    margin-left: 7;    height: 19px !important;" type="text" name="fromDate" id="dpFrom2" placeholder="{$fromDateph}" value="{$fromDate}">&nbsp;
-			<input class="srcCmb" style="width:95;    height: 19px !important;" type="text" name="toDate"  id="dpTo2" placeholder="{$toDateph}" value="{$toDate}">&nbsp;
+		<div style="float:left;width:199px;    height: 26px;">
+			<input class="srcCmb" style="width:90;    margin-left: 7;    height: 19px !important;" type="text" name="fromDate" id="dpFrom2" placeholder="{$fromDateph}" value="{$fromDate}">&nbsp;
+			<input class="srcCmb" style="width:90;    height: 19px !important;" type="text" name="toDate"  id="dpTo2" placeholder="{$toDateph}" value="{$toDate}">&nbsp;
 		</div>
 		</div>
 				<br/>
@@ -200,7 +202,7 @@
 		<label><input onclick="changeOrderBy(document.getElementById('reorder').value,1)" type="radio" name="direction" id="direction" value=1 {if (isset($directionVal) && $directionVal==1)} checked {/if}>{$asc}</label>
 		<label><input onclick="changeOrderBy(document.getElementById('reorder').value,2)" type="radio" name="direction" id="direction" value=2 {if isset($directionVal) && $directionVal==2|| !isset($directionVal)} checked {/if}>{$desc}</label>
 	</div>
-	<div style="width:900px;float:left">
+	<div style="width:805px;float:left">
 	<img id='loading' src='img/loading.gif'>
 	<div id="demoajax" cellspacing="0">
 	</div>

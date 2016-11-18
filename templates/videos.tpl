@@ -134,7 +134,7 @@ function changeOrderBy(orderBy,dir)
 		</div>
 		{/if}
 		<img id='loading' src='img/loading.gif'>
-		<div id="demoajax" cellspacing="0">
+		<div id="demoajax" cellspacing="0" style="width: 805px;">
 		</div>
 	</div>
 </div>

@@ -337,7 +337,7 @@ function showProfile(userId)
 					{if $canSeeDetails}
 						<td class="vertical-middle" style="overflow: hidden;" title="{$users[sec1].name}">{$users[sec1].name}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].fatherName}">{$users[sec1].fatherName}</td>
-						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].birthDate}">{$users[sec1].birthDate}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].bDate}">{$users[sec1].bDate}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].phoneNumber}">{$users[sec1].phoneNumber}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">{$users[sec1].notes}</td>

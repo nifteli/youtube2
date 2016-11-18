@@ -65,7 +65,7 @@ if(!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] == "adminProf
 		include_once($actionsPath."adminProfileAction.php");
 	include_once($templatePath."adminPageHeader.tpl");
 	$controller->includeSection("adminMenu");
-	$controller->includeSection("adminProfile");
+	$controller->includeSection("adminRoles");
 	//$controller->includeSection("adminFooter");
 	//echo "<pre>";print_r($access);echo "</pre>";
 }
@@ -299,7 +299,7 @@ else
 		default:
 			include_once($templatePath."adminPageHeader.tpl");
 			$controller->includeSection("adminMenu");
-			$controller->includeSection("adminProfile");
+			$controller->includeSection("adminRoles");
 			break;
 	}
 }

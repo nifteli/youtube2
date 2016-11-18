@@ -156,10 +156,10 @@ $( "#deletedTill" ).datepicker(
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center"  title="{$deleteCatsHint}">{$delete}</th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$lastVideoAddedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=created1&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=updated1&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$lastVideoAddedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=lastVideoAdded1&lastVideoAddedSortType={$lastVideoAddedSortType}')">{$lnlastVideoAdded}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=deleted1&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$questionsCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=questions&videoQuestionSortType={$videoQuestionSortType}')">{$lnQuestion}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catGroupCatsHint}" href="javascript:{}" onclick="submitForm('?page=adminCategories&sortBy=catGroup&catGroupSortType={$catGroupSortType}')">{$lnCatGroup}</a></th>

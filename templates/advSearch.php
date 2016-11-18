@@ -29,6 +29,8 @@ class AdvSearch
 		$this->advSearch->assign("regLink",$content['REGLINK']);
 		$this->advSearch->assign("languageVal",$langIds[$controller->lang]);
 		$this->advSearch->assign("category", 99999999);
+		$data = $controller->getNotifications(1);
+		$this->advSearch->assign("news2", $data["rightNote"]);
 		
 		$this->advSearch->assign("vQuestionVal", isset($_POST["videoQuestion"]) ? $_POST["videoQuestion"] : array());
 

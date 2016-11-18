@@ -1,14 +1,14 @@
 <div>
 	<!--<input class="newRole" type="button" value="New role" name="submit">-->
-	<br/><br/><br/>
-	<div class="titles">
-		<h1>{$titleDetails}</h1>
+	
+	<div >
+		<b>{$titleDetails}</b>
 	</div>	
-		<div style="width:1200px; padding-left: 490px;">
+		<div style="width:1200px; padding-left: 10px;">
 		
 			<div class="accessDiv" id="accessDiv" style="    width: 100%;">
 			<form method="post" action="?page=adminDetails&s={$s}&q={$q}&title={$titleDetails}&{$condName}={$id}" id="vlFilter" name="vlFilter">
-				<button class="btn btn-light-combo btn-sm" name="action" id="action" value='export'>{$export}</button><br><br>
+				<button class="btn btn-light-combo btn-sm" name="action" id="action" value='export'>{$export}</button><br>
 				
 			</form>
 				<table id="t01" class="tbl" style="width:100%;text-align:center;border: 1px solid black;">

@@ -9,7 +9,14 @@ class AdminMenu
 		global $content;
 		
 		$this->adminMenu = new Smarty;
-		
+		$profile = $this->getUserProfile($controller->access-userId,$controller->db);
+		if(count($profile))
+		{
+			if($profile["picturePath"] != "")
+				$this->adminMenu->assign("picturePath", $profile["picturePath"]);
+			$this->adminMenu->assign("user", $profile["userName"]);
+			$this->adminMenu->assign("userId", $profile["id"]);
+		}
 		$this->adminMenu->assign("mnAdminPanel", $content['MNADMINPANEL']);
 		$this->adminMenu->assign("mnProfile", $content['MNPROFILE']);
 		$this->adminMenu->assign("mnRoles", $content['MNROLES']);
@@ -35,6 +42,13 @@ class AdminMenu
 		global $templatePath;
 		
 		$this->adminMenu->display($templatePath."adminMenu.tpl");
+	}
+	
+	private function getUserProfile($id,$db)
+	{
+		$db->where("id=$id");
+		$res = $db->get("users");
+		return $res[0];
 	}
 }
 

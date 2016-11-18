@@ -490,14 +490,17 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "select * from (
-						SELECT v.id, v.name, v.info, DATE_FORMAT(v.added,'%d-%m-%Y') added, v.addedByIP,DATE_FORMAT(v.updated,'%d-%m-%Y') updated,v.duration,v.questions,
+						SELECT v.id, v.name, v.info,  v.addedByIP,v.duration,v.questions,
 								l.name$lang lang, v.link,v.languageId,v.added vadded,v.updatedById,v.addedById,v.deletedById,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								concat(u2.firstName,' ',u2.lastName) updatedBy,
 								concat(u3.firstName,' ',u3.lastName) deletedBy,
+								DATE_FORMAT(v.added,'%d-%m-%Y %k:%i:%S') added,
+								DATE_FORMAT(v.updated,'%d-%m-%Y %k:%i:%S') updated,
+								DATE_FORMAT(v.deleted,'%d-%m-%Y %k:%i:%S') deleted,
 								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 								c.catName$lang catName,v.deleted vdeleted,v.updated vupdated,
-								v.isDeleted,DATE_FORMAT(v.deleted,'%d-%m-%Y') deleted,
+								v.isDeleted,
 								vs.reportCount,vs.views,vs.likes,vs.dislikes,vs.comments,vs.userCntCommented,vs.userReportedCnt,vs.tagCount,vs.userCntAddedToFolder,vs.addedFolderCnt
 						FROM videos v
 						left join vwvideostats vs on v.id = vs.id
@@ -682,6 +685,7 @@ class Controller //extends MySQL
 		$qry = "select * from (SELECT c.*,
                DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') createdDate,
                DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updatedDate,
+               DATE_FORMAT(c.confirmed,'%d-%m-%Y %k:%i:%S') confirmedDate,
                c.confirmed confirmDate,
                if(c.createdById!='NULL',u.userName,c.email) author, 
                concat(u2.firstName,' ',u2.lastName) confirmer,
@@ -857,11 +861,13 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "created ";
+			$sortBy = "created1 ";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
 		$qry = "select t.*,ts.*,u1.userName createdBy,u2.userName updatedBy,
+						DATE_FORMAT(t.created,'%d-%m-%Y %k:%i:%S') created,t.created created1,
+						DATE_FORMAT(t.updated,'%d-%m-%Y %k:%i:%S') updated,t.created updated1,
 						l.nameAz lang
 				from tags t
 				inner join languages l on l.id=t.langId
@@ -921,11 +927,14 @@ class Controller //extends MySQL
 		$endDate="01-01-9999";
 		if ($sortBy == "")
 		{
-			$sortBy = "se.entryDate ";
+			$sortBy = "entryDate1 ";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "select se.id, se.entryDate,se.IP,se.device,se.browser,gs.*
+		$qry = "select se.id, 
+				se.entryDate entryDate1,
+				DATE_FORMAT(se.entryDate,'%d-%m-%Y %k:%i:%S') entryDate,
+				se.IP,se.device,se.browser,gs.*
 				from siteentry se
 				left join vwgueststats gs on gs.IP=se.IP
 				where se.userId=0 ";
@@ -934,7 +943,7 @@ class Controller //extends MySQL
 			$beginDate = $this->getDateForSelect(trim($post["entryDate"]));
 		if(isset($post["entryDateTill"]) && $post["entryDateTill"] != "")
 			$endDate = $this->getDateForSelect(trim($post["entryDateTill"]));
-		$qry .= " and se.entryDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		$qry .= " and entryDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
 		
 		
 		if(isset($post["id"]) && $post["id"] != "")
@@ -975,7 +984,9 @@ class Controller //extends MySQL
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "select * from (select l.*, u.userName createdBy, la.actionName".$this->lang." actionName
+		$qry = "select * from (select l.*, 
+				DATE_FORMAT(l.actionDate,'%d-%m-%Y %k:%i:%S') actionDate1,
+				u.userName createdBy, la.actionName".$this->lang." actionName
 				from logs l
 				inner join logactions la on l.actionId=la.id
 				inner join users u on u.id=l.createdById
@@ -1116,7 +1127,7 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "e.sentDate ";
+			$sortBy = "sentDate1 ";
 			$sortType = "desc";
 		}
 		$beginDate="01-01-0000";
@@ -1124,6 +1135,8 @@ class Controller //extends MySQL
 		
 		$lang = $this->lang;
 		$qry = "SELECT e.*,e.to sentTo,
+				DATE_FORMAT(e.sentDate,'%d-%m-%Y %k:%i:%S') sentDate,
+				e.sentDate sentDate1,
 				concat(u.firstName,' ',u.lastName) senderName, u.userName
 				from emails e
 				left join users u on u.id=e.senderId
@@ -1174,13 +1187,17 @@ class Controller //extends MySQL
 		//$db->where("id=$id");
 		if ($sortBy == "")
 		{
-			$sortBy = "c.created ";
+			$sortBy = "created1 ";
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
 				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,cg.catGroupName".$_SESSION["lang"]." catGroup,
 				concat(u.firstName,' ',u.lastName) createdBy,
+				DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') created,c.created created1,
+				DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updated,c.updated updated1,
+				DATE_FORMAT(c.lastVideoAdded,'%d-%m-%Y %k:%i:%S') lastVideoAdded,c.lastVideoAdded lastVideoAdded1,
+				DATE_FORMAT(c.deleted,'%d-%m-%Y %k:%i:%S') deleted,c.deleted deleted1,
 				cg.catGroupNameAz
 				FROM categories c
 				left join users u on u.id=c.createdById

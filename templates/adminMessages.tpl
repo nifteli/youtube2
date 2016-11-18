@@ -28,7 +28,7 @@ function submitForm(action)
 	document.getElementById('vlFilter').submit();
 }
 </script>
-<div>
+
 	
 	{if $result == 'error'}
 	  <div class="err">
@@ -61,7 +61,7 @@ function submitForm(action)
 					<!--<th class="vertical-middle">
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$sentDateMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=sentDate&sentDateSortType={$sentDateSortType}')">{$lnSentDate}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$sentDateMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=sentDate1&sentDateSortType={$sentDateSortType}')">{$lnSentDate}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$subjectMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=subject&subjectSortType={$subjectSortType}')">{$lnSubject}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$bodyMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=body&bodySortType={$bodySortType}')">{$lnBody}</a></th>
@@ -140,4 +140,4 @@ function submitForm(action)
             </div>
 		</form>
 	</div>
-</div>
+

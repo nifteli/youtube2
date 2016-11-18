@@ -136,8 +136,8 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center"  title="{$deleteVidLinksHint}">{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center"  title="{$editVidLinksHint}">{$edit}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$vaddedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=vadded&addedSortType={$addedSortType}')">{$lnAdded}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=deleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=vupdated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$deletedVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=vdeleted&deletedSortType={$deletedSortType}')">{$lnDeleted}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$linkVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=link&linkSortType={$linkSortType}')">{$lnLink}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$langVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
@@ -229,7 +229,7 @@ function submitForm(action)
 						<a href="index.php?page=addVideo&id={$videoLinks[sec1].id}"><img src="img/edit.png" width="15" height="15" alt=""/></a>
 						{/if}
 					</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].vadded}">{$videoLinks[sec1].vadded}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].added}">{$videoLinks[sec1].added}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].updated}">{$videoLinks[sec1].updated}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].deleted}">{$videoLinks[sec1].deleted}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].id}"><a href="index.php?page=watchVideo&id={$videoLinks[sec1].id}">{$videoLinks[sec1].id}</a></td>

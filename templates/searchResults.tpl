@@ -93,11 +93,7 @@
 </script>
 
 
-<div>
-<div style="float: right;height:1 width:220px; margin: 0 auto; padding: 15px 0 40px;">
-	<div class="tabcontents2"></div>
-</div>
-</div>
+<div class="tabcontents2" style="padding-left:0;float:right"> {$news2}</div>
 
 <!--Videos thums Start-->			 
 
@@ -109,7 +105,7 @@
 		{if $okMessage != ''}
 		<div class="success1" style="width:680px; margin-top:40px">{$okMessage}</div>
 		{/if}
-		<div class="orderByDiv">
+		<div class="orderByDiv" style="width:805px">
 			<select name="reorder" id="reorder" onchange="changeOrderBy(this.value,2)">
 				<!-- <option value="">{$sortBy}</option> -->
 				<option value="1">{$sbDate}</option>

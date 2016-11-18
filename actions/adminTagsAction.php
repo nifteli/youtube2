@@ -103,7 +103,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$links = $controller->getTags(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->logAction(22);
-	$controller->exportToExcel($fields,$links,$content['TITLETAGS']);
+	$controller->exportToExcel($fields,$links,$content['TITLETAGS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
 
