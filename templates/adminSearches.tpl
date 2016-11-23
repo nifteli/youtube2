@@ -29,7 +29,14 @@ function submitForm(action)
 }
 </script>
 <div>
-	
+	<div class="actionButtons">
+	<table border=1 cellpadding=25 cellspacing=25 align=left>
+		<tr>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
+		</tr>
+	</table>
+	</div>
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -40,7 +47,7 @@ function submitForm(action)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<form method="post" action="?page=adminSearches&action=filter" id="vlFilter" name="vlFilter">
 		<div class="table-responsive" style="overflow-x: auto; width:1200px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
@@ -71,8 +78,8 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control" name="searcher" id="searcher" type="text" value="{$searcherVal}" /></td>
 					<td class="vertical-middle"  style="text-align: left;">
 						<input  name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" style="width:50%" />
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 					</td>
 				</tr>
 				</thead>

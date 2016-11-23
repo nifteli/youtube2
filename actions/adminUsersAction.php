@@ -92,7 +92,7 @@ if ($_GET["action"]=="set" && $_POST["action"] == "saveRoles")
 		$messages["success"] = $content["ROLESNOTEDITED"];
 	
 }
-if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
+if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])) && is_numeric(trim($_GET["flag"])))
 {
 	$result = "success";
 	$messages = array();
@@ -105,12 +105,12 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
 	}
 	
 	$db->where("id=".trim($_GET["id"]));
-	$db->update("users",array("isDeleted"=>1,
+	$db->update("users",array("isDeleted"=>trim($_GET["flag"]),
 								"deleted"=>date("Y-m-d H:i:s"),
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
-		$messages["success"] = $content["REMOVED"];
+		$messages["success"] = $content["SAVED"];
 }
 
 if ($_GET["action"]=="setUser" && is_numeric(trim($_GET["id"])))

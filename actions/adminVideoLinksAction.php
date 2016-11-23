@@ -392,7 +392,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 	$controller->logAction(48);
 	unlink($saveto);
 }
-
+//echo "<br><br><br><br><pre>";print_r($_POST);echo "</pre>";
 if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 {
 	$result = "success";

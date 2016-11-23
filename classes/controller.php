@@ -276,7 +276,7 @@ class Controller //extends MySQL
 							left JOIN videocats vc on c.id = vc.categoryId 
 							left JOIN (select * from videos where questions &  $questions and languageId=(select id from languages where LOWER(abbr) = '".$this->lang."')) v on v.id = vc.videoId 
 							left join catgroups cg on cg.id=c.catGroupId
-							WHERE c.questions &  $questions $cond ) a
+							WHERE c.isDeleted=0 and c.questions &  $questions $cond ) a
 						where isDeleted=0
 						group by a.id,a.catName,a.catInfo) a
 						left join 
@@ -396,7 +396,7 @@ class Controller //extends MySQL
 	
 	public function getFolderNames()
 	{
-		$qry = "select id folderId, name folderName from folders where createdById=".$this->access->userId . " order by created desc";
+		$qry = "select id folderId, name folderName from folders where isDeleted=0 and createdById=".$this->access->userId . " order by created desc";
 		$res = $this->db->rawQuery($qry);
 		return $res;
 	}
@@ -491,7 +491,7 @@ class Controller //extends MySQL
 		$lang = $this->lang;
 		$qry = "select * from (
 						SELECT v.id, v.name, v.info,  v.addedByIP,v.duration,v.questions,
-								l.name$lang lang, v.link,v.languageId,v.added vadded,v.updatedById,v.addedById,v.deletedById,
+								l.name$lang lang, v.link,v.languageId,v.added vadded,v.updatedById,v.updatedByIP,v.addedById,v.deletedById,v.deletedByIP,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								concat(u2.firstName,' ',u2.lastName) updatedBy,
 								concat(u3.firstName,' ',u3.lastName) deletedBy,
@@ -547,8 +547,14 @@ class Controller //extends MySQL
 			$qry .= " and v.addedByIP like '%" . trim($post["addedByIP"]) . "%'";
 		if(isset($post["updatedById"]) && $post["updatedById"] != "")
 			$qry .= " and v.updatedById = " . trim($post["updatedById"]);
+		if(isset($post["updatedByIP"]) && $post["updatedByIP"] != "")
+			$qry .= " and v.updatedByIP like '%" . trim($post["updatedByIP"]) . "%'";
 		if(isset($post["deletedById"]) && $post["deletedById"] != "")
 			$qry .= " and v.deletedById = " . trim($post["deletedById"]);
+		if(isset($post["deletedByIP"]) && $post["deletedByIP"] != "")
+			$qry .= " and v.deletedByIP like '%" . trim($post["deletedByIP"]) . "%'";
+		if(isset($post["duration"]) && $post["duration"] != "")
+			$qry .= " and TIME_FORMAT(SEC_TO_TIME(v.duration),'%H:%i:%s') like '%" . trim($post["duration"]) . "%'";
 		
 		if(isset($post["languageId"]) && $post["languageId"] != "")
 			$qry .= " and v.languageId = " . trim($post["languageId"]);
@@ -722,6 +728,8 @@ class Controller //extends MySQL
 			$qry .= " and c.confirmer like '%" . trim($post["confirmer"]) . "%'";
 		if(isset($post["confirmedById"]) && $post["confirmedById"] != "")
 			$qry .= " and c.confirmedById like '%" . trim($post["confirmedById"]) . "%'";
+		if(isset($post["confirmedByIP"]) && $post["confirmedByIP"] != "")
+			$qry .= " and c.confirmedByIP like '%" . trim($post["confirmedByIP"]) . "%'";
 		
 		$beginDate="00-00-0000";
 		$endDate="01-01-9999";
@@ -795,7 +803,7 @@ class Controller //extends MySQL
 							left join vwfolderstats fs on fs.folderId=f.id 
 							group by f.id
 				) f
-				where isDeleted=0 ";
+				where 1=1 ";
 				
 		if(isset($post["created"]) && $post["created"] != "")
 			$beginDate = $this->getDateForSelect(trim($post["created"]));
@@ -1194,6 +1202,7 @@ class Controller //extends MySQL
 		$qry = "SELECT catNameAz catAz,catInfoAz,catNameEn catEn,catInfoEn,catNameRu catRu,catInfoRu, c.*,
 				cs.videoCntInCat,cs.userCntSubscribed,cs.clickUserCnt,cs.clickCnt,cg.catGroupName".$_SESSION["lang"]." catGroup,
 				concat(u.firstName,' ',u.lastName) createdBy,
+				concat(u2.firstName,' ',u2.lastName) deletedBy,
 				DATE_FORMAT(c.created,'%d-%m-%Y %k:%i:%S') created,c.created created1,
 				DATE_FORMAT(c.updated,'%d-%m-%Y %k:%i:%S') updated,c.updated updated1,
 				DATE_FORMAT(c.lastVideoAdded,'%d-%m-%Y %k:%i:%S') lastVideoAdded,c.lastVideoAdded lastVideoAdded1,
@@ -1201,6 +1210,7 @@ class Controller //extends MySQL
 				cg.catGroupNameAz
 				FROM categories c
 				left join users u on u.id=c.createdById
+				left join users u2 on u2.id=c.deletedById
 				left join vwcatstats cs on cs.categoryId=c.id
 				left join catgroups cg on cg.id=c.catGroupId
 				left join questions q on q.bitValue=c.questions

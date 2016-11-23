@@ -318,6 +318,7 @@ $content['ID'] = "No";
 $content['ADDDATE'] = "Əlavə olunma tarixi";
 $content['ADDEDBY'] = "Əlavə edən";
 $content['ADDEDBYIP'] = "Əlavə edən IP";
+$content['DELETEDDBYIP'] ="DELETEDDBYIP";
 $content['UPDATED'] = "Dəyişmə tarixi";
 $content['DURATION'] = "Müddət";
 $content["INSUFFACCESS"] = "Not sufficient access for this action";
@@ -383,6 +384,8 @@ $content['dislikesVidLinksHint']="dislikesVidLinksHint";
 $content['userReportedCntVidLinksHint']="userReportedCntVidLinksHint";
 $content['userCntAddedToFolderVidLinksHint']="userCntAddedToFolderVidLinksHint";
 $content['addedFolderCntVidLinksHint']="addedFolderCntVidLinksHint";
+$content['updatedByIPVidLinksHint']="updatedByIPVidLinksHint";
+$content['deletedByIPVidLinksHint']="deletedByIPVidLinksHint";
 
 //End Video links 
 

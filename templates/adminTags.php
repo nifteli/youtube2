@@ -12,6 +12,7 @@ class AdminTags
 		global $recsPerPage;
 		
 		$this->adminTags = new SmartyBC;
+		$this->adminTags->assign("languages", $controller->getLanguages());
 		$this->adminTags->assign("titleTags", $content['TITLETAGS']);
 		$this->adminTags->assign("save", $content['SAVE']);
 		$this->adminTags->assign("lang", $controller->lang);

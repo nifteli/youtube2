@@ -95,8 +95,22 @@ $( "#deletedTill" ).datepicker(
 });
 </script>
 <div>
-
-	<div class="actionButtons" >
+	<div class="actionButtons">
+	<form method="post" action="?page=adminCategories&action=filter" id="vlFilter" name="vlFilter" enctype='multipart/form-data'>
+	<table border=1 cellpadding=25 cellspacing=25 align=left>
+		<tr>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+			<td>
+			<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter' style="display:none">{$filter}</button>
+			<button class="btn btn-light-combo btn-sm" name="action" value="edit" type="submit" >{$edit}</button>
+			</td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" onclick="window.location.href='#addCat'">{$addCategory}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
+		</tr>
+	</table>
+	</div>
+	
+	<!-- <div class="actionButtons" >
 	
 	<form method="post" action="?page=adminCategories&action=filter" id="vlFilter" name="vlFilter" enctype='multipart/form-data'>
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
@@ -108,7 +122,7 @@ $( "#deletedTill" ).datepicker(
 		</tr>
 	</table>
 	
-	</div>
+	</div> -->
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -119,7 +133,7 @@ $( "#deletedTill" ).datepicker(
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<div class="table-responsive" style="overflow-x: auto; width:3600px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
@@ -216,10 +230,11 @@ $( "#deletedTill" ).datepicker(
 					<td class="vertical-middle"><input class="form-control"  name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="deletedById" id="deletedById" type="text" value="{$deletedByIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control"  name="deletedBy" id="deletedBy" type="text" value="{$deletedByVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="deletedByIP" id="deletedByIP" type="text" value="{$deletedByIPVal}" /></td>
-					<td class="vertical-middle" colspan=5 style="text-align: left;">
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+					<td class="vertical-middle" colspan=4 style="text-align: left;">
+						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
+						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 					</td>
 				</tr>
 				</thead>

@@ -32,6 +32,7 @@ class AdminUsers
 		$this->adminUsers->assign("send", $content['SEND']);
 		$this->adminUsers->assign("userProfile", $content['USERPROFILE']);
 		$this->adminUsers->assign("exportMailInfo", $content['EXPORTMAILINFO']);
+		$this->adminUsers->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		
 		$this->adminUsers->assign("canSeeDetails", $controller->access->authorized(70));
 		

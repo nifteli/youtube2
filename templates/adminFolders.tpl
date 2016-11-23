@@ -87,15 +87,24 @@ function setFolderName(id,folderName,tags,userId=0)
 	 //$( "#srcCmb select").val(userId);
 }
 </script>
-<div>
-	<div class="actionButtons" style="margin-top:3px">
+
+<div class="actionButtons">
+<table border=1 cellpadding=25 cellspacing=25 align=left>
+	<tr>
+		<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+		<td><button class="btn btn-light-combo btn-sm" type="button" onclick="window.location.href='#addNewFolder'">{$addFolder}</button></td>
+		<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
+	</tr>
+</table>
+</div>
+	<!-- <div class="actionButtons" style="margin-top:3px">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
 		<tr style="text-align:right">
 			<td><a href="#addNewFolder">{$addFolder}</a></td>
 		</tr>
 	</table>
 	
-	</div>
+	</div> -->
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -106,7 +115,7 @@ function setFolderName(id,folderName,tags,userId=0)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<form method="post" action="?page=adminFolders&action=filter" id="vlFilter" name="vlFilter">
 		<div class="table-responsive" style="overflow-x: auto; width:2700px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed; text-align: center;">
@@ -182,8 +191,8 @@ function setFolderName(id,folderName,tags,userId=0)
 					<td class="vertical-middle"><input class="form-control" name="deletedBy" id="deletedBy" type="text" value="{$deletedByVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="deletedByIP" id="deletedByIP" type="text" value="{$deletedByIPVal}"/></td>
 					<td class="vertical-middle" colspan=2>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
+						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 					</td>
 				</tr>
 				</thead>
@@ -214,8 +223,8 @@ function setFolderName(id,folderName,tags,userId=0)
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].deletedById}">{$folders[sec1].deletedById}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].deletedBy}">{$folders[sec1].deletedBy}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].deletedByIP}">{$folders[sec1].deletedByIP}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].tagCnt}">{$folders[sec1].tagCnt}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].videoCnt}">{$folders[sec1].videoCnt}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].tagCnt}"><a href="?page=adminDetails&s=folders&q=1&folderId={$folders[sec1].id}&title={$lnTagCnt}">{$folders[sec1].tagCnt}</a></td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$folders[sec1].videoCnt}"><a href="?page=adminDetails&s=folders&q=2&folderId={$folders[sec1].id}&title={$lnTagCnt}">{$folders[sec1].videoCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>
@@ -261,9 +270,9 @@ function setFolderName(id,folderName,tags,userId=0)
 		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminFolders&action=editFolder" method="post" style="width:250px">
 			<div style="float:right;width:250px" >
 				<input type="hidden" name="folderId" id="folderId">
-				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<input type="text" name="folderName" id="folderName" required placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
 				<input type="text" name="tagsp" id="tagsp" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
-				<select class="srcCmb" name="userId" id="userId" style="width: 100%;margin-bottom: 5px;">
+				<select class="srcCmb" name="userId" id="userId" style="width: 100%;margin-bottom: 5px;" disabled>
 					{section name=sec1 loop=$users}
 						<option value="{$users[sec1].id}"> {$users[sec1].user}</option>
 					{/section}
@@ -284,7 +293,7 @@ function setFolderName(id,folderName,tags,userId=0)
 		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminFolders&action=addNewFolder" method="post" style="width:250px">
 			<div style="float:right;width:250px" >
 				<input type="hidden" name="folderId" id="folderId">
-				<input type="text" name="folderName" id="folderName" placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<input type="text" name="folderName" id="folderName" required placeholder="{$folderName}" style="width: 100%; 5px;margin-bottom: 2px;">
 				<input type="text" name="tagsp" id="tagsp" placeholder="{$tags}" style="width: 100%;margin-top: 5px;margin-bottom: 5px;" required> 
 				<select class="srcCmb" name="userId" id="userId" style="width: 100%;margin-bottom: 5px;">
 					{section name=sec1 loop=$users}

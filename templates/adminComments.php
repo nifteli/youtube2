@@ -92,6 +92,7 @@ class AdminComments
 			$this->adminComments->assign("updatedByVal", $_POST["updatedBy"]);
 			$this->adminComments->assign("updatedByIPVal", $_POST["updatedByIP"]);
 			$this->adminComments->assign("confirmedByIdVal", $_POST["confirmedById"]);
+			$this->adminComments->assign("confirmedByIPVal", $_POST["confirmedByIP"]);
 			$this->adminComments->assign("confirmerVal", $_POST["confirmer"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")

@@ -172,7 +172,7 @@ class Categories
 				FROM foldervideos fv
 				right join folders f on f.id=fv.folderId
 				left join (select * from videos where isDeleted=0) v on v.id=fv.videoId
-				where f.createdById=$userId
+				where f.createdById=$userId and f.isDeleted=0
 				group by fv.folderId, f.name
 				order by f.created desc, f.name) fc 
 				left join foldertags ft on ft.folderId=fc.folderId
@@ -185,7 +185,7 @@ class Categories
 	
 	private function getMyVideos($controller)
 	{
-		$qry = "select id folderId, name folderName from folders where createdById=".$controller->access->userId;
+		$qry = "select id folderId, name folderName from folders where isDeleted=0 and createdById=".$controller->access->userId;
 		$res = $controller->db->rawQuery($qry);
 		return $res;
 	}

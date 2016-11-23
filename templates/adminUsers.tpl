@@ -326,8 +326,14 @@ function showProfile(userId)
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
-						<a href="?page=adminUsers&action=delete&id={$users[sec1].id}" alt="{$delete}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+							{if $users[sec1].isDeleted == 1}
+							<a href="?page=adminUsers&action=delete&id={$users[sec1].id}&flag=0" onClick="return confirm('{$undeleteConfirmation}')"><img src="img/success.png" width="15" height="15" alt=""/></a>
+							{else}
+							<a href="?page=adminUsers&action=delete&id={$users[sec1].id}&flag=1" alt="{$delete}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+							{/if}
+						
 						{/if}
+						
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].createdDate}">{$users[sec1].createdDate}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].updatedDate}">{$users[sec1].updatedDate}</td>

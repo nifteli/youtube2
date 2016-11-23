@@ -2264,12 +2264,13 @@ margin-right:45px;
 }
 
 .actionButtons{
-	float:right;
-	
+	float:left;
+	margin-left:5px;
 	vertical-align:bottom;
-	margin-top: 40px;
+	/* margin-top: 40px; */
 	MArgin-right: 12px;
     margin-bottom: 5px;
+	width: 900px;
 }
 
 .topgap{

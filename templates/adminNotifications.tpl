@@ -15,6 +15,9 @@
 	{/if}
 	<div id="all" style="float:left; margin-left:15px; width: 1200px;">
 		<form method="post" action="?page=adminNotifications&action=save" id="vlFilter" name="vlFilter" style="width:100%;">
+			<div style="text-align:left;    height: 30px;">
+			<input class="login39" type="submit" value="{$save}" name="submit" style="margin-left:0px;margin-top:5px">
+			</div>
 			<h3>{$middleNote}</h3>
 			<textarea name="middleNote" id="middleNote" style="width: 100%;background-color: white  !important;" cols="20">{$middleNoteVal}</textarea>
 			<h3>{$rightNote}</h3>
@@ -29,9 +32,6 @@
 			<textarea name="page1" id="page1" style="width: 100%;background-color: white  !important;height: 200px;" cols="20">{$page1Val}</textarea>
 			<h3>Page2</h3>
 			<textarea name="page2" id="page2" style="width: 100%;background-color: white  !important;height: 200px;" cols="20">{$page2Val}</textarea>
-			<div style="text-align:center;">
-			<input class="login39" type="submit" value="{$save}" name="submit" style="margin-left:0px;margin-top:10px">
-			</div>
 		</form>
 	</div>
 </div>

@@ -319,6 +319,7 @@ $content["REPORTCOUNT"] = "Report count";
 $content["FILTER"] = "Filtr";
 $content["EXPORT"] = "Export";
 $content["REMOVED"] = "Removed";
+$content['DELETEDDBYIP'] ="DELETEDDBYIP";
 $content["DELETED"] = "Deleted";
 $content["ADDMANY"] = "Add many";
 $content["EDITMANY"] = "Edit many";
@@ -377,6 +378,8 @@ $content['dislikesVidLinksHint']="dislikesVidLinksHint";
 $content['userReportedCntVidLinksHint']="userReportedCntVidLinksHint";
 $content['userCntAddedToFolderVidLinksHint']="userCntAddedToFolderVidLinksHint";
 $content['addedFolderCntVidLinksHint']="addedFolderCntVidLinksHint";
+$content['updatedByIPVidLinksHint']="updatedByIPVidLinksHint";
+$content['deletedByIPVidLinksHint']="deletedByIPVidLinksHint";
 
 //End Video links 
 

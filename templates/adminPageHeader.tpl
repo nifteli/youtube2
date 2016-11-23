@@ -67,4 +67,16 @@
 	<script src="js/backToTop/main.js"></script>
 	
 </head>
+<script>
+function sbtFrm(frmName,actName,val)
+{
+	var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = actName;
+    input.value = val;
+    document.forms[frmName].appendChild(input);
+	document.getElementById(frmName).submit();
+	document.forms[frmName].removeChild(input);
+}
+</script>
 <body>

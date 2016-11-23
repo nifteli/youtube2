@@ -55,7 +55,7 @@ if ($_GET["action"]=="add")
 								inner join videocats vc on vc.videoId=v.id
 								inner join categories c on c.id=vc.categoryId
 								WHERE v.link='". trim($_POST["videoLink"]) ."' and vc.categoryId in (".$cats.") 
-								and v.questions = " . array_sum($_POST["videoQuestion"]) . "
+								and v.isDeleted=0 and v.questions = " . array_sum($_POST["videoQuestion"]) . "
 								group by v.link");
 		if($db->count>0)
 		{
@@ -102,6 +102,7 @@ if ($_GET["action"]=="add")
 									  "updated"=>date("Y-m-d H:i:s"),
 									  "info"=>$_POST["information"],
 									  "updatedById"=>$access->userId,
+									  "updatedByIP"=>$_SERVER["REMOTE_ADDR"],
 									  "duration"=>$_POST["duration"]));
 			$controller->logAction(8);
 			if($db->count == 0)

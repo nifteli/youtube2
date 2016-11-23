@@ -43,8 +43,17 @@ function submitForm(action)
 }
 </script>
 <div>
-
-	<div class="actionButtons" >
+	<div class="actionButtons">
+	<form method="post" action="?page=adminTags&action=filter" id="vlFilter" name="vlFilter">
+	<table border=1 cellpadding=25 cellspacing=25 align=left>
+		<tr>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" name="action" value="substitute" type="submit" >{$substitute}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
+		</tr>
+	</table>
+	</div>
+	<!-- <div class="actionButtons" >
 	
 	<form method="post" action="?page=adminTags&action=filter" id="vlFilter" name="vlFilter">
 	<table border=1 cellpadding=25 cellspacing=25 align=right>
@@ -53,7 +62,7 @@ function submitForm(action)
 		</tr>
 	</table>
 	
-	</div>
+	</div> -->
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -64,13 +73,13 @@ function submitForm(action)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<div class="table-responsive" style="overflow-x: auto; width:2100px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 140px; overflow: hidden;"/>
-					<col style="width: 80px; overflow: hidden;"/>
+					<col style="width: 140px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -92,13 +101,13 @@ function submitForm(action)
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center"  title="$deleteTagsHint">{$delete}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=created1&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated1&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$langTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=lang&langSortType={$langSortType}')">{$lnLang}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$nameTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=name&nameSortType={$nameSortType}')">{$lnName}</a></th>
 					<th class="vertical-middle" style=" text-align:center"  title="$lnNewTagTagsHint">{$lnNewTag}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$createdByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updated1&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedById&updatedByIdSortType={$updatedByIdSortType}')">{$lnUpdatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedBy&updatedBySortType={$updatedBySortType}')">{$lnUpdatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$updatedByIPTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=updatedByIP&updatedByIPSortType={$updatedByIPSortType}')">{$lnUpdatedByIP}</a></th>
@@ -116,11 +125,15 @@ function submitForm(action)
 						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
 					</td>
 					<td class="vertical-middle">
+						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
+						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
+					</td>
+					<td class="vertical-middle">
 						<select name="languageId" id="languageId"  class="form-control">
 							<option value="">{$lnLang}</option>
-							<option value="5" {if $languageIdVal == 5} selected {/if}>AZ</option>
-							<option value="19" {if $languageIdVal == 19} selected {/if}>EN</option>
-							<option value="67" {if $languageIdVal == 67} selected {/if}>RU</option>
+							{foreach from=$languages item=row1}
+							{html_options values=$row1.id output=$row1.name selected=$languageIdVal}
+							{/foreach}
 						</select>
 					</td>
 					<td class="vertical-middle"><input class="form-control"  name="name" id="name" type="text" value="{$nameVal}" /></td>
@@ -128,16 +141,12 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control"  name="createdById" id="createdById" type="text" value="{$createdByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" /></td>
-					<td class="vertical-middle">
-						<input class="form-control" name="updated" id="updated" type="text" value="{$updatedVal}" style="width:90px;display:initial"/>
-						<input class="form-control" name="updatedTill" id="updatedTill" type="text" value="{$updatedTillVal}" style="width:90px;display:initial"/>
-					</td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedById" id="updatedById" type="text" value="{$updatedByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedBy" id="updatedBy" type="text" value="{$updatedByVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedByIP" id="updatedByIP" type="text" value="{$updatedByIPVal}" /></td>
 					<td class="vertical-middle" style="text-align: left;" colspan=3>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 					</td>
 				</tr>
 				</thead>
@@ -152,13 +161,13 @@ function submitForm(action)
 						{/if}
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].created}">{$tags[sec1].created}</td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].lang}">{$tags[sec1].lang}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$tags[sec1].name}">{$tags[sec1].name}</td>
 					<td class="vertical-middle" style="overflow: hidden;"><input style="width:100%" name="newTag[{$tags[sec1].id}]" id="newTag{$tags[sec1].id}" type="text"></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdById}">{$tags[sec1].createdById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdBy}">{$tags[sec1].createdBy}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].createdByIP}">{$tags[sec1].createdByIP}</td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedById}">{$tags[sec1].updatedById}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedBy}">{$tags[sec1].updatedBy}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updatedByIP}">{$tags[sec1].updatedByIP}</td>

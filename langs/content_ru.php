@@ -316,6 +316,7 @@ $content["INSUFFACCESS"] = "Not sufficient access for this action";
 $content["REPORTCOUNT"] = "Report count";
 $content["FILTER"] = "Filtr";
 $content["EXPORT"] = "Export";
+$content['DELETEDDBYIP'] ="DELETEDDBYIP";
 $content["REMOVED"] = "Məlumat silindi";
 $content["DELETED"] = "Deleted";
 $content["ADDMANY"] = "Toplu daxil et";
@@ -375,6 +376,8 @@ $content['dislikesVidLinksHint']="dislikesVidLinksHint";
 $content['userReportedCntVidLinksHint']="userReportedCntVidLinksHint";
 $content['userCntAddedToFolderVidLinksHint']="userCntAddedToFolderVidLinksHint";
 $content['addedFolderCntVidLinksHint']="addedFolderCntVidLinksHint";
+$content['updatedByIPVidLinksHint']="updatedByIPVidLinksHint";
+$content['deletedByIPVidLinksHint']="deletedByIPVidLinksHint";
 
 //End Video links 
 
