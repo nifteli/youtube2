@@ -59,6 +59,12 @@ function submitForm(action)
 	document.getElementById('vlFilter').action=action;
 	document.getElementById('vlFilter').submit();
 }
+
+function setComment(commentId,comment)
+{
+	 $( "#pcommentId" ).val( commentId );
+	 $( "#pcomment" ).val( comment );
+}
 </script>
 <div>
 <div class="actionButtons">
@@ -81,9 +87,10 @@ function submitForm(action)
 	{/if}
 	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<form method="post" action="?page=adminComments&action=filter" id="vlFilter" name="vlFilter">
-		<div class="table-responsive" style="overflow-x: auto; width:2700px">
+		<div class="table-responsive" style="overflow-x: auto; width:2800px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
+					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 160px; overflow: hidden;"/>
@@ -112,6 +119,7 @@ function submitForm(action)
 						<input type="checkbox" class="ui-port-checkable select-all-checkbox" value="1" id="Test-0" name="Test"/>
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center"  title="{$deleteCommentsHint}">{$delete}</th>
+					<th class="vertical-middle" style=" text-align:center" title="{$editCommentHint}" >{$edit}</th>
 					<th class="vertical-middle" style=" text-align:center" title="{$confirmCommentsHint}" >{$confirm}</th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdCommentsHint}" href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=created&createdSortType={$createdSortType}')">{$lnCreated}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$updatedCommentsHint}" href="javascript:{}" onclick="submitForm('?page=adminComments&sortBy=updated&updatedSortType={$updatedSortType}')">{$lnUpdated}</a></th>
@@ -136,7 +144,7 @@ function submitForm(action)
 				</thead>
 				<thead class="head-transparent">
 				<tr class="filter-row" style="background-color:rgb(219, 203, 129);">
-					<td class="vertical-middle" colspan=2></td>
+					<td class="vertical-middle" colspan=3></td>
 					<td class="vertical-middle">
 						<input class="form-control" name="created" id="created" type="text" value="{$createdVal}" style="width:90px;display:initial"/>
 						<input class="form-control" name="createdTill" id="createdTill" type="text" value="{$createdTillVal}" style="width:90px;display:initial"/>
@@ -184,6 +192,9 @@ function submitForm(action)
 						{if $hasConfirmAccess && $comments[sec1].isConfirmed == 0}
 						<a href="?page=adminComments&action=confirm&id={$comments[sec1].id}"><img src="img/success.png" width="15" height="15" alt=""/></a>
 						{/if}
+					</td>
+					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$confirm}">
+						<a onclick="setComment({$comments[sec1].id},'{$comments[sec1].comment}')" href="#editComment"><img src="img/edit.png" width="15" height="15" alt=""/></a>
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].createdDate}">{$comments[sec1].createdDate}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$comments[sec1].updatedDate}">{$comments[sec1].updatedDate}</td>
@@ -239,6 +250,23 @@ function submitForm(action)
                 <!-- /.col-lg-9 -->
                
             </div>
+		</form>
+	</div>
+</div>
+<div id="editComment" class="modalDialog" >
+	<div style="width:220px;height:150px">
+		<a href="#close" title="Close" class="close1">X</a>
+		<h4 style="font-weight:bold">{$editComment}</h4>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminComments&action=editComment" method="post" style="width:190px">
+			<div style="float:right;width:200px" >
+				<input type="hidden" name="pcommentId" id="pcommentId">
+				<input type="text" name="pcomment" id="pcomment" required placeholder="{$lnComment}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<br>
+				<br>
+				<div style="text-align:center;">
+				<input type="submit" class="login39" name = "add" id="add" value="{$save}" style="margin-left:0;">
+				</div>
+			</div>
 		</form>
 	</div>
 </div>

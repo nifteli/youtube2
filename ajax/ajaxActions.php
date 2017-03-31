@@ -651,6 +651,35 @@ TBL;
 echo $table;
 }
 
+if($_GET["action"] == "share" && is_numeric($_GET["videoId"]) && is_numeric($_GET["flag"]) )
+{	
+	if($access->hasAccess)
+		$userId = $access->userId;
+	else
+	{
+		$userId = 0;
+		$cond = " and IP = '".$_SERVER['REMOTE_ADDR']."'";
+	}
+	if($_GET["flag"] == 1)
+	{
+		$sn = "fbCount";
+		$dt = "fbShareDate";
+	}
+	else
+	{
+		$sn = "twCount";
+		$dt = "twShareDate";
+	}
+	
+	$db->rawQuery("update videoviews set $sn=$sn+1,$dt='".date("Y-m-d H:i:s")."' where videoId=".$_GET["videoId"]." and userId=$userId $cond");
+	//$db->where("videoId=".$_GET["videoId"]." and userId=$userId $cond");
+	// $ok = $db->update("videoviews", array($sn=>"$sn+1",
+										  // $dt=>date("Y-m-d H:i:s")
+										// )); echo $db->getLastQuery(); 
+	if($ok)
+		echo "1";
+}
+
 function getAccessTypes($lang)
 {
 	global $db;

@@ -199,7 +199,7 @@ class MysqliDb
      */
     public function rawQuery ($query, $bindParams = null, $sanitize = true)
     {
-        $this->_query = $query;
+        $this->_query = $query; echo $this->_query;
         if ($sanitize)
             $this->_query = filter_var ($query, FILTER_SANITIZE_STRING,
                                     FILTER_FLAG_NO_ENCODE_QUOTES);

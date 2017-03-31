@@ -1,4 +1,5 @@
 <?php
+//echo "<br><br><br><br><br><br><br><br><br><pre>"; print_r($_POST["to"]);echo "</pre>";return;
 if ($_GET["action"]=="sendMail")
 {
 //echo "<pre>"; print_r($_POST); echo "</pre>";//return;
@@ -23,12 +24,15 @@ if ($_GET["action"]=="sendMail")
 		$mail->Subject = $_POST["subject"];
 		$mail->Body    = $_POST["body"];
 		
-		//print_r($_FILES);return;
-		if(isset($_FILES['attachment']['name']) || $_FILES['attachment']['tmp_name'] != "" )
+		
+		for($i=0; $i<count($_FILES['attachment']['name']); $i++)
 		{
-			$saveto = $tmpPath . $access->userId . basename($_FILES["attachment"]["name"]);
-			move_uploaded_file($_FILES["attachment"]["tmp_name"], $saveto);
-			$mail->AddAttachment($saveto);
+			if(isset($_FILES['attachment']['name'][$i]) || $_FILES['attachment']['tmp_name'][$i] != "" )
+			{
+				$saveto = $tmpPath . $access->userId . basename($_FILES["attachment"]["name"][$i]);
+				move_uploaded_file($_FILES["attachment"]["tmp_name"][$i], $saveto);
+				$mail->AddAttachment($saveto[$i]);
+			}
 		}
 		
 		if(!$mail->send())
@@ -42,18 +46,29 @@ if ($_GET["action"]=="sendMail")
 	}
 	
 	if($result == "success")
-	{
+	{ //echo "<br><br><br><br><br><br><br>";
 		$messages["success"] = $content["MAILSENT"];
-		$db->insert("emails",array("sentDate" => date("Y-m-d H:i:s"),
+		$id = $db->insert("emails",array("sentDate" => date("Y-m-d H:i:s"),
 								   "senderId" => $access->userId,
 								   "subject" => $_POST["subject"],
 								   "body" => $_POST["body"],
 								   "senderIP" => $_SERVER["REMOTE_ADDR"],
-								   "to" => $_POST["to"],
-								   "attachment" => basename($_FILES["attachment"]["name"]),
-								   ));
-		if(file_exists($saveto))
-			unlink($saveto);
+								   "to" => $_POST["to"]
+								   ));//echo $db->getLastQuery();$db->getLastError();
+		if($id>0)
+		{
+			for($i=0; $i<count($_FILES['attachment']['name']); $i++)
+			{	
+				if(trim($_FILES['attachment']['name'][$i]) != "")
+				{
+					$db->insert("attachments",array("emailId" => $id,
+										   "attachment" => basename($_FILES["attachment"]["name"][$i])
+										   ));
+					if(file_exists($saveto[$i]))
+						unlink($saveto[$i]);
+				}
+			}
+		}
 	}
 	else
 		$messages["success"] = $content["MAILNOTSENT"];
@@ -110,7 +125,7 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])) && is_numeric(tri
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
-		$messages["success"] = $content["SAVED"];
+		$messages["success"] = $content["SUCCESSFULLYSAVED"];
 }
 
 if ($_GET["action"]=="setUser" && is_numeric(trim($_GET["id"])))
@@ -223,4 +238,19 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'exportMailInfo')
 	$controller->exportToExcel($fields,$links,$content['EMAIL']);
 	return;
 }
+
+if($_GET["action"] == "editNote" && is_numeric($_POST["puserId"]) && trim($_POST["pNote"]) != "")
+{
+	$result = "success";
+	$db->where("id=$_POST[puserId]");
+	$res = $db->update("users",array("notes"=>$_POST["pNote"]));
+	if(!$res)
+	{
+		$result = "error";
+		break;
+	}
+	else
+		$messages["success"] = $content["NOTECHANGED"];
+}
+
 ?>

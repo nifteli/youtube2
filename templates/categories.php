@@ -23,7 +23,7 @@ class Categories
 		$this->categories->assign("folderName",$content['FOLDERNAME']);
 		$this->categories->assign("editFolder",$content['EDITFOLDER']);
 		$this->categories->assign("save",$content['SAVE']);
-		$this->categories->assign("deleteConfirmation",$content['DELETECONFIRMATION']);
+		$this->categories->assign("deleteConfirmation",$content['FOLDERDELETECONFIRMATION']);
 		$this->categories->assign("tags",$content['TAGS']);
 		$this->categories->assign("sbAlph",$content['SORTALPHABETICALLY']);
 		$this->categories->assign("sbVideoCnt",$content['SORTVIDEOCOUNT']);

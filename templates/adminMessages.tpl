@@ -49,7 +49,7 @@ function submitForm(action)
 	{/if}
 	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		<form method="post" action="?page=adminMessages&action=filter" id="vlFilter" name="vlFilter">
-		<div class="table-responsive" style="overflow-x: auto; width:1800px">
+		<div class="table-responsive" style="overflow-x: auto; width:1600px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 140px; overflow: hidden;"/>
@@ -60,7 +60,7 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 200px; overflow: hidden;"/>
-					<col style="width: 200px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 					
 				</colgroup>
 				<thead>
@@ -76,7 +76,7 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userNameMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=userName&userNameSortType={$userNameSortType}')">{$lnUserName}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$senderIPMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=senderIP&senderIPSortType={$senderIPSortType}')">{$lnSenderIP}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$toMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=sentTo&toSortType={$toSortType}')">{$lnTo}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$attachmentMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=attachment&attachmentSortType={$attachmentSortType}')">{$lnAttachment}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$attachmentMessagesHint}" href="javascript:{}" onclick="submitForm('?page=adminMessages&sortBy=attachCnt&attachmentSortType={$attachmentSortType}')">{$lnAttachment}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -105,12 +105,14 @@ function submitForm(action)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$messages2[sec1].sentDate}">{$messages2[sec1].sentDate}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].id}">{$messages2[sec1].id}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].subject}">{$messages2[sec1].subject}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].body}">{$messages2[sec1].body}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].body}">{$messages2[sec1].body|substr:0:200}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].senderId}">{$messages2[sec1].senderId}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].userName}">{$messages2[sec1].userName}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].senderIP}">{$messages2[sec1].senderIP}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].to}">{$messages2[sec1].to}</td>
-					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].attachment}">{$messages2[sec1].attachment}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$messages2[sec1].attachCnt}">
+					<a href="?page=adminDetails&s=messages&q=1&emailId={$messages2[sec1].id}&title={$lnAttachment}">
+					{$messages2[sec1].attachCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>

@@ -201,9 +201,14 @@ function setFolderName(id,folderName,tags,userId=0)
 				<tr>
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
-						{if $hasDeleteAccess}
-						<a href="?page=adminFolders&action=delete&id={$folders[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+					{if $hasDeleteAccess}
+						{if $folders[sec1].isDeleted == 1}
+						<a href="?page=adminFolders&action=delete&id={$folders[sec1].id}&flag=0" onClick="return confirm('{$undeleteConfirmation}')"><img src="img/success.png" width="15" height="15" alt=""/></a>
+						{else}
+						<a href="?page=adminFolders&action=delete&id={$folders[sec1].id}&flag=1" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
+					{/if}	
+						
 					</td>
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$confirm}">
 						{if $hasEditAccess}

@@ -22,7 +22,9 @@ class AdminComments
 		$this->adminComments->assign("export", $content['EXPORT']);
 		$this->adminComments->assign("filter", $content['FILTER']);
 		$this->adminComments->assign("confirm", $content['CONFIRM']);
+		$this->adminComments->assign("editComment", $content['EDITCOMMENT']);
 		
+		$this->adminComments->assign("lnCreated", $content['ADDDATE']);
 		$this->adminComments->assign("lnCreated", $content['ADDDATE']);
 		$this->adminComments->assign("lnId", $content['ID']);
 		$this->adminComments->assign("lnVideoId", $content['VIDEOID']);
@@ -45,6 +47,7 @@ class AdminComments
 		$this->adminComments->assign("lnConfirmedByIP", $content['CONFIRMEDBYIP']);
 		
 		$this->adminComments->assign("createdCommentsHint", $content['createdCommentsHint']);
+		$this->adminComments->assign("editCommentHint", $content['editCommentHint']);
 		$this->adminComments->assign("idCommentsHint", $content['idCommentsHint']);
 		$this->adminComments->assign("videoIdCommentsHint", $content['videoIdCommentsHint']);
 		$this->adminComments->assign("linkCommentsHint", $content['linkCommentsHint']);

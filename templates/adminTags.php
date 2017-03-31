@@ -23,6 +23,7 @@ class AdminTags
 		$this->adminTags->assign("export", $content['EXPORT']);
 		$this->adminTags->assign("filter", $content['FILTER']);
 		$this->adminTags->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
+		$this->adminTags->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		$this->adminTags->assign("substitute", $content['SUBSTITUTE']);
 		//$this->adminTags->assign("confirm", $content['CONFIRM']);
 		
@@ -40,6 +41,7 @@ class AdminTags
 		$this->adminTags->assign("lnVideoCntTagged", $content['VIDEOCNTTAGGED']);
 		$this->adminTags->assign("lnUserCntClicked", $content['USERCNTCLICKED']);
 		$this->adminTags->assign("lnClickCnt", $content['CLICKCNT']);
+		$this->adminTags->assign("lnFolderCnt", $content['lnFolderCnt']);
 		
 		$this->adminTags->assign("langTagsHint", $content['langTagsHint']);
 		$this->adminTags->assign("nameTagsHint", $content['nameTagsHint']);
@@ -56,6 +58,7 @@ class AdminTags
 		$this->adminTags->assign("videoCntTaggedTagsHint", $content['videoCntTaggedTagsHint']);
 		$this->adminTags->assign("userCntClickedTagsHint", $content['userCntClickedTagsHint']);
 		$this->adminTags->assign("clickCntTagsHint", $content['clickCntTagsHint']);
+		$this->adminTags->assign("folderCntTagsHint", $content['folderCntTagsHint']);
 		
 		$this->adminTags->assign("hasEditAccess", $controller->access->authorized(31));
 		$this->adminTags->assign("hasDeleteAccess", $controller->access->authorized(30));
@@ -104,7 +107,9 @@ class AdminTags
 			$sortType = ($_GET["userCntClickedSortType"] == "" || $_GET["userCntClickedSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["clickCntSortType"]))
 			$sortType = ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC';
-		
+		if(isset($_GET["folderCntSortType"]))
+			$sortType = ($_GET["folderCntSortType"] == "" || $_GET["folderCntSortType"] == "ASC")? 'DESC' : 'ASC';
+
 			
 		$this->adminTags->assign("langSortType", ($_GET["langSortType"] == "" || $_GET["langSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
@@ -119,6 +124,7 @@ class AdminTags
 		$this->adminTags->assign("videoCntTaggedSortType", ($_GET["videoCntTaggedSortType"] == "" || $_GET["videoCntTaggedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("userCntClickedSortType", ($_GET["userCntClickedSortType"] == "" || $_GET["userCntClickedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminTags->assign("clickCntSortType", ($_GET["clickCntSortType"] == "" || $_GET["clickCntSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminTags->assign("folderCntSortType", ($_GET["folderCntSortType"] == "" || $_GET["folderCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;

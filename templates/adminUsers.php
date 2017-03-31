@@ -33,6 +33,7 @@ class AdminUsers
 		$this->adminUsers->assign("userProfile", $content['USERPROFILE']);
 		$this->adminUsers->assign("exportMailInfo", $content['EXPORTMAILINFO']);
 		$this->adminUsers->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
+		$this->adminUsers->assign("editNote", $content['EDITNOTE']);
 		
 		$this->adminUsers->assign("canSeeDetails", $controller->access->authorized(70));
 		
@@ -76,6 +77,7 @@ class AdminUsers
 		$this->adminUsers->assign("lnCatClicked", $content['CATCLICKED']);
 		$this->adminUsers->assign("lnSubCatCnt", $content['SUBCATCNT']);
 		$this->adminUsers->assign("lnSearchCnt", $content['SEARCHCNT']);
+		$this->adminUsers->assign("lnEmailCnt", $content['emailCnt']);
 		$this->adminUsers->assign("lnVideoCntCommented", $content['VIDEOCNTCOMMENTED']);
 		
 		$this->adminUsers->assign("createdUsersHint", $content['createdUsersHint']);
@@ -121,6 +123,7 @@ class AdminUsers
 		$this->adminUsers->assign("catClickedUsersHint", $content['catClickedUsersHint']);
 		$this->adminUsers->assign("subCatCntUsersHint", $content['subCatCntUsersHint']);
 		$this->adminUsers->assign("searchCntUsersHint", $content['searchCntUsersHint']);
+		$this->adminUsers->assign("emailCntUsersHint", $content['emailCntUsersHint']);
 		$this->adminUsers->assign("videoCntCommentedUsersHint", $content['videoCntCommentedUsersHint']);
 		
 		$this->adminUsers->assign("delete", $content['DELETE']);
@@ -166,6 +169,11 @@ class AdminUsers
 			$this->adminUsers->assign("registeredByIPVal", $_POST["registeredByIP"]);
 			$this->adminUsers->assign("regDeviceVal", $_POST["regDevice"]);
 			$this->adminUsers->assign("regBrowserVal", $_POST["regBrowser"]);
+			$this->adminUsers->assign("updateUserIdVal", $_POST["updateUserId"]);
+			$this->adminUsers->assign("deletedByIdVal", $_POST["deletedById"]);
+			$this->adminUsers->assign("getEmailOnNewsVal", $_POST["getEmailOnNews"]);
+			$this->adminUsers->assign("getEmailOnVideoCommentVal", $_POST["getEmailOnVideoComment"]);
+			$this->adminUsers->assign("getEmailAfterMyCommentVal", $_POST["getEmailAfterMyComment"]);
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
 			$sortBy = trim($_GET["sortBy"]);
@@ -248,6 +256,8 @@ class AdminUsers
 			$sortType = ($_GET["subCatCntSortType"] == "" || $_GET["subCatCntSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["searchCntSortType"]))
 			$sortType = ($_GET["searchCntSortType"] == "" || $_GET["searchCntSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["emailCntSortType"]))
+			$sortType = ($_GET["emailCntSortType"] == "" || $_GET["emailCntSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["videoCntCommentedSortType"]))
 			$sortType = ($_GET["videoCntCommentedSortType"] == "" || $_GET["videoCntCommentedSortType"] == "ASC")? 'DESC' : 'ASC';
 				
@@ -291,6 +301,7 @@ class AdminUsers
 		$this->adminUsers->assign("catClickedSortType", ($_GET["catClickedSortType"] == "" || $_GET["catClickedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminUsers->assign("subCatCntSortType", ($_GET["subCatCntSortType"] == "" || $_GET["subCatCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminUsers->assign("searchCntSortType", ($_GET["searchCntSortType"] == "" || $_GET["searchCntSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminUsers->assign("emailCntSortType", ($_GET["emailCntSortType"] == "" || $_GET["emailCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminUsers->assign("videoCntCommentedSortType", ($_GET["videoCntCommentedSortType"] == "" || $_GET["videoCntCommentedSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;

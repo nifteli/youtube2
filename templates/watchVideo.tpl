@@ -108,7 +108,7 @@ function likeIt(videoId,flag)
 }
 function addToNewFolder(videoId,folderName,tags)
 {
-alert(tags);
+//alert(tags);
 	$.ajax({
      type: "POST",
      url: 'ajax/ajaxActions.php',
@@ -248,6 +248,17 @@ function saveComment(id)
 }
 function share(url, title, descr, image, winWidth, winHeight,flag) 
 {
+	$.ajax({
+     type: "GET",
+     url: 'ajax/ajaxActions.php',
+     data: "action=share&videoId={$videoId}&flag="+flag,
+	      success: function(data) {
+          
+		  //alert(data);
+    }
+
+   });
+   
 	var winTop = (screen.height / 2) - (winHeight / 2);
 	var winLeft = (screen.width / 2) - (winWidth / 2);
 	if(flag==1)

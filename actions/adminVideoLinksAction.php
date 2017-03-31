@@ -45,61 +45,64 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 	$highestColumn = 'G'; 
 
 	//Loop through each row of the worksheet in turn
-	for ($row = 4; $row <= $highestRow; $row++)
+	for ($row = 2; $row <= $highestRow; $row++)
 	{
 		$continue = true;
+		$langInd = "en";
+		if(trim($rowData[0][1]) == "AZ" || trim($rowData[0][1]) == "EN" || trim($rowData[0][1]) == "RU")
+			$langInd = strtolower(trim($rowData[0][1]));
 		//  Read a row of data into an array
 		$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
 		//echo "<pre>"; print_r(trim($rowData[0][0])); echo "</pre>";
-		if(trim($rowData[0][0]) != "" || trim($rowData[0][1]) != "" || trim($rowData[0][2]) != "" || trim($rowData[0][5]) != "")
+		if(trim($rowData[0][0]) != "" || trim($rowData[0][1]) != "" || trim($rowData[0][2]) != "" || trim($rowData[0][3]) != "" || trim($rowData[0][4]) != "")
 		{
 			$linkId = getLinkId(trim($rowData[0][0]));
 			if (startsWith(trim($rowData[0][0]), "https://www.youtube.com/watch?"))
 			{
 				$data = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$linkId&key=$youtubeKey&fields=items(snippet(description,title),contentDetails(duration))&part=snippet,contentDetails"),true);
-				if(trim($rowData[0][3]) == "")
-					$rowData[0][3] = $data["items"][0]["snippet"]["title"];
-				if(trim($rowData[0][4]) == "")
-					$rowData[0][4] = $data["items"][0]["snippet"]["description"];
+				if(trim($rowData[0][5]) == "")
+					$rowData[0][5] = $data["items"][0]["snippet"]["title"];
+				if(trim($rowData[0][6]) == "")
+					$rowData[0][6] = $data["items"][0]["snippet"]["description"];
 				$duration = getVideoDuration($data["items"][0]["contentDetails"]["duration"]);
-				
+				//echo "<pre>"; print_r($data); echo "</pre>";
 				$db->startTransaction();
 				$db->rawQuery("insert into videos (link,languageId,questions,name,info,added,addedById,addedByIP,duration)
 								select '" .trim($rowData[0][0]) . "', l.id, q.id,'" . 
-										   trim($rowData[0][3]) . "','" . 
-										   trim($rowData[0][4]) . "','" . date("Y-m-d H:i:s") . "'," . $access->userId . ",'" . $_SERVER["REMOTE_ADDR"] . "'," . $duration .
+										   trim($rowData[0][5]) . "','" . 
+										   trim($rowData[0][6]) . "','" . date("Y-m-d H:i:s") . "'," . $access->userId . ",'" . $_SERVER["REMOTE_ADDR"] . "'," . $duration .
 								" from languages l 
-								inner join questions q on q.question = '" . trim($rowData[0][2]) . "'
+								inner join questions q on q.question".$langInd." = '" . trim($rowData[0][2]) . "'
 								where l.abbr = '" . trim($rowData[0][1]) . "'"
 							  );
-				$videoId = $db->getInsertId(); //echo "<br>videoid = ".$videoId." name".$rowData[0][3];
+				$videoId = $db->getInsertId(); 
+				
+				//echo "<br>videoid = ".$videoId." name".$rowData[0][3];
 				if($videoId)
 				{
 					$db->rawQuery("insert into videoCats (categoryId,videoId)
 								  select c.id, $videoId from categories c
-								  inner join questions q on q.bitValue & c.questions
-								  where catNameAz = '" . trim($rowData[0][5]) . "' and 
-								  q.question = '" . trim($rowData[0][2]) . "'
-								  ");
+								  where catName".ucfirst($langInd)." = '" . trim($rowData[0][3]) ."'");
 					
 					if($db->count < 1)
 					{
 						$continue = false;
+						$err = "(category error)";
 						//break;
 					}
 						//////////////////
 					if($continue)
 					{
-						$tags = array_unique(explode(",", trim($rowData[0][6])));
+						$tags = array_unique(explode(",", trim($rowData[0][4])));
 						foreach($tags as $tag)
 						{
-							$db->where("name='" . trim($tag) . "' and langId=" . $langIds[strtolower(trim($rowData[0][1]))]);
+							$db->where("name='" . trim($tag) . "' and langId=" . $langIds[strtolower($langInd)]);
 							$res = $db->getOne("tags");
 							if ($db->count == 1) 
 								$id = $res["id"];
 							else
 								$id = $db->insert("tags", array("name"=>trim($tag),
-														"langId"=>$langIds[strtolower(trim($rowData[0][1]))]));
+														"langId"=>$langIds[strtolower($langInd)]));
 							if($id)
 							{
 								$id = $db->insert("videotags", array("tagId"=>$id,
@@ -109,6 +112,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 							if(!$id)
 							{
 								$continue = false;
+								$err = "(tag error)";
 								//break;
 							}
 							//echo "<br>lang=".strtolower(trim($rowData[0][1]))." status=".$continue." videotagsid=".$id;
@@ -116,11 +120,14 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 					}
 				}
 				else
+				{
 					$continue = false;
+					$err = "(Video insert error)";
+				}
 				if(!$continue)
 				{//echo "rolback";
 					$db->rollback();
-					$errRows .= $row . ",";
+					$errRows .= $row . $err . ",";
 					//$result = "error";
 					//$messages["dbError"] = $content['ADDVIDEOERROR8'];
 				}
@@ -132,7 +139,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 				}
 			}
 			else
-				$errRows .= $row . ",";
+				$errRows .= $row . "(not youtube URL),";
 		}
 	}
 	$errRows = rtrim($errRows, ",");
@@ -187,10 +194,10 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 	//Get worksheet dimensions
 	$sheet = $objPHPExcel->getSheet(0); 
 	$highestRow = $sheet->getHighestRow(); //echo $highestRow;
-	$highestColumn = 'G'; 
+	$highestColumn = 'H'; 
 
 	//Loop through each row of the worksheet in turn
-	for ($row = 4; $row <= $highestRow; $row++)
+	for ($row = 2; $row <= $highestRow; $row++)
 	{
 		$continue = true;
 		//  Read a row of data into an array
@@ -200,50 +207,67 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 		{
 			if(is_numeric(trim($rowData[0][0])))
 			{
+				///
+				$name = trim($rowData[0][6]);
+				$about = trim($rowData[0][7]); 
+				if (startsWith(trim($rowData[0][1]), "https://www.youtube.com/watch?"))
+				{
+					$linkId = getLinkId(trim($rowData[0][1]));
+					$data = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$linkId&key=$youtubeKey&fields=items(snippet(description,title),contentDetails(duration))&part=snippet,contentDetails"),true);
+					if(trim($rowData[0][6]) == "")
+						$name = $data["items"][0]["snippet"]["title"];
+					if(trim($rowData[0][7]) == "")
+						$about = $data["items"][0]["snippet"]["description"];
+					$duration = getVideoDuration($data["items"][0]["contentDetails"]["duration"]);
+				}
+				////
+				$langInd = "en";
+				if(trim($rowData[0][2]) == "AZ" || trim($rowData[0][2]) == "EN" || trim($rowData[0][2]) == "RU")
+					$langInd = strtolower(trim($rowData[0][2]));
 				$sql = "update videos set ";
-				if(trim($rowData[0][1]) != "" && $langIds[strtolower(trim($rowData[0][1]))] != "")
-					$sql .= " languageId=" . $langIds[strtolower(trim($rowData[0][1]))] . ",";
-				if(trim($rowData[0][2]) != "")
-					$sql .= " questions=(select id from questions where question='" . trim($rowData[0][2]) . "' limit 1),";
+				if(trim($rowData[0][2]) != "" && $langIds[strtolower($langInd)] != "")
+					$sql .= " languageId=" . $langIds[strtolower($langInd)] . ",";
 				if(trim($rowData[0][3]) != "")
-					$sql .= " name='" . trim($rowData[0][3]) . "',";
-				if(trim($rowData[0][4]) != "")
-					$sql .= " info='" . trim($rowData[0][4]) . "',";
+					$sql .= " questions=(select id from questions where question".$langInd."='" . trim($rowData[0][3]) . "' limit 1),";
+				if($name != "")
+					$sql .= " name='" . $name . "',";
+				if($about != "")
+					$sql .= " info='" . $about . "',";
+				if($duration != "")
+					$sql .= " duration=$duration, ";
 				$sql .= " updated = '" . date("Y-m-d H:i:s") . "', updatedById = " . $access->userId . " where id=" . trim($rowData[0][0]);
 				
 				$db->startTransaction();
 				$db->rawQuery($sql);
 				if($db->count > 0)
 				{
-					if(trim($rowData[0][5]) != "")
+					if(trim($rowData[0][4]) != "")
 					{
 						$db->where("videoId=".trim($rowData[0][0]));
 						$db->delete("videocats");
+						
 						$sql = "insert into videoCats (categoryId,videoId)
 								  select c.id, " .trim($rowData[0][0]). " from categories c
-								  inner join questions q on q.bitValue & c.questions
-								  where catNameAz = '" . trim($rowData[0][5]) . "' and 
-								  q.question = ";
-						$sql .= (trim($rowData[0][2]) != "") ? "'" . trim($rowData[0][2]) . "'" : 
-								"(select question from questions where (select questions from videos where id=" . trim($rowData[0][0]) . ")) ";
+								  where catName".ucfirst($langInd)." = '" . trim($rowData[0][4]) . "'";
 						$db->rawQuery($sql);
-						//echo $sql;
+						//echo "<br><br><br><br><br><br><br>".$sql;
 						if($db->count < 1)
 						{
 							$continue = false;
+							$err = "(category error)";
 							//break;
 						}
 					}
 						//////////////////
 					if($continue)
 					{
-						if(trim($rowData[0][6]) != "")
+						if(trim($rowData[0][5]) != "")
 						{
 							$db->where("videoId=".trim($rowData[0][0]));
 							$db->delete("videotags");
 							
-							$tags = explode(",", trim($rowData[0][6]));
-							$langId = $langIds[strtolower(trim($rowData[0][1]))];
+							$tags = explode(",", trim($rowData[0][5]));
+							$langId = $langIds[strtolower($langInd)];
 							if($langId == "")
 							{
 								$db->where("id=".trim($rowData[0][0]));
@@ -268,6 +292,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 								if(!$id)
 								{
 									$continue = false;
+									$err = "(tag error)";
 									//break;
 								}
 								//echo "<br>lang=".strtolower(trim($rowData[0][1]))." status=".$continue." videotagsid=".$id;
@@ -276,11 +301,14 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 					}
 				}
 				else
+				{
 					$continue = false;
+					$err = "(video update error)";
+				}
 				if(!$continue)
 				{//echo "rolback";
 					$db->rollback();
-					$errRows .= $row . ",";
+					$errRows .= $row . $err. ",";
 					//$result = "error";
 					//$messages["dbError"] = $content['ADDVIDEOERROR8'];
 				}
@@ -360,7 +388,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 	}
 	$in = rtrim($in,",") . ")"; //echo $in;
 	$db->startTransaction();
-	$db->rawQuery("delete from videos where id $in");
+	$db->rawQuery("update videos set isDeleted=1, deleted='".date("Y-m-d H:i:s")."',deletedById=".$access->userId.",deletedByIp='".$_SERVER["REMOTE_ADDR"]."' where id $in");
 	if($db->count < 1)
 	{
 		$result = "error";
@@ -369,24 +397,24 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 		unlink($saveto);
 		return;
 	}
-	$db->rawQuery("delete from videocats where videoId $in");
-	if($db->count < 1)
-	{
-		$result = "error";
-		$db->rollback();
-		$messages["err1"] = $content["ERRORONDELETE"];
-		unlink($saveto);
-		return;
-	}
-	$db->rawQuery("delete from videotags where videoId $in");
-	if($db->count < 1)
-	{
-		$result = "error";
-		$db->rollback();
-		$messages["err1"] = $content["ERRORONDELETE"];
-		unlink($saveto);
-		return;
-	}
+	// $db->rawQuery("delete from videocats where videoId $in");
+	// if($db->count < 1)
+	// {
+		// $result = "error";
+		// $db->rollback();
+		// $messages["err1"] = $content["ERRORONDELETE"];
+		// unlink($saveto);
+		// return;
+	// }
+	// $db->rawQuery("delete from videotags where videoId $in");
+	// if($db->count < 1)
+	// {
+		// $result = "error";
+		// $db->rollback();
+		// $messages["err1"] = $content["ERRORONDELETE"];
+		// unlink($saveto);
+		// return;
+	// }
 	$messages["success"] = $content["LINKSDELETED"];
 	$db->commit();
 	$controller->logAction(48);

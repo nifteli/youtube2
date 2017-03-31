@@ -143,10 +143,10 @@ class WatchVideo
 			$userId = $access->userId;
 			$IP = 0;
 		}
-			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate,IP) 
-							values ($userId,$id,0,now(),'$IP')
+			$db->rawQuery("insert into videoviews (userId,videoId,action,actionDate,IP,allViewCount) 
+							values ($userId,$id,0,now(),'$IP',1)
 							on duplicate key update
-							actionDate = now()");
+							actionDate = now(),allViewCount=allViewCount+1");
 		$res = $db->rawQuery("
 						SELECT count(vv.action) viewCount,
 								SUM(IF(action = 1, 1, 0)) likeCount,

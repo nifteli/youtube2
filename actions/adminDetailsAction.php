@@ -29,12 +29,12 @@ if($_GET["s"] == "users" && isset($_GET["userId"]) && is_numeric($_GET["userId"]
 						left join videos v on v.id=vr.videoId
 						left join reportreasons rr on rr.id=vr.reasonId
 						where vr.reporterId=".$_GET["userId"];
-	$query["users"][8] = "select fv.videoId,v.name,fv.added,f.name folderName,v.deleted
+	$query["users"][8] = "select fv.folderId, fv.videoId,v.name,fv.added,f.name folderName,v.deleted
 						from foldervideos fv
 						left join videos v on v.id=fv.videoId
 						left join folders f on f.id=fv.folderId
 						where f.createdById=".$_GET["userId"];
-	$query["users"][9] = "select f.createdById userId,f.name, f.created
+	$query["users"][9] = "select f.id folderId, f.createdById userId,f.name, f.created
 						from folders f 
 						where f.createdById=".$_GET["userId"];
 	$query["users"][10] = "select c.userId,c.actionId tagId,t.name tag,c.clickDate
@@ -52,12 +52,15 @@ if($_GET["s"] == "users" && isset($_GET["userId"]) && is_numeric($_GET["userId"]
 	$query["users"][13] = "select s.createdById userId,s.keyword,s.created
 						from searches s
 						where createdById=".$_GET["userId"];
+	$query["users"][14] = "select id,sentDate,subject,body,`to` sentTo
+						from emails e
+						where `to` like '%".$_GET["email"]."%'";
 }
 if($_GET["s"] == "videos" && isset($_GET["videoId"]) && is_numeric($_GET["videoId"]))
 {
 	$condName = "videoId";
 	$id = $_GET["videoId"];
-	$query["videos"][1] = "SELECT vw.userId,vw.videoId,v.name,vw.actionDate
+	$query["videos"][1] = "SELECT vw.userId,vw.videoId,v.name,vw.actionDate,IP,allViewCount,fbCount,fbShareDate,twCount,twShareDate
 						  FROM videoviews vw
 						  left join videos v on v.id=vw.videoId
 						  where videoId=".$_GET["videoId"];
@@ -102,6 +105,11 @@ if($_GET["s"] == "tags" && isset($_GET["tagId"]) && is_numeric($_GET["tagId"]))
 					from clicks c 
 					left join tags t on t.id=c.actionId
 					where c.actionType=1 and c.actionId=".$_GET["tagId"];
+	$query["tags"][3] = "select t.name tag,t.created tagCreated, f.name folderName,f.created folderCreated
+					from foldertags ft
+					inner join tags t on t.id=ft.tagId
+					inner join folders f on f.id=ft.folderId
+					where ft.tagId=".$_GET["tagId"];
 }
 if($_GET["s"] == "guests" && isset($_GET["ip"]) && $_GET["ip"] != "")
 {
@@ -147,6 +155,12 @@ if($_GET["s"] == "folders" && isset($_GET["folderId"]) && is_numeric($_GET["fold
 							from foldervideos fv 
 							inner join videos v on v.id=fv.videoId
 							where fv.folderId=$_GET[folderId] and v.isDeleted=0";
+}
+if($_GET["s"] == "messages" && isset($_GET["emailId"]) && is_numeric($_GET["emailId"]))
+{
+	$query["messages"][1] = "SELECT *
+							FROM attachments 
+							where emailId=$_GET[emailId]";
 }
 if(isset($_POST["action"]) && $_POST["action"] == "export")
 {

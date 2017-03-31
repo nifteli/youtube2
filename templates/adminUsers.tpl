@@ -105,6 +105,13 @@ function showProfile(userId)
      }
    });
 }
+
+function setNote(userId,note)
+{
+	 $( "#puserId" ).val( userId );
+	 $( "#pNote" ).val( note );
+
+}
 </script>
 <div>
 	<div class="actionButtons">
@@ -116,9 +123,9 @@ function showProfile(userId)
 				<img src="img/sendMail.png" width="65" height="55" alt="sendMail"/>
 				</a>
 			</td>
-			<td>
-			<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter' style="display:hidden">{$filter}</button>
-			<button class="btn btn-light-combo btn-sm" name="action" value="saveRoles" type="submit" >{$saveRoles}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" name="action" value="saveRoles" type="submit" >{$saveRoles}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
 		</tr>
 	</table>
 	</div>
@@ -132,7 +139,7 @@ function showProfile(userId)
 	{if $result == 'success'}
 	<div class="success1">{$messages['success']}</div>
 	{/if}
-	<div id="all" style="float:left; margin-left:15px; overflow-x: auto;">
+	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
 		
 		<div class="table-responsive" style="overflow-x: auto; width:{if $canSeeDetails} 5000px; {else} 4200px;{/if}">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
@@ -162,6 +169,7 @@ function showProfile(userId)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 250px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
@@ -222,7 +230,7 @@ function showProfile(userId)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCount&videoCountSortType={$videoCountSortType}')">{$lnVideoCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$likeCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=likeCount&likeCountSortType={$likeCountSortType}')">{$lnLikeCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$dislikeCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=dislikeCount&dislikeCountSortType={$dislikeCountSortType}')">{$lnDislikeCount}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$commentCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=commentCount&commentCountSortType={$commentCountSortType}')">{$lnCommentCount}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$reportCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$lnReportCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntInFolderUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntInFolder&videoCntInFolderSortType={$videoCntInFolderSortType}')">{$lnVideoCntInFolder}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$folderCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=folderCnt&folderCntSortType={$folderCntSortType}')">{$lnFolderCnt}</a></th>
@@ -231,8 +239,9 @@ function showProfile(userId)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClickCnt&catClickCntSortType={$catClickCntSortType}')">{$lnCatClickCnt}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$catClickedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=catClicked&catClickedSortType={$catClickedSortType}')">{$lnCatClicked}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$subCatCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=subCatCnt&subCatCntSortType={$subCatCntSortType}')">{$lnSubCatCnt}</a></th>
-					<th class="vertical-middle" style=" text-align:center" ><a title="{$videoCntCommentedUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=videoCntCommented&videoCntCommentedSortType={$videoCntCommentedSortType}')">{$lnVideoCntCommented}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$commentCountUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=commentCount&commentCountSortType={$commentCountSortType}')">{$lnCommentCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$searchCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=searchCnt&searchCntSortType={$searchCntSortType}')">{$lnSearchCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$emailCntUsersHint}" href="javascript:{}" onclick="submitForm('?page=adminUsers&sortBy=emailCnt&emailCntSortType={$emailCntSortType}')">{$lnEmailCnt}</a></th>
 					
 				</tr>
 				</thead>
@@ -293,9 +302,14 @@ function showProfile(userId)
 					<td class="vertical-middle"><input class="form-control" name="registeredByIP" id="registeredByIP" type="text" value="{$registeredByIPVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="regDevice" id="regDevice" type="text" value="{$regDeviceVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="regBrowser" id="regBrowser" type="text" value="{$regBrowserVal}" /></td>
-					<td class="vertical-middle" colspan=22 style="text-align: left;">
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+					<td class="vertical-middle"><input class="form-control" name="updateUserId" id="updateUserId" type="text" value="{$updateUserIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="deletedById" id="deletedById" type="text" value="{$deletedByIdVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="getEmailOnNews" id="getEmailOnNews" type="text" value="{$getEmailOnNewsVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="getEmailOnVideoComment" id="getEmailOnVideoComment" type="text" value="{$getEmailOnVideoCommentVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="getEmailAfterMyComment" id="getEmailAfterMyComment" type="text" value="{$getEmailAfterMyCommentVal}" /></td>
+					<td class="vertical-middle" colspan=18 style="text-align: left;">
+						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
+						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='exportMailInfo'>{$exportMailInfo}</button> -->
 					</td>
 				</tr>
@@ -346,7 +360,10 @@ function showProfile(userId)
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].bDate}">{$users[sec1].bDate}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].email}">{$users[sec1].email}</td>
 						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].phoneNumber}">{$users[sec1].phoneNumber}</td>
-						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">{$users[sec1].notes}</td>
+						<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].notes}">
+						<a onclick="setNote({$users[sec1].id},'{$users[sec1].notes}')" href="#editNote"><img src="img/edit.png" width="15" height="15" alt=""/></a>
+						{$users[sec1].notes}
+						</td>
 					{/if}
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].gender}">{$users[sec1].gender}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].lang}">{$users[sec1].lang}</td>
@@ -366,7 +383,7 @@ function showProfile(userId)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videos}"><a href="?page=adminDetails&s=users&q=3&userId={$users[sec1].id}&title={$lnVideoCount}">{$users[sec1].videos}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].likes}"><a href="?page=adminDetails&s=users&q=4&userId={$users[sec1].id}&title={$lnLikeCount}">{$users[sec1].likes}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].dislikes}"><a href="?page=adminDetails&s=users&q=5&userId={$users[sec1].id}&title={$lnDislikeCount}">{$users[sec1].dislikes}</a></td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].comments}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnCommentCount}">{$users[sec1].comments}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnVideoCntCommented}">{$users[sec1].videoCntCommented}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].reportCount}"><a href="?page=adminDetails&s=users&q=7&userId={$users[sec1].id}&title={$lnReportCount}">{$users[sec1].reportCount}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntInFolder}"><a href="?page=adminDetails&s=users&q=8&userId={$users[sec1].id}&title={$lnVideoCntInFolder}">{$users[sec1].videoCntInFolder}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].folderCnt}"><a href="?page=adminDetails&s=users&q=9&userId={$users[sec1].id}&title={$lnFolderCnt}">{$users[sec1].folderCnt}</a></td>
@@ -375,8 +392,9 @@ function showProfile(userId)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClickCnt}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClickCnt}">{$users[sec1].catClickCnt}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].catClicked}"><a href="?page=adminDetails&s=users&q=11&userId={$users[sec1].id}&title={$lnCatClicked}">{$users[sec1].catClicked}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].subCatCnt}"><a href="?page=adminDetails&s=users&q=12&userId={$users[sec1].id}&title={$lnSubCatCnt}">{$users[sec1].subCatCnt}</a></td>
-					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].videoCntCommented}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnVideoCntCommented}">{$users[sec1].videoCntCommented}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].comments}"><a href="?page=adminDetails&s=users&q=6&userId={$users[sec1].id}&title={$lnCommentCount}">{$users[sec1].comments}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].searchCnt}"><a href="?page=adminDetails&s=users&q=13&userId={$users[sec1].id}&title={$lnSearchCnt}">{$users[sec1].searchCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$users[sec1].emailCnt}"><a href="?page=adminDetails&s=users&q=14&userId={$users[sec1].id}&title={$lnEmailCnt}&email={$users[sec1].email}">{$users[sec1].emailCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>
@@ -420,7 +438,7 @@ function showProfile(userId)
 	<div style="width:800px;height:350px">
 	<h4 style="font-weight:bold">{$sendMail}</h4>
 		<a href="#close" title="Close" class="close1">X</a>
-		<form action="?page=adminUsers&action=sendMail" method="post" enctype="multipart/form-data" style="width: 100%;">
+		<form action="?page=adminUsers&action=sendMail" method="post"  enctype="multipart/form-data" style="width: 100%;">
 			<div class="topgap">
 				<label>{$to}:</label>
 				<div class="gap">
@@ -436,7 +454,7 @@ function showProfile(userId)
 			<div class="topgap">
 				<label>{$file}:</label>
 				<div class="gap">
-					<input type="file" class="field"  name="attachment" id="attachment" />
+					<input type="file" class="field"  name="attachment[]" id="attachment" multiple />
 				</div>
 			</div>	
 			<div class="topgap">
@@ -457,10 +475,25 @@ function showProfile(userId)
 		</form>
 	</div>
 </div>
-
+<div id="editNote" class="modalDialog" >
+	<div style="width:290px;height:120px">
+		<a href="#close" title="Close" class="close1">X</a>
+		<h4 style="font-weight:bold">{$editNote}</h4>
+		<form name="frmAddNewFolder" id="frmAddNewFolder" action="?page=adminUsers&action=editNote" method="post" style="width:250px">
+			<div style="float:right;width:250px" >
+				<input type="hidden" name="puserId" id="puserId">
+				<input type="text" name="pNote" id="pNote" required placeholder="{$lnNote}" style="width: 100%; 5px;margin-bottom: 2px;">
+				<br>
+				<div style="text-align:center;">
+				<input type="submit" class="login39" name = "add" id="add" value="{$save}" style="margin-left:0;">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 {if $hasViewProfileAccess}
 <div id="userProfile" class="modalDialog" >
-	<div style="width:700px;height:480px">
+	<div style="width:893px;height:480px">
 		<h4 style="font-weight:bold">{$userProfile}</h4>
 		<a href="#close" title="Close" class="close1">X</a>
 		<div id="profileDiv" >

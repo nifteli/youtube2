@@ -78,4 +78,20 @@ if ($_GET["action"]=="confirm" && is_numeric(trim($_GET["id"])))
 		$controller->logAction(50);
 	}
 }
+
+if ($_GET["action"]=="editComment" && is_numeric($_POST["pcommentId"]) && trim($_POST["pcomment"]) != "")
+{
+	$result = "success";
+	$messages = array();
+	$db->where("id=".$_POST["pcommentId"]);
+	$res = $db->update("comments",array("comment"=>trim($_POST["pcomment"]),
+										"updated"=>date("Y-m-d H:i:s"),
+										"updatedById"=>$access->userId,
+										"updatedByIP"=>$_SERVER['REMOTE_ADDR'])); echo $db->getLastError();echo $db->getLastQuery();
+	if($res > 0)
+	{
+		$messages["success"] = $content["COMMENTUPDATED"];
+		//$controller->logAction(13);
+	}
+}
 ?>

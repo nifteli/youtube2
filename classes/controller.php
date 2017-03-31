@@ -501,7 +501,7 @@ class Controller //extends MySQL
 								GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 								c.catName$lang catName,v.deleted vdeleted,v.updated vupdated,
 								v.isDeleted,
-								vs.reportCount,vs.views,vs.likes,vs.dislikes,vs.comments,vs.userCntCommented,vs.userReportedCnt,vs.tagCount,vs.userCntAddedToFolder,vs.addedFolderCnt
+								vs.reportCount,vs.views,vs.likes,vs.dislikes,vs.comments,vs.userCntCommented,vs.userReportedCnt,vs.tagCount,vs.userCntAddedToFolder,vs.addedFolderCnt,vs.allViewCount,vs.fbCount,vs.twCount
 						FROM videos v
 						left join vwvideostats vs on v.id = vs.id
 						join users u on u.id = v.addedById
@@ -1050,12 +1050,13 @@ class Controller //extends MySQL
 				DATE_FORMAT(u.deleted,'%d-%m-%Y %k:%i:%S') deletedDate,
 				DATE_FORMAT(u.birthDate,'%d-%m-%Y') bDate,
 				concat(u.firstName,' ',u.lastName) name,us.*,
-				ec.deviceCount,ec.browserCount
+				ec.deviceCount,ec.browserCount,emc.emailCnt
 				FROM users u
 				left join roles r on r.id=u.roleId
 				left join languages l on l.id=u.languageId
 				left join vwuserstats us on us.id=u.id
 				left join vwentrycounts ec on ec.userId=u.id
+				left join vwuseremailcnt emc on emc.userId=u.id
 				where 1=1 ";
 		
 		if(isset($post["created"]) && $post["created"] != "")
@@ -1117,6 +1118,16 @@ class Controller //extends MySQL
 			$qry .= " and u.regDevice like '%" . trim($post["regDevice"]) . "%'";
 		if(isset($post["regBrowser"]) && $post["regBrowser"] != "")
 			$qry .= " and u.regBrowser like '%" . trim($post["regBrowser"]) . "%'";
+		if(isset($post["updateUserId"]) && is_numeric($post["updateUserId"]))
+			$qry .= " and u.updateUserId=".trim($post["updateUserId"]);
+		if(isset($post["deletedById"]) && is_numeric($post["deletedById"]))
+			$qry .= " and u.deletedById=".trim($post["deletedById"]);
+		if(isset($post["getEmailOnNews"]) && is_numeric($post["getEmailOnNews"]))
+			$qry .= " and u.getEmailOnNews=".trim($post["getEmailOnNews"]);
+		if(isset($post["getEmailOnVideoComment"]) && is_numeric($post["getEmailOnVideoComment"]))
+			$qry .= " and u.getEmailOnVideoComment=".trim($post["getEmailOnVideoComment"]);
+		if(isset($post["getEmailAfterMyComment"]) && is_numeric($post["getEmailAfterMyComment"]))
+			$qry .= " and u.getEmailAfterMyComment=".trim($post["getEmailAfterMyComment"]);
 		
 		$qry .= " order by $sortBy $sortType";
 		if($perPage>0)
@@ -1145,9 +1156,10 @@ class Controller //extends MySQL
 		$qry = "SELECT e.*,e.to sentTo,
 				DATE_FORMAT(e.sentDate,'%d-%m-%Y %k:%i:%S') sentDate,
 				e.sentDate sentDate1,
-				concat(u.firstName,' ',u.lastName) senderName, u.userName
+				concat(u.firstName,' ',u.lastName) senderName, u.userName,a.attachCnt
 				from emails e
 				left join users u on u.id=e.senderId
+				left join vwattachcounts a on e.id=a.emailId
 				where 1=1 ";
 		
 		if(isset($post["sentDate"]) && $post["sentDate"] != "")

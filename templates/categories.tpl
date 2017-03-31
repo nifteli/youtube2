@@ -284,12 +284,12 @@
 		return false;
 	}
 	
-	function addRemFromFolder(videoId,flag,folderId)
+	function addRemFromFolder(videoId,flag,folderId,folderName)
 	{
-	//alert(videoId+flag+folderId);
+	//alert(videoId+' '+flag+' '+folderId+' '+folderName);
 		if(flag == 1)
 		{
-			if(!confirm("{$deleteConfirmation}"))
+			if(!confirm("{$deleteConfirmation}"+folderName))
 				return;
 		}
 		$.ajax({
@@ -301,14 +301,14 @@
 		 //alert(data)
 			if(data=="") return;
 			if(flag == 1 && data == "1")
-			{
-				document.getElementById(videoId).innerHTML = "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='{$addToMyFolder}'/></a>";
+			{ //alert("deleted");
+				document.getElementById(videoId).innerHTML = "<a href='#add2FolderModal' onClick=\"submitForm("+videoId+")\"><img src='img/add.png' width='15' height='15' title='{$addToMyFolder}'/></a>";
 			}
 			if(flag == 2 && data == "1")
-			{
+			{ //alert("added");
 				//alert(folderId);
 				//$('#addToFolder').html(data);
-				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0,\""+folderName+"\")'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
 				//$('#addToFolder').hide();
 				window.location.href = "#close";
 				return;
@@ -342,7 +342,7 @@
 				//$('#addToFolder').html(data);
 				//$('#removeFromFolder').show();
 				//$('#addToFolder').hide();
-				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0)'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
+				document.getElementById(videoId).innerHTML = "<a href='#'><img onclick='addRemFromFolder("+videoId+",1,0,\""+folderName+"\")'  src='img/remove.png' width='15' height='15' title='{$removeFromFolder}'/></a>";
 				window.location.href = "#close";
 				return;
 			}
@@ -685,7 +685,7 @@
 			<input type="hidden" value="" name="hdnVideoId" id="hdnVideoId">
 			<div style="text-align:center;width:100%;float:left">
 				<!-- <input type="submit" class="post" name = "add" id="add"  value="{$addToFolder}"> -->
-				<img src="img/confirm_{$lang}.png" height=30 title="{$addToFolder}" onclick="addRemFromFolder(document.getElementById('hdnVideoId').value,2,document.getElementById('fldId').value)" href="#close"
+				<img src="img/confirm_{$lang}.png" height=30 title="{$addToFolder}" onclick="addRemFromFolder(document.getElementById('hdnVideoId').value,2,document.getElementById('fldId').value,fldId.options[fldId.selectedIndex].text)" href="#close"
 				onmouseover="this.src='img/confirmSelected_{$lang}.png';"
 				onmouseout="this.src='img/confirm_{$lang}.png';"
 				onmousedown="this.src='img/confirmPushed_{$lang}.png';">

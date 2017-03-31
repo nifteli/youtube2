@@ -33,6 +33,9 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("lnDeletedByIP", $content['DELETEDDBYIP']);
 		$this->adminVideoLinks->assign("lnDuration", $content['DURATION']);
 		$this->adminVideoLinks->assign("lnViews", $content['VIEWCNT']);
+		$this->adminVideoLinks->assign("lnAllViewCount", $content['allViewCount']);
+		$this->adminVideoLinks->assign("lnFbCount", $content['fbCount']);
+		$this->adminVideoLinks->assign("lnTwCount", $content['twCount']);
 		$this->adminVideoLinks->assign("lnUserCntCommented", $content['USERCNTCOMMENTED']);
 		$this->adminVideoLinks->assign("lnComments", $content['COMMENTCNT']);
 		$this->adminVideoLinks->assign("lnTagCount", $content['TAGCNT']);
@@ -64,6 +67,9 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("deletedByIdVidLinksHint", $content['deletedByIdVidLinksHint']);
 		$this->adminVideoLinks->assign("durationVidLinksHint", $content['durationVidLinksHint']);
 		$this->adminVideoLinks->assign("viewsVidLinksHint", $content['viewsVidLinksHint']);
+		$this->adminVideoLinks->assign("allViewCountVidLinksHint", $content['allViewCountVidLinksHint']);
+		$this->adminVideoLinks->assign("fbCountVidLinksHint", $content['fbCountVidLinksHint']);
+		$this->adminVideoLinks->assign("twCountVidLinksHint", $content['twCountVidLinksHint']);
 		$this->adminVideoLinks->assign("userCntCommentedVidLinksHint", $content['userCntCommentedVidLinksHint']);
 		$this->adminVideoLinks->assign("commentsVidLinksHint", $content['commentsVidLinksHint']);
 		$this->adminVideoLinks->assign("tagCountVidLinksHint", $content['tagCountVidLinksHint']);
@@ -165,6 +171,12 @@ class AdminVideoLinks
 			$sortType = ($_GET["durationSortType"] == "" || $_GET["durationSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["viewsSortType"]))
 			$sortType = ($_GET["viewsSortType"] == "" || $_GET["viewsSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["allViewCountSortType"]))
+			$sortType = ($_GET["allViewCountSortType"] == "" || $_GET["allViewCountSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["fbCountSortType"]))
+			$sortType = ($_GET["fbCountSortType"] == "" || $_GET["fbCountSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["twCountSortType"]))
+			$sortType = ($_GET["twCountSortType"] == "" || $_GET["twCountSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["userCntCommentedSortType"]))
 			$sortType = ($_GET["userCntCommentedSortType"] == "" || $_GET["userCntCommentedSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["commentsSortType"]))
@@ -202,6 +214,9 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("deletedByIPSortType", ($_GET["deletedByIPSortType"] == "" || $_GET["deletedByIPSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("durationSortType", ($_GET["durationSortType"] == "" || $_GET["durationSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("viewsSortType", ($_GET["viewsSortType"] == "" || $_GET["viewsSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("allViewCountSortType", ($_GET["allViewCountSortType"] == "" || $_GET["allViewCountSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("fbCountSortType", ($_GET["fbCountSortType"] == "" || $_GET["fbCountSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("twCountSortType", ($_GET["twCountSortType"] == "" || $_GET["twCountSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("userCntCommentedSortType", ($_GET["userCntCommentedSortType"] == "" || $_GET["userCntCommentedSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("commentsSortType", ($_GET["commentsSortType"] == "" || $_GET["commentsSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("tagCountSortType", ($_GET["tagCountSortType"] == "" || $_GET["tagCountSortType"] == "ASC")? 'DESC' : 'ASC');

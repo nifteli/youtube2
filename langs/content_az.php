@@ -105,6 +105,7 @@ $content["REGLINK"] = "bura tıklayın.";
 $content["SORTALPHABETICALLY"] = "Əlifba";
 $content["SORTVIDEOCOUNT"] = "Vİdeo sayı";
 $content["SORTDATE"] = "Tarix";
+$content["FOLDERDELETECONFIRMATION"] = "Video kataloqdan silinəcək:";
 //end categories
 
 //Registration
@@ -386,7 +387,13 @@ $content['userCntAddedToFolderVidLinksHint']="userCntAddedToFolderVidLinksHint";
 $content['addedFolderCntVidLinksHint']="addedFolderCntVidLinksHint";
 $content['updatedByIPVidLinksHint']="updatedByIPVidLinksHint";
 $content['deletedByIPVidLinksHint']="deletedByIPVidLinksHint";
+$content['allViewCount']="all View Count";
+$content['allViewCountVidLinksHint']="allViewCountVidLinksHint";
 
+$content['fbCount']="fbCount";
+$content['twCount']="twCount";
+$content['twCountVidLinksHint']="twCountVidLinksHint";
+$content['fbCountVidLinksHint']="fbCountVidLinksHint";
 //End Video links 
 
 // Admin users
@@ -443,6 +450,9 @@ $content['updatedByCommentsHint']="updatedByCommentsHint";
 $content['updatedByIPCommentsHint']="updatedByIPCommentsHint";
 $content['confirmedByIdCommentsHint']="confirmedByIdCommentsHint";
 $content['confirmedByIPCommentsHint']="confirmedByIPCommentsHint";
+$content['editCommentHint']="editCommentHint";
+$content['EDITCOMMENT']="Komment dəyişmə";
+$content['COMMENTUPDATED']="COMMENT UPDATED";
 
 //End Admin comments
 
@@ -494,6 +504,9 @@ $content['updatedByIPTagsHint']="updatedByIPTagsHint";
 $content['createdByIdTagsHint']="createdByIdTagsHint";
 $content['createdByIPTagsHint']="createdByIPTagsHint";
 
+$content['lnFolderCnt']="lnFolderCnt";
+$content['folderCntTagsHint']="folderCntTagsHint";
+
 //End Admin Tags
 
 
@@ -543,6 +556,7 @@ $content['CATCLICKCNT'] ='CATCLICK COUNT';
 $content['CATCLICKED'] ='CATCLICKED';
 $content['SUBCATCNT'] ='SUBCATCNT';
 $content['SEARCHCNT'] ='SEARCHCNT';
+$content['emailCnt'] ='emailCnt';
 $content['VIDEOCNTCOMMENTED'] ='VIDEOCNTCOMMENTED';
 $content['EXPORTMAILINFO'] ='EXPORTMAILINFO';
 $content['SENTDATE'] ='SENTDATE';
@@ -593,8 +607,11 @@ $content['catClickCntUsersHint']="catClickCntUsersHint";
 $content['catClickedUsersHint']="catClickedUsersHint";
 $content['subCatCntUsersHint']="subCatCntUsersHint";
 $content['searchCntUsersHint']="searchCntUsersHint";
+$content['emailCntUsersHint']="emailCntUsersHint";
 $content['videoCntCommentedUsersHint']="videoCntCommentedUsersHint";
+$content['EDITNOTE']="Qeydi dəyiş";
 
+$content['NOTECHANGED']="Qeydi dəyişdirildi";
 //End Admin users
 
 //Admin Menu

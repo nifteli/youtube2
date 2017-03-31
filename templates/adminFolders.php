@@ -22,6 +22,7 @@ class AdminFolders
 		$this->adminFolders->assign("export", $content['EXPORT']);
 		$this->adminFolders->assign("filter", $content['FILTER']);
 		$this->adminFolders->assign("deleteConfirmation", $content['DELETECONFIRMATION']);
+		$this->adminFolders->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		$this->adminFolders->assign("folderName",$content['FOLDERNAME']);
 		$this->adminFolders->assign("editFolder",$content['EDITFOLDER']);
 		$this->adminFolders->assign("tags",$content['TAGS']);

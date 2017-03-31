@@ -74,7 +74,7 @@ function submitForm(action)
 	<div class="success1">{$messages['success']}</div>
 	{/if}
 	<div id="all" style="float:left; margin-left:5px; overflow-x: auto;">
-		<div class="table-responsive" style="overflow-x: auto; width:2100px">
+		<div class="table-responsive" style="overflow-x: auto; width:2200px">
 			<table id="product-table" class="table table-condensed table-zebr table-hover" style="table-layout: fixed;text-align: center;">
 				<colgroup>
 					<col style="width: 50px; overflow: hidden;"/>
@@ -90,6 +90,7 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
 					
@@ -114,6 +115,7 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a title="$videoCntTaggedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=videoCntTagged&videoCntTaggedSortType={$videoCntTaggedSortType}')">{$lnVideoCntTagged}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$userCntClickedTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=userCntClicked&userCntClickedSortType={$userCntClickedSortType}')">{$lnUserCntClicked}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="$clickCntTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=clickCnt&clickCntSortType={$clickCntSortType}')">{$lnClickCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="$folderCntTagsHint" href="javascript:{}" onclick="submitForm('?page=adminTags&sortBy=folderCnt&folderCntSortType={$folderCntSortType}')">{$lnFolderCnt}</a></th>
 					
 				</tr>
 				</thead>
@@ -144,7 +146,7 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control"  name="updatedById" id="updatedById" type="text" value="{$updatedByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedBy" id="updatedBy" type="text" value="{$updatedByVal}" /></td>
 					<td class="vertical-middle"><input class="form-control"  name="updatedByIP" id="updatedByIP" type="text" value="{$updatedByIPVal}" /></td>
-					<td class="vertical-middle" style="text-align: left;" colspan=3>
+					<td class="vertical-middle" style="text-align: left;" colspan=4>
 						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 					</td>
@@ -156,9 +158,14 @@ function submitForm(action)
 					<input type="hidden" name="langId[{$tags[sec1].id}]" id="langId[{$tags[sec1].id}]" value="{$tags[sec1].langId}">
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
-						{if $hasDeleteAccess}
-						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+					
+					{if $hasDeleteAccess}
+						{if $tags[sec1].isDeleted == 1}
+						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}&flag=0" onClick="return confirm('{$undeleteConfirmation}')"><img src="img/success.png" width="15" height="15" alt=""/></a>
+						{else}
+						<a href="?page=adminTags&action=delete&id={$tags[sec1].id}&flag=1" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
 						{/if}
+					{/if}
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].created}">{$tags[sec1].created}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].updated}">{$tags[sec1].updated}</td>
@@ -174,6 +181,7 @@ function submitForm(action)
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].videoCntTagged}"><a href="?page=adminDetails&s=tags&q=1&tagId={$tags[sec1].id}&title={$lnVideoCntTagged}">{$tags[sec1].videoCntTagged}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].userCntClicked}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnUserCntClicked}">{$tags[sec1].userCntClicked}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].clickCnt}"><a href="?page=adminDetails&s=tags&q=2&tagId={$tags[sec1].id}&title={$lnClickCnt}">{$tags[sec1].clickCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$tags[sec1].folderCnt}"><a href="?page=adminDetails&s=tags&q=3&tagId={$tags[sec1].id}&title={$lnFolderCnt}">{$tags[sec1].folderCnt}</a></td>
 				</tr>
 				{/section}
 				</tbody>

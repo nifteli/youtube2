@@ -86,6 +86,7 @@ function showData($data,$db,$limit)
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					GROUP_CONCAT(DISTINCT t.id ORDER BY t.name asc) tagIds, 
 					vc.categoryId,fv.folderId,
+					f.name folderName,
 					c.catName$lang
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
@@ -97,6 +98,7 @@ function showData($data,$db,$limit)
 			left join questions q on q.bitValue=v.questions
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
+			left join folders f on f.id=fv.folderId
 			where v.isDeleted=0 and lower(l.abbr)='$lang'
 			group by v.id,vc.categoryId $fld
 			order by v.id desc) a where 1=1 ";
@@ -117,6 +119,8 @@ function showData($data,$db,$limit)
 			//limit $start,$limit";
 			//echo $qry;
 	$res =$db->rawQuery($qry); 
+	// echo $db->getLastError();
+	// echo "<pre> aaaaa";print_r($res);echo "</pre>";
 	if(count($res) == 0)
 		return;
 	for($i=0; $i<count($res); $i++)
@@ -139,7 +143,6 @@ function showData($data,$db,$limit)
 		}
 	}
 	//$data["exCatId"] = $res[$limit-1]["categoryId"];
-	//echo "<pre>";print_r($res2);echo "</pre>";
 	//echo "n=$n"."exCatId=".$data["exCatId"];
 	displayData($res3, $data);
 }
@@ -210,6 +213,7 @@ function showAllData($data,$db,$limit)
 					concat(u.firstName,' ',u.lastName) addedBy,
                     GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags,
 					vc.categoryId,
+					f.name folderName,
 					c.catName$lang
 			FROM videos v
             left join vwvideostats vs on v.id = vs.id
@@ -221,6 +225,7 @@ function showAllData($data,$db,$limit)
 			left join questions q on q.bitValue=v.questions
             left join tags t on t.id=vt.tagId
 			left join foldervideos fv on fv.videoId=v.id
+			left join folders f on f.id=fv.folderId
 			where v.isDeleted=0 and lower(l.abbr)='$lang'";
 	if(isset($catId)&& is_numeric($catId))
 		$qry .= " and vc.categoryId=$catId";
@@ -266,7 +271,7 @@ function showRecommended($data,$db,$limit)
 	$qry = "Select * from (
 			SELECT l.abbr, vs.views viewCount, vs.likes likeCount, vs.dislikes dislikeCount, v.id, v.name, v.info, v.duration,vs.comments,
 					DATE_FORMAT(v.added,'%d %b %Y') added, v.languageId, v.link, v.addedById, concat(u.firstName,' ',u.lastName) addedBy, 
-					q.question,
+					q.question,f.name folderName,
 					GROUP_CONCAT(DISTINCT t.name ORDER BY t.name asc) tags, vc.categoryId, c.catNameaz 
 			FROM videos v 
 			left join vwvideostats vs on v.id = vs.id 
@@ -277,6 +282,8 @@ function showRecommended($data,$db,$limit)
 			left join videotags vt on vt.videoId=v.id 
 			left join questions q on q.id&v.questions
 			left join tags t on t.id=vt.tagId 
+			left join foldervideos fv on fv.videoId=v.id
+			left join folders f on f.id=fv.folderId
 			where v.link!=(select link from videos where id=$data[videoId]) and v.isDeleted=0
 			group by v.id,vc.categoryId ) a";
 	if(isset($catId))
@@ -510,7 +517,7 @@ function displayAllData($res, $data, $colCnt=4)
 			{
 				$str .= "<div class='addVideoBtn' id='$id'>  ";
 				if(isAddedToFolder($id))
-					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0)'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0,\"".$res[$i]["folderName"]."\")'  src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
 					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";
@@ -604,7 +611,7 @@ function displayData($res, $data, $colCnt=4)
 			{
 				$str .= "<div class='addVideoBtn' id='$id'>  ";
 				if(isAddedToFolder($id))
-					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0)' src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
+					$str .= "<a href='#'><img onclick='addRemFromFolder($id,1,0,\"".$res[$i]["folderName"]."\")' src='img/remove.png' width='15' height='15' title='$content[REMOVEFROMFOLDER]'/></a>";
 				else
 					$str .= "<a href='#add2FolderModal' onClick=\"submitForm($id)\"><img src='img/add.png' width='15' height='15' title='$content[ADDTOMYFOLDER]'/></a>";
 				$str .= "</div>";
