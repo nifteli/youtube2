@@ -244,8 +244,14 @@ $( "#deletedTill" ).datepicker(
 					<!-- <input type="hidden" name="catId[{$categories[sec1].id}]" id="catId[{$categories[sec1].id}]" value="{$categories[sec1].id}"> -->
 					<td class="vertical-middle" style="overflow: hidden;text-align: center;" title="{$delete}">
 						{if $hasDeleteAccess}
-						<a href="?page=adminCategories&action=delete&id={$categories[sec1].id}" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+							{if $categories[sec1].isDeleted == 1}
+							<a href="?page=adminCategories&action=delete&id={$categories[sec1].id}&flag=0" onClick="return confirm('{$undeleteConfirmation}')"><img src="img/success.png" width="15" height="15" alt=""/></a>
+							{else}
+							<a href="?page=adminCategories&action=delete&id={$categories[sec1].id}&flag=1" onClick="return confirm('{$deleteConfirmation}')"><img src="img/delete.png" width="15" height="15" alt=""/></a>
+							{/if}
 						{/if}
+						
+						
 					</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].created}">{$categories[sec1].created}</td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$categories[sec1].updated}">{$categories[sec1].updated}</td>

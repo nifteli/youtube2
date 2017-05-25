@@ -24,7 +24,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getMailInfo(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($_POST); echo "</pre>";return;
-	$controller->logAction(42);
+	$controller->logAction2(42,"DateInterval=".$_POST["sentDate"]."-".$_POST["sentDateTill"]);
 	$controller->exportToExcel($fields,$links,$content['MNMESSAGES']."-".$_POST["sentDate"]."-".$_POST["sentDateTill"]);
 	return;
 }

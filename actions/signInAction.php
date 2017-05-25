@@ -24,7 +24,7 @@ if ($_GET["action"]=="login")
 				setcookie("arr[password]", $_POST["password"], time() + 3600);
 			}
 			authenticate($usr[0]["userName"]);
-			
+			$controller->logAction(53);
 			if(trim($_POST["src"]) == "addVideo")
 				header("Location: index.php?page=addVideo");
 			else

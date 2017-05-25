@@ -66,6 +66,7 @@ if(!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] == "adminProf
 	include_once($templatePath."adminPageHeader.tpl");
 	$controller->includeSection("adminMenu");
 	$controller->includeSection("adminRoles");
+	$controller->logAction(1);
 	//$controller->includeSection("adminFooter");
 	//echo "<pre>";print_r($access);echo "</pre>";
 }
@@ -76,10 +77,11 @@ else
 		case "adminRoles": 
 			if($access->authorized(35))
 			{
-				include_once($templatePath."adminPageHeader.tpl");
-				$controller->includeSection("adminMenu");
+				$controller->logAction2(87,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminRolesAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
 				$controller->includeSection("adminRoles");
 			}
 			else
@@ -106,6 +108,7 @@ else
 		case "adminVideoLinks": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(25))
 			{
+				$controller->logAction2(68,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminVideoLinksAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -134,6 +137,7 @@ else
 		case "adminComments": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(26))
 			{
+				$controller->logAction2(81,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminCommentsAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -149,6 +153,7 @@ else
 		case "adminFolders": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(28))
 			{
+				$controller->logAction2(72,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminFoldersAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -164,6 +169,7 @@ else
 		case "adminTags": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(32))
 			{
+				$controller->logAction2(79,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminTagsAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -179,6 +185,7 @@ else
 		case "adminCategories": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(41))
 			{
+				$controller->logAction2(66,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminCategoriesAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -194,6 +201,7 @@ else
 		case "adminNotifications": //echo "<pre>"; print_r($access->auth); echo "</pre>";
 			if($access->authorized(46))
 			{
+				$controller->logAction2(84,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminNotificationsAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -209,6 +217,7 @@ else
 		case "adminUsers":
 			if($access->authorized(33))
 			{
+				$controller->logAction2(61,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminUsersAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -224,6 +233,7 @@ else
 		case "adminGuests":
 			if($access->authorized(61))
 			{
+				$controller->logAction2(62,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminGuestsAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -239,6 +249,7 @@ else
 		case "adminSearches":
 			if($access->authorized(64))
 			{
+				$controller->logAction2(65,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminSearchesAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -254,6 +265,7 @@ else
 		case "adminMessages":
 			if($access->authorized(68))
 			{
+				$controller->logAction2(63,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminMessagesAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -269,6 +281,7 @@ else
 		case "adminLogs":
 			if($access->authorized(66))
 			{
+				$controller->logAction2(85,"");
 				if(isset($_GET["action"])) 
 					include_once($actionsPath."adminLogsAction.php");
 				include_once($templatePath."adminPageHeader.tpl");
@@ -296,6 +309,23 @@ else
 				return;
 			}
 			break;
+		case "adminAttachments":
+			if($access->authorized(71))
+			{
+				$controller->logAction2(64,"");
+				if(isset($_GET["action"])) 
+					include_once($actionsPath."adminAttachmentsAction.php");
+				include_once($templatePath."adminPageHeader.tpl");
+				$controller->includeSection("adminMenu");
+				$controller->includeSection("adminAttachments");
+			}
+			else
+			{
+				echo "No access";
+				return;
+			}
+			break;
+			
 		default:
 			include_once($templatePath."adminPageHeader.tpl");
 			$controller->includeSection("adminMenu");

@@ -99,6 +99,7 @@ if ($_GET["action"]=="editFolder" && $access->hasAccess && is_numeric($_POST["fo
 		if($continue)
 		{
 			$db->commit();
+			$controller->logAction2(74,"CatalogueId=".$_POST["folderId"]);
 			$okMessage = $content["FOLDEREDITED"];
 		}
 		else
@@ -129,6 +130,7 @@ if ($_GET["action"]=="deleteFolder" && $access->hasAccess && is_numeric($_GET["i
 		$db->where("folderId=".$_GET["id"]);
 		$res = $db->delete("foldervideos");
 		$okMessage = $content["FOLDERDELETED"];
+		$controller->logAction2(76,"CatalogueId=".$_GET["id"]);
 		$db->commit();
 	}
 	else
@@ -204,6 +206,7 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 		if($continue)
 		{
 			$db->commit();
+			$controller->logAction2(73,"CatalogueId=".$folderId);
 			$okMessage = $content["FOLDERADDED"];
 		}
 		else
@@ -233,6 +236,7 @@ if ($_GET["action"]=="delete")
 								   "deletedById"=>$access->userId,
 								   "deleted"=>date("Y-m-d H:i:s"),
 								   "deletedByIP"=>$_SERVER['REMOTE_ADDR']));
+		$controller->logAction2(9,"VideoId=".$_GET["videoId"]);
 		// {
 			// $db->where("videoId=".$_GET["videoId"]);
 			// $db->delete("videocats");
@@ -287,6 +291,7 @@ if ($_GET["action"]=="logout")
 		setcookie("arr[userName]", time() - 3600);
 		setcookie("arr[password]", time() - 3600);
 	}
+	$controller->logAction(54);
 }
 if ($_GET["action"]=="fbLogin")
 {

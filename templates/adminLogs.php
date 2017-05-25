@@ -24,6 +24,9 @@ class AdminLogs
 		$this->adminLogs->assign("lnActionDate", $content['ACTIONDATE']);
 		$this->adminLogs->assign("lnId", $content['ID']);
 		$this->adminLogs->assign("lnActionName", $content['ACTIONNAME']);
+		$this->adminLogs->assign("lnActionType", $content['lnActionType']);
+		$this->adminLogs->assign("lnPanel", $content['lnPanel']);
+		$this->adminLogs->assign("lnActionObject", $content['lnActionObject']);
 		$this->adminLogs->assign("lnCreatedById", $content['CREATEDBYID']);
 		$this->adminLogs->assign("lnCreatedBy", $content['CREATEDBY']);
 		$this->adminLogs->assign("lnCreatedByIP", $content['CREATEDBYIP']);
@@ -32,6 +35,9 @@ class AdminLogs
 		$this->adminLogs->assign("actionDateLogsHint", $content['actionDateLogsHint']);
 		$this->adminLogs->assign("idLogsHint", $content['idLogsHint']);
 		$this->adminLogs->assign("actionNameLogsHint", $content['actionNameLogsHint']);
+		$this->adminLogs->assign("actionTypeLogsHint", $content['actionTypeLogsHint']);
+		$this->adminLogs->assign("panelLogsHint", $content['panelLogsHint']);
+		$this->adminLogs->assign("actionObjectLogsHint", $content['actionObjectLogsHint']);
 		$this->adminLogs->assign("createdByIdLogsHint", $content['createdByIdLogsHint']);
 		$this->adminLogs->assign("createdByLogsHint", $content['createdByLogsHint']);
 		$this->adminLogs->assign("createdByIPLogsHint", $content['createdByIPLogsHint']);
@@ -44,7 +50,11 @@ class AdminLogs
 			$this->adminLogs->assign("actionDateTillVal", $_POST["actionDateTill"]);
 			$this->adminLogs->assign("idVal", $_POST["id"]);
 			$this->adminLogs->assign("actionNameVal", $_POST["actionName"]);
+			$this->adminLogs->assign("actionTypeVal", $_POST["actionType"]);
+			$this->adminLogs->assign("panelVal", $_POST["panel"]);
+			$this->adminLogs->assign("actionObjectVal", $_POST["actionObject"]);
 			$this->adminLogs->assign("createdByIdVal", $_POST["createdById"]);
+			$this->adminLogs->assign("createdByIPVal", $_POST["createdByIP"]);
 			$this->adminLogs->assign("createdByVal", $_POST["createdBy"]);			
 		}
 		if(isset($_GET["sortBy"]) && $_GET["sortBy"] != "")
@@ -55,6 +65,12 @@ class AdminLogs
 			$sortType = ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["actionNameSortType"]))
 			$sortType = ($_GET["actionNameSortType"] == "" || $_GET["actionNameSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["actionTypeSortType"]))
+			$sortType = ($_GET["actionTypeSortType"] == "" || $_GET["actionTypeSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["panelSortType"]))
+			$sortType = ($_GET["panelSortType"] == "" || $_GET["panelSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["actionObjectSortType"]))
+			$sortType = ($_GET["actionObjectSortType"] == "" || $_GET["actionObjectSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["createdByIdSortType"]))
 			$sortType = ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["createdBySortType"]))
@@ -67,6 +83,9 @@ class AdminLogs
 		$this->adminLogs->assign("actionDateSortType", ($_GET["actionDateSortType"] == "" || $_GET["actionDateSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminLogs->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminLogs->assign("actionNameSortType", ($_GET["actionNameSortType"] == "" || $_GET["actionNameSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminLogs->assign("actionTypeSortType", ($_GET["actionTypeSortType"] == "" || $_GET["actionTypeSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminLogs->assign("panelSortType", ($_GET["panelSortType"] == "" || $_GET["panelSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminLogs->assign("actionObjectSortType", ($_GET["actionObjectSortType"] == "" || $_GET["actionObjectSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminLogs->assign("createdByIdSortType", ($_GET["createdByIdSortType"] == "" || $_GET["createdByIdSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminLogs->assign("createdBySortType", ($_GET["createdBySortType"] == "" || $_GET["createdBySortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminLogs->assign("createdByIPSortType", ($_GET["createdByIPSortType"] == "" || $_GET["createdByIPSortType"] == "ASC")? 'DESC' : 'ASC');

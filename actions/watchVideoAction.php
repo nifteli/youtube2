@@ -167,6 +167,7 @@ if($_GET["action"]=="add2Folder")
 			$db->update("folders",array("lastVideoAddedById"=>$access->userId,"lastVideoAdded"=>date("Y-m-d H:i:s")));
 			$okMessage = $content["ADDEDTOFOLDER"];
 		}
+		$controller->logAction2(75,"CatalogueId=".$_POST["folderId"] . " VideoId=".$_GET["id"]);
 	}
 	if($_GET["from"] == "main")
 	{

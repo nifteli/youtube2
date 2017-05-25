@@ -23,7 +23,7 @@ class AdminCategories
 		$this->adminCategories->assign("edit", $content['EDIT']);
 		$this->adminCategories->assign("export", $content['EXPORT']);
 		$this->adminCategories->assign("filter", $content['FILTER']);
-		
+		$this->adminCategories->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		
 		$this->adminCategories->assign("vqHow", $content['HOW']);
 		$this->adminCategories->assign("vqWhy", $content['WHY']);

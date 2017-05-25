@@ -47,6 +47,7 @@ body { margin:0; }
 		<li><a {if $page=="adminUsers" } class='active' {/if} href='?page=adminUsers'><span>{$mnUsers}</span></a></li>
 		<li><a {if $page=="adminGuests" } class='active' {/if} href='?page=adminGuests'><span>{$mnGuests}</span></a>
 		<li><a {if $page=="adminMessages" } class='active' {/if} href='?page=adminMessages'><span>{$mnMessages}</span></a></li>
+		<li><a {if $page=="adminAttachments" } class='active' {/if} href='?page=adminAttachments'><span>{$mnAttachments}</span></a></li>
 		<li><a {if $page=="adminSearches" } class='active' {/if} href='?page=adminSearches'><span>{$mnSearches}</span></a></li>
 		<li><a {if $page=="adminCategories" } class='active' {/if} href='?page=adminCategories'><span>{$mnCategories}</span></a></li>
 		<li><a {if $page=="adminVideoLinks" } class='active' {/if} href='?page=adminVideoLinks'><span>{$mnVideoLinks}</span></a>

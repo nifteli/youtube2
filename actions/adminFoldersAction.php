@@ -66,7 +66,7 @@ if ($_GET["action"]=="editFolder" && is_numeric($_POST["folderId"]) && trim($_PO
 		if($continue)
 		{
 			$db->commit();
-			$controller->logAction(16);
+			$controller->logAction2(16,"CatalogueId=".$_POST["folderId"]);
 			$messages["success"] = $content["FOLDEREDITED"];
 		}
 		else
@@ -161,7 +161,7 @@ if ($_GET["action"]=="addNewFolder" && $access->hasAccess && trim($_POST["folder
 		{
 			$db->commit();
 			$okMessage = $content["FOLDERADDED"];
-			$controller->logAction(15);
+			$controller->logAction2(15,"CatalogueId=".$folderId);
 		}
 		else
 			$db->rollback();
@@ -205,7 +205,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getFolders(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->logAction(18);
+	$controller->logAction2(18,"DateInterval=".$_POST["created"]."-".$_POST["createdTill"]);
 	$controller->exportToExcel($fields,$links,$content['TITLEFOLDERS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
@@ -230,7 +230,10 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])) &&  is_numeric(tr
 	if($db->count>0)
 	{
 		$messages["success"] = $content["SUCCESSFULLYSAVED"];
-		$controller->logAction(17);
+		if($_GET["flag"] == 1)
+			$controller->logAction2(17,"CatalogueId=".$_GET["id"]);
+		else
+			$controller->logAction2(77,"CatalogueId=".$_GET["id"]);
 	}
 }
 ?>

@@ -49,10 +49,10 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 	{
 		$continue = true;
 		$langInd = "en";
-		if(trim($rowData[0][1]) == "AZ" || trim($rowData[0][1]) == "EN" || trim($rowData[0][1]) == "RU")
-			$langInd = strtolower(trim($rowData[0][1]));
 		//  Read a row of data into an array
 		$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+		if(trim($rowData[0][1]) == "AZ" || trim($rowData[0][1]) == "EN" || trim($rowData[0][1]) == "RU")
+			$langInd = strtolower(trim($rowData[0][1]));
 		//echo "<pre>"; print_r(trim($rowData[0][0])); echo "</pre>";
 		if(trim($rowData[0][0]) != "" || trim($rowData[0][1]) != "" || trim($rowData[0][2]) != "" || trim($rowData[0][3]) != "" || trim($rowData[0][4]) != "")
 		{
@@ -69,14 +69,14 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 				$db->startTransaction();
 				$db->rawQuery("insert into videos (link,languageId,questions,name,info,added,addedById,addedByIP,duration)
 								select '" .trim($rowData[0][0]) . "', l.id, q.id,'" . 
-										   trim($rowData[0][5]) . "','" . 
-										   trim($rowData[0][6]) . "','" . date("Y-m-d H:i:s") . "'," . $access->userId . ",'" . $_SERVER["REMOTE_ADDR"] . "'," . $duration .
+										   addslashes(trim($rowData[0][5])) . "','" . 
+										   addslashes(trim($rowData[0][6])) . "','" . date("Y-m-d H:i:s") . "'," . $access->userId . ",'" . $_SERVER["REMOTE_ADDR"] . "'," . $duration .
 								" from languages l 
 								inner join questions q on q.question".$langInd." = '" . trim($rowData[0][2]) . "'
 								where l.abbr = '" . trim($rowData[0][1]) . "'"
 							  );
 				$videoId = $db->getInsertId(); 
-				
+				$controller->logAction2(47,"VideoId=".$videoId." VideoLink = ".trim($rowData[0][0]));
 				//echo "<br>videoid = ".$videoId." name".$rowData[0][3];
 				if($videoId)
 				{
@@ -135,7 +135,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'addMany')
 				{
 					$db->commit();
 					$okRows .= $row . ",";
-					$controller->logAction(47);
+					//$controller->logAction(47);
 				}
 			}
 			else
@@ -249,6 +249,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 						$sql = "insert into videoCats (categoryId,videoId)
 								  select c.id, " .trim($rowData[0][0]). " from categories c
 								  where catName".ucfirst($langInd)." = '" . trim($rowData[0][4]) . "'";
+						$controller->logAction2(48,"VideoId=".trim($rowData[0][0]));
 						$db->rawQuery($sql);
 						//echo "<br><br><br><br><br><br><br>".$sql;
 						if($db->count < 1)
@@ -316,7 +317,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'editMany')
 				{
 					$db->commit();
 					$okRows .= $row . ",";
-					$controller->logAction(48);
+					//$controller->logAction(48);
 				}
 			}
 			else
@@ -389,6 +390,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 	$in = rtrim($in,",") . ")"; //echo $in;
 	$db->startTransaction();
 	$db->rawQuery("update videos set isDeleted=1, deleted='".date("Y-m-d H:i:s")."',deletedById=".$access->userId.",deletedByIp='".$_SERVER["REMOTE_ADDR"]."' where id $in");
+	$controller->logAction2(49,"VideoIds=".$in);
 	if($db->count < 1)
 	{
 		$result = "error";
@@ -417,7 +419,7 @@ if ($_GET["action"]=="load" && $_POST["action"] == 'deleteMany')
 	// }
 	$messages["success"] = $content["LINKSDELETED"];
 	$db->commit();
-	$controller->logAction(48);
+	//$controller->logAction(49);
 	unlink($saveto);
 }
 //echo "<br><br><br><br><pre>";print_r($_POST);echo "</pre>";
@@ -463,7 +465,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$links = $controller->getVideoLinks(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->exportToExcel($fields,$links,$content['TITLEVIDEOLINKS']."-".$_POST["added"]."-".$_POST["addedTill"]);
-	$controller->logAction(10);
+	$controller->logAction2(10,"DateInterval=".$_POST["added"]."-".$_POST["addedTill"]);
 	return;
 }
 
@@ -520,10 +522,13 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["videoId"])) && is_numeri
 		if($_GET["flag"] == 0)
 		{
 			$messages["success"] = $content["REMOVED"];
-			$controller->logAction(9);
+			$controller->logAction2(9,"VideoId=".$_GET["videoId"]);
 		}
 		else
+		{
+			$controller->logAction2(71,"VideoId=".$_GET["videoId"]);
 			$messages["success"] = $content["UNDELETED"];
+		}
 }
 
 function getLinkId($link)

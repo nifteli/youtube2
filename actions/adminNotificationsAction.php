@@ -28,7 +28,7 @@ if ($_GET["action"]=="save")
 	if($res)
 	{
 		$messages['success'] = $content["SUCCESSFULLYSAVED"];
-		$controller->logAction(32);
+		$controller->logAction2(32,"Notification");
 	}
 	else
 	{

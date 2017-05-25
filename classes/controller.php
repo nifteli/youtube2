@@ -18,7 +18,7 @@ include($templatePath."profile.php");
 include($templatePath."adminMenu.php");
 include($templatePath."adminProfile.php");
 include($templatePath."adminFooter.php");
-include($templatePath."adminRoles.php");
+//include($templatePath."adminRoles.php");
 include($templatePath."editRole.php");
 include($templatePath."adminVideoLinks.php");
 include($templatePath."adminUsers.php");
@@ -37,6 +37,8 @@ include($templatePath."adminDetails.php");
 include($templatePath."adminSearches.php");
 include($templatePath."adminMessages.php");
 include($templatePath."adminLogs.php");
+include($templatePath."adminAttachments.php");
+include($templatePath."adminRoles1.php");
 
 class Controller //extends MySQL
 {
@@ -145,7 +147,7 @@ class Controller //extends MySQL
 				$adminFooter = new AdminFooter($this);
 				$adminFooter->Show();
 				break;
-			case "adminRoles":
+			case "adminRoles": 
 				$adminRoles = new AdminRoles($this);
 				$adminRoles->Show();
 				break;
@@ -204,6 +206,10 @@ class Controller //extends MySQL
 			case "adminDetails":
 				$adminDetails = new AdminDetails($this);
 				$adminDetails->Show();
+				break;
+			case "adminAttachments":
+				$adminAttachments = new AdminAttachments($this);
+				$adminAttachments->Show();
 				break;
 			case "about":
 				$about = new About($this);
@@ -490,7 +496,7 @@ class Controller //extends MySQL
 		}
 		$lang = $this->lang;
 		$qry = "select * from (
-						SELECT v.id, v.name, v.info,  v.addedByIP,v.duration,v.questions,
+						SELECT v.id, v.name, v.info,  v.addedByIP,v.duration,v.questions,v.expired broken,
 								l.name$lang lang, v.link,v.languageId,v.added vadded,v.updatedById,v.updatedByIP,v.addedById,v.deletedById,v.deletedByIP,
 								concat(u.firstName,' ',u.lastName) addedBy,
 								concat(u2.firstName,' ',u2.lastName) updatedBy,
@@ -864,6 +870,49 @@ class Controller //extends MySQL
 		return $res;
 	}
 	
+	public function getRoles($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		$beginDate="01-01-0000";
+		$endDate="01-01-9999";
+		if ($sortBy == "")
+		{
+			$sortBy = "r.created ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "SELECT r.id, name, DATE_FORMAT(r.created,'%d-%m-%Y %k:%i:%S') createdDate,
+				r.created,concat(u.firstName,' ',u.lastName) author 
+						FROM roles r
+						inner join users u on u.id=r.createdBy
+				where 1=1 ";
+				
+		if(isset($post["created"]) && $post["created"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["created"]));
+		if(isset($post["createdTill"]) && $post["createdTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["createdTill"]));
+		$qry .= " and r.created between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+					
+		if(isset($post["id"]) && $post["id"] != "")
+			$qry .= " and r.id=".trim($post["id"]);
+		if(isset($post["author"]) && $post["author"] != "")
+			$qry .= " and concat(u.firstName,' ',u.lastName) like '%" . trim($post["author"]) . "%'";
+		if(isset($post["name"]) && $post["name"] != "")
+			$qry .= " and r.name like '%" . trim($post["name"]) . "%'";
+				
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		
+		return $res;
+	}
+	
 	public function getTags($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
 	{
 		//$db->where("id=$id");
@@ -992,13 +1041,14 @@ class Controller //extends MySQL
 			$sortType = "desc";
 		}
 		$lang = $this->lang;
-		$qry = "select * from (select l.*, 
-				DATE_FORMAT(l.actionDate,'%d-%m-%Y %k:%i:%S') actionDate1,
-				u.userName createdBy, la.actionName".$this->lang." actionName
-				from logs l
-				inner join logactions la on l.actionId=la.id
-				inner join users u on u.id=l.createdById
-				)a where 1=1 ";
+		$qry = "select * from (select  l.*,
+				  DATE_FORMAT(l.actionDate,'%d-%m-%Y %k:%i:%S') actionDate1,
+				  l.action actionObject, u.userName createdBy, 
+				la.actionName".$this->lang." actionName,la.logType actionType,
+				  la.logPanel panel 
+				  from logs l 
+				  inner join logactions la on l.actionId=la.id 
+				  inner join users u on u.id=l.createdById ) a where 1=1 ";
 		
 		if(isset($post["actionDate"]) && $post["actionDate"] != "")
 			$beginDate = $this->getDateForSelect(trim($post["actionDate"]));
@@ -1009,12 +1059,59 @@ class Controller //extends MySQL
 			$qry .= " and id = " . trim($post["id"]);
 		if(isset($post["actionName"]) && $post["actionName"] != "")
 			$qry .= " and actionName like '%" . trim($post["actionName"]) . "%'";
+		if(isset($post["actionType"]) && $post["actionType"] != "")
+			$qry .= " and actionType like '%" . trim($post["actionType"]) . "%'";
+		if(isset($post["actionObject"]) && $post["actionObject"] != "")
+			$qry .= " and actionObject like '%" . trim($post["actionObject"]) . "%'";
+		if(isset($post["panel"]) && $post["panel"] != "")
+			$qry .= " and panel like '%" . trim($post["panel"]) . "%'";
 		if(isset($post["createdById"]) && $post["createdById"] != "")
 			$qry .= " and createdById = " . trim($post["createdById"]);
 		if(isset($post["createdByIP"]) && $post["createdByIP"] != "")
 			$qry .= " and createdByIP like '%" . trim($post["createdByIP"]) . "%'";
 		if(isset($post["userName"]) && $post["userName"] != "")
 			$qry .= " and createdBy like '%" . trim($post["userName"]) . "%'";
+
+		$qry .= " order by $sortBy $sortType";
+		//echo $qry;
+		if($perPage>0)
+		{
+			$this->db->rawQuery($qry);
+			$cnt = $this->db->count;
+			$qry .= " limit ". (($begin-1)*$perPage) .", $perPage";
+		}
+		$res = $this->db->rawQuery($qry);
+		return $res;
+	}
+	
+	public function getAttachments($begin,$perPage,$post,&$cnt,$sortBy,$sortType)
+	{
+		//$db->where("id=$id");
+		$beginDate="01-01-0000";
+		$endDate="01-01-9999";
+		if ($sortBy == "")
+		{
+			$sortBy = "sentDate ";
+			$sortType = "desc";
+		}
+		$lang = $this->lang;
+		$qry = "SELECT e.sentDate,
+				DATE_FORMAT(e.sentDate,'%d-%m-%Y %k:%i:%S') attachDate,
+				a.emailId,a.attachment fileName
+				FROM attachments a
+				inner join emails e on e.id=a.emailId
+				where 1=1 
+		";
+		
+		if(isset($post["attachDate"]) && $post["attachDate"] != "")
+			$beginDate = $this->getDateForSelect(trim($post["attachDate"]));
+		if(isset($post["attachDateTill"]) && $post["attachDateTill"] != "")
+			$endDate = $this->getDateForSelect(trim($post["attachDateTill"]));
+		$qry .= " and sentDate between STR_TO_DATE('" . $beginDate . "','%d-%m-%Y') and STR_TO_DATE('" . $endDate . "','%d-%m-%Y')";
+		if(isset($post["id"]) && $post["id"] != "" && is_numeric($post["id"]))
+			$qry .= " and emailId = " . trim($post["id"]);
+		if(isset($post["fileName"]) && $post["fileName"] != "")
+			$qry .= " and a.attachment like '%" . trim($post["fileName"]) . "%'";
 
 		$qry .= " order by $sortBy $sortType";
 		//echo $qry;
@@ -1401,8 +1498,20 @@ class Controller //extends MySQL
 		return $destination_url; 
 	} 
 	
+	public function logAction2($actionId,$action)
+	{
+		$id = $this->db->insert("logs",array(
+								"actionDate"=>date("Y-m-d H:i:s"),
+								"actionId"=>$actionId,
+								"action"=>$action,
+								"createdById"=>$this->access->userId,
+								"createdByIP"=>$_SERVER["REMOTE_ADDR"]								
+								)); 
+								//echo "id=".$id.$this->db->getLastQuery();
+	}
+	
 	public function logAction($actionId)
-	{ 
+	{
 		$id = $this->db->insert("logs",array(
 								"actionDate"=>date("Y-m-d H:i:s"),
 								"actionId"=>$actionId,

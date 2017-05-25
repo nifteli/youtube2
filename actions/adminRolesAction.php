@@ -74,4 +74,94 @@ function validate_Date($mydate,$format = 'DD-MM-YYYY',&$date)
 		}
     return false;           
 }      
+
+if ($_GET["action"]=="editRole" && is_numeric($_POST["roleId"]) && trim($_POST["roleName"]) != "")
+{
+	$result = "success";
+	$messages = array();
+	if(!$access->authorized(37))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	
+	$db->where("id=".$_POST["roleId"]);
+	$res = $db->update("roles",array("name"=>trim($_POST["roleName"])));
+	if($res)
+	{
+		$controller->logAction2(89,"RoleId=".$_POST["roleId"]);
+		$messages["success"] = $content["ROLEEDITED"];
+	}
+	else
+	{
+		$result = "error";
+		$messages["err"] = $content["ROLENOTEDITED"];
+		$db->rollback();
+	}
+}
+
+if ($_GET["action"]=="addNewRole" && $access->hasAccess && trim($_POST["roleName"]) != "" )
+{ 
+	if(!$access->authorized(36))
+	{
+		$result = "error";
+		$messages["err"] = $content["INSUFFACCESS"];
+		return;
+	}
+	
+	$roleId = $db->insert("roles",array("name" => trim($_POST["roleName"]),
+									  "created" =>date("Y-m-d H:i:s"),
+									  "createdBy" => $access->userId)); 
+	if($roleId)
+	{
+		$okMessage = $content["ROLEADDED"];
+		$controller->logAction2(88,"RoleId=".$roleId);
+	}
+	else
+	{
+		$messages["err"] = $content["ROLENOTADDED"];
+	}
+	
+}
+if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
+{
+	$result = "success";
+	$messages = array();
+	if(!$access->authorized(73))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+
+	$fields = array("createdDate" => $content['ADDDATE'],
+					"id" => $content['ID'],
+					"name" => $content['ROLENAME'],
+					"author" => $content['AUTHOR']
+					);
+	$links = $controller->getRoles(1,0,$_POST,$cnt,"","");
+	$controller->logAction2(91,"DateInterval=".$_POST["created"]."-".$_POST["createdTill"]);
+	$controller->exportToExcel($fields,$links,$content['TITLEROLES']."-".$_POST["created"]."-".$_POST["createdTill"]);
+	return;
+}
+
+if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
+{ 
+	$result = "success";
+	$messages = array();
+	
+	if(!$access->authorized(38))
+	{
+		$result = "error";
+		$messages['noaccess'] = $content["INSUFFACCESS"];
+		return;
+	}
+	
+	$db->where("id=".trim($_GET["id"]));
+	$db->delete("roles");
+	$messages["success"] = $content["ROLEDELETED"];
+	$controller->logAction2(90,"RoleId=".$_GET["id"]);
+	
+}
 ?>

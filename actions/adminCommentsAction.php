@@ -34,7 +34,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 	$links = $controller->getComments(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->exportToExcel($fields,$links,$content['TITLECOMMENTS']."-".$_POST["created"]."-".$_POST["createdTill"]);
-	$controller->logAction(14);
+	$controller->logAction2(14,"DateInterval=".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
 if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
@@ -54,7 +54,7 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])))
 	if($cnt > 0)
 	{
 		$messages["success"] = $content["REMOVED"];
-		$controller->logAction(13);
+		$controller->logAction2(13,"CommentId=".$_GET["id"]);
 	}
 }
 
@@ -75,7 +75,7 @@ if ($_GET["action"]=="confirm" && is_numeric(trim($_GET["id"])))
 	if($db->count > 0)
 	{
 		$messages["success"] = $content["CHANGED"];
-		$controller->logAction(50);
+		$controller->logAction2(50,"CommentId=".$_GET["id"]);
 	}
 }
 
@@ -91,6 +91,7 @@ if ($_GET["action"]=="editComment" && is_numeric($_POST["pcommentId"]) && trim($
 	if($res > 0)
 	{
 		$messages["success"] = $content["COMMENTUPDATED"];
+		$controller->logAction2(12,"CommentId=".$_POST["pcommentId"]);
 		//$controller->logAction(13);
 	}
 }

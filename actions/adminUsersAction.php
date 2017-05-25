@@ -17,13 +17,15 @@ if ($_GET["action"]=="sendMail")
 	if(count($emails) > 0)
 	{
 		foreach($emails as $key => $email)
+		{
+			$controller->logAction2(59,"email=".$email);
 			$mail->addAddress($email);
+		}
 		foreach($ccs as $key => $cc)
 			$mail->addCC($cc);
 			
 		$mail->Subject = $_POST["subject"];
 		$mail->Body    = $_POST["body"];
-		
 		
 		for($i=0; $i<count($_FILES['attachment']['name']); $i++)
 		{
@@ -98,7 +100,10 @@ if ($_GET["action"]=="set" && $_POST["action"] == "saveRoles")
 				break;
 			}
 			else
+			{
+				$controller->logAction2(56,"userId=".$key);
 				$result = "success";
+			}
 		}
 	} 
 	if($result == "success")
@@ -125,7 +130,13 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])) && is_numeric(tri
 								"deletedById"=>$access->userId,
 								"deletedByIP"=>$_SERVER["REMOTE_ADDR"]));
 	if($db->count>0)
+	{
 		$messages["success"] = $content["SUCCESSFULLYSAVED"];
+		if(trim($_GET["flag"])==1)
+			$controller->logAction2(5,"userId=".$_GET["id"]);
+		else
+			$controller->logAction2(58,"userId=".$_GET["id"]);
+	}
 }
 
 if ($_GET["action"]=="setUser" && is_numeric(trim($_GET["id"])))
@@ -145,6 +156,7 @@ if ($_GET["action"]=="setUser" && is_numeric(trim($_GET["id"])))
 	{ //echo "set values";print_r($usr); return;
 		$_SESSION['userName'] = $usr["userName"];
 		$access->setValues($db);
+		$controller->logAction2(60,"UserId=".$_GET["id"]);
 		header("Location: index.php");
 	}
 }
@@ -207,6 +219,7 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'export')
 					"searchCnt" => $content['SEARCHCNT']
 					);
 	$links = $controller->getUsers(1,0,$_POST,$cnt,"","");
+	$controller->logAction2(6,"dateInterval=".$_POST["created"]."-".$_POST["createdTill"]);
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->exportToExcel($fields,$links,$content['TITLEUSERS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
@@ -234,6 +247,7 @@ if ($_GET["action"]=="set" && $_POST["action"] == 'exportMailInfo')
 					"attachment" => $content['FILE']
 					);
 	$links = $controller->getMailInfo(1,0,$_POST,$cnt,"","");
+	
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
 	$controller->exportToExcel($fields,$links,$content['EMAIL']);
 	return;
@@ -250,7 +264,10 @@ if($_GET["action"] == "editNote" && is_numeric($_POST["puserId"]) && trim($_POST
 		break;
 	}
 	else
+	{
 		$messages["success"] = $content["NOTECHANGED"];
+		$controller->logAction2(57,"UserId=".$_POST["puserId"]);
+	}
 }
 
 ?>

@@ -32,6 +32,7 @@ class AdminMenu
 		$this->adminMenu->assign("mnSearches", $content['MNSEARCHES']);
 		$this->adminMenu->assign("mnMessages", $content['MNMESSAGES']);
 		$this->adminMenu->assign("mnLogs", $content['MNLOGS']);
+		$this->adminMenu->assign("mnAttachments", $content['MNATTACHMENTS']);
 		$this->adminMenu->assign("page", isset($_GET["page"])?$_GET["page"]:"adminProfile" );
 		
 		$this->adminMenu->assign("logout",$content['LOGOUT']);

@@ -46,7 +46,6 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'substitute' && count($_POS
 											  "updatedById"=>$access->userId,
 											  "updatedByIP"=>$_SERVER["REMOTE_ADDR"]
 											  ));
-						
 			if(!$res)
 			{
 				$continue = false;
@@ -57,7 +56,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'substitute' && count($_POS
 			else
 			{
 				$result = "success";
-				$controller->logAction(19);
+				$controller->logAction2(20,"Tag=".$tag);
 				//echo trim($tag)." updated<br>";
 			}
 		}
@@ -102,7 +101,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getTags(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->logAction(22);
+	$controller->logAction2(22,"DateInterval=".$_POST["created"]."-".$_POST["createdTill"]);
 	$controller->exportToExcel($fields,$links,$content['TITLETAGS']."-".$_POST["created"]."-".$_POST["createdTill"]);
 	return;
 }
@@ -127,7 +126,12 @@ if ($_GET["action"]=="delete" && is_numeric(trim($_GET["id"])) && is_numeric(tri
 	if($db->count>0)
 	{
 		$messages["success"] = $content["SUCCESSFULLYSAVED"];
-		$controller->logAction(21);
+		$db->where("id=".trim($_GET["id"]));
+		$res = $db->getOne("tags");
+		if(trim($_GET["flag"]) == 1)
+			$controller->logAction2(21,"Tag=".$res["name"]);
+		else
+			$controller->logAction2(80,"Tag=".$res["name"]);
 	}
 }
 ?>

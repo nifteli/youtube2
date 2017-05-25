@@ -29,7 +29,14 @@ function submitForm(action)
 }
 </script>
 <div>
-	
+	<div class="actionButtons" style="width:1100px">
+	<table border=1 cellpadding=25 cellspacing=25 align=left>
+		<tr>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='filter' onClick="document.getElementById('vlFilter').submit();">{$filter}</button></td>
+			<td><button class="btn btn-light-combo btn-sm" type="button" name="action" id="action" value='export' onClick="sbtFrm('vlFilter','action','export')">{$export}</button></td>
+		</tr>
+	</table>
+	</div>
 	{if $result == 'error'}
 	  <div class="err">
 		{foreach from=$messages item=message}
@@ -48,6 +55,9 @@ function submitForm(action)
 					<col style="width: 160px; overflow: hidden;"/>
 					<col style="width: 30px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
+					<col style="width: 30px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 50px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 80px; overflow: hidden;"/>
@@ -59,7 +69,10 @@ function submitForm(action)
 					</th>-->
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionDateLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionDate&actionDateSortType={$actionDateSortType}')">{$lnActionDate}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$idLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=id&idSortType={$idSortType}')">{$lnId}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionTypeLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionType&actionTypeSortType={$actionTypeSortType}')">{$lnActionType}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$panelLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=panel&panelSortType={$panelSortType}')">{$lnPanel}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionNameLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionName&actionNameSortType={$actionNameSortType}')">{$lnActionName}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$actionObjectLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=actionObject&actionObjectSortType={$actionObjectSortType}')">{$lnActionObject}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIdLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdById&createdByIdSortType={$createdByIdSortType}')">{$lnCreatedById}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdBy&createdBySortType={$createdBySortType}')">{$lnCreatedBy}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$createdByIPLogsHint}" href="javascript:{}" onclick="submitForm('?page=adminLogs&sortBy=createdByIP&createdByIPSortType={$createdByIPSortType}')">{$lnCreatedByIP}</a></th>
@@ -72,12 +85,14 @@ function submitForm(action)
 						<input class="form-control" name="actionDateTill" id="actionDateTill" type="text" value="{$actionDateTillVal}" style="width:90px;display:initial"/>
 					</td>
 					<td class="vertical-middle"><input class="form-control" name="id" id="id" type="text" value="{$idVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="actionType" id="actionType" type="text" value="{$actionTypeVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="panel" id="panel" type="text" value="{$panelVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="actionName" id="actionName" type="text" value="{$actionNameVal}" /></td>
+					<td class="vertical-middle"><input class="form-control" name="actionObject" id="actionObject" type="text" value="{$actionObjectVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="createdById" id="createdById" type="text" value="{$createdByIdVal}" /></td>
 					<td class="vertical-middle"><input class="form-control" name="createdBy" id="createdBy" type="text" value="{$createdByVal}" /></td>
 					<td class="vertical-middle"  style="text-align: left;">
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
-						<button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button>
+					<input class="form-control" name="createdByIP" id="createdByIP" type="text" value="{$createdByIPVal}" />
 					</td>
 				</tr>
 				</thead>
@@ -87,7 +102,10 @@ function submitForm(action)
 					<!--<td class="vertical-middle"><input type="checkbox" class="ui-port-checkable" value="1" id="Test-1" name="Test"/></td>-->
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$logs[sec1].actionDate1}">{$logs[sec1].actionDate1}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].id}">{$logs[sec1].id}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].actionType}">{$logs[sec1].actionType}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].panel}">{$logs[sec1].panel}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].actionName}">{$logs[sec1].actionName}</td>
+					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].actionObject}">{$logs[sec1].actionObject}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdById}">{$logs[sec1].createdById}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdBy}">{$logs[sec1].createdBy}</td>
 					<td class="vertical-middle" style="overflow: hidden;" title="{$logs[sec1].createdByIP}">{$logs[sec1].createdByIP}</td>

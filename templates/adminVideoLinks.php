@@ -44,6 +44,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("lnUserReportedCnt", $content['USERREPORTEDCNT']);
 		$this->adminVideoLinks->assign("lnUserCntAddedToFolder", $content['USERCNTADDEDTOFOLDER']);
 		$this->adminVideoLinks->assign("lnAddedFolderCnt", $content['ADDEDFOLDERCNT']);
+		$this->adminVideoLinks->assign("lnBroken", $content['broken']);
 		$this->adminVideoLinks->assign("exportSearches", $content['EXPORTSEARCHES']);
 		$this->adminVideoLinks->assign("undeleteConfirmation", $content['UNDELETECONFIRMATION']);
 		
@@ -80,6 +81,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("addedFolderCntVidLinksHint", $content['addedFolderCntVidLinksHint']);
 		$this->adminVideoLinks->assign("updatedByIPVidLinksHint", $content['updatedByIPVidLinksHint']);
 		$this->adminVideoLinks->assign("deletedByIPVidLinksHint", $content['deletedByIPVidLinksHint']);
+		$this->adminVideoLinks->assign("brokenVidLinksHint", $content['brokenVidLinksHint']);
 				
 		$this->adminVideoLinks->assign("videoQuestion", $content['VIDEOQUESTION']);
 		$this->adminVideoLinks->assign("lnTags", $content['TAGS']);
@@ -193,6 +195,8 @@ class AdminVideoLinks
 			$sortType = ($_GET["userCntAddedToFolderSortType"] == "" || $_GET["userCntAddedToFolderSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["addedFolderCntSortType"]))
 			$sortType = ($_GET["addedFolderCntSortType"] == "" || $_GET["addedFolderCntSortType"] == "ASC")? 'DESC' : 'ASC';
+		if(isset($_GET["brokenSortType"]))
+			$sortType = ($_GET["brokenSortType"] == "" || $_GET["brokenSortType"] == "ASC")? 'DESC' : 'ASC';
 		
 		$this->adminVideoLinks->assign("idSortType", ($_GET["idSortType"] == "" || $_GET["idSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("nameSortType", ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC');
@@ -225,6 +229,7 @@ class AdminVideoLinks
 		$this->adminVideoLinks->assign("userReportedCntSortType", ($_GET["userReportedCntSortType"] == "" || $_GET["userReportedCntSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("userCntAddedToFolderSortType", ($_GET["userCntAddedToFolderSortType"] == "" || $_GET["userCntAddedToFolderSortType"] == "ASC")? 'DESC' : 'ASC');
 		$this->adminVideoLinks->assign("addedFolderCntSortType", ($_GET["addedFolderCntSortType"] == "" || $_GET["addedFolderCntSortType"] == "ASC")? 'DESC' : 'ASC');
+		$this->adminVideoLinks->assign("brokenSortType", ($_GET["brokenSortType"] == "" || $_GET["brokenSortType"] == "ASC")? 'DESC' : 'ASC');
 		
 		if (isset($_GET["begin"])) $begin = $_GET["begin"]; else $begin=1;
 		if (isset($_GET["perPage"])) $perPage = $_GET["perPage"]; else $perPage=$recsPerPage;

@@ -9,7 +9,9 @@ require_once($classesPath."access.php");
 $db = new MysqliDb($hostname, $username, $password, $database);
 $lang = $_SESSION["lang"];
 require_once($langsPath."content_".$lang.".php");
+require_once($classesPath."controller.php");
 $access = new Access($db);
+$controller = new Controller($db);
 
 //Category subscriptions
 if($_POST["action"] == "subs" && is_numeric($_POST["catId"]))
@@ -125,7 +127,7 @@ if($_GET["action"] == "showProfile" && is_numeric($_GET["userId"]))
 			$rselected = "selected";
 			break;
 	}
-		
+		$controller->logAction2(55,"UserId=".$_GET["userId"]);
 	$ret = "
 		<div style='float:left; width:300'>
 		<div class='topgap'>
@@ -239,7 +241,10 @@ if($_GET["action"] == "addRemove" &&
 				where videoId = $_GET[videoId] and exists(select 1 from folders where folders.id=foldervideos.folderId and createdById=".$_SESSION["userId"].")";
 		$db->rawQuery($qry);
 		if($db->count>0) 
+		{
+			//$controller->logAction2(78,"CatalogueId=".$_GET["folderId"] . " VideoId=".$_GET["videoId"]);
 			echo 1;
+		}
 		else
 			echo "";
 	}
@@ -257,7 +262,10 @@ if($_GET["action"] == "addRemove" &&
 													  "addedByIP"=>$_SERVER['REMOTE_ADDR'],
 													  "added"=>date("Y-m-d H:i:s")));
 			if($db->count > 0) 
+			{
+				$controller->logAction2(75,"CatalogueId=".$_GET["folderId"] . " VideoId=".$_GET["videoId"]);
 				echo 1;
+			}
 			else
 				echo "";
 		}
@@ -320,6 +328,7 @@ if($_POST["action"] == "addToNewFolder" && $access->hasAccess && trim($_POST["fo
 				if($db->count > 0) 
 				{
 					$db->commit();
+					$controller->logAction2(75,"CatalogueId=".$folderId . " VideoId=".$_POST["videoId"]);
 					//$okMessage = $content["ADDEDTOFOLDER"];
 					echo 1;
 				}
@@ -394,6 +403,7 @@ if ($_POST["action"]=="comment" && is_numeric($_POST["videoId"]))
 		
 		if($commentId)
 		{
+			$controller->logAction2(82,"CommentId=".$commentId." VideoId=".$_POST["videoId"]);
 			$res = $db->rawQuery("select getEmailOnVideoComment,getEmailAfterMyComment,email,firstName,lastName from users
 								where id = (select addedById from videos where id=".trim($_POST["videoId"]).")");
 								//print_r($res);
@@ -553,7 +563,10 @@ if($_POST["action"]=="editComment")
 												  "updatedById"=>$access->userId,
 												  "updated"=>date("Y-m-d H:i:s")));
 		if($commentId)
+		{
+			$controller->logAction2(83,"CommentId=".$_POST["commentId"]." VideoId=".$_POST["videoId"]);
 			echo "1";
+		}
 		//$db->commit();
 		
 	}
@@ -579,6 +592,7 @@ if($_GET["action"] == "likeIt" &&
 						values (".$_SESSION["userId"].",$_GET[videoId],1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update
 						action = 1, actionDate = '".date("Y-m-d H:i:s")."'");
+		$controller->logAction2(69,"VideoId=".$_GET["videoId"]);
 	}
 	if($_GET["flag"] == 2)
 	{
@@ -593,6 +607,7 @@ if($_GET["action"] == "likeIt" &&
 						values (".$_SESSION["userId"].",$_GET[videoId],-1,'".date("Y-m-d H:i:s")."')
 						on duplicate key update
 						action = -1, actionDate = '".date("Y-m-d H:i:s")."'");
+		$controller->logAction2(70,"VideoId=".$_GET["videoId"]);
 	}
 	//if($db->count>0)
 	//{

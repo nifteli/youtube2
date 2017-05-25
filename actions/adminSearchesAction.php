@@ -19,7 +19,7 @@ if ($_GET["action"]=="filter" && $_POST["action"] == 'export')
 					);
 	$links = $controller->getSearches(1,0,$_POST,$cnt,"","");
 	//echo "<pre>"; print_r($links[0]); echo "</pre>";return;
-	$controller->logAction(38);
+	$controller->logAction2(38,"DateInterval=".$_POST["createdDate"]."-".$_POST["createdDateTill"]);
 	$controller->exportToExcel($fields,$links,$content['MNSEARCHES']."-".$_POST["createdDate"]."-".$_POST["createdDateTill"]);
 	return;
 }

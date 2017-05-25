@@ -107,7 +107,7 @@ class AdminFolders
 		if(isset($_GET["authorSortType"]))
 			$sortType = ($_GET["authorSortType"] == "" || $_GET["authorSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["nameSortType"]))
-			$sortType = ($_GET["nametSortType"] == "" || $_GET["nametSortType"] == "ASC")? 'DESC' : 'ASC';
+			$sortType = ($_GET["nameSortType"] == "" || $_GET["nameSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["tagsSortType"]))
 			$sortType = ($_GET["tagsSortType"] == "" || $_GET["tagsSortType"] == "ASC")? 'DESC' : 'ASC';
 		if(isset($_GET["createdByIPSortType"]))

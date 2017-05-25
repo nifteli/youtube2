@@ -299,11 +299,26 @@ $content["ROLECREATEDBY"] = "Rol yaradan";
 $content["ROLECREATED"] = "Yaranma tarixi";
 $content['TITLEROLES'] = "Rollar";
 $content['ACTIONNAME'] = "Əməliyyat";
+$content['EDITROLE'] = "EDITROLE";
 $content['DATERANGE'] = "Tarix aralığı";
 $content['HASACCESS'] = "Təyin edilib";
 $content['ADMINROLESERR1'] = "Rol seçilməyib";
 $content['ADMINROLESERR2'] = "Yaddaşa vermədə xəta";
 $content['ADMINROLESNOTF1'] = "Accesslər yaddaşa verildi";
+$content['createdRoleHint'] = "createdRoleHint";
+$content['idRoleHint'] = "idRoleHint";
+$content['authorRoleHint'] = "authorRoleHint";
+$content['nameRoleHint'] = "nameRoleHint";
+$content['deleteRoleHint'] = "deleteRoleHint";
+$content['editRoleHint'] = "editRoleHint";
+$content['ADDROLE'] = "Add Role";
+$content['EDITROLE'] = "Edit Role";
+$content['ROLEEDITED'] = "Role editted";
+$content['ROLENOTEDITED'] = "Role not editted";
+$content['ROLEADDED'] = "Role added";
+$content['ROLENOTADDED'] = "Role not added";
+$content['TITLEROLES'] = "Roles";
+$content['ROLEDELETED'] = "ROLEDELETED";
 //End admin roles
 
 //Edit Roles
@@ -394,6 +409,8 @@ $content['fbCount']="fbCount";
 $content['twCount']="twCount";
 $content['twCountVidLinksHint']="twCountVidLinksHint";
 $content['fbCountVidLinksHint']="fbCountVidLinksHint";
+$content['brokenVidLinksHint']="brokenVidLinksHint";
+$content['broken']="broken";
 //End Video links 
 
 // Admin users
@@ -750,5 +767,19 @@ $content['actionNameLogsHint']="actionNameLogsHint";
 $content['createdByIdLogsHint']="createdByIdLogsHint";
 $content['createdByLogsHint']="createdByLogsHint";
 $content['createdByIPLogsHint']="createdByIPLogsHint";
+$content['lnActionType']="ActionType";
+$content['lnPanel']="Panel";
+$content['lnActionObject']="ActionObject";
+$content['actionTypeLogsHint']="actionTypeLogsHint";
+$content['panelLogsHint']="panelLogsHint";
+$content['actionObjectLogsHint']="actionObjectLogsHint";
 //End Admin Logs
+
+//Admin Attachments
+$content['MNATTACHMENTS']="Fayllar";
+$content['ATTACHDATE']="ATTACHDATE";
+$content['FILENAME']="FILENAME";
+$content['MESSAGEID']="MESSAGEID";
+
+//End Attachments
 ?>

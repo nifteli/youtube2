@@ -104,7 +104,7 @@ if ($_GET["action"]=="add")
 									  "updatedById"=>$access->userId,
 									  "updatedByIP"=>$_SERVER["REMOTE_ADDR"],
 									  "duration"=>$_POST["duration"]));
-			$controller->logAction(8);
+			$controller->logAction2(8,"VideoId=".$videoId." VideoLink=".trim($_POST["videoLink"]));
 			if($db->count == 0)
 			{
 				$result = 'error';
@@ -123,7 +123,7 @@ if ($_GET["action"]=="add")
 									  "addedById"=>$access->userId,
 									  "addedByIP"=>$_SERVER["REMOTE_ADDR"],
 									  "duration"=>$_POST["duration"]));
-			$controller->logAction(7);
+			$controller->logAction2(7,"VideoId=".$videoId." VideoLink=".trim($_POST["videoLink"]));
 		}
 		if($videoId)
 		{

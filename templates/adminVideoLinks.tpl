@@ -134,6 +134,7 @@ function submitForm(action)
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 100px; overflow: hidden;"/>
 					<col style="width: 130px; overflow: hidden;"/>
+					<col style="width: 100px; overflow: hidden;"/>
 				</colgroup>
 				<thead>
 				<tr style="background-color:rgb(219, 203, 129);">
@@ -173,6 +174,7 @@ function submitForm(action)
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$reportCountVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=reportCount&reportCountSortType={$reportCountSortType}')">{$reportCount}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$userCntAddedToFolderVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=userCntAddedToFolder&userCntAddedToFolderSortType={$userCntAddedToFolderSortType}')">{$lnUserCntAddedToFolder}</a></th>
 					<th class="vertical-middle" style=" text-align:center" ><a title="{$addedFolderCntVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=addedFolderCnt&addedFolderCntSortType={$addedFolderCntSortType}')">{$lnAddedFolderCnt}</a></th>
+					<th class="vertical-middle" style=" text-align:center" ><a title="{$brokenVidLinksHint}" href="javascript:{}" onclick="submitForm('?page=adminVideoLinks&sortBy=broken&brokenSortType={$brokenSortType}')">{$lnBroken}</a></th>
 				</tr>
 				</thead>
 				<thead class="head-transparent">
@@ -224,7 +226,7 @@ function submitForm(action)
 					<td class="vertical-middle"><input class="form-control" name="deletedById" id="deletedById" type="text" value="{$deletedByIdVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="deletedByIP" id="deletedByIP" type="text" value="{$deletedByIPVal}"/></td>
 					<td class="vertical-middle"><input class="form-control" name="duration" id="duration" type="text" value="{$durationVal}"/></td>
-					<td class="vertical-middle" colspan=12 style="text-align: left;">
+					<td class="vertical-middle" colspan=13 style="text-align: left;">
 						<!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='filter'>{$filter}</button>
 						 <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='export'>{$export}</button> -->
 						 <!-- <button class="btn btn-light-combo btn-sm" type="submit" name="action" id="action" value='exportSearches'>{$exportSearches}</button> -->
@@ -278,6 +280,7 @@ function submitForm(action)
 					<td class="vertical-middle" style="overflow: hidden;" title="{$videoLinks[sec1].reportCount}"><a href="?page=adminReports&id={$videoLinks[sec1].id}">{$videoLinks[sec1].reportCount}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].userCntAddedToFolder}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnUserCntAddedToFolder}">{$videoLinks[sec1].userCntAddedToFolder}</a></td>
 					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].addedFolderCnt}"><a href="?page=adminDetails&s=videos&q=7&videoId={$videoLinks[sec1].id}&title={$lnAddedFolderCnt}">{$videoLinks[sec1].addedFolderCnt}</a></td>
+					<td class="vertical-middle"  style="overflow: hidden;" title="{$videoLinks[sec1].broken}">{$videoLinks[sec1].broken}</td>
 				</tr>
 				{/section}
 				</tbody>
